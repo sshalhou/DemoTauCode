@@ -1,0 +1,12 @@
+scram project CMSSW_5_3_12
+cd CMSSW_5_3_12/src/
+cmsenv
+
+git cms-addpkg DataFormats/MuonReco
+git cms-addpkg DataFormats/PatCandidates
+git cms-addpkg DataFormats/TauReco
+git cms-addpkg FWCore/Version
+git cms-addpkg PhysicsTools/PatAlgos
+git cms-addpkg PhysicsTools/PatExamples
+git cms-addpkg RecoTauTag/RecoTau
+
