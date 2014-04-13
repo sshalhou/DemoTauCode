@@ -1,5 +1,6 @@
 #!/bin/tcsh
-echo "execute : " 
+echo "copy and execute the following : " 
+echo " "
 echo "scram project CMSSW_5_3_12 "
 echo "cd CMSSW_5_3_12/src/ "
 echo "cmsenv "
