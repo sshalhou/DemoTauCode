@@ -69,7 +69,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
                                                    cut =
-                                                   'et > '0.0'
+                                                   'et > 0.0'
                                                   )
 
 
