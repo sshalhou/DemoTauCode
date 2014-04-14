@@ -22,15 +22,49 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
 # CutLevel_2 : muon selection (just a test for now)
 #------------------
 
+#-------------------------------------------------
+# selection steps 3 and 4: muon selection
+#-------------------------------------------------
+
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.NonIsolatedTightMuons = cleanPatMuons.clone(preselection =
-                                               'pt > 20'
-
+process.isolatedMuons010 = cleanPatMuons.clone(preselection =
+                                               'isGlobalMuon & isTrackerMuon &'
+                                               'pt > 20. &'
+                                               'abs(eta) < 2.1 &'
+                                               '(trackIso+caloIso)/pt < 0.1 &'
+                                               'innerTrack.numberOfValidHits > 10 &'
+                                               'globalTrack.normalizedChi2 < 10.0 &'
+                                               'globalTrack.hitPattern.numberOfValidMuonHits > 0 &'
+                                               'abs(dB) < 0.02'
                                                )
-process.step2 = countPatMuons.clone(src = 'NonIsolatedTightMuons', minNumber = 1, maxNumber = 100)
 
+process.isolatedMuons010.checkOverlaps = cms.PSet(
+        jets = cms.PSet(src       = cms.InputTag("goodJets"),
+                        algorithm = cms.string("byDeltaR"),
+                        preselection        = cms.string(""),
+                        deltaR              = cms.double(0.3),
+                        checkRecoComponents = cms.bool(False),
+                        pairCut             = cms.string(""),
+                        requireNoOverlaps   = cms.bool(True),
+                        )
+            )
+process.isolatedMuons005 = cleanPatMuons.clone(src = 'isolatedMuons010',
+                                               preselection = '(trackIso+caloIso)/pt < 0.05'
+                                               )
 
-process.muonSequence = cms.Path(process.step2 *
+process.vetoMuons = cleanPatMuons.clone(preselection =
+                                        'isGlobalMuon &'
+                                        'pt > 10. &'
+                                        'abs(eta) < 2.5 &'
+                                        '(trackIso+caloIso)/pt < 0.2'
+                                        )
+
+from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
+process.step3a = countPatMuons.clone(src = 'isolatedMuons005', minNumber = 1, maxNumber = 1)
+process.step3b = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 1)
+process.step4  = countPatMuons.clone(src = 'vetoMuons', maxNumber = 1)
+
+process.muonSequence = cms.Path(process.step3b *
                                 process.patDefaultSequence
                                  )
 
