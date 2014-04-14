@@ -17,17 +17,17 @@ process.CutLevel_1_vertex = cms.EDFilter("VertexSelector",
                              )
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.cut1 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 1)
 
 #------------------
 # CutLevel_2 : muon selection (just a test for now)
 #------------------
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.isolatedMuons010 = cleanPatMuons.clone(preselection =
+process.NonIsolatedTightMuons = cleanPatMuons.clone(preselection =
                                                'pt > 20'
+
                                                )
-process.step2 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 100)
+process.step2 = countPatMuons.clone(src = 'NonIsolatedTightMuons', minNumber = 1, maxNumber = 100)
 
 
 process.muonSequence = cms.Path(process.step2 *
