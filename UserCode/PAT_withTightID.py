@@ -1,26 +1,44 @@
-# goal is to create a PATtuple following
-# a fairly tight H->tau tau ID, eventually
-# leading to a looser version useful for analysis
-
 import FWCore.ParameterSet.Config as cms
 
 ## import skeleton process
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
 
-#------------------
-# CutLevel_1 : vertex filter (taking defaulst from top selection for now)
-#------------------
-process.CutLevel_1_vertex = cms.EDFilter("VertexSelector",
+from PhysicsTools.PatAlgos.tools.coreTools import *
+removeMCMatching(process, ['All'])
+
+removeSpecificPATObjects(process,
+                         ['Photons'],  # 'Tau' has currently been taken out due to problems with tau discriminators
+                         outputModules=[])
+
+removeCleaning(process,
+               outputModules=[])
+
+process.patJetCorrFactors.payload = 'AK5Calo'
+# For data:
+#process.patJetCorrFactors.levels = ['L2Relative', 'L3Absolute', 'L2L3Residual', 'L5Flavor', 'L7Parton']
+# For MC:
+process.patJetCorrFactors.levels = ['L2Relative', 'L3Absolute']
+#process.patJetCorrFactors.flavorType = "T"
+
+process.patMuons.usePV = False
+
+#-------------------------------------------------
+# selection step 1: trigger
+#-------------------------------------------------
+
+from HLTrigger.HLTfilters.hltHighLevel_cfi import *
+process.step1 = hltHighLevel.clone(TriggerResultsTag = "TriggerResults::HLT", HLTPaths = ["HLT_Mu15_eta2p1_v3"])
+
+#-------------------------------------------------
+# selection step 2: vertex filter
+#-------------------------------------------------
+
+# vertex filter
+process.step2 = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
                              cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
                              )
-
-from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-
-#------------------
-# CutLevel_2 : muon selection (just a test for now)
-#------------------
 
 #-------------------------------------------------
 # selection steps 3 and 4: muon selection
@@ -64,14 +82,101 @@ process.step3a = countPatMuons.clone(src = 'isolatedMuons005', minNumber = 1, ma
 process.step3b = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 1)
 process.step4  = countPatMuons.clone(src = 'vetoMuons', maxNumber = 1)
 
-process.muonSequence = cms.Path( process.patDefaultSequence*process.step3b
+#-------------------------------------------------
+# selection step 5: electron selection
+#-------------------------------------------------
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.vetoElectrons = selectedPatElectrons.clone(src = 'selectedPatElectrons',
+                                                   cut =
+                                                   'et > 15. &'
+                                                   'abs(eta) < 2.5 &'
+                                                   '(dr03TkSumPt+dr03EcalRecHitSumEt+dr03HcalTowerSumEt)/et <  0.2'
+                                                   )
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
+process.step5  = countPatMuons.clone(src = 'vetoElectrons', maxNumber = 0)
+
+#-------------------------------------------------
+# selection steps 6 and 7: jet selection
+#-------------------------------------------------
+
+from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+process.goodJets = selectedPatJets.clone(src = 'patJets',
+                                         cut =
+                                         'pt > 30. &'
+                                         'abs(eta) < 2.4 &'
+                                         'emEnergyFraction > 0.01 &'
+                                         'jetID.n90Hits > 1 &'
+                                         'jetID.fHPD < 0.98'
+                                         )
+
+from PhysicsTools.PatAlgos.selectionLayer1.jetCountFilter_cfi import *
+process.step6a = countPatJets.clone(src = 'goodJets', minNumber = 1)
+process.step6b = countPatJets.clone(src = 'goodJets', minNumber = 2)
+process.step6c = countPatJets.clone(src = 'goodJets', minNumber = 3)
+process.step7  = countPatJets.clone(src = 'goodJets', minNumber = 4)
+
+#-------------------------------------------------
+# paths
+#-------------------------------------------------
+
+process.looseSequence = cms.Path(process.step1 *
+                                 process.step2 *
+                                 process.patDefaultSequence *
+                                 process.goodJets *
+                                 process.isolatedMuons010 *
+                                 process.step3b *
+                                 process.vetoMuons *
+                                 process.step4 *
+                                 process.vetoElectrons *
+                                 process.step5 *
+                                 process.step6a *
+                                 process.step6b *
+                                 process.step6c
                                  )
 
-process.out.SelectEvents.SelectEvents = ['muonSequence']
+process.tightSequence = cms.Path(process.step1 *
+                                 process.step2 *
+                                 process.patDefaultSequence *
+                                 process.goodJets *
+                                 process.isolatedMuons010 *
+                                 process.isolatedMuons005 *
+                                 process.step3a *
+                                 process.vetoMuons *
+                                 process.step4 *
+                                 process.vetoElectrons *
+                                 process.step5 *
+                                 process.step6a *
+                                 process.step6b *
+                                 process.step6c *
+                                 process.step7
+                                )
 
-process.GlobalTag.globaltag = 'START53_V7G::All' ##  (according to https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideFrontierConditions)
+process.out.SelectEvents.SelectEvents = ['tightSequence',
+                                         'looseSequence' ]
 
 
+from PhysicsTools.PatAlgos.patEventContent_cff import patEventContentNoCleaning
+process.out.outputCommands = cms.untracked.vstring('drop *', *patEventContentNoCleaning )
+
+## ------------------------------------------------------
+#  In addition you usually want to change the following
+#  parameters:
+## ------------------------------------------------------
+#
+#   process.GlobalTag.globaltag =  ...    ##  (according to https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideFrontierConditions)
+#                                         ##
+#szs from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
+#szs process.source.fileNames = filesRelValProdTTbarAODSIM
 process.source.fileNames = ['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
+
+
+#                                         ##
 process.maxEvents.input = 100
-process.out.fileName = 'patTuple_testSelection.root'
+#                                         ##
+#   process.out.outputCommands = [ ... ]  ##  (e.g. taken from PhysicsTools/PatAlgos/python/patEventContent_cff.py)
+#                                         ##
+process.out.fileName = 'patTuple_topSelection.root'
+#                                         ##
+#   process.options.wantSummary = False   ##  (to suppress the long output at the end of the job)
