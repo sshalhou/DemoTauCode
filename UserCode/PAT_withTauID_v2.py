@@ -154,7 +154,7 @@ process.maxEvents.input = 100
 
 process.out.fileName = 'patTuple_topSelection.root'
 
-process.options.wantSummary = False
+#process.options.wantSummary = False
 #
 #
 #
