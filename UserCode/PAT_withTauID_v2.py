@@ -118,7 +118,7 @@ switchToPFTauHPS(process)
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.Step7Tau = cleanPatTaus.clone(src = 'cleanPatTaus',
+process.Step7Tau = selectedPatTaus.clone(src = 'selectedPatTaus',
                                                    cut =
                                                    'et > 50420.0'
                                                   )
