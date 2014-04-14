@@ -101,6 +101,7 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
+process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 
 #########################
 
