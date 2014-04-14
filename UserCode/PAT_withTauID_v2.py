@@ -34,6 +34,15 @@ process.Step2GlobalPFMuons = cleanPatMuons.clone(preselection =
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
 process.Step3GlobalPFMuonsCount = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 1, maxNumber = 1000)
 
+#------------
+# muon path
+#------------
+
+process.muonSequence = cms.Path(process.Step1VertexPresent *
+                                 process.patDefaultSequence *
+                                 process.Step2GlobalPFMuons *
+                                 process.Step3GlobalPFMuonsCount
+                                 )
 
 #-------------------------------------------------
 # selection steps 4 and 5: electron selection
@@ -68,7 +77,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
-process.Step5MVAElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
+process.Step5ElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
 process.electronSequenceMVA = cms.Path(
     process.mvaID *
@@ -80,7 +89,7 @@ process.electronSequenceMVA = cms.Path(
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-process.Step4Electron = selectedPatElectrons.clone(src = 'electronSequenceMVA',
+process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
                                                    cut =
                                                    'et > 10.0'
                                                   )
@@ -89,28 +98,25 @@ process.Step4Electron = selectedPatElectrons.clone(src = 'electronSequenceMVA',
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
-process.Step5MVAElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
+process.Step5ElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
 
-process.electronSequence = process.electronSequenceMVA+cms.Path(process.Step4Electron *
-                                    process.Step5MVAElectronCount
+process.electronSequence = cms.Path(process.Step4Electron *
+                                    process.Step5ElectronCount
                                     )
 
 
-#-------------------------------------------------
-# paths
-#-------------------------------------------------
-
-process.muonSequence = cms.Path(process.Step1VertexPresent *
-                                 process.patDefaultSequence *
-                                 process.Step2GlobalPFMuons *
-                                 process.Step3GlobalPFMuonsCount
-                                 )
-
-
-process.out.SelectEvents.SelectEvents = ['electronSequence']
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
+
+
+#########################
+
+process.out.SelectEvents.SelectEvents = ['electronSequence+electronSequenceMVA']
+
+#########################
+
+
 
 ############################
 process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
