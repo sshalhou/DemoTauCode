@@ -13,7 +13,7 @@ from PhysicsTools.PatAlgos.tools.coreTools import *
 # vertex filter
 process.Step1VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
-                             cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
+                             cut = cms.string("!isFake && ndof > 4000 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
                              )
 
