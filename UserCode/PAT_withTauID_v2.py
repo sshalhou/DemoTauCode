@@ -73,16 +73,16 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
-process.Step5MVAElectronCount  = countPatMuons.clone(src = 'vetoElectrons', minNumber = 1, maxNumber = 1000)
+process.Step5MVAElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
 
 
 process.electronSequence = cms.Path(process.Step1VertexPresent *
                                     process.patDefaultSequence *
                                     process.Step4Electron *
+                                    process.Step5MVAElectronCount *
                                     process.mvaID *
-                                    process.patConversions *
-                                    process.Step5MVAElectronCount
+                                    process.patConversions
                                     )
 
 
@@ -99,7 +99,7 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
 
 process.out.SelectEvents.SelectEvents = ['electronSequence']
 
-
+process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 ############################
 process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
