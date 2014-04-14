@@ -22,7 +22,7 @@ process.step1 = cms.EDFilter("VertexSelector",
 #-------------------------------------------------
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.step2_MyTightMuons = cleanPatMuons.clone(preselection =
+process.Step2MyTightMuons = cleanPatMuons.clone(preselection =
                                                'isGlobalMuon &'
                                                'isPFMuon &'
                                                'globalTrack.normalizedChi2 < 10'
@@ -33,7 +33,7 @@ process.step2_MyTightMuons = cleanPatMuons.clone(preselection =
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.step3 = countPatMuons.clone(src = 'step2_MyTightMuons', minNumber = 1, maxNumber = 1000)
+process.step3 = countPatMuons.clone(src = 'Step2MyTightMuons', minNumber = 1, maxNumber = 1000)
 
 #-------------------------------------------------
 # paths
@@ -41,7 +41,7 @@ process.step3 = countPatMuons.clone(src = 'step2_MyTightMuons', minNumber = 1, m
 
 process.looseSequence = cms.Path(process.step1 *
                                  process.patDefaultSequence *
-                                 process.step2_MyTightMuons *
+                                 process.Step2MyTightMuons *
                                  process.step3
                                  )
 
