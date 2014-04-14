@@ -129,6 +129,7 @@ process.Step8TauCount  = countPatTaus.clone(src = 'Step7Tau', minNumber = 1, max
 
 
 process.tauSequence = cms.Path(process.Step1VertexPresent *
+                               process.tauStep6 *
                                  process.Step7Tau *
                                  process.Step8TauCount
                                )
