@@ -72,8 +72,8 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 ## let it run
 process.electronSequenceMVA = cms.Path(
-    process.mvaID +
     process.patDefaultSequence+
+    process.mvaID +
     process.patConversions
     )
 
