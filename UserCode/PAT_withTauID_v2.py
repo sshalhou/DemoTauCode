@@ -34,15 +34,6 @@ process.Step2GlobalPFMuons = cleanPatMuons.clone(preselection =
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
 process.Step3GlobalPFMuonsCount = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 1, maxNumber = 1000)
 
-#------------
-# muon path
-#------------
-
-#process.muonSequence = cms.Path(process.Step1VertexPresent *
-#                                 process.patDefaultSequence *
-#                                 process.Step2GlobalPFMuons *
-#                                 process.Step3GlobalPFMuonsCount
-#                                 )
 
 #-------------------------------------------------
 # selection steps 4 and 5: electron selection
@@ -95,6 +86,16 @@ process.electronSequenceMVA = cms.Path(
 #                                    )
 
 
+
+------------
+ muon path
+------------
+
+process.muonSequence = cms.Path(process.Step1VertexPresent *
+                                 process.patDefaultSequence *
+                                 process.Step2GlobalPFMuons *
+                                 process.Step3GlobalPFMuonsCount
+                                )
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
