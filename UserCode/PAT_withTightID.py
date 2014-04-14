@@ -24,10 +24,10 @@ process.cut1 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxN
 #------------------
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.NonIsolatedTightMuons = cleanPatMuons.clone(preselection =
+process.isolatedMuons010 = cleanPatMuons.clone(preselection =
                                                'pt > 20'
                                                )
-process.step2 = countPatMuons.clone(src = 'NonIsolatedTightMuons', minNumber = 1, maxNumber = 100)
+process.step2 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 100)
 
 
 process.muonSequence = cms.Path(process.step2 *
