@@ -68,27 +68,27 @@ process.electronSequenceMVA = cms.Path(
     process.patConversions
     )
 
-#from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-#process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
-#                                                   cut =
-#                                                   'et > 10.0'
-#                                                  )
-
-#
-#from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
-#process.Step5ElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
+                                                   cut =
+                                                   'et > 10.0'
+                                                  )
 
 
-#process.electronSequence = cms.Path(process.Step1VertexPresent *
-#                                    process.patDefaultSequence *
-#                                    process.Step4Electron *
-#                                    process.Step5ElectronCount
-#                                    )
+from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
+process.Step5ElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
+
+
+process.electronSequence = cms.Path(process.Step1VertexPresent *
+                                    process.patDefaultSequence *
+                                    process.Step4Electron *
+                                    process.Step5ElectronCount
+                                    )
 
 
 
 #------------
-# muon path
+# muon path (for some reason this has to be after the electron MVA sequence)
 #------------
 
 process.muonSequence = cms.Path(process.Step1VertexPresent *
@@ -97,12 +97,14 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
                                  process.Step3GlobalPFMuonsCount
                                 )
 
+process.cutElectronSequence = cms.Path(electronSequenceMVA+electronSequence)
+
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 
 #########################
 
-process.out.SelectEvents.SelectEvents = ['electronSequenceMVA']
+process.out.SelectEvents.SelectEvents = ['cutElectronSequence']
 
 #########################
 
