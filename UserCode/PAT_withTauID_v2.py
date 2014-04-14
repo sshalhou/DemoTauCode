@@ -118,7 +118,7 @@ process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+proc
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.Step7Tau = selectedTaus.clone(src = 'tauStep6',
+process.Step7Tau = cleanPatTaus.clone(src = 'tauStep6',
                                                    cut =
                                                    'et > 10.0'
                                                   )
