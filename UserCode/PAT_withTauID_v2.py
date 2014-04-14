@@ -120,7 +120,7 @@ process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+proc
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
 process.Step7Tau = selectedPatTaus.clone(src = 'selectedPatTaus',
                                                    cut =
-                                                   'et > 10.0'
+                                                   'et > 50420.0'
                                                   )
 
 
