@@ -32,7 +32,7 @@ process.NonIsolatedTightMuons = cleanPatMuons.clone(preselection =
 process.step2 = countPatMuons.clone(src = 'NonIsolatedTightMuons', minNumber = 1, maxNumber = 100)
 
 
-process.muonSequence = cms.Path(process.step1 *
+process.muonSequence = cms.Path(process.step2 *
                                 process.patDefaultSequence
                                  )
 
