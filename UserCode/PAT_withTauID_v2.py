@@ -51,7 +51,7 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
 
 
 process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
-process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaTrigNoIPV0 + process.mvaNonTrigV0 )
+process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaNonTrigV0 + process.mvaTrigNoIPV0 )
 
 #Electron ID
 process.patElectrons.electronIDSources = cms.PSet(
@@ -72,8 +72,8 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 ## let it run
 process.electronSequenceMVA = cms.Path(
-    process.patDefaultSequence+
     process.mvaID +
+    process.patDefaultSequence+
     process.patConversions
     )
 
