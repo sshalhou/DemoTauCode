@@ -25,9 +25,7 @@ process.cut1 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxN
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
 process.NonIsolatedTightMuons = cleanPatMuons.clone(preselection =
-                                               'isTightMuon &'
-                                               'abs(d0) < 0.02 &'
-                                               'abs(dz) < 0.2'
+                                               'pt > 20'
                                                )
 process.step2 = countPatMuons.clone(src = 'NonIsolatedTightMuons', minNumber = 1, maxNumber = 100)
 
