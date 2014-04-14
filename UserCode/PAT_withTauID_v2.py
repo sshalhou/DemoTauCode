@@ -75,15 +75,21 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
 process.Step5MVAElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
+process.electronSequence = cms.Path(
+    process.mvaID +
+    process.patDefaultSequence+
+    process.patConversions
+    )
 
 
-process.electronSequence = cms.Path(process.Step1VertexPresent *
-                                    process.patDefaultSequence *
-                                    process.Step4Electron *
-                                    process.Step5MVAElectronCount *
-                                    process.mvaID *
-                                    process.patConversions
-                                    )
+
+#process.electronSequence = cms.Path(process.Step1VertexPresent *
+#                                    process.patDefaultSequence *
+#                                    process.Step4Electron *
+#                                    process.Step5MVAElectronCount *
+#                                    process.mvaID *
+#                                    process.patConversions
+#                                    )
 
 
 #-------------------------------------------------
