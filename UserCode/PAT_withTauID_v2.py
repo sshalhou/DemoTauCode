@@ -62,8 +62,8 @@ process.patElectrons.electronIDSources = cms.PSet(
 #add pat conversions
 process.patConversions = cms.EDProducer("PATConversionProducer",
                                         # input collection
-                                        #electronSource = cms.InputTag("cleanPatElectrons")
-                                        electronSource = cms.InputTag("Step4Electron")
+                                        electronSource = cms.InputTag("cleanPatElectrons")
+                                        #electronSource = cms.InputTag("Step4Electron")
                                         )
 
 
