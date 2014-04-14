@@ -16,7 +16,7 @@ process.CutLevel_1_vertex = cms.EDFilter("VertexSelector",
                              filter = cms.bool(True),
                              )
 
-
+from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
 process.cut1 = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 1)
 
 #------------------
