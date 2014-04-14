@@ -17,7 +17,7 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 #usePF2PAT(process)
 
 # based on https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-# not sure this next line is really needed 
+# not sure this next line is really needed
 switchToPFTauHPS(process)
 
 
@@ -33,7 +33,7 @@ process.p = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.pat
 process.GlobalTag.globaltag = 'START53_V7G::All' ##  (according to https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideFrontierConditions)
 #process.source.fileNames = ['file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/CMSDataAnaSch_RelValZMM536.root']
 process.source.fileNames = ['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
-process.maxEvents.input = 3         ##  ( -1 to run on all events)
+process.maxEvents.input = 100         ##  ( -1 to run on all events)
 #process.out.fileName = 'MC.root'            ##  (e.g. 'myTuple.root')
 
 
