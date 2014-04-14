@@ -78,9 +78,9 @@ process.Step5MVAElectronCount  = countPatMuons.clone(src = 'vetoElectrons', minN
 
 
 process.electronSequence = cms.Path(process.Step1VertexPresent *
+                                    process.patDefaultSequence *
                                     process.Step4Electron *
                                     process.mvaID *
-                                    process.patDefaultSequence *
                                     process.patConversions *
                                     process.Step5MVAElectronCount
                                     )
