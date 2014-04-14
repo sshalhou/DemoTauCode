@@ -119,7 +119,7 @@ switchToPFTauHPS(process)
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauCountFilter_cfi import *
-process.Step8TauCount  = countPatTaus.clone(src = 'selectedPatTaus', minNumber = 1, maxNumber = 1000)
+process.Step8TauCount  = countPatTaus.clone(src = 'selectedPatTaus', minNumber = 999, maxNumber = 1000)
 
 
 process.tauSequence = cms.Path(process.Step1VertexPresent *
