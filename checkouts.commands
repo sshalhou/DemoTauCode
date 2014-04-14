@@ -5,4 +5,7 @@ git cms-addpkg FWCore/Version
 git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg PhysicsTools/PatExamples
 git cms-addpkg RecoTauTag/RecoTau
-
+git cms-addpkg EgammaAnalysis/ElectronTools
+cd EgammaAnalysis/ElectronTools/data/
+cat download.url | xargs wget
+cd -

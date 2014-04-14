@@ -13,7 +13,7 @@ from PhysicsTools.PatAlgos.tools.coreTools import *
 # vertex filter
 process.Step1VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
-                             cut = cms.string("!isFake && ndof > 4000 && abs(z) < 15 && position.Rho < 2"),
+                             cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
                              )
 
@@ -34,6 +34,58 @@ process.Step2GlobalPFMuons = cleanPatMuons.clone(preselection =
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
 process.Step3GlobalPFMuons1to1000 = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 1, maxNumber = 1000)
 
+
+#-------------------------------------------------
+# selection steps 4 and 5: electron selection
+#-------------------------------------------------
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
+                                                   cut =
+                                                   'et > 0.0'
+                                                  )
+
+
+
+
+process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
+process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaTrigNoIPV0 + process.mvaNonTrigV0 )
+
+#Electron ID
+process.patElectrons.electronIDSources = cms.PSet(
+    #MVA
+    mvaTrigV0 = cms.InputTag("mvaTrigV0"),
+    mvaNonTrigV0 = cms.InputTag("mvaNonTrigV0"),
+    mvaTrigNoIPV0 = cms.InputTag("mvaTrigNoIPV0"),
+    )
+
+#add pat conversions
+process.patConversions = cms.EDProducer("PATConversionProducer",
+                                        # input collection
+                                        #electronSource = cms.InputTag("cleanPatElectrons")
+                                        electronSource = cms.InputTag("Step4Electron")
+                                        )
+
+
+
+
+
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
+process.Step5MVAElectronCount  = countPatMuons.clone(src = 'vetoElectrons', minNumber = 1, maxNumber = 1000)
+
+
+
+process.electronSequence = cms.Path(process.Step1VertexPresent *
+                                    process.Step4Electron *
+                                    process.mvaID *
+                                    process.patDefaultSequence *
+                                    process.patConversions *
+                                    process.Step5MVAElectronCount
+                                    )
+
+
 #-------------------------------------------------
 # paths
 #-------------------------------------------------
@@ -45,7 +97,7 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
                                  )
 
 
-process.out.SelectEvents.SelectEvents = ['muonSequence']
+process.out.SelectEvents.SelectEvents = ['electronSequence']
 
 
 
