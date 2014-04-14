@@ -112,7 +112,7 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 #########################
 
-process.out.SelectEvents.SelectEvents = ['electronSequence+electronSequenceMVA']
+process.out.SelectEvents.SelectEvents = ['electronSequence'+'electronSequenceMVA']
 
 #########################
 
