@@ -87,9 +87,9 @@ process.electronSequenceMVA = cms.Path(
 
 
 
-------------
- muon path
-------------
+#------------
+# muon path
+#------------
 
 process.muonSequence = cms.Path(process.Step1VertexPresent *
                                  process.patDefaultSequence *
