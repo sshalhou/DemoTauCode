@@ -38,11 +38,11 @@ process.Step3GlobalPFMuonsCount = countPatMuons.clone(src = 'Step2GlobalPFMuons'
 # muon path
 #------------
 
-process.muonSequence = cms.Path(process.Step1VertexPresent *
-                                 process.patDefaultSequence *
-                                 process.Step2GlobalPFMuons *
-                                 process.Step3GlobalPFMuonsCount
-                                 )
+#process.muonSequence = cms.Path(process.Step1VertexPresent *
+#                                 process.patDefaultSequence *
+#                                 process.Step2GlobalPFMuons *
+#                                 process.Step3GlobalPFMuonsCount
+#                                 )
 
 #-------------------------------------------------
 # selection steps 4 and 5: electron selection
