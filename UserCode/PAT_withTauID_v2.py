@@ -66,20 +66,10 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 ######### ELECTRON MVAs -- END
 
 
-## define the MVA sequence
-#process.electronSequenceMVA = cms.Path(
-#    process.mvaID +
-#    process.patDefaultSequence+
-#    process.patConversions
-#    )
-
-
-
-
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
                                                    cut =
-                                                   'et > 10.0'
+                                                   'et > '0.0'
                                                   )
 
 
@@ -96,13 +86,6 @@ process.electronSequenceMVAcombined = cms.Path(
     process.Step4Electron *
     process.Step5ElectronCount
     )
-
-#process.electronSequence = cms.Path(process.Step1VertexPresent *
-#                                    process.patDefaultSequence *
-#                                    process.Step4Electron *
-#                                    process.Step5ElectronCount
-#                                    )
-
 
 
 #------------
@@ -121,7 +104,7 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 #########################
 
-process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined']
+process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined','muonSequence']
 
 #########################
 
