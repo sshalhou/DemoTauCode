@@ -118,9 +118,8 @@ switchToPFTauHPS(process)
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.Step7Tau = selectedPatTaus.clone(src = 'selectedPatTaus',
-                                                preselection =
-                                                'byCombinedIsolationDeltaBetaCorrRaw3Hits < 1.5'
+process.Step7Tau = selectedPatTaus.clone(preselection =
+                                        'byCombinedIsolationDeltaBetaCorrRaw3Hits < 1.5'
                                                   )
 
 
@@ -161,7 +160,7 @@ process.maxEvents.input = 100
 
 process.out.fileName = 'patTuple_topSelection.root'
 
-process.options.wantSummary = False 
+process.options.wantSummary = False
 #
 #
 #
