@@ -169,7 +169,7 @@ process.out.outputCommands = cms.untracked.vstring('drop *', *patEventContentNoC
 #                                         ##
 #szs from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
 #szs process.source.fileNames = filesRelValProdTTbarAODSIM
-process.source.fileNames = ['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
+process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
 
 #                                         ##
