@@ -11,7 +11,7 @@ from PhysicsTools.PatAlgos.tools.coreTools import *
 #-------------------------------------------------
 
 # vertex filter
-process.step1 = cms.EDFilter("VertexSelector",
+process.Step1VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
                              cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
@@ -22,10 +22,9 @@ process.step1 = cms.EDFilter("VertexSelector",
 #-------------------------------------------------
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.Step2MyTightMuons = cleanPatMuons.clone(preselection =
+process.Step2GlobalPFMuons = cleanPatMuons.clone(preselection =
                                                'isGlobalMuon &'
-                                               'isPFMuon &'
-                                               'globalTrack.normalizedChi2 < 10'
+                                               'isPFMuon'
                                                )
 
 
@@ -33,20 +32,20 @@ process.Step2MyTightMuons = cleanPatMuons.clone(preselection =
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.step3 = countPatMuons.clone(src = 'Step2MyTightMuons', minNumber = 1, maxNumber = 1000)
+process.Step3GlobalPFMuons1to1000 = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 1, maxNumber = 1000)
 
 #-------------------------------------------------
 # paths
 #-------------------------------------------------
 
-process.looseSequence = cms.Path(process.step1 *
+process.muonSequence = cms.Path(process.Step1VertexPresent *
                                  process.patDefaultSequence *
-                                 process.Step2MyTightMuons *
-                                 process.step3
+                                 process.Step2GlobalPFMuons *
+                                 process.Step3GlobalPFMuons1to1000
                                  )
 
 
-process.out.SelectEvents.SelectEvents = ['looseSequence']
+process.out.SelectEvents.SelectEvents = ['muonSequence']
 
 
 
