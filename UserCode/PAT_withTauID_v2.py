@@ -92,7 +92,7 @@ from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
 process.Step5MVAElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
 
-process.electronSequence = cms.Path(process.Step4Electron *
+process.electronSequence = process.electronSequenceMVA+cms.Path(process.Step4Electron *
                                     process.Step5MVAElectronCount
                                     )
 
