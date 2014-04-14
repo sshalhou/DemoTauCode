@@ -74,7 +74,7 @@ process.Step4Electron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
-process.Step5ElectronCount  = countPatMuons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
+process.Step5ElectronCount  = countPatElectrons.clone(src = 'Step4Electron', minNumber = 1, maxNumber = 1000)
 
 
 ## define the MVA+Filter sequence
@@ -99,13 +99,53 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
                                 )
 
 
+#--------------------------------
+# hadronic taus step 6, 7, and 8
+#---------------------------------
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+
+# based on (https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher)
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+# based on https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+# not sure this next line is really needed
+switchToPFTauHPS(process)
+
+## define the path
+
+process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.patDefaultSequence)
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
+process.Step7Tau = selectedTaus.clone(src = 'tauStep6',
+                                                   cut =
+                                                   'et > 10.0'
+                                                  )
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.tauCountFilter_cfi import *
+process.Step8TauCount  = countPatTaus.clone(src = 'Step7Tau', minNumber = 1, maxNumber = 1000)
+
+
+process.tauSequence = cms.Path(process.Step1VertexPresent *
+                                 process.Step7Tau *
+                                 process.Step8TauCount
+                               )
+
+
+#########################
+
+
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 
 #########################
 
-process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined','muonSequence']
+#process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined','muonSequence']
+
+process.out.SelectEvents.SelectEvents = ['tauSequence']
 
 #########################
 
