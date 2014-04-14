@@ -114,11 +114,11 @@ switchToPFTauHPS(process)
 
 ## define the path
 
-process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.patDefaultSequence)
+#process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.patDefaultSequence)
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.Step7Tau = selectedPatTaus.clone(src = 'selectedPatTaus',
+process.Step7Tau = cleanPatTaus.clone(src = 'cleanPatTaus',
                                                    cut =
                                                    'et > 50420.0'
                                                   )
@@ -129,9 +129,11 @@ process.Step8TauCount  = countPatTaus.clone(src = 'Step7Tau', minNumber = 1, max
 
 
 process.tauSequence = cms.Path(process.Step1VertexPresent *
-                               process.tauStep6 *
-                                 process.Step7Tau *
-                                 process.Step8TauCount
+                              process.recoTauClassicHPSSequence*
+                              process.PFTau*
+                              process.patDefaultSequence*
+                              process.Step7Tau *
+                              process.Step8TauCount
                                )
 
 
