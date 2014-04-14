@@ -64,8 +64,7 @@ process.step3a = countPatMuons.clone(src = 'isolatedMuons005', minNumber = 1, ma
 process.step3b = countPatMuons.clone(src = 'isolatedMuons010', minNumber = 1, maxNumber = 1)
 process.step4  = countPatMuons.clone(src = 'vetoMuons', maxNumber = 1)
 
-process.muonSequence = cms.Path(process.step3b *
-                                process.patDefaultSequence
+process.muonSequence = cms.Path( process.patDefaultSequence*process.step3b
                                  )
 
 process.out.SelectEvents.SelectEvents = ['muonSequence']
