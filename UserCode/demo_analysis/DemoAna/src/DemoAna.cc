@@ -2,7 +2,7 @@
 //
 // Package:    DemoAna
 // Class:      DemoAna
-// 
+//
 /**\class DemoAna DemoAna.cc demo_analysis/DemoAna/src/DemoAna.cc
 
  Description: [one line class summary]
@@ -77,7 +77,7 @@ class DemoAna : public edm::EDAnalyzer {
 
       edm::InputTag tauSrc_;
       edm::InputTag muonSrc_;
-      edm::InputTag pvertexSrc_;	
+      edm::InputTag pvertexSrc_;
 
 };
 
@@ -109,7 +109,7 @@ pvertexSrc_(iConfig.getUntrackedParameter<edm::InputTag>("pvertexSrc" ))
 
 DemoAna::~DemoAna()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -134,16 +134,16 @@ DemoAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   std::cout<<" is it real data "<< iEvent.isRealData() <<std::endl;
 
 //////////////////////
-  // get tau collection  
+  // get tau collection
   edm::Handle<edm::View<pat::Tau> > taus;
   iEvent.getByLabel(tauSrc_,taus);
 
-  // get muon collection  
+  // get muon collection
   edm::Handle<edm::View<pat::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
 
 
-  // get primary vertex collection  
+  // get primary vertex collection
   edm::Handle<edm::View<reco::Vertex> > pvertices;
   iEvent.getByLabel(pvertexSrc_,pvertices);
 
@@ -152,9 +152,9 @@ DemoAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   int nmuon = 0;
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
-                
+
                 nmuon++;
-   std::cout<<" tight muon ? "<<isTightMuon()<<std::endl;
+  // std::cout<<" tight muon ? "<<isTightMuon()<<std::endl;
 
 											     } // muons
 
@@ -162,10 +162,10 @@ DemoAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-  int ntau = 0;	
-  for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++tau) { 
+  int ntau = 0;
+  for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++tau) {
 
-		ntau++; 
+		ntau++;
 
 	          std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
 	          std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
@@ -180,7 +180,7 @@ DemoAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -189,39 +189,39 @@ DemoAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 DemoAna::beginJob()
 {
 
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-DemoAna::endJob() 
+void
+DemoAna::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 DemoAna::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 DemoAna::endRun(edm::Run const&, edm::EventSetup const&)
 {
 
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 DemoAna::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 DemoAna::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
