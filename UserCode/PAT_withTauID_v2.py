@@ -97,7 +97,7 @@ process.muonSequence = cms.Path(process.Step1VertexPresent *
                                  process.Step3GlobalPFMuonsCount
                                 )
 
-process.cutElectronSequence = cms.Path(electronSequenceMVA+electronSequence)
+process.cutElectronSequence = cms.Path(process.electronSequenceMVA+process.electronSequence)
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
