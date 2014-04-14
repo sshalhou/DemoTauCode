@@ -23,7 +23,9 @@ process.step1 = cms.EDFilter("VertexSelector",
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
 process.step2_MyTightMuons = cleanPatMuons.clone(preselection =
-                                               'isTightMuon'
+                                               'isGlobalMuon &'
+                                               'isPFMuon &'
+                                               'globalTrack.normalizedChi2 < 10'
                                                )
 
 
