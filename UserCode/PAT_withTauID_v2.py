@@ -157,7 +157,7 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 
 # could be more things needed for MVA MET
-process.out.outputCommands +=['keep *_pfMEtMVA_*']
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 #########################
 
 #process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined','muonSequence']
