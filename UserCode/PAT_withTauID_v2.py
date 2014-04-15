@@ -164,14 +164,14 @@ process.GlobalTag.globaltag = 'START53_V15::All'
 #                            skipEvents = cms.untracked.uint32(0)
 #)
 
-process.output = cms.OutputModule("PoolOutputModule",
-                                  outputCommands = cms.untracked.vstring('keep *')
+#process.output = cms.OutputModule("PoolOutputModule",
+#                                  outputCommands = cms.untracked.vstring('keep *')
 #                                  fileName = cms.untracked.string("test.root")
-                                  )
+#                                  )
 
 process.ana      = cms.Sequence(process.pfMEtMVAsequence)
 process.p        = cms.Path(process.ana)
-process.outpath  = cms.EndPath(process.output)
+#process.outpath  = cms.EndPath(process.output)
 
 ### To add the Jet Id
 #+process.pileupJetIdProducer)
