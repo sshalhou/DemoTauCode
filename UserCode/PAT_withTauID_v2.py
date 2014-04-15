@@ -19,7 +19,7 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence+process.pileupJetIdProducer)
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
 process.mvametpath   = cms.Path(process.mvamet)
 
 ### To add the Jet Id
@@ -156,6 +156,8 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 
+# could be more things needed for MVA MET
+process.out.outputCommands +=['keep *_pfMEtMVA_*']
 #########################
 
 #process.out.SelectEvents.SelectEvents = ['electronSequenceMVAcombined','muonSequence']
