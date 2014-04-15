@@ -1,0 +1,25 @@
+[CMSSW]
+total_number_of_events  = 10
+number_of_jobs          = 5
+pset                    = standard_pat.py
+datasetpath             =  /DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM
+get_edm_output = 1
+allow_NonProductionCMSSW = 1
+
+[USER]
+
+return_data = 0
+copy_data = 1
+storage_element = T3_US_FNALLPC
+#storage_element         =  cmseos.fnal.gov
+#storage_path            =  /srm/v2/server?SFN=/eos/uscms/store/user/shalhout
+ui_working_dir = test_crab_5
+check_user_remote_dir = 0
+
+
+
+
+[CRAB]
+jobtype = cmssw
+scheduler = condor
+use_server = 0

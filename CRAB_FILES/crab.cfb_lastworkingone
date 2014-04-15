@@ -1,0 +1,27 @@
+[CMSSW]
+total_number_of_events  = 10
+number_of_jobs          = 5
+pset                    = standard_pat.py
+datasetpath =  /DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball/sshalhou-shalhout_test_pub-061162beabed4fdbb5433c852b65ed95/USER
+dbs_url = http://cmsdbsprod.cern.ch/cms_dbs_ph_analysis_03/servlet/DBSServlet
+get_edm_output = 1
+allow_NonProductionCMSSW = 1
+
+[USER]
+
+return_data = 0
+copy_data = 1
+storage_element = T3_US_FNALLPC
+#storage_element         =  cmseos.fnal.gov
+#storage_path            =  /srm/v2/server?SFN=/eos/uscms/store/user/shalhout
+ui_working_dir = test_crab_x
+user_remote_dir = test_crab_x
+check_user_remote_dir = 0
+
+
+
+
+[CRAB]
+jobtype = cmssw
+scheduler = condor
+use_server = 0
