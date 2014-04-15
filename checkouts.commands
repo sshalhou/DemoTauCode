@@ -28,6 +28,10 @@ mv temp_SigInput JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProduce
 
 mv ../../UserCode-pharris-MVAMet-data/* JetMETCorrections/METPUSubtraction/data/.
 
+mv RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.cc RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.cc_old
+mv RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h_old
+
+
 cd EgammaAnalysis/ElectronTools/data/
 cat download.url | xargs wget
 cd -
