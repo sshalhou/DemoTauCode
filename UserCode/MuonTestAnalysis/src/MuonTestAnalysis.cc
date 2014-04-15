@@ -32,6 +32,14 @@
 
 #include "DataFormats/PatCandidates/interface/Muon.h"
 
+
+#include "FWCore/Utilities/interface/InputTag.h"
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "DataFormats/PatCandidates/interface/Muon.h"
+
+
+
 //
 // class declaration
 //
