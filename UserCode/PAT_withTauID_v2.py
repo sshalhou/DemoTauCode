@@ -154,7 +154,7 @@ process.p        = cms.Path(process.ana)
 
 # need to figure out how to get  this in : +process.pileupJetIdProducer
 
-#process.outpath  = cms.EndPath(process.output)
+process.outpath  = cms.EndPath(process.output)
 
 
 
