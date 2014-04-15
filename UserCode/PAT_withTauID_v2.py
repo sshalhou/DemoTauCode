@@ -131,14 +131,6 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 
 
-####################
-# MVA MET
-####################
-
-process.load("JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff")
-process.mvaMetSequence = cms.Path(process.pfMEtMVAsequence)
-process.GlobalTag.globaltag = 'START52_V11::All' 
-
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
@@ -154,6 +146,10 @@ process.out.fileName = 'patTuple_topSelection.root'
 #########################
 
 
+
+
+
+############################
 process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
 process.maxEvents.input = 100
