@@ -2,7 +2,7 @@
 //
 // Package:    MuonTestAnalysis
 // Class:      MuonTestAnalysis
-// 
+//
 /**\class MuonTestAnalysis MuonTestAnalysis.cc TEMP/MuonTestAnalysis/src/MuonTestAnalysis.cc
 
  Description: [one line class summary]
@@ -29,6 +29,9 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+#include "DataFormats/PatCandidates/interface/Muon.h"
+
 //
 // class declaration
 //
@@ -52,6 +55,9 @@ class MuonTestAnalysis : public edm::EDAnalyzer {
       virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+
+      edm::InputTag muonSrc_;
+
 };
 
 //
@@ -65,8 +71,8 @@ class MuonTestAnalysis : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-MuonTestAnalysis::MuonTestAnalysis(const edm::ParameterSet& iConfig)
-
+MuonTestAnalysis::MuonTestAnalysis(const edm::ParameterSet& iConfig):
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 {
    //now do what ever initialization is needed
 
@@ -75,7 +81,7 @@ MuonTestAnalysis::MuonTestAnalysis(const edm::ParameterSet& iConfig)
 
 MuonTestAnalysis::~MuonTestAnalysis()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -92,13 +98,28 @@ MuonTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 {
    using namespace edm;
 
+// get muon collection
+edm::Handle<edm::View<pat::Muon> > muons;
+iEvent.getByLabel(muonSrc_,muons);
+
+
+  int nmuon = 0;
+  for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
+
+              nmuon++;
+
+                           } // muons
+
+std::cout<<" event had "<<nmuon<<" cleanPatMuons "<<std::endl;
+
+
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -107,37 +128,37 @@ MuonTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 MuonTestAnalysis::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-MuonTestAnalysis::endJob() 
+void
+MuonTestAnalysis::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 MuonTestAnalysis::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 MuonTestAnalysis::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 MuonTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 MuonTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
