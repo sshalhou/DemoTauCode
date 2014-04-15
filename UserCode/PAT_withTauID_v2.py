@@ -149,8 +149,10 @@ process.output = cms.OutputModule("PoolOutputModule",
                                   outputCommands = cms.untracked.vstring('keep *')
                                   )
 
-process.ana      = cms.Sequence(process.pfMEtMVAsequence+process.pileupJetIdProducer)
+process.ana      = cms.Sequence(process.pfMEtMVAsequence)
 process.p        = cms.Path(process.ana)
+
+# need to figure out how to get  this in : +process.pileupJetIdProducer
 
 #process.outpath  = cms.EndPath(process.output)
 
