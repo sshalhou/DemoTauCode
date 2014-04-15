@@ -7,25 +7,6 @@ from PhysicsTools.PatAlgos.tools.coreTools import *
 
 
 
-#############
-# MVA MET
-#############
-
-process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(10)
-process.load('Configuration.StandardSequences.Services_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.GlobalTag.globaltag = 'START53_V15::All'
-
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath   = cms.Path(process.mvamet)
-
-### To add the Jet Id
-#+process.pileupJetIdProducer)
-
-
 #-------------------------------------------------
 # selection step 1: vertex filter
 #-------------------------------------------------
@@ -152,6 +133,32 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 
 
+
+
+
+
+
+#--------------------------------
+# step 9 - MVA MET (need to understand recoil corrections)
+#---------------------------------
+
+process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(10)
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.GlobalTag.globaltag = 'START53_V15::All'
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath   = cms.Path(process.mvamet)
+
+### To add the Jet Id
+#+process.pileupJetIdProducer)
+
+
+
+
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
@@ -164,7 +171,7 @@ process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 
 process.out.SelectEvents.SelectEvents = ['tauSequence']
 
-process.out.fileName = 'patTuple_topSelection.root'
+process.out.fileName = 'patTuple_testing.root'
 #########################
 
 
