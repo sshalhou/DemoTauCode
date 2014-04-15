@@ -26,7 +26,7 @@ mv temp_SigInput JetMETCorrections/METPUSubtraction/interface/PFMEtSignInterface
 cat JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc | grep -v SigInputObj.h >> temp_SigInput
 mv temp_SigInput JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc
 
-
+mv ../../UserCode-pharris-MVAMet-data/* JetMETCorrections/METPUSubtraction/data/.
 
 cd EgammaAnalysis/ElectronTools/data/
 cat download.url | xargs wget
