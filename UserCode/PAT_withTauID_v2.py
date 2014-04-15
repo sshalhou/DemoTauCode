@@ -20,7 +20,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
 process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath   = cms.Path(process.ana)
+process.mvametpath   = cms.Path(process.mvamet)
 
 #-------------------------------------------------
 # selection step 1: vertex filter
