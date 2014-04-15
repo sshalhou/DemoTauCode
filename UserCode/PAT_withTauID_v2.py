@@ -137,7 +137,7 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 
 
-process = cms.Process("mvamet")
+#process = cms.Process("mvamet")
 #process.load("FWCore.MessageService.MessageLogger_cfi")
 #process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(10)
 #process.load('Configuration.StandardSequences.Services_cff')
@@ -156,7 +156,7 @@ process = cms.Process("mvamet")
 
 # need to figure out how to get  this in : +process.pileupJetIdProducer
 
-process.outpath  = cms.EndPath(process.output)
+#process.outpath  = cms.EndPath(process.output)
 
 
 
