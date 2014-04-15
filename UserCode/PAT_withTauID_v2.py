@@ -117,9 +117,9 @@ switchToPFTauHPS(process)
 #process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.patDefaultSequence)
 
 
-
+# not really sure this is doing anything; may just want to omit it
 from PhysicsTools.PatAlgos.selectionLayer1.tauCountFilter_cfi import *
-process.Step8TauCount  = countPatTaus.clone(src = 'selectedPatTaus', minNumber = 999, maxNumber = 1000)
+process.Step8TauCount  = countPatTaus.clone(src = 'selectedPatTaus', minNumber = 1, maxNumber = 10000)
 
 
 process.tauSequence = cms.Path(process.Step1VertexPresent *
@@ -131,6 +131,10 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 
 #########################
+# MVA MET
+# MVA MET (uncorrected) + recoil corrections
+#########################
+
 
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']

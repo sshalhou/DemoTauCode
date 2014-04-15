@@ -6,6 +6,17 @@ git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg PhysicsTools/PatExamples
 git cms-addpkg RecoTauTag/RecoTau
 git cms-addpkg EgammaAnalysis/ElectronTools
+
+git cms-addpkg PhysicsTools/PatAlgos
+git cms-merge-topic cms-analysis-tools:5_3_14-updateSelectorUtils
+git cms-merge-topic cms-analysis-tools:5_3_13_patch2-testNewTau
+
+git cms-merge-topic -u TaiSakuma:53X-met-131120-01
+
+git-cms-merge-topic -u cms-met:53X-MVaNoPuMET-20131217-01
+
+wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.tgz
+
 cd EgammaAnalysis/ElectronTools/data/
 cat download.url | xargs wget
 cd -
