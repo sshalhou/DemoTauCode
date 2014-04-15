@@ -19,8 +19,12 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence+process.pileupJetIdProducer)
 process.mvametpath   = cms.Path(process.mvamet)
+
+### To add the Jet Id
+#+process.pileupJetIdProducer)
+
 
 #-------------------------------------------------
 # selection step 1: vertex filter
