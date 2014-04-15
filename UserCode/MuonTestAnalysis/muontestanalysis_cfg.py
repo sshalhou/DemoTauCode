@@ -11,8 +11,6 @@ process.source = cms.Source("PoolSource",
                           'DemoTauCode/CMSSW_5_3_14/src/patTuple_testing.root')
                           )
 
-process.demo = cms.EDAnalyzer('MuonTestAnalysis')
-
 
 process.demo = cms.EDAnalyzer('MuonTestAnalysis',
 muonSrc = cms.untracked.InputTag("cleanPatMuons")
