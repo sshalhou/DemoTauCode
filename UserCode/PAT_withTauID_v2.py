@@ -145,16 +145,16 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
 
-process.output = cms.OutputModule("PoolOutputModule",
-                                  outputCommands = cms.untracked.vstring('keep *')
-                                  )
+#process.output = cms.OutputModule("PoolOutputModule",
+#                                  outputCommands = cms.untracked.vstring('keep *')
+#                                  )
 
 process.ana      = cms.Sequence(process.pfMEtMVAsequence)
 process.p        = cms.Path(process.ana)
 
 # need to figure out how to get  this in : +process.pileupJetIdProducer
 
-process.outpath  = cms.EndPath(process.output)
+#process.outpath  = cms.EndPath(process.output)
 
 
 
