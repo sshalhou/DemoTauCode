@@ -6,6 +6,21 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 from PhysicsTools.PatAlgos.tools.coreTools import *
 
 
+
+#############
+# MVA MET
+#############
+
+process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(10)
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.GlobalTag.globaltag = 'START53_V15::All'
+
+
+
 #-------------------------------------------------
 # selection step 1: vertex filter
 #-------------------------------------------------
