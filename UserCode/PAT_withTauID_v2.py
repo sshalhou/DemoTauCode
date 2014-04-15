@@ -137,7 +137,7 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 process.load("JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff")
 process.mvaMetSequence = cms.Path(process.pfMEtMVAsequence)
-process.mvaMetSequence.GlobalTag.globaltag = 'START52_V11::All' 
+process.GlobalTag.globaltag = 'START52_V11::All' 
 
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
