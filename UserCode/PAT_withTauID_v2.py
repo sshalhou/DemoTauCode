@@ -132,10 +132,34 @@ process.tauSequence = cms.Path(process.Step1VertexPresent *
 
 #########################
 # MVA MET
-# MVA MET (uncorrected) + recoil corrections
+# recoil corrections will be done at ntuple stage (I think ..)
 #########################
 
+process = cms.Process("mvamet")
+process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(10)
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.GlobalTag.globaltag = 'START53_V15::All'
 
+
+process.output = cms.OutputModule("PoolOutputModule",
+                                  outputCommands = cms.untracked.vstring('keep *')
+                                  )
+
+process.ana      = cms.Sequence(process.pfMEtMVAsequence+process.pileupJetIdProducer)
+process.p        = cms.Path(process.ana)
+
+#process.outpath  = cms.EndPath(process.output)
+
+
+
+
+
+
+#########################
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
