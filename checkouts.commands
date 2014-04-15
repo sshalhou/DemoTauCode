@@ -17,6 +17,17 @@ git-cms-merge-topic -u cms-met:53X-MVaNoPuMET-20131217-01
 
 wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.tgz
 
+git clone https://github.com/cms-analysis/JetMETCorrections-METPUSubtraction
+mv JetMETCorrections-METPUSubtraction JetMETCorrections/METPUSubtraction
+
+cat JetMETCorrections/METPUSubtraction/interface/PFMEtSignInterfaceBase.h | grep -v SigInputObj.h >> temp_SigInput
+mv temp_SigInput JetMETCorrections/METPUSubtraction/interface/PFMEtSignInterfaceBase.h
+
+cat JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc | grep -v SigInputObj.h >> temp_SigInput
+mv temp_SigInput JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc
+
+
+
 cd EgammaAnalysis/ElectronTools/data/
 cat download.url | xargs wget
 cd -
