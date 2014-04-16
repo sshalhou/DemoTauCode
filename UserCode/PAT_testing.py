@@ -5,6 +5,12 @@ from PhysicsTools.PatAlgos.tools.trackTools import *
 ########################################################################################################
 
 
+###################################################
+# keep beamspot (needed for electron ID)
+###################################################
+
+process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
+
 
 ###################################################
 # Store the Vertex Collection
@@ -118,6 +124,9 @@ process.electronSequence = cms.Path(
     )
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
+# not sure the electron cut ID works with patConversions
+# so am including the next line just to be safe
+process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 
