@@ -99,13 +99,13 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
 // get muon collection
-edm::Handle<edm::View<pat::Electrons> > electrons;
+edm::Handle<edm::View<pat::Electron> > electrons;
 iEvent.getByLabel(electronSrc_,electrons);
 
 
 int nelectrons = 0;
 
-for(edm::View<pat::Electrons>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
+for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
             nelectrons++;
 
