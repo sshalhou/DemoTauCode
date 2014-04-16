@@ -23,7 +23,7 @@ process.demo = cms.EDAnalyzer('ElectronTestAnalysis',
 electronSrc = cms.untracked.InputTag("cleanPatElectrons"),
 beamspotSrc = cms.untracked.InputTag("offlineBeamSpot"),
 patconversionSrc = cms.untracked.InputTag("patConversions"),
-recconversionSrc = cms.untracked.InputTag("conversions")
+recoconversionSrc = cms.untracked.InputTag("conversions")
 
                               )
 
