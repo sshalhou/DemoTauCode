@@ -2,8 +2,15 @@ import FWCore.ParameterSet.Config as cms
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
 from PhysicsTools.PatAlgos.tools.coreTools import *
 from PhysicsTools.PatAlgos.tools.trackTools import *
+from PhysicsTools.PatAlgos.tools.pfTools import *
 ########################################################################################################
 
+
+###################################################
+# use PF isolation
+###################################################
+
+usePFIso(process)
 
 ###################################################
 # keep beamspot (needed for electron ID)
