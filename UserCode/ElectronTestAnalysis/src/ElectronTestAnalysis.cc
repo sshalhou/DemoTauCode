@@ -148,6 +148,8 @@ std::cout<<electron->gsfTrack()->dxy()<<std::endl;
 std::cout<<" dz ";
 std::cout<<electron->gsfTrack()->dz()<<std::endl;
 
+std::cout<<" eta ";
+std::cout<<electron->->gsfElectronRef()->superCluster()->eta()<<std::endl;
 
 ////////////
 // conversions
