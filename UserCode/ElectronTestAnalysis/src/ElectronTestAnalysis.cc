@@ -130,7 +130,9 @@ std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
 
 int nelectrons = 0;
 
-for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
+for (std::vector<pat::Electron>::const_iterator electron = electrons->begin(); electron != electrons->end(); ++electron) {
+
+//for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
             nelectrons++;
 
