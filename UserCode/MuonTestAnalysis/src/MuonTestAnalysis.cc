@@ -36,8 +36,7 @@
 #include "FWCore/Utilities/interface/InputTag.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
-#include "DataFormats/PatCandidates/interface/Muon.h"
-
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 
 
 //
@@ -113,21 +112,26 @@ iEvent.getByLabel(muonSrc_,muons);
 
   int nmuon = 0;
   int loosemuons = 0;
+  int tightmuons = 0;
+
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
 
               nmuon++;
 
-        if(muon->isLooseMuon()) loosemuons++;
+      //  if(muon->isLooseMuon()) loosemuons++;
+      //  if(muon->isTightMuon()) tightmuons++;
 
+
+      std::cout<<muon::isGoodMuon(muon,GlobalMuonPromptTight)<<std::endl;
 
 
                            } // muons
 
 
 
-std::cout<<" event had "<<nmuon<<" cleanPatMuons "<<std::endl;
+std::cout<<" event had "<<nmuon<<" cleanPatMuons ";
 
-std::cout<<" event had "<<loosemuons<<" loose cleanPatMuons "<<std::endl;
+std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons"<<std::endl;
 
 
 
