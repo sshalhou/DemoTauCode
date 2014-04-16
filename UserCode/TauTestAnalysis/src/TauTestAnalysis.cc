@@ -2,7 +2,7 @@
 //
 // Package:    TauTestAnalysis
 // Class:      TauTestAnalysis
-// 
+//
 /**\class TauTestAnalysis TauTestAnalysis.cc TEMP/TauTestAnalysis/src/TauTestAnalysis.cc
 
  Description: [one line class summary]
@@ -29,6 +29,7 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "DataFormats/PatCandidates/interface/Tau.h"
 //
 // class declaration
 //
@@ -52,6 +53,7 @@ class TauTestAnalysis : public edm::EDAnalyzer {
       virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+      edm::InputTag tauSrc_;
 };
 
 //
@@ -65,8 +67,8 @@ class TauTestAnalysis : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-TauTestAnalysis::TauTestAnalysis(const edm::ParameterSet& iConfig)
-
+TauTestAnalysis::TauTestAnalysis(const edm::ParameterSet& iConfig):
+tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" ))
 {
    //now do what ever initialization is needed
 
@@ -75,7 +77,7 @@ TauTestAnalysis::TauTestAnalysis(const edm::ParameterSet& iConfig)
 
 TauTestAnalysis::~TauTestAnalysis()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -93,12 +95,31 @@ TauTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
    using namespace edm;
 
 
+// get tau collection
+edm::Handle<edm::View<pat::Tau> > taus;
+iEvent.getByLabel(tauSrc_,taus);
+
+
+int ntau = 0;
+for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++tau) {
+
+  ntau++;
+
+          std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
+          std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
+          std::cout<<" byCombinedIsolationDeltaBetaCorrRaw = ";
+          std::cout<<tau->tauID("byCombinedIsolationDeltaBetaCorrRaw")<<std::endl;
+          std::cout<<" decay mode "<<tau->decayMode()<<std::endl;
+
+                    } // tau loop
+  std::cout<<" ntau = "<<ntau<<std::endl;
+
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -107,37 +128,37 @@ TauTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 TauTestAnalysis::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-TauTestAnalysis::endJob() 
+void
+TauTestAnalysis::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 TauTestAnalysis::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 TauTestAnalysis::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 TauTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 TauTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
