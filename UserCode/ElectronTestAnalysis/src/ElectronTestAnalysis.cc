@@ -111,6 +111,7 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 // get electron collection
 //edm::Handle<edm::View<pat::Electron> > electrons;
 //iEvent.getByLabel(electronSrc_,electrons);
+
 edm::Handle < std::vector<pat::Electron> > electrons;
 iEvent.getByLabel(electronSrc_, electrons);
 
