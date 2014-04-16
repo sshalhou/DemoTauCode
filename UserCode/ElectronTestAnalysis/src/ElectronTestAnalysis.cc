@@ -33,6 +33,7 @@
 #include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
 #include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
 #include "DataFormats/PatCandidates/interface/Conversion.h"
+#include "DataFormats/PatCandidates/interface/Lepton.h"
 
 
 //
@@ -154,6 +155,8 @@ std::cout<<electron->superCluster()->eta()<<std::endl;
 std::cout<<" electronID(mvaNonTrigV0) ";
 std::cout<<electron->electronID("mvaNonTrigV0")<<std::endl;
 
+std::cout<<" chargedHadronIso : ";
+std::cout<<electron->chargedHadronIso()<<std::endl;
 
 ////////////
 // conversions
