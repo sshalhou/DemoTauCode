@@ -151,6 +151,10 @@ std::cout<<electron->gsfTrack()->dz()<<std::endl;
 std::cout<<" eta ";
 std::cout<<electron->superCluster()->eta()<<std::endl;
 
+std::cout<<" electronID(mvaNonTrigV0) ";
+std::cout<<electron->superCluster()->electronID(mvaNonTrigV0)<<std::endl;
+
+
 ////////////
 // conversions
 
