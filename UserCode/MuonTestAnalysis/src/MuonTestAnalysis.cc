@@ -131,6 +131,8 @@ iEvent.getByLabel(muonSrc_,muons);
         if(muon->isLooseMuon()) loosemuons++;
         if(muon->isGood("GlobalMuonPromptTight")) tightmuons++;
 
+  std::cout<<muon->muonBestTrack()->dz()<<std::endl;
+
 
                            } // muons
 
