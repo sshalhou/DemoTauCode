@@ -128,6 +128,10 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 # so am including the next line just to be safe
 process.out.outputCommands +=['keep *_conversions*_*_*']
 
+# while the 2013 H->tau tau page says "only use the MVA for the ID"
+# it also lists selection cuts that seem to be applicable to
+# the GsfElectron collection, therefore we keep them
+process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 
