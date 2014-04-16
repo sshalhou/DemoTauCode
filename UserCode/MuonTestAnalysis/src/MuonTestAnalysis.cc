@@ -122,7 +122,7 @@ iEvent.getByLabel(muonSrc_,muons);
       //  if(muon->isTightMuon()) tightmuons++;
 
 
-      std::cout<<muon::isGoodMuon(muon,GlobalMuonPromptTight)<<std::endl;
+      std::cout<<muon::isGoodMuon(muon,muon::GlobalMuonPromptTight)<<std::endl;
 
 
                            } // muons
