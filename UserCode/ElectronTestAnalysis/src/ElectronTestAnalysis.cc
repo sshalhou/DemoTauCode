@@ -60,6 +60,7 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
       // ----------member data ---------------------------
 
       edm::InputTag electronSrc_;
+      edm::InputTag beamspotSrc_;
 
 };
 
