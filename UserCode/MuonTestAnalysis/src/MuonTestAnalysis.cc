@@ -127,7 +127,12 @@ iEvent.getByLabel(vertexSrc_,primaryvertex);
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-//        if(muon->isTightMuon(primaryvertex)) tightmuons++;
+
+// kind of strange to do a loop of one/zero need to check size instead
+for(edm::View<reco::Vertex>::const_iterator vertex=primaryvertex->begin(); vertex!=primaryvertex->end(); ++vertex) {
+
+
+      if(muon->isTightMuon(primaryvertex)) tightmuons++;
 
 
                            } // muons
