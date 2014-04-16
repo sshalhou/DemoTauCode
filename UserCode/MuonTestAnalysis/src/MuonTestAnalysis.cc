@@ -20,6 +20,8 @@
 
 // system include files
 #include <memory>
+#include <math>
+
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -138,7 +140,19 @@ iEvent.getByLabel(muonSrc_,muons);
 
 /////// isolation info
 
-std::cout<<" pfiso = "<<muon->pfIsolationR04().sumChargedHadronPt<<std::endl;
+double irel = 0;
+double i_charged = muon->pfIsolationR04().sumChargedParticlePt;
+double i_photons = muon->pfIsolationR04().sumPhotonEt;
+double i_neutralhadrons = muon->pfIsolationR04().sumNeutralHadronEt;
+double i_deltabeta = muon->pfIsolationR04().sumPUPt;
+
+irel = i_charged + max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0);
+
+if(muon->pt()) irel/=muon->pt();
+else irel = 0.0;
+
+std::cout<<" isolation = "<<irel<<std::endl;
+
 
 
                            } // muons
