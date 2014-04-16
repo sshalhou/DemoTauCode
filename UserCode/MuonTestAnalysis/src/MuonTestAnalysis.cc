@@ -117,7 +117,7 @@ iEvent.getByLabel(muonSrc_,muons);
   int nmuon = 0;
   int loosemuons = 0;
   int tightmuons = 0;
-
+  int selectedtightmuons = 0;
 
 
 //  if( primaryvertex->size() )  pvPtr = pv->ptrAt(0);
@@ -130,8 +130,8 @@ iEvent.getByLabel(muonSrc_,muons);
 
         if(muon->isLooseMuon()) loosemuons++;
         if(muon->isGood("GlobalMuonPromptTight")) tightmuons++;
+        if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
 
-  std::cout<<muon->muonBestTrack()->dz()<<std::endl;
 
 
                            } // muons
@@ -139,8 +139,8 @@ iEvent.getByLabel(muonSrc_,muons);
 
 
 std::cout<<" event had "<<nmuon<<" cleanPatMuons ";
-
-std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons"<<std::endl;
+std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons"<<selectedtightmuons;
+std::cout<<" with d0 and dz cuts "<<std::endl;
 
 
 
