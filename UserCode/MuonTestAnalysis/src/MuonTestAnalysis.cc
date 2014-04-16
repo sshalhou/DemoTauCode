@@ -129,7 +129,7 @@ iEvent.getByLabel(muonSrc_,muons);
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-        if(muon->isGood("AllGlobalMuons")) tightmuons++;
+        if(muon->isGood("GlobalMuonPromptTight")) tightmuons++;
 
 
                            } // muons
