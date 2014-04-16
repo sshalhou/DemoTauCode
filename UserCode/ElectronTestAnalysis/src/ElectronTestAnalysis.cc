@@ -32,7 +32,7 @@
 #include "DataFormats/PatCandidates/interface/Electron.h"
 #include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
 #include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
-
+#include "DataFormats/PatCandidates/interface/Conversion.h"
 
 
 //
@@ -61,6 +61,8 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
 
       edm::InputTag electronSrc_;
       edm::InputTag beamspotSrc_;
+      edm::InputTag patconversionSrc_;
+      edm::InputTag recoconversionSrc_;
 
 };
 
@@ -77,7 +79,9 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
 //
 ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
-beamspotSrc_(iConfig.getUntrackedParameter<edm::InputTag>("beamspotSrc" ))
+beamspotSrc_(iConfig.getUntrackedParameter<edm::InputTag>("beamspotSrc" )),
+patconversionSrc_(iConfig.getUntrackedParameter<edm::InputTag>("patconversionSrc" )),
+recoconversionSrc_(iConfig.getUntrackedParameter<edm::InputTag>("recoconversionSrc" ))
 {
    //now do what ever initialization is needed
 
@@ -111,6 +115,15 @@ iEvent.getByLabel(electronSrc_,electrons);
 // get beamspot
 edm::Handle < reco::BeamSpot > beamspot;
 iEvent.getByLabel(beamspotSrc_, beamspot);
+
+// get conversions (try pat and reco both)
+
+edm::Handle < edm::View<pat::Conversion> > patconversions;
+iEvent.getByLabel(patconversionSrc_, patconversions);
+
+edm::Handle < reco::Conversion > recoconversions;
+iEvent.getByLabel(recoconversionSrc_, recoconversions);
+
 
 std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
 
