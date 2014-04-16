@@ -112,7 +112,9 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
-          std::cout<<" NewMediumWP = "<<tau->tauID("NewMediumWP")<<std::endl;
+
+          std::cout<<"againstElectronMVA3raw = "<<tau->tauID("againstElectronMVA3raw")<<std::endl;
+
           std::cout<<" againstElectronLoose = "<<tau->tauID("againstElectronLoose")<<std::endl;
           std::cout<<" againstMuonTight = "<<tau->tauID("againstMuonTight")<<std::endl;
           std::cout<<" againstElectronLooseMVA3 = "<<tau->tauID("againstElectronLooseMVA3")<<std::endl;
