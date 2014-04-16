@@ -36,7 +36,7 @@
 #include "FWCore/Utilities/interface/InputTag.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
-#include "DataFormats/MuonReco/interface/MuonSelectors.h"
+
 
 
 //
@@ -118,11 +118,8 @@ iEvent.getByLabel(muonSrc_,muons);
 
               nmuon++;
 
-      //  if(muon->isLooseMuon()) loosemuons++;
+        if(muon->isLooseMuon()) loosemuons++;
       //  if(muon->isTightMuon()) tightmuons++;
-
-
-      std::cout<<muon::isGoodMuon(muon,muon::GlobalMuonPromptTight)<<std::endl;
 
 
                            } // muons
