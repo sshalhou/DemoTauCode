@@ -2,7 +2,7 @@
 //
 // Package:    ElectronTestAnalysis
 // Class:      ElectronTestAnalysis
-// 
+//
 /**\class ElectronTestAnalysis ElectronTestAnalysis.cc TEMP/ElectronTestAnalysis/src/ElectronTestAnalysis.cc
 
  Description: [one line class summary]
@@ -29,6 +29,7 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "DataFormats/PatCandidates/interface/Electron.h"
 //
 // class declaration
 //
@@ -52,6 +53,9 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
       virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+
+      edm::InputTag electronSrc_;
+
 };
 
 //
@@ -65,7 +69,8 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig)
+ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig):
+electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" ))
 
 {
    //now do what ever initialization is needed
@@ -75,7 +80,7 @@ ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig)
 
 ElectronTestAnalysis::~ElectronTestAnalysis()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -93,12 +98,27 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
    using namespace edm;
 
 
+// get muon collection
+edm::Handle<edm::View<pat::Electrons> > electrons;
+iEvent.getByLabel(electronSrc_,electrons);
+
+
+int nelectrons = 0;
+
+for(edm::View<pat::Electrons>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
+
+            nelectrons++;
+
+          }
+
+std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
+
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -107,37 +127,37 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 ElectronTestAnalysis::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-ElectronTestAnalysis::endJob() 
+void
+ElectronTestAnalysis::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 ElectronTestAnalysis::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 ElectronTestAnalysis::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 ElectronTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 ElectronTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
