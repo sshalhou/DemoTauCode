@@ -114,25 +114,25 @@ iEvent.getByLabel(muonSrc_,muons);
 // get best vertex, not sure about this
 edm::Handle<edm::View<reco::Vertex> > primaryvertex;
 iEvent.getByLabel(vertexSrc_,primaryvertex);
-
-
+const reco::Vertex* pv = &(*primaryvertex->begin());
 
 
   int nmuon = 0;
   int loosemuons = 0;
   int tightmuons = 0;
 
+
+
+//  if( primaryvertex->size() )  pvPtr = pv->ptrAt(0);
+
+
+
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
 
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-
-// kind of strange to do a loop of one/zero need to check size instead
-for(edm::View<reco::Vertex>::const_iterator vertex=primaryvertex->begin(); vertex!=primaryvertex->end(); ++vertex) {
-
-
-      if(muon->isTightMuon(primaryvertex)) tightmuons++;
+        if(muon->isTightMuon(pv)) tightmuons++;
 
 
                            } // muons
