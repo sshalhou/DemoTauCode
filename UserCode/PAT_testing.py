@@ -3,6 +3,7 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 from PhysicsTools.PatAlgos.tools.coreTools import *
 from PhysicsTools.PatAlgos.tools.trackTools import *
 from PhysicsTools.PatAlgos.tools.pfTools import *
+from PhysicsTools.PatAlgos.tools.tauTools import *
 ########################################################################################################
 
 
@@ -171,9 +172,35 @@ process.muonSequence = cms.Path(process.VertexPresent *
                                 )
 
 
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
 
 
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
+switchToPFTauHPS(process)
+
+## define the path
+
+#process.tauStep6 = cms.Path(process.recoTauClassicHPSSequence+process.PFTau+process.patDefaultSequence)
+
+# not really sure this is doing anything; may just want to omit it
+from PhysicsTools.PatAlgos.selectionLayer1.tauCountFilter_cfi import *
+process.TauCount  = countPatTaus.clone(src = 'selectedPatTaus', minNumber = 1, maxNumber = 10000)
+
+
+process.tauSequence = cms.Path(process.VertexPresent *
+                              process.recoTauClassicHPSSequence*
+                              process.PFTau*
+                              process.patDefaultSequence*
+                              process.TauCount
+                               )
+
+
+###################################################
 
 
 ###################################################
