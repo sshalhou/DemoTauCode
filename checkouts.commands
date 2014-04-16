@@ -26,7 +26,14 @@ mv temp_SigInput JetMETCorrections/METPUSubtraction/interface/PFMEtSignInterface
 cat JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc | grep -v SigInputObj.h >> temp_SigInput
 mv temp_SigInput JetMETCorrections/METPUSubtraction/plugins/NoPileUpPFMEtProducer.cc
 
-mv ../../UserCode-pharris-MVAMet-data/* JetMETCorrections/METPUSubtraction/data/.
+
+mv JetMETCorrections/METPUSubtraction/data/* ../../UserCode-pharris-MVAMet-data/.
+rm -rf JetMETCorrections/METPUSubtraction/data
+
+cd JetMETCorrections/METPUSubtraction
+ln -s ../../../../UserCode-pharris-MVAMet-data data
+cd -
+
 
 mv RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.cc RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.cc_old
 mv RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h_old
