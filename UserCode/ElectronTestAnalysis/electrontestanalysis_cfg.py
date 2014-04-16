@@ -20,7 +20,9 @@ process.demo = cms.EDAnalyzer('ElectronTestAnalysis'
 
 
 process.demo = cms.EDAnalyzer('ElectronTestAnalysis',
-electronSrc = cms.untracked.InputTag("cleanPatElectrons")
+electronSrc = cms.untracked.InputTag("cleanPatElectrons"),
+beamspotSrc = cms.untracked.InputTag("offlineBeamSpot")
+
                               )
 
 

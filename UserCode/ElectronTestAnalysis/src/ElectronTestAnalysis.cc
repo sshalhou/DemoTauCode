@@ -30,6 +30,11 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/PatCandidates/interface/Electron.h"
+#include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
+#include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
+
+
+
 //
 // class declaration
 //
@@ -70,8 +75,8 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
 // constructors and destructor
 //
 ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig):
-electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" ))
-
+electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
+beamspotSrc_(iConfig.getUntrackedParameter<edm::InputTag>("beamspotSrc" ))
 {
    //now do what ever initialization is needed
 
@@ -101,6 +106,12 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 // get muon collection
 edm::Handle<edm::View<pat::Electron> > electrons;
 iEvent.getByLabel(electronSrc_,electrons);
+
+// get beamspot
+edm::Handle < reco::BeamSpot > beamspot;
+iEvent.getByLabel(beamspotSrc_, beamspot);
+
+std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
 
 
 int nelectrons = 0;
