@@ -208,7 +208,7 @@ process.tauSequence = cms.Path(process.VertexPresent *
 # defined above; there will be a pass/fail report at the
 # end of the process
 ###################################################
-process.out.SelectEvents.SelectEvents = ['muonSequence','electronSequence']
+process.out.SelectEvents.SelectEvents = ['tauSequence','muonSequence','electronSequence']
 
 ########################################################################################################
 process.out.fileName = 'patTuple_testing.root'
