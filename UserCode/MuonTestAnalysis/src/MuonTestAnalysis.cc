@@ -20,7 +20,7 @@
 
 // system include files
 #include <memory>
-#include <math>
+
 
 
 // user include files
