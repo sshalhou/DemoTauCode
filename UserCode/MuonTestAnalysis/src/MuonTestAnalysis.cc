@@ -36,6 +36,7 @@
 #include "FWCore/Utilities/interface/InputTag.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 
 
 
