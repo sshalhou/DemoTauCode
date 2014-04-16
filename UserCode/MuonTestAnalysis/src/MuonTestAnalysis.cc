@@ -129,10 +129,12 @@ iEvent.getByLabel(muonSrc_,muons);
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-        if(muon->isGood("GlobalMuonPromptTight")) tightmuons++;
-        // units of dz are cm I think
-        if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
+        if(muon->isGood("GlobalMuonPromptTight")){
 
+          tightmuons++;
+          // units of dz are cm I think
+          if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
+                                                  }
 
 
                            } // muons
