@@ -152,7 +152,7 @@ std::cout<<" eta ";
 std::cout<<electron->superCluster()->eta()<<std::endl;
 
 std::cout<<" electronID(mvaNonTrigV0) ";
-std::cout<<electron->superCluster()->electronID(mvaNonTrigV0)<<std::endl;
+std::cout<<electron->electronID(mvaNonTrigV0)<<std::endl;
 
 
 ////////////
