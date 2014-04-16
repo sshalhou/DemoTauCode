@@ -112,10 +112,10 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
-          std::cout<<" NewMediumWP = "tau->tauID("NewMediumWP")<<std::endl;
-          std::cout<<" againstElectronLoose = "tau->tauID("againstElectronLoose")<<std::endl;
-          std::cout<<" againstMuonTight = "tau->tauID("againstMuonTight")<<std::endl;
-          std::cout<<" againstElectronLooseMVA3 = "tau->tauID("againstElectronLooseMVA3")<<std::endl;
+          std::cout<<" NewMediumWP = "<<tau->tauID("NewMediumWP")<<std::endl;
+          std::cout<<" againstElectronLoose = "<<tau->tauID("againstElectronLoose")<<std::endl;
+          std::cout<<" againstMuonTight = "<<tau->tauID("againstMuonTight")<<std::endl;
+          std::cout<<" againstElectronLooseMVA3 = "<<tau->tauID("againstElectronLooseMVA3")<<std::endl;
 
           std::cout<<" ByMediumCombinedIsolationDBSumPtCorr3Hits = "
           std::cout<<tau->tauID("ByMediumCombinedIsolationDBSumPtCorr3Hits")<<std::endl;
