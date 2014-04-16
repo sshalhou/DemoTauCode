@@ -155,8 +155,23 @@ std::cout<<electron->superCluster()->eta()<<std::endl;
 std::cout<<" electronID(mvaNonTrigV0) ";
 std::cout<<electron->electronID("mvaNonTrigV0")<<std::endl;
 
-std::cout<<" chargedHadronIso : ";
-std::cout<<electron->chargedHadronIso()<<std::endl;
+
+
+
+/////// isolation info
+
+double irel = 0;
+double i_charged = electron->chargedHadronIso();
+double i_photons = electron->photonIso();
+double i_neutralhadrons = electron->neutralHadronIso();
+double i_deltabeta = electron->puChargedHadronIso();
+
+irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+
+if(electron->pt()) irel/=electron->pt();
+else irel = 0.0;
+
+std::cout<<" isolation = "<<irel<<std::endl;
 
 ////////////
 // conversions
