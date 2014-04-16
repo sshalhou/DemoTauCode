@@ -114,7 +114,7 @@ iEvent.getByLabel(muonSrc_,muons);
 // get best vertex, not sure about this
 edm::Handle<edm::View<reco::Vertex> > primaryvertex;
 iEvent.getByLabel(vertexSrc_,primaryvertex);
-const reco::Vertex pv = &(primaryvertex->begin());
+const reco::Vertex pv = (primaryvertex->begin());
 
 
   int nmuon = 0;
