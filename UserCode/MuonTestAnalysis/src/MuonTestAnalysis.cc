@@ -136,6 +136,10 @@ iEvent.getByLabel(muonSrc_,muons);
           if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
                                                   }
 
+/////// isolation info
+
+cout<<" pfiso = "<<muon->pfIsolationR04()<<endl;
+
 
                            } // muons
 
@@ -144,6 +148,9 @@ iEvent.getByLabel(muonSrc_,muons);
 std::cout<<" event had "<<nmuon<<" cleanPatMuons ";
 std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons and "<<selectedtightmuons;
 std::cout<<" with d0 and dz cuts "<<std::endl;
+
+
+
 
 
 
