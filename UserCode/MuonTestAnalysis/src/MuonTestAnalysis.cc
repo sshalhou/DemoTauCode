@@ -146,7 +146,7 @@ double i_photons = muon->pfIsolationR04().sumPhotonEt;
 double i_neutralhadrons = muon->pfIsolationR04().sumNeutralHadronEt;
 double i_deltabeta = muon->pfIsolationR04().sumPUPt;
 
-irel = i_charged + max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0);
+irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
 
 if(muon->pt()) irel/=muon->pt();
 else irel = 0.0;
