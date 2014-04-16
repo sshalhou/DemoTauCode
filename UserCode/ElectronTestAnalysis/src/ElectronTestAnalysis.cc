@@ -108,9 +108,12 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
    using namespace edm;
 
 
-// get muon collection
-edm::Handle<edm::View<pat::Electron> > electrons;
-iEvent.getByLabel(electronSrc_,electrons);
+// get electron collection
+//edm::Handle<edm::View<pat::Electron> > electrons;
+//iEvent.getByLabel(electronSrc_,electrons);
+edm::Handle < std::vector<pat::Electron> > electrons;
+iEvent.getByLabel(inputTag, electrons);
+
 
 // get beamspot
 edm::Handle < reco::BeamSpot > beamspot;
