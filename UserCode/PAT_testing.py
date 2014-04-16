@@ -83,12 +83,6 @@ process.out.outputCommands.append('keep *_bestVertex_*_*')
 
 ###################################################
 # Store the Muons
-# default H->tau tau uses
-# isTightMuon which I can't figure out
-# how to apply at this stage since it
-# takes vertex as an argument
-# instead will filter on Global and PFmuons
-# will require at least 1 on the muon path
 ###################################################
 
 
@@ -111,6 +105,50 @@ process.muonSequence = cms.Path(process.VertexPresent *
                                 )
 
 
+###################################################
+# store electrons, filter if needed
+###################################################
+
+
+process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
+process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaNonTrigV0 + process.mvaTrigNoIPV0 )
+
+process.patElectrons.electronIDSources = cms.PSet(mvaTrigV0 = cms.InputTag("mvaTrigV0"),
+                                                  mvaNonTrigV0 = cms.InputTag("mvaNonTrigV0"),
+                                                  mvaTrigNoIPV0 = cms.InputTag("mvaTrigNoIPV0"),
+                                                  )
+
+#add pat conversions
+process.patConversions = cms.EDProducer("PATConversionProducer",
+                                        electronSource = cms.InputTag("gsfElectrons")
+                                        )
+
+# just here for demo purposes
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.FilterElectron = selectedPatElectrons.clone(src = 'selectedPatElectrons',
+                                                   cut = 'et > 0.0'
+                                                    )
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronCountFilter_cfi import *
+process.FilterElectronCount  = countPatElectrons.clone(src = 'FilterElectron', minNumber = 1, maxNumber = 1000)
+
+
+## define the MVA+Filter sequence
+process.electronSequence = cms.Path(
+    process.mvaID *
+    process.patDefaultSequence*
+    process.patConversions*
+    process.Step1VertexPresent*
+    process.FilterElectron *
+    process.FilterElectronCount
+    )
+
+process.out.outputCommands +=['keep *_patConversions*_*_*']
+
+
+
+
 
 
 ###################################################
@@ -118,7 +156,7 @@ process.muonSequence = cms.Path(process.VertexPresent *
 # defined above; there will be a pass/fail report at the
 # end of the process
 ###################################################
-process.out.SelectEvents.SelectEvents = ['muonSequence']
+process.out.SelectEvents.SelectEvents = ['muonSequence','electronSequence']
 
 ########################################################################################################
 process.out.fileName = 'patTuple_testing.root'
