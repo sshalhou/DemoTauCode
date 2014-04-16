@@ -126,7 +126,7 @@ iEvent.getByLabel(vertexSrc_,primaryvertex);
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-        if(muon->isTightMuon(primaryvertex)) tightmuons++;
+//        if(muon->isTightMuon(primaryvertex)) tightmuons++;
 
 
                            } // muons
