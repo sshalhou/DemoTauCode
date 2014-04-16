@@ -142,6 +142,12 @@ for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electr
 std::cout<<" number missing inner hits ";
 std::cout<<electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()<<std::endl;
 
+std::cout<<" dxy ";
+std::cout<<electron->gsfTrack()->dxy();<<std::endl;
+
+std::cout<<" dz ";
+std::cout<<electron->gsfTrack()->dz();<<std::endl;
+
 
 ////////////
 // conversions
