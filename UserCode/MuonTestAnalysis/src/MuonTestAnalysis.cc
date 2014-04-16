@@ -112,14 +112,22 @@ iEvent.getByLabel(muonSrc_,muons);
 
 
   int nmuon = 0;
+  int loosemuons = 0;
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
 
               nmuon++;
 
+        if(muon->isLooseMuon()) loosemuons++;
+
+
+
                            } // muons
+
+
 
 std::cout<<" event had "<<nmuon<<" cleanPatMuons "<<std::endl;
 
+std::cout<<" event had "<<loosemuons<<" loose cleanPatMuons "<<std::endl;
 
 
 
