@@ -64,6 +64,7 @@ class MuonTestAnalysis : public edm::EDAnalyzer {
       // ----------member data ---------------------------
 
       edm::InputTag muonSrc_;
+      edm::InputTag vertexSrc_;
 
 };
 
@@ -109,6 +110,10 @@ MuonTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 edm::Handle<edm::View<pat::Muon> > muons;
 iEvent.getByLabel(muonSrc_,muons);
 
+// get best vertex
+edm::Handle<edm::View<reco::Vertex> > primaryvertex;
+iEvent.getByLabel(vertexSrc_,primaryvertex);
+
 
   int nmuon = 0;
   int loosemuons = 0;
@@ -119,7 +124,7 @@ iEvent.getByLabel(muonSrc_,muons);
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-      //  if(muon->isTightMuon()) tightmuons++;
+        if(muon->isTightMuon(primaryvertex)) tightmuons++;
 
 
                            } // muons
