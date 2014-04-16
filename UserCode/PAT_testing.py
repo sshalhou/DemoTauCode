@@ -139,7 +139,7 @@ process.electronSequence = cms.Path(
     process.mvaID *
     process.patDefaultSequence*
     process.patConversions*
-    process.Step1VertexPresent*
+    process.VertexPresent*
     process.FilterElectron *
     process.FilterElectronCount
     )
