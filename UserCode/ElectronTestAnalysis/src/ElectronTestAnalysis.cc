@@ -118,11 +118,11 @@ iEvent.getByLabel(beamspotSrc_, beamspot);
 
 // get conversions (try pat and reco both)
 
-edm::Handle < edm::View<pat::Conversion> > patconversions;
-iEvent.getByLabel(patconversionSrc_, patconversions);
+edm::Handle < edm::View<pat::Conversion> > patconversion;
+iEvent.getByLabel(patconversionSrc_, patconversion);
 
-edm::Handle < reco::Conversion > recoconversions;
-iEvent.getByLabel(recoconversionSrc_, recoconversions);
+edm::Handle < reco::Conversion > recoconversion;
+iEvent.getByLabel(recoconversionSrc_, recoconversion);
 
 
 std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
@@ -138,6 +138,16 @@ std::cout<<" number missing inner hits ";
 std::cout<<electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()<<std::endl;
 
 
+////////////
+// conversions
+
+     bool matchesConv = false;
+			if (recoconversion.isValid() && beamspot.isValid()) {
+				matchesConv = ConversionTools::hasMatchedConversion(*electron, recoconversion, beamspot->position());
+			}
+
+
+std::cout<<" matchesConv = "<<matchesConv<<std::endl;
           }
 
 std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
