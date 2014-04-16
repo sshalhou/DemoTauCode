@@ -60,6 +60,7 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
       // ----------member data ---------------------------
 
       edm::InputTag electronSrc_;
+      edm::InputTag gsfelectronSrc_;
       edm::InputTag beamspotSrc_;
       edm::InputTag patconversionSrc_;
       edm::InputTag recoconversionSrc_;
@@ -79,6 +80,7 @@ class ElectronTestAnalysis : public edm::EDAnalyzer {
 //
 ElectronTestAnalysis::ElectronTestAnalysis(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
+gsfelectronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("gsfelectronSrc" )),
 beamspotSrc_(iConfig.getUntrackedParameter<edm::InputTag>("beamspotSrc" )),
 patconversionSrc_(iConfig.getUntrackedParameter<edm::InputTag>("patconversionSrc" )),
 recoconversionSrc_(iConfig.getUntrackedParameter<edm::InputTag>("recoconversionSrc" ))
@@ -109,11 +111,10 @@ ElectronTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
 // get electron collection
-//edm::Handle<edm::View<pat::Electron> > electrons;
-//iEvent.getByLabel(electronSrc_,electrons);
+edm::Handle<edm::View<pat::Electron> > electrons;
+iEvent.getByLabel(electronSrc_,electrons);
 
-edm::Handle < std::vector<pat::Electron> > electrons;
-iEvent.getByLabel(electronSrc_, electrons);
+
 
 
 // get beamspot
@@ -134,9 +135,7 @@ std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
 
 int nelectrons = 0;
 
-for (std::vector<pat::Electron>::const_iterator electron = electrons->begin(); electron != electrons->end(); ++electron) {
-
-//for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
+for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
             nelectrons++;
 
@@ -147,13 +146,13 @@ std::cout<<electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()<<
 ////////////
 // conversions
 
-     bool matchesConv = false;
-			if (recoconversion.isValid() && beamspot.isValid()) {
-				matchesConv = ConversionTools::hasMatchedConversion(*electron, recoconversion, beamspot->position());
-			}
+  //   bool matchesConv = false;
+		//	if (recoconversion.isValid() && beamspot.isValid()) {
+			//	matchesConv = ConversionTools::hasMatchedConversion(*electron, recoconversion, beamspot->position());
+			//}
 
 
-std::cout<<" matchesConv = "<<matchesConv<<std::endl;
+std::cout<<" PassConversionVeto = "<<electron->PassConversionVeto()<<std::endl;
           }
 
 std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
