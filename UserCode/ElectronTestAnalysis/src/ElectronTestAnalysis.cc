@@ -109,6 +109,10 @@ for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electr
 
             nelectrons++;
 
+std::cout<<" number missing inner hits ";
+std::cout<<electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()<<std::endl;
+
+
           }
 
 std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
