@@ -78,33 +78,6 @@ process.out.outputCommands.append('keep *_selectedPatTrackCands_*_*')
 process.out.outputCommands.append('keep *_patTrackVertexInfo_*_*')
 process.out.outputCommands.append('keep *_bestVertex_*_*')
 
-
-
-
-###################################################
-# Store the Muons
-###################################################
-
-
-from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.GlobalPFMuons = cleanPatMuons.clone(preselection =
-                                               'isGlobalMuon &'
-                                               'isPFMuon'
-                                               )
-
-
-from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
-
-
-
-process.muonSequence = cms.Path(process.VertexPresent *
-                                 process.patDefaultSequence *
-                                 process.GlobalPFMuons *
-                                 process.GlobalPFMuonsCount
-                                )
-
-
 ###################################################
 # store electrons, filter if needed
 ###################################################
@@ -145,6 +118,34 @@ process.electronSequence = cms.Path(
     )
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
+
+
+
+
+###################################################
+# Store the Muons (for some reason these need to be
+# after the Electrons or I get problems ...)
+###################################################
+
+
+from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
+process.GlobalPFMuons = cleanPatMuons.clone(preselection =
+                                               'isGlobalMuon &'
+                                               'isPFMuon'
+                                               )
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
+process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
+
+
+
+process.muonSequence = cms.Path(process.VertexPresent *
+                                 process.patDefaultSequence *
+                                 process.GlobalPFMuons *
+                                 process.GlobalPFMuonsCount
+                                )
+
 
 
 
