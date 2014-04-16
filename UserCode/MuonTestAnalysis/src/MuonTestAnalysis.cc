@@ -115,7 +115,12 @@ iEvent.getByLabel(muonSrc_,muons);
 
   edm::Handle< std::vector<reco::Vertex> > primaryvertex;
   iEvent.getByLabel( vertexSrc_, primaryvertex );
-  const reco::Vertex pv = (primaryvertex->begin());
+  const reco::Vertex pv; // = &(primaryvertex->begin());
+
+for(edm::View<reco::Vertex>::const_iterator vertex=primaryvertex->begin(); vertex!=primaryvertex->end(); ++vertex) {
+    pv = vertex;
+  }
+
 
 //edm::Handle<edm::View<reco::Vertex> > primaryvertex;
 //iEvent.getByLabel(vertexSrc_,primaryvertex);
