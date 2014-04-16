@@ -117,7 +117,7 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" againstMuonTight = "<<tau->tauID("againstMuonTight")<<std::endl;
           std::cout<<" againstElectronLooseMVA3 = "<<tau->tauID("againstElectronLooseMVA3")<<std::endl;
 
-          std::cout<<" ByMediumCombinedIsolationDBSumPtCorr3Hits = "
+          std::cout<<" ByMediumCombinedIsolationDBSumPtCorr3Hits = ";
           std::cout<<tau->tauID("ByMediumCombinedIsolationDBSumPtCorr3Hits")<<std::endl;
 
 
