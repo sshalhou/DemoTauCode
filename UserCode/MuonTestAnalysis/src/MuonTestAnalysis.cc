@@ -31,7 +31,6 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "DataFormats/PatCandidates/interface/Muon.h"
-#include "DataFormats/PatCandidates/interface/Vertexing.h"
 
 
 #include "FWCore/Utilities/interface/InputTag.h"
@@ -111,22 +110,7 @@ MuonTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 edm::Handle<edm::View<pat::Muon> > muons;
 iEvent.getByLabel(muonSrc_,muons);
 
-// get best vertex, not sure about this
 
-  edm::Handle< std::vector<reco::Vertex> > primaryvertex;
-  iEvent.getByLabel( vertexSrc_, primaryvertex );
-//  const reco::Vertex pv; // = &(primaryvertex->begin());
-
-for(edm::View<reco::Vertex>::const_iterator vertex=primaryvertex->begin(); vertex!=primaryvertex->end(); ++vertex) {
-
-std::cout<<" A";
-    //pv = vertex;
-  }
-
-
-//edm::Handle<edm::View<reco::Vertex> > primaryvertex;
-//iEvent.getByLabel(vertexSrc_,primaryvertex);
-//const reco::Vertex* pv = &(*primaryvertex->begin());
 
 
   int nmuon = 0;
@@ -144,7 +128,7 @@ std::cout<<" A";
               nmuon++;
 
         if(muon->isLooseMuon()) loosemuons++;
-//        if(muon->isTightMuon(pv)) tightmuons++;
+        if(muon->isGood(reco::Muon::TMLastStationOptimizedLowPtTight)) tightmuons++;
 
 
                            } // muons
