@@ -138,7 +138,7 @@ iEvent.getByLabel(muonSrc_,muons);
 
 /////// isolation info
 
-std::cout<<" pfiso = "<<muon->pfIsolationR04()<<std::endl;
+std::cout<<" pfiso = "<<muon->pfIsolationR04().sumChargedHadronPt<<std::endl;
 
 
                            } // muons
