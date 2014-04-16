@@ -12,8 +12,12 @@ from PhysicsTools.PatAlgos.tools.pfTools import *
 
 usePFIso(process)
 
+# if the sample does not contain value map of PF candidate "particleFlow:electrons", use following line.
+# this appears to be the case for our test sample
+process.patElectrons.pfElectronSource = 'particleFlow'
+
 ###################################################
-# keep beamspot (needed for electron ID)
+# keep beamspot (may be needed for electron ID)
 ###################################################
 
 process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
