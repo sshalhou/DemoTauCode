@@ -152,7 +152,7 @@ std::cout<<electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()<<
 			//}
 
 
-std::cout<<" PassConversionVeto = "<<electron->PassConversionVeto()<<std::endl;
+std::cout<<" PassConversionVeto = "<<electron->passConversionVeto()<<std::endl;
           }
 
 std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
