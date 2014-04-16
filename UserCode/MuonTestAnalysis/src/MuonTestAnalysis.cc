@@ -130,6 +130,7 @@ iEvent.getByLabel(muonSrc_,muons);
 
         if(muon->isLooseMuon()) loosemuons++;
         if(muon->isGood("GlobalMuonPromptTight")) tightmuons++;
+        // units of dz are cm I think
         if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
 
 
@@ -139,7 +140,7 @@ iEvent.getByLabel(muonSrc_,muons);
 
 
 std::cout<<" event had "<<nmuon<<" cleanPatMuons ";
-std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons"<<selectedtightmuons;
+std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons and "<<selectedtightmuons;
 std::cout<<" with d0 and dz cuts "<<std::endl;
 
 
