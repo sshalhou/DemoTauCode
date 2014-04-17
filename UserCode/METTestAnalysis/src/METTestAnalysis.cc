@@ -29,7 +29,7 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "DataFormats/METReco/interface/PFMET.h"
+#include "DataFormats/METReco/interface/MET.h"
 //
 // class declaration
 //
