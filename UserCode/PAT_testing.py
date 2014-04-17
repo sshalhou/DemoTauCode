@@ -219,7 +219,8 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
 ### To add the Jet Id
 #+process.pileupJetIdProducer)
 
-process.load('RecoMET.METProducers.mvaPFMET_cff_leptons')
+#process.load('RecoMET.METProducers.mvaPFMET_cff_leptons')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 #This will produce 1 object of type reco::PFMET for each event.
 #pat::MET objects can be produced by the following configuration:
