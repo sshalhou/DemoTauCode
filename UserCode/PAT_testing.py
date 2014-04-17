@@ -133,10 +133,10 @@ process.FilterElectronCount  = countPatElectrons.clone(src = 'FilterElectron', m
 process.electronSequence = cms.Path(
     process.mvaID *
     process.patDefaultSequence*
-    process.patConversions*
-    process.VertexPresent*
-    process.FilterElectron *
-    process.FilterElectronCount
+#    process.patConversions*
+#    process.VertexPresent*
+#    process.FilterElectron *
+#    process.FilterElectronCount
     )
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
