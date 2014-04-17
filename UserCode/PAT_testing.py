@@ -42,6 +42,7 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patPFMetByMVA)
 
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+process.out.outputCommands +=['keep *_*_*_*']
 
 
 ### To add the Jet Id
