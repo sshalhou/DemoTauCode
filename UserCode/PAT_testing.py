@@ -39,6 +39,8 @@ process.patPFMetByMVA = process.patMETs.clone(
 )
 
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+
 
 ### To add the Jet Id
 #+process.pileupJetIdProducer)
