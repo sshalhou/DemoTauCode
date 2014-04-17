@@ -13,7 +13,7 @@ process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 # MVA MET (this must be before muon and electron sequences, don't
 # understand why at this point)
 ###################################################
-
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
