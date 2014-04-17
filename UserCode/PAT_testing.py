@@ -14,19 +14,41 @@ process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 # understand why at this point)
 ###################################################
 
-
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
-#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+#process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+#process.load('pharris.MVAMet.metProducerSequence_cff')
+#process.load('JetMETCorrections.METPUSubtraction.pileupJetIdMVASequence_cff')
+
+#process.GlobalTag.globaltag = 'GR_R_42_V23::All'
+#process.GlobalTag.globaltag = 'MC_44_V12::All'
+#process.GlobalTag.globaltag = 'MC_44_V12::All'
 process.GlobalTag.globaltag = 'START53_V15::All'
 
+process.ana      = cms.Sequence(process.pfMEtMVAsequence)
+process.p        = cms.Path(process.ana)
 
-process.mvamet      = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath        = cms.Path(process.mvamet)
+### To add the Jet Id
+#+process.pileupJetIdProducer)
+
+
+
+
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+#process.load('Configuration.StandardSequences.Services_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
+
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+#process.GlobalTag.globaltag = 'START53_V15::All'
+
+
+#process.mvamet      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvamet)
 
 #process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
 #process.patPFMetByMVA = process.patMETs.clone(
@@ -37,7 +59,7 @@ process.mvametpath        = cms.Path(process.mvamet)
 #process.mvametpath   = cms.Path(process.mvamet*process.patPFMetByMVA)
 
 
-process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+#process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 
 
 ###################################################
