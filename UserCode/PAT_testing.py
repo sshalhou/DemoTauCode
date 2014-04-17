@@ -9,6 +9,37 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(5)
 ########################################################################################################
 
+###################################################
+# MVA MET
+###################################################
+
+
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.GlobalTag.globaltag = 'START53_V15::All'
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+
+### To add the Jet Id
+#+process.pileupJetIdProducer)
+
+
+#This will produce 1 object of type reco::PFMET for each event.
+#pat::MET objects can be produced by the following configuration:
+process.patPFMetByMVA = process.patMETs.clone(
+    metSource = cms.InputTag('pfMEtMVA'),
+    addMuonCorrections = cms.bool(False),
+    genMETSource = cms.InputTag('genMetTrue')
+)
+
+
+process.mvametpath   = cms.Path(process.mvamet*process.patPFMetByMVA)
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+
 
 ###################################################
 # use PF isolation
@@ -105,7 +136,7 @@ process.out.outputCommands.append('keep *_bestVertex_*_*')
 
 
 process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
-process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi')
+#process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi.py')
 process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaNonTrigV0 + process.mvaTrigNoIPV0 )
 
 process.patElectrons.electronIDSources = cms.PSet(mvaTrigV0 = cms.InputTag("mvaTrigV0"),
@@ -131,13 +162,12 @@ process.FilterElectronCount  = countPatElectrons.clone(src = 'FilterElectron', m
 
 ## define the MVA+Filter sequence
 process.electronSequence = cms.Path(
-    process.mvaID
-#*    process.patDefaultSequence
-#*
-#    process.patConversions*
-#    process.VertexPresent*
-#    process.FilterElectron *
-#    process.FilterElectronCount
+    process.mvaID *
+    process.patDefaultSequence*
+    process.patConversions*
+    process.VertexPresent*
+    process.FilterElectron *
+    process.FilterElectronCount
     )
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
@@ -205,36 +235,7 @@ process.tauSequence = cms.Path(process.VertexPresent *
                                )
 
 
-###################################################
-# MVA MET
-###################################################
 
-
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-process.load('Configuration.StandardSequences.Services_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.GlobalTag.globaltag = 'START53_V15::All'
-
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
-
-### To add the Jet Id
-#+process.pileupJetIdProducer)
-
-
-#This will produce 1 object of type reco::PFMET for each event.
-#pat::MET objects can be produced by the following configuration:
-process.patPFMetByMVA = process.patMETs.clone(
-    metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(False),
-    genMETSource = cms.InputTag('genMetTrue')
-)
-
-
-process.mvametpath   = cms.Path(process.mvamet*process.patPFMetByMVA)
-process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 
 
 
