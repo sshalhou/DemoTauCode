@@ -108,7 +108,7 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 edm::Handle<edm::View<pat::MET> > mvamet;
 iEvent.getByLabel(mvametSrc_,mvamet);
 
-std::cout<<" mva pf met = "<<mvamet->pt()<<std::endl;
+std::cout<<" mva pf met = "<<(*mvamet)[0].pt()<<std::endl;
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
