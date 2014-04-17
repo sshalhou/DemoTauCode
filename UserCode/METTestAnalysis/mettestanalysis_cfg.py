@@ -17,7 +17,7 @@ process.source = cms.Source("PoolSource",
 
 
 process.demo = cms.EDAnalyzer('METTestAnalysis',
-mvametSrc = cms.untracked.InputTag("pfMEtMVA"),
+mvametSrc = cms.untracked.InputTag("patMETs"),
 
 )
 

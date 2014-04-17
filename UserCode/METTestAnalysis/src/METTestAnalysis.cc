@@ -29,8 +29,9 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "DataFormats/METReco/interface/MET.h"
-#include "DataFormats/METReco/interface/PFMET.h"
+#include "DataFormats/PatCandidates/interface/MET.h"
+//#include "DataFormats/METReco/interface/MET.h"
+//#include "DataFormats/METReco/interface/PFMET.h"
 //
 // class declaration
 //
@@ -104,7 +105,7 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 // get mvamet collection
-edm::Handle<edm::View<reco::PFMET> > mvamet;
+edm::Handle<edm::View<pat::MET> > mvamet;
 iEvent.getByLabel(mvametSrc_,mvamet);
 
 std::cout<<" mva pf met = "<<mvamet->pt()<<std::endl;
