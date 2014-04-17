@@ -28,8 +28,17 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 #process.GlobalTag.globaltag = 'MC_44_V12::All'
 process.GlobalTag.globaltag = 'START53_V15::All'
 
-process.ana      = cms.Sequence(process.pfMEtMVAsequence)
-process.p        = cms.Path(process.ana)
+process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath        = cms.Path(process.mvametseq)
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+process.patPFMetByMVA = process.patMETs.clone(
+    metSource = cms.InputTag('pfMEtMVA'),
+    addMuonCorrections = cms.bool(False),
+    genMETSource = cms.InputTag('genMetTrue')
+)
+
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 
 ### To add the Jet Id
 #+process.pileupJetIdProducer)
