@@ -60,7 +60,7 @@ class METTestAnalysis : public edm::EDAnalyzer {
 
       // ----------member data ---------------------------
 
-      edm::InputTag mvametSrc_;
+      edm::InputTag mvamvametrc_;
 };
 
 //
@@ -75,7 +75,7 @@ class METTestAnalysis : public edm::EDAnalyzer {
 // constructors and destructor
 //
 METTestAnalysis::METTestAnalysis(const edm::ParameterSet& iConfig):
-mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
+mvamvametrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvamvametrc" ))
 
 {
    //now do what ever initialization is needed
@@ -106,12 +106,12 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 // get mvamet collection
 //edm::Handle<edm::View<pat::MET> > mvamet;
-//iEvent.getByLabel(mvametSrc_,mvamet);
+//iEvent.getByLabel(mvamvametrc_,mvamet);
 
     edm::Handle<std::vector<pat::MET> > mvamet;
-    iEvent.getByLabel(mvametSrc_, mvamet);
+    iEvent.getByLabel(mvamvametrc_, mvamet);
 
-  for( std::vector<pat::MET>::const_iterator it = mets->begin(); it != mets->end(); ++it )
+  for( std::vector<pat::MET>::const_iterator it = mvamet->begin(); it != mvamet->end(); ++it )
     {
 
   std::cout<<" met pt : "<<it->pt()<<std::endl;
@@ -128,7 +128,7 @@ std::cout<<" [1,0] "<<(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
 std::cout<<" [1,1] "<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<" ";
 */
 
-//histContainer_["met"  ]->Fill(mets->empty() ? 0 : (*mets)[0].et());
+//histContainer_["met"  ]->Fill(mvamet->empty() ? 0 : (*mvamet)[0].et());
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
