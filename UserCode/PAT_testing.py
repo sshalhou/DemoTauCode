@@ -132,7 +132,8 @@ process.FilterElectronCount  = countPatElectrons.clone(src = 'FilterElectron', m
 ## define the MVA+Filter sequence
 process.electronSequence = cms.Path(
     process.mvaID *
-    process.patDefaultSequence*
+    process.patDefaultSequence
+#*    
 #    process.patConversions*
 #    process.VertexPresent*
 #    process.FilterElectron *
