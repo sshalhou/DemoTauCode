@@ -105,15 +105,28 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 // get mvamet collection
-edm::Handle<edm::View<pat::MET> > mvamet;
-iEvent.getByLabel(mvametSrc_,mvamet);
+//edm::Handle<edm::View<pat::MET> > mvamet;
+//iEvent.getByLabel(mvametSrc_,mvamet);
 
+    edm::Handle<std::vector<pat::MET> > mvamet;
+    iEvent.getByLabel(inputTag, mvamet);
+
+  for( std::vector<pat::MET>::const_iterator it = mets->begin(); it != mets->end(); ++it )
+    {
+
+  std::cout<<" met pt : "<<it->pt()<<std::endl;
+  std::cout<<" met phi : "<<it->phi()<<std::endl;
+  std::cout<<" met sumEt : "<<it->sumEt()<<std::endl;
+
+    }
+
+/*
 std::cout<<" mva pf met = "<<(*mvamet)[0].pt()<<std::endl;
 std::cout<<" [0,0] "<<(*mvamet)[0].getSignificanceMatrix()(0,0)<<" ";
 std::cout<<" [0,1] "<<(*mvamet)[0].getSignificanceMatrix()(0,1)<<" ";
 std::cout<<" [1,0] "<<(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
 std::cout<<" [1,1] "<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<" ";
-
+*/
 
 //histContainer_["met"  ]->Fill(mets->empty() ? 0 : (*mets)[0].et());
 
