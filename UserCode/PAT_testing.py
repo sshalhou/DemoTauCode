@@ -208,31 +208,31 @@ process.tauSequence = cms.Path(process.VertexPresent *
 ###################################################
 
 
-process.load('Configuration.StandardSequences.Services_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.GlobalTag.globaltag = 'START53_V15::All'
+#process.load('Configuration.StandardSequences.Services_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+#process.GlobalTag.globaltag = 'START53_V15::All'
 
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
 
 ### To add the Jet Id
 #+process.pileupJetIdProducer)
 
 #process.load('RecoMET.METProducers.mvaPFMET_cff_leptons')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 #This will produce 1 object of type reco::PFMET for each event.
 #pat::MET objects can be produced by the following configuration:
-process.patPFMetByMVA = process.patMETs.clone(
-    metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(False),
-    genMETSource = cms.InputTag('genMetTrue')
-)
+#process.patPFMetByMVA = process.patMETs.clone(
+#    metSource = cms.InputTag('pfMEtMVA'),
+#    addMuonCorrections = cms.bool(False),
+#    genMETSource = cms.InputTag('genMetTrue')
+#)
 
 
-process.mvametpath   = cms.Path(process.mvamet*process.patPFMetByMVA)
-process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+#process.mvametpath   = cms.Path(process.mvamet*process.patPFMetByMVA)
+#process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 
 
 
