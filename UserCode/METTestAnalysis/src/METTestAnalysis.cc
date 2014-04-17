@@ -30,6 +30,7 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/METReco/interface/MET.h"
+#include "DataFormats/METReco/interface/PFMET.h"
 //
 // class declaration
 //
