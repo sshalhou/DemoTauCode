@@ -6,11 +6,12 @@ from PhysicsTools.PatAlgos.tools.pfTools import *
 from PhysicsTools.PatAlgos.tools.tauTools import *
 ########################################################################################################
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(5)
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 ########################################################################################################
 
 ###################################################
-# MVA MET
+# MVA MET (this must be before muon and electron sequences, don't
+# understand why at this point)
 ###################################################
 
 

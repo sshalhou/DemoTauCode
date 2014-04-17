@@ -2,7 +2,7 @@
 //
 // Package:    METTestAnalysis
 // Class:      METTestAnalysis
-// 
+//
 /**\class METTestAnalysis METTestAnalysis.cc TEMP/METTestAnalysis/src/METTestAnalysis.cc
 
  Description: [one line class summary]
@@ -52,6 +52,8 @@ class METTestAnalysis : public edm::EDAnalyzer {
       virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+
+      edm::InputTag mvametSrc_;
 };
 
 //
@@ -65,7 +67,8 @@ class METTestAnalysis : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-METTestAnalysis::METTestAnalysis(const edm::ParameterSet& iConfig)
+METTestAnalysis::METTestAnalysis(const edm::ParameterSet& iConfig):
+mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
 
 {
    //now do what ever initialization is needed
@@ -75,7 +78,7 @@ METTestAnalysis::METTestAnalysis(const edm::ParameterSet& iConfig)
 
 METTestAnalysis::~METTestAnalysis()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -94,11 +97,18 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 
+// get mvamet collection
+edm::Handle<edm::View<reco::PFMET> > mvamet;
+iEvent.getByLabel(mvametSrc_,mvamet);
+
+std::cout<<" mva pf met = "<<mvamet->pt()<<std::endl;
+
+
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -107,37 +117,37 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 METTestAnalysis::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-METTestAnalysis::endJob() 
+void
+METTestAnalysis::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 METTestAnalysis::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 METTestAnalysis::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 METTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 METTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }

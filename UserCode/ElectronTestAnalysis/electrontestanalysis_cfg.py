@@ -15,8 +15,8 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-process.demo = cms.EDAnalyzer('ElectronTestAnalysis'
-)
+#process.demo = cms.EDAnalyzer('ElectronTestAnalysis'
+#)
 
 
 process.demo = cms.EDAnalyzer('ElectronTestAnalysis',
