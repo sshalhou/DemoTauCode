@@ -112,7 +112,7 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 //edm::Handle<edm::View<pat::MET> > mvamet;
 //iEvent.getByLabel(mvametSrc_,mvamet);
 
-    edm::Handle<std::vector<reco::MET> > mvamet;
+    edm::Handle<std::vector<reco::PFMET> > mvamet;
     iEvent.getByLabel(mvametSrc_, mvamet);
 
   for( std::vector<reco::MET>::const_iterator it = mvamet->begin(); it != mvamet->end(); ++it )
