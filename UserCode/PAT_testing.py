@@ -31,12 +31,14 @@ process.GlobalTag.globaltag = 'START53_V15::All'
 process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 process.mvametpath        = cms.Path(process.mvametseq)
 
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
+
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patPFMetByMVA)
 
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
