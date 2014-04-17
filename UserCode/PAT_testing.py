@@ -252,5 +252,3 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
 process.maxEvents.input = 100
-
-process.outpath  = cms.EndPath(process.output)
