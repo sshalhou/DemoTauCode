@@ -32,17 +32,25 @@ process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 process.mvametpath        = cms.Path(process.mvametseq)
 
 
+# need to double-check on this since the
+# 2013 twiki makes it seem that we can
+# use pat::MET to access PFMVAMET
+# but it seems I can only do reco::PFMET
+# instead which gives the correct values
+
+
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
 
+
 process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
 
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
-process.out.outputCommands +=['keep *_*_*_*']
+#process.out.outputCommands +=['keep *_*_*_*']
 
 
 ### To add the Jet Id

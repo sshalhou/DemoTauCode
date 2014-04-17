@@ -124,7 +124,7 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   std::cout<<it->getSignificanceMatrix()(0,0)<<" ";
   std::cout<<it->getSignificanceMatrix()(0,1)<<std::endl;
   std::cout<<it->getSignificanceMatrix()(1,0)<<" ";
-  std::cout<<it->getSignificanceMatrix()(0,1)<<std::endl;
+  std::cout<<it->getSignificanceMatrix()(1,0)<<std::endl;
 
 
     }
