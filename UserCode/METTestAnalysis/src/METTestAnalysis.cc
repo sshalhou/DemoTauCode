@@ -109,7 +109,10 @@ edm::Handle<edm::View<pat::MET> > mvamet;
 iEvent.getByLabel(mvametSrc_,mvamet);
 
 std::cout<<" mva pf met = "<<(*mvamet)[0].pt()<<std::endl;
-(*mvamet)[0].getSignificanceMatrix();
+std::cout<<" [0,0] "(*mvamet)[0].getSignificanceMatrix()(0,0)<<" ";
+std::cout<<" [0,1] "(*mvamet)[0].getSignificanceMatrix()(0,1)<<" ";
+std::cout<<" [1,0] "(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
+std::cout<<" [1,1] "(*mvamet)[0].getSignificanceMatrix()(1,1)<<" ";
 
 
 //histContainer_["met"  ]->Fill(mets->empty() ? 0 : (*mets)[0].et());
