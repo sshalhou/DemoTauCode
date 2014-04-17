@@ -220,7 +220,7 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence)
 #+process.pileupJetIdProducer)
 
 process.load('RecoMET.METProducers.mvaPFMET_cff_leptons')
-cms.Sequence(process.pfMEtMVAequence*...)
+
 #This will produce 1 object of type reco::PFMET for each event.
 #pat::MET objects can be produced by the following configuration:
 process.patPFMetByMVA = process.patMETs.clone(
