@@ -30,7 +30,11 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/PatCandidates/interface/MET.h"
-#include "DataFormats/METReco/interface/MET.h"
+//#include "DataFormats/METReco/interface/MET.h"
+
+#include "DataFormats/METReco/interface/PFMET.h"
+#include "DataFormats/METReco/interface/PFMETCollection.h"
+
 //#include "DataFormats/METReco/interface/PFMET.h"
 //
 // class declaration
@@ -108,10 +112,10 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 //edm::Handle<edm::View<pat::MET> > mvamet;
 //iEvent.getByLabel(mvametSrc_,mvamet);
 
-    edm::Handle<std::vector<pat::MET> > mvamet;
+    edm::Handle<std::vector<reco::MET> > mvamet;
     iEvent.getByLabel(mvametSrc_, mvamet);
 
-  for( std::vector<pat::MET>::const_iterator it = mvamet->begin(); it != mvamet->end(); ++it )
+  for( std::vector<reco::MET>::const_iterator it = mvamet->begin(); it != mvamet->end(); ++it )
     {
 
   std::cout<<" met pt : "<<it->pt()<<std::endl;
