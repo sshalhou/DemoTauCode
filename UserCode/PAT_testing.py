@@ -105,6 +105,7 @@ process.out.outputCommands.append('keep *_bestVertex_*_*')
 
 
 process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
+process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi')
 process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaNonTrigV0 + process.mvaTrigNoIPV0 )
 
 process.patElectrons.electronIDSources = cms.PSet(mvaTrigV0 = cms.InputTag("mvaTrigV0"),
