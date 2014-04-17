@@ -117,6 +117,11 @@ METTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   std::cout<<" met pt : "<<it->pt()<<std::endl;
   std::cout<<" met phi : "<<it->phi()<<std::endl;
   std::cout<<" met sumEt : "<<it->sumEt()<<std::endl;
+  std::cout<<it->getSignificanceMatrix()(0,0)<<" ";
+  std::cout<<it->getSignificanceMatrix()(0,1);
+  std::cout<<it->getSignificanceMatrix()(1,0)<<" ";
+  std::cout<<it->getSignificanceMatrix()(0,1)<<std::endl;
+
 
     }
 
