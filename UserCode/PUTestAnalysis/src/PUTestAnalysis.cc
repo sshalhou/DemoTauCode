@@ -107,7 +107,7 @@ edm::LumiReWeighting LumiWeights_;
 
 //std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
 
-LumiWeights_ = edm::LumiReWeighting("mc_pileup_root_file", "data_pileup_root_file", "pileup", "pileup");
+LumiWeights_ = LumiReWeighting("mc_pileup_root_file", "data_pileup_root_file", "pileup", "pileup");
 
 ////////////////////////
 
