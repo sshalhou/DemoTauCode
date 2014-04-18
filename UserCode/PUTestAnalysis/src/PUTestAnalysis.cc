@@ -100,14 +100,12 @@ PUTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //////////////////////
 // following https://twiki.cern.ch/twiki/bin/viewauth/CMS/PileupMCReweightingUtilities
 
-LumiReWeighting LumiWeights_;
-//std::string data_pileup_root_file =
+edm::LumiReWeighting LumiWeights_;
+std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
 
-//const std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
+std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
 
-//std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
-
-LumiWeights_ = LumiReWeighting("mc_pileup_root_file", "data_pileup_root_file", "pileup", "pileup");
+LumiWeights_ = edm::LumiReWeighting(mc_pileup_root_file, data_pileup_root_file, "pileup", "pileup");
 
 ////////////////////////
 
@@ -128,7 +126,7 @@ for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI) {
    }
 
 }
-double MyWeight = 1.0;//LumiWeights_.weight( Tnpv );
+double MyWeight = LumiWeights_.weight( Tnpv );
 
 
 std::cout<<" True number of interactions = "<<Tnpv<<" pile-up reweight sf = "<<MyWeight<<std::endl;
