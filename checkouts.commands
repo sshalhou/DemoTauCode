@@ -6,6 +6,7 @@ git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg PhysicsTools/PatExamples
 git cms-addpkg RecoTauTag/RecoTau
 git cms-addpkg EgammaAnalysis/ElectronTools
+git cms-addpkg PhysicsTools/Utilities
 
 git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg RecoMET/METProducers

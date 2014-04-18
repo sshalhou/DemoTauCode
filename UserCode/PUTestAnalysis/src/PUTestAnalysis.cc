@@ -2,7 +2,7 @@
 //
 // Package:    PUTestAnalysis
 // Class:      PUTestAnalysis
-// 
+//
 /**\class PUTestAnalysis PUTestAnalysis.cc TEMP/PUTestAnalysis/src/PUTestAnalysis.cc
 
  Description: [one line class summary]
@@ -29,6 +29,7 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "PhysicsTools/Utilities/interface/LumiReWeighting.h"
 //
 // class declaration
 //
@@ -52,6 +53,8 @@ class PUTestAnalysis : public edm::EDAnalyzer {
       virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+      edm::InputTag pileupSrc_;
+
 };
 
 //
@@ -65,7 +68,8 @@ class PUTestAnalysis : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-PUTestAnalysis::PUTestAnalysis(const edm::ParameterSet& iConfig)
+PUTestAnalysis::PUTestAnalysis(const edm::ParameterSet& iConfig):
+pileupSrc_(iConfig.getUntrackedParameter<edm::InputTag>("pileupSrc" ))
 
 {
    //now do what ever initialization is needed
@@ -75,7 +79,7 @@ PUTestAnalysis::PUTestAnalysis(const edm::ParameterSet& iConfig)
 
 PUTestAnalysis::~PUTestAnalysis()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -92,13 +96,47 @@ PUTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
    using namespace edm;
 
+//////////////////////
+// following https://twiki.cern.ch/twiki/bin/viewauth/CMS/PileupMCReweightingUtilities
+
+edm::LumiReWeighting LumiWeights_;
+std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
+
+std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
+
+LumiWeights_ = edm::LumiReWeighting(mc_pileup_root_file, data_pileup_root_file, "pileup", "pileup");
+
+////////////////////////
+
+
+Handle<std::vector< PileupSummaryInfo > >  PupInfo;
+event.getByLabel(pileupSrc_, PupInfo);
+
+std::vector<PileupSummaryInfo>::const_iterator PVI;
+
+float Tnpv = -1;
+for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI) {
+
+   int BX = PVI->getBunchCrossing();
+
+   if(BX == 0) {
+     Tnpv = PVI->getTrueNumInteractions();
+     continue;
+   }
+
+}
+double MyWeight = LumiWeights_.weight( Tnpv );
+
+
+std::cout<<" True number of interactions = "<<Tnpv<<" pile-up reweight sf = "<<MyWeight<<std::endl;
+
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 #endif
-   
+
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
@@ -107,37 +145,37 @@ PUTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 PUTestAnalysis::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
-PUTestAnalysis::endJob() 
+void
+PUTestAnalysis::endJob()
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 PUTestAnalysis::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 PUTestAnalysis::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 PUTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 PUTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
