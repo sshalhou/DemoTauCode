@@ -100,7 +100,7 @@ PUTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //////////////////////
 // following https://twiki.cern.ch/twiki/bin/viewauth/CMS/PileupMCReweightingUtilities
 
-edm::LumiReWeighting LumiWeights_;
+LumiReWeighting LumiWeights_;
 //std::string data_pileup_root_file =
 
 //const std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
@@ -128,7 +128,7 @@ for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI) {
    }
 
 }
-double MyWeight = LumiWeights_.weight( Tnpv );
+double MyWeight = 1.0;//LumiWeights_.weight( Tnpv );
 
 
 std::cout<<" True number of interactions = "<<Tnpv<<" pile-up reweight sf = "<<MyWeight<<std::endl;
