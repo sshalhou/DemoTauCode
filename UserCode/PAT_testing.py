@@ -9,6 +9,14 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 ########################################################################################################
 
+
+###################################################
+# add info needed for pile-up reweight
+####################################################
+process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
+###################################################
+
+
 ###################################################
 # MVA MET (this must be before muon and electron sequences, don't
 # understand why at this point)
