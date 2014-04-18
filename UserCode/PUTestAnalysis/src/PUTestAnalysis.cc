@@ -109,8 +109,8 @@ LumiWeights_ = edm::LumiReWeighting(mc_pileup_root_file, data_pileup_root_file, 
 ////////////////////////
 
 
-Handle<std::vector< PileupSummaryInfo > >  PupInfo;
-event.getByLabel(pileupSrc_, PupInfo);
+edm::Handle<std::vector<PileupSummaryInfo> > PupInfo;
+iEvent.getByLabel(pileupSrc_, PupInfo);
 
 std::vector<PileupSummaryInfo>::const_iterator PVI;
 
