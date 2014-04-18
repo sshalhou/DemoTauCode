@@ -101,11 +101,13 @@ PUTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 // following https://twiki.cern.ch/twiki/bin/viewauth/CMS/PileupMCReweightingUtilities
 
 edm::LumiReWeighting LumiWeights_;
-std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
+//std::string data_pileup_root_file =
 
-std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
+//const std::string data_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root";
 
-LumiWeights_ = edm::LumiReWeighting(mc_pileup_root_file, data_pileup_root_file, "pileup", "pileup");
+//std::string mc_pileup_root_file = "/afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root";
+
+LumiWeights_ = edm::LumiReWeighting("mc_pileup_root_file", "data_pileup_root_file", "pileup", "pileup");
 
 ////////////////////////
 
