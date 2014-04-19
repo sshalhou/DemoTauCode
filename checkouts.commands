@@ -8,6 +8,7 @@ git cms-addpkg RecoTauTag/RecoTau
 git cms-addpkg EgammaAnalysis/ElectronTools
 git cms-addpkg PhysicsTools/Utilities
 git cms-addpkg SimDataFormats/PileupSummaryInfo
+git clone https://github.com/latinos/UserCode-CMG-CMGTools-External CMGTools/External
 
 git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg RecoMET/METProducers
