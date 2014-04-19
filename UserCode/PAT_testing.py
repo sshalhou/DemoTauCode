@@ -16,7 +16,7 @@ process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
 
 process.load("CMGTools.External.pujetidsequence_cff")
 
-process.pileupJetIDsequence = cms.Path(process.patSequence * process.puJetIdSqeuence)
+process.pileupJetIDsequence = cms.Path(process.patDefaultSequence * process.puJetIdSqeuence)
 
 process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
