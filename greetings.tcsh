@@ -6,4 +6,3 @@ echo "cd CMSSW_5_3_14/src/ "
 echo "cmsenv "
 echo "./../../checkouts.commands"
 echo "ln -s ../../UserCode UserCode"
-echo "next execute sram b -j 20'
