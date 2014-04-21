@@ -51,10 +51,10 @@ if not postfix == "":
 ########################################################################################################
 
 
-process.out.fileName = 'patTuple_testing.root'
-process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
+process.createpattuple.out.fileName = 'patTuple_testing.root'
+process.createpattuple.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 100
+process.createpattuple.maxEvents.input = 100
 ########################################################################################################
