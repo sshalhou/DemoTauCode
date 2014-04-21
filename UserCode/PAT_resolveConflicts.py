@@ -49,6 +49,7 @@ if not runOnMC:
 ########################################################################################################
 
 from PhysicsTools.PatAlgos.tools.trackTools import *
+from PhysicsTools.PatAlgos.tools.tauTools import *
 
 ###################################################
 # Store the Vertex Collection
@@ -71,9 +72,12 @@ process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        process.VertexPresent
-                             *getattr(process,"patPF2PATSequence"+postfix)
+process.p = cms.Path(
+                             getattr(process,"patPF2PATSequence"+postfix)
                                   )
+
+process.p+= process.VertexPresent
+
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
     process.p += process.patDefaultSequence
