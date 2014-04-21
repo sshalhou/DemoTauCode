@@ -76,7 +76,7 @@ process.p = cms.Path(
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 
-process.p+= process.VertexPresent
+#process.p+= process.VertexPresent
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
