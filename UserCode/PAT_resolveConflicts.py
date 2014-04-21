@@ -1,4 +1,8 @@
 
+########################################################################################################
+import FWCore.ParameterSet.Config as cms
+########################################################################################################
+
 runOnMC = True
 
 ########################################################################################################
@@ -41,11 +45,12 @@ if not runOnMC:
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(getattr(process,"patPF2PATSequence"+postfix)
+process.createpattuple = cms.Path(
+                             getattr(process,"patPF2PATSequence"+postfix)
                                   )
 if not postfix == "":
-    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.p += process.patDefaultSequence
+    process.createpattuple += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.createpattuple += process.patDefaultSequence
 
 ########################################################################################################
 
