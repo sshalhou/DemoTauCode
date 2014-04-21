@@ -48,6 +48,8 @@ if not runOnMC:
 # Include a vertex filter and identify the best vertex
 ########################################################################################################
 
+from PhysicsTools.PatAlgos.tools.trackTools import *
+
 ###################################################
 # Store the Vertex Collection
 # filtering is possible at this
@@ -103,7 +105,9 @@ process.patTrackVertexInfo = cms.EDProducer(
 
 
 # add modules to the default sequence right after the patAODTrackCands
-process.patDefaultSequence.replace(process.patAODTrackCands,
+
+#process.patDefaultSequence.replace(process.patAODTrackCands,
+getattr(process,"patPF2PATSequence"+postfix).replace(process.patAODTrackCands,
                                    process.patAODTrackCands *
                                    process.bestVertex *
                                    process.patTrackVertexInfo
@@ -127,8 +131,8 @@ process.out.outputCommands.append('keep *_bestVertex_*_*')
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(
-                             getattr(process,"patPF2PATSequence"+postfix)
+process.p = cms.Path(        process.VertexPresent
+                             *getattr(process,"patPF2PATSequence"+postfix)
                                   )
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
