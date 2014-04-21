@@ -41,20 +41,19 @@ if not runOnMC:
 ##################################################
 # Let it run
 ###################################################
-process.createpattuple = cms.Path(
-                             getattr(process,"patPF2PATSequence"+postfix)
+process.p = cms.Path(getattr(process,"patPF2PATSequence"+postfix)
                                   )
 if not postfix == "":
-    process.createpattuple += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.createpattuple += process.patDefaultSequence
+    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.p += process.patDefaultSequence
 
 ########################################################################################################
 
 
-process.createpattuple.out.fileName = 'patTuple_testing.root'
-process.createpattuple.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
+process.out.fileName = 'patTuple_testing.root'
+process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.createpattuple.maxEvents.input = 100
+process.maxEvents.input = 100
 ########################################################################################################
