@@ -1,9 +1,14 @@
 
 ########################################################################################################
 import FWCore.ParameterSet.Config as cms
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
-
 runOnMC = True
+if runOnMC:
+  process.GlobalTag.globaltag = 'START53_V23::All'
+else:
+  process.GlobalTag.globaltag = 'SOMETHING_FOR_DATA::All'
 
 ########################################################################################################
 # Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
