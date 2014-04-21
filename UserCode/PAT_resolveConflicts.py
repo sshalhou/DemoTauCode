@@ -45,12 +45,12 @@ if not runOnMC:
 ##################################################
 # Let it run
 ###################################################
-process.createpattuple = cms.Path(
+process.p = cms.Path(
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 if not postfix == "":
-    process.createpattuple += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.createpattuple += process.patDefaultSequence
+    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.p += process.patDefaultSequence
 
 ########################################################################################################
 
