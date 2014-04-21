@@ -4,24 +4,25 @@ import FWCore.ParameterSet.Config as cms
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
-runOnMC = True
 
+###################################################
+# Import skeleton
+###################################################
+from PhysicsTools.PatAlgos.patTemplate_cfg import *
+
+runOnMC = True
+if runOnMC:
+  process.GlobalTag.globaltag = 'START53_V23::All'
+else:
+  process.GlobalTag.globaltag = 'SOMETHING_FOR_DATA::All'
 
 ########################################################################################################
 # Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
 ########################################################################################################
 
 ###################################################
-# Import skeleton
-###################################################
-
-from PhysicsTools.PatAlgos.patTemplate_cfg import *
-
-###################################################
-# load the PAT config
-###################################################
-
 # tau discriminators must be re-run
+###################################################
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
@@ -33,12 +34,6 @@ from PhysicsTools.PatAlgos.tools.pfTools import *
 
 postfix = ""
 jetAlgo = "AK5"
-
-if runOnMC:
-  process.GlobalTag.globaltag = 'START53_V23::All'
-else:
-  process.GlobalTag.globaltag = 'SOMETHING_FOR_DATA::All'
-
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
 
