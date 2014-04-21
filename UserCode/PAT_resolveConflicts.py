@@ -57,13 +57,14 @@ from PhysicsTools.PatAlgos.tools.tauTools import *
 # stage (currently requiring at least one)
 ###################################################
 
-process.VertexPresent = cms.EDFilter("VertexSelector",
+process.VertexPresent = cms.EDFilter(getattr(process,"VertexSelector"  + postfix),
                              src = cms.InputTag("offlinePrimaryVertices"),
                              cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
                              )
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
+
 
 
 
