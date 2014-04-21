@@ -1,14 +1,15 @@
 
 ########################################################################################################
 import FWCore.ParameterSet.Config as cms
-process.load('Configuration.StandardSequences.Services_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
 ###################################################
 # Import skeleton
 ###################################################
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
+
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 runOnMC = True
 if runOnMC:
