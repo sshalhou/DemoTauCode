@@ -3,7 +3,7 @@
 import FWCore.ParameterSet.Config as cms
 ########################################################################################################
 
-process = cms.Process("DemoTauAna")
+#process = cms.Process("DemoTauAna")
 
 ###################################################
 # Import skeleton
@@ -93,7 +93,7 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 # Let it run, for some reason we absolutely need
 # a path called 'p'
 ###################################################
-process.p = cms.Path(        process.VertexPresent*
+process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
                              process.puJetIdSqeuence
                                   )
@@ -101,8 +101,8 @@ process.p = cms.Path(        process.VertexPresent*
 
 
 if not postfix == "":
-    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.p += process.patDefaultSequence
+    process.pX += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.pX += process.patDefaultSequence
 
 
 ########################################################################################################
