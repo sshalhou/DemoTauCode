@@ -59,8 +59,8 @@ process.p = cms.Path(
 #process.p+= process.VertexPresent
 
 if not postfix == "":
-    process.DemoTauAna += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.DemoTauAna += process.patDefaultSequence
+    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.p += process.patDefaultSequence
 
 ########################################################################################################
 
