@@ -111,6 +111,8 @@ process.muonSequence = cms.Path(process.VertexPresent *
                                  process.GlobalPFMuonsCount
                                 )
 
+process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
+
 
 ###################################################
 # using SelectEvents, you can filter on the paths (sequences)
