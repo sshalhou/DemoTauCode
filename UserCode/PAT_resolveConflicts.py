@@ -94,7 +94,6 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 
 from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
 process.GlobalPFMuons = cleanPatMuons.clone(preselection =
-                                               'isGlobalMuon &'
                                                'isPFMuon'
                                                )
 
