@@ -116,10 +116,10 @@ iEvent.getByLabel(muonSrc_,muons);
 
 
 
-  int nmuon = 0;
-  int loosemuons = 0;
-  int tightmuons = 0;
-  int selectedtightmuons = 0;
+
+
+
+
 
 
 //  if( primaryvertex->size() )  pvPtr = pv->ptrAt(0);
@@ -128,7 +128,7 @@ iEvent.getByLabel(muonSrc_,muons);
 
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
 
-              nmuon++;
+
 
 
 
