@@ -117,12 +117,13 @@ process.muonSequence = cms.Path(process.VertexPresent *
 # defined above; there will be a pass/fail report at the
 # end of the process
 ###################################################
+from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
 process.out.SelectEvents.SelectEvents = ['muonSequence']
 
 ##################################################
 # Let it run, for some reason we absolutely need
 # a path called 'p' unless we edit patTemplate_cfg.py
-# which expects p in the selector 
+# which expects p in the selector
 ###################################################
 process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
