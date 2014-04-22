@@ -52,7 +52,7 @@ if not runOnMC:
 ##################################################
 # Let it run
 ###################################################
-process.DemoTauAna = cms.Path(
+process.p = cms.Path(
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 
