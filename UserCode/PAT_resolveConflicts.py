@@ -117,7 +117,7 @@ process.muonSequence = cms.Path(process.VertexPresent *
 # defined above; there will be a pass/fail report at the
 # end of the process
 ###################################################
-SelectMuonEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('muonSequence') )
+process.SelectMuonEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('muonSequence') )
 #process.out.SelectEvents.SelectEvents = ['muonSequence']
 
 ##################################################
