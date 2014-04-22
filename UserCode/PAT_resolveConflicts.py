@@ -58,6 +58,9 @@ if not runOnMC:
 # stage (currently requiring at least one)
 ###################################################
 
+from PhysicsTools.PatAlgos.tools.coreTools import *
+from PhysicsTools.PatAlgos.tools.trackTools import *
+
 process.VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
                              cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
