@@ -127,7 +127,7 @@ process.muonSequence = cms.Path(process.VertexPresent *
 ###################################################
 process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
-                             process.puJetIdSqeuence*
+                             process.puJetIdSqeuence
                              #process.SelectMuonEvents
                                   )
 
