@@ -87,11 +87,42 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 
 
 
+###################################################
+# Store the Muons
+###################################################
 
+
+from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
+process.GlobalPFMuons = cleanPatMuons.clone(preselection =
+                                               'isGlobalMuon &'
+                                               'isPFMuon'
+                                               )
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
+process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
+
+
+
+process.muonSequence = cms.Path(process.VertexPresent *
+                                 #process.patDefaultSequence *
+                                 getattr(process,"patPF2PATSequence"+postfix)*
+                                 process.GlobalPFMuons *
+                                 process.GlobalPFMuonsCount
+                                )
+
+
+###################################################
+# using SelectEvents, you can filter on the paths (sequences)
+# defined above; there will be a pass/fail report at the
+# end of the process
+###################################################
+process.out.SelectEvents.SelectEvents = ['muonSequence']
 
 ##################################################
 # Let it run, for some reason we absolutely need
-# a path called 'p'
+# a path called 'p' unless we edit patTemplate_cfg.py
+# which expects p in the selector 
 ###################################################
 process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
