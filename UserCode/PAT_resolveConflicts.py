@@ -131,7 +131,7 @@ process.out.outputCommands.append('keep *_bestVertex_*_*')
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        VertexPresent*
+process.p = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 
