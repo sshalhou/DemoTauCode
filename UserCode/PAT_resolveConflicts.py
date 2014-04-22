@@ -46,29 +46,6 @@ usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=post
 
 if not runOnMC:
   removeMCMatchingPF2PAT( process, '' )
-########################################################################################################
-# Include a vertex filter and identify the best vertex
-########################################################################################################
-
-from PhysicsTools.PatAlgos.tools.trackTools import *
-from PhysicsTools.PatAlgos.tools.tauTools import *
-
-###################################################
-# Store the Vertex Collection
-# filtering is possible at this
-# stage (currently requiring at least one)
-###################################################
-
-#process.VertexPresent = cms.EDFilter("VertexSelector",
-#                             src = cms.InputTag("offlinePrimaryVertices"),
-#                             cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
-#                             filter = cms.bool(True),
-#                             )
-
-process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
-
-
-
 
 
 
