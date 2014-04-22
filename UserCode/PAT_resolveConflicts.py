@@ -86,39 +86,7 @@ process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
 process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 
 
-###################################################
-# use PF isolation
-###################################################
 
-usePFIso(process)
-
-# if the sample does not contain value map of PF candidate "particleFlow:electrons", use following line.
-# this appears to be the case for our test sample
-process.patElectrons.pfElectronSource = 'particleFlow'
-
-###################################################
-# Store the Muons (for some reason these need to be
-# after the Electrons or I get problems ...)
-###################################################
-
-
-from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.GlobalPFMuons = cleanPatMuons.clone(preselection =
-                                               'isGlobalMuon &'
-                                               'isPFMuon'
-                                               )
-
-
-from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
-
-
-
-process.muonSequence = cms.Path(process.VertexPresent *
-                                 process.patDefaultSequence *
-                                 process.GlobalPFMuons *
-                                 process.GlobalPFMuonsCount
-                                )
 
 
 ##################################################
