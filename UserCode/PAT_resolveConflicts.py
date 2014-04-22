@@ -142,7 +142,7 @@ switchToPFTauHPS(process)
 process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
                              process.puJetIdSqeuence*
-                             rocess.PFTau
+                             process.PFTau
                              #process.SelectMuonEvents
                                   )
 
