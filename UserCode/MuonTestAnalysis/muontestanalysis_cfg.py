@@ -19,7 +19,8 @@ process.source = cms.Source("PoolSource",
 
 
 process.demo = cms.EDAnalyzer('MuonTestAnalysis',
-muonSrc = cms.untracked.InputTag("cleanPatMuons"),
+#muonSrc = cms.untracked.InputTag("cleanPatMuons"),
+muonSrc = cms.untracked.InputTag("selectedPatMuons"),
 vertexSrc = cms.untracked.InputTag("bestVertex")
 
 
