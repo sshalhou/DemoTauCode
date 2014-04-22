@@ -87,6 +87,16 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 
 
 ###################################################
+# use PF isolation
+###################################################
+
+usePFIso(process)
+
+# if the sample does not contain value map of PF candidate "particleFlow:electrons", use following line.
+# this appears to be the case for our test sample
+process.patElectrons.pfElectronSource = 'particleFlow'
+
+###################################################
 # Store the Muons (for some reason these need to be
 # after the Electrons or I get problems ...)
 ###################################################
