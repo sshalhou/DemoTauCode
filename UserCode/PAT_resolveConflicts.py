@@ -114,6 +114,19 @@ process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
 
 
 ###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+
+
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+switchToPFTauHPS(process)
+
+
+
+###################################################
 # using SelectEvents, you can filter on the paths (sequences)
 # defined above; there will be a pass/fail report at the
 # end of the process
@@ -128,7 +141,8 @@ process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
 ###################################################
 process.pX = cms.Path(        process.VertexPresent*
                              getattr(process,"patPF2PATSequence"+postfix)*
-                             process.puJetIdSqeuence
+                             process.puJetIdSqeuence*
+                             rocess.PFTau
                              #process.SelectMuonEvents
                                   )
 
