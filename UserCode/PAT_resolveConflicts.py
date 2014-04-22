@@ -3,6 +3,8 @@
 import FWCore.ParameterSet.Config as cms
 ########################################################################################################
 
+process = cms.Process("DemoTauAna")
+
 ###################################################
 # Import skeleton
 ###################################################
@@ -73,15 +75,15 @@ process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(
+process.DemoTauAna = cms.Path(
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 
 #process.p+= process.VertexPresent
 
 if not postfix == "":
-    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.p += process.patDefaultSequence
+    process.DemoTauAna += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.DemoTauAna += process.patDefaultSequence
 
 ########################################################################################################
 
