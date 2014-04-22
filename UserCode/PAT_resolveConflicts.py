@@ -3,7 +3,7 @@
 import FWCore.ParameterSet.Config as cms
 ########################################################################################################
 
-process = cms.Process("p")
+process = cms.Process("DemoTauAna")
 
 ###################################################
 # Import skeleton
@@ -52,15 +52,15 @@ if not runOnMC:
 ##################################################
 # Let it run
 ###################################################
-process.mypath = cms.Path(
+process.p = cms.Path(
                              getattr(process,"patPF2PATSequence"+postfix)
                                   )
 
 #process.p+= process.VertexPresent
 
 if not postfix == "":
-    process.mypath += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.mypath += process.patDefaultSequence
+    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.p += process.patDefaultSequence
 
 ########################################################################################################
 
