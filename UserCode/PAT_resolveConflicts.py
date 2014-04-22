@@ -73,6 +73,43 @@ process.VertexPresent = cms.EDFilter("VertexSelector",
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 
 
+###################################################
+# add info needed for pile-up reweight
+####################################################
+process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
+###################################################
+
+###################################################
+# keep beamspot (may be needed for electron ID)
+###################################################
+
+process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
+
+
+###################################################
+# Store the Muons (for some reason these need to be
+# after the Electrons or I get problems ...)
+###################################################
+
+
+from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
+process.GlobalPFMuons = cleanPatMuons.clone(preselection =
+                                               'isGlobalMuon &'
+                                               'isPFMuon'
+                                               )
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
+process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
+
+
+
+process.muonSequence = cms.Path(process.VertexPresent *
+                                 process.patDefaultSequence *
+                                 process.GlobalPFMuons *
+                                 process.GlobalPFMuonsCount
+                                )
+
 
 ##################################################
 # Let it run, for some reason we absolutely need
