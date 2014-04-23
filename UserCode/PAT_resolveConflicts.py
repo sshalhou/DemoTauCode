@@ -99,7 +99,7 @@ process.GlobalPFMuons = cleanPatMuons.clone(preselection =
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 1)
+process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 0)
 
 
 
@@ -154,6 +154,10 @@ if not postfix == "":
 
 
 ########################################################################################################
+process.out.outputCommands +=['delete *_*_*_*']
+
+process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
+
 
 
 process.out.fileName = 'patTuple_testing.root'
