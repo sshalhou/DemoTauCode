@@ -17,7 +17,7 @@ process.source = cms.Source("PoolSource",
 
 
 process.demo = cms.EDAnalyzer('TauTestAnalysis',
-tauSrc = cms.untracked.InputTag("cleanPatTaus")
+tauSrc = cms.untracked.InputTag("selectedPatTaus")
 )
 
 
