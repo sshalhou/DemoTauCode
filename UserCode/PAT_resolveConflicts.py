@@ -153,27 +153,31 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 # MVA MET (this must be before muon and electron sequences, don't
 # understand why at this point)
 ###################################################
-#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-#process.load('JetMETCorrections.METPUSubtraction.
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
+process.patPFMetByMVA = process.patMETs.clone(
+    metSource = cms.InputTag('pfMEtMVA'),
+    addMuonCorrections = cms.bool(False),
+    genMETSource = cms.InputTag('genMetTrue')
+)
+
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
+
+
+
+process.patPF2PATSequence.replace( process.pfMET, rocess.mvamet)
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
 
 
 
 
-#process.patPFMetByMVA = process.patMETs.clone(
-#    metSource = cms.InputTag('pfMEtMVA'),
-#    addMuonCorrections = cms.bool(False),
-#    genMETSource = cms.InputTag('genMetTrue')
-#)
 
-
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
-
-#process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
-#process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
 
 ###################################################
