@@ -156,7 +156,7 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi.py')
+process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi')
 
 
 process.patPFMetByMVA = process.patMETs.clone(
