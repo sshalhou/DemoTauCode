@@ -106,25 +106,6 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 # Store the Muons
 ###################################################
 
-
-from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-process.GlobalPFMuons = cleanPatMuons.clone(preselection =
-                                               'isPFMuon'
-                                               )
-
-
-from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.GlobalPFMuonsCount = countPatMuons.clone(src = 'GlobalPFMuons', minNumber = 0)
-
-
-
-process.muonSequence = cms.Path(process.VertexPresent *
-                                 #process.patDefaultSequence *
-                                 getattr(process,"patPF2PATSequence"+postfix)*
-                                 process.GlobalPFMuons *
-                                 process.GlobalPFMuonsCount
-                                )
-
 process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 
 
@@ -169,6 +150,33 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 ###################################################
+# MVA MET (this must be before muon and electron sequences, don't
+# understand why at this point)
+###################################################
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#process.load('JetMETCorrections.METPUSubtraction.
+
+#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvametseq)
+
+
+
+
+#process.patPFMetByMVA = process.patMETs.clone(
+#    metSource = cms.InputTag('pfMEtMVA'),
+#    addMuonCorrections = cms.bool(False),
+#    genMETSource = cms.InputTag('genMetTrue')
+#)
+
+
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
+
+#process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+#process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+
+
+###################################################
 # using SelectEvents, you can filter on the paths (sequences)
 # defined above; there will be a pass/fail report at the
 # end of the process
@@ -181,9 +189,9 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 # a path called 'p' unless we edit patTemplate_cfg.py
 # which expects p in the selector
 ###################################################
-process.pX = cms.Path(        process.VertexPresent*
-                             getattr(process,"patPF2PATSequence"+postfix)*
-                             process.puJetIdSqeuence*
+process.pX = cms.Path(       process.VertexPresent+
+                             getattr(process,"patPF2PATSequence"+postfix)+
+                             process.puJetIdSqeuence+
                              process.PFTau
                              #process.SelectMuonEvents
                                   )
