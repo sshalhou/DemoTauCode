@@ -29,6 +29,15 @@ else:
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
+
+
+
+###################################################
+# setup PF2PAT, empty postfix means
+# only PF2PAT and not both PAT + PF2PAT
+###################################################
+from PhysicsTools.PatAlgos.tools.pfTools import *
+
 ###################################################
 # use PF isolation
 ###################################################
@@ -39,13 +48,6 @@ usePFIso(process)
 # this appears to be the case for our test sample
 process.patElectrons.pfElectronSource = 'particleFlow'
 
-
-
-###################################################
-# setup PF2PAT, empty postfix means
-# only PF2PAT and not both PAT + PF2PAT
-###################################################
-from PhysicsTools.PatAlgos.tools.pfTools import *
 
 postfix = ""
 jetAlgo = "AK5"
