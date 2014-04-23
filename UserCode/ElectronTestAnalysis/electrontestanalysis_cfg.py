@@ -20,7 +20,7 @@ process.source = cms.Source("PoolSource",
 
 
 process.demo = cms.EDAnalyzer('ElectronTestAnalysis',
-electronSrc = cms.untracked.InputTag("cleanPatElectrons"),
+electronSrc = cms.untracked.InputTag("selectedPatElectrons"),
 gsfelectronSrc = cms.untracked.InputTag("gsfElectrons"),
 beamspotSrc = cms.untracked.InputTag("offlineBeamSpot"),
 patconversionSrc = cms.untracked.InputTag("patConversions"),
