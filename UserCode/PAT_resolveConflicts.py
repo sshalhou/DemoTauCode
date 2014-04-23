@@ -156,28 +156,25 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.load('RecoTauTag.RecoTau.PFRecoTauDiscriminationByHPSSelection_cfi')
 
 
+
+
+
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
+#process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
+#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvametseq)
+
+
+process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-
-
 process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
-
-
-
-process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
-
-
-
-
-
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
