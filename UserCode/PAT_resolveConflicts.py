@@ -168,7 +168,7 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequenc
 
 
 
-process.patPF2PATSequence.replace( process.pfMET, rocess.mvamet)
+process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
 
