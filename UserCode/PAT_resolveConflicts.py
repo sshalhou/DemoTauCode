@@ -54,6 +54,9 @@ jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
 
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 ###################################################
 # rm MC matching if DATA
@@ -153,9 +156,6 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 # MVA MET (this must be before muon and electron sequences, don't
 # understand why at this point)
 ###################################################
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 
