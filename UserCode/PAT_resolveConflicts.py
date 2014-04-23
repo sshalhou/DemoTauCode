@@ -39,6 +39,16 @@ postfix = ""
 jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
+###################################################
+# use PF isolation
+###################################################
+
+usePFIso(process)
+
+# if the sample does not contain value map of PF candidate "particleFlow:electrons", use following line.
+# this appears to be the case for our test sample
+process.patElectrons.pfElectronSource = 'particleFlow'
+
 
 ###################################################
 # rm MC matching if DATA
