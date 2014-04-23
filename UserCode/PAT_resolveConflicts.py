@@ -156,7 +156,7 @@ if not postfix == "":
 ########################################################################################################
 process.out.outputCommands +=['drop *_*_*_*']
 
-process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
+process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 
 
 
