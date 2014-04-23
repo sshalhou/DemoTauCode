@@ -154,7 +154,7 @@ if not postfix == "":
 
 
 ########################################################################################################
-process.out.outputCommands +=['delete *_*_*_*']
+process.out.outputCommands +=['drop *_*_*_*']
 
 process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
 
