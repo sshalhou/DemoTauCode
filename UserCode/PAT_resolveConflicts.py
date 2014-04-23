@@ -155,7 +155,7 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 ###################################################
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 
@@ -174,7 +174,7 @@ process.patPFMetByMVA = process.patMETs.clone(
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
