@@ -74,6 +74,7 @@ if not runOnMC:
 ###################################################
 process.load("CMGTools.External.pujetidsequence_cff")
 
+process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
 ###################################################
@@ -92,6 +93,7 @@ process.VertexPresent = cms.EDFilter("VertexSelector",
                              )
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
+process.out.outputCommands +=['drop *_offlinePrimaryVerticesWithBS*_*_*']
 
 
 ###################################################
