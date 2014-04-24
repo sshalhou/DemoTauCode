@@ -58,6 +58,9 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
+
+process.out.outputCommands +=['drop *_*_*_*']
+
 ###################################################
 # rm MC matching if DATA
 ###################################################
@@ -147,9 +150,9 @@ process.patPF2PATSequence.replace( process.patElectrons, process.mvaIDelec * pro
 process.patConversions = cms.EDProducer("PATConversionProducer",
                                         electronSource = cms.InputTag("gsfElectrons")
                                         )
-process.out.outputCommands +=['keep *_patConversions*_*_*']
-process.out.outputCommands +=['keep *_conversions*_*_*']
-process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
+#process.out.outputCommands +=['keep *_patConversions*_*_*']
+#process.out.outputCommands +=['keep *_conversions*_*_*']
+#process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 ###################################################
@@ -178,6 +181,8 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PA
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
+# keep CSV info
+process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
 ###################################################
 # using SelectEvents, you can filter on the paths (sequences)
