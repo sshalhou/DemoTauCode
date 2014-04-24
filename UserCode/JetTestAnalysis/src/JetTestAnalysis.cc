@@ -110,10 +110,10 @@ edm::Handle<edm::View<pat::Jet> > jets;
 iEvent.getByLabel(jetSrc_,jets);
 
 Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel(puJetIdMVASrc_,"full53xDiscriminant",puJetIdMVA);
+iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
 
 Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel(puJetIdMVASrc_,"full53xId",puJetIdFlag);
+iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
 
 
 
