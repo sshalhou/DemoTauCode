@@ -133,7 +133,7 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
 switchToPFTauHPS(process)
 
-
+process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
 ###################################################
 # store electrons and MVA ID
@@ -147,6 +147,8 @@ process.patElectrons.electronIDSources.mvaNonTrigV0 = cms.InputTag("mvaNonTrigV0
 process.patElectrons.electronIDSources.mvaTrigNoIPV0 = cms.InputTag("mvaTrigNoIPV0")
 
 process.patPF2PATSequence.replace( process.patElectrons, process.mvaIDelec * process.patElectrons )
+
+process.out.outputCommands +=['keep *_selectedPatElectrons*_*_*']
 
 
 ###################################################
