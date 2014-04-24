@@ -13,6 +13,12 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
+
+dropAll = True
+if dropAll:
+  process.out.outputCommands +=['drop *_*_*_*']
+
+
 runOnMC = True
 if runOnMC:
   process.GlobalTag.globaltag = 'START53_V23::All'
@@ -59,7 +65,6 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
-process.out.outputCommands +=['drop *_*_*_*']
 
 ###################################################
 # rm MC matching if DATA
