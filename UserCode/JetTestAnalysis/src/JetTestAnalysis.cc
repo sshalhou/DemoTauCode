@@ -124,16 +124,16 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       float mva   = (*puJetIdMVA)[jets->refAt(i)];
       int    idflag = (*puJetIdFlag)[jets->refAt(i)];
       std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PU JetID MVA " << mva;
-      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) {
-           std::cout << " pass loose wp";
-      }
-      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium ) {
-           std::cout << " pass medium wp";
-      }
-      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight ) {
-           std::cout << " pass tight wp";
-      }
-      std::cout << std::endl;
+//      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) {
+//           std::cout << " pass loose wp";
+//      }
+//      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium ) {
+//           std::cout << " pass medium wp";
+//      }
+//      if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight ) {
+//           std::cout << " pass tight wp";
+  //    }
+  //    std::cout << std::endl;
 }
 
 
