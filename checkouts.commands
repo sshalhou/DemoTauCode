@@ -8,7 +8,7 @@ git cms-addpkg RecoTauTag/RecoTau
 git cms-addpkg EgammaAnalysis/ElectronTools
 git cms-addpkg PhysicsTools/Utilities
 git cms-addpkg SimDataFormats/PileupSummaryInfo
-
+git cms-addpkg RecoTauTag/Configuration
 git cms-addpkg DataFormats/VertexReco
 git cms-addpkg DataFormats/Common
 
@@ -60,5 +60,3 @@ git clone https://github.com/latinos/UserCode-CMG-CMGTools-External CMGTools/Ext
 
 mv RecoJets/JetProducers/plugins/PileupJetIdProducer.cc RecoJets/JetProducers/plugins/PileupJetIdProducer.cc_hold
 mv RecoJets/JetProducers/src/PileupJetIdAlgo.cc RecoJets/JetProducers/src/PileupJetIdAlgo.cc_hold
-
-
