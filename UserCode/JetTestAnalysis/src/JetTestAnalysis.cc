@@ -74,7 +74,7 @@ edm::InputTag puJetIdMVASrc_;
 //
 JetTestAnalysis::JetTestAnalysis(const edm::ParameterSet& iConfig):
 jetSrc_(iConfig.getUntrackedParameter<edm::InputTag>("jetSrc" )),
-puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" )),
+puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" ))
 {
    //now do what ever initialization is needed
 
