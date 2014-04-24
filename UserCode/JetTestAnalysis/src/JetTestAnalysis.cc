@@ -32,7 +32,6 @@
 
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "CMGTools/External/interface/PileupJetIdentifier.h"
-#include "CMGTools/External/interface/PileupJetIdAlgo.h"
 //
 // class declaration
 //
@@ -53,7 +52,7 @@ class JetTestAnalysis : public edm::EDAnalyzer {
       virtual void beginRun(edm::Run const&, edm::EventSetup const&);
       virtual void endRun(edm::Run const&, edm::EventSetup const&);
       virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
-      virtual void std::endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+      virtual void endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
 
@@ -113,10 +112,10 @@ edm::Handle<edm::View<pat::Jet> > jets;
 iEvent.getByLabel(jetSrc_,jets);
 
 Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel(puJetIdMVASrc_,puJetMva);
+iEvent.getByLabel(puJetIdMVASrc_,puJetIdMVA);
 
 Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel(puJetIdFlagSrc_,puJetMva);
+iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
 
 
 
@@ -184,7 +183,7 @@ JetTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSet
 
 // ------------ method called when ending the processing of a luminosity block  ------------
 void
-JetTestAnalysis::std::endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+JetTestAnalysis::endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
