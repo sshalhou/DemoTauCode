@@ -127,6 +127,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
       std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
       std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
+      std::cout<<" CSV = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
       std::cout << std::endl;
 }
 
