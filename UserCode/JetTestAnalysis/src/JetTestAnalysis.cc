@@ -32,6 +32,7 @@
 
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "CMGTools/External/interface/PileupJetIdentifier.h"
+#include "CMGTools/External/interface/PileupJetIdAlgo.h"
 //
 // class declaration
 //
@@ -52,7 +53,7 @@ class JetTestAnalysis : public edm::EDAnalyzer {
       virtual void beginRun(edm::Run const&, edm::EventSetup const&);
       virtual void endRun(edm::Run const&, edm::EventSetup const&);
       virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+      virtual void std::endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
 
@@ -123,17 +124,17 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       const pat::Jet & patjet = jets->at(i);
       float mva   = (*puJetIdMVA)[jets->refAt(i)];
       int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-      cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PU JetID MVA " << mva;
+      std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PU JetID MVA " << mva;
       if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) {
-           cout << " pass loose wp";
+           std::cout << " pass loose wp";
       }
       if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium ) {
-           cout << " pass medium wp";
+           std::cout << " pass medium wp";
       }
       if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight ) {
-           cout << " pass tight wp";
+           std::cout << " pass tight wp";
       }
-      cout << endl;
+      std::cout << std::endl;
 }
 
 
@@ -183,7 +184,7 @@ JetTestAnalysis::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSet
 
 // ------------ method called when ending the processing of a luminosity block  ------------
 void
-JetTestAnalysis::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+JetTestAnalysis::std::endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 
