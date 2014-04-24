@@ -29,6 +29,9 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+#include "DataFormats/PatCandidates/interface/Jet.h"
+#include "CMGTools/External/interface/PileupJetIdentifier.h"
 //
 // class declaration
 //
