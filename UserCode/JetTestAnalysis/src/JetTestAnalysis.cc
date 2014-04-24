@@ -58,7 +58,6 @@ class JetTestAnalysis : public edm::EDAnalyzer {
 
 edm::InputTag jetSrc_;
 edm::InputTag puJetIdMVASrc_;
-edm::InputTag puJetIdFlagSrc_;
 
 };
 
@@ -76,7 +75,6 @@ edm::InputTag puJetIdFlagSrc_;
 JetTestAnalysis::JetTestAnalysis(const edm::ParameterSet& iConfig):
 jetSrc_(iConfig.getUntrackedParameter<edm::InputTag>("jetSrc" )),
 puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" )),
-puJetIdFlagSrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdFlagSrc" ))
 {
    //now do what ever initialization is needed
 
@@ -112,10 +110,10 @@ edm::Handle<edm::View<pat::Jet> > jets;
 iEvent.getByLabel(jetSrc_,jets);
 
 Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel(puJetIdMVASrc_,puJetIdMVA);
+iEvent.getByLabel(puJetIdMVASrc_,"full53xDiscriminant",puJetIdMVA);
 
 Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
+iEvent.getByLabel(puJetIdMVASrc_,"full53xId",puJetIdFlag);
 
 
 

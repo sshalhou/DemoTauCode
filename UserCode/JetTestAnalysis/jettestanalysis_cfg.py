@@ -18,8 +18,7 @@ process.source = cms.Source("PoolSource",
 
 process.demo = cms.EDAnalyzer('JetTestAnalysis',
   jetSrc = cms.untracked.InputTag("selectedPatJets"),
-  puJetIdMVASrc = cms.untracked.InputTag("puJetMva::full53xDiscriminant"),
-  puJetIdFlagSrc = cms.untracked.InputTag("puJetMva::full53xId")
+  puJetIdMVASrc = cms.untracked.InputTag("puJetMva"),
 )
 
 
