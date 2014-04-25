@@ -129,6 +129,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
       std::cout<<" CSV = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
       std::cout<<" flavor "<<patjet.partonFlavour();
+      std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
       std::cout << std::endl;
 }
 
