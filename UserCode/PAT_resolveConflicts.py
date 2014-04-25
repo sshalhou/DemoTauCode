@@ -55,7 +55,7 @@ usePFIso(process)
 process.patElectrons.pfElectronSource = 'particleFlow'
 
 
-postfix = ""
+postfix = "PFlow"
 jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
