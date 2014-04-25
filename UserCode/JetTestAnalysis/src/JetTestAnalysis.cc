@@ -130,10 +130,11 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       std::cout<<" CSV = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
       std::cout<<" flavor "<<patjet.partonFlavour();
       std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
+      std::cout<<std::endl;
       std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
       std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
       std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
-      if(iEvent.isRealData()) std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";
+      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
 }
 
