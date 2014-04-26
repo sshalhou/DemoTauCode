@@ -56,8 +56,9 @@ process.patElectrons.pfElectronSource = 'particleFlow'
 
 
 postfix = ""
-jetAlgo = "AK5PF"
+jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
+switchToPFJets(process)
 
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
