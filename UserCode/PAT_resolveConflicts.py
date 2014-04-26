@@ -16,9 +16,9 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 DropKeeep = Keep
 
-if DropKeeep = Drop:
+if DropKeeep == Drop:
   process.out.outputCommands +=['drop *_*_*_*']
-if DropKeeep = Drop:
+if DropKeeep == Drop:
   process.out.outputCommands +=['keep *_*_*_*']
 
 
