@@ -14,11 +14,11 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-DropOrKeeep = Keep
+DropKeeep = Keep
 
-if DropOrKeeep = Drop:
+if DropKeeep = Drop:
   process.out.outputCommands +=['drop *_*_*_*']
-if DropOrKeeep = Drop:
+if DropKeeep = Drop:
   process.out.outputCommands +=['keep *_*_*_*']
 
 
