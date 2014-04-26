@@ -14,9 +14,12 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-dropAll = True
-if dropAll:
+DropOrKeeep = Keep
+
+if DropOrKeeep = Drop:
   process.out.outputCommands +=['drop *_*_*_*']
+if DropOrKeeep = Drop:
+  process.out.outputCommands +=['keep *_*_*_*']
 
 
 runOnMC = True
@@ -55,7 +58,7 @@ usePFIso(process)
 process.patElectrons.pfElectronSource = 'particleFlow'
 
 
-postfix = "PFlow"
+postfix = ""
 jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
