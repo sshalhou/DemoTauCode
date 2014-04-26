@@ -14,12 +14,9 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-DropKeeep = "Keep"
+KeepAll = False
 
-if DropKeeep == "Drop":
-  process.out.outputCommands +=['drop *_*_*_*']
-if DropKeeep == "Keep":
-  process.out.outputCommands +=['keep *_*_*_*']
+
 
 
 runOnMC = True
@@ -59,7 +56,7 @@ process.patElectrons.pfElectronSource = 'particleFlow'
 
 
 postfix = ""
-jetAlgo = "AK5"
+jetAlgo = "AK5PF"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 
 # needed for MVA met, but need to be here
@@ -227,6 +224,8 @@ if not postfix == "":
 
 
 
+if KeepAll:
+  process.out.outputCommands +=['keep *_*_*_*']
 
 process.out.fileName = 'patTuple_testing.root'
 process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
