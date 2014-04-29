@@ -213,6 +213,18 @@ std::vector<float> SubCorrections = jec_->getSubCorrections();
 
     }
 
+jec_->setJetEta( uncorrJet.eta() );
+jec_->setJetPt ( uncorrJet.pt() );
+jec_->setJetE  ( uncorrJet.energy() );
+jec_->setJetA  ( patjet.jetArea() );
+jec_->setRho   ( *(h_rho.product()) );
+jec_->setNPV   ( h_pv->size() );
+ double corr = jec_->getCorrection();
+
+std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+std::cout<<" step-by-step corr "= SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
+
+
 
 
 //      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
