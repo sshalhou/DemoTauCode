@@ -199,7 +199,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
     jec_->setJetA  ( patjet.jetArea() );
     jec_->setRho   ( *(h_rho.product()) );
     jec_->setNPV   ( h_pv->size() );
-    double corr = jec_->getCorrection();
+    double corr = jec_->getSubCorrections(0);
 
 std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
