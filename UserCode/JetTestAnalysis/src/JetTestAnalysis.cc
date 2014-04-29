@@ -205,7 +205,7 @@ std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
 std::vector<float> SubCorrections = jec_->getSubCorrections();
 
-  for(int ll=0;ll<SubCorrections.size();ll++)
+  for(unsigned int ll=0;ll<SubCorrections.size();ll++)
     {
 
       std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
