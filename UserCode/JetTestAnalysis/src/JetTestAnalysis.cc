@@ -145,6 +145,15 @@ JetTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 edm::Handle<edm::View<pat::Jet> > jets;
 iEvent.getByLabel(jetSrc_,jets);
 
+// Get the mean pt per unit area ("rho")
+  edm::Handle< double > h_rho;
+  evt.getByLabel( rhoSrc_, h_rho );
+
+  // Get the primary vertex collection
+  edm::Handle< std::vector<reco::Vertex> > h_pv;
+  evt.getByLabel( pvSrc_, h_pv );
+
+
 Handle<ValueMap<float> > puJetIdMVA;
 iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
 
@@ -167,10 +176,22 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       std::cout<<" flavor "<<patjet.partonFlavour();
       std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
       std::cout<<std::endl;
-      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
-      std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
-      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
-      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
+
+/////////////////
+// get uncorrected jet, then
+// apply JEC 'on the fly'
+//////////////////
+
+  reco::Candidate::LorentzVector uncorrJet;
+  pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+  uncorrJet = pJet->correctedP4(0);
+  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
+
+
+//      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
+//      std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
+//      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
+//      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
 }
 
