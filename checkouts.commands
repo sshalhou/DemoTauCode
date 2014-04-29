@@ -12,6 +12,10 @@ git cms-addpkg RecoTauTag/Configuration
 git cms-addpkg DataFormats/VertexReco
 git cms-addpkg DataFormats/Common
 
+
+
+
+
 git cms-addpkg PhysicsTools/PatAlgos
 git cms-addpkg RecoMET/METProducers
 
@@ -60,3 +64,13 @@ git clone https://github.com/latinos/UserCode-CMG-CMGTools-External CMGTools/Ext
 
 mv RecoJets/JetProducers/plugins/PileupJetIdProducer.cc RecoJets/JetProducers/plugins/PileupJetIdProducer.cc_hold
 mv RecoJets/JetProducers/src/PileupJetIdAlgo.cc RecoJets/JetProducers/src/PileupJetIdAlgo.cc_hold
+
+git cms-addpkg JetMETCorrections/Modules
+cp JetMETCorrections/Modules/test/JetCorrectionDBReader_cfg.py RecoJets/JetAnalyzers/test/.
+sed -i 's/string(\x27AK5PF\x27)/string(\x27AK5PFchs\x27)/g' RecoJets/JetAnalyzers/test/JetCorrectionDBReader_cfg.py
+sed -i 's/START53_V29B/GR_R_53_V10/g' RecoJets/JetAnalyzers/test/JetCorrectionDBReader_cfg.py
+cd RecoJets/JetAnalyzers/test/
+cmsRun JetCorrectionDBReader_cfg.py
+sed -i 's/GR_R_53_V10/START53_V29B/g' JetCorrectionDBReader_cfg.py
+cmsRun JetCorrectionDBReader_cfg.py
+cd -

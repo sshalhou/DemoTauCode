@@ -32,6 +32,16 @@
 
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "CMGTools/External/interface/PileupJetIdentifier.h"
+
+
+#include "CondFormats/JetMETObjects/interface/JetCorrectionUncertainty.h"
+#include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "DataFormats/JetReco/interface/Jet.h"
+
+
+
 //
 // class declaration
 //
@@ -58,6 +68,12 @@ class JetTestAnalysis : public edm::EDAnalyzer {
 
 edm::InputTag jetSrc_;
 edm::InputTag puJetIdMVASrc_;
+edm::InputTag rhoSrc_;
+edm::InputTag pvSrc_;
+std::vector<std::string> jecPayloadNames_;
+std::string jecUncName_;
+boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
+boost::shared_ptr<FactorizedJetCorrector> jec_;
 
 };
 
@@ -74,9 +90,29 @@ edm::InputTag puJetIdMVASrc_;
 //
 JetTestAnalysis::JetTestAnalysis(const edm::ParameterSet& iConfig):
 jetSrc_(iConfig.getUntrackedParameter<edm::InputTag>("jetSrc" )),
+rhoSrc_   (iConfig.getUntrackedParameter<edm::InputTag>("rhoSrc") ),
+pvSrc_    (iConfig.getUntrackedParameter<edm::InputTag>("pvSrc") ),
+jecPayloadNames_( iConfig.getUntrackedParameter<std::vector<std::string> >("jecPayloadNames") ),
+jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
 puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" ))
 {
    //now do what ever initialization is needed
+
+
+  //Get the factorized jet corrector parameters.
+  std::vector<JetCorrectorParameters> vPar;
+  for ( std::vector<std::string>::const_iterator payloadBegin = jecPayloadNames_.begin(),
+          payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
+    JetCorrectorParameters pars(*ipayload);
+    vPar.push_back(pars);
+  }
+
+ // Make the FactorizedJetCorrector and Uncertainty
+  jec_ = boost::shared_ptr<FactorizedJetCorrector> ( new FactorizedJetCorrector(vPar) );
+  jecUnc_ = boost::shared_ptr<JetCorrectionUncertainty>( new JetCorrectionUncertainty(jecUncName_) );
+
+
+
 
 }
 

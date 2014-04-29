@@ -16,9 +16,33 @@ process.source = cms.Source("PoolSource",
                             )
 
 
+
+isMC = True
+
+
+if isMC:
+  jecLevels = [
+    'GR_R_53_V10_L1FastJet_AK5PFchs.txt',
+    'GR_R_53_V10_L2Relative_AK5PFchs.txt',
+    'GR_R_53_V10_L3Absolute_AK5PFchs.txt'
+  ]
+else :
+  jecLevels = [
+    'GR_R_53_V10_L1FastJet_AK5PFchs.txt',
+    'GR_R_53_V10_L2Relative_AK5PFchs.txt',
+    'GR_R_53_V10_L3Absolute_AK5PFchs.txt',
+    'GR_R_53_V10_L2L3Residual_AK5PFchs.txt'
+  ]
+
+
+
 process.demo = cms.EDAnalyzer('JetTestAnalysis',
   jetSrc = cms.untracked.InputTag("selectedPatJets"),
-  puJetIdMVASrc = cms.untracked.InputTag("puJetMva"),
+  rhoSrc = cms.InputTag('ak5PFJets', 'rho'),
+  pvSrc  = cms.InputTag('offlinePrimaryVertices'),
+  jecPayloadNames = cms.vstring( jecLevels),
+  jecUncName = cms.string('GR_R_53_V10_Uncertainty_AK5PFchs.txt'),
+  puJetIdMVASrc = cms.untracked.InputTag("puJetMva")
 )
 
 

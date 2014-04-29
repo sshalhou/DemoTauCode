@@ -14,7 +14,7 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-KeepAll = True
+KeepAll = False
 
 
 
@@ -83,6 +83,12 @@ process.load("CMGTools.External.pujetidsequence_cff")
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
+
+###################################################
+# needed for JEC
+###################################################
+process.out.outputCommands +=['keep *_ak5PFJets*_*rhos*_*']
+
 ###################################################
 # Store the Vertex Collection
 # filtering is possible at this
