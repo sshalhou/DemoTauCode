@@ -203,7 +203,15 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
 
 std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
+std::vector<float> SubCorrections = jec_->getSubCorrections();
 
+  for(int ll=0;ll<SubCorrections.size();ll++)
+    {
+
+      std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
+
+
+    }
 
 
 
