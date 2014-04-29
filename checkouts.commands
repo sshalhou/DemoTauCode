@@ -11,7 +11,7 @@ git cms-addpkg SimDataFormats/PileupSummaryInfo
 git cms-addpkg RecoTauTag/Configuration
 git cms-addpkg DataFormats/VertexReco
 git cms-addpkg DataFormats/Common
-
+git cms-addpkg CondFormats/JetMETObjects
 
 
 
