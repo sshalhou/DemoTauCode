@@ -147,11 +147,11 @@ iEvent.getByLabel(jetSrc_,jets);
 
 // Get the mean pt per unit area ("rho")
   edm::Handle< double > h_rho;
-  evt.getByLabel( rhoSrc_, h_rho );
+  iEvent.getByLabel( rhoSrc_, h_rho );
 
   // Get the primary vertex collection
   edm::Handle< std::vector<reco::Vertex> > h_pv;
-  evt.getByLabel( pvSrc_, h_pv );
+  iEvent.getByLabel( pvSrc_, h_pv );
 
 
 Handle<ValueMap<float> > puJetIdMVA;
