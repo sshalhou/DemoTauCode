@@ -199,19 +199,19 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
     jec_->setJetA  ( patjet.jetArea() );
     jec_->setRho   ( *(h_rho.product()) );
     jec_->setNPV   ( h_pv->size() );
-    double corr = jec_->getSubCorrections(0);
+  //  double corr = jec_->getCorrection();
 
-std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+//std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
-//std::vector<float> SubCorrections = jec_->getSubCorrections();
+std::vector<float> SubCorrections = jec_->getSubCorrections();
 
-  //for(unsigned int ll=0;ll<SubCorrections.size();ll++)
-    //{
+  for(unsigned int ll=0;ll<SubCorrections.size();ll++)
+    {
 
-      //std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
+      std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
 
 
-//    }
+    }
 
 
 
