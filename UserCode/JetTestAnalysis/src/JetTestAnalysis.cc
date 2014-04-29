@@ -188,6 +188,23 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
   std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
 
 
+    // Get the correction itself. This needs the jet area,
+    // the rho value, and the number of primary vertices to
+    // run the correction.
+    jec_->setJetEta( uncorrJet.eta() );
+    jec_->setJetPt ( uncorrJet.pt() );
+    jec_->setJetE  ( uncorrJet.energy() );
+    jec_->setJetA  ( patjet.jetArea() );
+    jec_->setRho   ( *(h_rho.product()) );
+    jec_->setNPV   ( h_pv->size() );
+    double corr = jec_->getCorrection();
+
+std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+
+
+
+
+
 //      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
 //      std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
 //      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
