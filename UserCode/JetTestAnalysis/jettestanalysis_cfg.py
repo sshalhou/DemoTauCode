@@ -38,8 +38,8 @@ else :
 
 process.demo = cms.EDAnalyzer('JetTestAnalysis',
   jetSrc = cms.untracked.InputTag("selectedPatJets"),
-  rhoSrc = cms.InputTag('ak5PFJets', 'rho'),
-  pvSrc  = cms.InputTag('offlinePrimaryVertices'),
+  rhoSrc = cms.untracked.InputTag('ak5PFJets', 'rho'),
+  pvSrc  = cms.untracked.InputTag('offlinePrimaryVertices'),
   jecPayloadNames = cms.vstring( jecLevels),
   jecUncName = cms.string('GR_R_53_V10_Uncertainty_AK5PFchs.txt'),
   puJetIdMVASrc = cms.untracked.InputTag("puJetMva")
