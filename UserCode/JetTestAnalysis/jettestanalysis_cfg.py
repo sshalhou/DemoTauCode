@@ -23,7 +23,7 @@ isMC = True
 if isMC:
   jecLevels = [
     './RecoJets/JetAnalyzers/test/GR_R_53_V10_L1FastJet_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt'
+    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt',
     './RecoJets/JetAnalyzers/test/GR_R_53_V10_L3Absolute_AK5PFchs.txt'
   ]
 else :
