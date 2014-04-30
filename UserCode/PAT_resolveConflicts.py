@@ -72,7 +72,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 ###################################################
 
 if not runOnMC:
-  removeMCMatchingPF2PAT( process, '' )
+  removeMCMatchingPF2PAT( process, 'All' )
 
 
 ###################################################

@@ -179,6 +179,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
       std::cout<<std::endl;
 
+
 /////////////////
 // get uncorrected jet, then
 // apply JEC 'on the fly'
@@ -222,7 +223,7 @@ jec_->setNPV   ( h_pv->size() );
  double corr = jec_->getCorrection();
 
 std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
-std::cout<<" step-by-step corr "<<SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
+//std::cout<<" step-by-step corr "<<SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
 
 
 
