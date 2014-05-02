@@ -226,8 +226,8 @@ process.goodMuons = cms.EDFilter("CandSelector",
 # Let it run
 ###################################################
 process.pX = cms.Path(       process.VertexPresent+
-                             process.recoTauClassicHPSSequence+
                              getattr(process,"patPF2PATSequence"+postfix)+
+                             process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence
                              #process.PFTau
                              #process.SelectMuonEvents
