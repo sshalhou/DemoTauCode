@@ -87,7 +87,7 @@ process.out.outputCommands +=['keep *_puJetMva*_*_*']
 ###################################################
 # needed for JEC
 ###################################################
-process.out.outputCommands +=['keep *_*kt6PFJets*_*rho*_*']
+process.out.outputCommands +=['keep double_kt6PFJets_rho_RECO']
 ###################################################
 # Store the Vertex Collection
 # filtering is possible at this
