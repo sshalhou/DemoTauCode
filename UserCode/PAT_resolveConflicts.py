@@ -204,8 +204,8 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 # to keep that PATtuple to a reasonable kB/event
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-process.filteredPatJets = selectedPatJets.clone(src = 'patJets', cut = 'pt >25. & abs(eta) < 2.4')
-process.patPF2PATSequence.replace( process.selectedPatJets, process.filteredPatJets )
+process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'pt >25. & abs(eta) < 2.4')
+process.patPF2PATSequence.replace( process.selectedPatJets, process.selectedPatJets )
 
 
 
