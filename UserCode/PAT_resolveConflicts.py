@@ -222,6 +222,8 @@ process.goodMuons = cms.EDFilter("CandSelector",
 #SelectMuonEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('muonSequence') )
 #process.out.SelectEvents.SelectEvents = ['muonSequence']
 
+hardJets = selectedPatJets.clone(src = 'selectedPatTaus', cut = 'pt > 30. & abs(eta) < 2.4')
+
 ##################################################
 # Let it run
 ###################################################
