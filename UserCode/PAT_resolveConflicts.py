@@ -199,18 +199,16 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 # keep CSV info
 process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
-
-
-
-
-
 ###################################################
-# using SelectEvents, you can filter on the paths (sequences)
-# defined above; there will be a pass/fail report at the
-# end of the process
-###################################################
-#SelectMuonEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('muonSequence') )
-#process.out.SelectEvents.SelectEvents = ['muonSequence']
+# apply selection cuts on physics objects
+# to keep that PATtuple to a reasonable kB/event
+
+from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+process.filteredPatJets = selectedPatJets.clone(src = 'patJets', cut = 'pt >25. & abs(eta) < 2.4')
+process.patPF2PATSequence.replace( process.selectedPatJets, process.filteredPatJets )
+
+
+
 
 
 ##################################################
@@ -234,19 +232,7 @@ if not postfix == "":
 ########################################################################################################
 
 
-###################################################
-# apply selection cuts on physics objects
-# to keep that PATtuple to a reasonable kB/event
 
-
-#process.goodMuons = cms.EDFilter("CandSelector",
-#    src = cms.InputTag("selectedLayer1Muons"),
-#    cut = cms.string("pt > 5.0")
-#)
-#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-#hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
-#process.out.outputCommands +=['keep *_*_*hardJets*_*']
-#process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
 
 
 if KeepAll:
