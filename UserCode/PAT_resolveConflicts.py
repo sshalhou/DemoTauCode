@@ -205,7 +205,7 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
 process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'pt >25. & abs(eta) < 2.4')
-process.patPF2PATSequence.replace( process.selectedPatJets, process.selectedPatJets )
+#process.patPF2PATSequence.replace( process.selectedPatJets, process.selectedPatJets )
 
 
 
