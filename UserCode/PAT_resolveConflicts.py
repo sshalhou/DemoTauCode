@@ -207,12 +207,12 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 # to keep that PATtuple to a reasonable kB/event
 
 
-process.goodMuons = cms.EDFilter("CandSelector",
-    src = cms.InputTag("selectedLayer1Muons"),
-    cut = cms.string("pt > 5.0")
-)
-
-
+#process.goodMuons = cms.EDFilter("CandSelector",
+#    src = cms.InputTag("selectedLayer1Muons"),
+#    cut = cms.string("pt > 5.0")
+#)
+from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+hardJets = selectedPatJets.clone(src = 'selectedPatTaus', cut = 'pt > 30. & abs(eta) < 2.4')
 
 ###################################################
 # using SelectEvents, you can filter on the paths (sequences)
@@ -222,7 +222,6 @@ process.goodMuons = cms.EDFilter("CandSelector",
 #SelectMuonEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('muonSequence') )
 #process.out.SelectEvents.SelectEvents = ['muonSequence']
 
-hardJets = selectedPatJets.clone(src = 'selectedPatTaus', cut = 'pt > 30. & abs(eta) < 2.4')
 
 ##################################################
 # Let it run
