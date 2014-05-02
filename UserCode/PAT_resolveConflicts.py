@@ -200,6 +200,20 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 # keep CSV info
 process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
+
+
+###################################################
+# apply selection cuts on physics objects
+# to keep that PATtuple to a reasonable kB/event
+
+
+process.goodMuons = cms.EDFilter("CandSelector",
+    src = cms.InputTag("selectedLayer1Muons"),
+    cut = cms.string("pt > 5.0")
+)
+
+
+
 ###################################################
 # using SelectEvents, you can filter on the paths (sequences)
 # defined above; there will be a pass/fail report at the
@@ -209,14 +223,12 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 #process.out.SelectEvents.SelectEvents = ['muonSequence']
 
 ##################################################
-# Let it run, note: we absolutely need
-# a path called 'p' unless we edit patTemplate_cfg.py
-# which expects p in the selector
+# Let it run
 ###################################################
 process.pX = cms.Path(       process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.puJetIdSqeuence+
-                             process.PFTau
+                             #process.PFTau
                              #process.SelectMuonEvents
                                   )
 
