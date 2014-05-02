@@ -14,7 +14,7 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-KeepAll = True
+KeepAll = False
 
 
 
@@ -212,7 +212,10 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 #    cut = cms.string("pt > 5.0")
 #)
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-hardJets = selectedPatJets.clone(src = 'selectedPatTaus', cut = 'pt > 30. & abs(eta) < 2.4')
+hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
+process.out.outputCommands +=['keep *_*_*hardJets*_*']
+process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
+
 
 ###################################################
 # using SelectEvents, you can filter on the paths (sequences)
