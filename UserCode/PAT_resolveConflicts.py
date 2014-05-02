@@ -201,19 +201,7 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
 
 
-###################################################
-# apply selection cuts on physics objects
-# to keep that PATtuple to a reasonable kB/event
 
-
-#process.goodMuons = cms.EDFilter("CandSelector",
-#    src = cms.InputTag("selectedLayer1Muons"),
-#    cut = cms.string("pt > 5.0")
-#)
-#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-#hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
-#process.out.outputCommands +=['keep *_*_*hardJets*_*']
-#process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
 
 
 ###################################################
@@ -245,6 +233,20 @@ if not postfix == "":
 
 ########################################################################################################
 
+
+###################################################
+# apply selection cuts on physics objects
+# to keep that PATtuple to a reasonable kB/event
+
+
+#process.goodMuons = cms.EDFilter("CandSelector",
+#    src = cms.InputTag("selectedLayer1Muons"),
+#    cut = cms.string("pt > 5.0")
+#)
+#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+#hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
+#process.out.outputCommands +=['keep *_*_*hardJets*_*']
+#process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
 
 
 if KeepAll:
