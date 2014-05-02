@@ -211,10 +211,10 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 #    src = cms.InputTag("selectedLayer1Muons"),
 #    cut = cms.string("pt > 5.0")
 #)
-from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
-process.out.outputCommands +=['keep *_*_*hardJets*_*']
-process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
+#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+#hardJets = selectedPatJets.clone(src = 'selectedPatJets', cut = 'pt >2. & abs(eta) < 2.4')
+#process.out.outputCommands +=['keep *_*_*hardJets*_*']
+#process.out.outputCommands +=['drop *_*_*selectedPatJets*_*']
 
 
 ###################################################
