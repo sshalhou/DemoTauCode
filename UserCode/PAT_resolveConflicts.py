@@ -100,7 +100,7 @@ from PhysicsTools.PatAlgos.tools.trackTools import *
 process.VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
                              cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
-                             filter = cms.bool(True),
+                             filter = cms.bool(True)
                              )
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
@@ -238,6 +238,7 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
   countTaus      = cms.bool(True),
   minNumber = cms.uint32(2),
   maxNumber = cms.uint32(999999),
+  filter = cms.bool(True)
 )
 
 
