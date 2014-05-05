@@ -229,11 +229,20 @@ process.out.outputCommands +=['drop patPFParticles_selectedPatPFParticles__PAT']
 
 
 # module to filter on the number of Electrons
-process.countSelectedLeptons = cms.EDFilter("PATCandViewCountFilter",
-    minNumber = cms.uint32(2),
-    maxNumber = cms.uint32(999999),
-    src = cms.InputTag("selectedPatElectrons+selectedPatMuons+selectedPatTaus")
+process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
+  electronSource = cms.InputTag("selectedPatElectrons"),
+  muonSource     = cms.InputTag("selectedPatMuons"),
+  tauSource      = cms.InputTag("selectedPatTaus"),
+  countElectrons = cms.bool(True),
+  countMuons     = cms.bool(True),
+  countTaus      = cms.bool(True),
+  minNumber = cms.uint32(2),
+  maxNumber = cms.uint32(999999),
 )
+
+
+
+
 
 
 
