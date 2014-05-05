@@ -99,7 +99,7 @@ from PhysicsTools.PatAlgos.tools.trackTools import *
 
 process.VertexPresent = cms.EDFilter("VertexSelector",
                              src = cms.InputTag("offlinePrimaryVertices"),
-                             cut = cms.string("!isFake && ndof > 4 && abs(z) < 15 && position.Rho < 2"),
+                             cut = cms.string("!isFake && ndof > 400 && abs(z) < 15 && position.Rho < 2"),
                              filter = cms.bool(True),
                              )
 
