@@ -219,8 +219,12 @@ process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >8
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
-process.out.outputCommands +=['drop patPFParticles_selectedPatPFParticles__PAT']
+###################################################
+# drop some large unused collections
+###################################################
 
+process.out.outputCommands +=['drop patPFParticles_selectedPatPFParticles__PAT']
+process.out.outputCommands +=['drop recoPFCandidates_selectedPatJets_pfCandidates_PAT']
 
 ###################################################
 # require at least two lepton candidates
@@ -266,11 +270,19 @@ if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
     process.p += process.patDefaultSequence
 
+###################################################
+# require all paths to pass
+###################################################
+
+process.out.SelectEvents.SelectEvents = ['p']
+
+
 
 ########################################################################################################
 
 
-process.out.SelectEvents.SelectEvents = ['p']
+
+
 
 
 if KeepAll:
