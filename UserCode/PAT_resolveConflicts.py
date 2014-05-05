@@ -241,7 +241,8 @@ countSelectedLeptons = cms.EDFilter("PATCandViewCountFilter",
 process.pX = cms.Path(       process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
-                             process.puJetIdSqeuence
+                             process.puJetIdSqeuence+
+                             countSelectedLeptons
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
