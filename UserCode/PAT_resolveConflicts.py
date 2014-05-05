@@ -215,7 +215,7 @@ process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >8
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'Et >8.')
+process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
 
 ##################################################
