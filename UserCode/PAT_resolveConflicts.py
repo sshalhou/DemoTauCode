@@ -223,7 +223,7 @@ process.out.outputCommands +=['drop patPFParticles_selectedPatPFParticles__PAT']
 
 
 ###################################################
-# require at least two leptons
+# require at least two lepton candidates
 # in the event
 ###################################################
 
@@ -251,7 +251,7 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 ##################################################
 # Let it run
 ###################################################
-process.pX = cms.Path(       process.VertexPresent+
+process.p = cms.Path(       process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
@@ -263,14 +263,14 @@ process.pX = cms.Path(       process.VertexPresent+
 
 
 if not postfix == "":
-    process.pX += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.pX += process.patDefaultSequence
+    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
+    process.p += process.patDefaultSequence
 
 
 ########################################################################################################
 
 
-
+process.out.SelectEvents.SelectEvents = ['p']
 
 
 if KeepAll:
