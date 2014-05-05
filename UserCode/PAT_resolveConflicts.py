@@ -204,16 +204,18 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 # to keep that PATtuple to a reasonable kB/event
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 25. && abs(eta)<4.7')
+process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 15. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >10.')
+process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18.')
 
 
+from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >8.')
 
 
-
-
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'Et >8.')
 
 
 ##################################################
