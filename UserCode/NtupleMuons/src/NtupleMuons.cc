@@ -122,8 +122,8 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    edm::Handle<edm::View<pat::Muon> > muons;
    iEvent.getByLabel(muonSrc_,muons);
 
-    auto_ptr<int> muonCount( new int );
-    muonCount = 13;
+    //auto_ptr<int> muonCount( new int );
+    int muonCount = 13;
     iEvent.put( muonCount, "muonCount" );
 
 
