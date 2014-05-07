@@ -2,13 +2,13 @@
 //
 // Package:    Ntuple
 // Class:      Ntuple
-// 
+//
 /**\class Ntuple Ntuple.cc TEMP/Ntuple/src/Ntuple.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  shalhout shalhout
@@ -24,35 +24,40 @@
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDProducer.h"
-
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
+
+// needed by ntuple producer
+#include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 
 //
 // class declaration
 //
 
 class Ntuple : public edm::EDProducer {
-   public:
-      explicit Ntuple(const edm::ParameterSet&);
-      ~Ntuple();
+public:
+  explicit Ntuple(const edm::ParameterSet&);
+  ~Ntuple();
 
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
-      
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      // ----------member data ---------------------------
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+
+  // ----------member data ---------------------------
+
+  edm::InputTag muonSrc_;
+
 };
 
 //
@@ -67,28 +72,29 @@ class Ntuple : public edm::EDProducer {
 //
 // constructors and destructor
 //
-Ntuple::Ntuple(const edm::ParameterSet& iConfig)
+Ntuple::Ntuple(const edm::ParameterSet& iConfig):
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 {
-   //register your products
-/* Examples
-   produces<ExampleData2>();
+  //register your products
+  /* Examples
+  produces<ExampleData2>();
 
-   //if do put with a label
-   produces<ExampleData2>("label");
- 
-   //if you want to put into the Run
-   produces<ExampleData2,InRun>();
-*/
-   //now do what ever other initialization is needed
-  
+  //if do put with a label
+  produces<ExampleData2>("label");
+
+  //if you want to put into the Run
+  produces<ExampleData2,InRun>();
+  */
+  //now do what ever other initialization is needed
+
 }
 
 
 Ntuple::~Ntuple()
 {
- 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -101,57 +107,68 @@ Ntuple::~Ntuple()
 void
 Ntuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace edm;
-/* This is an event example
-   //Read 'ExampleData' from the Event
-   Handle<ExampleData> pIn;
-   iEvent.getByLabel("example",pIn);
+  using namespace edm;
 
-   //Use the ExampleData to create an ExampleData2 which 
-   // is put into the Event
-   std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-   iEvent.put(pOut);
-*/
+  // get muon collection
+  edm::Handle<edm::View<pat::Muon> > muons;
+  iEvent.getByLabel(muonSrc_,muons);
 
-/* this is an EventSetup example
-   //Read SetupData from the SetupRecord in the EventSetup
-   ESHandle<SetupData> pSetup;
-   iSetup.get<SetupRecord>().get(pSetup);
-*/
- 
+
+  for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon)
+  {
+    std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
+  }
+
+  /* This is an event example
+  //Read 'ExampleData' from the Event
+  Handle<ExampleData> pIn;
+  iEvent.getByLabel("example",pIn);
+
+  //Use the ExampleData to create an ExampleData2 which
+  // is put into the Event
+  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+  iEvent.put(pOut);
+  */
+
+  /* this is an EventSetup example
+  //Read SetupData from the SetupRecord in the EventSetup
+  ESHandle<SetupData> pSetup;
+  iSetup.get<SetupRecord>().get(pSetup);
+  */
+
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 Ntuple::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
+void
 Ntuple::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 Ntuple::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 Ntuple::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 Ntuple::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 Ntuple::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
