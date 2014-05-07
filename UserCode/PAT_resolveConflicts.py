@@ -206,14 +206,14 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 15. && abs(eta)<4.7')
+process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
 process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18.')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >8.')
+process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >3.')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
@@ -255,7 +255,7 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(       process.VertexPresent+
+process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
