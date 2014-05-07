@@ -37,6 +37,9 @@ Implementation:
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
+typedef math::XYZTLorentzVector LorentzVector;
+using namespace std;
+using namespace edm;
 
 //
 // class declaration
@@ -118,9 +121,7 @@ NtupleMuons::~NtupleMuons()
 void
 NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  typedef math::XYZTLorentzVector LorentzVector;
-  using namespace std;
-  using namespace edm;
+
 
 
   // get muon collection
