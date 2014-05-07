@@ -82,7 +82,7 @@ muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 
 
   produces<int>( "muonCount" ).setBranchAlias( "muonCount");
-  produces<vector<LorentzVector>>("patmuonP4").setBranchAlias("patmuonP4");
+  produces<std::vector<LorentzVector>>("patmuonP4").setBranchAlias("patmuonP4");
 
 
 
