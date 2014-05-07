@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("OWNPARTICLES")
+process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
@@ -19,6 +19,16 @@ process.myProducerLabel = cms.EDProducer('Ntuple'
 process.out = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('NtupleFile.root')
 )
+
+#################################
+# start by clearing everyting
+#################################
+process.out.outputCommands +=['drop *_*_*_*']
+
+#################################
+# keep everything produced by Ntuple
+#################################
+process.out.outputCommands +=['drop *_*_*_Ntuple']
 
 
 process.p = cms.Path(process.myProducerLabel)
