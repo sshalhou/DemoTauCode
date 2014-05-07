@@ -114,6 +114,7 @@ NtupleMuons::~NtupleMuons()
 void
 NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+   using namespace std;
    using namespace edm;
 
 
