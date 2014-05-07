@@ -5,10 +5,10 @@
 //
 /**\class NtupleMuons NtupleMuons.cc TEMP/NtupleMuons/src/NtupleMuons.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  shalhout shalhout
@@ -41,24 +41,24 @@
 //
 
 class NtupleMuons : public edm::EDProducer {
-   public:
-      explicit NtupleMuons(const edm::ParameterSet&);
-      ~NtupleMuons();
+public:
+  explicit NtupleMuons(const edm::ParameterSet&);
+  ~NtupleMuons();
 
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
-      // ----------member data ---------------------------
-      edm::InputTag muonSrc_;
+  // ----------member data ---------------------------
+  edm::InputTag muonSrc_;
 
 };
 
@@ -82,17 +82,17 @@ muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
   produces<int>( "muonCount" ).setBranchAlias( "muonCount");
 
 
-   //register your products
-/* Examples
-   produces<ExampleData2>();
+  //register your products
+  /* Examples
+  produces<ExampleData2>();
 
-   //if do put with a label
-   produces<ExampleData2>("label");
+  //if do put with a label
+  produces<ExampleData2>("label");
 
-   //if you want to put into the Run
-   produces<ExampleData2,InRun>();
-*/
-   //now do what ever other initialization is needed
+  //if you want to put into the Run
+  produces<ExampleData2,InRun>();
+  */
+  //now do what ever other initialization is needed
 
 }
 
@@ -100,8 +100,8 @@ muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 NtupleMuons::~NtupleMuons()
 {
 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -114,38 +114,51 @@ NtupleMuons::~NtupleMuons()
 void
 NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace std;
-   using namespace edm;
+  using namespace std;
+  using namespace edm;
 
 
-   // get muon collection
-   edm::Handle<edm::View<pat::Muon> > muons;
-   iEvent.getByLabel(muonSrc_,muons);
+  // get muon collection
+  edm::Handle<edm::View<pat::Muon> > muons;
+  iEvent.getByLabel(muonSrc_,muons);
 
-    auto_ptr<int> muonCount (new int);
-
-    //auto_ptr<int> muonCount( new int );
-    *muonCount = 13;
-    iEvent.put( muonCount, "muonCount" );
+  auto_ptr<int> muonCount (new int);
+  edm::View<pat::Muon>::const_iterator muon;
 
 
+  for(muon=muons->begin(); muon!=muons->end(); ++muon)
+  {
+   std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
+  }
 
-/* This is an event example
-   //Read 'ExampleData' from the Event
-   Handle<ExampleData> pIn;
-   iEvent.getByLabel("example",pIn);
+  *muonCount = muons->size();
 
-   //Use the ExampleData to create an ExampleData2 which
-   // is put into the Event
-   std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-   iEvent.put(pOut);
-*/
 
-/* this is an EventSetup example
-   //Read SetupData from the SetupRecord in the EventSetup
-   ESHandle<SetupData> pSetup;
-   iSetup.get<SetupRecord>().get(pSetup);
-*/
+
+
+
+
+
+  iEvent.put( muonCount, "muonCount" );
+
+
+
+  /* This is an event example
+  //Read 'ExampleData' from the Event
+  Handle<ExampleData> pIn;
+  iEvent.getByLabel("example",pIn);
+
+  //Use the ExampleData to create an ExampleData2 which
+  // is put into the Event
+  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+  iEvent.put(pOut);
+  */
+
+  /* this is an EventSetup example
+  //Read SetupData from the SetupRecord in the EventSetup
+  ESHandle<SetupData> pSetup;
+  iSetup.get<SetupRecord>().get(pSetup);
+  */
 
 }
 
