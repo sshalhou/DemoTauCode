@@ -131,7 +131,7 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   auto_ptr<int> muonCount (new int);
   auto_ptr<vector<LorentzVector>> patmuonP4 (new vector<LorentzVector>);
 
-  const int muonP4size = muons->p4().size();
+  const int muonP4size = muons->size();
   patmuonP4->reserve( muonP4size );
 
 
