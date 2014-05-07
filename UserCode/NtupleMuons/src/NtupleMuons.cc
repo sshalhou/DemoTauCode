@@ -2,7 +2,7 @@
 //
 // Package:    NtupleMuons
 // Class:      NtupleMuons
-// 
+//
 /**\class NtupleMuons NtupleMuons.cc TEMP/NtupleMuons/src/NtupleMuons.cc
 
  Description: [one line class summary]
@@ -30,6 +30,11 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
+// needed by ntuple muons producer
+#include <vector>
+#include <iostream>
+#include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 
 //
 // class declaration
@@ -46,13 +51,15 @@ class NtupleMuons : public edm::EDProducer {
       virtual void beginJob() ;
       virtual void produce(edm::Event&, const edm::EventSetup&);
       virtual void endJob() ;
-      
+
       virtual void beginRun(edm::Run&, edm::EventSetup const&);
       virtual void endRun(edm::Run&, edm::EventSetup const&);
       virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
       virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+      edm::InputTag muonSrc_;
+
 };
 
 //
@@ -67,26 +74,32 @@ class NtupleMuons : public edm::EDProducer {
 //
 // constructors and destructor
 //
-NtupleMuons::NtupleMuons(const edm::ParameterSet& iConfig)
+NtupleMuons::NtupleMuons(const edm::ParameterSet& iConfig):
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 {
+
+
+  produces<int>( "muonCount" ).setBranchAlias( "muonCount");
+
+
    //register your products
 /* Examples
    produces<ExampleData2>();
 
    //if do put with a label
    produces<ExampleData2>("label");
- 
+
    //if you want to put into the Run
    produces<ExampleData2,InRun>();
 */
    //now do what ever other initialization is needed
-  
+
 }
 
 
 NtupleMuons::~NtupleMuons()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -102,12 +115,24 @@ void
 NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
    using namespace edm;
+
+
+   // get muon collection
+   edm::Handle<edm::View<pat::Muon> > muons;
+   iEvent.getByLabel(muonSrc_,muons);
+
+    auto_ptr<int> muonCount( new int );
+    muonCount = 13;
+    iEvent.put( muonCount, "muonCount" );
+
+
+
 /* This is an event example
    //Read 'ExampleData' from the Event
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 
-   //Use the ExampleData to create an ExampleData2 which 
+   //Use the ExampleData to create an ExampleData2 which
    // is put into the Event
    std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
    iEvent.put(pOut);
@@ -118,40 +143,40 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
 */
- 
+
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 NtupleMuons::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
+void
 NtupleMuons::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 NtupleMuons::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 NtupleMuons::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 NtupleMuons::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 NtupleMuons::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
