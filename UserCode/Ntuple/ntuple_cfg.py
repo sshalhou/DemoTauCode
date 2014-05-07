@@ -17,13 +17,12 @@ process.myProducerLabel = cms.EDProducer('Ntuple'
 )
 
 process.out = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string('NtupleFile.root')
+    fileName = cms.untracked.string('NtupleFile.root'),
+    outputCommands = cms.untracked.vstring('drop *')
+    #SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p')
 )
 
-#################################
-# start by clearing everyting
-#################################
-process.out.outputCommands +=['drop *_*_*_*']
+
 
 #################################
 # keep everything produced by Ntuple
