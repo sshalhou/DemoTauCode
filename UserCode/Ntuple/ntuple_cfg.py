@@ -27,7 +27,7 @@ process.out = cms.OutputModule("PoolOutputModule",
 #################################
 # keep everything produced by Ntuple
 #################################
-process.out.outputCommands +=['drop *_*_*_Ntuple']
+process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
 process.p = cms.Path(process.myProducerLabel)
