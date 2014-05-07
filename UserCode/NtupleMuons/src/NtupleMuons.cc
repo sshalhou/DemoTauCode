@@ -35,6 +35,8 @@ Implementation:
 #include <iostream>
 #include "DataFormats/PatCandidates/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
+
 
 //
 // class declaration
@@ -80,6 +82,8 @@ muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 
 
   produces<int>( "muonCount" ).setBranchAlias( "muonCount");
+  produces<vector<LorentzVector>>("patmuonP4").setBranchAlias("patmuonP4");
+
 
 
   //register your products
@@ -114,6 +118,7 @@ NtupleMuons::~NtupleMuons()
 void
 NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+  typedef math::XYZTLorentzVector LorentzVector;
   using namespace std;
   using namespace edm;
 
@@ -123,12 +128,18 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(muonSrc_,muons);
 
   auto_ptr<int> muonCount (new int);
+  auto_ptr<vector<LorentzVector>> patmuonP4 (new vector<LorentzVector>);
+
+  const int muonP4size = muons->p4().size();
+  patmuonP4->reserve( muonP4size );
+
+
+
   edm::View<pat::Muon>::const_iterator muon;
-
-
   for(muon=muons->begin(); muon!=muons->end(); ++muon)
   {
    std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
+   patmuonP4->push_back(muon->p4());
   }
 
   *muonCount = muons->size();
@@ -140,6 +151,7 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   iEvent.put( muonCount, "muonCount" );
+  iEvent.put( patmuonP4, "patmuonP4" );
 
 
 
