@@ -85,8 +85,8 @@ muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 
 
   produces<int>( "muonCount" ).setBranchAlias( "muonCount");
-  produces<std::vector<LorentzVector>>("patmuonP4").setBranchAlias("patmuonP4");
-
+  produces<vector<LorentzVector>>("patmuonP4").setBranchAlias("patmuonP4");
+  produces<vector<bool>>("isGlobal").setBranchAlias("isGlobal");
 
 
   //register your products
@@ -130,17 +130,25 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   auto_ptr<int> muonCount (new int);
   auto_ptr<vector<LorentzVector>> patmuonP4 (new vector<LorentzVector>);
+  auto_ptr<vector<bool>> isGlobal (new vector<bool>);
+
 
   const int muonP4size = muons->size();
   patmuonP4->reserve( muonP4size );
-
+  isGlobal->reserve( muonP4size );
 
 
   edm::View<pat::Muon>::const_iterator muon;
   for(muon=muons->begin(); muon!=muons->end(); ++muon)
   {
-   std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
+   cout<<" is loose "<<muon->isLooseMuon()<<endl;
+   cout<<" is loose "<<muon->isLooseMuon()<<endl;
+
+
    patmuonP4->push_back(muon->p4());
+   isGlobal->push_back(muon->isGood("AllGlobalMuons"));
+
+
   }
 
   *muonCount = muons->size();
@@ -153,6 +161,7 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   iEvent.put( muonCount, "muonCount" );
   iEvent.put( patmuonP4, "patmuonP4" );
+  iEvent.put( isGlobal, "isGlobal" );
 
 
 
@@ -163,7 +172,7 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   //Use the ExampleData to create an ExampleData2 which
   // is put into the Event
-  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+  auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
   iEvent.put(pOut);
   */
 
