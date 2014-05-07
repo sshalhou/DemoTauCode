@@ -18,7 +18,7 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 )
 
 
-process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.InputTag('selectedPatMuons') )
+process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
 
 
 process.out = cms.OutputModule("PoolOutputModule",
