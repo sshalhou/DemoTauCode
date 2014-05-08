@@ -64,6 +64,8 @@ private:
 
   // ----------member data ---------------------------
   edm::InputTag muonSrc_;
+  edm::InputTag vertexSrc_;
+
 };
 
 //
