@@ -156,7 +156,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         {
           max_sumPt  =     vertex->p4().pt();
           primary_vertex_indx =    vertex - vertices->begin();
-          cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<endl;
+          //cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<endl;
 
 
         }
@@ -171,8 +171,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
 
     const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
-    cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
-    
+    //cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
+
 
 
 
@@ -206,7 +206,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
-    //  cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
+    cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
 
 
 
