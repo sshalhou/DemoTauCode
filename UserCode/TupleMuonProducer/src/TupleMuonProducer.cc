@@ -79,7 +79,7 @@ private:
 // constructors and destructor
 //
 TupleMuonProducer::TupleMuonProducer(const edm::ParameterSet& iConfig):
-muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" )),
 vertexSrc_(iConfig.getUntrackedParameter<edm::InputTag>("vertexSrc" ))
 {
 
