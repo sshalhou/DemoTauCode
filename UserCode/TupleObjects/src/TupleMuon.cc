@@ -5,9 +5,9 @@ TupleMuon::TupleMuon()
 {
   Pt = NAN;
   LorentzVector p4(NAN,NAN,NAN,NAN);
-  bool isGlobalMuon = FALSE;
-  bool isTightMuon = FALSE;
-  bool isLooseMuon = FALSE;
+  bool isGlobalMuon = 0;
+  bool isTightMuon = 0;
+  bool isLooseMuon = 0;
 }
 
 void TupleMuon::set_Pt(float Pt_)
