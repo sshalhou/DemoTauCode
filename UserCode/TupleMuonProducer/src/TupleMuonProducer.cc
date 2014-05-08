@@ -35,7 +35,6 @@ Implementation:
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
-#include "UserCode/TupleObjects/src/TupleMuon.cc"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
