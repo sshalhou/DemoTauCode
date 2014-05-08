@@ -134,10 +134,11 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
 
     TupleMuon CurrentMuon;
+    CurrentMuon.set_Pt(muon->p4().pt());
 
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
-    //TupleMuons->push_back(&CurrentMuon);
+    TupleMuons->push_back(&CurrentMuon);
 
 
   //  delete CurrentMuon;
