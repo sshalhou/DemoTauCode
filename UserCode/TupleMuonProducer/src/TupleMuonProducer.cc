@@ -212,7 +212,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
     CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
-    CurrentMuon.set_isLooselMuon(muon->isLooseMuon());
+    CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
 
 
