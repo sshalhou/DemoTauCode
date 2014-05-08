@@ -19,11 +19,12 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 
 
 process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
+#process.TupleMuons = cms.EDProducer('TupleMuon' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
 
 
 process.out = cms.OutputModule("PoolOutputModule",
 fileName = cms.untracked.string('NtupleFile.root'),
-outputCommands = cms.untracked.vstring('drop *')
+outputCommands = cms.untracked.vstring('keep *')
 #SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p')
 )
 
@@ -35,6 +36,6 @@ outputCommands = cms.untracked.vstring('drop *')
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
-process.p = cms.Path(process.myProducerLabel+process.NtupleMuons)
+process.p = cms.Path(process.myProducerLabel+process.NtupleMuons+process.TupleMuons)
 
 process.e = cms.EndPath(process.out)
