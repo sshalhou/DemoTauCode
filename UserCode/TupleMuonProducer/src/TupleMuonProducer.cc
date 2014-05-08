@@ -208,6 +208,11 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
     cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
+    cout<<" isLooseMuon "<<muon->isLooseMuon()<<endl;
+
+    CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
+    CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
+    CurrentMuon.set_isLooselMuon(muon->isLooseMuon());
 
 
 

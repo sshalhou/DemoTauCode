@@ -5,6 +5,9 @@ TupleMuon::TupleMuon()
 {
   Pt = NAN;
   LorentzVector p4(NAN,NAN,NAN,NAN);
+  bool isGlobalMuon = False;
+  bool isTightMuon = False;
+  bool isLooseMuon = False;
 }
 
 void TupleMuon::set_Pt(float Pt_)
@@ -20,6 +23,26 @@ void TupleMuon::set_p4(LorentzVector v4_)
 }
 
 
+void TupleMuon::set_isGlobalMuon(bool isGlobalMuon_)
+{
+  isGlobalMuon = isGlobalMuon_;
+
+}
+
+
+void TupleMuon::set_isTightMuon(bool isTightMuon_)
+{
+  isTightMuon = isTightMuon_;
+
+}
+
+void TupleMuon::set_isLooseMuon(bool isLooseMuon_)
+{
+  isLooseMuon = isLooseMuon_;
+
+}
+
+
 //////////////////
 
 float TupleMuon::get_Pt()
@@ -31,5 +54,25 @@ float TupleMuon::get_Pt()
 LorentzVector TupleMuon::get_p4()
 {
   return p4;
+
+}
+
+
+bool TupleMuon::get_isGlobalMuon()
+{
+  return isGlobalMuon;
+
+}
+
+
+bool TupleMuon::get_isTightMuon()
+{
+  return isTightMuon;
+
+}
+
+bool TupleMuon::get_isLooseMuon()
+{
+  return isLooseMuon;
 
 }

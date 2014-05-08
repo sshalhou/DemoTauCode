@@ -25,18 +25,30 @@ class TupleMuon
 public:
   TupleMuon();
   virtual ~TupleMuon(){}
+
+  // setters
+
   void set_Pt(float);
   void set_p4(LorentzVector);
+  void set_isGlobalMuon(bool);
+  void set_isTightMuon(bool);
+  void set_isLooseMuon(bool);
 
+  // getters
 
   float get_Pt();
   LorentzVector get_p4();
+  bool get_isGlobalMuon();
+  bool get_isTightMuon();
+  bool get_isLooseMuon();
 
 private:
 
   float Pt;
   LorentzVector p4;
-
+  bool isGlobalMuon;
+  bool isTightMuon;
+  bool isLooseMuon;
 
 };
 
