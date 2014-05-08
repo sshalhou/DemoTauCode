@@ -133,8 +133,8 @@ edm::View<reco::Vertex>::const_iterator vertex;
 for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
 {
 
-//  cout<<" vertex ndof = "<<vertex->ndof();
-  //cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
+ cout<<" vertex ndof = "<<vertex->ndof();
+ cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
 
 }
 
