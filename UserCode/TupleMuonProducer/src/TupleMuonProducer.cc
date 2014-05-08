@@ -172,7 +172,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
     cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
-    cout<<" final max pt "<<primary_vertex->p4().pt()<<endl;
+    
 
 
 
