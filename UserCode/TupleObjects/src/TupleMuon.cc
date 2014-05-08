@@ -13,7 +13,7 @@ void TupleMuon::set_Pt(float Pt_)
 
 }
 
-void TupleMuon::get_Pt()
+float TupleMuon::get_Pt()
 {
   return Pt;
 
