@@ -34,7 +34,7 @@ public:
   TupleMuon();
   virtual ~TupleMuon(){}
   void set_Pt(float);
-  float get_Pt( return Pt);
+  float get_Pt();
 
 private:
 
