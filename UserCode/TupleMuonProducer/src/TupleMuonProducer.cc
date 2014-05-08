@@ -141,6 +141,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
+    cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
+
 
 
     TupleMuons->push_back(CurrentMuon);
