@@ -122,7 +122,9 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
 
-  auto_ptr<vector<TupleMuon>> TupleMuons (new vector<TupleMuon>);
+  //auto_ptr<vector<TupleMuon>> TupleMuons (new vector<TupleMuon>);
+   auto_ptr<TupleMuonCollection> TupleMuons (new TupleMuonCollection);
+
   const int TupleMuonSize = muons->size();
   TupleMuons->reserve( TupleMuonSize );
 

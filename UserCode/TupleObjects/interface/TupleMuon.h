@@ -33,6 +33,6 @@ private:
   float Pt;
 };
 
-
+typedef std::vector<TupleMuon> TupleMuonCollection;
 
 #endif
