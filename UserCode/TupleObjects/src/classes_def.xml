@@ -1,3 +1,4 @@
 <lcgdict>
   <class name="TupleMuon"/>
+  <class name="edm::Wrapper<TupleMuon>"/>
 </lcgdict>
