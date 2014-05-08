@@ -8,6 +8,11 @@ TupleMuon::TupleMuon()
   isGlobalMuon = 0;
   isTightMuon = 0;
   isLooseMuon = 0;
+  sumChargedParticlePt = NAN;
+  sumPhotonEt = NAN;
+  sumNeutralHadronEt = NAN;
+  sumPUPt = NAN;
+  relativeIso = NAN;
 }
 
 void TupleMuon::set_Pt(float Pt_)
@@ -42,6 +47,35 @@ void TupleMuon::set_isLooseMuon(bool isLooseMuon_)
 
 }
 
+void TupleMuon::set_sumChargedParticlePt (double sumChargedParticlePt_)
+{
+  sumChargedParticlePt  = sumChargedParticlePt_;
+
+}
+
+void TupleMuon::set_sumPhotonEt (double sumPhotonEt_)
+{
+  sumPhotonEt = sumPhotonEt_;
+
+}
+
+void TupleMuon::set_sumNeutralHadronEt (double sumNeutralHadronEt_)
+{
+  sumNeutralHadronEt = sumNeutralHadronEt_;
+
+}
+
+void TupleMuon::set_sumPUPt (double sumPUPt_)
+{
+  sumPUPt = sumPUPt_;
+
+}
+
+void TupleMuon::set_relativeIso (double relativeIso_)
+{
+  relativeIso = relativeIso_;
+
+}
 
 //////////////////
 
@@ -74,5 +108,36 @@ bool TupleMuon::get_isTightMuon()
 bool TupleMuon::get_isLooseMuon()
 {
   return isLooseMuon;
+
+}
+
+
+double TupleMuon::get_sumChargedParticlePt()
+{
+  return sumChargedParticlePt;
+
+}
+
+double TupleMuon::get_sumPhotonEt()
+{
+  return sumPhotonEt;
+
+}
+
+double TupleMuon::get_sumNeutralHadronEt()
+{
+  return sumNeutralHadronEt;
+
+}
+
+double TupleMuon::get_sumPUPt()
+{
+  return sumPUPt;
+
+}
+
+double TupleMuon::get_relativeIso()
+{
+  return relativeIso;
 
 }

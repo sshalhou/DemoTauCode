@@ -33,6 +33,14 @@ public:
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
   void set_isLooseMuon(bool);
+  void set_sumChargedParticlePt(double);
+  void set_sumPhotonEt(double);
+  void set_sumNeutralHadronEt(double);
+  void set_sumPUPt(double);
+  void set_relativeIso(double);
+
+
+
 
   // getters
 
@@ -41,6 +49,13 @@ public:
   bool get_isGlobalMuon();
   bool get_isTightMuon();
   bool get_isLooseMuon();
+  double get_sumChargedParticlePt();
+  double get_sumPhotonEt();
+  double get_sumNeutralHadronEt();
+  double get_sumPUPt();
+  double get_relativeIso();
+
+
 
 private:
 
@@ -49,6 +64,11 @@ private:
   bool isGlobalMuon;
   bool isTightMuon;
   bool isLooseMuon;
+  double sumChargedParticlePt;
+  double sumPhotonEt;
+  double sumNeutralHadronEt;
+  double sumPUPt;
+  double relativeIso;
 
 };
 

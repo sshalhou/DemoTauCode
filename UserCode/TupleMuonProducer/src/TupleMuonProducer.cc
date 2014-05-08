@@ -214,6 +214,27 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
     CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
+/////////////
+// compute isolation parameters
+/////////////
+
+    double irel = 0;
+    double i_charged = muon->pfIsolationR04().sumChargedParticlePt;
+    double i_photons = muon->pfIsolationR04().sumPhotonEt;
+    double i_neutralhadrons = muon->pfIsolationR04().sumNeutralHadronEt;
+    double i_deltabeta = muon->pfIsolationR04().sumPUPt;
+
+    irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+
+    if(muon->pt()) irel/=muon->pt();
+    else irel = 0.0;
+/////////////
+
+    CurrentMuon.set_sumChargedParticlePt(i_charged);
+    CurrentMuon.set_sumPhotonEt(i_photons);
+    CurrentMuon.set_sumNeutralHadronEt(i_neutralhadrons);
+    CurrentMuon.set_sumPUPt(i_deltabeta);
+    CurrentMuon.set_relativeIso(irel);
 
 
     TupleMuons->push_back(CurrentMuon);
