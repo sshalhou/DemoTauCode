@@ -130,7 +130,20 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(vertexSrc_,vertices);
 
   edm::View<reco::Vertex>::const_iterator vertex;
+
+
+  /////////////////
+  // find max sum pt vertex
+  // passing quality cuts
+  // would really be best to do this
+  // at PAT level
+
+  edm::View<reco::Vertex> primary_vertex;
+  float max_sumPt = -999;
+
   cout<<" ---------- "<<endl;
+
+
   for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
   {
 
@@ -139,9 +152,15 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
       {
 
+        if( vertex->p4().pt() > max_sumPt)
+        {
+          max_sumPt  =     vertex->p4().pt();
+          primary_vertex =    vertex;
+          cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<" "<<primary_vertex->p4().pt()<<endl;
 
 
-        cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
+        }
+
 
 
 
@@ -150,7 +169,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       }
 
     }
-    
+
 
 
 
