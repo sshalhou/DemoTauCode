@@ -129,14 +129,36 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<reco::Vertex> > vertices;
   iEvent.getByLabel(vertexSrc_,vertices);
 
-edm::View<reco::Vertex>::const_iterator vertex;
-for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
-{
+  edm::View<reco::Vertex>::const_iterator vertex;
+  cout<<" ---------- "<<endl;
+  for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
+  {
 
- cout<<" vertex ndof = "<<vertex->ndof();
- cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
+    if(!vertex->isFake() && vertex->ndof() > 4.0)
+    {
+      if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
+      {
 
-}
+
+
+        cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
+
+
+
+
+
+      }
+
+    }
+    
+
+
+
+
+
+
+
+  }
 
 
 
@@ -145,7 +167,7 @@ for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
 
 
   //auto_ptr<vector<TupleMuon>> TupleMuons (new vector<TupleMuon>);
-   auto_ptr<TupleMuonCollection> TupleMuons (new TupleMuonCollection);
+  auto_ptr<TupleMuonCollection> TupleMuons (new TupleMuonCollection);
 
   const int TupleMuonSize = muons->size();
   TupleMuons->reserve( TupleMuonSize );
@@ -164,7 +186,7 @@ for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
-  //  cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
+    //  cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
 
 
 
@@ -173,7 +195,7 @@ for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
   }
 
 
-iEvent.put( TupleMuons, "TupleMuons" );
+  iEvent.put( TupleMuons, "TupleMuons" );
 
 
   /* This is an event example

@@ -105,6 +105,7 @@ process.VertexPresent = cms.EDFilter("VertexSelector",
 
 process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
 process.out.outputCommands +=['drop *_offlinePrimaryVerticesWithBS*_*_*']
+process.out.outputCommands +=['keep *_generalTracks_*_*']
 
 
 ###################################################
