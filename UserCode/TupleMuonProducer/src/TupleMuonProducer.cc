@@ -143,9 +143,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     TupleMuons->push_back(CurrentMuon);
-    delete CurrentMuon;
-
-
 
   }
 
