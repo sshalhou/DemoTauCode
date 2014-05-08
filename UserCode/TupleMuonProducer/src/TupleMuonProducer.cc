@@ -35,7 +35,7 @@ Implementation:
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
-
+#include "DataFormats/VertexReco/interface/Vertex.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -80,6 +80,7 @@ private:
 //
 TupleMuonProducer::TupleMuonProducer(const edm::ParameterSet& iConfig):
 muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
+vertexSrc_(iConfig.getUntrackedParameter<edm::InputTag>("vertexSrc" ))
 {
 
   produces<vector<TupleMuon>>("TupleMuons").setBranchAlias("TupleMuons");
@@ -122,6 +123,25 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
 
+  // get vertex collection
+  edm::Handle<edm::View<reco::Vertex> > vertices;
+  iEvent.getByLabel(vertexSrc_,vertices);
+
+edm::View<reco::Vertex>::const_iterator vertex;
+for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
+{
+
+  cout<<" vertex ndof = "<<vertex->ndof();
+  cout<<" vertex sumPt = "<<vertex->p4().pt()<<endl;
+
+}
+
+
+
+
+
+
+
   //auto_ptr<vector<TupleMuon>> TupleMuons (new vector<TupleMuon>);
    auto_ptr<TupleMuonCollection> TupleMuons (new TupleMuonCollection);
 
@@ -142,7 +162,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
-    cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
+  //  cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
 
 
 

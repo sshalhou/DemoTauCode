@@ -19,7 +19,10 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 
 
 #process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
-process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
+process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
+                muonSrc =cms.untracked.InputTag('selectedPatMuons'),
+                vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices')
+                                     )
 
 
 process.out = cms.OutputModule("PoolOutputModule",
