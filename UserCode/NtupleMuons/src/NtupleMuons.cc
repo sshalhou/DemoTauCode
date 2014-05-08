@@ -137,6 +137,8 @@ NtupleMuons::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   patmuonP4->reserve( muonP4size );
   isGlobal->reserve( muonP4size );
 
+  
+
 
   edm::View<pat::Muon>::const_iterator muon;
   for(muon=muons->begin(); muon!=muons->end(); ++muon)
