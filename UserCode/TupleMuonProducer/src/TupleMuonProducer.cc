@@ -131,7 +131,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(muon=muons->begin(); muon!=muons->end(); ++muon)
   {
 
-    TupleMuon CurrentMuon;
+  //  TupleMuon CurrentMuon;
 
     //CurrentMuon.set_Pt(muon->p4().pt());
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
