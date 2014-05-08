@@ -28,7 +28,7 @@ float TupleMuon::get_Pt()
 
 }
 
-float TupleMuon::get_p4()
+LorentzVector TupleMuon::get_p4()
 {
   return p4;
 

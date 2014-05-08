@@ -26,7 +26,7 @@ public:
   TupleMuon();
   virtual ~TupleMuon(){}
   void set_Pt(float);
-  voit set_p4(LorentzVector);
+  void set_p4(LorentzVector);
 
   float get_Pt();
   LorentzVector get_p4();
