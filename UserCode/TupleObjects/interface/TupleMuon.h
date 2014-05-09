@@ -29,16 +29,24 @@ public:
   // setters
 
   void set_p4(LorentzVector);
+
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
   void set_isLooseMuon(bool);
-  void set_sumChargedParticlePt(double);
-  void set_sumPhotonEt(double);
-  void set_sumNeutralHadronEt(double);
-  void set_sumPUPt(double);
-  void set_relativeIso(double);
 
+  // R = 0.4 isolation
+  void set_sumChargedParticlePt_DR4(double);
+  void set_sumPhotonEt_DR4(double);
+  void set_sumNeutralHadronEt_DR4(double);
+  void set_sumPUPt_DR4(double);
+  void set_relativeIso_DR4(double);
 
+  // R = 0.3 isolation
+  void set_sumChargedParticlePt_DR3(double);
+  void set_sumPhotonEt_DR3(double);
+  void set_sumNeutralHadronEt_DR3(double);
+  void set_sumPUPt_DR3(double);
+  void set_relativeIso_DR3(double);
 
 
   // getters
@@ -47,12 +55,16 @@ public:
   bool isGlobalMuon();
   bool isTightMuon();
   bool isLooseMuon();
-  double sumChargedParticlePt();
-  double sumPhotonEt();
-  double sumNeutralHadronEt();
-  double sumPUPt();
-  double relativeIso();
-
+  double sumChargedParticlePt_DR4();
+  double sumPhotonEt_DR4();
+  double sumNeutralHadronEt_DR4();
+  double sumPUPt_DR4();
+  double relativeIso_DR4();
+  double sumChargedParticlePt_DR3();
+  double sumPhotonEt_DR3();
+  double sumNeutralHadronEt_DR3();
+  double sumPUPt_DR3();
+  double relativeIso_DR3();
 
 
 private:
@@ -61,11 +73,16 @@ private:
   bool m_isGlobalMuon;
   bool m_isTightMuon;
   bool m_isLooseMuon;
-  double m_sumChargedParticlePt;
-  double m_sumPhotonEt;
-  double m_sumNeutralHadronEt;
-  double m_sumPUPt;
-  double m_relativeIso;
+  double m_sumChargedParticlePt_DR4;
+  double m_sumPhotonEt_DR4;
+  double m_sumNeutralHadronEt_DR4;
+  double m_sumPUPt_DR4;
+  double m_relativeIso_DR4;
+  double m_sumChargedParticlePt_DR3;
+  double m_sumPhotonEt_DR3;
+  double m_sumNeutralHadronEt_DR3;
+  double m_sumPUPt_DR3;
+  double m_relativeIso_DR3;
 
 };
 
