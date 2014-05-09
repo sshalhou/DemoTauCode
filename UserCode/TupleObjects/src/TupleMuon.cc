@@ -3,7 +3,7 @@
 
 TupleMuon::TupleMuon()
 {
-  m_LorentzVector p4(NAN,NAN,NAN,NAN);
+  m_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_isGlobalMuon = 0;
   m_isTightMuon = 0;
   m_isLooseMuon = 0;
