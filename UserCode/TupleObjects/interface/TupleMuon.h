@@ -58,15 +58,15 @@ public:
 
 private:
 
-  LorentzVector p4;
-  bool isGlobalMuon;
-  bool isTightMuon;
-  bool isLooseMuon;
-  double sumChargedParticlePt;
-  double sumPhotonEt;
-  double sumNeutralHadronEt;
-  double sumPUPt;
-  double relativeIso;
+  LorentzVector m_p4;
+  bool m_isGlobalMuon;
+  bool m_isTightMuon;
+  bool m_isLooseMuon;
+  double m_sumChargedParticlePt;
+  double m_sumPhotonEt;
+  double m_sumNeutralHadronEt;
+  double m_sumPUPt;
+  double m_relativeIso;
 
 };
 
