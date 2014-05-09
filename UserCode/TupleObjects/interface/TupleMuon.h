@@ -28,7 +28,6 @@ public:
 
   // setters
 
-  void set_Pt(float);
   void set_p4(LorentzVector);
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
