@@ -3,7 +3,6 @@
 
 TupleMuon::TupleMuon()
 {
-  Pt = NAN;
   LorentzVector p4(NAN,NAN,NAN,NAN);
   isGlobalMuon = 0;
   isTightMuon = 0;
@@ -15,11 +14,7 @@ TupleMuon::TupleMuon()
   relativeIso = NAN;
 }
 
-void TupleMuon::set_Pt(float Pt_)
-{
-  Pt = Pt_;
 
-}
 
 void TupleMuon::set_p4(LorentzVector v4_)
 {
@@ -79,64 +74,59 @@ void TupleMuon::set_relativeIso (double relativeIso_)
 
 //////////////////
 
-float TupleMuon::get_Pt()
-{
-  return Pt;
 
-}
-
-LorentzVector TupleMuon::get_p4()
+LorentzVector TupleMuon::p4()
 {
   return p4;
 
 }
 
 
-bool TupleMuon::get_isGlobalMuon()
+bool TupleMuon::isGlobalMuon()
 {
   return isGlobalMuon;
 
 }
 
 
-bool TupleMuon::get_isTightMuon()
+bool TupleMuon::isTightMuon()
 {
   return isTightMuon;
 
 }
 
-bool TupleMuon::get_isLooseMuon()
+bool TupleMuon::isLooseMuon()
 {
   return isLooseMuon;
 
 }
 
 
-double TupleMuon::get_sumChargedParticlePt()
+double TupleMuon::sumChargedParticlePt()
 {
   return sumChargedParticlePt;
 
 }
 
-double TupleMuon::get_sumPhotonEt()
+double TupleMuon::sumPhotonEt()
 {
   return sumPhotonEt;
 
 }
 
-double TupleMuon::get_sumNeutralHadronEt()
+double TupleMuon::sumNeutralHadronEt()
 {
   return sumNeutralHadronEt;
 
 }
 
-double TupleMuon::get_sumPUPt()
+double TupleMuon::sumPUPt()
 {
   return sumPUPt;
 
 }
 
-double TupleMuon::get_relativeIso()
+double TupleMuon::relativeIso()
 {
   return relativeIso;
 

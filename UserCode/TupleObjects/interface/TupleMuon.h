@@ -44,22 +44,20 @@ public:
 
   // getters
 
-  float get_Pt();
-  LorentzVector get_p4();
-  bool get_isGlobalMuon();
-  bool get_isTightMuon();
-  bool get_isLooseMuon();
-  double get_sumChargedParticlePt();
-  double get_sumPhotonEt();
-  double get_sumNeutralHadronEt();
-  double get_sumPUPt();
-  double get_relativeIso();
+  LorentzVector p4();
+  bool isGlobalMuon();
+  bool isTightMuon();
+  bool isLooseMuon();
+  double sumChargedParticlePt();
+  double sumPhotonEt();
+  double sumNeutralHadronEt();
+  double sumPUPt();
+  double relativeIso();
 
 
 
 private:
 
-  float Pt;
   LorentzVector p4;
   bool isGlobalMuon;
   bool isTightMuon;
