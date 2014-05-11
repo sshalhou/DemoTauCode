@@ -202,12 +202,16 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     CurrentMuon.set_p4(muon->p4());
+//    CurrentMuon.set_pfp4(muon->pfp4());
+
 
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
     cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
     cout<<" isLooseMuon "<<muon->isLooseMuon()<<endl;
-    cout<<" charge "<<muon->charge()<<endl;  
+    cout<<" charge "<<muon->charge()<<endl;
+    cout<<" pfpt "<<muon->pfp4().pt()<<endl;
+
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
     CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
