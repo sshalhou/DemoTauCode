@@ -29,7 +29,7 @@ public:
   // setters
 
   void set_p4(LorentzVector);
-  void set_pfP4(LorentzVector);
+  void set_pfp4(LorentzVector);
 
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
