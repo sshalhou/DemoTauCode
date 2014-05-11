@@ -29,10 +29,14 @@ public:
   // setters
 
   void set_p4(LorentzVector);
+  void set_pfP4(LorentzVector);
 
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
   void set_isLooseMuon(bool);
+
+
+
 
   // R = 0.4 isolation
   void set_sumChargedParticlePt_DR4(double);
@@ -52,6 +56,7 @@ public:
   // getters
 
   LorentzVector p4();
+  LorentzVector pfp4();
   bool isGlobalMuon();
   bool isTightMuon();
   bool isLooseMuon();
@@ -70,6 +75,8 @@ public:
 private:
 
   LorentzVector m_p4;
+  LorentzVector m_pfp4;
+
   bool m_isGlobalMuon;
   bool m_isTightMuon;
   bool m_isLooseMuon;
