@@ -4,6 +4,7 @@
 TupleMuon::TupleMuon()
 {
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_pfp4.SetXYZT(NAN,NAN,NAN,NAN);
   m_isGlobalMuon = 0;
   m_isTightMuon = 0;
   m_isLooseMuon = 0;
@@ -24,6 +25,12 @@ TupleMuon::TupleMuon()
 void TupleMuon::set_p4(LorentzVector v4_)
 {
   m_p4 = v4_;
+
+}
+
+void TupleMuon::set_pfp4(LorentzVector v4_)
+{
+  m_pfp4 = v4_;
 
 }
 
@@ -115,6 +122,12 @@ void TupleMuon::set_relativeIso_DR3 (double relativeIso_)
 LorentzVector TupleMuon::p4()
 {
   return m_p4;
+
+}
+
+LorentzVector TupleMuon::pfp4()
+{
+  return m_pfp4;
 
 }
 
