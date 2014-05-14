@@ -4,4 +4,5 @@
 <use name="DataFormats/PatCandidates"/>
 <use name="UserCode/TupleObjects"/>
 <use name="rootrflx"/>
+<use   name="root"/>
 <flags EDM_PLUGIN="1"/>
