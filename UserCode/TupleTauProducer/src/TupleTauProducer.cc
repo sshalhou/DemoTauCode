@@ -154,20 +154,22 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 //  }
 
 
-  std::vector<const TupleMuon*> TupleMuonPtrs;
-  TupleMuonPtrs.reserve(muons->size());
+//  std::vector<const TupleMuon*> TupleMuonPtrs;
+//  TupleMuonPtrs.reserve(muons->size());
 
 
   for (unsigned int i = 0; i < muons->size(); ++i)
   {
-    TupleMuonPtrs.push_back( &( (*muons)[i] ) );
+    //TupleMuonPtrs.push_back( &( (*muons)[i] ) );
+
+    cout<<(*muons)[i]->pdgId()<<endl;
   }
 
 
-   for (unsigned int i = 0; i < TupleMuonPtrs.size(); ++i)
-    {
-      delete TupleMuonPtrs[i];
-    }
+  // for (unsigned int i = 0; i < TupleMuonPtrs.size(); ++i)
+    //{
+      //delete TupleMuonPtrs[i];
+    //}
 
   ////////////
 
