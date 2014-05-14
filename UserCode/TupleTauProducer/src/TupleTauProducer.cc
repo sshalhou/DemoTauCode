@@ -132,20 +132,26 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Tau> > taus;
   iEvent.getByLabel(tauSrc_,taus);
 
+
+
+////////////
+
   // get tuple muon collection
 
-    edm::Handle<TupleMuonCollection> muon;
-    iEvent.getByLabel(muonSrc_, muon);
-    for (size_t i = 0; i < muon.size(); ++i) {
 
-      cout<<" muon x "<< muon->normalizedChi2()<<endl;
+  edm::Handle<TupleMuonCollection> muon;
+  evt.getByLabel(src_, muon);
 
-    }
-
+  std::vector<const TupleMuon*> muonPtrs;
+  muonPtrs.reserve(TupleMuon->size());
 
 
 
-  ////////////
+////////////
+
+
+
+
 
 
 
