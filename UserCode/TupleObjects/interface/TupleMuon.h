@@ -34,7 +34,7 @@ public:
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
   void set_isLooseMuon(bool);
-  void set_pfIsolationValid(bool);
+  void set_isPFIsolationValid(bool);
   void set_charge(int);
   void set_pdgId(int);
 
@@ -73,7 +73,7 @@ public:
   double sumNeutralHadronEt_DR3();
   double sumPUPt_DR3();
   double relativeIso_DR3();
-  bool   pfIsolationValid();
+  bool   isPFIsolationValid();
   int    charge();
   int    pdgId();
 
@@ -95,7 +95,7 @@ private:
   double m_sumNeutralHadronEt_DR3;
   double m_sumPUPt_DR3;
   double m_relativeIso_DR3;
-  bool   m_pfIsolationValid;
+  bool   m_isPFIsolationValid;
   int    m_charge;
   int    m_pdgId;
 
