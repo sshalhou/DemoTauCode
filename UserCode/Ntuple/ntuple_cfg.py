@@ -28,7 +28,7 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus'),
                 #muonSrc =cms.untracked.InputTag('TupleMuons')
 #                muonSrc=cms.SecSource('TupleMuons')
-               muonSrc=cms.InputTag('TupleMuons',"",'Ntuple')
+               muonSrc=cms.InputTag('TupleMuons',"TupleMuons",'TupleMuons')
                                      )
 
 
