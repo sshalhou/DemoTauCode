@@ -90,7 +90,7 @@ tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
 {
 
-  produces<vector<TupleTau>>("TupleTaus").setBranchAlias("TupleTaus");
+  produces< vector<TupleTau> >("TupleTaus").setBranchAlias("TupleTaus");
 
 
 
