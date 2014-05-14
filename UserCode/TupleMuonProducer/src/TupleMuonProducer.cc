@@ -246,6 +246,19 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
 
+    // store additional parameters related to track/vertex & tight ID
+
+    CurrentMuon.set_normalizedChi2(muon->globalTrack()->normalizedChi2());
+    CurrentMuon.set_numberOfValidMuonHits(muon->globalTrack()->hitPattern().numberOfValidMuonHits());
+    CurrentMuon.set_numberOfMatchedStations(muon->numberOfMatchedStations());
+    CurrentMuon.set_numberOfValidPixelHits(muon->innerTrack()->hitPattern().numberOfValidPixelHits());
+    CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
+    CurrentMuon.set_dB(muon->dB());
+    CurrentMuon.set_dz(muon->muonBestTrack()->dz());
+    CurrentMuon.set_dxy(muon->muonBestTrack()->dxy());
+
+
+
 
 
 
