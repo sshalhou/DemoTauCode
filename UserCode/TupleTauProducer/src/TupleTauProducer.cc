@@ -135,7 +135,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get tuple muon collection
 
     edm::Handle<TupleMuonCollection> muon;
-    evt.getByLabel(muonSrc_, muon);
+    iEvent.getByLabel(muonSrc_, muon);
     for (size_t i = 0; i < muon.size(); ++i) {
 
       cout<<" muon x "<< muon->normalizedChi2()<<endl;
