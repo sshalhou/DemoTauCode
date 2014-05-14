@@ -9,6 +9,7 @@
 // needed by ntuple Taus producer
 #include <vector>
 #include <iostream>
+#include "FWCore/Framework/interface/Event.h"
 //#include "DataFormats/PatCandidates/interface/Tau.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
