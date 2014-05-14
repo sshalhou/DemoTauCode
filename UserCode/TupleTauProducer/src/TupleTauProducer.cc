@@ -139,9 +139,8 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::View<TupleMuonCollection>::const_iterator muon;
   for(muon=tupleMuon->begin(); muon!=tupleMuon->end(); ++muon)
   {
-    cout<<" tuple muon : "<<muon->m_p4.pt()<<endl;
-    cout<<" tuple muon : "<<muon->p4().pt()<<endl;
-    cout<<" tuple muon : "<<muon->p4.pt()<<endl;
+
+    cout<<" muon x "<< muon->normalizedChi2()<<endl;
 
   }
   ////////////
