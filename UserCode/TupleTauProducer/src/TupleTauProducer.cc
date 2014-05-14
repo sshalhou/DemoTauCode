@@ -122,8 +122,6 @@ void
 TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
-  // decay modes enum
-  TauDecayModes TauDecayModes_;
 
 
   // get tau collection
@@ -150,7 +148,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentTau.set_decayMode(tau->decayMode());
 
 
-    cout<<"TauDecayModes_.tauToThreeProngNPiZero = "<<TauDecayModes_.tauToThreeProngNPiZero <<endl;
+    cout<<"tauToThreeProngNPiZero = "<<tauToThreeProngNPiZero <<endl;
 
 
   ////////////
