@@ -21,7 +21,6 @@ TupleMuon::TupleMuon()
   m_isPFIsolationValid = 0;
   m_charge = -999;
   m_pdgId = -999;
-  m_PFRefIsAvailable = 0;
 }
 
 
@@ -138,11 +137,7 @@ void TupleMuon::set_pdgId (int pdgId_)
   m_pdgId = pdgId_;
 }
 
-void TupleMuon::set_PFRefIsAvailable(bool PFRefIsAvailable_)
-{
-  m_PFRefIsAvailable = PFRefIsAvailable_;
 
-}
 
 //////////////////
 
@@ -257,10 +252,4 @@ int TupleMuon::charge()
 int TupleMuon::pdgId()
 {
   return m_pdgId;
-}
-
-void TupleMuon::PFRefIsAvailable()
-{
-  return PFRefIsAvailable;
-
 }

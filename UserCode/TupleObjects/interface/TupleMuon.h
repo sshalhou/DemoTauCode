@@ -37,7 +37,6 @@ public:
   void set_isPFIsolationValid(bool);
   void set_charge(int);
   void set_pdgId(int);
-  void set_m_PFRefIsAvailable(bool);
 
 
 
@@ -76,7 +75,6 @@ public:
   bool   isPFIsolationValid();
   int    charge();
   int    pdgId();
-  bool   PFRefIsAvailable();
 
 
 private:
@@ -99,7 +97,6 @@ private:
   bool   m_isPFIsolationValid;
   int    m_charge;
   int    m_pdgId;
-  bool   m_PFRefIsAvailable;
 
 };
 

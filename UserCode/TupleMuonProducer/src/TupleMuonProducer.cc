@@ -208,7 +208,36 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     cout<<" charge "<<muon->charge()<<endl;
     cout<<" pfP4.pt "<<muon->pfP4().pt()<<endl;
 
+    /////
 
+    cout<<" normalizedChi2 "<<muon->globalTrack().normalizedChi2()<<endl;
+
+
+    cout<<" number valid hits "<<muon->hitPattern().numberOfValidMuonHits()<<endl;
+
+    cout<<" number matched stations "<<muon->numberOfMatchedStations()<<endl;
+
+    cout<<" number valid pixel hits "<<muon->innerTrack().hitPattern().numberOfValidPixelHits()<<endl;
+
+    cout<<" tracker layer with measurement "<<muon->track().hitPattern().trackerLayersWithMeasurement()<<endl;
+
+    cout<<" 1st d0 "<<muon->d0()<<endl;
+    cout<<" selected d0 "<<muon->d0(primary_vertex)<<endl;
+
+    cout<<" 1st dB "<<muon->dB()<<endl;
+
+    cout<<" selected dB "<<muon->dB(primary_vertex)<<endl;
+
+    std::cout<<" 1st dz = "<<muon->muonBestTrack()->dz()<<std::endl;
+    std::cout<<" selected dz = "<<muon->muonBestTrack()->dz(primary_vertex)<<std::endl;
+
+    std::cout<<"1st  dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
+    std::cout<<"selected dxy = "<<(muon->muonBestTrack()->dxy(primary_vertex))<<std::endl;
+
+
+
+
+    /////
     // set 4-vectors, in our case p4 == pfP4
     // since we use PF2PAT aka PFBRECO
 
@@ -233,9 +262,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
 
-    // store PFRefIsAvailable boolean
 
-    CurrentMuon.set_PFRefIsAvailable(muon->muonRef().isAvailable());
 
 
 
