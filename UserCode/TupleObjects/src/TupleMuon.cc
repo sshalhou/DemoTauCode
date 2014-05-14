@@ -125,12 +125,12 @@ void TupleMuon::set_pfIsolationValid (bool pfIsolationValid_)
   m_pfIsolationValid = pfIsolationValid_;
 }
 
-void TupleMuon::set_charge (bool charge_)
+void TupleMuon::set_charge (int charge_)
 {
   m_charge = charge_;
 }
 
-void TupleMuon::set_pdgID (bool pdgID_)
+void TupleMuon::set_pdgID (int pdgID_)
 {
   m_pdgID = pdgID_;
 }
