@@ -286,9 +286,9 @@ int TupleMuon::pdgId()
 }
 
 double TupleMuon::normalizedChi2(){ return m_normalizedChi2; }
-int TupleMuon::numberOfValidMuonHits(){ return m_numberOfValidMuonHits = numberOfValidMuonHits_; }
-int TupleMuon::numberOfMatchedStations(){ return m_numberOfMatchedStations = numberOfMatchedStations_;}
-int TupleMuon::numberOfValidPixelHits(){ return m_numberOfValidPixelHits = numberOfValidPixelHits_;}
+int TupleMuon::numberOfValidMuonHits(){ return m_numberOfValidMuonHits; }
+int TupleMuon::numberOfMatchedStations(){ return m_numberOfMatchedStations;}
+int TupleMuon::numberOfValidPixelHits(){ return m_numberOfValidPixelHits;}
 int TupleMuon::trackerLayersWithMeasurement(){ return m_trackerLayersWithMeasurement;}
 double TupleMuon::dB(){ return m_dB;}
 double TupleMuon::dz(){ return m_dz;}
