@@ -37,11 +37,11 @@ public:
 
   // getters
 
-  LorentzVector p4();
-  LorentzVector corrected_p4();
-  int pdgId();
-  int charge();
-  int decayMode();
+  LorentzVector p4() const;
+  LorentzVector corrected_p4() const;
+  int pdgId() const;
+  int charge() const;
+  int decayMode() const;
 
 private:
 

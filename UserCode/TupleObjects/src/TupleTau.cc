@@ -12,7 +12,7 @@ TupleTau::TupleTau()
 }
 
 void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
-LorentzVector TupleTau::p4() { return m_p4; }
+LorentzVector TupleTau::p4() const  { return m_p4; }
 
 
 void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
@@ -26,10 +26,10 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
   // #TauES_and_decay_mode_scale_facto
 
 // one prong, 1 pi0
-if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.));
+if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt() const -45.,0.),10.));
 
 // 3 prong, 0 to N pi0
-if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.));
+if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt() const -32.,0.),18.));
 
 
 
@@ -41,14 +41,14 @@ if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::ma
 
 
 
-LorentzVector TupleTau::corrected_p4() { return m_corrected_p4; }
+LorentzVector TupleTau::corrected_p4() const  { return m_corrected_p4; }
 
 
 void TupleTau::set_pdgId(int pdgId_) { m_pdgId = pdgId_;}
-int TupleTau::pdgId() { return m_pdgId; }
+int TupleTau::pdgId() const  { return m_pdgId; }
 
 void TupleTau::set_charge(int charge_) { m_charge = charge_;}
-int TupleTau::charge() { return m_charge; }
+int TupleTau::charge() const  { return m_charge; }
 
 void TupleTau::set_decayMode(int decayMode_) { m_decayMode = decayMode_;}
-int TupleTau::decayMode() { return m_decayMode; }
+int TupleTau::decayMode() const  { return m_decayMode; }

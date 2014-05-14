@@ -173,64 +173,64 @@ void TupleMuon::set_pdgId (int pdgId_)
 //////////////////
 
 
-LorentzVector TupleMuon::p4()
+LorentzVector TupleMuon::p4() const
 {
   return m_p4;
 
 }
 
-LorentzVector TupleMuon::pfP4()
+LorentzVector TupleMuon::pfP4() const
 {
   return m_pfP4;
 
 }
 
 
-bool TupleMuon::isGlobalMuon()
+bool TupleMuon::isGlobalMuon() const
 {
   return m_isGlobalMuon;
 
 }
 
 
-bool TupleMuon::isTightMuon()
+bool TupleMuon::isTightMuon() const
 {
   return m_isTightMuon;
 
 }
 
-bool TupleMuon::isLooseMuon()
+bool TupleMuon::isLooseMuon() const
 {
   return m_isLooseMuon;
 
 }
 
 
-double TupleMuon::sumChargedParticlePt_DR4()
+double TupleMuon::sumChargedParticlePt_DR4() const
 {
   return m_sumChargedParticlePt_DR4;
 
 }
 
-double TupleMuon::sumPhotonEt_DR4()
+double TupleMuon::sumPhotonEt_DR4() const
 {
   return m_sumPhotonEt_DR4;
 
 }
 
-double TupleMuon::sumNeutralHadronEt_DR4()
+double TupleMuon::sumNeutralHadronEt_DR4() const
 {
   return m_sumNeutralHadronEt_DR4;
 
 }
 
-double TupleMuon::sumPUPt_DR4()
+double TupleMuon::sumPUPt_DR4() const
 {
   return m_sumPUPt_DR4;
 
 }
 
-double TupleMuon::relativeIso_DR4()
+double TupleMuon::relativeIso_DR4() const
 {
   return m_relativeIso_DR4;
 
@@ -239,43 +239,43 @@ double TupleMuon::relativeIso_DR4()
 
 
 
-double TupleMuon::sumChargedParticlePt_DR3()
+double TupleMuon::sumChargedParticlePt_DR3() const
 {
   return m_sumChargedParticlePt_DR3;
 
 }
 
-double TupleMuon::sumPhotonEt_DR3()
+double TupleMuon::sumPhotonEt_DR3() const
 {
   return m_sumPhotonEt_DR3;
 
 }
 
-double TupleMuon::sumNeutralHadronEt_DR3()
+double TupleMuon::sumNeutralHadronEt_DR3() const
 {
   return m_sumNeutralHadronEt_DR3;
 
 }
 
-double TupleMuon::sumPUPt_DR3()
+double TupleMuon::sumPUPt_DR3() const
 {
   return m_sumPUPt_DR3;
 
 }
 
-double TupleMuon::relativeIso_DR3()
+double TupleMuon::relativeIso_DR3() const
 {
   return m_relativeIso_DR3;
 
 }
 
 
-bool TupleMuon::isPFIsolationValid()
+bool TupleMuon::isPFIsolationValid() const
 {
   return m_isPFIsolationValid;
 }
 
-int TupleMuon::charge()
+int TupleMuon::charge() const
 {
   return m_charge;
 }
@@ -285,11 +285,11 @@ int TupleMuon::pdgId() const
   return m_pdgId;
 }
 
-double TupleMuon::normalizedChi2(){ return m_normalizedChi2; }
-int TupleMuon::numberOfValidMuonHits(){ return m_numberOfValidMuonHits; }
-int TupleMuon::numberOfMatchedStations(){ return m_numberOfMatchedStations;}
-int TupleMuon::numberOfValidPixelHits(){ return m_numberOfValidPixelHits;}
-int TupleMuon::trackerLayersWithMeasurement(){ return m_trackerLayersWithMeasurement;}
-double TupleMuon::dB(){ return m_dB;}
-double TupleMuon::dz(){ return m_dz;}
-double TupleMuon::dxy(){ return m_dxy;}
+double TupleMuon::normalizedChi2() const { return m_normalizedChi2; }
+int TupleMuon::numberOfValidMuonHits() const { return m_numberOfValidMuonHits; }
+int TupleMuon::numberOfMatchedStations() const { return m_numberOfMatchedStations;}
+int TupleMuon::numberOfValidPixelHits() const { return m_numberOfValidPixelHits;}
+int TupleMuon::trackerLayersWithMeasurement() const { return m_trackerLayersWithMeasurement;}
+double TupleMuon::dB() const { return m_dB;}
+double TupleMuon::dz() const { return m_dz;}
+double TupleMuon::dxy() const { return m_dxy;}

@@ -66,32 +66,32 @@ public:
 
   // getters
 
-  LorentzVector p4();
-  LorentzVector pfP4();
-  bool isGlobalMuon();
-  bool isTightMuon();
-  bool isLooseMuon();
-  double sumChargedParticlePt_DR4();
-  double sumPhotonEt_DR4();
-  double sumNeutralHadronEt_DR4();
-  double sumPUPt_DR4();
-  double relativeIso_DR4();
-  double sumChargedParticlePt_DR3();
-  double sumPhotonEt_DR3();
-  double sumNeutralHadronEt_DR3();
-  double sumPUPt_DR3();
-  double relativeIso_DR3();
-  bool   isPFIsolationValid();
-  int    charge();
+  LorentzVector p4() const;
+  LorentzVector pfP4() const;
+  bool isGlobalMuon() const;
+  bool isTightMuon() const;
+  bool isLooseMuon() const;
+  double sumChargedParticlePt_DR4() const;
+  double sumPhotonEt_DR4() const;
+  double sumNeutralHadronEt_DR4() const;
+  double sumPUPt_DR4() const;
+  double relativeIso_DR4() const;
+  double sumChargedParticlePt_DR3() const;
+  double sumPhotonEt_DR3() const;
+  double sumNeutralHadronEt_DR3() const;
+  double sumPUPt_DR3() const;
+  double relativeIso_DR3() const;
+  bool   isPFIsolationValid() const;
+  int    charge() const;
   int    pdgId() const;
-  double normalizedChi2();
-  int    numberOfValidMuonHits();
-  int    numberOfMatchedStations();
-  int    numberOfValidPixelHits();
-  int    trackerLayersWithMeasurement();
-  double dB(); // aka d0
-  double dz();
-  double dxy();
+  double normalizedChi2() const;
+  int    numberOfValidMuonHits() const;
+  int    numberOfMatchedStations() const;
+  int    numberOfValidPixelHits() const;
+  int    trackerLayersWithMeasurement() const;
+  double dB() const; // aka d0
+  double dz() const;
+  double dxy() const;
 
 
 private:

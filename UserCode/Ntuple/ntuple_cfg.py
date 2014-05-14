@@ -26,7 +26,7 @@ process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
 
 process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus'),
-                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple')
+                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple') # needed for TupleMuon access example
                                      )
 
 
