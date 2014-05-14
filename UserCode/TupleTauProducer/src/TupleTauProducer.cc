@@ -133,7 +133,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(tauSrc_,taus);
 
   // get muon collection
-  edm::Handle<edm::View<TupleMuon> > tupleMuon;
+  edm::Handle<edm::View<TupleMuonCollection> > tupleMuon;
   iEvent.getByLabel(muonSrc_,tupleMuon);
 
   edm::View<TupleMuon>::const_iterator muon;
