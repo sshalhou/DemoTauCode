@@ -132,7 +132,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   TupleTaus->reserve( TupleTauSize );
 
 
-  edm::View<pat::Tau>::const_iterator Tau;
+  edm::View<pat::Tau>::const_iterator tau;
   for(tau=taus->begin(); tau!=taus->end(); ++tau)
   {
 
