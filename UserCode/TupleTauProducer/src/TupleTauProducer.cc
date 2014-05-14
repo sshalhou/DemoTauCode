@@ -128,17 +128,17 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   auto_ptr<TupleTauCollection> TupleTaus (new TupleTauCollection);
 
-  const int TupleTauSize = Taus->size();
+  const int TupleTauSize = taus->size();
   TupleTaus->reserve( TupleTauSize );
 
 
   edm::View<pat::Tau>::const_iterator Tau;
-  for(Tau=Taus->begin(); Tau!=Taus->end(); ++Tau)
+  for(tau=taus->begin(); tau!=taus->end(); ++tau)
   {
 
     TupleTau CurrentTau;
 
-    CurrentTau.set_p4(Tau->p4());
+    CurrentTau.set_p4(tau->p4());
 
 
 
