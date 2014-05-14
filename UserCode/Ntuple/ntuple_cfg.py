@@ -26,10 +26,13 @@ process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
 
 process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus'),
-                muonSrc =cms.untracked.InputTag('TupleMuons'),
+                #muonSrc =cms.untracked.InputTag('TupleMuons')
+                muonSrc=cms.InputTag(“TupleMuons”)
 
                                      )
 
+
+#process.TrackTrackPoints = cms.EDProducer('TrackAndPointsProducer' ,src =cms.InputTag('generalTracks') )
 
 
 process.out = cms.OutputModule("PoolOutputModule",
