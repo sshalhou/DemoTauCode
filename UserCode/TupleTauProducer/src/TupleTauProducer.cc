@@ -154,7 +154,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 //  }
 
 
-  std::vector<const TupleMuon*> TupleMuonPtrs;
+  std::vector<TupleMuon*> TupleMuonPtrs;
   TupleMuonPtrs.reserve(muons->size());
 
 
