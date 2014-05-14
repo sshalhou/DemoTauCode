@@ -41,7 +41,7 @@ public:
 
 private:
 
-  LorentzVector m_p4;
+  LorentzVector p4;
 
 
 
