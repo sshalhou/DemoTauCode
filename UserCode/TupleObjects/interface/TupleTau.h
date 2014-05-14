@@ -30,7 +30,7 @@ public:
   // setters
 
   void set_p4(LorentzVector);
-  void set_corrected_p4(LorentzVector);
+  void set_corrected_p4(LorentzVector, int);
   void set_pdgId(int);
   void set_charge(int);
   void set_decayMode(int);
