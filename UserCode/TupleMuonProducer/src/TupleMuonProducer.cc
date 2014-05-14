@@ -230,7 +230,12 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_charge(muon->charge());
 
     // store the pdgId (if !MC stores NAN)
+
     if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
+
+    // store PFRefIsAvailable boolean
+
+    CurrentMuon.set_PFRefIsAvailable(muon->muonRef().isAvailable());
 
 
 
