@@ -36,17 +36,20 @@ TupleMuon::TupleMuon()
 
 
 
-void TupleMuon::set_normalizedChi2(normalizedChi2_){ m_normalizedChi2 = normalizedChi2_;}
-void TupleMuon::set_numberOfValidMuonHits(numberOfValidMuonHits_){ m_numberOfValidMuonHits = numberOfValidMuonHits_;}
-void TupleMuon::set_numberOfMatchedStations(numberOfMatchedStations_){ m_numberOfMatchedStations = numberOfMatchedStations_;}
-void TupleMuon::set_numberOfValidPixelHits(numberOfValidPixelHits_){ m_numberOfValidPixelHits = numberOfValidPixelHits_;}
-void TupleMuon::set_trackerLayersWithMeasurement(trackerLayersWithMeasurement_)
+void TupleMuon::set_normalizedChi2(double normalizedChi2_){ m_normalizedChi2 = normalizedChi2_;}
+void TupleMuon::set_numberOfValidMuonHits(int numberOfValidMuonHits_){ m_numberOfValidMuonHits = numberOfValidMuonHits_;}
+void TupleMuon::set_numberOfMatchedStations(int numberOfMatchedStations_)
+{
+   m_numberOfMatchedStations = numberOfMatchedStations_;
+ }
+void TupleMuon::set_numberOfValidPixelHits(int numberOfValidPixelHits_){ m_numberOfValidPixelHits = numberOfValidPixelHits_;}
+void TupleMuon::set_trackerLayersWithMeasurement(int trackerLayersWithMeasurement_)
 {
    m_trackerLayersWithMeasurement = trackerLayersWithMeasurement_;
 }
-void TupleMuon::set_dB(dB_){ m_dB = dB_;}
-void TupleMuon::set_dz(dz_){ m_dz = dz_;}
-void TupleMuon::set_dxy(dxy_){ m_dxy = dxy_;}
+void TupleMuon::set_dB(double dB_){ m_dB = dB_;}
+void TupleMuon::set_dz(double dz_){ m_dz = dz_;}
+void TupleMuon::set_dxy(double dxy_){ m_dxy = dxy_;}
 
 
 
