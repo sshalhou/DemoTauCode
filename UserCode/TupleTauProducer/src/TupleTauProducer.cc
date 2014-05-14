@@ -145,44 +145,33 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   cout<<" size "<<muons->size()<<endl;
 
-  edm::Handle<TupleMuonCollection>::const_iterator muon;
-  for(muon=muons->begin(); muon!=muons->end(); ++muon)
-  {
-
-    cout<<" a "<<endl;
-//    cout<<" pdgID "<<muon->pdgId()<<endl;
-  }
-
-//edm::View< TupleMuon >::const_iterator muon;
-
-
-
-
-//for(muon=muons->begin(); muon!=muons->end(); ++muon)
-//{
-
-//cout<<" A";
- //cout<<"pdgID "<<muon->pdgId()<<endl;
-
-//}
-
-
-//  for(unsigned int x=0;x<muons->size();++x) cout<<muons[x]->pdgId()<<endl;
-
-
-//  edm::Handle<TupleMuonCollection> muons;
-//  iEvent.getByLabel(muonSrc_, muons);
-
-//  std::vector<const TupleMuon*> muonPtrs;
-//  muonPtrs.reserve(muons->size());
-
-//  for (size_t i = 0; i < muons->size(); ++i)
+//  edm::Handle<TupleMuonCollection>::const_iterator muon;
+//  for(muon=muons->begin(); muon!=muons->end(); ++muon)
 //  {
 
-//     cout<<"muon x "<<(*muons)[i].pdgId()<<endl;
-    //muonPtrs.push_back( &( (*muons)[i] ) );
+  //  cout<<" a "<<endl;
+//    cout<<" pdgID "<<muon->pdgId()<<endl;
 //  }
 
+  // Get the final states to analyze
+  edm::Handle<TupleMuonCollection> muons;
+  evt.getByLabel(muonSrc_, muons);
+
+  std::vector<const TupleMuon*> TupleMuonPtrs;
+  TupleMuonPtrs.reserve(muons->size());
+
+  unsigned int size_t = 0;
+
+  for (size_t i = 0; i < muons->size(); ++i)
+  {
+    TupleMuonPtrs.push_back( &( (*muons)[i] ) );
+  }
+
+
+   for (size_t i = 0; i < TupleMuonPtrs.size(); ++i)
+    {
+      delete TupleMuonPtrs[i];
+    }
 
   ////////////
 
