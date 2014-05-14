@@ -26,10 +26,10 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
   // #TauES_and_decay_mode_scale_facto
 
 // one prong, 1 pi0
-if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.);
+if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.));
 
 // 3 prong, 0 to N pi0
-if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.);
+if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.));
 
 
 
