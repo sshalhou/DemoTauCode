@@ -9,7 +9,7 @@
 // needed by ntuple Taus producer
 #include <vector>
 #include <iostream>
-#include "DataFormats/PatCandidates/interface/Tau.h"
+//#include "DataFormats/PatCandidates/interface/Tau.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
