@@ -38,7 +38,14 @@ public:
   void set_charge(int);
   void set_pdgId(int);
 
-
+  void set_normalizedChi2(double);
+  void set_numberOfValidMuonHits(int);
+  void set_numberOfMatchedStations(int);
+  void set_numberOfValidPixelHits(int);
+  void set_trackerLayersWithMeasurement(int);
+  void set_dB(double); // aka d0
+  void set_dz(double);
+  void set_dxy(double);
 
   // R = 0.4 isolation
   void set_sumChargedParticlePt_DR4(double);
@@ -75,15 +82,23 @@ public:
   bool   isPFIsolationValid();
   int    charge();
   int    pdgId();
+  double normalizedChi2();
+  int    numberOfValidMuonHits();
+  int    numberOfMatchedStations();
+  int    numberOfValidPixelHits();
+  int    trackerLayersWithMeasurement();
+  double dB(); // aka d0
+  double dz();
+  double dxy();
 
 
 private:
 
   LorentzVector m_p4;
   LorentzVector m_pfP4;
-  bool m_isGlobalMuon;
-  bool m_isTightMuon;
-  bool m_isLooseMuon;
+  bool   m_isGlobalMuon;
+  bool   m_isTightMuon;
+  bool   m_isLooseMuon;
   double m_sumChargedParticlePt_DR4;
   double m_sumPhotonEt_DR4;
   double m_sumNeutralHadronEt_DR4;
@@ -97,6 +112,17 @@ private:
   bool   m_isPFIsolationValid;
   int    m_charge;
   int    m_pdgId;
+  double m_normalizedChi2;
+  int    m_numberOfValidMuonHits;
+  int    m_numberOfMatchedStations;
+  int    m_numberOfValidPixelHits;
+  int    m_trackerLayersWithMeasurement;
+  double m_dB; // aka d0
+  double m_dz;
+  double m_dxy;
+
+
+
 
 };
 

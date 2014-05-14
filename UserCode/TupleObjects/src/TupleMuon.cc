@@ -21,7 +21,35 @@ TupleMuon::TupleMuon()
   m_isPFIsolationValid = 0;
   m_charge = -999;
   m_pdgId = -999;
+  m_normalizedChi2 = NAN;
+  m_numberOfValidMuonHits = -999;
+  m_numberOfMatchedStations = -999;
+  m_numberOfValidPixelHits = -999;
+  m_trackerLayersWithMeasurement = -999;
+  m_dB = NAN; // aka d0
+  m_dz = NAN;
+  m_dxy = NAN;
 }
+
+
+
+
+
+
+void TupleMuon::set_normalizedChi2(normalizedChi2_){ m_normalizedChi2 = normalizedChi2_;}
+void TupleMuon::set_numberOfValidMuonHits(numberOfValidMuonHits_){ m_numberOfValidMuonHits = numberOfValidMuonHits_;}
+void TupleMuon::set_numberOfMatchedStations(numberOfMatchedStations_){ m_numberOfMatchedStations = numberOfMatchedStations_;}
+void TupleMuon::set_numberOfValidPixelHits(numberOfValidPixelHits_){ m_numberOfValidPixelHits = numberOfValidPixelHits_;}
+void TupleMuon::set_trackerLayersWithMeasurement(trackerLayersWithMeasurement_)
+{
+   m_trackerLayersWithMeasurement = trackerLayersWithMeasurement_;
+}
+void TupleMuon::set_dB(dB_){ m_dB = dB_;}
+void TupleMuon::set_dz(dz_){ m_dz = dz_;}
+void TupleMuon::set_dxy(dxy_){ m_dxy = dxy_;}
+
+
+
 
 
 
@@ -253,3 +281,12 @@ int TupleMuon::pdgId()
 {
   return m_pdgId;
 }
+
+double TupleMuon::normalizedChi2(){ return m_normalizedChi2; }
+int TupleMuon::numberOfValidMuonHits(){ return m_numberOfValidMuonHits = numberOfValidMuonHits_; }
+int TupleMuon::numberOfMatchedStations(){ return m_numberOfMatchedStations = numberOfMatchedStations_;}
+int TupleMuon::numberOfValidPixelHits(){ return m_numberOfValidPixelHits = numberOfValidPixelHits_;}
+int TupleMuon::trackerLayersWithMeasurement(){ return m_trackerLayersWithMeasurement;}
+double TupleMuon::dB(){ return m_dB;}
+double TupleMuon::dz(){ return m_dz;}
+double TupleMuon::dxy(){ return m_dxy;}

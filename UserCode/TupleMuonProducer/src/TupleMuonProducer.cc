@@ -211,30 +211,13 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     /////
 
     cout<<" normalizedChi2 "<<muon->globalTrack()->normalizedChi2()<<endl;
-
-
-
-
     cout<<" number valid hits "<<muon->globalTrack()->hitPattern().numberOfValidMuonHits()<<endl;
-
     cout<<" number matched stations "<<muon->numberOfMatchedStations()<<endl;
-
-
-
-
     cout<<" number valid pixel hits "<<muon->innerTrack()->hitPattern().numberOfValidPixelHits()<<endl;
-
     cout<<" tracker layer with measurement "<<muon->track()->hitPattern().trackerLayersWithMeasurement()<<endl;
-
-
-
-    cout<<" 1st dB "<<muon->dB()<<endl;
-
-
-    std::cout<<" 1st dz = "<<muon->muonBestTrack()->dz()<<std::endl;
-
-    std::cout<<"1st  dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
-
+    cout<<" dB "<<muon->dB()<<endl;
+    std::cout<<" dz = "<<muon->muonBestTrack()->dz()<<std::endl;
+    std::cout<<"dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
 
 
 
