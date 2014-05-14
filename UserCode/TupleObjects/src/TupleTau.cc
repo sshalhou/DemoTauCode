@@ -3,7 +3,7 @@
 
 TupleTau::TupleTau()
 {
-  p4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_p4.SetXYZT(NAN,NAN,NAN,NAN);
 
 }
 
@@ -19,6 +19,6 @@ TupleTau::TupleTau()
 
 
 
-void TupleTau::set_p4(LorentzVector v4_) { p4 = v4_;}
+void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 
-LorentzVector TupleTau::p4() { return p4; }
+LorentzVector TupleTau::p4() { return m_p4; }
