@@ -215,7 +215,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-    cout<<" number valid hits "<<muon->globalTrack()->hitPattern()->numberOfValidMuonHits()<<endl;
+    cout<<" number valid hits "<<muon->globalTrack()->hitPattern().numberOfValidMuonHits()<<endl;
 
     cout<<" number matched stations "<<muon->numberOfMatchedStations()<<endl;
 
@@ -230,13 +230,10 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     cout<<" 1st dB "<<muon->dB()<<endl;
 
-    cout<<" selected dB "<<muon->dB(primary_vertex)<<endl;
 
     std::cout<<" 1st dz = "<<muon->muonBestTrack()->dz()<<std::endl;
-    std::cout<<" selected dz = "<<muon->muonBestTrack()->dz(primary_vertex)<<std::endl;
 
     std::cout<<"1st  dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
-    std::cout<<"selected dxy = "<<(muon->muonBestTrack()->dxy(primary_vertex))<<std::endl;
 
 
 
