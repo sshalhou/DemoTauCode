@@ -24,6 +24,11 @@ process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
                 vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices')
                                      )
 
+process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
+                muonSrc =cms.untracked.InputTag('selectedPatTaus')
+                                     )
+
+
 
 process.out = cms.OutputModule("PoolOutputModule",
 fileName = cms.untracked.string('NtupleFile.root'),
@@ -39,6 +44,6 @@ outputCommands = cms.untracked.vstring('drop *')
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
-process.p = cms.Path(process.myProducerLabel+process.TupleMuons)
+process.p = cms.Path(process.myProducerLabel+process.TupleMuons+process.TupleTaus)
 
 process.e = cms.EndPath(process.out)

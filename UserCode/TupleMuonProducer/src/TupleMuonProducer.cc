@@ -141,7 +141,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   int primary_vertex_indx = -999;
   float max_sumPt = -999;
 
-  cout<<" ---------- "<<endl;
+  //cout<<" ---------- "<<endl;
 
 
   for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
@@ -200,7 +200,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     TupleMuon CurrentMuon;
 
-
+/*
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
     cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
@@ -218,7 +218,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     cout<<" dB "<<muon->dB()<<endl;
     std::cout<<" dz = "<<muon->muonBestTrack()->dz()<<std::endl;
     std::cout<<"dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
-
+*/
 
 
     /////
