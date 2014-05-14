@@ -139,20 +139,23 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // the following block shows
   // how to get the output of one
   // producer into another
-  // not all accessors (pdgId below)
+  // note all accessors (for ex. pdgId() below)
   // must be const
+  /////////////////////
+
   // get tuple muon collection
 
 
   edm::Handle< TupleMuonCollection > muons;
   iEvent.getByLabel(muonSrc_, muons);
 
-  cout<<" size "<<muons->size()<<endl;
 
 
   for (unsigned int i = 0; i < muons->size(); ++i)
   {
     cout<<((*muons)[i]).pdgId()<<endl;
+    cout<<((muons)[i])->pdgId()<<endl;
+
   }
 
   ////////////
