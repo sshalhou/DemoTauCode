@@ -162,7 +162,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
     //TupleMuonPtrs.push_back( &( (*muons)[i] ) );
 
-    cout<<(*muons)[i].pdgId()<<endl;
+    cout<<&((*muons)[i]).pdgId()<<endl;
   }
 
 
