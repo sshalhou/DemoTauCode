@@ -9,8 +9,9 @@
 // needed by ntuple muons producer
 #include <vector>
 #include <iostream>
-#include "DataFormats/PatCandidates/interface/Muon.h"
-#include "DataFormats/MuonReco/interface/MuonSelectors.h"
+#include "FWCore/Framework/interface/Event.h"
+//#include "DataFormats/PatCandidates/interface/Muon.h"
+//#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
