@@ -86,7 +86,8 @@ private:
 // constructors and destructor
 //
 TupleTauProducer::TupleTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" ))
+tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
 {
 
   produces<vector<TupleTau>>("TupleTaus").setBranchAlias("TupleTaus");
