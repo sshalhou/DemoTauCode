@@ -134,7 +134,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-////////////
+  ////////////
 
   // get tuple muon collection
 
@@ -145,9 +145,15 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   std::vector<const TupleMuon*> muonPtrs;
   muonPtrs.reserve(muons->size());
 
+  for (size_t i = 0; i < muons->size(); ++i)
+  {
+
+     cout<<"muon x "<<muons[i]->pdgId()<<endl;
+    //muonPtrs.push_back( &( (*muons)[i] ) );
+  }
 
 
-////////////
+  ////////////
 
 
 
@@ -176,79 +182,79 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-  ////////////
-  // store the Tau
+    ////////////
+    // store the Tau
 
-  TupleTaus->push_back(CurrentTau);
+    TupleTaus->push_back(CurrentTau);
+
+  }
+
+
+  iEvent.put( TupleTaus, "TupleTaus" );
+
+  /* This is an event example
+  //Read 'ExampleData' from the Event
+  Handle<ExampleData> pIn;
+  iEvent.getByLabel("example",pIn);
+
+  //Use the ExampleData to create an ExampleData2 which
+  // is put into the Event
+  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+  iEvent.put(pOut);
+  */
+
+  /* this is an EventSetup example
+  //Read SetupData from the SetupRecord in the EventSetup
+  ESHandle<SetupData> pSetup;
+  iSetup.get<SetupRecord>().get(pSetup);
+  */
 
 }
 
+// ------------ method called once each job just before starting event loop  ------------
+void
+TupleTauProducer::beginJob()
+{
+}
 
-iEvent.put( TupleTaus, "TupleTaus" );
+// ------------ method called once each job just after ending the event loop  ------------
+void
+TupleTauProducer::endJob() {
+}
 
-    /* This is an event example
-    //Read 'ExampleData' from the Event
-    Handle<ExampleData> pIn;
-    iEvent.getByLabel("example",pIn);
+// ------------ method called when starting to processes a run  ------------
+void
+TupleTauProducer::beginRun(edm::Run&, edm::EventSetup const&)
+{
+}
 
-    //Use the ExampleData to create an ExampleData2 which
-    // is put into the Event
-    std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-    iEvent.put(pOut);
-    */
+// ------------ method called when ending the processing of a run  ------------
+void
+TupleTauProducer::endRun(edm::Run&, edm::EventSetup const&)
+{
+}
 
-    /* this is an EventSetup example
-    //Read SetupData from the SetupRecord in the EventSetup
-    ESHandle<SetupData> pSetup;
-    iSetup.get<SetupRecord>().get(pSetup);
-    */
+// ------------ method called when starting to processes a luminosity block  ------------
+void
+TupleTauProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
+{
+}
 
-  }
+// ------------ method called when ending the processing of a luminosity block  ------------
+void
+TupleTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
+{
+}
 
-  // ------------ method called once each job just before starting event loop  ------------
-  void
-  TupleTauProducer::beginJob()
-  {
-  }
+// ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
+void
+TupleTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+  //The following says we do not know what parameters are allowed so do no validation
+  // Please change this to state exactly what you do use, even if it is no parameters
+  edm::ParameterSetDescription desc;
+  desc.setUnknown();
+  descriptions.addDefault(desc);
+}
 
-  // ------------ method called once each job just after ending the event loop  ------------
-  void
-  TupleTauProducer::endJob() {
-  }
-
-  // ------------ method called when starting to processes a run  ------------
-  void
-  TupleTauProducer::beginRun(edm::Run&, edm::EventSetup const&)
-  {
-  }
-
-  // ------------ method called when ending the processing of a run  ------------
-  void
-  TupleTauProducer::endRun(edm::Run&, edm::EventSetup const&)
-  {
-  }
-
-  // ------------ method called when starting to processes a luminosity block  ------------
-  void
-  TupleTauProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
-  {
-  }
-
-  // ------------ method called when ending the processing of a luminosity block  ------------
-  void
-  TupleTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
-  {
-  }
-
-  // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
-  void
-  TupleTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
-    //The following says we do not know what parameters are allowed so do no validation
-    // Please change this to state exactly what you do use, even if it is no parameters
-    edm::ParameterSetDescription desc;
-    desc.setUnknown();
-    descriptions.addDefault(desc);
-  }
-
-  //define this as a plug-in
-  DEFINE_FWK_MODULE(TupleTauProducer);
+//define this as a plug-in
+DEFINE_FWK_MODULE(TupleTauProducer);
