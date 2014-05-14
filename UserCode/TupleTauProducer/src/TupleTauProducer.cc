@@ -153,9 +153,6 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 //    cout<<" pdgID "<<muon->pdgId()<<endl;
 //  }
 
-  // Get the final states to analyze
-  edm::Handle<TupleMuonCollection> muons;
-  evt.getByLabel(muonSrc_, muons);
 
   std::vector<const TupleMuon*> TupleMuonPtrs;
   TupleMuonPtrs.reserve(muons->size());
