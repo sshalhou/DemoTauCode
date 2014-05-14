@@ -157,15 +157,14 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   std::vector<const TupleMuon*> TupleMuonPtrs;
   TupleMuonPtrs.reserve(muons->size());
 
-  unsigned int size_t = 0;
 
-  for (size_t i = 0; i < muons->size(); ++i)
+  for (unsigned int i = 0; i < muons->size(); ++i)
   {
     TupleMuonPtrs.push_back( &( (*muons)[i] ) );
   }
 
 
-   for (size_t i = 0; i < TupleMuonPtrs.size(); ++i)
+   for (unsigned int i = 0; i < TupleMuonPtrs.size(); ++i)
     {
       delete TupleMuonPtrs[i];
     }
