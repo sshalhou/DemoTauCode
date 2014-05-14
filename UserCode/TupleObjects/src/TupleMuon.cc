@@ -19,8 +19,8 @@ TupleMuon::TupleMuon()
   m_sumPUPt_DR3 = NAN;
   m_relativeIso_DR3 = NAN;
   m_isPFIsolationValid = 0;
-  m_charge = NAN;
-  m_pdgId = NAN;
+  m_charge = -999;
+  m_pdgId = -999;
 }
 
 

@@ -223,7 +223,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // store the pf isolation valid boolean
 
-    CurrentMuon.set_pfIsolationValid(muon->pfIsolationValid());
+    CurrentMuon.set_isPFIsolationValid(muon->isPFIsolationValid());
 
     // store the charge
 
