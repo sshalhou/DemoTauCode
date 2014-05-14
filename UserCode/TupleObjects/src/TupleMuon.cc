@@ -4,7 +4,7 @@
 TupleMuon::TupleMuon()
 {
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
-  m_pfp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_pfP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_isGlobalMuon = 0;
   m_isTightMuon = 0;
   m_isLooseMuon = 0;
@@ -18,6 +18,9 @@ TupleMuon::TupleMuon()
   m_sumNeutralHadronEt_DR3 = NAN;
   m_sumPUPt_DR3 = NAN;
   m_relativeIso_DR3 = NAN;
+  m_pfIsolationValid = 0;
+  m_charge = NAN;
+  m_pdgID = NAN;
 }
 
 
@@ -28,9 +31,9 @@ void TupleMuon::set_p4(LorentzVector v4_)
 
 }
 
-void TupleMuon::set_pfp4(LorentzVector v4_)
+void TupleMuon::set_pfP4(LorentzVector v4_)
 {
-  m_pfp4 = v4_;
+  m_pfP4 = v4_;
 
 }
 
@@ -116,6 +119,22 @@ void TupleMuon::set_relativeIso_DR3 (double relativeIso_)
 
 }
 
+
+void TupleMuon::set_pfIsolationValid (bool pfIsolationValid_)
+{
+  m_pfIsolationValid = pfIsolationValid_;
+}
+
+void TupleMuon::set_charge (bool charge_)
+{
+  m_charge = charge_;
+}
+
+void TupleMuon::set_pdgID (bool pdgID_)
+{
+  m_pdgID = pdgID_;
+}
+
 //////////////////
 
 
@@ -125,9 +144,9 @@ LorentzVector TupleMuon::p4()
 
 }
 
-LorentzVector TupleMuon::pfp4()
+LorentzVector TupleMuon::pfP4()
 {
-  return m_pfp4;
+  return m_pfP4;
 
 }
 
@@ -213,4 +232,20 @@ double TupleMuon::relativeIso_DR3()
 {
   return m_relativeIso_DR3;
 
+}
+
+
+bool TupleMuon::pfIsolationValid()
+{
+  return m_pfIsolationValid;
+}
+
+int TupleMuon::charge()
+{
+  return m_charge;
+}
+
+int TupleMuon::pdgID()
+{
+  return m_pdgID;
 }

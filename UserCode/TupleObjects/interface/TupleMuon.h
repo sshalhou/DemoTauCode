@@ -29,11 +29,14 @@ public:
   // setters
 
   void set_p4(LorentzVector);
-  void set_pfp4(LorentzVector);
+  void set_pfP4(LorentzVector);
 
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
   void set_isLooseMuon(bool);
+  void set_pfIsolationValid(bool);
+  void set_charge(int);
+  void set_pdgID(int);
 
 
 
@@ -56,7 +59,7 @@ public:
   // getters
 
   LorentzVector p4();
-  LorentzVector pfp4();
+  LorentzVector pfP4();
   bool isGlobalMuon();
   bool isTightMuon();
   bool isLooseMuon();
@@ -70,13 +73,15 @@ public:
   double sumNeutralHadronEt_DR3();
   double sumPUPt_DR3();
   double relativeIso_DR3();
+  bool   pfIsolationValid();
+  int    charge();
+  int    pdgID();
 
 
 private:
 
   LorentzVector m_p4;
-  LorentzVector m_pfp4;
-
+  LorentzVector m_pfP4;
   bool m_isGlobalMuon;
   bool m_isTightMuon;
   bool m_isLooseMuon;
@@ -90,6 +95,9 @@ private:
   double m_sumNeutralHadronEt_DR3;
   double m_sumPUPt_DR3;
   double m_relativeIso_DR3;
+  bool   m_pfIsolationValid;
+  int    m_charge;
+  int    m_pdgID;
 
 };
 

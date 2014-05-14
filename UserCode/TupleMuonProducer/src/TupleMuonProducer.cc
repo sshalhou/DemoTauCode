@@ -201,10 +201,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     TupleMuon CurrentMuon;
 
 
-    CurrentMuon.set_p4(muon->p4());
-//    CurrentMuon.set_pfp4(muon->pfp4());
-
-
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
     cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
@@ -213,33 +209,30 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     cout<<" pfP4.pt "<<muon->pfP4().pt()<<endl;
 
 
+    // set 4-vectors, in our case p4 == pfP4
+    // since we use PF2PAT aka PFBRECO
+
+    CurrentMuon.set_p4(muon->p4());
+    CurrentMuon.set_pfP4(muon->pfP4());
+
+    // store selection summary booleans
+
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
     CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
     CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
-    /////////////
-    // compute
-    // and store
-    // isolation parameters
-    // @ DR 4
-    /////////////
+    // store the pf isolation valid boolean
 
-    double irel_DR4 = 0;
-    double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
-    double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
-    double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
-    double i_deltabeta_DR4 = muon->pfIsolationR04().sumPUPt;
+    CurrentMuon.set_pfIsolationValid(muon->pfIsolationValid());
 
-    irel_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
+    // store the charge
 
-    if(muon->pt()) irel_DR4/=muon->pt();
-    else irel_DR4 = 0.0;
+    CurrentMuon.set_charge(muon->charge());
 
-    CurrentMuon.set_sumChargedParticlePt_DR4(i_charged_DR4);
-    CurrentMuon.set_sumPhotonEt_DR4(i_photons_DR4);
-    CurrentMuon.set_sumNeutralHadronEt_DR4(i_neutralhadrons_DR4);
-    CurrentMuon.set_sumPUPt_DR4(i_deltabeta_DR4);
-    CurrentMuon.set_relativeIso_DR4(irel_DR4);
+    // store the pdgID (if !MC stores NAN)
+    if(!iEvent.isRealData()) CurrentMuon.set_pdgID(muon->pdgID());
+
+
 
     /////////////
     // compute
@@ -264,6 +257,31 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_sumNeutralHadronEt_DR3(i_neutralhadrons_DR3);
     CurrentMuon.set_sumPUPt_DR3(i_deltabeta_DR3);
     CurrentMuon.set_relativeIso_DR3(irel_DR3);
+
+
+    /////////////
+    // compute
+    // and store
+    // isolation parameters
+    // @ DR 4
+    /////////////
+
+    double irel_DR4 = 0;
+    double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
+    double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
+    double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
+    double i_deltabeta_DR4 = muon->pfIsolationR04().sumPUPt;
+
+    irel_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
+
+    if(muon->pt()) irel_DR4/=muon->pt();
+    else irel_DR4 = 0.0;
+
+    CurrentMuon.set_sumChargedParticlePt_DR4(i_charged_DR4);
+    CurrentMuon.set_sumPhotonEt_DR4(i_photons_DR4);
+    CurrentMuon.set_sumNeutralHadronEt_DR4(i_neutralhadrons_DR4);
+    CurrentMuon.set_sumPUPt_DR4(i_deltabeta_DR4);
+    CurrentMuon.set_relativeIso_DR4(irel_DR4);
 
 
     ////////////
