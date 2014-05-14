@@ -39,7 +39,7 @@ public:
 
   LorentzVector p4();
   LorentzVector corrected_p4();
-  int pdgID();
+  int pdgId();
   int charge();
   int decayMode();
 
@@ -47,7 +47,7 @@ private:
 
   LorentzVector m_p4;
   LorentzVector m_corrected_p4;
-  int m_pdgID;
+  int m_pdgId;
   int m_charge;
   int m_decayMode;
 
