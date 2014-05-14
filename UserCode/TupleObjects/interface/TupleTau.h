@@ -51,7 +51,6 @@ private:
   int m_charge;
   int m_decayMode;
 
-
 };
 
 typedef std::vector<TupleTau> TupleTauCollection;
