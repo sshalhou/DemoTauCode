@@ -83,7 +83,7 @@ public:
   double relativeIso_DR3();
   bool   isPFIsolationValid();
   int    charge();
-  const int    pdgId();
+  int    pdgId() const;
   double normalizedChi2();
   int    numberOfValidMuonHits();
   int    numberOfMatchedStations();
