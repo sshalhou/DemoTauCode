@@ -133,14 +133,15 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(tauSrc_,taus);
 
   // get muon collection
-  edm::Handle<edm::View<vector<TupleMuon>> > tupleMuon;
+  edm::Handle<edm::View<TupleMuonCollection> > tupleMuon;
   iEvent.getByLabel(muonSrc_,tupleMuon);
 
-  edm::View<vector<TupleMuon>>::const_iterator muon;
+  edm::View<TupleMuonCollection>::const_iterator muon;
   for(muon=tupleMuon->begin(); muon!=tupleMuon->end(); ++muon)
   {
     cout<<" tuple muon : "<<muon->m_p4.pt()<<endl;
-//    cout<<" tuple muon : "<<muon->p4().pt()<<endl;
+    cout<<" tuple muon : "<<muon->p4().pt()<<endl;
+    cout<<" tuple muon : "<<muon->p4.pt()<<endl;
 
   }
   ////////////
