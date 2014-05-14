@@ -139,7 +139,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get tuple muon collection
 
 
-  edm::Handle< TupleMuonCollection > muons;
+  edm::Handle< vector<TupleMuon> > muons;
   iEvent.getByLabel(muonSrc_, muons);
 
   cout<<" size "<<muons->size()<<endl;
