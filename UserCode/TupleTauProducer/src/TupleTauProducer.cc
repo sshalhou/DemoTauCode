@@ -139,6 +139,12 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     TupleTau CurrentTau;
 
     CurrentTau.set_p4(tau->p4());
+    CurrentTau.set_corrected_p4(tau->p4());
+    CurrentTau.set_pdgID(tau->pdgID());
+    CurrentTau.set_charge(tau->charge());
+    CurrentTau.set_decayMode(tau->decayMode());
+
+
 
 
 
