@@ -46,6 +46,6 @@ outputCommands = cms.untracked.vstring('drop *')
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
-process.p = cms.Path(process.myProducerLabel+process.TupleMuons+process.TupleTaus)
+process.p = cms.Path(process.myProducerLabel+process.TupleMuons*process.TupleTaus)
 
 process.e = cms.EndPath(process.out)
