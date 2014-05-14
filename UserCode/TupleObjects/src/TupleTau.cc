@@ -20,10 +20,10 @@ LorentzVector TupleTau::corrected_p4() { return m_corrected_p4; }
 
 
 void TupleTau::set_pdgId(int pdgId_) { m_pdgId = pdgId_;}
-int TupleTau::() { return m_pdgId; }
+int TupleTau::pdgId() { return m_pdgId; }
 
 void TupleTau::set_charge(int charge_) { m_charge = charge_;}
-int TupleTau::() { return m_charge; }
+int TupleTau::charge() { return m_charge; }
 
 void TupleTau::set_decayMode(int decayMode_) { m_decayMode = decayMode_;}
-int TupleTau::() { return m_decayMode; }
+int TupleTau::decayMode() { return m_decayMode; }
