@@ -36,7 +36,7 @@ public:
   void set_isLooseMuon(bool);
   void set_pfIsolationValid(bool);
   void set_charge(int);
-  void set_pdgID(int);
+  void set_pdgId(int);
 
 
 
@@ -75,7 +75,7 @@ public:
   double relativeIso_DR3();
   bool   pfIsolationValid();
   int    charge();
-  int    pdgID();
+  int    pdgId();
 
 
 private:
@@ -97,7 +97,7 @@ private:
   double m_relativeIso_DR3;
   bool   m_pfIsolationValid;
   int    m_charge;
-  int    m_pdgID;
+  int    m_pdgId;
 
 };
 

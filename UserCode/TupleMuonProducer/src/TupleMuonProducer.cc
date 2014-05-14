@@ -229,8 +229,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_charge(muon->charge());
 
-    // store the pdgID (if !MC stores NAN)
-    if(!iEvent.isRealData()) CurrentMuon.set_pdgID(muon->pdgID());
+    // store the pdgId (if !MC stores NAN)
+    if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
 
 
 

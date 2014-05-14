@@ -18,9 +18,9 @@ TupleMuon::TupleMuon()
   m_sumNeutralHadronEt_DR3 = NAN;
   m_sumPUPt_DR3 = NAN;
   m_relativeIso_DR3 = NAN;
-  m_pfIsolationValid = 0;
+  m_isPFIsolationValid = 0;
   m_charge = NAN;
-  m_pdgID = NAN;
+  m_pdgId = NAN;
 }
 
 
@@ -120,9 +120,9 @@ void TupleMuon::set_relativeIso_DR3 (double relativeIso_)
 }
 
 
-void TupleMuon::set_pfIsolationValid (bool pfIsolationValid_)
+void TupleMuon::set_isPFIsolationValid (bool isPFIsolationValid_)
 {
-  m_pfIsolationValid = pfIsolationValid_;
+  m_isPFIsolationValid = isPFIsolationValid_;
 }
 
 void TupleMuon::set_charge (int charge_)
@@ -130,9 +130,9 @@ void TupleMuon::set_charge (int charge_)
   m_charge = charge_;
 }
 
-void TupleMuon::set_pdgID (int pdgID_)
+void TupleMuon::set_pdgId (int pdgId_)
 {
-  m_pdgID = pdgID_;
+  m_pdgId = pdgId_;
 }
 
 //////////////////
@@ -235,9 +235,9 @@ double TupleMuon::relativeIso_DR3()
 }
 
 
-bool TupleMuon::pfIsolationValid()
+bool TupleMuon::isPFIsolationValid()
 {
-  return m_pfIsolationValid;
+  return m_isPFIsolationValid;
 }
 
 int TupleMuon::charge()
@@ -245,7 +245,7 @@ int TupleMuon::charge()
   return m_charge;
 }
 
-int TupleMuon::pdgID()
+int TupleMuon::pdgId()
 {
-  return m_pdgID;
+  return m_pdgId;
 }
