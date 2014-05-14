@@ -280,7 +280,7 @@ int TupleMuon::charge()
   return m_charge;
 }
 
-int TupleMuon::pdgId()
+const int TupleMuon::pdgId()
 {
   return m_pdgId;
 }
