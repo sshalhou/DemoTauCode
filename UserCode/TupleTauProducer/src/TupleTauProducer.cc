@@ -38,6 +38,8 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleTauProducer/interface/TupleTauProducer.h"
 
+#include "UserCode/TupleObjects/interface/TupleMuon.h"
+
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
@@ -66,6 +68,8 @@ private:
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
+  edm::InputTag muonSrc_;
+
 
 };
 
@@ -127,6 +131,18 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get tau collection
   edm::Handle<edm::View<pat::Tau> > taus;
   iEvent.getByLabel(tauSrc_,taus);
+
+  // get muon collection
+  edm::Handle<edm::View<vector<TupleMuon>> > tupleMuon;
+  iEvent.getByLabel(muonSrc_,tupleMuon);
+
+  edm::View<vector<TupleMuon>>::const_iterator muon;
+  for(muon=tupleMuon->begin(); muon!=tupleMuon->end(); ++muon)
+  {
+    cout<<" tuple muon : "<<muon->p4().pt()<<endl;
+  }
+  ////////////
+
 
 
   auto_ptr<TupleTauCollection> TupleTaus (new TupleTauCollection);
