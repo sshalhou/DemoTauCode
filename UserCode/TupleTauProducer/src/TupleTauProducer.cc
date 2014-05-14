@@ -145,6 +145,8 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   cout<<" size "<<muons->size()<<endl;
 
+  for(int x=0;x<muons->size();++x) cout<<muons[x]->pdgId()<<endl;
+
 
 //  edm::Handle<TupleMuonCollection> muons;
 //  iEvent.getByLabel(muonSrc_, muons);
