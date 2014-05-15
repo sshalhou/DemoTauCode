@@ -197,11 +197,11 @@ std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<std::endl;
 
 covMET = (*mvamet)[0].getSignificanceMatrix();
 NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
-//algo.addLogM(false);
-//algo.integrateMarkovChain();
+algo.addLogM(false);
+algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-//cout<<" diTauMass "<<algo.getMass();
+cout<<" diTauMass "<<algo.getMass();
 //cout<<" diTauMassErr "<<algo.getMassUncert();
 //cout<<" diTauPt "<<algo.getPt();
 //cout<<" diTauPtErr "<<algo.getPtUncert();
