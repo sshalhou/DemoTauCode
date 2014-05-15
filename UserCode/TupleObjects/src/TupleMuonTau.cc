@@ -10,7 +10,7 @@ TupleMuonTau::TupleMuonTau()
   m_scalarSumPt = NAN;
   m_DR = NAN;
   m_sumCharge = -999;
-
+  m_correctedSVFitMass = NAN;
 
 }
 
@@ -34,3 +34,6 @@ double TupleMuonTau::scalarSumPt() const  { return m_scalarSumPt; }
 
 void TupleMuonTau::set_DR(LorentzVector A_, LorentzVector B_) { m_DR = deltaR(A_, B_);}
 double TupleMuonTau::DR() const  { return m_DR; }
+
+void TupleMuonTau::set_correctedSVFitMass(double correctedSVFitMass_) { m_correctedSVFitMass = correctedSVFitMass_;}
+double TupleMuonTau::correctedSVFitMass() const  { return m_correctedSVFitMass; }

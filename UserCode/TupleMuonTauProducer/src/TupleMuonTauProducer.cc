@@ -185,29 +185,44 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       ////////////
 
-TMatrixD covMET(2, 2); // PFMET significance matrix
-std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
-measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()));
-measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
+      TMatrixD covMET(2, 2); // PFMET significance matrix
+      std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
 
-std::cout<<(*mvamet)[0].getSignificanceMatrix()(0,0)<<" ";
-std::cout<<(*mvamet)[0].getSignificanceMatrix()(0,1)<<std::endl;
-std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
-std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<std::endl;
+      ///////
+      // it seems the order matters
+      // pass the higher pt lepton 1st
 
-covMET = (*mvamet)[0].getSignificanceMatrix();
-NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
-algo.addLogM(false);
-algo.integrateMarkovChain();
-//algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+      if( ((*muons)[i]).p4().pt() >=  ((*taus)[j]).corrected_p4().pt()  )
+      {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+         ((*taus)[j]).corrected_p4()));
+      }
 
-cout<<" diTauMass "<<algo.getMass();
-//cout<<" diTauMassErr "<<algo.getMassUncert();
-//cout<<" diTauPt "<<algo.getPt();
-//cout<<" diTauPtErr "<<algo.getPtUncert();
+      else
+      {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+         ((*taus)[j]).corrected_p4()));
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
 
 
-measuredTauLeptons.clear();
+      }
+
+
+      covMET = (*mvamet)[0].getSignificanceMatrix();
+      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+      algo.addLogM(false);
+      algo.integrateMarkovChain();
+      //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+
+      CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
+
+      //cout<<" diTauMassErr "<<algo.getMassUncert();
+      //cout<<" diTauPt "<<algo.getPt();
+      //cout<<" diTauPtErr "<<algo.getPtUncert();
+
+
+      measuredTauLeptons.clear();
 
       ////////////
       // store the MuonTau
@@ -219,7 +234,7 @@ measuredTauLeptons.clear();
 
   }
 
-      iEvent.put( TupleMuonTaus, "TupleMuonTaus" );
+  iEvent.put( TupleMuonTaus, "TupleMuonTaus" );
 
 
   /* This is an event example

@@ -35,6 +35,7 @@ public:
   void set_scalarSumPt(LorentzVector,LorentzVector);
   void set_DR(LorentzVector,LorentzVector);
   void set_sumCharge(int, int);
+  void set_correctedSVFitMass(double);
 
   // getters
 
@@ -45,6 +46,7 @@ public:
   double scalarSumPt() const;
   double DR() const;
   int sumCharge() const;
+  double correctedSVFitMass() const;
 
 private:
 
@@ -55,6 +57,7 @@ private:
   double m_scalarSumPt;
   double m_DR;
   int m_sumCharge;
+  double m_correctedSVFitMass;
 
 
 };
