@@ -1,5 +1,5 @@
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
-
+#include "DataFormats/Math/interface/deltaR.h"
 
 TupleMuonTau::TupleMuonTau()
 {
@@ -32,5 +32,5 @@ int TupleMuonTau::tauIndex() const  { return m_tauIndex; }
 void TupleMuonTau::set_scalarSumPt(LorentzVector A_, LorentzVector B_) { m_scalarSumPt = (A_.pt()+B_.pt());}
 double TupleMuonTau::scalarSumPt() const  { return m_scalarSumPt; }
 
-void TupleMuonTau::set_DR(LorentzVector A_, LorentzVector B_) { m_DR = A_.DeltaR(B_);}
+void TupleMuonTau::set_DR(LorentzVector A_, LorentzVector B_) { m_DR = deltaR(A_, B_);}
 double TupleMuonTau::DR() const  { return m_DR; }
