@@ -196,7 +196,7 @@ measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalon
 //algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-cout<<" diTauMass "<<algo.getMass();
+//cout<<" diTauMass "<<algo.getMass();
 //cout<<" diTauMassErr "<<algo.getMassUncert();
 //cout<<" diTauPt "<<algo.getPt();
 //cout<<" diTauPtErr "<<algo.getPtUncert();
