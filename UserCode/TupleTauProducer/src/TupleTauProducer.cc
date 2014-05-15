@@ -68,7 +68,7 @@ private:
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
-  edm::InputTag muonSrc_; // needed for TupleMuon access example
+
 
 
 };
@@ -86,8 +86,8 @@ private:
 // constructors and destructor
 //
 TupleTauProducer::TupleTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )) // needed for TupleMuon access example
+tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" ))
+
 {
 
   produces< vector<TupleTau> >("TupleTaus").setBranchAlias("TupleTaus");
@@ -135,28 +135,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-  ////////////
-  // the following block shows
-  // how to get the output of one
-  // producer into another
-  // note all accessors (for ex. pdgId() below)
-  // must be const
-  /////////////////////
-
-  // get tuple muon collection
-
-
-  edm::Handle< TupleMuonCollection > muons;
-  iEvent.getByLabel(muonSrc_, muons);
-
-
-
-  for (unsigned int i = 0; i < muons->size(); ++i)
-  {
-    cout<<((*muons)[i]).pdgId()<<endl;
-  }
-
-  ////////////
+  
 
 
 
