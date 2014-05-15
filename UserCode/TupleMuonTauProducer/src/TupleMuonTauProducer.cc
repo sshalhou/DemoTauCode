@@ -42,6 +42,12 @@ Implementation:
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
+#include "DataFormats/PatCandidates/interface/MET.h"
+#include "DataFormats/METReco/interface/PFMET.h"
+#include "DataFormats/METReco/interface/PFMETCollection.h"
+
+
+
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;

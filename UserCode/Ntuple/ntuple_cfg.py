@@ -30,7 +30,8 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
 
 process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
-                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple')
+                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
+                mvametSrc = cms.untracked.InputTag("pfMEtMVA")
                                      )
 
 
