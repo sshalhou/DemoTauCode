@@ -158,8 +158,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       TupleMuonTau CurrentMuonTau;
 
-      CurrentMuonTau.set_p4(  ((*muons)[i]).p4() + ((*taus)[i]).p4() );
-
+      CurrentMuonTau.set_p4(  ((*muons)[i]).p4() + ((*taus)[j]).p4() );
+      CurrentMuonTau.set_muonIndex(i);
+      CurrentMuonTau.set_tauIndex(j);
+      CurrentMuonTau.set_corrected_p4( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   );
+      CurrentMuonTau.set_scalarSumPt(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
+      CurrentMuonTau.set_DR(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
+      CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
 
       ////////////
       // store the MuonTau
