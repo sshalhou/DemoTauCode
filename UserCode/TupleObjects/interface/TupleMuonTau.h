@@ -29,16 +29,32 @@ public:
   // setters
 
   void set_p4(LorentzVector);
-
+  void set_corrected_p4(LorentzVector);
+  void set_muonIndex(int);
+  void set_tauIndex(int);
+  void set_scalarSumPt(LorentzVector,LorentzVector);
+  void set_DR(LorentzVector,LorentzVector);
+  void set_sumCharge(int, int);
 
   // getters
 
   LorentzVector p4() const;
-
+  LorentzVector corrected_p4() const;
+  int muonIndex() const;
+  int tauIndex() const;
+  double scalarSumPt() const;
+  double DR() const;
+  int sumCharge() const;
 
 private:
 
   LorentzVector m_p4;
+  LorentzVector m_corrected_p4;
+  int m_muonIndex;
+  int m_tauIndex;
+  double m_scalarSumPt;
+  double m_DR;
+  int m_sumCharge;
 
 
 };
