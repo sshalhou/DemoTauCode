@@ -196,12 +196,11 @@ algo.addLogM(false);
 algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-/*
-double diTauMass = algo.getMass();
-double diTauMassErr = algo.getMassUncert(); // mass uncertainty and Pt of Z/Higgs are new features of the Markov Chain integration
-double diTauPt = algo.getPt();
-double diTauPtErr = algo.getPtUncert();
-*/
+cout<<" diTauMass "<<algo.getMass();
+cout<<" diTauMassErr "<<algo.getMassUncert();
+cout<<" diTauPt "<<algo.getPt();
+cout<<" diTauPtErr "<<algo.getPtUncert();
+
 
 measuredTauLeptons.clear();
 
