@@ -37,6 +37,10 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
+#include "TauAnalysis/CandidateTools/interface/NSVfitStandaloneAlgorithm.h"
+#include "TLorentzVector.h"
+#include "DataFormats/Math/interface/Vector3D.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -165,6 +169,23 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_scalarSumPt(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
       CurrentMuonTau.set_DR(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
       CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
+
+      ////////////
+/*
+TMatrixD covMET(2, 2); // PFMET significance matrix
+std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
+measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, leg1->p4()));
+measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, leg2->p4()));
+NSVfitStandaloneAlgorithm algo(measuredTauLeptons, met->momentum(), covMET, 0);
+algo.addLogM(false);
+algo.integrateMarkovChain();
+//algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+double diTauMass = algo.getMass();
+double diTauMassErr = algo.getMassUncert(); // mass uncertainty and Pt of Z/Higgs are new features of the Markov Chain integration
+double diTauPt = algo.getPt();
+double diTauPtErr = algo.getPtUncert();
+*/
+
 
       ////////////
       // store the MuonTau
