@@ -36,6 +36,7 @@ Implementation:
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
+#include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
