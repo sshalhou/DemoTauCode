@@ -197,9 +197,9 @@ algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
 cout<<" diTauMass "<<algo.getMass();
-cout<<" diTauMassErr "<<algo.getMassUncert();
-cout<<" diTauPt "<<algo.getPt();
-cout<<" diTauPtErr "<<algo.getPtUncert();
+//cout<<" diTauMassErr "<<algo.getMassUncert();
+//cout<<" diTauPt "<<algo.getPt();
+//cout<<" diTauPtErr "<<algo.getPtUncert();
 
 
 measuredTauLeptons.clear();
