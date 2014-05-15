@@ -195,9 +195,8 @@ std::cout<<(*mvamet)[0].getSignificanceMatrix()(0,1)<<std::endl;
 std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
 std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<std::endl;
 
-
-
-//NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+covMET = (*mvamet)[0].getSignificanceMatrix();
+NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
 //algo.addLogM(false);
 //algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
