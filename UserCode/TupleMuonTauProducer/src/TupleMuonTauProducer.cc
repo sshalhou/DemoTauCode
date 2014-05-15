@@ -171,11 +171,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
 
       ////////////
-/*
+
 TMatrixD covMET(2, 2); // PFMET significance matrix
 std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
-measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, leg1->p4()));
-measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, leg2->p4()));
+measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4());
+measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
+
+/*
 NSVfitStandaloneAlgorithm algo(measuredTauLeptons, met->momentum(), covMET, 0);
 algo.addLogM(false);
 algo.integrateMarkovChain();
