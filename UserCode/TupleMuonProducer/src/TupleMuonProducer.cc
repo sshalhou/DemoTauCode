@@ -200,7 +200,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     TupleMuon CurrentMuon;
 
-/*
+    /*
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
     cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
@@ -218,7 +218,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     cout<<" dB "<<muon->dB()<<endl;
     std::cout<<" dz = "<<muon->muonBestTrack()->dz()<<std::endl;
     std::cout<<"dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
-*/
+    */
 
 
     /////
@@ -247,15 +247,46 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
 
     // store additional parameters related to track/vertex & tight ID
+    // must check for these tracks before calling
 
-    CurrentMuon.set_normalizedChi2(muon->globalTrack()->normalizedChi2());
-    CurrentMuon.set_numberOfValidMuonHits(muon->globalTrack()->hitPattern().numberOfValidMuonHits());
+    if(!muon->innerTrack().isNull())
+    {
+      CurrentMuon.set_numberOfValidPixelHits(muon->innerTrack()->hitPattern().numberOfValidPixelHits());
+    }
+
+    if(!muon->globalTrack().isNull())
+    {
+
+      CurrentMuon.set_normalizedChi2(muon->globalTrack()->normalizedChi2());
+      CurrentMuon.set_numberOfValidMuonHits(muon->globalTrack()->hitPattern().numberOfValidMuonHits());
+      
+    }
+
+    if(!muon->track().isNull())
+    {
+
+      CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
+
+    }
+
+    if(!muon->muonBestTrack().isNull())
+    {
+
+      CurrentMuon.set_dz(muon->muonBestTrack()->dz());
+      CurrentMuon.set_dxy(muon->muonBestTrack()->dxy());
+
+    }
+
+
+
+
+
+
+
+
     CurrentMuon.set_numberOfMatchedStations(muon->numberOfMatchedStations());
-    CurrentMuon.set_numberOfValidPixelHits(muon->innerTrack()->hitPattern().numberOfValidPixelHits());
-    CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
     CurrentMuon.set_dB(muon->dB());
-    CurrentMuon.set_dz(muon->muonBestTrack()->dz());
-    CurrentMuon.set_dxy(muon->muonBestTrack()->dxy());
+
 
 
 
