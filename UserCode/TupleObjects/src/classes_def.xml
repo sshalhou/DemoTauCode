@@ -5,4 +5,7 @@
   <class name="TupleTau"/>
   <class name="std::vector<TupleTau>"/>
   <class name="edm::Wrapper<std::vector<TupleTau> >"/>
+  <class name="TupleMuonTau"/>
+  <class name="std::vector<TupleMuonTau>"/>
+  <class name="edm::Wrapper<std::vector<TupleMuonTau> >"/>
 </lcgdict>
