@@ -191,7 +191,7 @@ measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalon
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
 
 
-NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+NSVfitStandalone::NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
 algo.addLogM(false);
 algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
@@ -203,6 +203,7 @@ double diTauPt = algo.getPt();
 double diTauPtErr = algo.getPtUncert();
 */
 
+measuredTauLeptons.clear();
 
       ////////////
       // store the MuonTau
