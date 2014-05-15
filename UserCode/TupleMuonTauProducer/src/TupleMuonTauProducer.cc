@@ -84,7 +84,7 @@ private:
 // constructors and destructor
 //
 TupleMuonTauProducer::TupleMuonTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
 {
 
