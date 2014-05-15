@@ -29,8 +29,13 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple') # needed for TupleMuon access example
                                      )
 
+process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleMuonTaus','TupleMuonTaus','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonTaus','TupleMuonTaus','Ntuple')
+                                     )
 
-#process.TrackTrackPoints = cms.EDProducer('TrackAndPointsProducer' ,src =cms.InputTag('generalTracks') )
+
+
 
 
 process.out = cms.OutputModule("PoolOutputModule",
@@ -47,6 +52,6 @@ outputCommands = cms.untracked.vstring('drop *')
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
-process.p = cms.Path(process.myProducerLabel+process.TupleMuons*process.TupleTaus)
+process.p = cms.Path(process.myProducerLabel+process.TupleMuons*process.TupleTaus*process.TupleMuonTaus)
 
 process.e = cms.EndPath(process.out)
