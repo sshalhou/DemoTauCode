@@ -190,8 +190,14 @@ std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()));
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
 
+std::cout<<(*mvamet)[0].getSignificanceMatrix()(0,0)<<" ";
+std::cout<<(*mvamet)[0].getSignificanceMatrix()(0,1)<<std::endl;
+std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,0)<<" ";
+std::cout<<(*mvamet)[0].getSignificanceMatrix()(1,1)<<std::endl;
 
-NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+
+
+//NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
 //algo.addLogM(false);
 //algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
