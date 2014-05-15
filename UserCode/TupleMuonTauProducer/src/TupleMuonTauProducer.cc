@@ -191,9 +191,9 @@ measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalon
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
 
 
-NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
-algo.addLogM(false);
-algo.integrateMarkovChain();
+//NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+//algo.addLogM(false);
+//algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
 cout<<" diTauMass "<<algo.getMass();
