@@ -71,6 +71,8 @@ private:
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
   edm::InputTag muonSrc_;
+  edm::InputTag mvametSrc_;
+
 
 
 };
@@ -89,7 +91,8 @@ private:
 //
 TupleMuonTauProducer::TupleMuonTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
+mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
 {
 
   produces< vector<TupleMuonTau> >("TupleMuonTaus").setBranchAlias("TupleMuonTaus");
@@ -139,6 +142,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< TupleTauCollection > taus;
   iEvent.getByLabel(tauSrc_, taus);
 
+  // get the mva met
+
+  edm::Handle<std::vector<reco::PFMET> > mvamet;
+  iEvent.getByLabel(mvametSrc_, mvamet);
 
 
 
@@ -177,11 +184,13 @@ std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()));
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
 
-/*
-NSVfitStandaloneAlgorithm algo(measuredTauLeptons, met->momentum(), covMET, 0);
+
+NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
 algo.addLogM(false);
 algo.integrateMarkovChain();
 //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+
+/*
 double diTauMass = algo.getMass();
 double diTauMassErr = algo.getMassUncert(); // mass uncertainty and Pt of Z/Higgs are new features of the Markov Chain integration
 double diTauPt = algo.getPt();
