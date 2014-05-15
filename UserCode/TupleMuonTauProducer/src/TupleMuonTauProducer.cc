@@ -174,7 +174,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 TMatrixD covMET(2, 2); // PFMET significance matrix
 std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
-measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4());
+measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()));
 measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay, ((*taus)[j]).corrected_p4()));
 
 /*
