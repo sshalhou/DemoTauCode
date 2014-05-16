@@ -105,10 +105,11 @@ PAR1_(iConfig.getParameter<double>("PAR1" )),
 PAR2_(iConfig.getParameter<string>("PAR2" ))
 {
 
-  int SYS = 1;
 
-  if(SYS==0) produces< vector<TupleMuonTau> >("TupleMuonTausNOM").setBranchAlias("TupleMuonTausNOM");
-  if(SYS==1) produces< vector<TupleMuonTau> >("TupleMuonTausSYS").setBranchAlias("TupleMuonTausSYS");
+
+
+
+   produces< vector<TupleMuonTau> >(PAR2_).setBranchAlias(PAR2_);
 
 
   //register your products
@@ -242,9 +243,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   }
 
-  int SYS = 1;
-  if(SYS==0) iEvent.put( TupleMuonTaus, "TupleMuonTausNOM" );
-  if(SYS==1) iEvent.put( TupleMuonTaus, "TupleMuonTausSYS" );
+   iEvent.put( TupleMuonTaus, PAR2_ );
 
 
   /* This is an event example
