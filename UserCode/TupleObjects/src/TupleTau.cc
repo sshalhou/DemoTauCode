@@ -4,6 +4,7 @@
 TupleTau::TupleTau()
 {
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_corrected_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_pdgId = -999;
   m_charge = -999;
@@ -13,6 +14,9 @@ TupleTau::TupleTau()
 
 void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleTau::p4() const  { return m_p4; }
+
+void TupleTau::set_genP4(LorentzVector v4_) { m_genP4 = v4_;}
+LorentzVector TupleTau::genP4() const  { return m_genP4; }
 
 
 void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)

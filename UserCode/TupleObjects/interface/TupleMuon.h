@@ -31,6 +31,7 @@ public:
   // setters
 
   void set_p4(LorentzVector);
+  void set_genP4(LorentzVector);
   void set_pfP4(LorentzVector);
 
   void set_isGlobalMuon(bool);
@@ -68,6 +69,7 @@ public:
 
   LorentzVector p4() const;
   LorentzVector pfP4() const;
+  LorentzVector genP4() const;
   bool isGlobalMuon() const;
   bool isTightMuon() const;
   bool isLooseMuon() const;
@@ -98,6 +100,7 @@ private:
 
   LorentzVector m_p4;
   LorentzVector m_pfP4;
+  LorentzVector m_genP4;
   bool   m_isGlobalMuon;
   bool   m_isTightMuon;
   bool   m_isLooseMuon;

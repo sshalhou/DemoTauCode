@@ -30,6 +30,7 @@ public:
   // setters
 
   void set_p4(LorentzVector);
+  void set_genP4(LorentzVector);
   void set_corrected_p4(LorentzVector, int);
   void set_pdgId(int);
   void set_charge(int);
@@ -38,6 +39,7 @@ public:
   // getters
 
   LorentzVector p4() const;
+  LorentzVector genP4() const;
   LorentzVector corrected_p4() const;
   int pdgId() const;
   int charge() const;
@@ -46,6 +48,7 @@ public:
 private:
 
   LorentzVector m_p4;
+  LorentzVector m_genP4;
   LorentzVector m_corrected_p4;
   int m_pdgId;
   int m_charge;

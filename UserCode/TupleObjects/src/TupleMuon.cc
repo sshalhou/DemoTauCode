@@ -4,6 +4,7 @@
 TupleMuon::TupleMuon()
 {
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_pfP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_isGlobalMuon = 0;
   m_isTightMuon = 0;
@@ -32,7 +33,8 @@ TupleMuon::TupleMuon()
 }
 
 
-
+void TupleMuon::set_genP4(LorentzVector v4_) { m_genP4 = v4_;}
+LorentzVector TupleMuon::genP4() const  { return m_genP4; }
 
 
 
