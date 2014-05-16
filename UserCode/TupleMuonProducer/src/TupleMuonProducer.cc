@@ -230,7 +230,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // store the generator level 4-vector
 
-    if(!muon->genLepton()->isNull())
+    if(muon->genLepton())
     {
       CurrentMuon.set_genP4(muon->genLepton()->p4());
     }

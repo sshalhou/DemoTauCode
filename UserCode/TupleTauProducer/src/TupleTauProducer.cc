@@ -162,7 +162,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // store the generator level 4-vector
 
 
-    if(!tau->genLepton()->isNull())
+    if(tau->genLepton())
     {
       CurrentTau.set_genP4(tau->genLepton()->p4());
     }
