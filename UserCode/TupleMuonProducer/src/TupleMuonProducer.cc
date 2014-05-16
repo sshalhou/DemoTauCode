@@ -230,7 +230,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // store the generator level 4-vector
 
-    cout<<" gen "<<muon->genParticleEmbedded_.empty()<<endl;
+    cout<<" gen "<<muon->genLepton().p4().pt()<<endl;
 
     // store selection summary booleans
 
