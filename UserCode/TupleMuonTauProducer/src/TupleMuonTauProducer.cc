@@ -101,7 +101,10 @@ muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
 {
 
-  produces< vector<TupleMuonTau> >("TupleMuonTaus").setBranchAlias("TupleMuonTaus");
+  int SYS = 1;
+
+  if(SYS==0) produces< vector<TupleMuonTau> >("TupleMuonTaus").setBranchAlias("TupleMuonTaus_NOM");
+  if(SYS==1) produces< vector<TupleMuonTau> >("TupleMuonTaus").setBranchAlias("TupleMuonTaus_SYS");
 
 
   //register your products
