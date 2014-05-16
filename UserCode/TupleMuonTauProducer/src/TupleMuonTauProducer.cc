@@ -78,7 +78,7 @@ private:
   edm::InputTag tauSrc_;
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
-
+  double PAR1_;
 
 
 };
@@ -98,7 +98,8 @@ private:
 TupleMuonTauProducer::TupleMuonTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
-mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
+mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" )),
+PAR1_(iConfig.getParameter<double>("PAR1" ))
 {
 
   int SYS = 1;
@@ -157,7 +158,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(mvametSrc_, mvamet);
 
 
-
+  cout<<" PAR1_ "<<PAR1_<<endl;
 
   ////////////
 
