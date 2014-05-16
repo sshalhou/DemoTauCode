@@ -32,7 +32,6 @@ Implementation:
 #include <vector>
 #include <iostream>
 #include "DataFormats/PatCandidates/interface/Muon.h"
-#include "DataFormats/PatCandidates/interface/Lepton.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
@@ -231,7 +230,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // store the generator level 4-vector
 
-    cout<<" gen "<<muon->genLepton().p4().pt()<<endl;
+    cout<<" gen "<<muon->genLepton()->pt()<<endl;
 
     // store selection summary booleans
 
