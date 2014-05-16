@@ -228,6 +228,10 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_p4(muon->p4());
     CurrentMuon.set_pfP4(muon->pfP4());
 
+    // store the generator level 4-vector
+
+    cout<<" gen "<<muon->genParticleEmbedded_.empty()<<endl;
+
     // store selection summary booleans
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
@@ -259,7 +263,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       CurrentMuon.set_normalizedChi2(muon->globalTrack()->normalizedChi2());
       CurrentMuon.set_numberOfValidMuonHits(muon->globalTrack()->hitPattern().numberOfValidMuonHits());
-      
+
     }
 
     if(!muon->track().isNull())
