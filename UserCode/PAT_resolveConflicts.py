@@ -69,7 +69,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 ##################################################
 # specify settings for met mva
 ###################################################
-process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
 
 
 
