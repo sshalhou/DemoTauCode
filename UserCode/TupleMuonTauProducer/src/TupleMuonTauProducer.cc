@@ -78,7 +78,7 @@ private:
   edm::InputTag tauSrc_;
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
-  const int SYS = 1;
+
 
 
 };
@@ -101,7 +101,7 @@ muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" ))
 {
 
-
+  int SYS = 1;
 
   if(SYS==0) produces< vector<TupleMuonTau> >("TupleMuonTaus_NOM").setBranchAlias("TupleMuonTaus_NOM");
   if(SYS==1) produces< vector<TupleMuonTau> >("TupleMuonTaus_SYS").setBranchAlias("TupleMuonTaus_SYS");
@@ -237,6 +237,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   }
 
+  int SYS = 1;  
   if(SYS==0) iEvent.put( TupleMuonTaus, "TupleMuonTaus_NOM" );
   if(SYS==1) iEvent.put( TupleMuonTaus, "TupleMuonTaus_SYS" );
 
