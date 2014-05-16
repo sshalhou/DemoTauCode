@@ -32,6 +32,7 @@ Implementation:
 #include <vector>
 #include <iostream>
 #include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/PatCandidates/interface/Lepton.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
