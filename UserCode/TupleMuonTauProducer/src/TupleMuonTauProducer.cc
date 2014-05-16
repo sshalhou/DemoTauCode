@@ -20,6 +20,7 @@ Implementation:
 
 // system include files
 #include <memory>
+#include <string>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -79,6 +80,7 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
   double PAR1_;
+  string PAR2_;
 
 
 };
@@ -99,7 +101,8 @@ TupleMuonTauProducer::TupleMuonTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" )),
-PAR1_(iConfig.getParameter<double>("PAR1" ))
+PAR1_(iConfig.getParameter<double>("PAR1" )),
+PAR2_(iConfig.getParameter<string>("PAR2" ))
 {
 
   int SYS = 1;
@@ -159,6 +162,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   cout<<" PAR1_ "<<PAR1_<<endl;
+  cout<<" PAR2_ "<<PAR2_<<endl;
 
   ////////////
 
