@@ -78,7 +78,7 @@ private:
   edm::InputTag tauSrc_;
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
-  int SYS = 1;
+  const int SYS = 1;
 
 
 };
