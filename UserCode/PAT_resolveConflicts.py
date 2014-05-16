@@ -66,6 +66,12 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
+##################################################
+# specify settings for met mva
+###################################################
+process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
+
+
 
 ###################################################
 # rm MC matching if DATA
@@ -198,11 +204,6 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
 
-##################################################
-# specify srcLeptons for met mva
-###################################################
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cfi import isomuons, isoelectrons, isotaus
-process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
 
 
 
