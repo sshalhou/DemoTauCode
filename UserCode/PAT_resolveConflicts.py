@@ -86,13 +86,14 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 process.patIsoElec = cms.EDProducer("PATElectronProducer",
                               electronSource = cms.InputTag("isoelectrons")
                                     )
+process.patIsoMuon = patMuons.clone(muonSource = cms.InputTag("iosmuons"))
 
-process.patIsoMuon = cms.EDProducer("PATMuonProducer",
-                              muonSource = cms.InputTag("iosmuons"),
-                              embedMuonBestTrack          = cms.bool(True),
-                              embedImprovedMuonBestTrack          = cms.bool(True),
-                              embedTrack  = cms.bool(False)
-                                    )
+#process.patIsoMuon = cms.EDProducer("PATMuonProducer",
+#                              muonSource = cms.InputTag("iosmuons"),
+#                              embedMuonBestTrack          = cms.bool(True),
+#                              embedImprovedMuonBestTrack          = cms.bool(True),
+#                              embedTrack  = cms.bool(False)
+#                                    )
 
 process.patIsoTau = cms.EDProducer("PATTauProducer",
                               tauSource = cms.InputTag("iostaus")
