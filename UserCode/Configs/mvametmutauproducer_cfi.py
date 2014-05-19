@@ -12,9 +12,9 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForest
 
 
 
-load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+from Configuration.StandardSequences.FrontierConditions_GlobalTag_cff import *
+from JetMETCorrections.Configuration.JetCorrectionProducers_cff import *
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import *
 GlobalTag.globaltag = 'START53_V15::All'
 
 
