@@ -77,24 +77,7 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
                                           useType1 = cms.bool(True)
                                           )
 
-#############################
-# need to create PAT versions
-# of the iso-leptons for use with
-# the met uncertainty tool
-#############################
 
-
-
-from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
-process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
-
-
-from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
-process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
-
-
-from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
                                           )
 
 
@@ -314,6 +297,24 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # and estimate systematic uncertainties on MET
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
+#############################
+# need to create PAT versions
+# of the iso-leptons for use with
+# the met uncertainty tool
+#############################
+
+
+
+from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
+process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
+
+
+from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
+process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
+
+
+from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
 
 
 runMEtUncertainties(process,
