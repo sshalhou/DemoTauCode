@@ -61,7 +61,11 @@ usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=post
 switchToPFJets(process)
 
 # needed for MVA met, but need to be here
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons as isomuonsPAT
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
+
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
@@ -299,17 +303,13 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 
 
 
-from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
-process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
-
-
-from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
-process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
-
-
-from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
-                                          )
+#from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
+#process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
+#from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
+#process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
+#from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
+#process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
+#                                          )
 
 
 # apply type I/type I + II PFMEt corrections to pat::MET object
@@ -319,10 +319,10 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('patIsoElec'),
+      electronCollection = cms.InputTag('isoelectronsPAT'),
       photonCollection = '',
-      muonCollection = cms.InputTag('patIsoMuon'),
-      tauCollection = cms.InputTag('patIsoTau'),
+      muonCollection = cms.InputTag('isomuonsPAT'),
+      tauCollection = cms.InputTag('isotausPAT'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = False,
@@ -346,10 +346,9 @@ process.p = cms.Path(        process.VertexPresent+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
-                             +process.patIsoElec
-                             +process.patIsoMuon
-                             +process.recoTauClassicHPSSequence
-                             +process.patIsoTau
+#                             +process.patIsoElec
+#                             +process.patIsoMuon
+#                             +process.patIsoTau
                              +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
