@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
-demo = cms.EDProducer('MvaMetMuTauProducer'
-)
+#demo = cms.EDProducer('MvaMetMuTauProducer'
+#)
 
 ################
 from JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff import *
