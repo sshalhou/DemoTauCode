@@ -349,7 +349,7 @@ process.p = cms.Path(        process.VertexPresent+
                              +process.patIsoElec
                              +process.patIsoMuon
                              +process.patIsoTau
-                             +process.metUncertaintySequence
+#                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
