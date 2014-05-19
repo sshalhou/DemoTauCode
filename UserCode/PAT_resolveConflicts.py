@@ -97,6 +97,8 @@ process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"
 process.myisotaus = cms.EDFilter(
     "PFTauSelector",
     src = cms.InputTag('hpsPFTauProducer'),
+    BooleanOperator = cms.string("and"),
+    discriminators = cms.VPSet(),
     cut = cms.string("abs(eta) < 2.3 && pt > 19.0 "),
     filter = cms.bool(False)
     )
