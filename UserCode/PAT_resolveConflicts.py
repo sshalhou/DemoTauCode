@@ -85,9 +85,9 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 
 
 process.pfMEtMVAsequence  = cms.Sequence(
-    (isomuonseq+isotauseq+isoelectronseq)*
-    calibratedAK5PFJetsForPFMEtMVA*
-    pfMEtMVA
+    (process.isomuonseq+process.isotauseq+process.isoelectronseq)*
+    process.calibratedAK5PFJetsForPFMEtMVA*
+    process.pfMEtMVA
 )
 
 
