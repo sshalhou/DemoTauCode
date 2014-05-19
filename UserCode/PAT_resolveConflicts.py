@@ -61,9 +61,19 @@ usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=post
 switchToPFJets(process)
 
 # needed for MVA met, but need to be here
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import calibratedAK5PFJetsForPFMEtMVA
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
+
+process.pfMEtMVAsequence = pfMEtMVAsequence.clone(
+                                srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+                                useType1 = cms.bool(True)
+                                          )
 
 
 ##################################################
@@ -73,9 +83,9 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # in later stages isomuons, isoelectrons, and isotaus
 # should be replaced by our final selected leptons
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-                                          useType1 = cms.bool(True)
-                                          )
+#process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+#                                          useType1 = cms.bool(True)
+#                                          )
 
 
 
@@ -216,15 +226,14 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
-
-
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
 
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patMETs)
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+
 
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
@@ -342,14 +351,16 @@ runMEtUncertainties(process,
 # Let it run
 ###################################################
 
+#process.mvamet = cms.Sequence(
+#  process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 
 process.p = cms.Path(        process.VertexPresent+
-                             process.pfMEtMVAsequence+
+                             #getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
-                             process.puJetIdSqeuence+
-#                             process.patMETs+
+                             process.pfMEtMVAsequence+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.patPFMetByMVA+
+                             process.puJetIdSqeuence+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
