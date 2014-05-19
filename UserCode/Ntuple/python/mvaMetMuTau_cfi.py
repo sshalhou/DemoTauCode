@@ -4,7 +4,6 @@ from JetMETCorrections.Configuration.DefaultJEC_cff import *
 from RecoJets.JetProducers.PileupJetIDParams_cfi import JetIdParams
 from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForestsFromDB
 
-demo = cms.EDProducer('mvaMetMuTau')
 
 
 
