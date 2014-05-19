@@ -49,7 +49,8 @@ from JetMETCorrections.Configuration.DefaultJEC_cff import *
 ##     by top-level cfg.py file before JetMETCorrections/METPUSubtraction/python/mvaPFMET_cff.py gets loaded)
 ##from RecoJets.JetProducers.PileupJetIDCutParams_cfi import full_53x_wp
 from RecoJets.JetProducers.PileupJetIDParams_cfi import JetIdParams
-from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForestsFromDB
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForestsFromDB
+from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import *
 
 
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
@@ -69,8 +70,9 @@ process.pfMEtMVA = cms.EDProducer("PFMETProducerMVA",
     srcUncorrJets = cms.InputTag('ak5PFJets'),
     srcPFCandidates = cms.InputTag('particleFlow'),
     srcVertices = cms.InputTag('offlinePrimaryVertices'),
-    srcLeptons = cms.VInputTag(),#"isomuons","isoelectrons","isotaus") # NOTE: you need to set this to collections of electrons, muons and tau-jets
-                                 #                                             passing the lepton reconstruction & identification criteria applied in your analysis
+    srcLeptons = cms.VInputTag(),#"isomuons","isoelectrons","isotaus")
+    # NOTE: you need to set this to collections of electrons, muons and tau-jets
+    #passing the lepton reconstruction & identification criteria applied in your analysis
     minNumLeptons = cms.int32(0),
     srcRho = cms.InputTag('kt6PFJets','rho'),
     globalThreshold = cms.double(-1.),#pfMet.globalThreshold,
