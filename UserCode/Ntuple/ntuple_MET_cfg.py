@@ -77,12 +77,12 @@ process.pfMEtMVA = cms.EDProducer("PFMETProducerMVA",
     srcRho = cms.InputTag('kt6PFJets','rho'),
     globalThreshold = cms.double(-1.),#pfMet.globalThreshold,
     minCorrJetPt = cms.double(-1.),
-    ##inputFileNames = cms.PSet(
-    ##    U     = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
-    ##    DPhi  = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
-    ##    CovU1 = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
-    ##    CovU2 = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
-    ##),
+    inputFileNames = cms.PSet(
+        U     = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+        DPhi  = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+        CovU1 = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+        CovU2 = cms.FileInPath('JetMETCorrections/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+    ),
     ##loadMVAfromDB = cms.bool(False),
     inputRecords = cms.PSet(
         U     = cms.string('mvaPFMET_53_Dec2012_U'),
