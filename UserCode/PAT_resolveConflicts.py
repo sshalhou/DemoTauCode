@@ -14,7 +14,7 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-KeepAll = False
+KeepAll = True
 
 
 
@@ -232,23 +232,24 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
-process.load("JetMETCorrections.Type1MET.pfMETsysShiftCorrections_cfi")
-runMEtUncertainties(process,
-                      electronCollection = cms.InputTag('selectedPatElectrons'),
-                      photonCollection = '',
-                      muonCollection = 'selectedPatMuons',
-                      tauCollection = '',
-                      jetCollection = cms.InputTag('selectedPatJets'),
-                      jetCorrLabel = 'L3Absolute',
-                      doSmearJets = False,
-                      makeType1corrPFMEt = True,
-                      makeType1p2corrPFMEt = False,
-                      makePFMEtByMVA = True,
-                      makeNoPileUpPFMEt = True,
-                      doApplyType0corr = True,
-                      #sysShiftCorrParameter = process.pfMEtSysShiftCorrParameters_2012runAvsNvtx_mc,
-                      doApplySysShiftCorr = False,
+  runMEtUncertainties(process,
+      electronCollection = cms.InputTag('selectedPatElectrons'),
+      photonCollection = '',
+      muonCollection = cms.InputTag('selectedPatMuons'),
+      tauCollection = cms.InputTag('selectedPatTaus'),
+      jetCollection = cms.InputTag('selectedPatJets'),
+      jetCorrLabel = "L3Absolute",
+      doSmearJets = True,
+      makeType1corrPFMEt = False,
+      makeType1p2corrPFMEt = False,
+      makePFMEtByMVA = True,
+      makeNoPileUpPFMEt = False,
+      doApplyType0corr = False
+
+
                       )
+
+
 
 
 # keep CSV info
