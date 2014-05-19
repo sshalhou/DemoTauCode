@@ -304,23 +304,37 @@ process.p = cms.Path(        process.VertexPresent+
 ##################################################
 # run the MET systematic tool
 ##################################################
-# switch pat::Jets to use ak5PFJets as input
-from PhysicsTools.PatAlgos.tools.jetTools import *
-switchJetCollection(
-    process,
-    cms.InputTag('ak5PFJets'),
-    doJTA = True,
-    doBTagging = False,
-    jetCorrLabel = ( 'AK5PF', cms.vstring([ 'L1FastJet', 'L2Relative', 'L3Absolute' ]) ),
-    doType1MET = False,
-    doJetID = True,
-    jetIdLabel = "ak5",
-)
+
+
+
+
+
+
 
 # apply type I/type I + II PFMEt corrections to pat::MET object
 # and estimate systematic uncertainties on MET
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
-runMEtUncertainties(process)
+
+
+
+runMEtUncertainties(process,
+      electronCollection = cms.InputTag('selectedPatElectrons'),
+      photonCollection = '',
+      muonCollection = cms.InputTag('selectedPatMuons'),
+      tauCollection = cms.InputTag('selectedPatTaus'),
+      jetCollection = cms.InputTag('selectedPatJets'),
+      jetCorrLabel = "L3Absolute",
+      doSmearJets = False,
+      makeType1corrPFMEt = True,
+      makeType1p2corrPFMEt = True,
+      makePFMEtByMVA = True,
+      makeNoPileUpPFMEt = False,
+      doApplyType0corr = False
+
+
+                      )
+
+
 ##################################################
 
 
