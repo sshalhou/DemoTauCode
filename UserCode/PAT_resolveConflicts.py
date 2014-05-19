@@ -214,14 +214,16 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 
-process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath        = cms.Path(process.mvametseq)
-process.patPFMetByMVA = process.patMETs.clone(
+#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvametseq)
+process.patMETs = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patMETs)
+
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -337,10 +339,14 @@ runMEtUncertainties(process,
 ##################################################
 # Let it run
 ###################################################
+
+
 process.p = cms.Path(        process.VertexPresent+
-                             getattr(process,"patPF2PATSequence"+postfix)+
+                             process.pfMEtMVAsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
+                             getattr(process,"patPF2PATSequence"+postfix)+
+                             process.patMETs+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
