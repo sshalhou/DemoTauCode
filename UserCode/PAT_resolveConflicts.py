@@ -285,30 +285,9 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 #from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 #process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
-
-
-
-##################################################
-# Let it run
-###################################################
-process.p = cms.Path(        process.VertexPresent+
-                             getattr(process,"patPF2PATSequence"+postfix)+
-                             process.recoTauClassicHPSSequence+
-                             process.puJetIdSqeuence+
-                             process.countSelectedLeptons
-                             #process.PFTau
-                             #process.SelectMuonEvents
-                                  )
-
-
 ##################################################
 # run the MET systematic tool
 ##################################################
-
-
-
-
-
 
 
 # apply type I/type I + II PFMEt corrections to pat::MET object
@@ -333,6 +312,23 @@ runMEtUncertainties(process,
 
 
                       )
+
+
+
+
+##################################################
+# Let it run
+###################################################
+process.p = cms.Path(        process.VertexPresent+
+                             getattr(process,"patPF2PATSequence"+postfix)+
+                             process.recoTauClassicHPSSequence+
+                             process.puJetIdSqeuence+
+                             process.countSelectedLeptons
+                             +process.metUncertaintySequence
+                             #process.PFTau
+                             #process.SelectMuonEvents
+                                  )
+
 
 
 ##################################################
