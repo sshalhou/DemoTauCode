@@ -83,8 +83,9 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 # the met uncertainty tool
 #############################
 
-process.patIsoElec = cms.EDProducer("PATElectronProducer", src=cms.VInputTag("isoelectrons"))
-
+process.patIsoElec = cms.EDProducer("PATElectronProducer",
+                              src = cms.InputTag("isoelectrons")
+                                    )
 
 
 ###################################################
