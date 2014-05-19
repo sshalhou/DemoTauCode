@@ -45,6 +45,14 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
 
+
+process.pfMEtMVAsequence  = cms.Sequence(
+#    (isomuonseq+isotauseq+isoelectronseq)*
+    calibratedAK5PFJetsForPFMEtMVA*
+    pfMEtMVA
+    )
+
+
 process.out = cms.OutputModule("PoolOutputModule",
 fileName = cms.untracked.string('NtupleFile.root'),
 outputCommands = cms.untracked.vstring('drop *')
