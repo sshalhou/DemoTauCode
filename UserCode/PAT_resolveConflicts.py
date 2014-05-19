@@ -319,7 +319,8 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('isoelectronsPAT'),
+#      electronCollection = cms.InputTag('isoelectronsPAT'),
+      electronCollection = '',
       photonCollection = '',
       muonCollection = cms.InputTag('isomuonsPAT'),
       tauCollection = cms.InputTag('isotausPAT'),
