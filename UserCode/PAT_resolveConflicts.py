@@ -94,7 +94,7 @@ process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"
 
 
 
-myisotaus = cms.EDFilter(
+process.myisotaus = cms.EDFilter(
     "PFTauSelector",
     src = cms.InputTag('hpsPFTauProducer'),
     cut = cms.string("abs(eta) < 2.3 && pt > 19.0 "),
@@ -353,6 +353,7 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
+                             +process.myisotaus
                              +process.patIsoTau
                              +process.metUncertaintySequence
                              #process.PFTau
