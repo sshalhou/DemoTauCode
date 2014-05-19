@@ -182,9 +182,14 @@ process.patIsoMuon = cms.EDProducer("PATMuonProducer",
 #                              embedTrack  = cms.bool(False)
 #                                    )
 
-process.patIsoTau = cms.EDProducer("PATTauProducer",
-                              tauSource = cms.InputTag("iostaus")
-                                    )
+#process.patIsoTau = cms.EDProducer("PATTauProducer",
+#                              tauSource = cms.InputTag("iostaus")
+#                                    )
+
+from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus"))
+
+
 
 ###################################################
 # rm MC matching if DATA
