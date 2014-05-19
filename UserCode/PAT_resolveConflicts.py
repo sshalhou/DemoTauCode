@@ -67,7 +67,7 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
 
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 ##################################################
@@ -77,7 +77,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # in later stages isomuons, isoelectrons, and isotaus
 # should be replaced by our final selected leptons
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT","isoelectronsPAT","isotausPAT"),
                                           useType1 = cms.bool(True)
                                           )
 
