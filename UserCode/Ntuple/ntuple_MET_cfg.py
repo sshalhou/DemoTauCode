@@ -30,7 +30,7 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
 
 
 
-process.load("UserCode.Ntuple.mvaMetMuTau_cff")
+process.load("UserCode.Ntuple.python.mvaMetMuTau_cff")
 
 process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
