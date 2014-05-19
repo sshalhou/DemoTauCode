@@ -30,7 +30,6 @@ mkdir UserConfigs/Configs
 mkdir UserConfigs/Configs/python
 cd UserConfigs/Configs/python
 ln -s ../../../UserCode/Configs/myTest_cfi.py myTest_cfi.py
-ln -s ../../../UserCode/Configs/mvametmutauproducer_cfi.py mvametmutauproducer_cfi.py
 cd -
 cp DataFormats/PatCandidates/BuildFile.xml UserConfigs/Configs/BuildFile.xml
 

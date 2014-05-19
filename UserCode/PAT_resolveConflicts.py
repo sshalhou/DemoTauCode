@@ -306,16 +306,6 @@ if not postfix == "":
 
 process.out.SelectEvents.SelectEvents = ['p']
 
-###################################################
-# for running MVA MET on PATtuples
-###################################################
-
-process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
-process.out.outputCommands +=['keep *_isomuons_*_*']
-process.out.outputCommands +=['keep *_isoelectrons_*_*']
-process.out.outputCommands +=['keep *_isotaus_*_*']
-process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
-
 ########################################################################################################
 
 
