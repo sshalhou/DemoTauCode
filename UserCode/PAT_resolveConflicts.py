@@ -306,7 +306,11 @@ if not postfix == "":
 
 process.out.SelectEvents.SelectEvents = ['p']
 
+###################################################
+# for running MVA MET on PATtuples
+###################################################
 
+process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
 
 ########################################################################################################
 
@@ -324,5 +328,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 3000
+process.maxEvents.input = 300
 ########################################################################################################
