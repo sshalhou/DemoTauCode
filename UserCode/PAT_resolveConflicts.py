@@ -366,7 +366,7 @@ process.p = cms.Path(        process.VertexPresent+
 #                             +process.patIsoMuon
 #                             +process.patIsoTau
                              +process.smearedUncorrectedJetsForPFMEtByMVA
-                             +process.metUncertaintySequence
+#                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
