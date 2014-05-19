@@ -93,8 +93,19 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
 
 
+
+
+process.myisoTaus = process.isotaus.clone()
+
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus"))
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("myisoTaus"))
+
+process.myisotauseq      = cms.Sequence(
+     process.kt6PFJetsForRhoComputationVoronoiMet*
+     process.hpsPFTauDiscriminationByMVAIsolation*
+     process.hpsPFTauDiscriminationAgainstMuon2*
+     process.myisoTaus*process.patIsoTau
+    )
 
 
 
@@ -345,7 +356,7 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
-                             +process.patIsoTau
+                             +process.myisotauseq
                              +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
