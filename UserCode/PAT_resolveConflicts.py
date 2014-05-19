@@ -88,11 +88,13 @@ process.patIsoElec = cms.EDProducer("PATElectronProducer",
                                     )
 
 process.patIsoMuon = cms.EDProducer("PATMuonProducer",
-                              muonSource = cms.InputTag("iosmuons")
+                              muonSource = cms.InputTag("iosmuons"),
+                              embedMuonBestTrack          = cms.bool(True),
+                              embedImprovedMuonBestTrack          = cms.bool(True)
                                     )
 
 process.patIsoTau = cms.EDProducer("PATTauProducer",
-                              muonSource = cms.InputTag("iostaus")
+                              tauSource = cms.InputTag("iostaus")
                                     )
 
 ###################################################
