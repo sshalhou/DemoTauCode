@@ -39,6 +39,19 @@ process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
 
 ################
 
+
+from JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff import *
+from JetMETCorrections.Configuration.DefaultJEC_cff import *
+##from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cfi import *
+## CV: importing mvaPFMET_leptons_cfi breaks produceAndDiscriminateHPSPFTaus sequence
+##    (hpsPFTauDiscriminationByDecayModeFinding module gets overwritten by None,
+##     in case RecoTauTag/Configuration/python/RecoPFTauTag_cff.py is loaded by
+##     by top-level cfg.py file before JetMETCorrections/METPUSubtraction/python/mvaPFMET_cff.py gets loaded)
+##from RecoJets.JetProducers.PileupJetIDCutParams_cfi import full_53x_wp
+from RecoJets.JetProducers.PileupJetIDParams_cfi import JetIdParams
+from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForestsFromDB
+
+
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
