@@ -62,12 +62,10 @@ switchToPFJets(process)
 
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons as isomuonsPAT
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
-
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_cff')
+
 
 
 ##################################################
@@ -77,9 +75,20 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 # in later stages isomuons, isoelectrons, and isotaus
 # should be replaced by our final selected leptons
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT","isoelectronsPAT","isotausPAT"),
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
                                           useType1 = cms.bool(True)
                                           )
+
+##################################################
+# make sure we include the iso lepton sequences
+##################################################
+
+
+process.pfMEtMVAsequence  = cms.Sequence(
+    (isomuonseq+isotauseq+isoelectronseq)*
+    calibratedAK5PFJetsForPFMEtMVA*
+    pfMEtMVA
+)
 
 
 
@@ -216,16 +225,17 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 #process.mvametpath        = cms.Path(process.mvametseq)
 
 
+#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvametseq)
 
 
-process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+
+process.mvametseq = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -319,10 +329,10 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('isoelectronsPAT'),
+      electronCollection = cms.InputTag('selectedPatElectrons'),
       photonCollection = '',
-      muonCollection = cms.InputTag('isomuonsPAT'),
-      tauCollection = cms.InputTag('isotausPAT'),
+      muonCollection = cms.InputTag('selectedPatMuons'),
+      tauCollection = cms.InputTag('selectedPatTaus'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = False,
@@ -345,11 +355,12 @@ process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
-                             process.countSelectedLeptons
+                             +process.mvametseq
+                             +process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
 #                             +process.patIsoTau
-                             +process.metUncertaintySequence
+#                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
