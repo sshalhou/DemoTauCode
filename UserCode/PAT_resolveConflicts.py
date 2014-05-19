@@ -239,24 +239,20 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 # to keep that PATtuple to a reasonable kB/event
 ###################################################
 
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons as isomuonsPAT
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
-
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
 process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.selectedPatTaus = selectedPatTaus.clone(src = 'isotausPAT', cut = 'pt >18. && decayMode>-1')
+process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-process.selectedPatMuons = selectedPatMuons.clone(src = 'isomuonsPAT', cut = 'pt >3.')
+process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >3.')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-process.selectedPatElectrons = selectedPatElectrons.clone(src = 'isoelectronsPAT', cut = 'et >8.')
+process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
 ###################################################
 # drop some large unused collections
@@ -343,16 +339,13 @@ runMEtUncertainties(process,
 ###################################################
 process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
-                             process.selectedPatTaus+
-                             process.selectedPatElectrons+
-                             process.selectedPatMuons+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
 #                             +process.patIsoTau
-#                             +process.metUncertaintySequence
+                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
