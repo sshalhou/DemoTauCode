@@ -87,6 +87,13 @@ process.patIsoElec = cms.EDProducer("PATElectronProducer",
                               electronSource = cms.InputTag("isoelectrons")
                                     )
 
+process.patIsoMuon = cms.EDProducer("PATMuonProducer",
+                              muonSource = cms.InputTag("iosmuons")
+                                    )
+
+process.patIsoTau = cms.EDProducer("PATTauProducer",
+                              muonSource = cms.InputTag("iostaus")
+                                    )
 
 ###################################################
 # rm MC matching if DATA
@@ -306,10 +313,10 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('selectedPatElectrons'),
+      electronCollection = cms.InputTag('patIsoElec'),
       photonCollection = '',
-      muonCollection = cms.InputTag('selectedPatMuons'),
-      tauCollection = cms.InputTag('selectedPatTaus'),
+      muonCollection = cms.InputTag('patIsoMuon'),
+      tauCollection = cms.InputTag('patIsoTau'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = False,
@@ -334,7 +341,9 @@ process.p = cms.Path(        process.VertexPresent+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                              +process.patIsoElec
-#                             +process.metUncertaintySequence
+                             +process.patIsoMuon
+                             +process.patIsoTau
+                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
