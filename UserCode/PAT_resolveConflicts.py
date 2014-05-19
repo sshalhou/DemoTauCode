@@ -60,15 +60,10 @@ jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 switchToPFJets(process)
 
-
 # needed for MVA met, but need to be here
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_cff')
-from JetMETCorrections.METPUSubtraction.mvaPFMET_cff import *
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 ##################################################
@@ -81,17 +76,6 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_cff import *
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
                                           useType1 = cms.bool(True)
                                           )
-
-##################################################
-# make sure we include the iso lepton sequences
-##################################################
-
-
-process.pfMEtMVAsequence  = cms.Sequence(
-    (process.isomuonseq+process.isotauseq+process.isoelectronseq)*
-    process.calibratedAK5PFJetsForPFMEtMVA*
-    process.pfMEtMVA
-)
 
 
 
@@ -228,17 +212,16 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 #process.mvametpath        = cms.Path(process.mvametseq)
 
 
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
 
 
+process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-
-process.mvametseq = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -358,8 +341,7 @@ process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
-                             +process.mvametseq
-                             +process.countSelectedLeptons
+                             process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
 #                             +process.patIsoTau
