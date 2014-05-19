@@ -338,9 +338,10 @@ runMEtUncertainties(process,
 # Let it run
 ###################################################
 process.p = cms.Path(        process.VertexPresent+
-                             getattr(process,"patPF2PATSequence"+postfix)+
+                            # getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
+                             process.patPF2PATSequence+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
