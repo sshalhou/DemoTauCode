@@ -224,6 +224,31 @@ process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PA
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
+
+##################################################
+# run the MET systematic tool
+##################################################
+
+from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+process.load("JetMETCorrections.Type1MET.pfMETsysShiftCorrections_cfi")
+runMEtUncertainties(process,
+                      electronCollection = cms.InputTag('selectedPatElectrons'),
+                      photonCollection = '',
+                      muonCollection = 'selectedPatMuons',
+                      tauCollection = '',
+                      jetCollection = cms.InputTag('selectedPatJets'),
+                      jetCorrLabel = 'L3Absolute',
+                      doSmearJets = True,
+                      makeType1corrPFMEt = True,
+                      makeType1p2corrPFMEt = False,
+                      makePFMEtByMVA = True,
+                      makeNoPileUpPFMEt = True,
+                      doApplyType0corr = True,
+                      #sysShiftCorrParameter = process.pfMEtSysShiftCorrParameters_2012runAvsNvtx_mc,
+                      doApplySysShiftCorr = False,
+                      )
+
+
 # keep CSV info
 process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 
