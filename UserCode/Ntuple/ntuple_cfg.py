@@ -33,7 +33,7 @@ process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
                 mvametSrc = cms.untracked.InputTag("pfMEtMVA"),
                 PAR1=cms.double(321.),
-                PAR2=cms.string("TupleMuonTausSysTauEsPlus")
+                PAR2=cms.string("TupleMuonTaus-Nominal")
                                      )
 
 
