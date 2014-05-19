@@ -349,7 +349,7 @@ process.p = cms.Path(        process.VertexPresent+
                              process.puJetIdSqeuence+
 #                             process.patMETs+
                              getattr(process,"patPF2PATSequence"+postfix)+
-                             process.process.patPFMetByMVA+
+                             process.patPFMetByMVA+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
