@@ -90,7 +90,7 @@ process.pfMEtMVA = cms.EDProducer("PFMETProducerMVA",
         CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
         CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')
     ),
-    loadMVAfromDB = cms.bool(True),
+    loadMVAfromDB = cms.bool(False),
     is42 = cms.bool(False), # CV: set this flag to true if you are running mvaPFMET in CMSSW_4_2_x
     corrector = cms.string("ak5PFL1Fastjet"),
     useType1  = cms.bool(False),
