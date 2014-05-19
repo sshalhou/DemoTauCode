@@ -60,8 +60,11 @@ jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 switchToPFJets(process)
 
+
 # needed for MVA met, but need to be here
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_cff')
