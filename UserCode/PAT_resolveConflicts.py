@@ -220,9 +220,7 @@ process.patPFMetByMVA = process.patMETs.clone(
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
-process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
-process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+
 
 
 ##################################################
@@ -248,6 +246,13 @@ runMEtUncertainties(process,
 
 
                       )
+
+
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+
+
 
 
 
