@@ -229,8 +229,8 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 # run the MET systematic tool
 ##################################################
 
-#from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
-from PhysicsTools.PatUtils.tools.metUncertaintyTools import *
+from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+
 
 process.load("JetMETCorrections.Type1MET.pfMETsysShiftCorrections_cfi")
 runMEtUncertainties(process,
@@ -240,7 +240,7 @@ runMEtUncertainties(process,
                       tauCollection = '',
                       jetCollection = cms.InputTag('selectedPatJets'),
                       jetCorrLabel = 'L3Absolute',
-                      doSmearJets = True,
+                      doSmearJets = False,
                       makeType1corrPFMEt = True,
                       makeType1p2corrPFMEt = False,
                       makePFMEtByMVA = True,
