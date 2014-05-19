@@ -77,6 +77,14 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
                                           useType1 = cms.bool(True)
                                           )
 
+#############################
+# need to create PAT versions
+# of the iso-leptons for use with
+# the met uncertainty tool
+#############################
+
+process.patIsoElec = cms.EDProducer("PATElectronProducer", src=cms.VInputTag("isoelectrons"))
+
 
 
 ###################################################
@@ -297,7 +305,7 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('isoelectrons'),
+      electronCollection = cms.InputTag('selectedPatElectrons'),
       photonCollection = '',
       muonCollection = cms.InputTag('selectedPatMuons'),
       tauCollection = cms.InputTag('selectedPatTaus'),
@@ -324,7 +332,8 @@ process.p = cms.Path(        process.VertexPresent+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
-                             +process.metUncertaintySequence
+                             +process.patIsoElec
+#                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
