@@ -93,16 +93,10 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
 
 
-process.myisotaus = cms.EDFilter(
+
+myisotaus = cms.EDFilter(
     "PFTauSelector",
     src = cms.InputTag('hpsPFTauProducer'),
-    BooleanOperator = cms.string("and"),
-    discriminators = cms.VPSet(
-    cms.PSet( discriminator=cms.InputTag("hpsPFTauDiscriminationByDecayModeFinding"),       selectionCut=cms.double(0.5)),
-    cms.PSet( discriminator=cms.InputTag("hpsPFTauDiscriminationByMVAIsolation"),           selectionCut=cms.double(0.5)),
-    cms.PSet( discriminator=cms.InputTag("hpsPFTauDiscriminationByLooseElectronRejection"), selectionCut=cms.double(0.5)),
-    cms.PSet( discriminator=cms.InputTag("hpsPFTauDiscriminationAgainstMuon2"),             selectionCut=cms.double(0.5))
-    ),
     cut = cms.string("abs(eta) < 2.3 && pt > 19.0 "),
     filter = cms.bool(False)
     )
@@ -359,7 +353,6 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
-                             +process.myisotaus
                              +process.patIsoTau
                              +process.metUncertaintySequence
                              #process.PFTau
