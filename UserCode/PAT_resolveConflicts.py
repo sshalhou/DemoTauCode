@@ -348,8 +348,8 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
-                             +process.patIsoTau
-#                             +process.metUncertaintySequence
+#                             +process.patIsoTau
+                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
                                   )
