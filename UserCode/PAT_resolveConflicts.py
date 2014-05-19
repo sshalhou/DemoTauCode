@@ -86,6 +86,8 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 process.patIsoElec = cms.EDProducer("PATElectronProducer",
                               electronSource = cms.InputTag("isoelectrons")
                                     )
+                                    
+from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.patIsoMuon = patMuons.clone(muonSource = cms.InputTag("iosmuons"))
 
 #process.patIsoMuon = cms.EDProducer("PATMuonProducer",
@@ -266,7 +268,7 @@ from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
 process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
 
 
-from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+
 process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >3.')
 
 
