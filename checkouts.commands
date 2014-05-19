@@ -25,6 +25,16 @@ git cms-merge-topic -u TaiSakuma:53X-met-131120-01
 
 git cms-merge-topic -u cms-met:53X-MVaNoPuMET-20131217-01
 
+mkdir UserConfigs
+mkdir UserConfigs/Configs
+mkdir UserConfigs/Configs/python
+cd UserConfigs/Configs/python
+ln -s ../../../UserCode/Configs/myTest_cfi.py myTest_cfi.py
+cd -
+cp DataFormats/PatCandidates/BuildFile.xml UserConfigs/Configs/BuildFile.xml
+
+
+
 wget --no-check-certificate https://github.com/cms-analysis/TauAnalysis-CandidateTools/archive/TauAnalysis-CandidateTools-V00-02-03s.tar.gz .
 tar -xzvf TauAnalysis-CandidateTools-V00-02-03s
 mkdir TauAnalysis
