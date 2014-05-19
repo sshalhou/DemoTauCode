@@ -312,7 +312,7 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # and estimate systematic uncertainties on MET
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
-
+import RecoMET.METProducers.METSigParams_cfi as jetResolutions
 
 
 process.smearedUncorrectedJetsForPFMEtByMVA = cms.EDProducer("SmearedPFJetProducer",
