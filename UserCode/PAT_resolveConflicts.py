@@ -93,8 +93,8 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
 
 
-from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotauseq"))
+#from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
+#process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotauseq"))
 
 
 
@@ -319,7 +319,8 @@ runMEtUncertainties(process,
       electronCollection = cms.InputTag('patIsoElec'),
       photonCollection = '',
       muonCollection = cms.InputTag('patIsoMuon'),
-      tauCollection = cms.InputTag('patIsoTau'),
+      tauCollection = '',
+#      tauCollection = cms.InputTag('patIsoTau'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = False,
