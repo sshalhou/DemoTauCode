@@ -232,7 +232,7 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
-  runMEtUncertainties(process,
+runMEtUncertainties(process,
       electronCollection = cms.InputTag('selectedPatElectrons'),
       photonCollection = '',
       muonCollection = cms.InputTag('selectedPatMuons'),
