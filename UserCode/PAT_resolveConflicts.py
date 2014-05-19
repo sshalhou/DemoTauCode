@@ -311,9 +311,9 @@ process.out.SelectEvents.SelectEvents = ['p']
 ###################################################
 
 process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
-process.out.outputCommands +=['keep recoMuons_isomuons_*_*']
-process.out.outputCommands +=['keep recoMuons_isoelectrons_*_*']
-process.out.outputCommands +=['keep recoMuons_isotaus_*_*']
+process.out.outputCommands +=['keep *_isomuons_*_*']
+process.out.outputCommands +=['keep *_isoelectrons_*_*']
+process.out.outputCommands +=['keep *_isotaus_*_*']
 
 
 ########################################################################################################
@@ -332,5 +332,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 100
+process.maxEvents.input = 10
 ########################################################################################################
