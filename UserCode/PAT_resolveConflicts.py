@@ -315,18 +315,17 @@ process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
 
 
 
-process.smearedUncorrectedJetsForPFMEtByMVA =
-              cms.EDProducer("SmearedPFJetProducer",
-              src = cms.InputTag('ak5PFJets'),
-              jetCorrLabel = cms.string("ak5PFL1FastL2L3"),
-              dRmaxGenJetMatch = cms.string('TMath::Min(0.5, 0.1 + 0.3*TMath::Exp(-0.05*(genJetPt - 10.)))'),
-              sigmaMaxGenJetMatch = cms.double(5.),
-              inputFileName =cms.FileInPath('PhysicsTools/PatUtils/data/pfJetResolutionMCtoDataCorrLUT.root'),
-              lutName = cms.string('pfJetResolutionMCtoDataCorrLUT'),
-              jetResolutions = jetResolutions.METSignificance_params,
-              skipRawJetPtThreshold = cms.double(10.), # GeV
-              skipCorrJetPtThreshold = cms.double(1.e-2),
-              srcGenJets = cms.InputTag('ak5GenJetsNoNu')
+process.smearedUncorrectedJetsForPFMEtByMVA = cms.EDProducer("SmearedPFJetProducer",
+  src = cms.InputTag('ak5PFJets'),
+  jetCorrLabel = cms.string("ak5PFL1FastL2L3"),
+  dRmaxGenJetMatch = cms.string('TMath::Min(0.5, 0.1 + 0.3*TMath::Exp(-0.05*(genJetPt - 10.)))'),
+  sigmaMaxGenJetMatch = cms.double(5.),
+  inputFileName =cms.FileInPath('PhysicsTools/PatUtils/data/pfJetResolutionMCtoDataCorrLUT.root'),
+  lutName = cms.string('pfJetResolutionMCtoDataCorrLUT'),
+  jetResolutions = jetResolutions.METSignificance_params,
+  skipRawJetPtThreshold = cms.double(10.), # GeV
+  skipCorrJetPtThreshold = cms.double(1.e-2),
+  srcGenJets = cms.InputTag('ak5GenJetsNoNu')
                             )
 
 
