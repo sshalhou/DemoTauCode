@@ -63,7 +63,7 @@ switchToPFJets(process)
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.M')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 ##################################################
