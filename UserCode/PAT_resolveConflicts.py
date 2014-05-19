@@ -217,7 +217,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
 
-from PhysicsTools.PatAlgos.producersLayer1.metProducer_cfi import patMETs
+process.load("PhysicsTools.PatAlgos.producersLayer1.metProducer_cfi")
 process.patMETs = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
