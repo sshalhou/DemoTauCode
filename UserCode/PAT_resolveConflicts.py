@@ -61,26 +61,9 @@ usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=post
 switchToPFJets(process)
 
 # needed for MVA met, but need to be here
-#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-#process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-#process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import calibratedAK5PFJetsForPFMEtMVA
-#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
-
-
-process.pfMEtMVAsequence  = cms.Sequence(
-    (process.isomuonseq+process.isotauseq+process.isoelectronseq)*
-    calibratedAK5PFJetsForPFMEtMVA*
-    process.pfMEtMVA
-    )
-
-#process.pfMEtMVAsequence = pfMEtMVAsequence.clone(
-#                                srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-#                                useType1 = cms.bool(True)
-#                                          )
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 ##################################################
@@ -90,9 +73,9 @@ process.pfMEtMVAsequence  = cms.Sequence(
 # in later stages isomuons, isoelectrons, and isotaus
 # should be replaced by our final selected leptons
 ###################################################
-#process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-#                                          useType1 = cms.bool(True)
-#                                          )
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+                                          useType1 = cms.bool(True)
+                                          )
 
 
 
@@ -231,17 +214,14 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
+process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
-
-
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -259,20 +239,24 @@ process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
 # to keep that PATtuple to a reasonable kB/event
 ###################################################
 
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons as isomuonsPAT
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
+
 
 from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
 process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
+process.selectedPatTaus = selectedPatTaus.clone(src = 'isotausPAT', cut = 'pt >18. && decayMode>-1')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >3.')
+process.selectedPatMuons = selectedPatMuons.clone(src = 'isomuonsPAT', cut = 'pt >3.')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
+process.selectedPatElectrons = selectedPatElectrons.clone(src = 'isoelectronsPAT', cut = 'et >8.')
 
 ###################################################
 # drop some large unused collections
@@ -357,16 +341,9 @@ runMEtUncertainties(process,
 ##################################################
 # Let it run
 ###################################################
-
-#process.mvamet = cms.Sequence(
-#  process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
-
 process.p = cms.Path(        process.VertexPresent+
-                             #getattr(process,"patPF2PATSequence"+postfix)+
-                             process.recoTauClassicHPSSequence+
-                             process.pfMEtMVAsequence+
                              getattr(process,"patPF2PATSequence"+postfix)+
-                             process.patPFMetByMVA+
+                             process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
