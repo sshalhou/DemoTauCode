@@ -229,7 +229,9 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 # run the MET systematic tool
 ##################################################
 
-from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+#from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+from PhysicsTools.PatUtils.tools.metUncertaintyTools import *
+
 process.load("JetMETCorrections.Type1MET.pfMETsysShiftCorrections_cfi")
 runMEtUncertainties(process,
                       electronCollection = cms.InputTag('selectedPatElectrons'),
