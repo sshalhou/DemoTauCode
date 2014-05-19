@@ -71,7 +71,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/MVAMet
 # recoil corrections should be applied at Ntuple stage
 # in later stages isomuons, isoelectrons, and isotaus
-# should be replaced by our final selecte dlepton
+# should be replaced by our final selected leptons
 ###################################################
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
                                           useType1 = cms.bool(True)
@@ -85,26 +85,17 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 
 
 
-from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
 process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
 
 
-from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
 process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
 
 
-
-process.myisotaus = cms.EDFilter(
-    "PFTauSelector",
-    src = cms.InputTag('hpsPFTauProducer'),
-    BooleanOperator = cms.string("and"),
-    discriminators = cms.VPSet(),
-    cut = cms.string("abs(eta) < 2.3 && pt > 19.0 "),
-    filter = cms.bool(False)
-    )
-
-from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("myisotaus"))
+from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
+                                          )
 
 
 
@@ -355,7 +346,6 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
-                             +process.myisotaus
                              +process.patIsoTau
                              +process.metUncertaintySequence
                              #process.PFTau
