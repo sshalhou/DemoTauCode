@@ -297,13 +297,13 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-      electronCollection = cms.InputTag('selectedPatElectrons'),
+      electronCollection = cms.InputTag('isoelectrons'),
       photonCollection = '',
       muonCollection = cms.InputTag('selectedPatMuons'),
       tauCollection = cms.InputTag('selectedPatTaus'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
-      doSmearJets = True,
+      doSmearJets = False,
       makeType1corrPFMEt = True,
       makeType1p2corrPFMEt = True,
       makePFMEtByMVA = True,
