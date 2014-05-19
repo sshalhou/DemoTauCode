@@ -357,6 +357,7 @@ runMEtUncertainties(process,
 process.p = cms.Path(        process.VertexPresent+
                              process.pfMEtMVAsequence*
                              getattr(process,"patPF2PATSequence"+postfix)*
+                             process.smearedUncorrectedJetsForPFMEtByMVA+
                              process.patPFMetByMVA+
                              #getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
@@ -365,7 +366,6 @@ process.p = cms.Path(        process.VertexPresent+
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
 #                             +process.patIsoTau
-                             +process.smearedUncorrectedJetsForPFMEtByMVA
 #                             +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
