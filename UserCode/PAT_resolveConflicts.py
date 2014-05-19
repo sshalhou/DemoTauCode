@@ -311,7 +311,8 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # apply type I/type I + II PFMEt corrections to pat::MET object
 # and estimate systematic uncertainties on MET
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
-process.load("JetMETCorrections.Type1MET.pfMETsysShiftCorrections_cfi")
+process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
+
 
 
 
@@ -323,7 +324,7 @@ runMEtUncertainties(process,
       photonCollection = '',
       muonCollection = cms.InputTag('selectedPatMuons'),
       tauCollection = cms.InputTag('selectedPatTaus'),
-      jetCollection = cms.InputTag('selectedPatJets'),
+      jetCollection = cms.InputTag('patJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = True,
       makeType1corrPFMEt = True,
