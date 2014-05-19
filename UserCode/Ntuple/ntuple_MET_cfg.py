@@ -127,7 +127,7 @@ process.pfMEtMVA = cms.EDProducer("PFMETProducerMVA",
 process.pfMEtMVAsequence  = cms.Sequence(
 #    (isomuonseq+isotauseq+isoelectronseq)*
     process.calibratedAK5PFJetsForPFMEtMVA*
-    pfMEtMVA
+    process.pfMEtMVA
     )
 ################
 
