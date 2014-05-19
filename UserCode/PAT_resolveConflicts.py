@@ -320,7 +320,7 @@ runMEtUncertainties(process,
       photonCollection = '',
       muonCollection = cms.InputTag('patIsoMuon'),
       tauCollection = '',
-#      tauCollection = cms.InputTag('patIsoTau'),
+      tauCollection = cms.InputTag('patIsoTau'),
       jetCollection = cms.InputTag('selectedPatJets'),
       jetCorrLabel = "L3Absolute",
       doSmearJets = False,
@@ -346,7 +346,7 @@ process.p = cms.Path(        process.VertexPresent+
                              process.countSelectedLeptons
                              +process.patIsoElec
                              +process.patIsoMuon
-#                             +process.patIsoTau
+                             +process.patIsoTau
                              +process.metUncertaintySequence
                              #process.PFTau
                              #process.SelectMuonEvents
