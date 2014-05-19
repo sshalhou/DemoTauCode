@@ -31,7 +31,7 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
 
 
 #process.load("UserCode.Ntuple.python.mvaMetMuTau_cff")
-from UserCode.Ntuple.mvaMetMuTau_cfi import *
+from UserCode.MvaMetMyTauProducer.mvametmutauproduer_cfi import *
 
 process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
