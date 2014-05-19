@@ -93,11 +93,8 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
 
 
-
-
-
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.VInputTag("isotaus"))
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("hpsPFTauProducer"))
 
 
 
