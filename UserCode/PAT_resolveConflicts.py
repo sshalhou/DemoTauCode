@@ -217,8 +217,8 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 #process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
 #process.mvametpath        = cms.Path(process.mvametseq)
 
-process.load("PhysicsTools.PatAlgos.producersLayer1.metProducer_cfi")
-process.patMETs = process.patMETs.clone(
+
+process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
@@ -347,8 +347,9 @@ process.p = cms.Path(        process.VertexPresent+
                              process.pfMEtMVAsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
+#                             process.patMETs+
                              getattr(process,"patPF2PATSequence"+postfix)+
-                             process.patMETs+
+                             process.process.patPFMetByMVA+
                              process.countSelectedLeptons
 #                             +process.patIsoElec
 #                             +process.patIsoMuon
