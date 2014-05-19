@@ -61,7 +61,7 @@ usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=post
 switchToPFJets(process)
 
 # needed for MVA met, but need to be here
-#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons as isomuonsPAT
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
@@ -319,8 +319,7 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 
 
 runMEtUncertainties(process,
-#      electronCollection = cms.InputTag('isoelectronsPAT'),
-      electronCollection = '',
+      electronCollection = cms.InputTag('isoelectronsPAT'),
       photonCollection = '',
       muonCollection = cms.InputTag('isomuonsPAT'),
       tauCollection = cms.InputTag('isotausPAT'),
