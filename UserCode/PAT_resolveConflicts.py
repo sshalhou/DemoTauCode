@@ -66,14 +66,21 @@ switchToPFJets(process)
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import calibratedAK5PFJetsForPFMEtMVA
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
 
-process.pfMEtMVAsequence = pfMEtMVAsequence.clone(
-                                srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-                                useType1 = cms.bool(True)
-                                          )
+
+process.pfMEtMVAsequence  = cms.Sequence(
+    (process.isomuonseq+process.isotauseq+process.isoelectronseq)*
+    process.calibratedAK5PFJetsForPFMEtMVA*
+    process.pfMEtMVA
+    )
+
+#process.pfMEtMVAsequence = pfMEtMVAsequence.clone(
+#                                srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+#                                useType1 = cms.bool(True)
+#                                          )
 
 
 ##################################################
