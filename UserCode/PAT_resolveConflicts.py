@@ -74,7 +74,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi')
 process.pfMEtMVAsequence  = cms.Sequence(
     (process.isomuonseq+process.isotauseq+process.isoelectronseq)*
     calibratedAK5PFJetsForPFMEtMVA*
-    pfMEtMVA
+    process.pfMEtMVA
     )
 
 #process.pfMEtMVAsequence = pfMEtMVAsequence.clone(
