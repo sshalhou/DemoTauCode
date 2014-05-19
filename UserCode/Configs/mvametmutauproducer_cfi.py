@@ -12,19 +12,19 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForest
 
 
 
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
-process.GlobalTag.globaltag = 'START53_V15::All'
+load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+GlobalTag.globaltag = 'START53_V15::All'
 
 
-process.calibratedAK5PFJetsForPFMEtMVA = cms.EDProducer('PFJetCorrectionProducer',
+calibratedAK5PFJetsForPFMEtMVA = cms.EDProducer('PFJetCorrectionProducer',
     src = cms.InputTag('ak5PFJets'),
     correctors = cms.vstring("ak5PFL1FastL2L3") # NOTE: use "ak5PFL1FastL2L3" for MC / "ak5PFL1FastL2L3Residual" for Data
 )
 
 
-process.pfMEtMVAMuTau = cms.EDProducer("PFMETProducerMVA",
+pfMEtMVAMuTau = cms.EDProducer("PFMETProducerMVA",
     srcCorrJets = cms.InputTag('calibratedAK5PFJetsForPFMEtMVA'),
     srcUncorrJets = cms.InputTag('ak5PFJets'),
     srcPFCandidates = cms.InputTag('particleFlow'),
@@ -85,8 +85,8 @@ process.pfMEtMVAMuTau = cms.EDProducer("PFMETProducerMVA",
 )
 
 
-process.pfMEtMVAMuTauSequence  = cms.Sequence(
+pfMEtMVAMuTauSequence  = cms.Sequence(
 #    (isomuonseq+isotauseq+isoelectronseq)*
-    process.calibratedAK5PFJetsForPFMEtMVA*
-    process.pfMEtMVA
+    calibratedAK5PFJetsForPFMEtMVA*
+    pfMEtMVA
     )
