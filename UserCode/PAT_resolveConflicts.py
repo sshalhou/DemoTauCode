@@ -63,7 +63,7 @@ switchToPFJets(process)
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+process.load('JetMETCorrections.METPUSubtraction.M')
 
 
 ##################################################
@@ -94,7 +94,7 @@ process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus"))
+process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotauseq"))
 
 
 
