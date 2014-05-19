@@ -84,7 +84,7 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 #############################
 
 process.patIsoElec = cms.EDProducer("PATElectronProducer",
-                              src = cms.InputTag("isoelectrons")
+                              electronSource = cms.InputTag("isoelectrons")
                                     )
 
 
