@@ -45,10 +45,15 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 process.GlobalTag.globaltag = 'START53_V15::All'
 
 
+process.calibratedAK5PFJetsForPFMEtMVA = cms.EDProducer('PFJetCorrectionProducer',
+    src = cms.InputTag('ak5PFJets'),
+    correctors = cms.vstring("ak5PFL1FastL2L3") # NOTE: use "ak5PFL1FastL2L3" for MC / "ak5PFL1FastL2L3Residual" for Data
+)
+
 
 process.pfMEtMVAsequence  = cms.Sequence(
 #    (isomuonseq+isotauseq+isoelectronseq)*
-    calibratedAK5PFJetsForPFMEtMVA*
+    process.calibratedAK5PFJetsForPFMEtMVA*
     pfMEtMVA
     )
 
