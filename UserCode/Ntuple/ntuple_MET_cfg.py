@@ -25,7 +25,6 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 # PATtuple
 ####################
 
-# needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
@@ -34,6 +33,24 @@ process.pfMEtMVAtuple = process.pfMEtMVA.clone(
                       #srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
                       srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
                                           )
+
+##################################################
+# run the MET systematic tool
+##################################################
+
+# apply type I/type I + II PFMEt corrections to pat::MET object
+# and estimate systematic uncertainties on MET
+from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+runMEtUncertainties(process,
+      electronCollection  = cms.InputTag('selectedPatElectrons'),
+      muonCollection  = cms.InputTag('selectedPatMuons'),
+      tauCollection  = cms.InputTag('selectedPatTaus'),
+      jetCollection  = cms.InputTag('selectedPatJets'),
+      makePFMEtByMVA = True,
+      doSmearJets = False
+                    )
+
+
 
 
 
@@ -78,6 +95,7 @@ process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 process.p = cms.Path(process.myProducerLabel+
                      process.pfMEtMVAtuple+
-                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus)
+                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus+
+                     process.metUncertaintySequence)
 
 process.e = cms.EndPath(process.out)
