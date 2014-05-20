@@ -310,6 +310,15 @@ process.p = cms.Path(        process.VertexPresent+
 if RunMETUnc:
   process.p += process.metUncertaintySequence
 
+else:
+  process.out.outputCommands +=['keep recoPFJets_calibratedAK5PFJetsForPFMEtMVA__PAT']
+  process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
+  process.out.outputCommands +=['keep recoVertexs_offlinePrimaryVertices__RECO']
+  process.out.outputCommands +=['keep recoMuons_isomuons__PAT']
+  process.out.outputCommands +=['keep recoPFTaus_isotaus__PAT']
+  process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
+  process.out.outputCommands +=['keep recoGsfElectrons_isoelectrons__PAT']
+
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
