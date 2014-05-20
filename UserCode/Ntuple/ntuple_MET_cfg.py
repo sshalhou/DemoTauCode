@@ -64,10 +64,7 @@ runMEtUncertainties(process,
       jetCollection  = cms.InputTag('selectedPatJets'),
       makePFMEtByMVA = True,
       doSmearJets = False,
-      addToPatDefaultSequence = False,
-      makeType1corrPFMEt = True,
-      makeType1p2corrPFMEt = False,
-      makeNoPileUpPFMEt = False
+      addToPatDefaultSequence = False
                     )
 
 

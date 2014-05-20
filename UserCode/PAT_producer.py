@@ -336,6 +336,8 @@ else:
   process.out.outputCommands +=['keep recoPFMETs_pfMet__RECO']
   process.out.outputCommands +=['keep recoGenMETs_genMetTrue__SIM']
   process.out.outputCommands +=['keep recoPFCandidates_selectedPatJets_pfCandidates_PAT']
+  process.out.outputCommands +=['keep recoMuons_muons__RECO']
+
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
