@@ -283,7 +283,10 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # run the MET systematic tool
 ##################################################
 
-
+# apply type I/type I + II PFMEt corrections to pat::MET object
+# and estimate systematic uncertainties on MET
+from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+runMEtUncertainties(process)
 
 
 ##################################################
