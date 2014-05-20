@@ -202,13 +202,25 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 ###################################################
 
 
+
+
+
+#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
+#process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
+#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+#process.mvametpath        = cms.Path(process.mvametseq)
+
+
+
+
+process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
+process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-
-
+process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -273,22 +285,6 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 ##################################################
 # Let it run
 ###################################################
-
-
-
-##################################################
-# Let it run
-###################################################
-process.p = cms.Path(        process.VertexPresent*
-                             process.pfMEtMVAsequence*
-                             getattr(process,"patPF2PATSequence"+postfix)*
-                             process.puJetIdSqeuence*
-                             process.patPFMetByMVA*
-                             process.countSelectedLeptons
-                                  )
-
-
-
 process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
                              process.recoTauClassicHPSSequence+
@@ -328,4 +324,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 30
+process.maxEvents.input = 4
+########################################################################################################
