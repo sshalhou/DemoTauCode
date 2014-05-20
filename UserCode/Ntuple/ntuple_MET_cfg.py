@@ -61,9 +61,6 @@ runMEtUncertainties(process,
       tauCollection  = cms.InputTag('selectedPatTaus'),
       jetCollection  = cms.InputTag('selectedPatJets'),
       makePFMEtByMVA = True,
-      makeType1corrPFMEt = False,
-      makeType1p2corrPFMEt = False,
-      makeNoPileUpPFMEt = False,
       doSmearJets = False,
       addToPatDefaultSequence = False
                     )
