@@ -45,6 +45,11 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 #process.load("PhysicsTools.PatUtils.tools.metUncertaintyTools")
 
 
+process.load('Configuration.StandardSequences.Services_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.GlobalTag.globaltag = 'START53_V23::All'
+
+
 ##-------------------- Import the JEC services -----------------------
 process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
