@@ -60,7 +60,7 @@ process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 runMEtUncertainties(process,
       electronCollection  = cms.InputTag('selectedPatElectrons'),
       muonCollection  = cms.InputTag('selectedPatMuons'),
-      tauCollection  = None, #cms.InputTag('selectedPatTaus'),
+      tauCollection  = cms.InputTag('selectedPatTaus'),
       jetCollection  = cms.InputTag('selectedPatJets'),
       makePFMEtByMVA = True,
       doSmearJets = False,
