@@ -110,7 +110,7 @@ outputCommands = cms.untracked.vstring('drop *')
 #################################
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
-metUncertaintySequence.pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
+process.metUncertaintySequence.pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
 
 process.p = cms.Path(process.myProducerLabel+
                      process.pfMEtMVAtuple+
