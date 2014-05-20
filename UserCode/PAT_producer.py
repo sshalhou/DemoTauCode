@@ -13,8 +13,8 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
-
-KeepAll = True
+RunMETUnc = False
+KeepAll = False
 
 
 
@@ -296,6 +296,7 @@ runMEtUncertainties(process,
                     )
 
 
+
 ##################################################
 # Let it run
 ###################################################
@@ -303,10 +304,11 @@ process.p = cms.Path(        process.VertexPresent+
                              process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
-                             process.metUncertaintySequence+
                              process.countSelectedLeptons
                                   )
 
+if RunMETUnc:
+  process.p += process.metUncertaintySequence
 
 
 if not postfix == "":
@@ -337,5 +339,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 25
+process.maxEvents.input = 100
 ########################################################################################################
