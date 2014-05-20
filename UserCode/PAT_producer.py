@@ -212,6 +212,8 @@ process.patPFMetByMVA = process.patMETs.clone(
     genMETSource = cms.InputTag('genMetTrue')
 )
 
+process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
+
 
 process.mvametPF2PATsequence = cms.Sequence(
                 process.pfMEtMVAsequence*
