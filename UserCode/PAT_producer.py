@@ -78,6 +78,8 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
                                           )
 
 
+process.out.outputCommands +=['keep *_isomuons*_*_*']
+
 
 ###################################################
 # rm MC matching if DATA
@@ -95,6 +97,7 @@ process.load("CMGTools.External.pujetidsequence_cff")
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
+
 
 ###################################################
 # needed for JEC
@@ -159,7 +162,8 @@ process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
 ###################################################
 
-process.load("Configuration.StandardSequences.GeometryPilot2_cff")
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
@@ -270,10 +274,9 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 )
 
 
-
-
-#from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
-#process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
+##################################################
+# run the MET systematic tool
+##################################################
 
 
 
@@ -283,13 +286,9 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 ###################################################
 process.p = cms.Path(        process.VertexPresent+
                              process.mvametPF2PATsequence+
-#                             getattr(process,"patPF2PATSequence"+postfix)+
-#                             process.patPFMetByMVA+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
-                             #process.PFTau
-                             #process.SelectMuonEvents
                                   )
 
 
