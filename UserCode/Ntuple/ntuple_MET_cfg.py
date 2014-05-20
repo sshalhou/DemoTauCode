@@ -37,7 +37,7 @@ process.pfMEtMVAtuple = pfMEtMVA.clone(
                       #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
                                           )
 
-process.replace(pfMEtMVA, process.pfMEtMVAtuple)
+pfMEtMVA.replace(process.pfMEtMVAtuple)
 
 
 
