@@ -41,7 +41,9 @@ process.pfMEtMVAtuple = process.pfMEtMVA.clone(
 
 # apply type I/type I + II PFMEt corrections to pat::MET object
 # and estimate systematic uncertainties on MET
-from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+#from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
+process.load("PhysicsTools.PatUtils.tools.metUncertaintyTools")
+
 runMEtUncertainties(process,
       electronCollection  = cms.InputTag('selectedPatElectrons'),
       muonCollection  = cms.InputTag('selectedPatMuons'),
