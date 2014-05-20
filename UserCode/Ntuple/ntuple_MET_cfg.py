@@ -118,7 +118,7 @@ process.p = cms.Path(process.myProducerLabel+
                      +process.metUncertaintySequence
                      )
 
-p.replace(pfMEtMVA,pfMEtMVAtuple)
+process.p.replace(pfMEtMVA,pfMEtMVAtuple)
 
 
 process.e = cms.EndPath(process.out)
