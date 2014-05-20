@@ -108,7 +108,8 @@ process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 process.p = cms.Path(process.myProducerLabel+
                      process.pfMEtMVAtuple+
-                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus+
-                     process.metUncertaintySequence)
+                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus
+                     #+process.metUncertaintySequence
+                     )
 
 process.e = cms.EndPath(process.out)
