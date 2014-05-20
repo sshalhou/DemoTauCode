@@ -30,12 +30,13 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
-process.pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
+#pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
 
-#process.pfMEtMVAtuple = pfMEtMVA.clone(
-#                      srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
+pfMEtMVAtuple = pfMEtMVA.clone(
+                      srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
                       #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
-#                                          )
+                                          )
+
 
 
 
@@ -116,5 +117,8 @@ process.p = cms.Path(process.myProducerLabel+
                      process.TupleMuons*process.TupleTaus*process.TupleMuonTaus
                      +process.metUncertaintySequence
                      )
+
+p.replace(pfMEtMVA,pfMEtMVAtuple)
+
 
 process.e = cms.EndPath(process.out)
