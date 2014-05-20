@@ -55,7 +55,7 @@ process.GlobalTag.globaltag = 'START53_V23::All'
 
 
 ##-------------------- Import the JEC services -----------------------
-process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+#process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
 runMEtUncertainties(process,
       electronCollection  = cms.InputTag('selectedPatElectrons'),
@@ -108,7 +108,7 @@ outputCommands = cms.untracked.vstring('drop *')
 # keep everything produced by Ntuple
 #################################
 process.out.outputCommands +=['keep *_*_*_Ntuple']
-process.out.outputCommands +=['keep *_*_*_*']
+
 
 
 process.p = cms.Path(process.myProducerLabel+
