@@ -1,5 +1,4 @@
 import FWCore.ParameterSet.Config as cms
-from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -49,7 +48,8 @@ runMEtUncertainties(process,
       tauCollection  = cms.InputTag('selectedPatTaus'),
       jetCollection  = cms.InputTag('selectedPatJets'),
       makePFMEtByMVA = True,
-      doSmearJets = False
+      doSmearJets = False,
+      addToPatDefaultSequence = False
                     )
 
 
