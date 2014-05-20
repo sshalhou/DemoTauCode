@@ -65,6 +65,9 @@ runMEtUncertainties(process,
       makePFMEtByMVA = True,
       doSmearJets = False,
       addToPatDefaultSequence = False
+      makeType1corrPFMEt = False,
+      makeType1p2corrPFMEt = False,
+      makeNoPileUpPFMEt = False
                     )
 
 
