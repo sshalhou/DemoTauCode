@@ -1,5 +1,5 @@
 import FWCore.ParameterSet.Config as cms
-
+from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
