@@ -28,9 +28,10 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA as pfMEtMVAtuple
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
-process.pfMEtMVAtuple = process.pfMEtMVA.clone(
+process.pfMEtMVAtuple = pfMEtMVAtuple.clone(
                     srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
                                           )
 
