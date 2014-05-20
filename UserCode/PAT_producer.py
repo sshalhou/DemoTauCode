@@ -14,7 +14,7 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-KeepAll = False
+KeepAll = True
 
 
 
@@ -291,7 +291,8 @@ runMEtUncertainties(process,
       muonCollection  = cms.InputTag('selectedPatMuons'),
       tauCollection  = cms.InputTag('selectedPatTaus'),
       jetCollection  = cms.InputTag('selectedPatJets'),
-      makePFMEtByMVA = True
+      makePFMEtByMVA = True,
+      doSmearJets = False
                     )
 
 
