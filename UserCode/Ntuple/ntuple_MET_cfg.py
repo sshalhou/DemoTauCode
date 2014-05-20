@@ -30,7 +30,6 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 #process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
-#pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
 
 pfMEtMVA = pfMEtMVA.clone(
                       srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
@@ -38,7 +37,7 @@ pfMEtMVA = pfMEtMVA.clone(
                                           )
 
 
-
+pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
 
 
 ##################################################
