@@ -213,7 +213,7 @@ process.patPFMetByMVA = process.patMETs.clone(
 )
 
 process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
-
+process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
 
 process.mvametPF2PATsequence = cms.Sequence(
                 process.pfMEtMVAsequence*
