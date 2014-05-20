@@ -77,7 +77,7 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
                                           )
 
 
-process.out.outputCommands +=['keep *_isomuons*_*_*']
+
 
 
 ###################################################
@@ -286,7 +286,13 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # apply type I/type I + II PFMEt corrections to pat::MET object
 # and estimate systematic uncertainties on MET
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
-runMEtUncertainties(process)
+runMEtUncertainties(process,
+      electronCollection  = cms.InputTag('selectedPatElectrons'),
+      muonCollection  = cms.InputTag('selectedPatMuons'),
+      tauCollection  = cms.InputTag('selectedPatTaus'),
+      jetCollection  = cms.InputTag('selectedPatJets'),
+      makePFMEtByMVA = True
+                    )
 
 
 ##################################################
