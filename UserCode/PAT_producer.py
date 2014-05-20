@@ -318,7 +318,7 @@ else:
   process.out.outputCommands +=['keep recoPFTaus_isotaus__PAT']
   process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
   process.out.outputCommands +=['keep recoGsfElectrons_isoelectrons__PAT']
-  process.out.outputCommands +=['recoGsfTracks_electronGsfTracks__RECO']
+  process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__RECO']
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
