@@ -32,10 +32,14 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
 
 
-process.pfMEtMVA = pfMEtMVA.clone(
+process.pfMEtMVAtuple = pfMEtMVA.clone(
                       srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
                       #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
                                           )
+
+process.replace(pfMEtMVA, process.pfMEtMVAtuple)
+
+
 
 ##################################################
 # run the MET systematic tool
