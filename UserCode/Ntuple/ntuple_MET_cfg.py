@@ -110,6 +110,7 @@ outputCommands = cms.untracked.vstring('drop *')
 #################################
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
+process.metUncertaintySequence.replace(pfMEtMVA,process.pfMEtMVAtuple)
 
 process.p = cms.Path(process.myProducerLabel+
                      process.pfMEtMVAtuple+
