@@ -55,7 +55,7 @@ process.GlobalTag.globaltag = 'START53_V23::All'
 
 
 ##-------------------- Import the JEC services -----------------------
-#process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
 runMEtUncertainties(process,
       electronCollection  = cms.InputTag('selectedPatElectrons'),
