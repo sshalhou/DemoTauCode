@@ -37,7 +37,7 @@ pfMEtMVA = pfMEtMVA.clone(
                                           )
 
 
-pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
+process.pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
 
 
 ##################################################
