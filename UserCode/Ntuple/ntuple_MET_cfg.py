@@ -28,9 +28,6 @@ process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus')
                                                    )
 
-process.load("UserConfigs.Configs.mvametmutauproducer_cfi")
-
-
 process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
