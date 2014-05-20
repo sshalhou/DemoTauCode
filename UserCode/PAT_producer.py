@@ -73,8 +73,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # in later stages isomuons, isoelectrons are a resonable
 # preselection for MET corrections
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-                                          useType1 = cms.bool(True)
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
                                           )
 
 
@@ -209,7 +208,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(False),
+    addMuonCorrections = cms.bool(True),
     genMETSource = cms.InputTag('genMetTrue')
 )
 
@@ -321,5 +320,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 4
+process.maxEvents.input = 25
 ########################################################################################################
