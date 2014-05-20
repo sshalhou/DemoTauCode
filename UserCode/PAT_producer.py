@@ -303,6 +303,7 @@ process.p = cms.Path(        process.VertexPresent+
                              process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
+                             process.metUncertaintySequence+
                              process.countSelectedLeptons
                                   )
 
