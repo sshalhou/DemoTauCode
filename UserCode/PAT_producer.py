@@ -318,7 +318,7 @@ else:
   process.out.outputCommands +=['keep recoPFTaus_isotaus__PAT']
   process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
   process.out.outputCommands +=['keep recoGsfElectrons_isoelectrons__PAT']
-
+  process.out.outputCommands +=['recoGsfTracks_electronGsfTracks__RECO']
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
@@ -348,5 +348,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 100
+process.maxEvents.input = 300
 ########################################################################################################
