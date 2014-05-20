@@ -18,6 +18,24 @@ muonSrc = cms.untracked.InputTag("selectedPatMuons")
 )
 
 
+##################
+# Set up a recalc
+# of the MVA met
+# based on stuff in the
+# PATtuple
+####################
+
+# needed for MVA met, but need to be here
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
+
+process.pfMEtMVAtuple = process.pfMEtMVA.clone(
+                          srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
+                                          )
+
+
+
 #process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
 process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.untracked.InputTag('selectedPatMuons'),
@@ -57,6 +75,8 @@ outputCommands = cms.untracked.vstring('drop *')
 process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
-process.p = cms.Path(process.myProducerLabel+process.TupleMuons*process.TupleTaus*process.TupleMuonTaus)
+process.p = cms.Path(process.myProducerLabel+
+                     process.pfMEtMVAtuple+
+                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus)
 
 process.e = cms.EndPath(process.out)
