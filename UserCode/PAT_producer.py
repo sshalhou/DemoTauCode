@@ -215,6 +215,10 @@ process.patPFMetByMVA = process.patMETs.clone(
 
 process.mvametPF2PATsequence = cms.Sequence(
                 process.pfMEtMVAsequence*
+                # next 2 lines are from
+                # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
+                process.type0PFMEtCorrection*
+                process.patPFMETtype0Corr*
                 getattr(process,"patPF2PATSequence"+postfix)*
                 process.patPFMetByMVA
                                 )
