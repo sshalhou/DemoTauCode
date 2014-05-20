@@ -60,6 +60,24 @@ jetAlgo = "AK5"
 usePF2PAT(process,runPF2PAT=True, jetAlgo=jetAlgo, runOnMC=runOnMC, postfix=postfix)
 switchToPFJets(process)
 
+###############
+# change some tau defaults
+process.patTaus = process.patTaus.clone(embedIsolationPFCands = True,
+                                        embedIsolationPFChargedHadrCands = True,
+                                        embedIsolationPFGammaCands = True,
+                                        embedIsolationPFNeutralHadrCands = True,
+                                        embedLeadPFCand = True,
+                                        embedLeadPFChargedHadrCand = True,
+                                        embedLeadPFNeutralCand = True,
+                                        embedSignalPFCands = True,
+                                        embedSignalPFChargedHadrCands = True,
+                                        embedSignalPFGammaCands = True,
+                                        embedSignalPFNeutralHadrCands = True
+                                                        )
+
+
+
+
 # needed for MVA met, but need to be here
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
@@ -311,14 +329,13 @@ if RunMETUnc:
   process.p += process.metUncertaintySequence
 
 else:
-  process.out.outputCommands +=['keep recoPFJets_calibratedAK5PFJetsForPFMEtMVA__PAT']
+  process.out.outputCommands +=['drop recoPFCandidates_*_*_*']
   process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
-  process.out.outputCommands +=['keep recoVertexs_offlinePrimaryVertices__RECO']
-  process.out.outputCommands +=['keep recoMuons_isomuons__PAT']
-  process.out.outputCommands +=['keep recoPFTaus_isotaus__PAT']
+  process.out.outputCommands +=['keep recoPFJets_calibratedAK5PFJetsForPFMEtMVA__PAT']
   process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
-  process.out.outputCommands +=['keep recoGsfElectrons_isoelectrons__PAT']
-  process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__RECO']
+  process.out.outputCommands +=['keep recoPFMETs_pfMet__RECO']
+  process.out.outputCommands +=['keep recoGenMETs_genMetTrue__SIM']
+  process.out.outputCommands +=['keep recoPFCandidates_selectedPatJets_pfCandidates_PAT']
 
 if not postfix == "":
     process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
@@ -348,5 +365,5 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 300
+process.maxEvents.input = 400
 ########################################################################################################
