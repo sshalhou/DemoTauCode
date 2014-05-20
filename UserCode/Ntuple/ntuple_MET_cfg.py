@@ -13,7 +13,6 @@ fileNames = cms.untracked.vstring(
 )
 )
 
-from PhysicsTools.PatAlgos.patTemplate_cfg import *
 
 
 process.myProducerLabel = cms.EDProducer('Ntuple',
