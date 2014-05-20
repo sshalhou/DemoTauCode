@@ -32,7 +32,7 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 process.pfMEtMVAtuple = process.pfMEtMVA.clone(
                       #srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
-                      srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
+                      srcLeptons = cms.VInputTag("selectedPatMuons","isoelectrons","isotaus")
                                           )
 
 ##################################################
