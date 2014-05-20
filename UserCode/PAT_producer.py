@@ -203,24 +203,20 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 
-
-
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
-#process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
-
-
-
-
-process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+
+
+process.mvametPF2PATsequence = cms.Sequence(
+                process.pfMEtMVAsequence*
+                getattr(process,"patPF2PATSequence"+postfix)*
+                process.patPFMetByMVA
+                                )
+
+
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
@@ -286,8 +282,9 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 # Let it run
 ###################################################
 process.p = cms.Path(        process.VertexPresent+
-                             getattr(process,"patPF2PATSequence"+postfix)+
-                             patPFMetByMVA+
+                             process.mvametPF2PATsequence+
+#                             getattr(process,"patPF2PATSequence"+postfix)+
+#                             process.patPFMetByMVA+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
