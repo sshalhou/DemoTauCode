@@ -44,6 +44,10 @@ process.pfMEtMVAtuple = process.pfMEtMVA.clone(
 from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
 #process.load("PhysicsTools.PatUtils.tools.metUncertaintyTools")
 
+
+##-------------------- Import the JEC services -----------------------
+process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+
 runMEtUncertainties(process,
       electronCollection  = cms.InputTag('selectedPatElectrons'),
       muonCollection  = cms.InputTag('selectedPatMuons'),
