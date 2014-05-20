@@ -70,8 +70,8 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # specify settings for met mva
 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/MVAMet
 # recoil corrections should be applied at Ntuple stage
-# in later stages isomuons, isoelectrons, and isotaus
-# should be replaced by our final selecte dlepton
+# in later stages isomuons, isoelectrons are a resonable
+# preselection for MET corrections
 ###################################################
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
                                           useType1 = cms.bool(True)
@@ -287,6 +287,7 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 ###################################################
 process.p = cms.Path(        process.VertexPresent+
                              getattr(process,"patPF2PATSequence"+postfix)+
+                             patPFMetByMVA+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
