@@ -14,7 +14,7 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
-KeepAll = True
+KeepAll = False
 
 
 
@@ -71,12 +71,11 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/MVAMet
 # recoil corrections should be applied at Ntuple stage
 # in later stages isomuons, isoelectrons, and isotaus
-# should be replaced by our final selected leptons
+# should be replaced by our final selecte dlepton
 ###################################################
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
                                           useType1 = cms.bool(True)
                                           )
-
 
 
 
@@ -203,33 +202,15 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 ###################################################
 
 
-
-
-
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*process.patDefaultSequence*process.patPFMetByMVA)
-#process.patPF2PATSequence.replace( process.pfMET, process.mvamet)
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
-
-
-
-
-#process.mvametseq      = cms.Sequence(process.pfMEtMVAsequence)
-#process.mvametpath        = cms.Path(process.mvametseq)
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
 )
-#process.mvamet = cms.Sequence(process.pfMEtMVAsequence*getattr(process,"patPF2PATSequence"+postfix)*process.patPFMetByMVA)
+
+
 process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
-
-
-
-
-
-
 
 # keep CSV info
 process.out.outputCommands +=['keep *_combinedSecondaryVertexBJetTagsAOD_*_*']
@@ -286,94 +267,36 @@ process.countSelectedLeptons = cms.EDFilter("PATLeptonCountFilter",
 #from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 #process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
-##################################################
-# run the MET systematic tool
-##################################################
-
-
-#############################
-# need to create PAT versions
-# of the iso-leptons for use with
-# the met uncertainty tool
-#############################
-
-
-
-#from PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi import *
-#process.patIsoElec = process.patElectrons.clone(electronSource = cms.InputTag("isoelectrons"))
-#from PhysicsTools.PatAlgos.producersLayer1.muonProducer_cfi import *
-#process.patIsoMuon = process.patMuons.clone(muonSource = cms.InputTag("isomuons"))
-#from PhysicsTools.PatAlgos.producersLayer1.tauProducer_cfi import *
-#process.patIsoTau = process.patTaus.clone(tauSource = cms.InputTag("isotaus")
-#                                          )
-
-
-# apply type I/type I + II PFMEt corrections to pat::MET object
-# and estimate systematic uncertainties on MET
-from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
-process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
-import RecoMET.METProducers.METSigParams_cfi as jetResolutions
-
-
-process.smearedUncorrectedJetsForPFMEtByMVA = cms.EDProducer("SmearedPFJetProducer",
-  src = cms.InputTag('ak5PFJets'),
-  jetCorrLabel = cms.string("ak5PFL1FastL2L3"),
-  dRmaxGenJetMatch = cms.string('TMath::Min(0.5, 0.1 + 0.3*TMath::Exp(-0.05*(genJetPt - 10.)))'),
-  sigmaMaxGenJetMatch = cms.double(5.),
-  inputFileName =cms.FileInPath('PhysicsTools/PatUtils/data/pfJetResolutionMCtoDataCorrLUT.root'),
-  lutName = cms.string('pfJetResolutionMCtoDataCorrLUT'),
-  jetResolutions = jetResolutions.METSignificance_params,
-  skipRawJetPtThreshold = cms.double(10.), # GeV
-  skipCorrJetPtThreshold = cms.double(1.e-2),
-  srcGenJets = cms.InputTag('ak5GenJetsNoNu')
-                            )
-
-
-
-
-runMEtUncertainties(process,
-      electronCollection = cms.InputTag('selectedPatElectrons'),
-      photonCollection = '',
-      muonCollection = cms.InputTag('selectedPatMuons'),
-      tauCollection = cms.InputTag('selectedPatTaus'),
-      jetCollection = cms.InputTag('patJets'),
-      jetCorrLabel = "L3Absolute",
-      doSmearJets = True,
-      makeType1corrPFMEt = True,
-      makeType1p2corrPFMEt = True,
-      makePFMEtByMVA = True,
-      makeNoPileUpPFMEt = False,
-      doApplyType0corr = False
-
-
-                      )
-
 
 
 
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        process.VertexPresent+
-                             process.pfMEtMVAsequence*
-                             getattr(process,"patPF2PATSequence"+postfix)*
-#                             process.smearedUncorrectedJetsForPFMEtByMVA+
-                             process.patPFMetByMVA+
-                             #getattr(process,"patPF2PATSequence"+postfix)+
-                             process.recoTauClassicHPSSequence+
-                             process.puJetIdSqeuence+
-                             process.countSelectedLeptons
-#                             +process.patIsoElec
-#                             +process.patIsoMuon
-#                             +process.patIsoTau
-#                             +process.metUncertaintySequence
-                             #process.PFTau
-                             #process.SelectMuonEvents
-                                  )
 
 
 
 ##################################################
+# Let it run
+###################################################
+process.p = cms.Path(        process.VertexPresent*
+                             process.pfMEtMVAsequence*
+                             getattr(process,"patPF2PATSequence"+postfix)*
+                             process.puJetIdSqeuence*
+                             process.patPFMetByMVA*
+                             process.countSelectedLeptons
+                                  )
+
+
+
+process.p = cms.Path(        process.VertexPresent+
+                             getattr(process,"patPF2PATSequence"+postfix)+
+                             process.recoTauClassicHPSSequence+
+                             process.puJetIdSqeuence+
+                             process.countSelectedLeptons
+                             #process.PFTau
+                             #process.SelectMuonEvents
+                                  )
 
 
 
@@ -386,6 +309,8 @@ if not postfix == "":
 ###################################################
 
 process.out.SelectEvents.SelectEvents = ['p']
+
+
 
 ########################################################################################################
 
@@ -403,5 +328,4 @@ process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR5
                           'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
                           'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
 
-process.maxEvents.input = 4
-########################################################################################################
+process.maxEvents.input = 30
