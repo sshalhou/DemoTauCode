@@ -37,8 +37,8 @@ pfMEtMVA = pfMEtMVA.clone(
                                           )
 
 
-process.pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
-
+pfMEtMVA.srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
+process.extend(pfMEtMVA)
 
 ##################################################
 # run the MET systematic tool
