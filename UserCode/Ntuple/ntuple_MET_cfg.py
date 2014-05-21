@@ -140,7 +140,7 @@ outputCommands = cms.untracked.vstring('drop *')
 #################################
 # keep everything produced by Ntuple
 #################################
-process.out.outputCommands +=['keep *_*_*_Ntuple']
+process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
 
 
 
