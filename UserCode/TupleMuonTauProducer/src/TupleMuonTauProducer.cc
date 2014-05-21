@@ -198,9 +198,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       // corrections to the MET before
       // running SVFit
 
-      double met=(*mvamet)[0].momentum();
+      double met=(*mvamet)[0].pt();
       double metphi=(*mvamet)[0].phi();
-      cout<<" met, metphi "<<met<<" , "<<metphi<<" met pt "<<(*mvamet)[0].pt();
+      cout<<" met, metphi "<<met<<" , "<<metphi<<" met et "<<(*mvamet)[0].et();
       cout<<" met sumEt "<<(*mvamet)[0].sumEt()<<endl;
       //RecoilCorrector corrector;
       //corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
