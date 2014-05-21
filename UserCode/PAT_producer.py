@@ -76,6 +76,23 @@ process.patTaus = process.patTaus.clone(embedIsolationPFCands = True,
                                                         )
 
 
+#############################
+# add in some gen level jet collections
+# needed for the jet smear in MET unc.
+##############################
+
+from RecoJets.Configuration.GenJetParticles_cff import *
+from RecoJets.Configuration.RecoGenJets_cff import *
+
+
+process.genForPF2PATSequence = cms.Sequence(
+    genParticlesForJetsNoNu +
+    iterativeCone5GenJetsNoNu +
+    ak5GenJetsNoNu +
+    ak7GenJetsNoNu
+    )
+
+
 
 
 # needed for MVA met, but need to be here
@@ -338,7 +355,13 @@ else:
   process.out.outputCommands +=['keep recoPFCandidates_selectedPatJets_pfCandidates_PAT']
   process.out.outputCommands +=['keep recoMuons_muons__RECO']
   process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__RECO']
+  process.out.outputCommands +=['keep *_ak5GenJetsNoNu_*_PAT']
+  process.out.outputCommands +=['keep *_*genParticlesForJetsNoNu*_*_PAT']
+  process.out.outputCommands +=['keep *_*iterativeCone5GenJetsNoNu*_*_PAT']
+  process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
 
+if runOnMC:
+    process.p += process.genForPF2PATSequence
 
 
 if not postfix == "":
