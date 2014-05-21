@@ -194,6 +194,23 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
 
       ////////////
+      // apply Phil's Harris recoil
+      // corrections to the MET before
+      // running SVFit
+
+      double met=(*mvamet)[0].momentum();
+      double metphi=(*mvamet)[0].phi();
+      cout<<" met, metphi "<<met<<" , "<<metphi<<" met pt "<<(*mvamet)[0].pt();
+      cout<<" met sumEt "<<(*mvamet)[0].sumEt()<<endl;
+      RecoilCorrector corrector;
+      //corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
+      //printf("corrected met: %10.2f%10.2f\n",met,metphi);
+
+
+
+
+      ////////////
+
 
       TMatrixD covMET(2, 2); // PFMET significance matrix
       std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
