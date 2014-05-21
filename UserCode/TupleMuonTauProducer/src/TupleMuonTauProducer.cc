@@ -80,7 +80,7 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
   double PAR1_;
-  string PAR2_;
+  string NAME_;
 
 
 };
@@ -102,14 +102,14 @@ tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" )),
 PAR1_(iConfig.getParameter<double>("PAR1" )),
-PAR2_(iConfig.getParameter<string>("PAR2" ))
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
 
 
 
 
-   produces< vector<TupleMuonTau> >(PAR2_).setBranchAlias(PAR2_);
+   produces< vector<TupleMuonTau> >(NAME_).setBranchAlias(NAME_);
 
 
   //register your products
@@ -163,7 +163,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   cout<<" PAR1_ "<<PAR1_<<endl;
-  cout<<" PAR2_ "<<PAR2_<<endl;
+  cout<<" NAME_ "<<NAME_<<endl;
 
   ////////////
 
@@ -243,7 +243,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   }
 
-   iEvent.put( TupleMuonTaus, PAR2_ );
+   iEvent.put( TupleMuonTaus, NAME_ );
 
 
   /* This is an event example

@@ -65,6 +65,7 @@ private:
   // ----------member data ---------------------------
   edm::InputTag muonSrc_;
   edm::InputTag vertexSrc_;
+  string NAME_;
 
 };
 
@@ -82,11 +83,11 @@ private:
 //
 TupleMuonProducer::TupleMuonProducer(const edm::ParameterSet& iConfig):
 muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" )),
-vertexSrc_(iConfig.getUntrackedParameter<edm::InputTag>("vertexSrc" ))
+vertexSrc_(iConfig.getUntrackedParameter<edm::InputTag>("vertexSrc" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
-  produces<vector<TupleMuon>>("TupleMuons").setBranchAlias("TupleMuons");
-
+  produces<vector<TupleMuon>>(NAME_).setBranchAlias(NAME_);
 
   //register your products
   /* Examples
@@ -359,7 +360,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
-  iEvent.put( TupleMuons, "TupleMuons" );
+  iEvent.put( TupleMuons, NAME_ );
 
 
   /* This is an event example

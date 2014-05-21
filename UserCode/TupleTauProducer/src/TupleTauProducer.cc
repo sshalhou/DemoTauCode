@@ -68,6 +68,7 @@ private:
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
+  string NAME_;
 
 
 
@@ -86,11 +87,11 @@ private:
 // constructors and destructor
 //
 TupleTauProducer::TupleTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" ))
-
+tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
-  produces< vector<TupleTau> >("TupleTaus").setBranchAlias("TupleTaus");
+  produces< vector<TupleTau> >(NAME_).setBranchAlias(NAME_);
 
 
 
@@ -182,7 +183,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
-  iEvent.put( TupleTaus, "TupleTaus" );
+  iEvent.put( TupleTaus, NAME_ );
 
   /* This is an event example
   //Read 'ExampleData' from the Event

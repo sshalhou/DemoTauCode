@@ -70,25 +70,26 @@ runMEtUncertainties(process,
 
 
 
-
-#process.NtupleMuons = cms.EDProducer('NtupleMuons' ,muonSrc =cms.untracked.InputTag('selectedPatMuons') )
-process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
+##########################
+# Nominal Systematics    #
+##########################
+process.TupleMuons-Nominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.untracked.InputTag('selectedPatMuons'),
-                vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices')
+                vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices'),
+                NAME=cms.string("TupleMuons-Nominal")
                                      )
 
-process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.untracked.InputTag('selectedPatTaus')
+process.TupleTaus-Nominal = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.untracked.InputTag('selectedPatTaus'),
+                NAME=cms.string("TupleTaus-Nominal")
                                                    )
 
-
-
-process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
+process.TupleMuonTaus-Nominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
                 mvametSrc = cms.untracked.InputTag("pfMEtMVA"),
                 PAR1=cms.double(321.),
-                PAR2=cms.string("TupleMuonTaus-Nominal")
+                NAME=cms.string("TupleMuonTaus-Nominal")
                                      )
 
 
@@ -114,9 +115,9 @@ process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 
 process.p = cms.Path(process.myProducerLabel+
-                     process.pfMEtMVAnominal+
-                     process.TupleMuons*process.TupleTaus*process.TupleMuonTaus
-                     +process.metUncertaintySequence
+      process.pfMEtMVAnominal+
+      process.TupleMuons-Nominal*process.TupleTaus-Nominal*process.TupleMuonTaus-Nominal
+      +process.metUncertaintySequence
                      )
 
 process.e = cms.EndPath(process.out)
