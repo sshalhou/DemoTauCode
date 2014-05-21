@@ -73,18 +73,18 @@ runMEtUncertainties(process,
 ##########################
 # Nominal Systematics    #
 ##########################
-process.TupleMuons-Nominal = cms.EDProducer('TupleMuonProducer' ,
+process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.untracked.InputTag('selectedPatMuons'),
                 vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuons-Nominal")
                                      )
 
-process.TupleTaus-Nominal = cms.EDProducer('TupleTauProducer' ,
+process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus'),
                 NAME=cms.string("TupleTaus-Nominal")
                                                    )
 
-process.TupleMuonTaus-Nominal = cms.EDProducer('TupleMuonTauProducer' ,
+process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
                 mvametSrc = cms.untracked.InputTag("pfMEtMVA"),
@@ -116,7 +116,7 @@ process.out.outputCommands +=['keep *_*_*_Ntuple']
 
 process.p = cms.Path(process.myProducerLabel+
       process.pfMEtMVAnominal+
-      process.TupleMuons-Nominal*process.TupleTaus-Nominal*process.TupleMuonTaus-Nominal
+      process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
       +process.metUncertaintySequence
                      )
 
