@@ -46,7 +46,7 @@ Implementation:
 #include "DataFormats/PatCandidates/interface/MET.h"
 #include "DataFormats/METReco/interface/PFMET.h"
 #include "DataFormats/METReco/interface/PFMETCollection.h"
-#include "UserCode/RecoilCode/interface/RecoilCorrector.hh"
+#include "UserCode/RecoilCorrector/interface/RecoilCorrector.hh"
 
 
 
