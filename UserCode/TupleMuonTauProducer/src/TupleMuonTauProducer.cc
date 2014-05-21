@@ -110,7 +110,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 
 
 
-   produces< vector<TupleMuonTau> >(NAME_).setBranchAlias(NAME_);
+  produces< vector<TupleMuonTau> >(NAME_).setBranchAlias(NAME_);
 
 
   //register your products
@@ -197,14 +197,25 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       // apply Phil's Harris recoil
       // corrections to the MET before
       // running SVFit
-
       double met=(*mvamet)[0].pt();
       double metphi=(*mvamet)[0].phi();
-      cout<<" met, metphi "<<met<<" , "<<metphi<<" met et "<<(*mvamet)[0].et();
-      cout<<" met sumEt "<<(*mvamet)[0].sumEt()<<endl;
-      //RecoilCorrector corrector;
-      //corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
-      //printf("corrected met: %10.2f%10.2f\n",met,metphi);
+      double leptonPt = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).pt();
+      double leptonPhi  = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).phi();
+      double GenZPt = 0.;
+      double GenZPhi = 0.;
+
+
+      if( abs(((*muons)[i]).pdgId()) == 13 && abs(((*taus)[j]).pdgId()) == 15)
+      {
+        GenZPt =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).pt();
+        GenZPhi =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).phi();
+        RecoilCorrector corrector;
+
+      }
+
+      cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
+      corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
+      printf("corrected met: %10.2f%10.2f\n",met,metphi);
 
 
 
@@ -223,13 +234,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       {
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-         ((*taus)[j]).corrected_p4()));
+        ((*taus)[j]).corrected_p4()));
       }
 
       else
       {
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-         ((*taus)[j]).corrected_p4()));
+        ((*taus)[j]).corrected_p4()));
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
 
 
@@ -261,7 +272,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   }
 
-   iEvent.put( TupleMuonTaus, NAME_ );
+  iEvent.put( TupleMuonTaus, NAME_ );
 
 
   /* This is an event example
