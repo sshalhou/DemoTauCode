@@ -103,7 +103,7 @@ process.TupleTausTauEnUp = cms.EDProducer('TupleTauProducer' ,
 
 process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausTauEnUp','TupleTausTauEnUp','Ntuple'),
-                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnUp"),
                 PAR1=cms.double(321.),
                 NAME=cms.string("TupleMuonTausTauEnUp")
@@ -122,7 +122,7 @@ process.TupleTausTauEnDown = cms.EDProducer('TupleTauProducer' ,
 
 process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausTauEnDown','TupleTausTauEnDown','Ntuple'),
-                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnDown"),
                 PAR1=cms.double(321.),
                 NAME=cms.string("TupleMuonTausTauEnDown")
