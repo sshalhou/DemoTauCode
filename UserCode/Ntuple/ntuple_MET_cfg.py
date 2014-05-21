@@ -3,7 +3,7 @@ process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(50) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 
 process.source = cms.Source("PoolSource",
 # replace 'myfile.root' with the source file you want to use
@@ -92,10 +92,41 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                                      )
 
 
+##########################
+# Tau ES Up Systematics    #
+##########################
+
+process.TupleTausTauEnUp = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.untracked.InputTag('shiftedPatTausEnUp'),
+                NAME=cms.string("TupleTausTauEnUp")
+                                                   )
+
+process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausTauEnUp','TupleTausTauEnUp','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
+                mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnUp"),
+                PAR1=cms.double(321.),
+                NAME=cms.string("TupleMuonTausTauEnUp")
+                                     )
 
 
+##########################
+# Tau ES Down Systematics    #
+##########################
 
 
+process.TupleTausTauEnDown = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.untracked.InputTag('shiftedPatTausEnDown'),
+                NAME=cms.string("TupleTausTauEnDown")
+                                                   )
+
+process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausTauEnDown','TupleTausTauEnDown','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
+                mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnDown"),
+                PAR1=cms.double(321.),
+                NAME=cms.string("TupleMuonTausTauEnDown")
+                                     )
 
 
 process.out = cms.OutputModule("PoolOutputModule",
@@ -116,7 +147,8 @@ process.out.outputCommands +=['keep *_*_*_Ntuple']
 process.p = cms.Path(process.myProducerLabel+
       process.pfMEtMVANominal+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
-      +process.metUncertaintySequence
+      +process.metUncertaintySequence+
+      process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
                      )
 
 process.e = cms.EndPath(process.out)
