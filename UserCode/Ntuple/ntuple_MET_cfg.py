@@ -3,7 +3,7 @@ process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(50) )
 
 process.source = cms.Source("PoolSource",
 # replace 'myfile.root' with the source file you want to use
@@ -32,9 +32,8 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
 
 
-process.pfMEtMVAnominal = pfMEtMVA.clone(
+process.pfMEtMVANominal = pfMEtMVA.clone(
                       srcLeptons = cms.VInputTag("selectedPatMuons","selectedPatElectrons","selectedPatTaus")
-                      #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
                                           )
 
 
@@ -76,20 +75,20 @@ runMEtUncertainties(process,
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.untracked.InputTag('selectedPatMuons'),
                 vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices'),
-                NAME=cms.string("TupleMuons-Nominal")
+                NAME=cms.string("TupleMuonsNominal")
                                      )
 
 process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus'),
-                NAME=cms.string("TupleTaus-Nominal")
+                NAME=cms.string("TupleTausNominal")
                                                    )
 
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
-                tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
-                muonSrc=cms.InputTag('TupleMuons','TupleMuons','Ntuple'),
-                mvametSrc = cms.untracked.InputTag("pfMEtMVA"),
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.untracked.InputTag("pfMEtMVANominal"),
                 PAR1=cms.double(321.),
-                NAME=cms.string("TupleMuonTaus-Nominal")
+                NAME=cms.string("TupleMuonTausNominal")
                                      )
 
 
