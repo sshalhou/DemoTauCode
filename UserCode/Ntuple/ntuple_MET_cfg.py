@@ -63,7 +63,7 @@ runMEtUncertainties(process,
       tauCollection  = cms.InputTag('selectedPatTaus'),
       jetCollection  = cms.InputTag('selectedPatJets'),
       makePFMEtByMVA = True,
-      doSmearJets = False,
+      doSmearJets = True,
       addToPatDefaultSequence = False
                     )
 
@@ -80,6 +80,8 @@ process.TupleMuons = cms.EDProducer('TupleMuonProducer' ,
 process.TupleTaus = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.untracked.InputTag('selectedPatTaus')
                                                    )
+
+
 
 process.TupleMuonTaus = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTaus','TupleTaus','Ntuple'),
