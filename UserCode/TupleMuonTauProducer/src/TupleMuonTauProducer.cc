@@ -202,7 +202,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       double metphi=(*mvamet)[0].phi();
       cout<<" met, metphi "<<met<<" , "<<metphi<<" met pt "<<(*mvamet)[0].pt();
       cout<<" met sumEt "<<(*mvamet)[0].sumEt()<<endl;
-      RecoilCorrector corrector;
+      //RecoilCorrector corrector;
       //corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
       //printf("corrected met: %10.2f%10.2f\n",met,metphi);
 
