@@ -211,12 +211,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         GenZPhi =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).phi();
         RecoilCorrector corrector;
 
+        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
+        corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
+        printf("corrected met: %10.2f%10.2f\n",met,metphi);
       }
-
-      cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
-      corrector->Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
-      printf("corrected met: %10.2f%10.2f\n",met,metphi);
-
 
 
 
