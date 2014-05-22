@@ -7,7 +7,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "DataFormats/HepMCCandIdate/interface/GenParticle.h"
+#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
@@ -23,7 +23,7 @@ class GenBosonDecayFinder
 public:
   GenBosonDecayFinder();
   virtual ~GenBosonDecayFinder();
-  voId findBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
+  void findBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
   int &, LorentzVector&,int &, LorentzVector&,bool&);
 
 
@@ -41,7 +41,7 @@ GenBosonDecayFinder::GenBosonDecayFinder(){}
 
 GenBosonDecayFinder::~GenBosonDecayFinder(){}
 
-voId GenBosonDecayFinder::findBosonAndDaugters (const reco::GenParticleCollection & genparticles,
+void GenBosonDecayFinder::findBosonAndDaugters (const reco::GenParticleCollection & genparticles,
 int& BosonPdgId, LorentzVector& BosonP4, int& DaughterOnePdgId,
 LorentzVector& DaughterOneP4,int& DaughterTwoPdgId, LorentzVector& DaughterTwoP4,
 bool& ApplyRecoilCorrection)

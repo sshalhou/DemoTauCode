@@ -38,12 +38,12 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
-#include "TauAnalysis/CandIdateTools/interface/NSVfitStandaloneAlgorithm.h"
+#include "TauAnalysis/CandidateTools/interface/NSVfitStandaloneAlgorithm.h"
 #include "TLorentzVector.h"
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
-#include "DataFormats/PatCandIdates/interface/MET.h"
+#include "DataFormats/PatCandidates/interface/MET.h"
 #include "DataFormats/METReco/interface/PFMET.h"
 #include "DataFormats/METReco/interface/PFMETCollection.h"
 #include "UserCode/RecoilCorrector/interface/RecoilCorrector.hh"
@@ -65,17 +65,17 @@ public:
   explicit TupleMuonTauProducer(const edm::ParameterSet&);
   ~TupleMuonTauProducer();
 
-  static voId fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
 private:
-  virtual voId beginJob() ;
-  virtual voId produce(edm::Event&, const edm::EventSetup&);
-  virtual voId endJob() ;
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-  virtual voId beginRun(edm::Run&, edm::EventSetup const&);
-  virtual voId endRun(edm::Run&, edm::EventSetup const&);
-  virtual voId beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-  virtual voId endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
@@ -145,7 +145,7 @@ TupleMuonTauProducer::~TupleMuonTauProducer()
 //
 
 // ------------ method called to produce the data  ------------
-voId
+void
 TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
@@ -186,8 +186,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       cout<<" i,j = "<<i<<","<<j;
-      cout<<" muon PDGId "<<((*muons)[i]).pdgId();
-      cout<<" tau PDGId "<<((*taus)[j]).pdgId()<<endl;
+      cout<<" muon PDGID "<<((*muons)[i]).pdgId();
+      cout<<" tau PDGID "<<((*taus)[j]).pdgId()<<endl;
 
       TupleMuonTau CurrentMuonTau;
 
@@ -365,44 +365,44 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-voId
+void
 TupleMuonTauProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-voId
+void
 TupleMuonTauProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-voId
+void
 TupleMuonTauProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-voId
+void
 TupleMuonTauProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-voId
+void
 TupleMuonTauProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-voId
+void
 TupleMuonTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
-voId
+void
 TupleMuonTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
-  //The following says we do not know what parameters are allowed so do no valIdation
+  //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
   desc.setUnknown();
