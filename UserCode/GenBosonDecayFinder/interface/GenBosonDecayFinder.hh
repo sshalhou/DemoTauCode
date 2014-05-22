@@ -26,12 +26,12 @@ public:
 
 private:
 
-  const higgsBoson = 25;
-  const zBoson = 23;
-  const wBoson = 24;
-  const electron = 11;
-  const muon = 13;
-  const tau = 15;
+  const int higgsBoson = 25;
+  const int zBoson = 23;
+  const int wBoson = 24;
+  const int electron = 11;
+  const int muon = 13;
+  const int tau = 15;
 
 };
 
@@ -56,7 +56,7 @@ bool& ApplyRecoilCorrection)
 
       const reco::GenParticle & mc = (*genParticles)[i];
       cout<<mc.pdgId()<<" "<<mc.status()<<endl;
-      //cout<< higgsBoson <<endl;
+      cout<< higgsBoson <<endl;
 
 
 
