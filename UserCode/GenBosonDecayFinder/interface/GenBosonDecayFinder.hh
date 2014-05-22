@@ -17,7 +17,7 @@ class GenBosonDecayFinder
 
 public:
     GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> >);
-    ~GenBosonDecayFinder()
+    ~GenBosonDecayFinder();
 
 
 };
