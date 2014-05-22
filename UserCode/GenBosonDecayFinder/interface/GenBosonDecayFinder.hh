@@ -2,7 +2,20 @@
 #include <sstream>
 #include <string>
 
-#include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.h"
+#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+
+using namespace reco;
+using namespace std;
+
+class GenBosonDecayFinder
+{
+
+public:
+    GenBosonDecayFinder(const GenParticleCollection);
+    ~GenBosonDecayFinder()
+
+
+}
 
 GenBosonDecayFinder::GenBosonDecayFinder(const GenParticleCollection genparticles)
 {
