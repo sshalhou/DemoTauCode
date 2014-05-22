@@ -53,42 +53,57 @@ bool& ApplyRecoilCorrection)
   {
 
 
-    if( genparticles[mc].pdgId()  == 23 ||
-    genparticles[mc].pdgId()  == 24  ||
+    if( abs(genparticles[mc].pdgId())  == 24 ||
+    genparticles[mc].pdgId()  == 23  ||
     genparticles[mc].pdgId()  == 25 )
     {
       // only care about the hard interaction
       if( genparticles[mc].status() == 3)
       {
 
+        // as of yet, we have no correctins for
+        // di-Boson events
+        // thus, filter those out here
+        if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
+        else ApplyRecoilCorrection = 1;
 
         BosonPdgID = genparticles[mc].pdgId();
         BosonP4 = genparticles[mc].p4();
 
         std::size_t nDaughters = genparticles[mc].numberOfDaughters();
+        vector <int> daughter_indices;
+        daughter_indices.clear();
 
-        std::cout<<" num dau "<<nDaughters<<endl;
-        if(nDaughters==1)
+        for(std::size_t d = 0; d<nDaughters; ++d )
         {
-          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
-          DaughterOneP4  = genparticles[mc].daughter(0)->p4();
-          // if we see this again, it means we have a WW, ZZ, or HH event
-          if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
-          else ApplyRecoilCorrection = 1;
+          int pdgId = abs(genparticles[mc].daughter(d)->pdgId());
+          if(pdgId == 11 || pdgId == 13 || pdgId ==15) daughter_indices.push_back(d);
+        }
+
+
+        if(daughter_indices.size()>=1)
+        {
+          int d1 = daughter_indices[0];
+          DaughterOnePdgID  = genparticles[mc].daughter(d1)->pdgId();
+          DaughterOneP4  = genparticles[mc].daughter(d1)->p4();
 
         }
 
-        else if(nDaughters==2)
+        if(daughter_indices.size()>=1)
         {
-          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
-          DaughterOneP4  = genparticles[mc].daughter(0)->p4();
-          DaughterTwoPdgID  = genparticles[mc].daughter(1)->pdgId();
-          DaughterTwoP4  = genparticles[mc].daughter(1)->p4();
-          ApplyRecoilCorrection = 1;
-          // if we see this again, it means we have a WW, ZZ, or HH event
-          if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
-          else ApplyRecoilCorrection = 1;
+          int d2 = daughter_indices[1];
+          DaughterTwoPdgID  = genparticles[mc].daughter(d2)->pdgId();
+          DaughterTwoP4  = genparticles[mc].daughter(d2)->p4();
         }
+
+
+        daughter_indices.clear();
+
+
+
+        
+
+
 
       }
 

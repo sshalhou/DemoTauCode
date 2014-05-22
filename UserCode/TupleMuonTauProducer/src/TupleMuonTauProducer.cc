@@ -246,7 +246,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         cout<<BosonPdgID<<" = BosonPdgID "<<endl;
         cout<<DaughterOnePdgID<<" = DaughterOnePdgID "<<endl;
         cout<<DaughterTwoPdgID<<" = DaughterTwoPdgID "<<endl;
-
+        cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
 
 
