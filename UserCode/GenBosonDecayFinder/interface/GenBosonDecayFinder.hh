@@ -25,7 +25,7 @@ public:
 GenBosonDecayFinder::GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> > genparticles)
 {
 
-  std::cout<<genparticles.size()<<endl;
+  //cout<<genparticles.size()<<endl;
 
 }
 
