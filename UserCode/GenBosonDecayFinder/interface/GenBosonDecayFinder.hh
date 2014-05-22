@@ -58,7 +58,7 @@ bool& ApplyRecoilCorrection)
     genparticles[mc].pdgId()  == 25 )
     {
       // only care about the hard interaction
-      if( genparticles[mc].status() == 3)
+      if( genparticles[mc].status() == 2)
       {
 
 
