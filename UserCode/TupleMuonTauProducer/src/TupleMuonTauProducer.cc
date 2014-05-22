@@ -38,12 +38,12 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
-#include "TauAnalysis/CandidateTools/interface/NSVfitStandaloneAlgorithm.h"
+#include "TauAnalysis/CandIdateTools/interface/NSVfitStandaloneAlgorithm.h"
 #include "TLorentzVector.h"
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
-#include "DataFormats/PatCandidates/interface/MET.h"
+#include "DataFormats/PatCandIdates/interface/MET.h"
 #include "DataFormats/METReco/interface/PFMET.h"
 #include "DataFormats/METReco/interface/PFMETCollection.h"
 #include "UserCode/RecoilCorrector/interface/RecoilCorrector.hh"
@@ -65,17 +65,17 @@ public:
   explicit TupleMuonTauProducer(const edm::ParameterSet&);
   ~TupleMuonTauProducer();
 
-  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static voId fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
 private:
-  virtual void beginJob() ;
-  virtual void produce(edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+  virtual voId beginJob() ;
+  virtual voId produce(edm::Event&, const edm::EventSetup&);
+  virtual voId endJob() ;
 
-  virtual void beginRun(edm::Run&, edm::EventSetup const&);
-  virtual void endRun(edm::Run&, edm::EventSetup const&);
-  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual voId beginRun(edm::Run&, edm::EventSetup const&);
+  virtual voId endRun(edm::Run&, edm::EventSetup const&);
+  virtual voId beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual voId endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
@@ -145,7 +145,7 @@ TupleMuonTauProducer::~TupleMuonTauProducer()
 //
 
 // ------------ method called to produce the data  ------------
-void
+voId
 TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
@@ -186,8 +186,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       cout<<" i,j = "<<i<<","<<j;
-      cout<<" muon PDGID "<<((*muons)[i]).pdgId();
-      cout<<" tau PDGID "<<((*taus)[j]).pdgId()<<endl;
+      cout<<" muon PDGId "<<((*muons)[i]).pdgId();
+      cout<<" tau PDGId "<<((*taus)[j]).pdgId()<<endl;
 
       TupleMuonTau CurrentMuonTau;
 
@@ -230,22 +230,22 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // determine the generator
         // level process
 
-        int BosonPdgID = 0;
+        int BosonPdgId = 0;
         LorentzVector BosonP4(0,0,0,0);
-        int DaughterOnePdgID = 0;
+        int DaughterOnePdgId = 0;
         LorentzVector DaughterOneP4(0,0,0,0);
-        int DaughterTwoPdgID = 0;
+        int DaughterTwoPdgId = 0;
         LorentzVector DaughterTwoP4(0,0,0,0);
         bool ApplyRecoilCorrection = 0;
 
         GenBosonDecayFinder genDecayFinder;
-        genDecayFinder.findBosonAndDaugters(*gen,BosonPdgID,BosonP4,DaughterOnePdgID,
-                                                  DaughterOneP4,DaughterTwoPdgID,
+        genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
+                                                  DaughterOneP4,DaughterTwoPdgId,
                                                   DaughterTwoP4,ApplyRecoilCorrection);
 
-        cout<<BosonPdgID<<" = BosonPdgID "<<endl;
-        cout<<DaughterOnePdgID<<" = DaughterOnePdgID "<<endl;
-        cout<<DaughterTwoPdgID<<" = DaughterTwoPdgID "<<endl;
+        cout<<BosonPdgId<<" = BosonPdgId "<<endl;
+        cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
+        cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
         cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
 
@@ -365,44 +365,44 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void
+voId
 TupleMuonTauProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void
+voId
 TupleMuonTauProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void
+voId
 TupleMuonTauProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void
+voId
 TupleMuonTauProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void
+voId
 TupleMuonTauProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void
+voId
 TupleMuonTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
-void
+voId
 TupleMuonTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
-  //The following says we do not know what parameters are allowed so do no validation
+  //The following says we do not know what parameters are allowed so do no valIdation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
   desc.setUnknown();

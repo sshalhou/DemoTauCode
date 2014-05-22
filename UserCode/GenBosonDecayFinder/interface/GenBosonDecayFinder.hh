@@ -7,7 +7,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include "DataFormats/HepMCCandIdate/interface/GenParticle.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
@@ -23,7 +23,7 @@ class GenBosonDecayFinder
 public:
   GenBosonDecayFinder();
   virtual ~GenBosonDecayFinder();
-  void findBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
+  voId findBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
   int &, LorentzVector&,int &, LorentzVector&,bool&);
 
 
@@ -41,9 +41,9 @@ GenBosonDecayFinder::GenBosonDecayFinder(){}
 
 GenBosonDecayFinder::~GenBosonDecayFinder(){}
 
-void GenBosonDecayFinder::findBosonAndDaugters (const reco::GenParticleCollection & genparticles,
-int& BosonPdgID, LorentzVector& BosonP4, int& DaughterOnePdgID,
-LorentzVector& DaughterOneP4,int& DaughterTwoPdgID, LorentzVector& DaughterTwoP4,
+voId GenBosonDecayFinder::findBosonAndDaugters (const reco::GenParticleCollection & genparticles,
+int& BosonPdgId, LorentzVector& BosonP4, int& DaughterOnePdgId,
+LorentzVector& DaughterOneP4,int& DaughterTwoPdgId, LorentzVector& DaughterTwoP4,
 bool& ApplyRecoilCorrection)
 {
 
@@ -67,7 +67,7 @@ bool& ApplyRecoilCorrection)
         if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
         else ApplyRecoilCorrection = 1;
 
-        BosonPdgID = genparticles[mc].pdgId();
+        BosonPdgId = genparticles[mc].pdgId();
         BosonP4 = genparticles[mc].p4();
 
         std::size_t nDaughters = genparticles[mc].numberOfDaughters();
@@ -84,7 +84,7 @@ bool& ApplyRecoilCorrection)
         if(daughter_indices.size()>=1)
         {
           int d1 = daughter_indices[0];
-          DaughterOnePdgID  = genparticles[mc].daughter(d1)->pdgId();
+          DaughterOnePdgId  = genparticles[mc].daughter(d1)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(d1)->p4();
 
         }
@@ -92,7 +92,7 @@ bool& ApplyRecoilCorrection)
         if(daughter_indices.size()>=1)
         {
           int d2 = daughter_indices[1];
-          DaughterTwoPdgID  = genparticles[mc].daughter(d2)->pdgId();
+          DaughterTwoPdgId  = genparticles[mc].daughter(d2)->pdgId();
           DaughterTwoP4  = genparticles[mc].daughter(d2)->p4();
         }
 
@@ -101,7 +101,7 @@ bool& ApplyRecoilCorrection)
 
 
 
-        
+
 
 
 
