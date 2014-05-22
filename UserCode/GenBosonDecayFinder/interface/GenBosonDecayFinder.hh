@@ -58,7 +58,7 @@ bool& ApplyRecoilCorrection)
     genparticles[mc].pdgId()  == 25 )
     {
       // only care about the hard interaction
-      if( genparticles[mc].status() == 2)
+      if( genparticles[mc].status() == 3)
       {
 
 
@@ -67,7 +67,7 @@ bool& ApplyRecoilCorrection)
 
         std::size_t nDaughters = genparticles[mc].numberOfDaughters();
 
-        if(nDaughters==1)
+        if(nDaughters>=1)
         {
           DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
@@ -76,7 +76,7 @@ bool& ApplyRecoilCorrection)
           if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
         }
 
-        else if(nDaughters==2)
+        else if(nDaughters>=2)
         {
           DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
