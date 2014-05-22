@@ -16,13 +16,13 @@ class GenBosonDecayFinder
 {
 
 public:
-    GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> >);
+    GenBosonDecayFinder(const reco::GenParticleCollection &);
     ~GenBosonDecayFinder();
 
 
 };
 
-GenBosonDecayFinder::GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> > genparticles)
+GenBosonDecayFinder::GenBosonDecayFinder(const reco::GenParticleCollection & genparticles)
 {
 
   cout<<genparticles.size()<<endl;
