@@ -26,12 +26,12 @@ public:
 
 private:
 
-  const int higgsBoson = 25;
-  const int zBoson = 23;
-  const int wBoson = 24;
-  const int electron = 11;
-  const int muon = 13;
-  const int tau = 15;
+  static const int higgsBoson = 25;
+  static const int zBoson = 23;
+  static const int wBoson = 24;
+  static const int electron = 11;
+  static const int muon = 13;
+  static const int tau = 15;
 
 };
 
