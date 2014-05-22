@@ -295,7 +295,7 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
   stringstream M;
 
   M << MFile;
-  M >> McFile;
+  M >> MCFile;
 
 
 
