@@ -123,7 +123,8 @@ process.TupleTausTauEnDown = cms.EDProducer('TupleTauProducer' ,
 process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausTauEnDown','TupleTausTauEnDown','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-                mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnDown"),
+                mvametSrc = cms.InputTag("pfMEtMVATauEnDown"),
+                genSrc = cms.InputTag("genParticles"),
                 PAR1=cms.double(321.),
                 NAME=cms.string("TupleMuonTausTauEnDown")
                                      )

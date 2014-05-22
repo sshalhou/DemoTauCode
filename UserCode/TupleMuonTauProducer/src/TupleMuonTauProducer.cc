@@ -47,6 +47,7 @@ Implementation:
 #include "DataFormats/METReco/interface/PFMET.h"
 #include "DataFormats/METReco/interface/PFMETCollection.h"
 #include "UserCode/RecoilCorrector/interface/RecoilCorrector.hh"
+#include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.h"
 
 
 
@@ -80,6 +81,7 @@ private:
   edm::InputTag tauSrc_;
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
+  edm::InputTag genSrc_;
   double PAR1_;
   string NAME_;
 
@@ -101,7 +103,8 @@ private:
 TupleMuonTauProducer::TupleMuonTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
-mvametSrc_(iConfig.getUntrackedParameter<edm::InputTag>("mvametSrc" )),
+mvametSrc_(iConfig.getParameter<edm::InputTag>("mvametSrc" )),
+genSrc_(iConfig.getParameter<edm::InputTag>("genSrc" )),
 PAR1_(iConfig.getParameter<double>("PAR1" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
@@ -162,6 +165,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<std::vector<reco::PFMET> > mvamet;
   iEvent.getByLabel(mvametSrc_, mvamet);
 
+  edm::Handle<std::vector<reco::GenParticle> > gen;
+  iEvent.getByLabel(genSrc_, gen);
+
 
   cout<<" PAR1_ "<<PAR1_<<endl;
   cout<<" NAME_ "<<NAME_<<endl;
@@ -196,30 +202,67 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       ////////////
       // apply Phil's Harris recoil
       // corrections to the MET before
-      // running SVFit
-      double met=(*mvamet)[0].pt();
-      double metphi=(*mvamet)[0].phi();
-      double leptonPt = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).pt();
-      double leptonPhi  = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).phi();
-      double GenZPt = 0.0;
-      double GenZPhi = 0.0;
-      double iU1 = 0.0;
-      double iU2 = 0.0;
+      // running SVFit to MC only
 
-      if( abs(((*muons)[i]).pdgId()) == 13 && abs(((*taus)[j]).pdgId()) == 15)
+      if( !iEvent.isRealData() )
       {
-        GenZPt =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).pt();
-        GenZPhi =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).phi();
-        RecoilCorrector corrector;
-        
-//        RecoilCorrector corrector("someFileName",0);
+        double met=(*mvamet)[0].pt();
+        double metphi=(*mvamet)[0].phi();
+        double leptonPt = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).pt();
+        double leptonPhi  = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).phi();
+        double GenZPt = 0.0;
+        double GenZPhi = 0.0;
+        double iU1 = 0.0;
+        double iU2 = 0.0;
 
-//        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
-//        corrector.Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
-//        printf("corrected met: %10.2f%10.2f\n",met,metphi);
+        ////////////////
+        // there are specific corrections
+        // for H->tau tau, W, Z, and Zmm
+        // as of Summer 2013, H,W, and Z use 53X_20pv
+        // while Zmm uses 53X_2012 for data and Zmm
+
+        string recoilCorr = "53X_20pv";
+        string recoilCorrZmm  = "53X_2012";
+
+        int GenLevelBoson = 0;
+
+        ////////////////////////
+        // determine the generator
+        // level process
+
+
+        GenBosonDecayFinder genDecayFinder(gen);
+
+
+
+
+
+
+        //      if( abs(((*muons)[i]).pdgId()) == 13 && abs(((*taus)[j]).pdgId()) == 15)
+        //      {
+        //        GenZPt =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).pt();
+        //        GenZPhi =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).phi();
+
+
+        ////////////////////
+        // set up various
+        // versions of the recoil corrector
+
+
+
+
+
+
+
+        //      RecoilCorrector corrector("UserCode/RecoilCorrector/data", int iSeed=0xDEADBEEF);
+        //        RecoilCorrector corrector("someFileName",0);
+
+        //        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
+        //        corrector.Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
+        //        printf("corrected met: %10.2f%10.2f\n",met,metphi);
+        //  }
+
       }
-
-
 
       ////////////
 

@@ -47,6 +47,10 @@ ln -s ../../../../../UserCode/mvaPFMET_leptons_PAT_cfi.py mvaPFMET_leptons_PAT_c
 cd -
 
 wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.tgz
+tar -xzvf RecoilCorrector_v7.tgz
+mv RecoilCorrector_v7/recoilfits UserCode/RecoilCorrector/recoilfits
+rm -rf RecoilCorrector_v7
+rm -rf RecoilCorrector_v7.tgz	
 
 git clone https://github.com/cms-analysis/JetMETCorrections-METPUSubtraction
 mv JetMETCorrections-METPUSubtraction JetMETCorrections/METPUSubtraction
