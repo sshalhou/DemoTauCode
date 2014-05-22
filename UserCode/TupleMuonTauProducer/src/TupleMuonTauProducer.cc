@@ -248,15 +248,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         cout<<DaughterTwoPdgID<<" = DaughterTwoPdgID "<<endl;
         cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
-/*
+
         if(ApplyRecoilCorrection)
         {
-          oid RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOnePdgId,
-  int DaughterTwoPdgId, int njet, std::string &DataFile, std::string &MCFile)
+          std::string DataFile;
+          std::string MCFile;
+          int njet = 3;
+            whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
+            DaughterTwoPdgId, njet, DataFile, MCFile)
+
+          cout<<" files = "<<DataFile<<" "<<MCFile<<endl;
+
 
         }
 
-*/
+
 
         //      if( abs(((*muons)[i]).pdgId()) == 13 && abs(((*taus)[j]).pdgId()) == 15)
         //      {
