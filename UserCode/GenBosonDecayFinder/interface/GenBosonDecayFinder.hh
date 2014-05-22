@@ -15,6 +15,8 @@ typedef math::XYZTLorentzVector LorentzVector;
 using namespace reco;
 using namespace std;
 
+
+
 class GenBosonDecayFinder
 {
 
@@ -24,14 +26,8 @@ public:
   void findBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
   int &, LorentzVector&,int &, LorentzVector&,bool&);
 
-private:
 
-  static const int higgsBoson = 25;
-  static const int zBoson = 23;
-  static const int wBoson = 24;
-  static const int electron = 11;
-  static const int muon = 13;
-  static const int tau = 15;
+
 
 };
 
@@ -57,14 +53,14 @@ bool& ApplyRecoilCorrection)
   {
 
 
-    if( genparticles[mc].pdgId()  == higgsBoson ||
-    genparticles[mc].pdgId()  == zBoson  ||
-    genparticles[mc].pdgId()  == wBoson )
+    if( genparticles[mc].pdgId()  == 23 ||
+    genparticles[mc].pdgId()  == 24  ||
+    genparticles[mc].pdgId()  == 25 )
     {
       // only care about the hard interaction
       if( genparticles[mc].status() == 3)
       {
-        cout<<" have a W, Z, or H event "<<endl;
+
 
         BosonPdgID = genparticles[mc].pdgId();
         BosonP4 = genparticles[mc].p4();
