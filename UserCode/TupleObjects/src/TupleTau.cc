@@ -29,6 +29,10 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
   // https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingSummer2013
   // #TauES_and_decay_mode_scale_facto
 
+// caution, these corrections should only be applied
+// for certain MC samples
+ cout<<" Warning correcting energy of all Taus, add in a sample & MC check!!!!!"<<endl;
+
 // one prong, 1 pi0
 if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.));
 
