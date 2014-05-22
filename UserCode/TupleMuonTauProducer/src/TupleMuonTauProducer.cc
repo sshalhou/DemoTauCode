@@ -200,7 +200,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
 
       ////////////
-      // apply Phil's Harris recoil
+      // apply Phil's recoil
       // corrections to the MET before
       // running SVFit to MC only
 
