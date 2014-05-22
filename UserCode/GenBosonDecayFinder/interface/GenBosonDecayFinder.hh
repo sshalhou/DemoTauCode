@@ -37,7 +37,7 @@ GenBosonDecayFinder::GenBosonDecayFinder(){}
 
 GenBosonDecayFinder::~GenBosonDecayFinder(){}
 
-GenBosonDecayFinder::findMaxPtBosonAndDaugters (const reco::GenParticleCollection & genparticles,
+void GenBosonDecayFinder::findMaxPtBosonAndDaugters (const reco::GenParticleCollection & genparticles,
 int& BosonPdgID, LorentzVector& BosonP4, int& DaughterOnePdgID,
 LorentzVector& DaughterOneP4,int& DaughterTwoPdgID, LorentzVector& DaughterTwoP4,
 bool& ApplyRecoilCorrection)
