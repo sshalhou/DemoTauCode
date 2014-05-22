@@ -255,7 +255,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           std::string MCFile;
           int njet = 3;
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, DataFile, MCFile)
+            DaughterTwoPdgId, njet, DataFile, MCFile);
 
           cout<<" files = "<<DataFile<<" "<<MCFile<<endl;
 
