@@ -4,7 +4,7 @@
 
 #include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.h"
 
-GenBosonDecayFinder(const GenParticleCollection genparticles)
+GenBosonDecayFinder::GenBosonDecayFinder(const GenParticleCollection genparticles)
 {
 
   std::cout<<genparticles.size()<<endl;
@@ -12,4 +12,4 @@ GenBosonDecayFinder(const GenParticleCollection genparticles)
 }
 
 
-~GenBosonDecayFinder(){}
+GenBosonDecayFinder::~GenBosonDecayFinder(){}
