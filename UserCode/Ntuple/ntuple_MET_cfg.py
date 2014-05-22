@@ -15,7 +15,7 @@ fileNames = cms.untracked.vstring(
 
 
 process.myProducerLabel = cms.EDProducer('Ntuple',
-muonSrc = cms.untracked.InputTag("selectedPatMuons")
+muonSrc = cms.InputTag("selectedPatMuons")
 )
 
 
@@ -73,20 +73,20 @@ runMEtUncertainties(process,
 # Nominal Systematics    #
 ##########################
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
-                muonSrc =cms.untracked.InputTag('selectedPatMuons'),
-                vertexSrc =cms.untracked.InputTag('offlinePrimaryVertices'),
+                muonSrc =cms.InputTag('selectedPatMuons'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal")
                                      )
 
 process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.untracked.InputTag('selectedPatTaus'),
+                tauSrc =cms.InputTag('selectedPatTaus'),
                 NAME=cms.string("TupleTausNominal")
                                                    )
 
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-                mvametSrc = cms.untracked.InputTag("pfMEtMVANominal"),
+                mvametSrc = cms.InputTag("pfMEtMVANominal"),
                 PAR1=cms.double(321.),
                 NAME=cms.string("TupleMuonTausNominal")
                                      )
@@ -97,14 +97,14 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
 ##########################
 
 process.TupleTausTauEnUp = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.untracked.InputTag('shiftedPatTausEnUp'),
+                tauSrc =cms.InputTag('shiftedPatTausEnUp'),
                 NAME=cms.string("TupleTausTauEnUp")
                                                    )
 
 process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausTauEnUp','TupleTausTauEnUp','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-                mvametSrc = cms.untracked.InputTag("pfMEtMVATauEnUp"),
+                mvametSrc = cms.InputTag("pfMEtMVATauEnUp"),
                 PAR1=cms.double(321.),
                 NAME=cms.string("TupleMuonTausTauEnUp")
                                      )
@@ -116,7 +116,7 @@ process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
 
 
 process.TupleTausTauEnDown = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.untracked.InputTag('shiftedPatTausEnDown'),
+                tauSrc =cms.InputTag('shiftedPatTausEnDown'),
                 NAME=cms.string("TupleTausTauEnDown")
                                                    )
 

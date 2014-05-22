@@ -73,7 +73,7 @@ private:
 // constructors and destructor
 //
 Ntuple::Ntuple(const edm::ParameterSet& iConfig):
-muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" ))
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
 {
   //register your products
   /* Examples

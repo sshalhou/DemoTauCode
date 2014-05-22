@@ -87,7 +87,7 @@ private:
 // constructors and destructor
 //
 TupleTauProducer::TupleTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
