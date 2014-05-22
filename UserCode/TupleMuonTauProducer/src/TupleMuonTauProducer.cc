@@ -231,7 +231,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // level process
 
 
-        GenBosonDecayFinder genDecayFinder(gen);
+        GenBosonDecayFinder genDecayFinder(*gen);
 
 
 
