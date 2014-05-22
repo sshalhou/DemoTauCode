@@ -15,7 +15,7 @@ public:
     ~GenBosonDecayFinder()
 
 
-}
+};
 
 GenBosonDecayFinder::GenBosonDecayFinder(const GenParticleCollection genparticles)
 {
