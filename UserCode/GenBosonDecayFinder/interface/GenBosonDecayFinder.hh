@@ -2,6 +2,11 @@
 #include <sstream>
 #include <string>
 
+#include "FWCore/Framework/interface/Frameworkfwd.h"
+#include "FWCore/Framework/interface/EDProducer.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
 using namespace reco;
@@ -11,13 +16,13 @@ class GenBosonDecayFinder
 {
 
 public:
-    GenBosonDecayFinder(const GenParticleCollection);
+    GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> >);
     ~GenBosonDecayFinder()
 
 
 };
 
-GenBosonDecayFinder::GenBosonDecayFinder(const GenParticleCollection genparticles)
+GenBosonDecayFinder::GenBosonDecayFinder(edm::Handle<std::vector<reco::GenParticle> > genparticles)
 {
 
   std::cout<<genparticles.size()<<endl;
