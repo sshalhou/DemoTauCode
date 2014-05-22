@@ -54,9 +54,9 @@ bool& ApplyRecoilCorrection)
   for(std::size_t i = 0; i < genparticles.size(); ++i)
     {
 
-      const GenParticle & mc = (*genParticles)[i];
+      const reco::GenParticle & mc = (*genParticles)[i];
       cout<<mc.pdgId()<<" "<<mc.status()<<endl;
-      cout<< higgsBoson <<endl;
+      //cout<< higgsBoson <<endl;
 
 
 
