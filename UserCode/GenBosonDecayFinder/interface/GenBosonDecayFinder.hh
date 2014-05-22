@@ -67,6 +67,7 @@ bool& ApplyRecoilCorrection)
 
         std::size_t nDaughters = genparticles[mc].numberOfDaughters();
 
+        std::cout<<" num dau "<<nDaughters<<endl;
         if(nDaughters>=1)
         {
           DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
