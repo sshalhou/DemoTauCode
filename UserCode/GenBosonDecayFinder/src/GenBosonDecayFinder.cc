@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-#include "GenBosonDecayFinder/interface/GenBosonDecayFinder.h"
+#include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.h"
 
 GenBosonDecayFinder(const GenParticleCollection genparticles)
 {
