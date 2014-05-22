@@ -51,11 +51,25 @@ LorentzVector& DaughterOneP4,int& DaughterTwoPdgID, LorentzVector& DaughterTwoP4
 bool& ApplyRecoilCorrection)
 {
 
+
   for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
       cout<<(genparticles)[mc].pdgId()<<" "<<(genparticles)[mc].status()<<endl;
-      cout<< higgsBoson <<endl;
 
+      if( genparticles[mc].pdgId()  == higgsBoson || genparticles[mc].pdgId()  == zBoson )
+      {
+
+        cout<<" have a Z or H event "<<endl;
+
+        BosonPdgID = genparticles[mc].pdgId();
+
+      BosonP4.SetPtEtaPhiM(genparticles[mc].pt_,
+                           genparticles[mc].eta_,
+                           genparticles[mc].phi_,
+                           genparticles[mc].mass_  );
+
+
+      }
 
 
     }
