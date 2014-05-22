@@ -73,7 +73,7 @@ bool& ApplyRecoilCorrection)
 
         if(nDaughters==1)
         {
-          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgID();
+          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
           ApplyRecoilCorrection = 1;
           // if we see this again, it means we have a WW, ZZ, or HH event
@@ -82,9 +82,9 @@ bool& ApplyRecoilCorrection)
 
         else if(nDaughters==2)
         {
-          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgID();
+          DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
-          DaughterTwoPdgID  = genparticles[mc].daughter(1)->pdgID();
+          DaughterTwoPdgID  = genparticles[mc].daughter(1)->pdgId();
           DaughterTwoP4  = genparticles[mc].daughter(1)->p4();
           ApplyRecoilCorrection = 1;
           // if we see this again, it means we have a WW, ZZ, or HH event
