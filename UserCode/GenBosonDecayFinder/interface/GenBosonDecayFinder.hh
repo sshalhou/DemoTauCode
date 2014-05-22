@@ -68,16 +68,17 @@ bool& ApplyRecoilCorrection)
         std::size_t nDaughters = genparticles[mc].numberOfDaughters();
 
         std::cout<<" num dau "<<nDaughters<<endl;
-        if(nDaughters>=1)
+        if(nDaughters==1)
         {
           DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
-          ApplyRecoilCorrection = 1;
           // if we see this again, it means we have a WW, ZZ, or HH event
           if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
+          else ApplyRecoilCorrection = 1;
+
         }
 
-        else if(nDaughters>=2)
+        else if(nDaughters==2)
         {
           DaughterOnePdgID  = genparticles[mc].daughter(0)->pdgId();
           DaughterOneP4  = genparticles[mc].daughter(0)->p4();
@@ -86,6 +87,7 @@ bool& ApplyRecoilCorrection)
           ApplyRecoilCorrection = 1;
           // if we see this again, it means we have a WW, ZZ, or HH event
           if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
+          else ApplyRecoilCorrection = 1;
         }
 
       }
