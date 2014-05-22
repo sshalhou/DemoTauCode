@@ -193,7 +193,7 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
   int DaughterTwoPdgId, int njet, std::string &DataFile, std::string &MCFile)
   {
 
-  std::string path;
+  char path[200];
   sprintf(path,"%s","UserCode/RecoilCorrector/recoilfits/");
 
   char DFile[350], MFile[350];
@@ -285,10 +285,10 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
   }
 
 
-  sstream D;
+  std::sstream D;
   DFile >> D >> DataFile;
 
-  sstream M;
+  std::sstream M;
   MFile >> M >> MCFile;
 
 
