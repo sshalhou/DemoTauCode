@@ -238,7 +238,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         LorentzVector DaughterTwoP4(0,0,0,0);
         bool ApplyRecoilCorrection = 0;
 
-        GenBosonDecayFinder genDecayFinder();
+        GenBosonDecayFinder genDecayFinder;
         genDecayFinder.findMaxPtBosonAndDaugters(*gen,BosonPdgID,BosonP4,DaughterOnePdgID,DaughterTwoPdgID,
                                                   ApplyRecoilCorrection);
 
