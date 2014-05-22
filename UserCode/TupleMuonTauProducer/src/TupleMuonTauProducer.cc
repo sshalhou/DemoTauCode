@@ -230,9 +230,19 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // determine the generator
         // level process
 
+        int BosonPdgID = 0;
+        LorentzVector BosonP4(0,0,0,0);
+        int DaughterOnePdgID = 0;
+        LorentzVector DaughterOneP4(0,0,0,0);
+        int DaughterTwoPdgID = 0;
+        LorentzVector DaughterTwoP4(0,0,0,0);
+        bool ApplyRecoilCorrection = 0;
 
-        GenBosonDecayFinder genDecayFinder(*gen);
+        GenBosonDecayFinder genDecayFinder();
+        genDecayFinder.findMaxPtBosonAndDaugters(*gen,BosonPdgID,BosonP4,DaughterOnePdgID,DaughterTwoPdgID,
+                                                  ApplyRecoilCorrection);
 
+        cout<<BosonPdgID<<" = BosonPdgID "<<endl;
 
 
 
