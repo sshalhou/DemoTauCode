@@ -99,14 +99,3 @@ bool& ApplyRecoilCorrection)
 
 
 }
-
-
-
-
-
-
-
-
-
-
-}
