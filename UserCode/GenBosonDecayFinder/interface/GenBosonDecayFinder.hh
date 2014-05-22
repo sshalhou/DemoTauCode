@@ -24,6 +24,14 @@ public:
   void findMaxPtBosonAndDaugters(const reco::GenParticleCollection&, int &, LorentzVector&,
   int &, LorentzVector&,int &, LorentzVector&,bool&);
 
+private:
+
+  const higgsBoson = 25;
+  const zBoson = 23;
+  const wBoson = 24;
+  const electron = 11;
+  const muon = 13;
+  const tau = 15;
 
 };
 
@@ -43,8 +51,24 @@ LorentzVector& DaughterOneP4,int& DaughterTwoPdgID, LorentzVector& DaughterTwoP4
 bool& ApplyRecoilCorrection)
 {
 
+  for(std::size_t i = 0; i < genparticles.size(); ++i)
+    {
 
-  BosonPdgID = -999;
-  cout<<genparticles.size()<<endl;
+      const GenParticle & mc = (*genParticles)[i];
+      cout<<mc.pdgId()<<" "<<mc.status()<<endl;
+      cout<< higgsBoson <<endl;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
