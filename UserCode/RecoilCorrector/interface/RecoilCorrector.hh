@@ -27,6 +27,17 @@
 
 using namespace std;
 
+
+//////////////////////
+// adding a function to
+// determine what files to use
+// based on pdgId's
+///////////////////////
+
+void whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOnePdgId,
+  int DaughterTwoPdgId, int njet, std::string &DataFile, std::string &MCFile);
+
+
 class RecoilCorrector
 {
 
@@ -43,14 +54,7 @@ public:
   void addDataFile(std::string iNameDat);
   void addMCFile  (std::string iNameMC);
 
-  //////////////////////
-  // adding a function to
-  // determine what files to use
-  // based on pdgId's
-  ///////////////////////
 
-  void whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOnePdgId,
-    int DaughterTwoPdgId, int njet, std::string &DataFile, std::string &MCFile);
 
 
 protected:
@@ -189,7 +193,7 @@ RecoilCorrector::RecoilCorrector(string iNameZ, int iSeed) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
-void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOnePdgId,
+void whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOnePdgId,
   int DaughterTwoPdgId, int njet, std::string &DataFile, std::string &MCFile)
   {
 
