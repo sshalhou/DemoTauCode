@@ -239,7 +239,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         bool ApplyRecoilCorrection = 0;
 
         GenBosonDecayFinder genDecayFinder;
-        genDecayFinder.findMaxPtBosonAndDaugters(*gen,BosonPdgID,BosonP4,DaughterOnePdgID,
+        genDecayFinder.findBosonAndDaugters(*gen,BosonPdgID,BosonP4,DaughterOnePdgID,
                                                   DaughterOneP4,DaughterTwoPdgID,
                                                   DaughterTwoP4,ApplyRecoilCorrection);
 
