@@ -286,10 +286,18 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
 
 
   stringstream D;
-  DFile >> D >> DataFile;
+
+  D << DFile;
+  D >> DataFile;
+
+
 
   stringstream M;
-  MFile >> M >> MCFile;
+
+  M << MFile;
+  M >> McFile;
+
+
 
 
   }
