@@ -196,6 +196,8 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
   std::string path;
   sprintf(path,"%s","UserCode/RecoilCorrector/recoilfits/");
 
+
+
   ////////
   // higgs
 
@@ -204,14 +206,14 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
 
       if(njet>=3)
       {
-        sprintf(DataFile,"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
-        sprintf(MCFile,"%srecoilfit_%s%s_%sjet.root","path","higgs","53X_20pv","n");
+        sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
+        sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","higgs","53X_20pv","n");
 
       }
       else
       {
-        sprintf(DataFile,"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
-        sprintf(MCFile,"%srecoilfit_%s%s_%djet.root","path","higgs","53X_20pv",njet);
+        sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
+        sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","higgs","53X_20pv",njet);
       }
 
     }
@@ -225,14 +227,14 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
 
         if(njet>=3)
         {
-          sprintf(DataFile,"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
-          sprintf(MCFile,"%srecoilfit_%s%s_%sjet.root","path","wjets","53X_20pv","n");
+          sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
+          sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","wjets","53X_20pv","n");
 
         }
         else
         {
-          sprintf(DataFile,"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
-          sprintf(MCFile,"%srecoilfit_%s%s_%djet.root","path","wjets","53X_20pv",njet);
+          sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
+          sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","wjets","53X_20pv",njet);
         }
 
       }
@@ -246,14 +248,14 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
 
       if(njet>=3)
       {
-        sprintf(DataFile,"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
-        sprintf(MCFile,"%srecoilfit_%s%s_%sjet.root","path","zmm","53X_20pv","n");
+        sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_20pv","n");
+        sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","zmm","53X_20pv","n");
 
       }
       else
       {
-        sprintf(DataFile,"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
-        sprintf(MCFile,"%srecoilfit_%s%s_%djet.root","path","zmm","53X_20pv",njet);
+        sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","datamm","53X_20pv",njet);
+        sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","zmm","53X_20pv",njet);
       }
 
     }
@@ -267,14 +269,14 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
 
     if(njet>=3)
     {
-      sprintf(DataFile,"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_2012","n");
-      sprintf(MCFile,"%srecoilfit_%s%s_%sjet.root","path","zmm","53X_2012","n");
+      sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","datamm","53X_2012","n");
+      sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%sjet.root","path","zmm","53X_2012","n");
 
     }
     else
     {
-      sprintf(DataFile,"%srecoilfit_%s%s_%djet.root","path","datamm","53X_2012",njet);
-      sprintf(MCFile,"%srecoilfit_%s%s_%djet.root","path","zmm","53X_2012",njet);
+      sprintf(DataFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","datamm","53X_2012",njet);
+      sprintf(MCFile.c_str(),"%srecoilfit_%s%s_%djet.root","path","zmm","53X_2012",njet);
     }
 
   }
