@@ -285,10 +285,10 @@ void RecoilCorrector::whichRecoilCorrectionFiles(int BosonPdgId, int DaughterOne
   }
 
 
-  std::sstream D;
+  stringstream D;
   DFile >> D >> DataFile;
 
-  std::sstream M;
+  stringstream M;
   MFile >> M >> MCFile;
 
 
