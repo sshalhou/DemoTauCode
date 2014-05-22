@@ -63,10 +63,7 @@ bool& ApplyRecoilCorrection)
 
         BosonPdgID = genparticles[mc].pdgId();
 
-      BosonP4.SetPtEtaPhiM(genparticles[mc].pt_,
-                           genparticles[mc].eta_,
-                           genparticles[mc].phi_,
-                           genparticles[mc].mass_  );
+        BosonP4 = genparticles[mc].p4();
 
 
       }
