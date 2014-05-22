@@ -51,10 +51,9 @@ LorentzVector& DaughterOneP4,int& DaughterTwoPdgID, LorentzVector& DaughterTwoP4
 bool& ApplyRecoilCorrection)
 {
 
-  for(std::size_t i = 0; i < genparticles.size(); ++i)
+  for(std::size_t mc = 0; mc < genparticles.size(); ++i)
     {
 
-      const reco::GenParticle & mc = (*genparticles)[i];
       cout<<mc.pdgId()<<" "<<mc.status()<<endl;
       cout<< higgsBoson <<endl;
 
