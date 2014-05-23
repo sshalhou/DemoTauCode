@@ -347,7 +347,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       covMET = mvaMETpf.getSignificanceMatrix();
-      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, XYZTcorrectedMET, covMET, 0);
+      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, mvaMETpf.momentum(), covMET, 0);
       algo.addLogM(false);
       algo.integrateMarkovChain();
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
