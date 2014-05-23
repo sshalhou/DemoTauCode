@@ -212,7 +212,7 @@ process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
 #################################
 # keep UserSpecifiedData
 #################################
-process.out.outputCommands +=['keep *_TupleUserSpecifiedData_*_*']
+process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
 
 
 

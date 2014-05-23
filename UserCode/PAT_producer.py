@@ -30,7 +30,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
                                             PhysicsProcess=cms.string(PhysicsProcess_)
                                             )
 
-process.out.outputCommands +=['keep *_TupleUserSpecifiedData_*_*']
+process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
 
 
 ###################################################
