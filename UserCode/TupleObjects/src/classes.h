@@ -1,6 +1,7 @@
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/Common/interface/Wrapper.h"
 
 struct dictionary {
