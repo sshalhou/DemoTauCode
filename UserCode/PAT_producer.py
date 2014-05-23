@@ -15,7 +15,8 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 RunMETUnc = False
 KeepAll = False
-
+SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
 
 ###################################################
@@ -25,12 +26,10 @@ KeepAll = False
 ###################################################
 
 process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
-     SampleName=cms.string("A"),
-     PhysicsProcess=cms.string("B")
-#    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
-#                          /Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"),
-#    PhysicsProcess=cms.string("gg->H->tautau[SM_125_8TeV]")
-                                     )
+                                            SampleName=cms.string(SampleName_),
+                                            PhysicsProcess=cms.string(PhysicsProcess_)
+                                            )
+
 process.out.outputCommands +=['keep *_TupleUserSpecifiedData_*_*']
 
 
@@ -424,5 +423,5 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 process.source.fileNames=['file:/uscms/home/shalhout/no_backup/5000.root']
 
-process.maxEvents.input = 5000
+process.maxEvents.input = 100
 ########################################################################################################
