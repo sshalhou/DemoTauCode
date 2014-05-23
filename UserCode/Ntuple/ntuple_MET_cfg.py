@@ -3,7 +3,7 @@ process = cms.Process("Ntuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
 
 process.source = cms.Source("PoolSource",
 # replace 'myfile.root' with the source file you want to use
@@ -93,6 +93,65 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 jetSrc = cms.InputTag("selectedPatJets"),
                 NAME=cms.string("TupleMuonTausNominal")
                                      )
+##########################
+# Tau Recoil Up Systematics    #
+##########################
+
+process.TupleMuonTausRecoilUp = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.InputTag("pfMEtMVANominal"),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(1.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
+                NAME=cms.string("TupleMuonTausRecoilUp")
+                                     )
+
+##########################
+# Tau Recoil Down Systematics    #
+##########################
+
+process.TupleMuonTausRecoilDown = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.InputTag("pfMEtMVANominal"),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(-1.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
+                NAME=cms.string("TupleMuonTausRecoilDown")
+                                     )
+
+##########################
+# Tau Recoil Res Up Systematics    #
+##########################
+
+process.TupleMuonTausRecoilResUp = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.InputTag("pfMEtMVANominal"),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(1.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
+                NAME=cms.string("TupleMuonTausRecoilResUp")
+                                     )
+
+##########################
+# Tau Recoil Res Down Systematics    #
+##########################
+
+process.TupleMuonTausRecoilResDown = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.InputTag("pfMEtMVANominal"),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(-1.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
+                NAME=cms.string("TupleMuonTausRecoilResDown")
+                                     )
 
 
 ##########################
@@ -158,6 +217,10 @@ process.p = cms.Path(process.myProducerLabel+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
       +process.metUncertaintySequence+
       process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
+      +process.TupleMuonTausRecoilUp
+      +process.TupleMuonTausRecoilDown
+      +process.TupleMuonTausRecoilResUp
+      +process.TupleMuonTausRecoilResDown
                      )
 
 process.e = cms.EndPath(process.out)

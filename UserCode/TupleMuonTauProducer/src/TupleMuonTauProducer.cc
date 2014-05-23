@@ -312,11 +312,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           //////////////////////
           // print out the corrected value
           cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
-          cout<<sqrt(NSVcorrectedMET.x()*NSVcorrectedMET.x()+NSVcorrectedMET.y()*NSVcorrectedMET.y());
-          cout<<" z "<<NSVcorrectedMET.z()<<endl;
-          cout<<" Phi "<<NSVcorrectedMET.Phi()<<endl;
-
-
         }
 
 
@@ -352,9 +347,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       covMET = mvaMETpf.getSignificanceMatrix();
+
+      // last argument is verbosity
       NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
       algo.addLogM(false);
       algo.integrateMarkovChain();
+
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
       CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
