@@ -191,7 +191,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   TupleMuonTaus->reserve( TupleMuonTauSize );
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
   //LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
-  NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
+  NSVfitStandalone::LorentzVector NSVcorrectedMET = mvaMETpf.momentum();
 
 
   for (std::size_t i = 0; i < muons->size(); ++i)
@@ -310,7 +310,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           //XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
 
           //XYZTcorrectedMET =  mvaMETpf.momentum();
-
+          NSVcorrectedMET =
           //////////////////////
           // print out the corrected value
           cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
