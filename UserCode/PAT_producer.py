@@ -16,14 +16,31 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 RunMETUnc = False
 KeepAll = False
 
+###################################################
+# Store SampleName and PhysicsProcess
+# eventually these should be command line
+# options
+###################################################
 
+process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedData' ,
+    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
+                          /Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"),
+    PhysicsProcess=cms.string("gg->H->tautau[SM_125_8TeV]")
+                                     )
 
+###################################################
+# need to get the correct version of the global
+# tag and set JEC to match
+###################################################
 
 runOnMC = True
 if runOnMC:
   process.GlobalTag.globaltag = 'START53_V23::All'
 else:
   process.GlobalTag.globaltag = 'SOMETHING_FOR_DATA::All'
+
+
+process.out.outputCommands +=['keep *_TupleUserSpecifiedData*_*_*']
 
 ########################################################################################################
 # Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
@@ -335,7 +352,8 @@ runMEtUncertainties(process,
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        process.VertexPresent+
+process.p = cms.Path(        process.process.UserSpecifiedData+
+                             process.VertexPresent+
                              process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
@@ -392,6 +410,7 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 #process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
 #                          'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
 #                          'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
+
 
 
 process.source.fileNames=['file:/uscms/home/shalhout/no_backup/5000.root']
