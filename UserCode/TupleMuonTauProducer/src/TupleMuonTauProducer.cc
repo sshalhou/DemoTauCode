@@ -182,8 +182,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   for (unsigned int i = 0; i < muons->size(); ++i)
   {
 
+    const TupleMuon muon =   ((*muons)[i]);
+
     for (unsigned int j = 0; j < taus->size(); ++j)
     {
+
+      const TupleTau tau =   ((*taus)[j]);
+
 
       cout<<" i,j = "<<i<<","<<j;
       cout<<" muon PDGID "<<((*muons)[i]).pdgId();
