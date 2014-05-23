@@ -190,7 +190,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const int TupleMuonTauSize = muons->size();
   TupleMuonTaus->reserve( TupleMuonTauSize );
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
-  LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
+  //LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
+  NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
+
 
   for (std::size_t i = 0; i < muons->size(); ++i)
   {
@@ -305,9 +307,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           njet);
 
           math::PtEtaPhiMLorentzVector correctedMET(met,0.0,metphi,0.0);
-          XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
+          //XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
 
-          XYZTcorrectedMET =  mvaMETpf.momentum();
+          //XYZTcorrectedMET =  mvaMETpf.momentum();
 
           //////////////////////
           // print out the corrected value
@@ -349,7 +351,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       covMET = mvaMETpf.getSignificanceMatrix();
-      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, mvaMETpf.momentum(), covMET, 0);
+      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
       algo.addLogM(false);
       algo.integrateMarkovChain();
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
