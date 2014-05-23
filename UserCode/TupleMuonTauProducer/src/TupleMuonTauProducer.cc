@@ -48,8 +48,8 @@ Implementation:
 #include "DataFormats/METReco/interface/PFMETCollection.h"
 #include "UserCode/RecoilCorrector/interface/RecoilCorrector.hh"
 #include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.hh"
-
-
+#include "DataFormats/PatCandidates/interface/Jet.h"
+#include "DataFormats/JetReco/interface/Jet.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
