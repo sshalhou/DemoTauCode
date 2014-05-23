@@ -314,6 +314,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
           cout<<sqrt(NSVcorrectedMET.x()*NSVcorrectedMET.x()+NSVcorrectedMET.y()*NSVcorrectedMET.y());
           cout<<" z "<<NSVcorrectedMET.z()<<endl;
+          cout<<" Phi "<<NSVcorrectedMET.Phi()<<endl;
 
 
         }
