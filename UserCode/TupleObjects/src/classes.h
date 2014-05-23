@@ -10,4 +10,6 @@ struct dictionary {
     edm::Wrapper<TupleTauCollection> dummy3;
     TupleMuonTauCollection dummy4;
     edm::Wrapper<TupleMuonTauCollection> dummy5;
+    TupleUserSpecifiedData dummy6;
+    edm::Wrapper<TupleUserSpecifiedDataCollection> dummy7;
 };

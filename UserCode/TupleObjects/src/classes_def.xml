@@ -8,4 +8,7 @@
   <class name="TupleMuonTau"/>
   <class name="std::vector<TupleMuonTau>"/>
   <class name="edm::Wrapper<std::vector<TupleMuonTau> >"/>
+  <class name="TupleUserSpecifiedData"/>
+  <class name="std::vector<TupleUserSpecifiedData>"/>
+  <class name="edm::Wrapper<std::vector<UserSpecifiedData> >"/>
 </lcgdict>
