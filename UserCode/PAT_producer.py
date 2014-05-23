@@ -18,6 +18,21 @@ KeepAll = False
 
 
 
+###################################################
+# Store SampleName and PhysicsProcess
+# eventually these should be command line
+# options
+###################################################
+
+process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
+     SampleName=cms.string("A"),
+     PhysicsProcess=cms.string("B")
+#    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
+#                          /Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"),
+#    PhysicsProcess=cms.string("gg->H->tautau[SM_125_8TeV]")
+                                     )
+process.out.outputCommands +=['keep *_TupleUserSpecifiedData_*_*']
+
 
 ###################################################
 # need to get the correct version of the global
@@ -339,27 +354,15 @@ runMEtUncertainties(process,
 
 
 
-###################################################
-# Store SampleName and PhysicsProcess
-# eventually these should be command line
-# options
-###################################################
 
-process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
-     SampleName=cms.string("A"),
-     PhysicsProcess=cms.string("B")
-#    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
-#                          /Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"),
-#    PhysicsProcess=cms.string("gg->H->tautau[SM_125_8TeV]")
-                                     )
 
-process.out.outputCommands +=['keep *_TupleUserSpecifiedData*_*_*']
+
 
 
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        process.process.UserSpecifiedData+
+process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
                              process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
