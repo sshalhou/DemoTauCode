@@ -2,7 +2,7 @@
 //
 // Package:    TupleUserSpecifiedDataProducer
 // Class:      TupleUserSpecifiedDataProducer
-// 
+//
 /**\class TupleUserSpecifiedDataProducer TupleUserSpecifiedDataProducer.cc TEMP/TupleUserSpecifiedDataProducer/src/TupleUserSpecifiedDataProducer.cc
 
  Description: [one line class summary]
@@ -20,6 +20,8 @@
 
 // system include files
 #include <memory>
+#include <string>
+
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -29,8 +31,9 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 
-
+using namespace std;
 //
 // class declaration
 //
@@ -46,13 +49,15 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
       virtual void beginJob() ;
       virtual void produce(edm::Event&, const edm::EventSetup&);
       virtual void endJob() ;
-      
+
       virtual void beginRun(edm::Run&, edm::EventSetup const&);
       virtual void endRun(edm::Run&, edm::EventSetup const&);
       virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
       virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
       // ----------member data ---------------------------
+      string SampleName_;
+      string PhysicsProcess_;
 };
 
 //
@@ -67,26 +72,34 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
 //
 // constructors and destructor
 //
-TupleUserSpecifiedDataProducer::TupleUserSpecifiedDataProducer(const edm::ParameterSet& iConfig)
+TupleUserSpecifiedDataProducer::TupleUserSpecifiedDataProducer(const edm::ParameterSet& iConfig):
+SampleName_(iConfig.getParameter<string>("SampleName" )),
+PhysicsProcess_(iConfig.getParameter<string>("PhysicsProcess" ))
 {
+
+
+  produces< vector<TupleUserSpecifiedData> >("TupleUserSpecifiedData").setBranchAlias("TupleUserSpecifiedData");
+
+
+
    //register your products
 /* Examples
    produces<ExampleData2>();
 
    //if do put with a label
    produces<ExampleData2>("label");
- 
+
    //if you want to put into the Run
    produces<ExampleData2,InRun>();
 */
    //now do what ever other initialization is needed
-  
+
 }
 
 
 TupleUserSpecifiedDataProducer::~TupleUserSpecifiedDataProducer()
 {
- 
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
 
@@ -101,13 +114,31 @@ TupleUserSpecifiedDataProducer::~TupleUserSpecifiedDataProducer()
 void
 TupleUserSpecifiedDataProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace edm;
+
+
+auto_ptr<TupleUserSpecifiedDataCollection> UserData (new TupleUserSpecifiedDataCollection);
+UserData->reserve( 1 );
+
+
+TupleUserSpecifiedData CurrentTupleUserSpecifiedData;
+CurrentTupleUserSpecifiedData.set_SampleName(SampleName_);
+CurrentTupleUserSpecifiedData.set_PhysicsProcess(PhysicsProcess_);
+
+////////////
+// store the TupleUserSpecifiedData
+
+UserData->push_back(CurrentTupleUserSpecifiedData);
+
+
+iEvent.put( UserData, "TupleUserSpecifiedData" );
+
+
 /* This is an event example
    //Read 'ExampleData' from the Event
    Handle<ExampleData> pIn;
    iEvent.getByLabel("example",pIn);
 
-   //Use the ExampleData to create an ExampleData2 which 
+   //Use the ExampleData to create an ExampleData2 which
    // is put into the Event
    std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
    iEvent.put(pOut);
@@ -118,40 +149,40 @@ TupleUserSpecifiedDataProducer::produce(edm::Event& iEvent, const edm::EventSetu
    ESHandle<SetupData> pSetup;
    iSetup.get<SetupRecord>().get(pSetup);
 */
- 
+
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 TupleUserSpecifiedDataProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
