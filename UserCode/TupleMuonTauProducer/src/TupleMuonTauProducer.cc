@@ -253,11 +253,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         {
           std::string DataFile;
           std::string MCFile;
+          std::string ProcessFile;
+
           int njet = 3;
+
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, DataFile, MCFile);
+            DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
           cout<<" files = "<<DataFile<<" "<<MCFile<<endl;
+
+//RecoilCorrector corrector(DataFile, int iSeed=0xDEADBEEF);
+//        RecoilCorrector corrector("someFileName",0);
+
+//        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
+//        corrector.Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
+//        printf("corrected met: %10.2f%10.2f\n",met,metphi);
 
 
         }
