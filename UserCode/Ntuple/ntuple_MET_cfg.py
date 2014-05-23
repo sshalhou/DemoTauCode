@@ -73,7 +73,7 @@ runMEtUncertainties(process,
 # options
 ###################################################
 
-process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedData' ,
+process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
      SampleName=cms.string("A"),
      PhysicsProcess=cms.string("B")
 #    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
