@@ -266,8 +266,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
           cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
 
+          // not sure what random seed we should be using?
+          // do we really want it to be random?
+          cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
 
-          RecoilCorrector corrector(ProcessFile, int iSeed=0xDEADBEEF);
+          RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
           corrector.addDataFile(DataFile);
           corrector.addMCFile(MCFile);
 
