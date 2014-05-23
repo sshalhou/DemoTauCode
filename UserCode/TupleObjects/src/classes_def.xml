@@ -10,5 +10,5 @@
   <class name="edm::Wrapper<std::vector<TupleMuonTau> >"/>
   <class name="TupleUserSpecifiedData"/>
   <class name="std::vector<TupleUserSpecifiedData>"/>
-  <class name="edm::Wrapper<std::vector<UserSpecifiedData> >"/>
+  <class name="edm::Wrapper<std::vector<TupleUserSpecifiedData> >"/>
 </lcgdict>
