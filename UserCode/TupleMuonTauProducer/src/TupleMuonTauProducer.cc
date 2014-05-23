@@ -179,10 +179,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const int TupleMuonTauSize = muons->size();
   TupleMuonTaus->reserve( TupleMuonTauSize );
 
+
   for (unsigned int i = 0; i < muons->size(); ++i)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
+    const reco::PFMet mvaMETpf =  (*mvamet)[0];
 
     for (unsigned int j = 0; j < taus->size(); ++j)
     {
@@ -191,18 +193,18 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       cout<<" i,j = "<<i<<","<<j;
-      cout<<" muon PDGID "<<((*muons)[i]).pdgId();
-      cout<<" tau PDGID "<<((*taus)[j]).pdgId()<<endl;
+      cout<<" muon PDGID "<<muon.pdgId();
+      cout<<" tau PDGID "<<tau.pdgId()<<endl;
 
       TupleMuonTau CurrentMuonTau;
 
-      CurrentMuonTau.set_p4(  ((*muons)[i]).p4() + ((*taus)[j]).p4() );
+      CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
       CurrentMuonTau.set_muonIndex(i);
       CurrentMuonTau.set_tauIndex(j);
-      CurrentMuonTau.set_corrected_p4( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   );
-      CurrentMuonTau.set_scalarSumPt(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
-      CurrentMuonTau.set_DR(((*muons)[i]).p4() , ((*taus)[j]).corrected_p4()  );
-      CurrentMuonTau.set_sumCharge(((*muons)[i]).charge() , ((*taus)[j]).charge()  );
+      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
+      CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
+      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
+      CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
 
       ////////////
       // apply Phil's recoil
@@ -211,10 +213,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( !iEvent.isRealData() )
       {
-        double met=(*mvamet)[0].pt();
-        double metphi=(*mvamet)[0].phi();
-        double leptonPt = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).pt();
-        double leptonPhi  = ( ((*muons)[i]).p4() + ((*taus)[j]).corrected_p4()   ).phi();
+        double met=mvaMETpf.pt();
+        double metphi=mvaMETpf.phi();
+        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
+        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
         double GenZPt = 0.0;
         double GenZPhi = 0.0;
         double iU1 = 0.0;
@@ -316,25 +318,27 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       // it seems the order matters
       // pass the higher pt lepton 1st
 
-      if( ((*muons)[i]).p4().pt() >=  ((*taus)[j]).corrected_p4().pt()  )
+      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
       {
-        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        ((*taus)[j]).corrected_p4()));
+        tau.corrected_p4()));
       }
 
       else
       {
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        ((*taus)[j]).corrected_p4()));
-        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay, ((*muons)[i]).p4()) );
+        tau.corrected_p4()));
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
 
 
       }
 
 
-      covMET = (*mvamet)[0].getSignificanceMatrix();
-      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, (*mvamet)[0].momentum(), covMET, 0);
+      covMET = mvaMETpf.getSignificanceMatrix();
+      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, mvaMETpf.momentum(), covMET, 0);
       algo.addLogM(false);
       algo.integrateMarkovChain();
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
