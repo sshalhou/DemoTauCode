@@ -4,8 +4,8 @@
 TupleUserSpecifiedData::TupleUserSpecifiedData()
 {
 
-  SampleName = "NULL";
-  PhysicsProcess = "NULL";
+  m_SampleName = "NULL";
+  m_PhysicsProcess = "NULL";
 
 }
 
