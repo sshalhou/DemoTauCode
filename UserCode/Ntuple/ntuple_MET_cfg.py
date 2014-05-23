@@ -88,7 +88,9 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = cms.InputTag("pfMEtMVANominal"),
                 genSrc = cms.InputTag("genParticles"),
-                PAR1=cms.double(321.),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
                 NAME=cms.string("TupleMuonTausNominal")
                                      )
 
@@ -107,7 +109,9 @@ process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = cms.InputTag("pfMEtMVATauEnUp"),
                 genSrc = cms.InputTag("genParticles"),
-                PAR1=cms.double(321.),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
                 NAME=cms.string("TupleMuonTausTauEnUp")
                                      )
 
@@ -127,7 +131,9 @@ process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = cms.InputTag("pfMEtMVATauEnDown"),
                 genSrc = cms.InputTag("genParticles"),
-                PAR1=cms.double(321.),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("selectedPatJets"),
                 NAME=cms.string("TupleMuonTausTauEnDown")
                                      )
 

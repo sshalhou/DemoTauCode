@@ -82,7 +82,9 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag mvametSrc_;
   edm::InputTag genSrc_;
-  double PAR1_;
+  edm::InputTag jetSrc_;
+  double iFluc_;
+  double iScale_;
   string NAME_;
 
 
@@ -105,7 +107,9 @@ tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 mvametSrc_(iConfig.getParameter<edm::InputTag>("mvametSrc" )),
 genSrc_(iConfig.getParameter<edm::InputTag>("genSrc" )),
-PAR1_(iConfig.getParameter<double>("PAR1" )),
+jetSrc_(iConfig.getParameter<edm::InputTag>("jetSrc" )),
+iFluc_(iConfig.getParameter<double>("iFluc" )),
+iScale_(iConfig.getParameter<double>("iScale" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
@@ -151,7 +155,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-  // get tuple muon and tau collections
+  // get tuple muon and tau and jet collections
 
 
   edm::Handle< TupleMuonCollection > muons;
@@ -160,17 +164,24 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< TupleTauCollection > taus;
   iEvent.getByLabel(tauSrc_, taus);
 
+  edm::Handle<edm::View<pat::Jet> > jets;
+  iEvent.getByLabel(jetSrc_,jets);
+
+  std::size_t njet = jets->size();
+
   // get the mva met
 
   edm::Handle<std::vector<reco::PFMET> > mvamet;
   iEvent.getByLabel(mvametSrc_, mvamet);
 
+  // get the gen particles
+
   edm::Handle<std::vector<reco::GenParticle> > gen;
   iEvent.getByLabel(genSrc_, gen);
 
+  // print the parameters passed by the config file
 
-  cout<<" PAR1_ "<<PAR1_<<endl;
-  cout<<" NAME_ "<<NAME_<<endl;
+  cout<<" NAME_, iFluc_, iScale_ "<<NAME_<<" "<<iFluc_<<" "<<iScale_<<endl;
 
   ////////////
 
@@ -181,12 +192,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
   LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
 
-  for (unsigned int i = 0; i < muons->size(); ++i)
+  for (std::size_t i = 0; i < muons->size(); ++i)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
 
-    for (unsigned int j = 0; j < taus->size(); ++j)
+    for (std::size_t j = 0; j < taus->size(); ++j)
     {
 
       const TupleTau tau =   ((*taus)[j]);
@@ -240,10 +251,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         LorentzVector DaughterTwoP4(0,0,0,0);
         bool ApplyRecoilCorrection = 0;
 
-        // these need to become argumenst to the producer
-        double iFluc  = 0.0;
-        double iScale = 0.0;
-        int njet = 3;
 
         GenBosonDecayFinder genDecayFinder;
         genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
@@ -293,8 +300,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           leptonPhi,
           iU1,
           iU2,
-          iFluc,
-          iScale,
+          iFluc_,
+          iScale_,
           njet);
 
           math::PtEtaPhiMLorentzVector correctedMET(met,0.0,metphi,0.0);
@@ -340,7 +347,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       covMET = mvaMETpf.getSignificanceMatrix();
-      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, mvaMETpf.momentum(), covMET, 0);
+      NSVfitStandaloneAlgorithm algo(measuredTauLeptons, XYZTcorrectedMET, covMET, 0);
       algo.addLogM(false);
       algo.integrateMarkovChain();
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
