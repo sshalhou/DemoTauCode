@@ -179,7 +179,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const int TupleMuonTauSize = muons->size();
   TupleMuonTaus->reserve( TupleMuonTauSize );
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
-  math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
   LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
 
   for (unsigned int i = 0; i < muons->size(); ++i)
@@ -298,7 +297,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           iScale,
           njet);
 
-          correctedMET.SetPtEtaPhiM(met,0.0,metphi,0.0);
+          math::PtEtaPhiMLorentzVector correctedMET(met,0.0,metphi,0.0);
           XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
 
           //////////////////////
