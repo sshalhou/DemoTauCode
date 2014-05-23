@@ -280,7 +280,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           GenZPt,
           GenZPhi,
           leptonPt,
-          leleptonPhi,
+          leptonPhi,
           iU1,
           iU2,
           iFluc,
