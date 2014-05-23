@@ -423,5 +423,5 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 process.source.fileNames=['file:/uscms/home/shalhout/no_backup/5000.root']
 
-process.maxEvents.input = 100
+process.maxEvents.input = 5000
 ########################################################################################################

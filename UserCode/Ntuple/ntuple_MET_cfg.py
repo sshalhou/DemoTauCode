@@ -217,7 +217,6 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 
 
 process.p = cms.Path(process.myProducerLabel+
-      process.UserSpecifiedData+
       process.pfMEtMVANominal+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
       +process.metUncertaintySequence+
