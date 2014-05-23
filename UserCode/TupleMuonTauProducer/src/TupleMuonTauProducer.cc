@@ -42,7 +42,7 @@ Implementation:
 #include "TLorentzVector.h"
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
-
+#include "Math/GenVector/VectorUtil.h"
 #include "DataFormats/PatCandidates/interface/MET.h"
 #include "DataFormats/METReco/interface/PFMET.h"
 #include "DataFormats/METReco/interface/PFMETCollection.h"
@@ -178,13 +178,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   const int TupleMuonTauSize = muons->size();
   TupleMuonTaus->reserve( TupleMuonTauSize );
-
+  const reco::PFMET mvaMETpf =  (*mvamet)[0];
+  math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
+  LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
 
   for (unsigned int i = 0; i < muons->size(); ++i)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
-    const reco::PFMET mvaMETpf =  (*mvamet)[0];
 
     for (unsigned int j = 0; j < taus->size(); ++j)
     {
@@ -297,6 +298,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           iScale,
           njet);
 
+          correctedMET.SetPtEtaPhiM(met,0.0,metphi,0.0);
+          XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
 
           //////////////////////
           // print out the corrected value
