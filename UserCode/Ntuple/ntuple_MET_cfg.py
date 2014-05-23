@@ -67,7 +67,19 @@ runMEtUncertainties(process,
                     )
 
 
+###################################################
+# Store SampleName and PhysicsProcess
+# eventually these should be command line
+# options
+###################################################
 
+process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedData' ,
+     SampleName=cms.string("A"),
+     PhysicsProcess=cms.string("B")
+#    SampleName=cms.string("GluGluToHToTauTau_M-125_8TeV-powheg-pythia6\
+#                          /Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"),
+#    PhysicsProcess=cms.string("gg->H->tautau[SM_125_8TeV]")
+                                     )
 
 ##########################
 # Nominal Systematics    #
@@ -213,6 +225,7 @@ process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
 
 
 process.p = cms.Path(process.myProducerLabel+
+      process.UserSpecifiedData+
       process.pfMEtMVANominal+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
       +process.metUncertaintySequence+
