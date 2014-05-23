@@ -307,6 +307,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           math::PtEtaPhiMLorentzVector correctedMET(met,0.0,metphi,0.0);
           XYZTcorrectedMET.SetXYZT(correctedMET.X(),correctedMET.Y(),correctedMET.Z(),correctedMET.T());
 
+          XYZTcorrectedMET =  mvaMETpf.momentum();
+
           //////////////////////
           // print out the corrected value
           cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
