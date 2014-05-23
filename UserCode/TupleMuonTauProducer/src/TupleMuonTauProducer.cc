@@ -216,19 +216,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         double iU2 = 0.0;
 
         ////////////////
-        // there are specific corrections
-        // for H->tau tau, W, Z, and Zmm
-        // as of Summer 2013, H,W, and Z use 53X_20pv
-        // while Zmm uses 53X_2012 for data and Zmm
-
-        string recoilCorr = "53X_20pv";
-        string recoilCorrZmm  = "53X_2012";
-
-        int GenLevelBoson = 0;
-
-        ////////////////////////
-        // determine the generator
-        // level process
+        // There are specific corrections
+        // for H->tau tau, W, Z, and Zmm.
+        // As of Summer 2013, H,W, and Z use 53X_20pv
+        // while Zmm uses 53X_2012 for the process.
+        // For data Zmm and simulated Zmm, we use 53X_2012.
+        // The function genDecayFinder can figure out the process
+        // while whichRecoilCorrectionFiles will return the
+        // correct set of files for the correction
 
         int BosonPdgId = 0;
         LorentzVector BosonP4(0,0,0,0);
@@ -238,10 +233,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         LorentzVector DaughterTwoP4(0,0,0,0);
         bool ApplyRecoilCorrection = 0;
 
+        // these need to become argumenst to the producer
+        double iFluc  = 0.0;
+        double iScale = 0.0;
+        int njet = 3;
+
         GenBosonDecayFinder genDecayFinder;
         genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
-                                                  DaughterOneP4,DaughterTwoPdgId,
-                                                  DaughterTwoP4,ApplyRecoilCorrection);
+        DaughterOneP4,DaughterTwoPdgId,
+        DaughterTwoP4,ApplyRecoilCorrection);
 
         cout<<BosonPdgId<<" = BosonPdgId "<<endl;
         cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
@@ -251,52 +251,50 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         if(ApplyRecoilCorrection)
         {
+
+          GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
+          GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+
           std::string DataFile;
           std::string MCFile;
           std::string ProcessFile;
 
-          int njet = 3;
 
-            whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-          cout<<" files = "<<DataFile<<" "<<MCFile<<endl;
+          whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
+          DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-//RecoilCorrector corrector(DataFile, int iSeed=0xDEADBEEF);
-//        RecoilCorrector corrector("someFileName",0);
+          cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
 
-//        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
-//        corrector.Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
-//        printf("corrected met: %10.2f%10.2f\n",met,metphi);
+
+          RecoilCorrector corrector(ProcessFile, int iSeed=0xDEADBEEF);
+          corrector.addDataFile(DataFile);
+          corrector.addMCFile(MCFile);
+
+          //////////////////////
+          // print out the uncorrected value
+          cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
+
+          corrector.CorrectType1(  met,
+          metphi,
+          GenZPt,
+          GenZPhi,
+          leptonPt,
+          leleptonPhi,
+          iU1,
+          iU2,
+          iFluc,
+          iScale,
+          njet);
+
+
+          //////////////////////
+          // print out the corrected value
+          cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
 
 
         }
 
-
-
-        //      if( abs(((*muons)[i]).pdgId()) == 13 && abs(((*taus)[j]).pdgId()) == 15)
-        //      {
-        //        GenZPt =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).pt();
-        //        GenZPhi =  (((*muons)[i]).genP4() + ((*taus)[j]).genP4()).phi();
-
-
-        ////////////////////
-        // set up various
-        // versions of the recoil corrector
-
-
-
-
-
-
-
-        //      RecoilCorrector corrector("UserCode/RecoilCorrector/data", int iSeed=0xDEADBEEF);
-        //        RecoilCorrector corrector("someFileName",0);
-
-        //        cout<<" met, metphi "<<met<<" , "<<metphi<<endl;
-        //        corrector.Correct(met,metphi,GenZPt,GenZPhi,leptonPt,leptonPhi);
-        //        printf("corrected met: %10.2f%10.2f\n",met,metphi);
-        //  }
 
       }
 
