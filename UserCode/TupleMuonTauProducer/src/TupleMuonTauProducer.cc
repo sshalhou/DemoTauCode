@@ -184,7 +184,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
-    const reco::PFMet mvaMETpf =  (*mvamet)[0];
+    const reco::PFMET mvaMETpf =  (*mvamet)[0];
 
     for (unsigned int j = 0; j < taus->size(); ++j)
     {
