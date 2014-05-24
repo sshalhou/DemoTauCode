@@ -33,9 +33,7 @@ namespace TupleHelpers
   // combination of the various
   // vector types floating around here
 
-  template <class SomeVector>
-  template <class AnotherVector>
-
+  template <class SomeVector, class AnotherVector>
   inline double GetTransverseMass(SomeVector V1, AnotherVector V2)
   {
 
