@@ -191,7 +191,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     ///////////////////////////
 
     CurrentTau.set_passFullId(passFullId);
-    cout<<" tau ID "<<passFullId<<endl;
+
 
     ////////////
     // store the Tau
