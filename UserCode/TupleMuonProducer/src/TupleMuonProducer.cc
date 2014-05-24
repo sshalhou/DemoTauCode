@@ -293,7 +293,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     CurrentMuon.set_numberOfMatchedStations(muon->numberOfMatchedStations());
-    CurrentMuon.set_dB(muon->dB(primary_vertex.position()));
+    CurrentMuon.set_dB(muon->dB());
 
 
 
@@ -363,14 +363,9 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
     if(!(muon->isGlobalMuon())) passFullId = 0;
-    cout<<" glob "<<passFullId<<endl;
     if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
-    cout<<" tight "<<passFullId<<endl;
-    if(!(fabs(muon->dB(primary_vertex.position())) < 0.045)) passFullId = 0;
-    cout<<" dB "<<passFullId<<" val "<<muon->dB(primary_vertex.position())<<endl;
+    if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
-    cout<<" dz "<<passFullId<<" val "<<muon->muonBestTrack()->dz(primary_vertex.position())<<endl;
-
     if(!(irel_DR4 < 0.1)) passFullId = 0;
     if(!(muon->p4().pt()>20)) passFullId = 0;
     if(!(fabs(muon->p4().eta())<2.1)) passFullId = 0;
