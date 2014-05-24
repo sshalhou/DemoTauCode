@@ -356,15 +356,20 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // set the passFullId summary boolean
     // eventually the cuts should be passed
     // to the producer using the cutParser
-
+    // this is temporary since muTau, eTau, TauTau
+    // have different cut sets
 
     bool passFullId = 1;
 
     ///////////////////////////
     if(!(muon->isGlobalMuon())) passFullId = 0;
+    cout<<" glob "<<passFullId<<endl;
     if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
+    cout<<" tight "<<passFullId<<endl;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
+    cout<<" dB "<<passFullId<<" val "<<muon->dB()<<endl;
     if(!(fabs(muon->muonBestTrack()->dz()) < 0.2)) passFullId = 0;
+    cout<<" dz "<<passFullId<<" val "<<muon->muonBestTrack()->dz()<<endl;
     if(!(irel_DR4 < 0.1)) passFullId = 0;
     if(!(muon->p4().pt()>20)) passFullId = 0;
     if(!(fabs(muon->p4().eta())<2.1)) passFullId = 0;
