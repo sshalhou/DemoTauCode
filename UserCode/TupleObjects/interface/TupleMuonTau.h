@@ -36,6 +36,7 @@ public:
   void set_DR(LorentzVector,LorentzVector);
   void set_sumCharge(int, int);
   void set_correctedSVFitMass(double);
+  void set_TransverseMass(double);
 
   // getters
 
@@ -47,6 +48,7 @@ public:
   double DR() const;
   int sumCharge() const;
   double correctedSVFitMass() const;
+  double TransverseMass() const;
 
 private:
 
@@ -58,7 +60,7 @@ private:
   double m_DR;
   int m_sumCharge;
   double m_correctedSVFitMass;
-
+  double m_TransverseMass;
 
 };
 

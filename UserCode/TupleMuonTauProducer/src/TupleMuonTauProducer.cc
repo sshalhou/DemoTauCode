@@ -50,6 +50,8 @@ Implementation:
 #include "UserCode/GenBosonDecayFinder/interface/GenBosonDecayFinder.hh"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/Jet.h"
+#include "DataFormats/Math/interface/deltaPhi.h"
+#include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -219,6 +221,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
       CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
 
+
+
       ////////////
       // apply Phil's recoil
       // corrections to the MET before
@@ -317,8 +321,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       }
 
-      ////////////
+      ////////////////
+      double Mt = TupleHelpers::GetTransverseMass(muon.p4(), NSVcorrectedMET);
+      CurrentMuonTau.set_TransverseMass(Mt);
 
+      cout<<" transverse mass  = "<<Mt<<endl;
+      ////////////////
 
       TMatrixD covMET(2, 2); // PFMET significance matrix
       std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;

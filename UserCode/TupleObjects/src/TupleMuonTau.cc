@@ -11,8 +11,13 @@ TupleMuonTau::TupleMuonTau()
   m_DR = NAN;
   m_sumCharge = -999;
   m_correctedSVFitMass = NAN;
+  m_TransverseMass = NAN;
 
 }
+
+
+void TupleMuonTau::set_TransverseMass(double TransverseMass_) { m_TransverseMass = TransverseMass_;}
+double TupleMuonTau::TransverseMass() const  { return m_TransverseMass; }
 
 void TupleMuonTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleMuonTau::p4() const  { return m_p4; }
