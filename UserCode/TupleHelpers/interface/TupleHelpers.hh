@@ -37,7 +37,7 @@ namespace TupleHelpers
   inline double GetTransverseMass(SomeVector V1, AnotherVector V2)
   {
 
-    double pTxMET = V1.pt()*V2.pt();
+    double pTxMET = V1.Pt()*V2.Pt();
     double CosDphi = cos(deltaPhi(V1.phi(), V2.phi()));
     double MtSq = (2 * pTxMET*(1-CosDphi));
     return sqrt(MtSq);
