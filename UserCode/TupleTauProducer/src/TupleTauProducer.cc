@@ -173,7 +173,25 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentTau.set_decayMode(tau->decayMode());
 
 
+    //////////////////////////
+    // set the passFullId summary boolean
+    // eventually the cuts should be passed
+    // to the producer using the cutParser
+    // this is temporary since muTau, eTau, TauTau
+    // have different cut sets
 
+    bool passFullId = 1;
+
+    ///////////////////////////
+    if(!(tau->tauID("againstElectronLoose"))) passFullId = 0;
+    if(!(tau->tauID("againstMuonTight"))) passFullId = 0;
+    if(!(tau->tauID("byCombinedIsolationDeltaBetaCorrRaw3Hits") < 1.5)) passFullId = 0;
+    if(!(CurrentTau.corrected_p4().pt()>20)) passFullId = 0;
+    if(!(fabs(CurrentTau.corrected_p4().eta())<2.3)) passFullId = 0;
+    ///////////////////////////
+
+    CurrentMuon.set_passFullId(passFullId);
+    cout<<" tau ID "<<passFullId<<endl;
 
     ////////////
     // store the Tau
