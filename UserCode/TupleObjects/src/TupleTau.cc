@@ -9,8 +9,17 @@ TupleTau::TupleTau()
   m_pdgId = -999;
   m_charge = -999;
   m_decayMode = -999;
+  m_passFullId = 0;
 
 }
+
+
+
+
+// will set this in TupleTauProducer, since we can track all cuts
+// more easily when calling the producer
+void TupleTau::set_passFullId(bool passFullId_) { m_passFullId = passFullId_;}
+bool TupleTau::passFullId() const  { return m_passFullId; }
 
 void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleTau::p4() const  { return m_p4; }

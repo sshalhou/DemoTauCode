@@ -49,6 +49,7 @@ public:
   void set_dB(double); // aka d0
   void set_dz(double);
   void set_dxy(double);
+  void set_passFullId(bool);
 
   // R = 0.4 isolation
   void set_sumChargedParticlePt_DR4(double);
@@ -94,6 +95,7 @@ public:
   double dB() const; // aka d0
   double dz() const;
   double dxy() const;
+  bool   passFullId() const;
 
 
 private:
@@ -125,7 +127,7 @@ private:
   double m_dB; // aka d0
   double m_dz;
   double m_dxy;
-
+  bool m_passFullId;
 
 
 

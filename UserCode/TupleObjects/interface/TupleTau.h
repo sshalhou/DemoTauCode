@@ -35,6 +35,7 @@ public:
   void set_pdgId(int);
   void set_charge(int);
   void set_decayMode(int);
+  void set_passFullId(bool);
 
   // getters
 
@@ -44,6 +45,8 @@ public:
   int pdgId() const;
   int charge() const;
   int decayMode() const;
+  bool passFullId() const;
+
 
 private:
 
@@ -53,6 +56,8 @@ private:
   int m_pdgId;
   int m_charge;
   int m_decayMode;
+  bool m_passFullId;
+
 
 };
 

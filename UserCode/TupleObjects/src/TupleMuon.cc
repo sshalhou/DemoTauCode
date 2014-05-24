@@ -30,7 +30,14 @@ TupleMuon::TupleMuon()
   m_dB = NAN; // aka d0
   m_dz = NAN;
   m_dxy = NAN;
+  m_passFullId = 0;
 }
+
+
+// will set this in TupleMuonProducer, since we can track all cuts
+// more easily when calling the producer
+void TupleMuon::set_passFullId(bool passFullId_) { m_passFullId = passFullId_;}
+bool TupleMuon::passFullId() const  { return m_passFullId; }
 
 
 void TupleMuon::set_genP4(LorentzVector v4_) { m_genP4 = v4_;}
