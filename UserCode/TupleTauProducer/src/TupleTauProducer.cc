@@ -190,7 +190,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(fabs(CurrentTau.corrected_p4().eta())<2.3)) passFullId = 0;
     ///////////////////////////
 
-    CurrentMuon.set_passFullId(passFullId);
+    CurrentTau.set_passFullId(passFullId);
     cout<<" tau ID "<<passFullId<<endl;
 
     ////////////
