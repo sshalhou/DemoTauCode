@@ -38,9 +38,9 @@ namespace TupleHelpers
   {
 
     double pTxMET = V1.pt()*V2.pt();
-    double CosDphi = math::cos(deltaPhi(V1.phi(), V2.phi()));
-    double MtSq = 2 * pTxMET(1-CosDphi);
-    return math::sqrt(MtSq);
+    double CosDphi = cos(deltaPhi(V1.phi(), V2.phi()));
+    double MtSq = (2 * pTxMET*(1-CosDphi));
+    return sqrt(MtSq);
 
   }
 
