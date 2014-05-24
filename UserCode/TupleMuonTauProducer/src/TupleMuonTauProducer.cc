@@ -363,8 +363,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-      //CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
-       CurrentMuonTau.set_correctedSVFitMass(0);
+      CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
 
       //cout<<" diTauMassErr "<<algo.getMassUncert();
       //cout<<" diTauPt "<<algo.getPt();
