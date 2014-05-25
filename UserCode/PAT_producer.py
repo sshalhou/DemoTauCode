@@ -121,6 +121,7 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelect
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
+from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
 
 
 
@@ -137,7 +138,7 @@ process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
                                                                      "isotausPAT")
                                           )
 
-
+process.pfMEtMVAsequence = pfMEtMVAsequence.clone()
 
 
 
