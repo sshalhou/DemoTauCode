@@ -206,6 +206,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
+      if(tau.passFullId && muon.passFullId)
+      { // temp
+
 
       cout<<" i,j = "<<i<<","<<j;
       cout<<" muon PDGID "<<muon.pdgId();
@@ -377,6 +380,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       TupleMuonTaus->push_back(CurrentMuonTau);
 
+    } //temp
 
     }
 
