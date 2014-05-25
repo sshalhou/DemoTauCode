@@ -121,6 +121,8 @@ process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
+
+
 ##################################################
 # specify settings for met mva
 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/MVAMet
@@ -405,23 +407,25 @@ process.out.SelectEvents.SelectEvents = ['p']
 
 
 ########################################################################################################
-
-
-
-
-
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
-
-#process.out.fileName = 'patTuple_testing.root'
+########################################################################################################
 process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
-#process.source.fileNames=['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/'+
-#                          'GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/'+
-#                          'PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root']
+
+########################################################################################################
+myfilelist = cms.untracked.vstring()
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/085027A0-63E9-E111-BA2C-0018F3D09670.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/0E3688C3-98E9-E111-8FC6-003048FFCBB0.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/1289637A-69E9-E111-B26D-003048678F84.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/12A21961-B3E9-E111-AA11-00261894394D.root'])
+
+process.source = cms.Source ("PoolSource",
+                      fileNames=myfilelist,
+		                  skipEvents=cms.untracked.uint32(12568)
+			                       )
+########################################################################################################
 
 
-
-process.source.fileNames=['file:/uscms/home/shalhout/no_backup/5000.root']
-
-process.maxEvents.input = 5000
+process.maxEvents.input = -1
 ########################################################################################################
