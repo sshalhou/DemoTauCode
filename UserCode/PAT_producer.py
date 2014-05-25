@@ -132,7 +132,7 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
 # in later stages isomuons, isoelectrons are a resonable
 # preselection for MET corrections
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
+process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
                                                                      "isoelectronsPAT",
                                                                      "isotausPAT")
                                           )
