@@ -138,7 +138,6 @@ process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
                                                                      "isotausPAT")
                                           )
 
-process.pfMEtMVAsequence = pfMEtMVAsequence.clone()
 
 
 
