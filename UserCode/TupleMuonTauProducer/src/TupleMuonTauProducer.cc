@@ -219,9 +219,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
       CurrentMuonTau.set_muonIndex(i);
       CurrentMuonTau.set_tauIndex(j);
-      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
-      CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
-      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
+            CurrentMuonTau.set_corrected_p4( muon.p4() + tau.p4()   );
+            CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.p4()  );
+            CurrentMuonTau.set_DR(muon.p4() , tau.p4()  );
+
+
+//      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
+//      CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
+//      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
       CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
 
 
@@ -235,8 +240,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       {
         double met=mvaMETpf.pt();
         double metphi=mvaMETpf.phi();
-        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
-        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
+//        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
+//        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
+        cout<<" turned off tau ES correction"<<endl;
+        double leptonPt = ( muon.p4() + tau.p4()   ).pt();
+        double leptonPhi  = ( muon.p4() + tau.p4()   ).phi();
+
         double GenZPt = 0.0;
         double GenZPhi = 0.0;
         double iU1 = 0.0;
@@ -338,18 +347,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       // it seems the order matters
       // pass the higher pt lepton 1st
 
-      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+      if( muon.p4().pt() >=  tau.p4().pt()  )
+//      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
       {
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
         muon.p4()) );
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        tau.corrected_p4()));
+        tau.p4()));
+//        tau.corrected_p4()));
       }
 
       else
       {
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        tau.corrected_p4()));
+        tau.p4()));
+//        tau.corrected_p4()));
         measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
         muon.p4()) );
 
