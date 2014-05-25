@@ -120,10 +120,11 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isomuons
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isoelectrons as isoelectronsPAT
 from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import isotaus as isotausPAT
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
-from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequence
 
-
+#from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 ##################################################
@@ -133,7 +134,7 @@ from JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVAsequ
 # in later stages isomuons, isoelectrons are a resonable
 # preselection for MET corrections
 ###################################################
-process.pfMEtMVA = pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuonsPAT",
                                                                      "isoelectronsPAT",
                                                                      "isotausPAT")
                                           )
