@@ -82,6 +82,9 @@ process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
                 NAME=cms.string("TupleTausNominal")
                                                    )
 
+
+
+
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
@@ -90,6 +93,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausNominal")
                                      )
 ##########################
@@ -104,6 +109,8 @@ process.TupleMuonTausRecoilUp = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(1.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausRecoilUp")
                                      )
 
@@ -119,6 +126,8 @@ process.TupleMuonTausRecoilDown = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(-1.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausRecoilDown")
                                      )
 
@@ -134,6 +143,8 @@ process.TupleMuonTausRecoilResUp = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(1.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausRecoilResUp")
                                      )
 
@@ -149,6 +160,8 @@ process.TupleMuonTausRecoilResDown = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(-1.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausRecoilResDown")
                                      )
 
@@ -170,6 +183,8 @@ process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausTauEnUp")
                                      )
 
@@ -192,6 +207,8 @@ process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("selectedPatJets"),
+                puJetIdMVASrc = cms.InputTag("puJetMva","full53xDiscriminant"),
+                puJetIdFlagSrc = cms.InputTag("puJetMva","full53xId"),
                 NAME=cms.string("TupleMuonTausTauEnDown")
                                      )
 
