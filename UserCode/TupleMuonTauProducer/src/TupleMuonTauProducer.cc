@@ -206,7 +206,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-      if(tau.passFullId && muon.passFullId)
+      if(tau.passFullId() && muon.passFullId())
       { // temp
 
 
