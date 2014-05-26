@@ -148,13 +148,13 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 std::cout<<" iEvent.id() "<<iEvent.id();
-std::cout<<" againstElectronLoose "<<againstElectronLoose;
-std::cout<<" againstElectronLooseMVA3 "<<againstElectronLooseMVA3;
-std::cout<<" againstElectronMVA3raw  "<<againstElectronMVA3raw;
+std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
+std::cout<<" againstElectronLooseMVA3 "<<tau->tauID("againstElectronLooseMVA3");
+std::cout<<" againstElectronMVA3raw  "<<tau->tauID("againstElectronLooseMVA3raw");
 std::cout<<" againstElectronMVA3category "<<tau->tauID("againstElectronMVA3category");
 
 
-std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), againstElectronMVA3raw, 1)<<endl;
+std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
 
 
                     } // tau loop
