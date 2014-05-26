@@ -290,10 +290,12 @@ for (std::size_t i = 0; i < muons->size(); ++i)
         cout<<" muon PDGID "<<muon.pdgId();
         cout<<" tau PDGID "<<tau.pdgId()<<endl;
 
+
+        TupleMuonTau CurrentMuonTau;
+
         if(max_i == i && max_j == j) CurrentMuonTau.set_MAX(1);
         else CurrentMuonTau.set_MAX(2);
 
-        TupleMuonTau CurrentMuonTau;
 
         CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
         CurrentMuonTau.set_muonIndex(i);
