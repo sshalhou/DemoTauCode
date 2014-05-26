@@ -37,6 +37,10 @@ public:
   void set_sumCharge(int, int);
   void set_correctedSVFitMass(double);
   void set_TransverseMass(double);
+  void set_mvaMETraw(double);
+  void set_mvaMET(double);
+  void set_mvaMETphiRaw(double);
+  void set_mvaMETphi(double);
 
   // getters
 
@@ -49,6 +53,11 @@ public:
   int sumCharge() const;
   double correctedSVFitMass() const;
   double TransverseMass() const;
+  double set_mvaMETraw() const;
+  double set_mvaMET() const;
+  double set_mvaMETphiRaw() const;
+  double set_mvaMETphi()const;
+
 
 private:
 
@@ -61,6 +70,10 @@ private:
   int m_sumCharge;
   double m_correctedSVFitMass;
   double m_TransverseMass;
+  double m_mvaMETraw;
+  double m_mvaMET;
+  double m_mvaMETphiRaw;
+  double m_mvaMETphi;
 
 };
 

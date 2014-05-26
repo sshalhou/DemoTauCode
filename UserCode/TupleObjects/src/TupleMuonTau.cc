@@ -12,9 +12,26 @@ TupleMuonTau::TupleMuonTau()
   m_sumCharge = -999;
   m_correctedSVFitMass = NAN;
   m_TransverseMass = NAN;
+  // probably better to store the vectors later on
+  m_mvaMETraw = NAN;
+  m_mvaMET = NAN;
+  m_mvaMETphiRaw = NAN;
+  m_mvaMETphi = NAN;
 
 }
 
+
+void TupleMuonTau::set_mvaMETraw(double mvaMETraw_) { m_mvaMETraw = mvaMETraw_;}
+double TupleMuonTau::mvaMETraw() const  { return m_mvaMETraw; }
+
+void TupleMuonTau::set_mvaMET(double mvaMET_) { m_mvaMET = mvaMET_;}
+double TupleMuonTau::mvaMET() const  { return m_mvaMET; }
+
+void TupleMuonTau::set_mvaMETphiRaw(double mvaMETphiRaw_) { m_mvaMETphiRaw = mvaMETphiRaw_;}
+double TupleMuonTau::mvaMETphiRaw() const  { return m_mvaMETphiRaw; }
+
+void TupleMuonTau::set_mvaMETphi(double mvaMETphi_) { m_mvaMETphi = mvaMETphi_;}
+double TupleMuonTau::mvaMETphi() const  { return m_mvaMETphi; }
 
 void TupleMuonTau::set_TransverseMass(double TransverseMass_) { m_TransverseMass = TransverseMass_;}
 double TupleMuonTau::TransverseMass() const  { return m_TransverseMass; }

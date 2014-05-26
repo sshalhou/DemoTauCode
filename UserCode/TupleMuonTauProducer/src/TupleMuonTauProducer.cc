@@ -231,8 +231,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const int TupleMuonTauSize = muons->size();
   TupleMuonTaus->reserve( TupleMuonTauSize );
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
-  //LorentzVector XYZTcorrectedMET = (*mvamet)[0].p4();
+
+
+  CurrentMuonTau.set_mvaMETraw(mvaMETpf.pt());
+  CurrentMuonTau.set_mvaMETphiRaw(mvaMETpf.phi());
+
+  // declare & init to raw value before applying recoil corrections
   NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
+  math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
+
 
 
   for (std::size_t i = 0; i < muons->size(); ++i)
@@ -361,7 +368,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             iScale_,
             njet);
 
-            math::PtEtaPhiMLorentzVector correctedMET(met,0.0,metphi,0.0);
+            correctedMET.SetPtEtaPhi(met,0.0,metphi,0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
             //////////////////////
@@ -407,6 +414,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         }
 
+       // store the met
+       CurrentMuonTau.set_mvaMET(correctedMET.pt());
+       CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
 
         covMET = mvaMETpf.getSignificanceMatrix();
 
