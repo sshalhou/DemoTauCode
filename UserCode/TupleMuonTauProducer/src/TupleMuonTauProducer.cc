@@ -233,8 +233,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
 
 
-  CurrentMuonTau.set_mvaMETraw(mvaMETpf.pt());
-  CurrentMuonTau.set_mvaMETphiRaw(mvaMETpf.phi());
+
 
   // declare & init to raw value before applying recoil corrections
   NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
@@ -268,6 +267,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         CurrentMuonTau.set_corrected_p4( muon.p4() + tau.p4()   );
         CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.p4()  );
         CurrentMuonTau.set_DR(muon.p4() , tau.p4()  );
+        CurrentMuonTau.set_mvaMETraw(mvaMETpf.pt());
+        CurrentMuonTau.set_mvaMETphiRaw(mvaMETpf.phi());
 
 
         //      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
@@ -368,7 +369,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             iScale_,
             njet);
 
-            correctedMET.SetPtEtaPhi(met,0.0,metphi,0.0);
+            correctedMET.SetPtEtaPhiM(met,0.0,metphi,0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
             //////////////////////
