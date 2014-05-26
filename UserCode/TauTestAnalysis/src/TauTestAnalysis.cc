@@ -153,7 +153,7 @@ std::cout<<" againstElectronLooseMVA3 "<<tau->tauID("againstElectronLooseMVA3");
 std::cout<<" againstElectronMVA3raw  "<<tau->tauID("againstElectronMVA3raw");
 std::cout<<" againstElectronMVA3category "<<tau->tauID("againstElectronMVA3category");
 std::cout<<" newLOOSEWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 0);
-
+std::cout<<" decay mode "<<tau->decayMode();
 std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 1)<<std::endl;
 
 
