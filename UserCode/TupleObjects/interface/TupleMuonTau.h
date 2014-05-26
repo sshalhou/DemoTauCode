@@ -53,10 +53,10 @@ public:
   int sumCharge() const;
   double correctedSVFitMass() const;
   double TransverseMass() const;
-  double set_mvaMETraw() const;
-  double set_mvaMET() const;
-  double set_mvaMETphiRaw() const;
-  double set_mvaMETphi()const;
+  double mvaMETraw() const;
+  double mvaMET() const;
+  double mvaMETphiRaw() const;
+  double mvaMETphi()const;
 
 
 private:
