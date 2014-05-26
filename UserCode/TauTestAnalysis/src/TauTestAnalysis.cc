@@ -154,7 +154,7 @@ std::cout<<" againstElectronMVA3raw  "<<tau->tauID("againstElectronMVA3raw");
 std::cout<<" againstElectronMVA3category "<<tau->tauID("againstElectronMVA3category");
 
 
-std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
+std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 1)<<std::endl;
 
 
                     } // tau loop
