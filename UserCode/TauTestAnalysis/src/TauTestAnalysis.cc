@@ -30,6 +30,26 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/PatCandidates/interface/Tau.h"
+
+
+bool passAntiEMVA(int iCat, float raw, int WP=1) {
+
+  if(iCat<0) return false;
+  if(iCat>15) return true;
+
+  float cutsLoose[16]={0.835,0.831,0.849,0.859,0.873,0.823,0.85,0.855,0.816,0.861,0.862,0.847,0.893,0.82,0.845,0.851};
+  float cutsMedium[16]={0.933,0.921,0.944,0.945,0.918,0.941,0.981,0.943,0.956,0.947,0.951,0.95,0.897,0.958,0.955,0.942};
+  float cutsTight[16]={ 0.96,0.968,0.971,0.972,0.969,0.959,0.981,0.965,0.975,0.972,0.974,0.971,0.897,0.971,0.961,0.97};
+  float cutsVeryTight[16]={0.978,0.98,0.982,0.985,0.977,0.974,0.989,0.977,0.986,0.983,0.984,0.983,0.971,0.987,0.977,0.981};
+  float cut=0;
+  if(WP==0) cut = cutsLoose[iCat];
+  if(WP==1) cut = cutsMedium[iCat];
+  if(WP==2) cut = cutsTight[iCat];
+  if(WP==3) cut = cutsVeryTight[iCat];
+  return (raw>cut);
+}
+
+
 //
 // class declaration
 //
@@ -109,7 +129,6 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 
-
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
 
@@ -126,6 +145,17 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" byCombinedIsolationDeltaBetaCorrRaw = ";
           std::cout<<tau->tauID("byCombinedIsolationDeltaBetaCorrRaw")<<std::endl;
           std::cout<<" decay mode "<<tau->decayMode()<<std::endl;
+
+
+std::cout<<" iEvent.id() "<<iEvent.id();
+std::cout<<" againstElectronLoose "<<againstElectronLoose;
+std::cout<<" againstElectronLooseMVA3 "<<againstElectronLooseMVA3;
+std::cout<<" againstElectronMVA3raw  "<<againstElectronMVA3raw;
+std::cout<<" againstElectronMVA3category "<<tau->tauID("againstElectronMVA3category");
+
+
+std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), againstElectronMVA3raw, 1)<<endl;
+
 
                     } // tau loop
   std::cout<<" ntau = "<<ntau<<std::endl;
