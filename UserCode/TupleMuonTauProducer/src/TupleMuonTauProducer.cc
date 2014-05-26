@@ -239,6 +239,37 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
   math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
 
+///////////////////
+// find max pt pair
+
+std::size_t max_i = 0;
+std::size_t max_j = 0;
+int max_pt = -999;
+
+for (std::size_t i = 0; i < muons->size(); ++i)
+{
+
+  const TupleMuon muon =   ((*muons)[i]);
+
+  for (std::size_t j = 0; j < taus->size(); ++j)
+  {
+
+    const TupleTau tau =   ((*taus)[j]);
+
+    if(tau.passFullId() && muon.passFullId())
+    { // temp
+
+      if(tau.p4().pt()+muon.p4().pt() >= max_pt)
+      {
+          max_pt = (tau.p4().pt()+muon.p4().pt());
+          max_i = i;
+          max_j = j;
+      }
+
+    }
+  }
+}
+
 
 
   for (std::size_t i = 0; i < muons->size(); ++i)
@@ -258,6 +289,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         cout<<" i,j = "<<i<<","<<j;
         cout<<" muon PDGID "<<muon.pdgId();
         cout<<" tau PDGID "<<tau.pdgId()<<endl;
+
+        if(max_i == i && max_j == j) CurrentMuonTau.set_MAX(1);
+        else CurrentMuonTau.set_MAX(2);
 
         TupleMuonTau CurrentMuonTau;
 

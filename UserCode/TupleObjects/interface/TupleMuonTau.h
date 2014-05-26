@@ -41,6 +41,7 @@ public:
   void set_mvaMET(double);
   void set_mvaMETphiRaw(double);
   void set_mvaMETphi(double);
+  void set_MAX(int);
 
   // getters
 
@@ -57,7 +58,7 @@ public:
   double mvaMET() const;
   double mvaMETphiRaw() const;
   double mvaMETphi()const;
-
+  int MAX() const;
 
 private:
 
@@ -74,6 +75,7 @@ private:
   double m_mvaMET;
   double m_mvaMETphiRaw;
   double m_mvaMETphi;
+  int m_MAX;
 
 };
 

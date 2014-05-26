@@ -17,9 +17,13 @@ TupleMuonTau::TupleMuonTau()
   m_mvaMET = NAN;
   m_mvaMETphiRaw = NAN;
   m_mvaMETphi = NAN;
+  m_MAX = -999;
 
 }
 
+// temp MAX pt check 
+void TupleMuonTau::set_MAX(double _) { m_MAX = MAX_;}
+double TupleMuonTau::MAX() const  { return m_MAX; }
 
 void TupleMuonTau::set_mvaMETraw(double mvaMETraw_) { m_mvaMETraw = mvaMETraw_;}
 double TupleMuonTau::mvaMETraw() const  { return m_mvaMETraw; }
