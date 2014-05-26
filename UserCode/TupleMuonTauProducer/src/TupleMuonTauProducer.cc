@@ -369,7 +369,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             iScale_,
             njet);
 
-            correctedMET.SetPtEtaPhiM(met,0.0,metphi,0.0);
+            correctedMET.SetPt(met);
+            correctedMET.SetEta(0.0);
+            correctedMET.SetPhi(metphi);
+            correctedMET.SetM(0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
             //////////////////////
