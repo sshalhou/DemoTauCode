@@ -178,6 +178,23 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     float disc = 0.0;
 
     //////////////////////
+    disc=tau->tauID("againstMuonLoose");
+    CurrentTau.set_againstMuonLoose(disc);
+
+    //////////////////////
+    disc=tau->tauID("againstMuonTight");
+    CurrentTau.set_againstMuonTight(disc);
+
+    //////////////////////
+    disc=tau->tauID("againstElectronLoose");
+    CurrentTau.set_againstElectronLoose(disc);
+
+    //////////////////////
+    disc=tau->tauID("againstElectronTight");
+    CurrentTau.set_againstElectronTight(disc);
+
+
+    //////////////////////
     disc=tau->tauID("byIsolationMVAraw");
     CurrentTau.set_byIsolationMVAraw(disc);
 

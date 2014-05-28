@@ -11,6 +11,12 @@ TupleTau::TupleTau()
   m_charge = -999;
   m_decayMode = -999;
   m_passFullId = 0;
+  float m_againstMuonLoose = NAN;
+  float m_againstMuonTight = NAN;
+  float m_againstElectronLoose = NAN;
+  float m_againstElectronTight = NAN;
+  float m_againstElectronMedium = NAN;
+  float m_againstMuonMedium = NAN;
   float m_byIsolationMVAraw = NAN;
   float m_byLooseIsolationMVA = NAN;
   float m_byMediumIsolationMVA = NAN;
@@ -59,6 +65,66 @@ LorentzVector TupleTau::genP4() const  { return m_genP4; }
 
 // the tau discriminators
 
+
+//////////////////////////////////////////
+//againstMuonLoose
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonLoose(float againstMuonLoose_)
+{
+  m_againstMuonLoose = againstMuonLoose_;
+}
+float TupleTau::againstMuonLoose() const { return m_againstMuonLoose;}
+
+//////////////////////////////////////////
+//againstMuonTight
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonTight(float againstMuonTight_)
+{
+  m_againstMuonTight = againstMuonTight_;
+}
+float TupleTau::againstMuonTight() const { return m_againstMuonTight;}
+
+//////////////////////////////////////////
+//againstElectronLoose
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronLoose(float againstElectronLoose_)
+{
+  m_againstElectronLoose = againstElectronLoose_;
+}
+float TupleTau::againstElectronLoose() const { return m_againstElectronLoose;}
+
+//////////////////////////////////////////
+//againstElectronTight
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronTight(float againstElectronTight_)
+{
+  m_againstElectronTight = againstElectronTight_;
+}
+float TupleTau::againstElectronTight() const { return m_againstElectronTight;}
+
+//////////////////////////////////////////
+//againstElectronMedium
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronMedium(float againstElectronMedium_)
+{
+  m_againstElectronMedium = againstElectronMedium_;
+}
+float TupleTau::againstElectronMedium() const { return m_againstElectronMedium;}
+
+//////////////////////////////////////////
+//againstMuonMedium
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonMedium(float againstMuonMedium_)
+{
+  m_againstMuonMedium = againstMuonMedium_;
+}
+float TupleTau::againstMuonMedium() const { return m_againstMuonMedium;}
 
 //////////////////////////////////////////
 //byIsolationMVAraw

@@ -39,6 +39,12 @@ public:
 
   // Tau Discriminators
 
+  void set_againstMuonLoose(float);
+  void set_againstMuonTight(float);
+  void set_againstElectronLoose(float);
+  void set_againstElectronTight(float);
+  void set_againstElectronMedium(float);
+  void set_againstMuonMedium(float);
   void set_byIsolationMVAraw(float);
   void set_byLooseIsolationMVA(float);
   void set_byMediumIsolationMVA(float);
@@ -79,6 +85,12 @@ public:
   int charge() const;
   int decayMode() const;
   bool passFullId() const;
+  float againstMuonLoose() const;
+  float againstMuonTight() const;
+  float againstElectronLoose() const;
+  float againstElectronTight() const;
+  float againstElectronMedium() const;
+  float againstMuonMedium() const;
   float byIsolationMVAraw() const;
   float byLooseIsolationMVA() const;
   float byMediumIsolationMVA() const;
@@ -121,6 +133,12 @@ private:
   int m_charge;
   int m_decayMode;
   bool m_passFullId;
+  float m_againstMuonLoose;
+  float m_againstMuonTight;
+  float m_againstElectronLoose;
+  float m_againstElectronTight;
+  float m_againstElectronMedium;
+  float m_againstMuonMedium;
   float m_byIsolationMVAraw;
   float m_byLooseIsolationMVA;
   float m_byMediumIsolationMVA;
