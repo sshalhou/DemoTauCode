@@ -85,6 +85,11 @@ mv RecoJets/JetProducers/plugins/PileupJetIdProducer.cc RecoJets/JetProducers/pl
 mv RecoJets/JetProducers/src/PileupJetIdAlgo.cc RecoJets/JetProducers/src/PileupJetIdAlgo.cc_hold
 #sed -i 's/SelectEvents/#SelectEvents/g' PhysicsTools/PatAlgos/python/patTemplate_cfg.py
 
+
+mv RecoJets/JetProducers/python/PileupJetIDCutParams_cfi.py RecoJets/JetProducers/python/PileupJetIDCutParams_cfi.py_hold
+ln -s ../../../CMGTools/External/python/JetIdParams_cfi.py PileupJetIDCutParams_cfi.py
+cd -
+
 git cms-addpkg JetMETCorrections/Modules
 cp JetMETCorrections/Modules/test/JetCorrectionDBReader_cfg.py RecoJets/JetAnalyzers/test/.
 sed -i 's/string(\x27AK5PF\x27)/string(\x27AK5PFchs\x27)/g' RecoJets/JetAnalyzers/test/JetCorrectionDBReader_cfg.py
