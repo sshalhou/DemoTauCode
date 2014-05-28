@@ -121,7 +121,6 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # preselection for MET corrections
 ###################################################
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-                                          JetIdParams = cms.string("full_53x_wp")
                                           )
 
 
