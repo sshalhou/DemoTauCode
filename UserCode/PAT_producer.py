@@ -1,4 +1,3 @@
-
 ########################################################################################################
 import FWCore.ParameterSet.Config as cms
 ########################################################################################################
@@ -411,7 +410,7 @@ process.out.SelectEvents.SelectEvents = ['p']
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing_1st10000repeat.root'
+process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
@@ -423,10 +422,10 @@ myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluG
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
-		                  skipEvents=cms.untracked.uint32(0)
+		                  skipEvents=cms.untracked.uint32(12568)
 			                       )
 ########################################################################################################
 
 
-process.maxEvents.input = 10000
+process.maxEvents.input = 5
 ########################################################################################################
