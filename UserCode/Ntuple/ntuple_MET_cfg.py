@@ -100,7 +100,7 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausNominal"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 ##########################
 # Tau Recoil Up Systematics    #
@@ -117,7 +117,7 @@ process.TupleMuonTausRecoilUp = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausRecoilUp"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 ##########################
@@ -135,7 +135,7 @@ process.TupleMuonTausRecoilDown = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausRecoilDown"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 ##########################
@@ -153,7 +153,7 @@ process.TupleMuonTausRecoilResUp = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausRecoilResUp"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 ##########################
@@ -171,7 +171,7 @@ process.TupleMuonTausRecoilResDown = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausRecoilResDown"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 
@@ -195,7 +195,7 @@ process.TupleMuonTausTauEnUp = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausTauEnUp"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 
@@ -220,7 +220,7 @@ process.TupleMuonTausTauEnDown = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausTauEnDown"),
-                doSVFit_=cms.bool(False)
+                doSVFit=cms.bool(False)
                                      )
 
 

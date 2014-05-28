@@ -120,7 +120,7 @@ iScale_(iConfig.getParameter<double>("iScale" )),
 NAME_(iConfig.getParameter<string>("NAME" )),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
 puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
-doSVFit_=cms.bool(0)
+doSVFit_(iConfig.getParameter<bool>("doSVFit" ))
 {
 
 
