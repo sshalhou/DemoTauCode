@@ -51,8 +51,8 @@ else:
 ###################################################
 # tau discriminators must be re-run
 ###################################################
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
 
 
