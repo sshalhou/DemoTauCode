@@ -38,9 +38,9 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
 
 runOnMC = True
 if runOnMC:
-  process.GlobalTag.globaltag = 'START53_V23::All'
+  process.GlobalTag.globaltag = 'START53_V27::All'
 else:
-  process.GlobalTag.globaltag = 'SOMETHING_FOR_DATA::All'
+  process.GlobalTag.globaltag = 'FT_53_V21_AN5::All'
 
 
 
