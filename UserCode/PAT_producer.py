@@ -120,8 +120,9 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # in later stages isomuons, isoelectrons are a resonable
 # preselection for MET corrections
 ###################################################
+JetIdParams = full_53x_wp
 process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-                                          JetIdParams = full_53x_wp
+                                          JetIdParams = JetIdParams
                                           )
 
 
