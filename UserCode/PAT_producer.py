@@ -368,10 +368,18 @@ runMEtUncertainties(process,
 ##################################################
 # Let it run
 ###################################################
+#process.p = cms.Path(        process.UserSpecifiedData+
+#                             process.VertexPresent+
+#                             process.recoTauClassicHPSSequence+
+#                             process.mvametPF2PATsequence*
+#                             process.puJetIdSqeuence+
+#                             process.countSelectedLeptons
+#                                  )
+
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
+                             process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
-                             process.mvametPF2PATsequence*
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
