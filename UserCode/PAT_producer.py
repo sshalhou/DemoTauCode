@@ -120,7 +120,8 @@ process.load('JetMETCorrections.METPUSubtraction.mvaPFMET_leptons_cff')
 # in later stages isomuons, isoelectrons are a resonable
 # preselection for MET corrections
 ###################################################
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus")
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+                                          JetIdParams = full_53x_wp
                                           )
 
 
@@ -294,8 +295,7 @@ from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
 process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-#process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
-process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18.')
+process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
@@ -402,7 +402,7 @@ process.out.SelectEvents.SelectEvents = ['p']
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing_noDecayFilter.root'
+process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
@@ -419,5 +419,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 2500
+process.maxEvents.input = 10
 ########################################################################################################
