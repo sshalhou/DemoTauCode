@@ -30,6 +30,7 @@ mkdir UserConfigs/Configs
 mkdir UserConfigs/Configs/python
 cd UserConfigs/Configs/python
 ln -s ../../../UserCode/Configs/myTest_cfi.py myTest_cfi.py
+ln -s ../../../UserCode/Configs/myJetIDParams.py myJetIDParams.py
 cd -
 cp DataFormats/PatCandidates/BuildFile.xml UserConfigs/Configs/BuildFile.xml
 
@@ -87,7 +88,12 @@ mv RecoJets/JetProducers/src/PileupJetIdAlgo.cc RecoJets/JetProducers/src/Pileup
 
 
 mv RecoJets/JetProducers/python/PileupJetIDCutParams_cfi.py RecoJets/JetProducers/python/PileupJetIDCutParams_cfi.py_hold
-ln -s ../../../CMGTools/External/python/JetIdParams_cfi.py PileupJetIDCutParams_cfi.py
+cd RecoJets/JetProducers/python/
+ln -s ../../../UserConfigs/Configs/python/myJetIDParams.py PileupJetIDCutParams_cfi.py
+cd -
+mv CMGTools/External/python/JetIdParams_cfi.py CMGTools/External/python/JetIdParams_cfi.py_hold
+cd CMGTools/External/python/
+ln -s ../../../UserConfigs/Configs/python/myJetIDParams.py JetIdParams_cfi.py
 cd -
 
 git cms-addpkg JetMETCorrections/Modules
