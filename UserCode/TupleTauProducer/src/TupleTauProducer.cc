@@ -173,6 +173,122 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentTau.set_decayMode(tau->decayMode());
 
 
+    ////////////////////////
+    // fill the tau discriminators
+    float disc = 0.0;
+
+    //////////////////////
+    disc=tau->tauID(byIsolationMVAraw);
+    CurrentTau.set_byIsolationMVAraw(disc);
+
+    //////////////////////
+    disc=tau->tauID(byLooseIsolationMVA);
+    CurrentTau.set_byLooseIsolationMVA(disc);
+
+    //////////////////////
+    disc=tau->tauID(byMediumIsolationMVA);
+    CurrentTau.set_byMediumIsolationMVA(disc);
+
+    //////////////////////
+    disc=tau->tauID(byTightIsolationMVA);
+    CurrentTau.set_byTightIsolationMVA(disc);
+
+    //////////////////////
+    disc=tau->tauID(byIsolationMVA2raw);
+    CurrentTau.set_byIsolationMVA2raw(disc);
+
+    //////////////////////
+    disc=tau->tauID(byLooseIsolationMVA2);
+    CurrentTau.set_byLooseIsolationMVA2(disc);
+
+    //////////////////////
+    disc=tau->tauID(byMediumIsolationMVA2);
+    CurrentTau.set_byMediumIsolationMVA2(disc);
+
+    //////////////////////
+    disc=tau->tauID(byTightIsolationMVA2);
+    CurrentTau.set_byTightIsolationMVA2(disc);
+
+    //////////////////////
+    disc=tau->tauID(byLooseCombinedIsolationDeltaBetaCorr3Hits);
+    CurrentTau.set_byLooseCombinedIsolationDeltaBetaCorr3Hits(disc);
+
+    //////////////////////
+    disc=tau->tauID(byMediumCombinedIsolationDeltaBetaCorr3Hits);
+    CurrentTau.set_byMediumCombinedIsolationDeltaBetaCorr3Hits(disc);
+
+    //////////////////////
+    disc=tau->tauID(byTightCombinedIsolationDeltaBetaCorr3Hits);
+    CurrentTau.set_byTightCombinedIsolationDeltaBetaCorr3Hits(disc);
+
+    //////////////////////
+    disc=tau->tauID(byCombinedIsolationDeltaBetaCorrRaw3Hits);
+    CurrentTau.set_byCombinedIsolationDeltaBetaCorrRaw3Hits(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMVA3raw);
+    CurrentTau.set_againstElectronMVA3raw(disc);
+
+    //////////////////////
+    CurrentTau.set_againstElectronMVA3category(tau->tauID(againstElectronMVA3category));
+
+    //////////////////////
+    disc=tau->tauID(againstElectronLooseMVA3);
+    CurrentTau.set_againstElectronLooseMVA3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMediumMVA3);
+    CurrentTau.set_againstElectronMediumMVA3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronTightMVA3);
+    CurrentTau.set_againstElectronTightMVA3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronVTightMVA3);
+    CurrentTau.set_againstElectronVTightMVA3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronDeadECAL);
+    CurrentTau.set_againstElectronDeadECAL(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstMuonLoose2);
+    CurrentTau.set_againstMuonLoose2(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstMuonMedium2);
+    CurrentTau.set_againstMuonMedium2(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstMuonTight2);
+    CurrentTau.set_againstMuonTight2(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstMuonLoose3);
+    CurrentTau.set_againstMuonLoose3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstMuonTight3);
+    CurrentTau.set_againstMuonTight3(disc);
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMVA3raw);
+    CurrentTau.set_antiEMVA3NewLooseWP(disc,tau->tauID(againstElectronMVA3category));
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMVA3raw);
+    CurrentTau.set_antiEMVA3NewMediumWP(disc,tau->tauID(againstElectronMVA3category));
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMVA3raw);
+    CurrentTau.set_antiEMVA3NewTightWP(disc,tau->tauID(againstElectronMVA3category));
+
+    //////////////////////
+    disc=tau->tauID(againstElectronMVA3raw);
+    CurrentTau.set_antiEMVA3NewVeryTightWP(disc,tau->tauID(againstElectronMVA3category));
+
+
     //////////////////////////
     // set the passFullId summary boolean
     // eventually the cuts should be passed
