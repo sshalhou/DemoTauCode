@@ -352,15 +352,15 @@ runMEtUncertainties(process,
 
 
 
-
+#works before this
 
 ##################################################
 # Let it run
 ###################################################
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
+                             process.mvametPF2PATsequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
@@ -388,9 +388,6 @@ if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
     # the above is needed for the PDF sys. tool
 
-if not postfix == "":
-    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.p += process.patDefaultSequence
 
 ###################################################
 # require all paths to pass
