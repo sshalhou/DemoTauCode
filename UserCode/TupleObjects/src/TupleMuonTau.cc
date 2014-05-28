@@ -17,7 +17,7 @@ TupleMuonTau::TupleMuonTau()
   m_mvaMET = NAN;
   m_mvaMETphiRaw = NAN;
   m_mvaMETphi = NAN;
-  m_MAX = -999;
+  m_MAX = 0;
 
 }
 
