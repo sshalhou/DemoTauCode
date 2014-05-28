@@ -146,14 +146,7 @@ if not runOnMC:
   removeMCMatchingPF2PAT( process, 'All' )
 
 
-###################################################
-# load the PU JetID sequence
-###################################################
-process.load("CMGTools.External.pujetidsequence_cff")
 
-process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
-process.out.outputCommands +=['keep *_puJetId*_*_*']
-process.out.outputCommands +=['keep *_puJetMva*_*_*']
 
 
 ###################################################
@@ -184,7 +177,7 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 ###################################################
 # add info needed for pile-up reweight
 ####################################################
-process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
+process.out.outputCommands +=['keep *_addJInfo*_*_*']
 ###################################################
 
 ###################################################
@@ -229,6 +222,16 @@ from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
+
+###################################################
+# load the PU JetID sequence
+###################################################
+process.load("CMGTools.External.pujetidsequence_cff")
+
+process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
+process.out.outputCommands +=['keep *_puJetId*_*_*']
+process.out.outputCommands +=['keep *_puJetMva*_*_*']
+
 
 ###################################################
 # store electrons and MVA ID
@@ -368,7 +371,7 @@ runMEtUncertainties(process,
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
                              process.recoTauClassicHPSSequence+
-                             process.mvametPF2PATsequence+
+                             process.mvametPF2PATsequence*
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
