@@ -294,7 +294,8 @@ from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
 process.selectedPatJets = selectedPatJets.clone(src = 'patJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
+#process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18. && decayMode>-1')
+process.selectedPatTaus = selectedPatTaus.clone(src = 'patTaus', cut = 'pt >18.')
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
@@ -401,7 +402,7 @@ process.out.SelectEvents.SelectEvents = ['p']
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
+process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing_noDecayFilter.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
@@ -413,10 +414,10 @@ myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluG
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
-		                  skipEvents=cms.untracked.uint32(12568)
+		                  skipEvents=cms.untracked.uint32(0)
 			                       )
 ########################################################################################################
 
 
-process.maxEvents.input = 5
+process.maxEvents.input = 2500
 ########################################################################################################
