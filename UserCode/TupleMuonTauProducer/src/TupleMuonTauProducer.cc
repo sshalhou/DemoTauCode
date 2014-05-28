@@ -93,6 +93,7 @@ private:
   string NAME_;
   edm::InputTag puJetIdMVASrc_;
   edm::InputTag puJetIdFlagSrc_;
+  bool doSVFit_;
 
 };
 
@@ -118,7 +119,8 @@ iFluc_(iConfig.getParameter<double>("iFluc" )),
 iScale_(iConfig.getParameter<double>("iScale" )),
 NAME_(iConfig.getParameter<string>("NAME" )),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
-puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" ))
+puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
+doSVFit_=cms.bool(0)
 {
 
 
@@ -239,36 +241,36 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
   math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
 
-///////////////////
-// find max pt pair
+  ///////////////////
+  // find max pt pair
 
-std::size_t max_i = 0;
-std::size_t max_j = 0;
-int max_pt = -999;
+  std::size_t max_i = 0;
+  std::size_t max_j = 0;
+  int max_pt = -999;
 
-for (std::size_t i = 0; i < muons->size(); ++i)
-{
-
-  const TupleMuon muon =   ((*muons)[i]);
-
-  for (std::size_t j = 0; j < taus->size(); ++j)
+  for (std::size_t i = 0; i < muons->size(); ++i)
   {
 
-    const TupleTau tau =   ((*taus)[j]);
+    const TupleMuon muon =   ((*muons)[i]);
 
-    if(tau.passFullId() && muon.passFullId())
-    { // temp
+    for (std::size_t j = 0; j < taus->size(); ++j)
+    {
 
-      if(tau.p4().pt()+muon.p4().pt() >= max_pt)
-      {
+      const TupleTau tau =   ((*taus)[j]);
+
+      if(tau.passFullId() && muon.passFullId())
+      { // temp
+
+        if(tau.p4().pt()+muon.p4().pt() >= max_pt)
+        {
           max_pt = (tau.p4().pt()+muon.p4().pt());
           max_i = i;
           max_j = j;
-      }
+        }
 
+      }
     }
   }
-}
 
 
 
@@ -409,9 +411,9 @@ for (std::size_t i = 0; i < muons->size(); ++i)
             correctedMET.SetEta(0.0);
             correctedMET.SetPhi(metphi);
             correctedMET.SetM(0.0);
-// RECOIL CORR OFF
-cout<<" recoil OFF "<<endl;
-//            NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
+            // RECOIL CORR OFF
+            cout<<" recoil OFF "<<endl;
+            //            NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
             //////////////////////
             // print out the corrected value
@@ -456,26 +458,29 @@ cout<<" recoil OFF "<<endl;
 
         }
 
-       // store the met
-       CurrentMuonTau.set_mvaMET(correctedMET.pt());
-       CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
+        // store the met
+        CurrentMuonTau.set_mvaMET(correctedMET.pt());
+        CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
 
         covMET = mvaMETpf.getSignificanceMatrix();
 
-        // last argument is verbosity
-        NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
-        algo.addLogM(false);
-        algo.integrateMarkovChain();
 
-        //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+        if(doSVFit_)
+        {
+          // last argument is verbosity
+          NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
+          algo.addLogM(false);
+          algo.integrateMarkovChain();
 
-        CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
+          //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-        //cout<<" diTauMassErr "<<algo.getMassUncert();
-        //cout<<" diTauPt "<<algo.getPt();
-        //cout<<" diTauPtErr "<<algo.getPtUncert();
+          CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
 
-
+          //cout<<" diTauMassErr "<<algo.getMassUncert();
+          //cout<<" diTauPt "<<algo.getPt();
+          //cout<<" diTauPtErr "<<algo.getPtUncert();
+        }
+        else CurrentMuonTau.set_correctedSVFitMass(0.0);
         measuredTauLeptons.clear();
 
         ////////////
