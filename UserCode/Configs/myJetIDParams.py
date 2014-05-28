@@ -72,20 +72,33 @@ met_53x_wp  = cms.PSet(
                                     Pt2030_Loose   = cms.vdouble(-2, -2, -2, -2, -2),
                                     Pt3050_Loose   = cms.vdouble(-2, -2, -2, -2, -2),
 
+
+                                    #MET
+                                    Pt010_MET      = cms.vdouble( 0.  ,-0.6,-0.4,-0.4),
+                                    Pt1020_MET     = cms.vdouble( 0.3 ,-0.2,-0.4,-0.4),
+                                    Pt2030_MET     = cms.vdouble( 0.  , 0. , 0. , 0. ),
+                                    Pt3050_MET     = cms.vdouble( 0.  , 0. ,-0.1,-0.2)
+
                                     #4 Eta Categories  0-2.5 2.5-2.75 2.75-3.0 3.0-5.0
                                     #MET
-                                    Pt010_MET      = cms.vdouble(-0.2 ,-0.3,-0.5,-0.5),
-                                    Pt1020_MET     = cms.vdouble(-0.2 ,-0.2,-0.5,-0.3),
-                                    Pt2030_MET     = cms.vdouble(-0.2 ,-0.2,-0.2, 0.1),
-                                    Pt3050_MET     = cms.vdouble(-0.2 ,-0.2, 0. , 0.2)
+                                  #  Pt010_MET      = cms.vdouble(-0.2 ,-0.3,-0.5,-0.5),
+                                  #  Pt1020_MET     = cms.vdouble(-0.2 ,-0.2,-0.5,-0.3),
+                                  #  Pt2030_MET     = cms.vdouble(-0.2 ,-0.2,-0.2, 0.1),
+                                  #  Pt3050_MET     = cms.vdouble(-0.2 ,-0.2, 0. , 0.2)
                                     )
 
 metfull_53x_wp  = cms.PSet(
+                              #MET
+                              Pt010_MET      = cms.vdouble( 0.  ,-0.6,-0.4,-0.4),
+                              Pt1020_MET     = cms.vdouble( 0.3 ,-0.2,-0.4,-0.4),
+                              Pt2030_MET     = cms.vdouble( 0.  , 0. , 0. , 0. ),
+                              Pt3050_MET     = cms.vdouble( 0.  , 0. ,-0.1,-0.2)
+
                             #MET
-                            Pt010_MET      = cms.vdouble(-0.2 ,-0.3,-0.5,-0.5),
-                            Pt1020_MET     = cms.vdouble(-0.2 ,-0.2,-0.5,-0.3),
-                            Pt2030_MET     = cms.vdouble( 0.  , 0. , 0. , 0. ),
-                            Pt3050_MET     = cms.vdouble( 0.  , 0. ,-0.1,-0.2)
+                            #Pt010_MET      = cms.vdouble(-0.2 ,-0.3,-0.5,-0.5),
+                            #Pt1020_MET     = cms.vdouble(-0.2 ,-0.2,-0.5,-0.3),
+                            #Pt2030_MET     = cms.vdouble( 0.  , 0. , 0. , 0. ),
+                            #Pt3050_MET     = cms.vdouble( 0.  , 0. ,-0.1,-0.2)
                             )
 
 ###########################################################
