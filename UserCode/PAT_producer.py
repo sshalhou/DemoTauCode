@@ -273,7 +273,6 @@ process.mvametPF2PATsequence = cms.Sequence(
                 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
                 process.type0PFMEtCorrection*
                 process.patPFMETtype0Corr*
-                process.recoTauClassicHPSSequence*
                 getattr(process,"patPF2PATSequence"+postfix)*
                 process.patPFMetByMVA
                                 )
@@ -353,7 +352,7 @@ runMEtUncertainties(process,
 
 
 
-#works before this
+
 
 ##################################################
 # Let it run
@@ -361,7 +360,7 @@ runMEtUncertainties(process,
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
                              process.mvametPF2PATsequence+
-                             #process.recoTauClassicHPSSequence+
+                             process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
