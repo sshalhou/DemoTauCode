@@ -225,6 +225,7 @@ process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
+from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
@@ -366,9 +367,9 @@ runMEtUncertainties(process,
 ###################################################
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
+                             process.mvametPF2PATsequence+
                              process.countSelectedLeptons
                                   )
 
@@ -395,9 +396,6 @@ if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
     # the above is needed for the PDF sys. tool
 
-if not postfix == "":
-    process.p += process.recoTauClassicHPSSequence # re-run tau discriminators (new version)
-    process.p += process.patDefaultSequence
 
 ###################################################
 # require all paths to pass
@@ -411,7 +409,7 @@ process.out.SelectEvents.SelectEvents = ['p']
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
+process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing_1st10000repeat.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
@@ -423,10 +421,10 @@ myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluG
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
-		                  skipEvents=cms.untracked.uint32(12568)
+		                  skipEvents=cms.untracked.uint32(0)
 			                       )
 ########################################################################################################
 
 
-process.maxEvents.input = 5
+process.maxEvents.input = 10000
 ########################################################################################################
