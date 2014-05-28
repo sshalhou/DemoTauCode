@@ -178,115 +178,115 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     float disc = 0.0;
 
     //////////////////////
-    disc=tau->tauID(byIsolationMVAraw);
+    disc=tau->tauID("byIsolationMVAraw");
     CurrentTau.set_byIsolationMVAraw(disc);
 
     //////////////////////
-    disc=tau->tauID(byLooseIsolationMVA);
+    disc=tau->tauID("byLooseIsolationMVA");
     CurrentTau.set_byLooseIsolationMVA(disc);
 
     //////////////////////
-    disc=tau->tauID(byMediumIsolationMVA);
+    disc=tau->tauID("byMediumIsolationMVA");
     CurrentTau.set_byMediumIsolationMVA(disc);
 
     //////////////////////
-    disc=tau->tauID(byTightIsolationMVA);
+    disc=tau->tauID("byTightIsolationMVA");
     CurrentTau.set_byTightIsolationMVA(disc);
 
     //////////////////////
-    disc=tau->tauID(byIsolationMVA2raw);
+    disc=tau->tauID("byIsolationMVA2raw");
     CurrentTau.set_byIsolationMVA2raw(disc);
 
     //////////////////////
-    disc=tau->tauID(byLooseIsolationMVA2);
+    disc=tau->tauID("byLooseIsolationMVA2");
     CurrentTau.set_byLooseIsolationMVA2(disc);
 
     //////////////////////
-    disc=tau->tauID(byMediumIsolationMVA2);
+    disc=tau->tauID("byMediumIsolationMVA2");
     CurrentTau.set_byMediumIsolationMVA2(disc);
 
     //////////////////////
-    disc=tau->tauID(byTightIsolationMVA2);
+    disc=tau->tauID("byTightIsolationMVA2");
     CurrentTau.set_byTightIsolationMVA2(disc);
 
     //////////////////////
-    disc=tau->tauID(byLooseCombinedIsolationDeltaBetaCorr3Hits);
+    disc=tau->tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits");
     CurrentTau.set_byLooseCombinedIsolationDeltaBetaCorr3Hits(disc);
 
     //////////////////////
-    disc=tau->tauID(byMediumCombinedIsolationDeltaBetaCorr3Hits);
+    disc=tau->tauID("byMediumCombinedIsolationDeltaBetaCorr3Hits");
     CurrentTau.set_byMediumCombinedIsolationDeltaBetaCorr3Hits(disc);
 
     //////////////////////
-    disc=tau->tauID(byTightCombinedIsolationDeltaBetaCorr3Hits);
+    disc=tau->tauID("byTightCombinedIsolationDeltaBetaCorr3Hits");
     CurrentTau.set_byTightCombinedIsolationDeltaBetaCorr3Hits(disc);
 
     //////////////////////
-    disc=tau->tauID(byCombinedIsolationDeltaBetaCorrRaw3Hits);
+    disc=tau->tauID("byCombinedIsolationDeltaBetaCorrRaw3Hits");
     CurrentTau.set_byCombinedIsolationDeltaBetaCorrRaw3Hits(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronMVA3raw);
+    disc=tau->tauID("againstElectronMVA3raw");
     CurrentTau.set_againstElectronMVA3raw(disc);
 
     //////////////////////
-    CurrentTau.set_againstElectronMVA3category(tau->tauID(againstElectronMVA3category));
+    CurrentTau.set_againstElectronMVA3category(tau->tauID("againstElectronMVA3category"));
 
     //////////////////////
-    disc=tau->tauID(againstElectronLooseMVA3);
+    disc=tau->tauID("againstElectronLooseMVA3");
     CurrentTau.set_againstElectronLooseMVA3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronMediumMVA3);
+    disc=tau->tauID("againstElectronMediumMVA3");
     CurrentTau.set_againstElectronMediumMVA3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronTightMVA3);
+    disc=tau->tauID("againstElectronTightMVA3");
     CurrentTau.set_againstElectronTightMVA3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronVTightMVA3);
+    disc=tau->tauID("againstElectronVTightMVA3");
     CurrentTau.set_againstElectronVTightMVA3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronDeadECAL);
+    disc=tau->tauID("againstElectronDeadECAL");
     CurrentTau.set_againstElectronDeadECAL(disc);
 
     //////////////////////
-    disc=tau->tauID(againstMuonLoose2);
+    disc=tau->tauID("againstMuonLoose2");
     CurrentTau.set_againstMuonLoose2(disc);
 
     //////////////////////
-    disc=tau->tauID(againstMuonMedium2);
+    disc=tau->tauID("againstMuonMedium2");
     CurrentTau.set_againstMuonMedium2(disc);
 
     //////////////////////
-    disc=tau->tauID(againstMuonTight2);
+    disc=tau->tauID("againstMuonTight2");
     CurrentTau.set_againstMuonTight2(disc);
 
     //////////////////////
-    disc=tau->tauID(againstMuonLoose3);
+    disc=tau->tauID("againstMuonLoose3");
     CurrentTau.set_againstMuonLoose3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstMuonTight3);
+    disc=tau->tauID("againstMuonTight3");
     CurrentTau.set_againstMuonTight3(disc);
 
     //////////////////////
-    disc=tau->tauID(againstElectronMVA3raw);
-    CurrentTau.set_antiEMVA3NewLooseWP(disc,tau->tauID(againstElectronMVA3category));
+    disc=tau->tauID("againstElectronMVA3raw");
+    CurrentTau.set_antiEMVA3NewLooseWP(disc,tau->tauID("againstElectronMVA3category"));
 
     //////////////////////
-    disc=tau->tauID(againstElectronMVA3raw);
-    CurrentTau.set_antiEMVA3NewMediumWP(disc,tau->tauID(againstElectronMVA3category));
+    disc=tau->tauID("againstElectronMVA3raw");
+    CurrentTau.set_antiEMVA3NewMediumWP(disc,tau->tauID("againstElectronMVA3category"));
 
     //////////////////////
-    disc=tau->tauID(againstElectronMVA3raw);
-    CurrentTau.set_antiEMVA3NewTightWP(disc,tau->tauID(againstElectronMVA3category));
+    disc=tau->tauID("againstElectronMVA3raw");
+    CurrentTau.set_antiEMVA3NewTightWP(disc,tau->tauID("againstElectronMVA3category"));
 
     //////////////////////
-    disc=tau->tauID(againstElectronMVA3raw);
-    CurrentTau.set_antiEMVA3NewVeryTightWP(disc,tau->tauID(againstElectronMVA3category));
+    disc=tau->tauID("againstElectronMVA3raw");
+    CurrentTau.set_antiEMVA3NewVeryTightWP(disc,tau->tauID("againstElectronMVA3category"));
 
 
     //////////////////////////
