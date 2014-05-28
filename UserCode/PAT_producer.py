@@ -49,15 +49,6 @@ else:
 ########################################################################################################
 
 ###################################################
-# tau discriminators must be re-run
-###################################################
-#process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-#process.load("PhysicsTools.PatAlgos.patSequences_cff")
-
-
-
-
-###################################################
 # setup PF2PAT, empty postfix means
 # only PF2PAT and not both PAT + PF2PAT
 ###################################################
@@ -218,12 +209,15 @@ process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 # based on
 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
 ###################################################
-
+###################################################
+# tau discriminators must be re-run
+###################################################
 
 process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
+from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
