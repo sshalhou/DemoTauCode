@@ -414,6 +414,11 @@ myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluG
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
+                        dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
+                        inputCommands = cms.untracked.vstring(
+                        'keep *',
+                        'drop recoPFTaus_*_*_*'
+                        ),
 		                  skipEvents=cms.untracked.uint32(0)
 			                       )
 ########################################################################################################
