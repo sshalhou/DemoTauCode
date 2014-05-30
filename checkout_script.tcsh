@@ -60,8 +60,10 @@ git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_boostedTaus_2013Dec17
 
 echo "copying MVA PF MET code from Phil Harris : "
 ################################################
-mkdir $CMSSW_BASE/src/RecoMET
-cp -r  /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET .
-cp /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET/METPUSubtraction/python/mvaPFMET_leptons_cff.py $CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
-cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
+cp -r /uscms/home/shalhout/public/RecoMET .
+#mkdir $CMSSW_BASE/src/RecoMET
+#cp -r  /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET .
+#cp /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET/METPUSubtraction/python/mvaPFMET_leptons_cff.py
+#$CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
+#cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
 ################################################
