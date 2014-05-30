@@ -94,24 +94,24 @@ JetTestAnalysis::JetTestAnalysis(const edm::ParameterSet& iConfig):
 jetSrc_(iConfig.getUntrackedParameter<edm::InputTag>("jetSrc" )),
 rhoSrc_   (iConfig.getUntrackedParameter<edm::InputTag>("rhoSrc") ),
 pvSrc_    (iConfig.getUntrackedParameter<edm::InputTag>("pvSrc") ),
-jecPayloadNames_( iConfig.getUntrackedParameter<std::vector<std::string> >("jecPayloadNames") ),
-jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
+//jecPayloadNames_( iConfig.getUntrackedParameter<std::vector<std::string> >("jecPayloadNames") ),
+//jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
 puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" ))
 {
    //now do what ever initialization is needed
 
 
   //Get the factorized jet corrector parameters.
-  std::vector<JetCorrectorParameters> vPar;
-  for ( std::vector<std::string>::const_iterator payloadBegin = jecPayloadNames_.begin(),
-          payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
-    JetCorrectorParameters pars(*ipayload);
-    vPar.push_back(pars);
+//  std::vector<JetCorrectorParameters> vPar;
+//  for ( std::vector<std::string>::const_iterator payloadBegin = jecPayloadNames_.begin(),
+  //        payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
+  //  JetCorrectorParameters pars(*ipayload);
+  //  vPar.push_back(pars);
   }
 
  // Make the FactorizedJetCorrector and Uncertainty
-  jec_ = boost::shared_ptr<FactorizedJetCorrector> ( new FactorizedJetCorrector(vPar) );
-  jecUnc_ = boost::shared_ptr<JetCorrectionUncertainty>( new JetCorrectionUncertainty(jecUncName_) );
+  //jec_ = boost::shared_ptr<FactorizedJetCorrector> ( new FactorizedJetCorrector(vPar) );
+  //jecUnc_ = boost::shared_ptr<JetCorrectionUncertainty>( new JetCorrectionUncertainty(jecUncName_) );
 
 
 
@@ -184,7 +184,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
 // get uncorrected jet, then
 // apply JEC 'on the fly'
 //////////////////
-
+/*
   reco::Candidate::LorentzVector uncorrJet;
   //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
   uncorrJet = patjet.correctedP4(0);
@@ -233,6 +233,9 @@ std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 //      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
 //      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
+
+
+      */
 }
 
 
