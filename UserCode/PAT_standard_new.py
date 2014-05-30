@@ -204,8 +204,8 @@ process.p = cms.Path(
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
-                             process.patConversions*
-                             process.puJetIdSqeuence
+                             process.patConversions
+                             #process.puJetIdSqeuence
                                                               )
 
 
