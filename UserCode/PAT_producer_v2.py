@@ -158,15 +158,7 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 # Store the Muons
 ###################################################
 
-# https://twiki.cern.ch/twiki/bin/view/Main/SingleTopHiggsBBEventSel
-# setting to 9999 eliminates the default filtering w.r.t the 1st vertex in
-# the vertex src list; there is no gaurantee that the 1st vertex is the
-# one that we will end up selecting
 
-process.pfMuonsFromVertex.d0Cut = 9999.
-process.pfMuonsFromVertex.d0SigCut = 9999.
-process.pfMuonsFromVertex.dzCut = 9999.
-process.pfMuonsFromVertex.dzSigCut = 9999.
 
 process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 
