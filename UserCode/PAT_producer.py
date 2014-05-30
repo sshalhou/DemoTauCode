@@ -55,24 +55,6 @@ else:
 ###################################################
 from PhysicsTools.PatAlgos.tools.pfTools import *
 
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
-
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
-
 
 ###################################################
 # use PF isolation
@@ -104,6 +86,26 @@ process.patTaus = process.patTaus.clone(embedIsolationPFCands = True,
                                         embedSignalPFGammaCands = True,
                                         embedSignalPFNeutralHadrCands = True
                                                         )
+
+
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
+
 
 
 #############################
