@@ -84,8 +84,13 @@ process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
 
+###################################################
+# the new Tau ID
+###################################################
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
-
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
 
 
 
@@ -95,6 +100,7 @@ if runOnMC:
 process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
+                             process.PFTau+
                              process.patDefaultSequence
                                                               )
 
