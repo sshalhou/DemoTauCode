@@ -39,6 +39,7 @@ echo "checking out SVFit code : "
 wget --no-check-certificate https://github.com/cms-analysis/TauAnalysis-CandidateTools/archive/TauAnalysis-CandidateTools-V00-02-03s.tar.gz .
 tar -xzvf TauAnalysis-CandidateTools-V00-02-03s
 mkdir TauAnalysis
+rm -rf TauAnalysis/CandidateTools
 mv TauAnalysis-CandidateTools-TauAnalysis-CandidateTools-V00-02-03s TauAnalysis/CandidateTools
 rm -rf TauAnalysis-CandidateTools-V00-02-03s
 ################################################
@@ -75,37 +76,9 @@ cp -r /uscms/home/shalhout/public/RecoMET .
 #cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
 ################################################
 
-
-#echo "Get The Correct Version of DataFormats/JetReco for use with MVA MET"
+echo "soft link MVA MET leptons PAT config :"
 ################################################
-#rm -rf DataFormats/JetReco
-#git clone https://github.com/cms-cvs-history/DataFormats-JetReco DataFormats/JetReco
-################################################
-
-
-#echo "Get The Correct Version of DataFormats/METReco for use with MVA MET"
-################################################
-#rm -rf DataFormats/METReco
-#git clone https://github.com/cms-cvs-history/DataFormats-METReco DataFormats/METReco
-################################################
-
-
-#echo "Get The Correct Version of RecoJets-JetProducers"
-################################################
-#rm -rf RecoJets/JetProducers
-#git clone https://github.com/cms-cvs-history/RecoJets-JetProducers RecoJets/JetProducers
-################################################
-
-
-#echo "Get The Correct Version of CommonTools-Utils"
-################################################
-#rm -rf CommonTools/Utils
-#git clone https://github.com/cms-cvs-history/CommonTools-Utils CommonTools/Utils
-################################################
-
-
-#echo "Get The Correct Version of FWCore-Utilities"
-################################################
-#rm -rf FWCore/Utilities
-#git clone https://github.com/cms-cvs-history/FWCore-Utilities FWCore/Utilities
+cd RecoMET/METPUSubtraction/python/
+ln -s ../../../UserCode/mvaPFMET_leptons_PAT_cfi.py mvaPFMET_leptons_PAT_cfi.py
+cd -
 ################################################
