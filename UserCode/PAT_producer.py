@@ -12,7 +12,7 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
-RunMETUnc = False
+RunMETUnc = True
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
@@ -423,11 +423,11 @@ myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluG
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
-#                        dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-#                        inputCommands = cms.untracked.vstring(
-#                        'keep *'
-#                        'drop recoPFTaus_*_*_*'
-#                        ),
+                        dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
+                        inputCommands = cms.untracked.vstring(
+                        'keep *'
+                        'drop recoPFTaus_*_*_*'
+                        ),
 		                  skipEvents=cms.untracked.uint32(0)
 			                       )
 ########################################################################################################
