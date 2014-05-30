@@ -70,7 +70,7 @@ process.recoPuJetMva = puJetMva.clone(
    inputIsCorrected = cms.bool(False),
 )
 
-process.recoPuJetIdSqeuence(process.recoPuJetId * process.recoPuJetMva )
+process.recoPuJetIdSqeuence = cms.Sequence(process.recoPuJetId * process.recoPuJetMva )
 
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
