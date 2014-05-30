@@ -76,24 +76,24 @@ cp -r /uscms/home/shalhout/public/RecoMET .
 ################################################
 
 
-echo "Get The Correct Version of DataFormats/JetReco for use with MVA MET"
+#echo "Get The Correct Version of DataFormats/JetReco for use with MVA MET"
 ################################################
-rm -rf DataFormats/JetReco
-git clone https://github.com/cms-cvs-history/DataFormats-JetReco DataFormats/JetReco
-################################################
-
-
-echo "Get The Correct Version of DataFormats/METReco for use with MVA MET"
-################################################
-rm -rf DataFormats/METReco
-git clone https://github.com/cms-cvs-history/DataFormats-METReco DataFormats/METReco
+#rm -rf DataFormats/JetReco
+#git clone https://github.com/cms-cvs-history/DataFormats-JetReco DataFormats/JetReco
 ################################################
 
 
-echo "Get The Correct Version of RecoJets-JetProducers"
+#echo "Get The Correct Version of DataFormats/METReco for use with MVA MET"
 ################################################
-rm -rf RecoJets/JetProducers
-git clone https://github.com/cms-cvs-history/RecoJets-JetProducers RecoJets/JetProducers
+#rm -rf DataFormats/METReco
+#git clone https://github.com/cms-cvs-history/DataFormats-METReco DataFormats/METReco
+################################################
+
+
+#echo "Get The Correct Version of RecoJets-JetProducers"
+################################################
+#rm -rf RecoJets/JetProducers
+#git clone https://github.com/cms-cvs-history/RecoJets-JetProducers RecoJets/JetProducers
 ################################################
 
 
