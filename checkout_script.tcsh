@@ -82,3 +82,8 @@ cd RecoMET/METPUSubtraction/python/
 ln -s ../../../UserCode/mvaPFMET_leptons_PAT_cfi.py mvaPFMET_leptons_PAT_cfi.py
 cd -
 ################################################
+
+echo " copy pile up jet ID configs "
+################################################
+cp /uscms/home/shalhout/public/PU_JET_ID/*py RecoJets/JetProducers/python/.
+################################################
