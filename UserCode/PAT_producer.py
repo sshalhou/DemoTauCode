@@ -139,7 +139,7 @@ if not runOnMC:
 ###################################################
 # load the PU JetID sequence
 ###################################################
-process.load("CMGTools.External.pujetidsequence_cff")
+process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
