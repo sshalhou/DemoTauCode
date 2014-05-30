@@ -182,8 +182,8 @@ process.p = cms.Path(
                              process.PFTau*
                              process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
-                             process.puJetIdSqeuence*
                              process.patDefaultSequence*
+                             process.puJetIdSqeuence*
                              process.patPFMetByMVA*
                              process.patConversions
                                                               )
