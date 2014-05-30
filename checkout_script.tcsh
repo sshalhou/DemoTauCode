@@ -33,6 +33,7 @@ wget --no-check-certificate https://github.com/cms-analysis/TauAnalysis-Candidat
 tar -xzvf TauAnalysis-CandidateTools-V00-02-03s
 mkdir TauAnalysis
 mv TauAnalysis-CandidateTools-TauAnalysis-CandidateTools-V00-02-03s TauAnalysis/CandidateTools
+rm -rf TauAnalysis-CandidateTools-V00-02-03s
 ################################################
 
 echo "checking out MET Recoil Correction Code : "
