@@ -73,6 +73,20 @@ process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
 process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
 
+
+
+###################################################
+# load the PU JetID sequence
+###################################################
+process.load("RecoJets.JetProducers.pujetidsequence_cff")
+
+process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
+process.out.outputCommands +=['keep *_puJetId*_*_*']
+process.out.outputCommands +=['keep *_puJetMva*_*_*']
+
+
+
+
 ###################################################
 # needed for JEC
 ###################################################
@@ -168,6 +182,7 @@ process.p = cms.Path(
                              process.PFTau*
                              process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
+                             process.puJetIdSqeuence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
                              process.patConversions
