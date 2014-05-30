@@ -81,13 +81,6 @@ from RecoJets.Configuration.GenJetParticles_cff import *
 from RecoJets.Configuration.RecoGenJets_cff import *
 
 
-process.genForPATSequence = cms.Sequence(
-    genParticlesForJetsNoNu +
-    iterativeCone5GenJetsNoNu +
-    ak5GenJetsNoNu +
-    ak7GenJetsNoNu
-    )
-
 ##################################################
 # needed for MVA met, but need to be here
 ##################################################
