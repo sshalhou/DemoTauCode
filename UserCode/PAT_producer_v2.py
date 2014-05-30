@@ -44,11 +44,6 @@ else:
 
 
 
-###################################################
-# use PF isolation
-###################################################
-
-usePFIso(process)
 
 ###################################################
 # if the sample does not contain value map of PF candidate
