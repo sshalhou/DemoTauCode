@@ -218,7 +218,7 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
 
-process.load("CommonTools/ParticleFlow/python/pfTaus_cff")
+process.load("CommonTools.ParticleFlow.pfTaus_cff")
 
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
