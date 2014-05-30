@@ -215,15 +215,12 @@ process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 
 process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
+process.load("CommonTools.ParticleFlow.pfTaus_cff")
 
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
-
-
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
