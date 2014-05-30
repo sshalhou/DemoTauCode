@@ -184,6 +184,12 @@ process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
 process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
 
 
+###################################################
+# Create the PFTaus
+###################################################
+
+process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
 
 ###################################################
 # Store the Muons
@@ -303,7 +309,6 @@ process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
 
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
@@ -367,8 +372,8 @@ runMEtUncertainties(process,
 process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.mvametPF2PATsequence+
                              process.PFTau+
+                             process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
