@@ -54,10 +54,23 @@ else:
 
 
 
-#process.load("RecoJets.JetProducers.pujetidsequence_cff")
-from RecoJets.JetProducers.pujetidsequence_cff import *
-loadPujetId(process,collection="cleanPatJets",mvaOnly=False,isChs=False,release="53X")
 
+from RecoJets.JetProducers.pujetidsequence_cff import puJetId
+
+process.recoPuJetId = puJetId.clone(
+   jets = cms.InputTag("ak5PFJets"),
+   applyJec = cms.bool(True),
+   inputIsCorrected = cms.bool(False),
+)
+
+process.recoPuJetMva = puJetMva.clone(
+   jets = cms.InputTag("ak5PFJets"),
+   jetids = cms.InputTag("recoPuJetId"),
+   applyJec = cms.bool(True),
+   inputIsCorrected = cms.bool(False),
+)
+
+process.recoPuJetIdSqeuence(process.recoPuJetId * process.recoPuJetMva )
 
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
@@ -204,8 +217,9 @@ process.p = cms.Path(
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
-                             process.patConversions
-                             #process.puJetIdSqeuence
+                             process.patConversions*
+                             process.recoPuJetIdSqeuence
+
                                                               )
 
 
