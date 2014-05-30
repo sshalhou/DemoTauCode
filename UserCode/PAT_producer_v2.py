@@ -104,6 +104,20 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 if not runOnMC:
   removeMCMatchingPF2PAT( process, 'All' )
 
+###################################################
+# get AK5PF jets
+###################################################
+from PhysicsTools.PatAlgos.tools.jetTools import *
+
+switchJetCollection(process,cms.InputTag('ak5PFJets'),
+                 doJTA        = True,
+                 doBTagging   = True,
+                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
+                 doType1MET   = True,
+                 genJetCollection=cms.InputTag("ak5GenJets"),
+                 doJetID      = True
+                 )
+
 
 ###################################################
 # load the PU JetID sequence
