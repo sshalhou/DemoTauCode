@@ -37,7 +37,7 @@ else :
 
 
 process.demo = cms.EDAnalyzer('JetTestAnalysis',
-  jetSrc = cms.untracked.InputTag("cleanPatJets"),
+  jetSrc = cms.untracked.InputTag("selectedPatJets"),
   rhoSrc = cms.untracked.InputTag('kt6PFJets', 'rho'),
   pvSrc  = cms.untracked.InputTag('offlinePrimaryVertices'),
 #  jecPayloadNames = cms.untracked.vstring(jecLevels),
