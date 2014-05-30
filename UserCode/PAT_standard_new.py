@@ -92,6 +92,31 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
+###################################################
+# the MVA electron ID
+###################################################
+
+
+process.load('EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi')
+process.mvaID = cms.Sequence(  process.mvaTrigV0 + process.mvaTrigNoIPV0 + process.mvaNonTrigV0 )
+
+
+process.patElectrons.electronIDSources = cms.PSet(
+    mvaTrigV0 = cms.InputTag("mvaTrigV0"),
+    mvaNonTrigV0 = cms.InputTag("mvaNonTrigV0"),
+    mvaTrigNoIPV0 = cms.InputTag("mvaTrigNoIPV0"),
+    )
+
+
+process.patConversions = cms.EDProducer("PATConversionProducer",
+                                        # input collection
+                                        # this should be whatever the final analysis-level
+                                        # electrons are
+                                        electronSource = cms.InputTag("cleanPatElectrons")
+                                        )
+
+
+process.out.outputCommands +=['keep *_patConversions*_*_*']
 
 
 ##################################################
@@ -100,9 +125,11 @@ switchToPFTauHPS(process)
 process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
+                             process.mvaID+
                              process.PFTau*
                              process.recoTauClassicHPSSequence *
-                             process.patDefaultSequence
+                             process.patDefaultSequence+
+                             process.patConversions
                                                               )
 
 
