@@ -41,21 +41,23 @@ else:
 ###################################################
 # load the PU JetID sequence
 ###################################################
-from PhysicsTools.PatAlgos.tools.jetTools import *
+#from PhysicsTools.PatAlgos.tools.jetTools import *
 
-switchJetCollection(process,cms.InputTag('ak5PFJets'),
-                 doJTA        = True,
-                 doBTagging   = True,
-                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
-                 doType1MET   = True,
-                 genJetCollection=cms.InputTag("ak5GenJets"),
-                 doJetID      = True
-                 )
-
+#switchJetCollection(process,cms.InputTag('ak5PFJets'),
+#                 doJTA        = True,
+#                 doBTagging   = True,
+#                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
+#                 doType1MET   = True,
+#                 genJetCollection=cms.InputTag("ak5GenJets"),
+#                 doJetID      = True
+#                 )
 
 
 
 process.load("RecoJets.JetProducers.pujetidsequence_cff")
+loadPujetId(process,collection,mvaOnly=False,isChs=False,release="53X")
+
+
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
