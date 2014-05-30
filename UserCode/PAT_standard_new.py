@@ -56,7 +56,7 @@ else:
 
 #process.load("RecoJets.JetProducers.pujetidsequence_cff")
 from RecoJets.JetProducers.pujetidsequence_cff import *
-loadPujetId(process,collection,mvaOnly=False,isChs=False,release="53X")
+loadPujetId(process,collection="cleanPatJets",mvaOnly=False,isChs=False,release="53X")
 
 
 
