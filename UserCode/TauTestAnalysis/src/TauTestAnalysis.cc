@@ -132,11 +132,11 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
 
-          std::cout<<"againstElectronMVA3raw = "<<tau->tauID("againstElectronMVA3raw")<<std::endl;
+          std::cout<<"againstElectronMVA5raw = "<<tau->tauID("againstElectronMVA5raw")<<std::endl;
 
           std::cout<<" againstElectronLoose = "<<tau->tauID("againstElectronLoose")<<std::endl;
           std::cout<<" againstMuonTight = "<<tau->tauID("againstMuonTight")<<std::endl;
-          std::cout<<" againstElectronLooseMVA3 = "<<tau->tauID("againstElectronLooseMVA3")<<std::endl;
+          std::cout<<" againstElectronLooseMVA5 = "<<tau->tauID("againstElectronLooseMVA5")<<std::endl;
 
           std::cout<<" byMediumCombinedIsolationDeltaBetaCorr3Hits = ";
           std::cout<<tau->tauID("byMediumCombinedIsolationDeltaBetaCorr3Hits")<<std::endl;
@@ -149,12 +149,12 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 std::cout<<" iEvent.id() "<<iEvent.id();
 std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
-std::cout<<" againstElectronLooseMVA3 "<<tau->tauID("againstElectronLooseMVA3");
-std::cout<<" againstElectronMVA3raw  "<<tau->tauID("againstElectronMVA3raw");
-std::cout<<" againstElectronMVA3category "<<tau->tauID("againstElectronMVA3category");
-std::cout<<" newLOOSEWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 0);
+std::cout<<" againstElectronLooseMVA5 "<<tau->tauID("againstElectronLooseMVA5");
+std::cout<<" againstElectronMVA5raw  "<<tau->tauID("againstElectronMVA5raw");
+std::cout<<" againstElectronMVA5category "<<tau->tauID("againstElectronMVA5category");
+//std::cout<<" newLOOSEWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 0);
 std::cout<<" decay mode "<<tau->decayMode();
-std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
+//std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
 
 
                     } // tau loop
@@ -172,6 +172,12 @@ std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"),
 #endif
 }
 
+
+/* WANT TO KEEP ALL THIS IN NTUPLE
+
+The available IDs are: 'againstElectronDeadECAL' 'againstElectronLoose' 'againstElectronLooseMVA5' 'againstElectronMVA5category' 'againstElectronMVA5raw' 'againstElectronMedium' 'againstElectronMediumMVA5' 'againstElectronTight' 'againstElectronTightMVA5' 'againstElectronVLooseMVA5' 'againstElectronVTightMVA5' 'againstMuonLoose' 'againstMuonLoose2' 'againstMuonLoose3' 'againstMuonLooseMVA' 'againstMuonMVAraw' 'againstMuonMedium' 'againstMuonMedium2' 'againstMuonMediumMVA' 'againstMuonTight' 'againstMuonTight2' 'againstMuonTight3' 'againstMuonTightMVA' 'byCombinedIsolationDeltaBetaCorrRaw' 'byCombinedIsolationDeltaBetaCorrRaw3Hits' 'byIsolationMVA3newDMwLTraw' 'byIsolationMVA3newDMwoLTraw' 'byIsolationMVA3oldDMwLTraw' 'byIsolationMVA3oldDMwoLTraw' 'byLooseCombinedIsolationDeltaBetaCorr' 'byLooseCombinedIsolationDeltaBetaCorr3Hits' 'byLooseIsolation' 'byLooseIsolationMVA3newDMwLT' 'byLooseIsolationMVA3newDMwoLT' 'byLooseIsolationMVA3oldDMwLT' 'byLooseIsolationMVA3oldDMwoLT' 'byMediumCombinedIsolationDeltaBetaCorr' 'byMediumCombinedIsolationDeltaBetaCorr3Hits' 'byMediumIsolationMVA3newDMwLT' 'byMediumIsolationMVA3newDMwoLT' 'byMediumIsolationMVA3oldDMwLT' 'byMediumIsolationMVA3oldDMwoLT' 'byTightCombinedIsolationDeltaBetaCorr' 'byTightCombinedIsolationDeltaBetaCorr3Hits' 'byTightIsolationMVA3newDMwLT' 'byTightIsolationMVA3newDMwoLT' 'byTightIsolationMVA3oldDMwLT' 'byTightIsolationMVA3oldDMwoLT' 'byVLooseCombinedIsolationDeltaBetaCorr' 'byVLooseIsolationMVA3newDMwLT' 'byVLooseIsolationMVA3newDMwoLT' 'byVLooseIsolationMVA3oldDMwLT' 'byVLooseIsolationMVA3oldDMwoLT' 'byVTightIsolationMVA3newDMwLT' 'byVTightIsolationMVA3newDMwoLT' 'byVTightIsolationMVA3oldDMwLT' 'byVTightIsolationMVA3oldDMwoLT' 'byVVTightIsolationMVA3newDMwLT' 'byVVTightIsolationMVA3newDMwoLT' 'byVVTightIsolationMVA3oldDMwLT' 'byVVTightIsolationMVA3oldDMwoLT' 'chargedIsoPtSum' 'decayModeFinding' 'decayModeFindingNewDMs' 'decayModeFindingOldDMs' 'neutralIsoPtSum' 'puCorrPtSum' .
+
+*/
 
 // ------------ method called once each job just before starting event loop  ------------
 void
