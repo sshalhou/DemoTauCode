@@ -122,7 +122,7 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
 ###################################################
 # load the PU JetID sequence
 ###################################################
-process.load("RecoJets.JetProducers.pujetidsequence_cff")
+#process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
