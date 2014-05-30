@@ -157,10 +157,10 @@ iEvent.getByLabel(jetSrc_,jets);
 
 
 Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
+iEvent.getByLabel("recoPuJetMva","full53xDiscriminant",puJetIdMVA);
 
 Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
+iEvent.getByLabel("recoPuJetMva","full53xId",puJetIdFlag);
 
 
 
