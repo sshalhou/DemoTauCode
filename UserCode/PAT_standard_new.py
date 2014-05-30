@@ -78,21 +78,22 @@ process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 ###################################################
 # load the PU JetID sequence
 ###################################################
-from PhysicsTools.PatAlgos.tools.jetTools import *
+#from PhysicsTools.PatAlgos.tools.jetTools import *
 
-switchJetCollection(process,cms.InputTag('ak5PFJets'),
-                 doJTA        = True,
-                 doBTagging   = True,
-                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
-                 doType1MET   = True,
-                 genJetCollection=cms.InputTag("ak5GenJets"),
-                 doJetID      = True
-                 )
-
-
+#switchJetCollection(process,cms.InputTag('ak5PFJets'),
+#                 doJTA        = True,
+#                 doBTagging   = True,
+#                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
+#                 doType1MET   = True,
+#                 genJetCollection=cms.InputTag("ak5GenJets"),
+#                 doJetID      = True
+#                 )
 
 
-process.load("RecoJets.JetProducers.pujetidsequence_cff")
+
+
+#process.load("RecoJets.JetProducers.pujetidsequence_cff")
+process.load("RecoJets.JetProducers.PileupJetID_cfi")
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
@@ -197,7 +198,7 @@ process.p = cms.Path(
                              process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
-                             process.puJetIdSqeuence*
+                             #process.puJetIdSqeuence*
                              process.patPFMetByMVA*
                              process.patConversions
                                                               )
