@@ -364,8 +364,7 @@ else:
   process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
 
 if runOnMC:
-    process.p += process.genForPF2PATSequence
-    process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
+      process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
     # the above is needed for the PDF sys. tool
 
 
