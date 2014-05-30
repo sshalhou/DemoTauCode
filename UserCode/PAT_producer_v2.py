@@ -53,10 +53,6 @@ else:
 
 process.patElectrons.pfElectronSource = 'particleFlow'
 
-###################################################
-# PF Jets
-###################################################
-switchToPFJets(process)
 
 ###################################################
 # change some tau defaults
