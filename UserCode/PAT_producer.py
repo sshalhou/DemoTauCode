@@ -217,6 +217,9 @@ process.load("Configuration.Geometry.GeometryPilot2_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
+
+process.load("CommonTools/ParticleFlow/python/pfTaus_cff")
+
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
@@ -359,9 +362,9 @@ runMEtUncertainties(process,
 ###################################################
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.mvametPF2PATsequence+
                              process.PFTau+
-                             #process.recoTauClassicHPSSequence+
+                             process.mvametPF2PATsequence+
+                             process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
