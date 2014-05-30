@@ -185,7 +185,7 @@ std::cout<<" isolation = "<<irel<<std::endl;
 std::cout<<" PassConversionVeto = "<<electron->passConversionVeto()<<std::endl;
           }
 
-std::cout<<" event has "<<nelectrons<<" selectedPatElectrons "<<std::endl;
+std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
