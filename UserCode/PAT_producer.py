@@ -204,25 +204,7 @@ process.out.outputCommands +=['keep *_selectedPatMuons*_*_*']
 
 
 
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
 
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
-
-process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
 ###################################################
 # store electrons and MVA ID
@@ -306,6 +288,29 @@ process.selectedPatMuons = selectedPatMuons.clone(src = 'patMuons', cut = 'pt >3
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', cut = 'et >8.')
 
+
+
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
+
+process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
+
+
 ###################################################
 # drop some large unused collections
 ###################################################
@@ -362,8 +367,8 @@ runMEtUncertainties(process,
 process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.PFTau+
                              process.mvametPF2PATsequence+
+                             process.PFTau+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
