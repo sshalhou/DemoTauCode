@@ -361,10 +361,12 @@ process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
                              process.PFTau+
                              process.mvametPF2PATsequence+
-                             process.recoTauClassicHPSSequence+
+                             #process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
+
+
 
 if RunMETUnc:
   process.p += process.metUncertaintySequence
