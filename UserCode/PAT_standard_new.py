@@ -38,6 +38,40 @@ else:
   runOnData(process)
 
 
+##################################################
+# MVA MET
+###################################################
+from RecoMET.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
+
+
+
+
+process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
+
+
+process.patPFMetByMVA = process.patMETs.clone(
+    metSource = cms.InputTag('pfMEtMVA'),
+    addMuonCorrections = cms.bool(True),
+    genMETSource = cms.InputTag('genMetTrue')
+                                                )
+
+process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
+process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
+
+process.mvametPF2PATsequence = cms.Sequence(
+                process.pfMEtMVAsequence*
+                # next 2 lines are from
+                # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
+                process.type0PFMEtCorrection*
+                process.patPFMETtype0Corr
+                                )
+
+
+process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+
 
 ###################################################
 # needed for JEC
@@ -118,39 +152,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 
-##################################################
-# MVA MET
-###################################################
-from RecoMET.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
 
-
-
-
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
-
-
-process.patPFMetByMVA = process.patMETs.clone(
-    metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(True),
-    genMETSource = cms.InputTag('genMetTrue')
-                                                )
-
-process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
-process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
-
-process.mvametPF2PATsequence = cms.Sequence(
-                process.pfMEtMVAsequence*
-                # next 2 lines are from
-                # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
-                process.type0PFMEtCorrection*
-                process.patPFMETtype0Corr
-                                )
-
-
-process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
-process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
 
 
 
@@ -164,9 +166,9 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
+                             process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
-                             process.recoTauClassicHPSSequence *
                              process.patPFMetByMVA*
                              process.patConversions
                                                               )
