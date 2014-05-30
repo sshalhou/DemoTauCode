@@ -377,7 +377,7 @@ process.p = cms.Path(        process.PFTau+
                              process.UserSpecifiedData+
                              process.VertexPresent+
                              process.mvametPF2PATsequence+
-                             process.recoTauClassicHPSSequence+
+                             #process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
