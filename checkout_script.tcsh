@@ -67,3 +67,10 @@ cp -r /uscms/home/shalhout/public/RecoMET .
 #$CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
 #cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
 ################################################
+
+
+echo "Get The Correct Version of DataFormats/JetReco for use with MVA MET"
+################################################
+rm -rf DataFormats/JetReco 
+git clone https://github.com/cms-cvs-history/DataFormats-JetReco DataFormats/JetReco
+################################################

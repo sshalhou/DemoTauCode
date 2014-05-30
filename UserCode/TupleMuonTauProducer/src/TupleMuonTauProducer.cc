@@ -53,7 +53,7 @@ Implementation:
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
 #include "DataFormats/PatCandidates/interface/Jet.h"
-#include "CMGTools/External/interface/PileupJetIdentifier.h"
+#include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
