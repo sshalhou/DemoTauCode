@@ -88,24 +88,6 @@ process.patTaus = process.patTaus.clone(embedIsolationPFCands = True,
                                                         )
 
 
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
-
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
-
 
 
 #############################
@@ -124,6 +106,24 @@ process.genForPF2PATSequence = cms.Sequence(
     ak7GenJetsNoNu
     )
 
+
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
 
 
 
@@ -377,7 +377,7 @@ process.p = cms.Path(        process.PFTau+
                              process.UserSpecifiedData+
                              process.VertexPresent+
                              process.mvametPF2PATsequence+
-                             #process.recoTauClassicHPSSequence+
+                             process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
                              process.countSelectedLeptons
                                   )
