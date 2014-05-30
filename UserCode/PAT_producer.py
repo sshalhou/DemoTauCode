@@ -44,7 +44,6 @@ else:
 
 
 
-
 ########################################################################################################
 # Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
 ########################################################################################################
@@ -54,7 +53,6 @@ else:
 # only PF2PAT and not both PAT + PF2PAT
 ###################################################
 from PhysicsTools.PatAlgos.tools.pfTools import *
-
 
 ###################################################
 # use PF isolation
@@ -88,8 +86,6 @@ process.patTaus = process.patTaus.clone(embedIsolationPFCands = True,
                                                         )
 
 
-
-
 #############################
 # add in some gen level jet collections
 # needed for the jet smear in MET unc.
@@ -106,24 +102,6 @@ process.genForPF2PATSequence = cms.Sequence(
     ak7GenJetsNoNu
     )
 
-
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
-
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
 
 
 
@@ -156,9 +134,6 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 
 if not runOnMC:
   removeMCMatchingPF2PAT( process, 'All' )
-
-
-
 
 
 ###################################################
@@ -315,7 +290,23 @@ process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', 
 
 
 
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
 
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
