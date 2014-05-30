@@ -86,4 +86,5 @@ cd -
 echo " copy pile up jet ID configs "
 ################################################
 cp /uscms/home/shalhout/public/PU_JET_ID/*py RecoJets/JetProducers/python/.
+touch RecoJets/JetProducers/data/dummy.txt
 ################################################

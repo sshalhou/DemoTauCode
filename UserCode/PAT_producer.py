@@ -359,6 +359,7 @@ runMEtUncertainties(process,
 ###################################################
 process.p = cms.Path(        process.UserSpecifiedData+
                              process.VertexPresent+
+                             process.PFTau+
                              process.mvametPF2PATsequence+
                              process.recoTauClassicHPSSequence+
                              process.puJetIdSqeuence+
