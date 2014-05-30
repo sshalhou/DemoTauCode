@@ -55,7 +55,7 @@ else:
 
 
 
-from RecoJets.JetProducers.pujetidsequence_cff import puJetId
+from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
 
 process.recoPuJetId = puJetId.clone(
    jets = cms.InputTag("ak5PFJets"),
