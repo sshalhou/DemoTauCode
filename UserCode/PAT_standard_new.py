@@ -100,7 +100,8 @@ switchToPFTauHPS(process)
 process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
-                             process.PFTau+
+                             process.PFTau*
+                             process.recoTauClassicHPSSequence *
                              process.patDefaultSequence
                                                               )
 
