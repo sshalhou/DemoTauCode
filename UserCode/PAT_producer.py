@@ -42,6 +42,19 @@ if runOnMC:
 else:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 
+
+
+
+########################################################################################################
+# Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
+########################################################################################################
+
+###################################################
+# setup PF2PAT, empty postfix means
+# only PF2PAT and not both PAT + PF2PAT
+###################################################
+from PhysicsTools.PatAlgos.tools.pfTools import *
+
 ###################################################
 # add in hadronic taus
 # based on
@@ -60,16 +73,6 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
 
-
-########################################################################################################
-# Setup PF2PAT (for now we will not run both PAT and PF2PAT, everything will be PF2PAT)
-########################################################################################################
-
-###################################################
-# setup PF2PAT, empty postfix means
-# only PF2PAT and not both PAT + PF2PAT
-###################################################
-from PhysicsTools.PatAlgos.tools.pfTools import *
 
 ###################################################
 # use PF isolation
