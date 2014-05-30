@@ -145,7 +145,7 @@ process.mvametPF2PATsequence = cms.Sequence(
                 # next 2 lines are from
                 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
                 process.type0PFMEtCorrection*
-                process.patPFMETtype0Corr*
+                process.patPFMETtype0Corr
                                 )
 
 
