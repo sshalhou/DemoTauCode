@@ -25,6 +25,13 @@ echo "soft link to UserCode "
 ln -s ../../UserCode UserCode
 ################################################
 
+echo "some needed Fixes "
+################################################
+git cms-merge-topic cms-analysis-tools:5_3_14-updateSelectorUtils
+git cms-merge-topic cms-analysis-tools:5_3_13_patch2-testNewTau
+git cms-merge-topic -u TaiSakuma:53X-met-131120-01
+git cms-merge-topic -u cms-met:53X-MVaNoPuMET-20131217-01
+################################################
 
 echo "checking out SVFit code : "
 
@@ -71,6 +78,34 @@ cp -r /uscms/home/shalhout/public/RecoMET .
 
 echo "Get The Correct Version of DataFormats/JetReco for use with MVA MET"
 ################################################
-rm -rf DataFormats/JetReco 
+rm -rf DataFormats/JetReco
 git clone https://github.com/cms-cvs-history/DataFormats-JetReco DataFormats/JetReco
+################################################
+
+
+echo "Get The Correct Version of DataFormats/METReco for use with MVA MET"
+################################################
+rm -rf DataFormats/METReco
+git clone https://github.com/cms-cvs-history/DataFormats-METReco DataFormats/METReco
+################################################
+
+
+echo "Get The Correct Version of RecoJets-JetProducers"
+################################################
+rm -rf RecoJets/JetProducers
+git clone https://github.com/cms-cvs-history/RecoJets-JetProducers RecoJets/JetProducers
+################################################
+
+
+#echo "Get The Correct Version of CommonTools-Utils"
+################################################
+#rm -rf CommonTools/Utils
+#git clone https://github.com/cms-cvs-history/CommonTools-Utils CommonTools/Utils
+################################################
+
+
+#echo "Get The Correct Version of FWCore-Utilities"
+################################################
+#rm -rf FWCore/Utilities
+#git clone https://github.com/cms-cvs-history/FWCore-Utilities FWCore/Utilities
 ################################################
