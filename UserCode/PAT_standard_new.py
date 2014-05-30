@@ -164,9 +164,9 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
-                             process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
+                             process.recoTauClassicHPSSequence *
                              process.patPFMetByMVA*
                              process.patConversions
                                                               )
