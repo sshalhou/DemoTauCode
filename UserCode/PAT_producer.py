@@ -251,7 +251,31 @@ process.patPFMetByMVA = process.patMETs.clone(
 process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
 process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
 
+
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
+
+process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
+########################################################
+
+
 process.mvametPF2PATsequence = cms.Sequence(
+                process.PFTau*
                 process.pfMEtMVAsequence*
                 # next 2 lines are from
                 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
@@ -290,25 +314,7 @@ process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', 
 
 
 
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
 
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
-
-process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
 
 ###################################################
@@ -364,7 +370,7 @@ runMEtUncertainties(process,
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(        process.PFTau+
+process.p = cms.Path(
                              process.UserSpecifiedData+
                              process.VertexPresent+
                              process.mvametPF2PATsequence+
