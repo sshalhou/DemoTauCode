@@ -12,7 +12,7 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
-RunMETUnc = True
+RunMETUnc = False
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
@@ -42,6 +42,23 @@ if runOnMC:
 else:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 
+###################################################
+# add in hadronic taus
+# based on
+# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
+###################################################
+###################################################
+# tau discriminators must be re-run
+###################################################
+
+process.load("Configuration.Geometry.GeometryPilot2_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
+
+#process.load("CommonTools.ParticleFlow.pfTaus_cff")
+
+from PhysicsTools.PatAlgos.tools.tauTools import *
+switchToPFTauHPS(process)
 
 
 ########################################################################################################
@@ -134,6 +151,9 @@ process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons",
 
 if not runOnMC:
   removeMCMatchingPF2PAT( process, 'All' )
+
+
+
 
 
 ###################################################
@@ -290,23 +310,7 @@ process.selectedPatElectrons = selectedPatElectrons.clone(src = 'patElectrons', 
 
 
 
-###################################################
-# add in hadronic taus
-# based on
-# https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePFTauID#5_3_12_and_higher
-###################################################
-###################################################
-# tau discriminators must be re-run
-###################################################
 
-process.load("Configuration.Geometry.GeometryPilot2_cff")
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
-
-#process.load("CommonTools.ParticleFlow.pfTaus_cff")
-
-from PhysicsTools.PatAlgos.tools.tauTools import *
-switchToPFTauHPS(process)
 
 process.out.outputCommands += ['keep *_selectedPatTaus*_*_*']
 
@@ -425,7 +429,7 @@ process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
                         dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
                         inputCommands = cms.untracked.vstring(
-                        'keep *'
+                        'keep *',
                         'drop recoPFTaus_*_*_*'
                         ),
 		                  skipEvents=cms.untracked.uint32(0)
