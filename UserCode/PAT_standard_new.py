@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
 RunMETUnc = False
-KeepAll = False
+KeepAll = True
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
