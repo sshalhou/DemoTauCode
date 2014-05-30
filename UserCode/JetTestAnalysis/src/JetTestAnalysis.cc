@@ -70,10 +70,10 @@ edm::InputTag jetSrc_;
 edm::InputTag puJetIdMVASrc_;
 edm::InputTag rhoSrc_;
 edm::InputTag pvSrc_;
-std::vector<std::string> jecPayloadNames_;
-std::string jecUncName_;
-boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
-boost::shared_ptr<FactorizedJetCorrector> jec_;
+//std::vector<std::string> jecPayloadNames_;
+//std::string jecUncName_;
+//boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
+//boost::shared_ptr<FactorizedJetCorrector> jec_;
 
 };
 
@@ -107,7 +107,7 @@ puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" ))
   //        payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
   //  JetCorrectorParameters pars(*ipayload);
   //  vPar.push_back(pars);
-  }
+//  }
 
  // Make the FactorizedJetCorrector and Uncertainty
   //jec_ = boost::shared_ptr<FactorizedJetCorrector> ( new FactorizedJetCorrector(vPar) );
@@ -157,10 +157,10 @@ iEvent.getByLabel(jetSrc_,jets);
 
 
 Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel("recoPuJetMva","full53xDiscriminant",puJetIdMVA);
+iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
 
 Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel("recoPuJetMva","full53xId",puJetIdFlag);
+iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
 
 
 
@@ -184,45 +184,45 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
 // get uncorrected jet, then
 // apply JEC 'on the fly'
 //////////////////
-/*
-  reco::Candidate::LorentzVector uncorrJet;
+
+//  reco::Candidate::LorentzVector uncorrJet;
   //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
-  uncorrJet = patjet.correctedP4(0);
-  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
+//  uncorrJet = patjet.correctedP4(0);
+//  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
 
 
     // Get the correction itself. This needs the jet area,
     // the rho value, and the number of primary vertices to
     // run the correction.
-    jec_->setJetEta( uncorrJet.eta() );
-    jec_->setJetPt ( uncorrJet.pt() );
-    jec_->setJetE  ( uncorrJet.energy() );
-    jec_->setJetA  ( patjet.jetArea() );
-    jec_->setRho   ( *(h_rho.product()) );
-    jec_->setNPV   ( h_pv->size() );
+  //  jec_->setJetEta( uncorrJet.eta() );
+  //  jec_->setJetPt ( uncorrJet.pt() );
+  //  jec_->setJetE  ( uncorrJet.energy() );
+  //  jec_->setJetA  ( patjet.jetArea() );
+  //  jec_->setRho   ( *(h_rho.product()) );
+  //  jec_->setNPV   ( h_pv->size() );
   //  double corr = jec_->getCorrection();
 
 //std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
-std::vector<float> SubCorrections = jec_->getSubCorrections();
+//std::vector<float> SubCorrections = jec_->getSubCorrections();
 
-  for(unsigned int ll=0;ll<SubCorrections.size();ll++)
-    {
+  //for(unsigned int ll=0;ll<SubCorrections.size();ll++)
+  //  {
 
-      std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
+    //  std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
 
 
-    }
+    //}
 
-jec_->setJetEta( uncorrJet.eta() );
-jec_->setJetPt ( uncorrJet.pt() );
-jec_->setJetE  ( uncorrJet.energy() );
-jec_->setJetA  ( patjet.jetArea() );
-jec_->setRho   ( *(h_rho.product()) );
-jec_->setNPV   ( h_pv->size() );
- double corr = jec_->getCorrection();
+//jec_->setJetEta( uncorrJet.eta() );
+//jec_->setJetPt ( uncorrJet.pt() );
+//jec_->setJetE  ( uncorrJet.energy() );
+//jec_->setJetA  ( patjet.jetArea() );
+//jec_->setRho   ( *(h_rho.product()) );
+//jec_->setNPV   ( h_pv->size() );
+ //double corr = jec_->getCorrection();
 
-std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+//std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 //std::cout<<" step-by-step corr "<<SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
 
 
@@ -233,9 +233,6 @@ std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 //      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
 //      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
-
-
-      */
 }
 
 
