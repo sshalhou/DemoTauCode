@@ -67,9 +67,9 @@ class JetTestAnalysis : public edm::EDAnalyzer {
       // ----------member data ---------------------------
 
 edm::InputTag jetSrc_;
-edm::InputTag puJetIdMVASrc_;
 edm::InputTag rhoSrc_;
 edm::InputTag pvSrc_;
+edm::InputTag puJetIdMVASrc_;
 edm::InputTag puJetIdFlagSrc_;
 //std::vector<std::string> jecPayloadNames_;
 //std::string jecUncName_;
