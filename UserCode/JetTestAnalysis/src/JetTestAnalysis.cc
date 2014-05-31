@@ -98,7 +98,7 @@ pvSrc_    (iConfig.getUntrackedParameter<edm::InputTag>("pvSrc") ),
 //jecPayloadNames_( iConfig.getUntrackedParameter<std::vector<std::string> >("jecPayloadNames") ),
 //jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
-puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
+puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" ))
 {
    //now do what ever initialization is needed
 
