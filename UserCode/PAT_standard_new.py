@@ -57,11 +57,11 @@ else:
 
 from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
 
-process.puJetId = puJetId.clone()
+#process.puJetId = puJetId.clone()
 
-#process.puJetMva = puJetMva.clone()
+process.puJetMva = puJetMva.clone()
 
-process.puJetIdSqeuence = cms.Sequence(process.puJetId)
+process.puJetIdSqeuence = cms.Sequence(process.puJetMva)
 
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
