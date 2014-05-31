@@ -20,19 +20,19 @@ process.source = cms.Source("PoolSource",
 isMC = True
 
 
-if isMC:
-  jecLevels = [
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L1FastJet_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L3Absolute_AK5PFchs.txt'
-  ]
-else :
-  jecLevels = [
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L1FastJet_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L3Absolute_AK5PFchs.txt',
-    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2L3Residual_AK5PFchs.txt'
-  ]
+#if isMC:
+#  jecLevels = [
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L1FastJet_AK5PFchs.txt',
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt',
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L3Absolute_AK5PFchs.txt'
+#  ]
+#else :
+#  jecLevels = [
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L1FastJet_AK5PFchs.txt',
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2Relative_AK5PFchs.txt',
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L3Absolute_AK5PFchs.txt',
+#    './RecoJets/JetAnalyzers/test/GR_R_53_V10_L2L3Residual_AK5PFchs.txt'
+#  ]
 
 
 
@@ -42,8 +42,9 @@ process.demo = cms.EDAnalyzer('JetTestAnalysis',
   pvSrc  = cms.untracked.InputTag('offlinePrimaryVertices'),
 #  jecPayloadNames = cms.untracked.vstring(jecLevels),
 #  jecUncName = cms.untracked.string('./RecoJets/JetAnalyzers/test/GR_R_53_V10_Uncertainty_AK5PFchs.txt'),
-  puJetIdMVASrc = cms.untracked.InputTag("puJetMva")
-)
+  puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+  puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT')
+  )
 
 
 process.p = cms.Path(process.demo)

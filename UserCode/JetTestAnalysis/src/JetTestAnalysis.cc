@@ -70,6 +70,7 @@ edm::InputTag jetSrc_;
 edm::InputTag puJetIdMVASrc_;
 edm::InputTag rhoSrc_;
 edm::InputTag pvSrc_;
+edm::InputTag puJetIdFlagSrc_
 //std::vector<std::string> jecPayloadNames_;
 //std::string jecUncName_;
 //boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
@@ -96,7 +97,8 @@ rhoSrc_   (iConfig.getUntrackedParameter<edm::InputTag>("rhoSrc") ),
 pvSrc_    (iConfig.getUntrackedParameter<edm::InputTag>("pvSrc") ),
 //jecPayloadNames_( iConfig.getUntrackedParameter<std::vector<std::string> >("jecPayloadNames") ),
 //jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
-puJetIdMVASrc_(iConfig.getUntrackedParameter<edm::InputTag>("puJetIdMVASrc" ))
+puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
+puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
 {
    //now do what ever initialization is needed
 
@@ -156,14 +158,30 @@ iEvent.getByLabel(jetSrc_,jets);
   iEvent.getByLabel( pvSrc_, h_pv );
 
 
-Handle<ValueMap<float> > puJetIdMVA;
-iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
 
-Handle<ValueMap<int> > puJetIdFlag;
-iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
+  edm::Handle<ValueMap<float> > puJetIdMVA;
+  iEvent.getByLabel(puJetIdMVASrc_,puJetIdMVA);
 
 
+  edm::Handle<ValueMap<int> > puJetIdFlag;
+  iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
 
+
+
+for ( unsigned int i=0; i<jets->size(); ++i )
+{
+  const pat::Jet & patjet = jets->at(i);
+  float mva   = (*puJetIdMVA)[jets->refAt(i)];
+  int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+  std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
+  std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
+  std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
+  std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
+
+}
+
+
+/*
 for ( unsigned int i=0; i<jets->size(); ++i ) {
       const pat::Jet & patjet = jets->at(i);
       float mva   = (*puJetIdMVA)[jets->refAt(i)];
@@ -234,7 +252,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
 //      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
 }
-
+*/
 
 
 
