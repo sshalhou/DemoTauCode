@@ -58,13 +58,13 @@ else:
 from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
 
 process.puJetId = puJetId.clone(
-   jets = cms.InputTag("ak5PFJets"),
+   jets = cms.InputTag("cleanPatJets"),
    applyJec = cms.bool(True),
    inputIsCorrected = cms.bool(False),
 )
 
 process.puJetMva = puJetMva.clone(
-   jets = cms.InputTag("ak5PFJets"),
+   jets = cms.InputTag("cleanPatJets"),
    jetids = cms.InputTag("puJetId"),
    applyJec = cms.bool(True),
    inputIsCorrected = cms.bool(False),
