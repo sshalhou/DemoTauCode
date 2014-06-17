@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
 FilterEvents = True
-FilterCleanPatObjects = True
+FilterCleanPatObjects = False
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
@@ -231,17 +231,6 @@ cut = cms.string("et > 17 * 0.9"+
                 )
                                                   )
 
-
-double irel = 0;
-double i_charged = muon->pfIsolationR04().sumChargedParticlePt;
-double i_photons = muon->pfIsolationR04().sumPhotonEt;
-double i_neutralhadrons = muon->pfIsolationR04().sumNeutralHadronEt;
-double i_deltabeta = muon->pfIsolationR04().sumPUPt;
-
-irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
-
-if(muon->pt()) irel/=muon->pt();
-else irel = 0.0;
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
