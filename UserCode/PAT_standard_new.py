@@ -229,7 +229,7 @@ from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
       cut = cms.string("et > 24 * 0.9"+
                        " && gsfTrack.trackerExpectedHitsInner.numberOfLostHits == 0"+
-                       " && fabs(gsfEle.superCluster.eta) < 2.1 * 1.1" +
+                       " && abs(gsfEle.superCluster.eta) < 2.1 * 1.1" +
                        " && electronID('mvaNonTrigV0') >= 0.85 " +
                        " && passConversionVeto " +
                        " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.3 "
