@@ -186,7 +186,7 @@ std::cout <<std::endl;
 //////////////////
 
   reco::Candidate::LorentzVector uncorrJet;
-  pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+  //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
   uncorrJet = patjet.correctedP4(0);
   std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" "<<std::endl;
 
