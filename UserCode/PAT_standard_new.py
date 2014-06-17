@@ -226,7 +226,7 @@ process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
 cut = cms.string("et > 17 * 0.9"+
                  " && abs(eta) < 2.1 * 1.1"
                 +" && (pfIsolationR04.sumChargedParticlePt +"
-                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.3"
+                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.2"
                 +" && isGood('GlobalMuonPromptTight')"
                 )
                                                   )
@@ -240,7 +240,7 @@ process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectron
                        " && abs(eta) < 2.1 * 1.1" +
                        " && electronID('mvaNonTrigV0') >= 0.85 " +
                        " && passConversionVeto " +
-                       " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.3 "
+                       " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.2 "
                       )
                                                         )
 
