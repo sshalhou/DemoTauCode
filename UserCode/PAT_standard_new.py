@@ -219,7 +219,7 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
                                                 )
 
 
-#from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
 cut = cms.string("et > 17 * 0.9"+
                  " && abs(eta) < 2.1 * 1.1"
@@ -304,6 +304,7 @@ process.p = cms.Path(
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
+                             *countMyPatMuons
                              *process.countGoodPairs
 
                                                               )
