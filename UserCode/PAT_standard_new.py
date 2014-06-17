@@ -201,7 +201,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 process.out.outputCommands +=['keep *_conversions*_*_*']
-process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
+#process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 
@@ -225,11 +225,23 @@ from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
 cut = cms.string("et > 17 * 0.9"+
                  " && abs(eta) < 2.1 * 1.1"
-#                 + " && electronID('mvaNonTrigV0') >= 0.85 " +
-#                 " && passConversionVeto " +
-#                 " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.3 "
+                +" && (pfIsolationR04.sumChargedParticlePt +"
+                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.3"
+                +" && isGood('GlobalMuonPromptTight')"
                 )
                                                   )
+
+
+double irel = 0;
+double i_charged = muon->pfIsolationR04().sumChargedParticlePt;
+double i_photons = muon->pfIsolationR04().sumPhotonEt;
+double i_neutralhadrons = muon->pfIsolationR04().sumNeutralHadronEt;
+double i_deltabeta = muon->pfIsolationR04().sumPUPt;
+
+irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+
+if(muon->pt()) irel/=muon->pt();
+else irel = 0.0;
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
