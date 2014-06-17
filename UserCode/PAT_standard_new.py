@@ -55,7 +55,7 @@ else:
 
 
 
-process.load("RecoJets.JetProducers.pujetidsequence_cff")
+#process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
 #from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
 
@@ -211,7 +211,7 @@ process.p = cms.Path(
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
                              process.patConversions*
-                             process.puJetIdSqeuence
+                          #   process.puJetIdSqeuence
 
                                                               )
 
