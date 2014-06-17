@@ -5,10 +5,10 @@
 //
 /**\class JetTestAnalysis JetTestAnalysis.cc TEMP/JetTestAnalysis/src/JetTestAnalysis.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  shalhout shalhout
@@ -47,34 +47,34 @@
 //
 
 class JetTestAnalysis : public edm::EDAnalyzer {
-   public:
-      explicit JetTestAnalysis(const edm::ParameterSet&);
-      ~JetTestAnalysis();
+public:
+  explicit JetTestAnalysis(const edm::ParameterSet&);
+  ~JetTestAnalysis();
 
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
 
-   private:
-      virtual void beginJob() ;
-      virtual void analyze(const edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+private:
+  virtual void beginJob() ;
+  virtual void analyze(const edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      virtual void beginRun(edm::Run const&, edm::EventSetup const&);
-      virtual void endRun(edm::Run const&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
-      virtual void endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+  virtual void beginRun(edm::Run const&, edm::EventSetup const&);
+  virtual void endRun(edm::Run const&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+  virtual void endluminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
 
-      // ----------member data ---------------------------
+  // ----------member data ---------------------------
 
-edm::InputTag jetSrc_;
-edm::InputTag rhoSrc_;
-edm::InputTag pvSrc_;
-edm::InputTag puJetIdMVASrc_;
-edm::InputTag puJetIdFlagSrc_;
-std::vector<std::string> jecPayloadNames_;
-std::string jecUncName_;
-boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
-boost::shared_ptr<FactorizedJetCorrector> jec_;
+  edm::InputTag jetSrc_;
+  edm::InputTag rhoSrc_;
+  edm::InputTag pvSrc_;
+  edm::InputTag puJetIdMVASrc_;
+  edm::InputTag puJetIdFlagSrc_;
+  std::vector<std::string> jecPayloadNames_;
+  std::string jecUncName_;
+  boost::shared_ptr<JetCorrectionUncertainty> jecUnc_;
+  boost::shared_ptr<FactorizedJetCorrector> jec_;
 
 };
 
@@ -100,18 +100,18 @@ jecUncName_( iConfig.getUntrackedParameter<std::string>("jecUncName") ),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
 puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" ))
 {
-   //now do what ever initialization is needed
+  //now do what ever initialization is needed
 
 
   //Get the factorized jet corrector parameters.
   std::vector<JetCorrectorParameters> vPar;
   for ( std::vector<std::string>::const_iterator payloadBegin = jecPayloadNames_.begin(),
-          payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
+  payloadEnd = jecPayloadNames_.end(), ipayload = payloadBegin; ipayload != payloadEnd; ++ipayload ) {
     JetCorrectorParameters pars(*ipayload);
     vPar.push_back(pars);
   }
 
- // Make the FactorizedJetCorrector and Uncertainty
+  // Make the FactorizedJetCorrector and Uncertainty
   jec_ = boost::shared_ptr<FactorizedJetCorrector> ( new FactorizedJetCorrector(vPar) );
   jecUnc_ = boost::shared_ptr<JetCorrectionUncertainty>( new JetCorrectionUncertainty(jecUncName_) );
 
@@ -124,8 +124,8 @@ puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" ))
 JetTestAnalysis::~JetTestAnalysis()
 {
 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -138,7 +138,7 @@ JetTestAnalysis::~JetTestAnalysis()
 void
 JetTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace edm;
+  using namespace edm;
 
 
 
@@ -146,10 +146,10 @@ JetTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 
-edm::Handle<edm::View<pat::Jet> > jets;
-iEvent.getByLabel(jetSrc_,jets);
+  edm::Handle<edm::View<pat::Jet> > jets;
+  iEvent.getByLabel(jetSrc_,jets);
 
-// Get the mean pt per unit area ("rho")
+  // Get the mean pt per unit area ("rho")
   edm::Handle< double > h_rho;
   iEvent.getByLabel( rhoSrc_, h_rho );
 
@@ -168,66 +168,84 @@ iEvent.getByLabel(jetSrc_,jets);
 
 
 
-for ( unsigned int i=0; i<jets->size(); ++i )
-{
-  const pat::Jet & patjet = jets->at(i);
-  float mva   = (*puJetIdMVA)[jets->refAt(i)];
-  int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-  std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA "<< mva;
-  std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
-  std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
-  std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
-std::cout <<std::endl;
+  for ( unsigned int i=0; i<jets->size(); ++i )
+  {
+    const pat::Jet & patjet = jets->at(i);
+    float mva   = (*puJetIdMVA)[jets->refAt(i)];
+    int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA "<< mva;
+    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
+    std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
+    std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
+    std::cout <<std::endl;
 
 
-/////////////////
-// get uncorrected jet, then
-// apply JEC 'on the fly'
-//////////////////
+    /////////////////
+    // get uncorrected jet, then
+    // apply JEC 'on the fly'
+    //////////////////
 
-  reco::Candidate::LorentzVector uncorrJet;
-  //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
-  uncorrJet = patjet.correctedP4(0);
-  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" "<<std::endl;
-
-
-
-
-
-}
-
-
-/*
-for ( unsigned int i=0; i<jets->size(); ++i ) {
-      const pat::Jet & patjet = jets->at(i);
-      float mva   = (*puJetIdMVA)[jets->refAt(i)];
-      int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-      std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PU JetID MVA " << mva;
-
-
-      std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
-      std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
-      std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
-      //std::cout<<" CSV = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
-      //std::cout<<" flavor "<<patjet.partonFlavour();
-      //std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
-      std::cout<<std::endl;
-
-
-/////////////////
-// get uncorrected jet, then
-// apply JEC 'on the fly'
-//////////////////
-
-//  reco::Candidate::LorentzVector uncorrJet;
-  //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
-//  uncorrJet = patjet.correctedP4(0);
-//  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
-
+    reco::Candidate::LorentzVector uncorrJet;
+    //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+    uncorrJet = patjet.correctedP4(0);
+    std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" "<<std::endl;
 
     // Get the correction itself. This needs the jet area,
     // the rho value, and the number of primary vertices to
     // run the correction.
+    jec_->setJetEta( uncorrJet.eta() );
+    jec_->setJetPt ( uncorrJet.pt() );
+    jec_->setJetE  ( uncorrJet.energy() );
+    jec_->setJetA  ( patjet.jetArea() );
+    jec_->setRho   ( *(h_rho.product()) );
+    jec_->setNPV   ( h_pv->size() );
+
+
+    std::vector<float> SubCorrections = jec_->getSubCorrections();
+
+    for(unsigned int ll=0;ll<SubCorrections.size();ll++)
+    {
+      std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
+    }
+
+    std::cout<<std::endl;
+    std::cout<<" final on-the-fly-correct jet pt = " <<jec_->getCorrection()*uncorrJet.Pt()<<std::endl;
+
+
+  }
+
+
+  /*
+  for ( unsigned int i=0; i<jets->size(); ++i ) {
+  const pat::Jet & patjet = jets->at(i);
+  float mva   = (*puJetIdMVA)[jets->refAt(i)];
+  int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+  std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PU JetID MVA " << mva;
+
+
+  std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
+  std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
+  std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
+  //std::cout<<" CSV = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
+  //std::cout<<" flavor "<<patjet.partonFlavour();
+  //std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
+  std::cout<<std::endl;
+
+
+  /////////////////
+  // get uncorrected jet, then
+  // apply JEC 'on the fly'
+  //////////////////
+
+  //  reco::Candidate::LorentzVector uncorrJet;
+  //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+  //  uncorrJet = patjet.correctedP4(0);
+  //  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
+
+
+  // Get the correction itself. This needs the jet area,
+  // the rho value, and the number of primary vertices to
+  // run the correction.
   //  jec_->setJetEta( uncorrJet.eta() );
   //  jec_->setJetPt ( uncorrJet.pt() );
   //  jec_->setJetE  ( uncorrJet.energy() );
@@ -236,50 +254,50 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
   //  jec_->setNPV   ( h_pv->size() );
   //  double corr = jec_->getCorrection();
 
-//std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+  //std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
 
-//std::vector<float> SubCorrections = jec_->getSubCorrections();
+  //std::vector<float> SubCorrections = jec_->getSubCorrections();
 
   //for(unsigned int ll=0;ll<SubCorrections.size();ll++)
   //  {
 
-    //  std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
+  //  std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
 
 
-    //}
+  //}
 
-//jec_->setJetEta( uncorrJet.eta() );
-//jec_->setJetPt ( uncorrJet.pt() );
-//jec_->setJetE  ( uncorrJet.energy() );
-//jec_->setJetA  ( patjet.jetArea() );
-//jec_->setRho   ( *(h_rho.product()) );
-//jec_->setNPV   ( h_pv->size() );
- //double corr = jec_->getCorrection();
+  //jec_->setJetEta( uncorrJet.eta() );
+  //jec_->setJetPt ( uncorrJet.pt() );
+  //jec_->setJetE  ( uncorrJet.energy() );
+  //jec_->setJetA  ( patjet.jetArea() );
+  //jec_->setRho   ( *(h_rho.product()) );
+  //jec_->setNPV   ( h_pv->size() );
+  //double corr = jec_->getCorrection();
 
-//std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
-//std::cout<<" step-by-step corr "<<SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
-
-
+  //std::cout<<" on-the-fly-correct jet pt = " <<corr*uncorrJet.Pt()<<" ";
+  //std::cout<<" step-by-step corr "<<SubCorrections[0]*SubCorrections[1]*SubCorrections[2]*uncorrJet.Pt()<<" ";
 
 
-//      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
-//      std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
-//      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
-//      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
-      std::cout << std::endl;
+
+
+  //      std::cout<<" L1FastJet "<<patjet.jecFactor("L1FastJet")<<" ";
+  //      std::cout<<" L2Relative "<<patjet.jecFactor("L2Relative")<<" ";
+  //      std::cout<<" L3Absolute "<<patjet.jecFactor("L3Absolute")<<" ";
+  //      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
+  std::cout << std::endl;
 }
 */
 
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
-   Handle<ExampleData> pIn;
-   iEvent.getByLabel("example",pIn);
+Handle<ExampleData> pIn;
+iEvent.getByLabel("example",pIn);
 #endif
 
 #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
-   ESHandle<SetupData> pSetup;
-   iSetup.get<SetupRecord>().get(pSetup);
+ESHandle<SetupData> pSetup;
+iSetup.get<SetupRecord>().get(pSetup);
 #endif
 }
 
