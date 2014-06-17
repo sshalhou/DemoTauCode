@@ -219,6 +219,22 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
                                                 )
 
 
+###################################################
+# require an eTau or MuTau pair in the event
+###################################################
+
+
+process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
+  electronSource = cms.InputTag("cleanPatElectrons"),
+  muonSource     = cms.InputTag("cleanPatMuons"),
+  tauSource      = cms.InputTag("countMyPatTaus"),
+  countElectronTaus = cms.bool(True),
+  countMuonTaus     = cms.bool(True),
+  filter = cms.bool(True)
+)
+
+
+
 
 ###################################################
 # keep selected and clean collections
@@ -263,6 +279,7 @@ process.p = cms.Path(
                              process.patConversions
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
+                             *process.countGoodPairs
 
                                                               )
 
