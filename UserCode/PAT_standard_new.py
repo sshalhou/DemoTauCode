@@ -304,7 +304,7 @@ process.p = cms.Path(
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
-                             *countMyPatMuons
+                             *process.countMyPatMuons
                              *process.countGoodPairs
 
                                                               )
