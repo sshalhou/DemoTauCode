@@ -209,8 +209,9 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 # to keep that PATtuple to a reasonable size
 ###################################################
 
-from PhysicsTools.PatAlgos.cleaningLayer1.cleanPatCandidates_cff import *
-process.countMyPatTaus = cleanPatTaus.clone(src = 'cleanPatTaus', cut = 'pt >18. && decayMode>-1')
+#from PhysicsTools.PatAlgos.cleaningLayer1.cleanPatCandidates_cff import *
+from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
+process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus', cut = 'pt >18. && decayMode>-1')
 
 
 
