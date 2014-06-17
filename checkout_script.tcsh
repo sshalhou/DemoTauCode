@@ -90,3 +90,21 @@ cp /uscms/home/shalhout/public/PU_JET_ID/PileupJetIdAlgo.cc ./RecoJets/JetProduc
 cp /uscms/home/shalhout/public/PU_JET_ID/BuildFile.xml RecoJets/JetProducers/BuildFile.xml
 touch RecoJets/JetProducers/data/dummy.txt
 ################################################
+
+
+echo "setting up JEC and uncertainty "
+################################################
+git cms-addpkg JetMETCorrections/Modules
+cp JetMETCorrections/Modules/test/JetCorrectionDBReader_cfg.py RecoJets/JetAnalyzers/test/.
+sed -i 's/string(\x27AK5PF\x27)/string(\x27AK5PFchs\x27)/g' RecoJets/JetAnalyzers/test/JetCorrectionDBReader_cfg.py
+cd RecoJets/JetAnalyzers/test/
+
+echo "running JEC DB file pull for MC under START53_V23 : "
+sed -i 's/GR_R_42_V19/START53_V23/g' JetCorrectionDBReader_cfg.py
+cmsRun JetCorrectionDBReader_cfg.py
+
+echo "running JEC DB file pull for DATA under START53_V23 : "
+sed -i 's/START53_V23/FT_53_V21_AN4/g' JetCorrectionDBReader_cfg.py
+cmsRun JetCorrectionDBReader_cfg.py
+cd -
+################################################

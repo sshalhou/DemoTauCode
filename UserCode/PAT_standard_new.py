@@ -39,20 +39,20 @@ else:
 
 
 ###################################################
-# load the PU JetID sequence
-###################################################
-from PhysicsTools.PatAlgos.tools.jetTools import *
-
-###################################################
 # set the JEC level for MC or DATA
 ###################################################
+
 
 jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
 
 if not runOnMC:
   jetEnCorr.extend(['L2L3Residual'])
 
+###################################################
+# pu jet id requires PF jets as input
+###################################################
 
+from PhysicsTools.PatAlgos.tools.jetTools import *
 
 switchJetCollection(process,cms.InputTag('ak5PFJets'),
                  doJTA        = True,
@@ -63,23 +63,15 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
                  doJetID      = True
                  )
 
-
 ###################################################
-# make selected PAT jets containing only PF jets
+# load the PU JetID sequence
 ###################################################
-#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
-#process.selectedPatJets = selectedPatJets.clone(src = 'cleanPatJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
 
 process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
-#from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
-
-#process.puJetId = puJetId.clone()
-
-#process.puJetMva = puJetMva.clone()
-
-#process.puJetIdSqeuence = cms.Sequence(process.puJetMva)
-
+###################################################
+# keep PU jet id
+###################################################
 
 process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
 process.out.outputCommands +=['keep *_puJetId*_*_*']
