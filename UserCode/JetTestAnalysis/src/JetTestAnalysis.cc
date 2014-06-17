@@ -178,6 +178,22 @@ for ( unsigned int i=0; i<jets->size(); ++i )
   std::cout<<" medium WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium );
   std::cout<<" tight WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight );
 std::cout <<std::endl;
+
+
+/////////////////
+// get uncorrected jet, then
+// apply JEC 'on the fly'
+//////////////////
+
+  reco::Candidate::LorentzVector uncorrJet;
+  pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+  uncorrJet = patjet.correctedP4(0);
+  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" "<<sdt::endl;
+
+
+
+
+
 }
 
 
@@ -197,17 +213,16 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
       //std::cout<<" currently applied jet correction factor "<<patjet.jecFactor(1);
       std::cout<<std::endl;
 
-*/
 
 /////////////////
 // get uncorrected jet, then
 // apply JEC 'on the fly'
 //////////////////
 
-  reco::Candidate::LorentzVector uncorrJet;
-  pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
-  uncorrJet = patjet.correctedP4(0);
-  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
+//  reco::Candidate::LorentzVector uncorrJet;
+  //pat::Jet const * pJet = dynamic_cast<pat::Jet const *>( &*patjet );
+//  uncorrJet = patjet.correctedP4(0);
+//  std::cout<<" uncorrect jet pt = " <<uncorrJet.Pt()<<" ";
 
 
     // Get the correction itself. This needs the jet area,
@@ -253,7 +268,7 @@ for ( unsigned int i=0; i<jets->size(); ++i ) {
 //      if(iEvent.isRealData()) {std::cout<<" L2L3Residual "<<patjet.jecFactor("L2L3Residual")<<" ";}
       std::cout << std::endl;
 }
-
+*/
 
 
 
