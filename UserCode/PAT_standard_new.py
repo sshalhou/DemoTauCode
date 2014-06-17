@@ -41,21 +41,25 @@ else:
 ###################################################
 # load the PU JetID sequence
 ###################################################
-#from PhysicsTools.PatAlgos.tools.jetTools import *
+from PhysicsTools.PatAlgos.tools.jetTools import *
 
-#switchJetCollection(process,cms.InputTag('ak5PFJets'),
-#                 doJTA        = True,
-#                 doBTagging   = True,
-#                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
-#                 doType1MET   = True,
-#                 genJetCollection=cms.InputTag("ak5GenJets"),
-#                 doJetID      = True
-#                 )
-
-
+switchJetCollection(process,cms.InputTag('ak5PFJets'),
+                 doJTA        = True,
+                 doBTagging   = True,
+                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
+                 doType1MET   = True,
+                 genJetCollection=cms.InputTag("ak5GenJets"),
+                 doJetID      = True
+                 )
 
 
-#process.load("RecoJets.JetProducers.pujetidsequence_cff")
+###################################################
+# make selected PAT jets containing only PF jets
+###################################################
+#from PhysicsTools.PatAlgos.selectionLayer1.jetSelector_cfi import *
+#process.selectedPatJets = selectedPatJets.clone(src = 'cleanPatJets', cut = 'correctedP4(0).pt > 10. && abs(eta)<4.7')
+
+process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
 #from RecoJets.JetProducers.pujetidsequence_cff import puJetId, puJetMva
 
@@ -211,7 +215,7 @@ process.p = cms.Path(
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
                              process.patConversions
-                          #   *process.puJetIdSqeuence
+                             *process.puJetIdSqeuence
 
                                                               )
 
