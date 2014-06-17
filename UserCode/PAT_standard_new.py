@@ -220,9 +220,13 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
 
 
 #from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-#process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons', cut = 'pt >3.')
-#cut = cms.string("")
-
+process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
+cut = cms.string("et > 17 * 0.9"+
+                 " && abs(eta) < 2.1 * 1.1"
+#                 + " && electronID('mvaNonTrigV0') >= 0.85 " +
+#                 " && passConversionVeto " +
+#                 " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.3 "
+                )
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
@@ -245,7 +249,7 @@ process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectron
 
 process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
   electronSource = cms.InputTag("countMyPatElectrons"),
-  muonSource     = cms.InputTag("cleanPatMuons"),
+  muonSource     = cms.InputTag("countMyPatMuons"),
   tauSource      = cms.InputTag("countMyPatTaus"),
   countElectronTaus = cms.bool(True),
   countMuonTaus     = cms.bool(True),
