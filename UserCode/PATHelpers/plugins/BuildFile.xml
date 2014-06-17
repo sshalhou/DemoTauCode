@@ -1,6 +1,7 @@
 <export>
 </export>
 <library   name="UserCode/PATHelpers_plugins" file="*.cc">
+  <use   name="UserCode/PATHelpers"/>
   <use   name="PhysicsTools/PatAlgos"/>
   <use   name="FWCore/Framework"/>
   <use   name="FWCore/ParameterSet"/>
@@ -23,6 +24,6 @@
   <use   name="SimGeneral/HepPDTRecord"/>
   <use   name="RecoMET/METAlgorithms"/>
   <use   name="RecoEgamma/EgammaTools"/>
-  <use   name="TrackingTools/IPTools"/> 
+  <use   name="TrackingTools/IPTools"/>
   <use   name="root"/>
 </library>
