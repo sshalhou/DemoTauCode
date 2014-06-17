@@ -6,6 +6,8 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
 
+FilterEvents = True
+FilterCleanPatObjects = True
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
@@ -305,9 +307,22 @@ process.p = cms.Path(
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
                              *process.countMyPatMuons
-                             *process.countGoodPairs
-
                                                               )
+
+
+if FilterEvents:
+  process.p *= process.countGoodPairs
+
+if FilterCleanPatObjects:
+  process.out.outputCommands +=['drop *_selectedPatElectrons*_*_*']
+  process.out.outputCommands +=['drop *_selectedPatMuons*_*_*']
+  process.out.outputCommands +=['drop *_selectedPatTaus*_*_*']
+  process.out.outputCommands +=['drop *_cleanPatElectrons*_*_*']
+  process.out.outputCommands +=['drop *_cleanPatMuons*_*_*']
+  process.out.outputCommands +=['drop *_cleanPatTaus*_*_*']
+  process.out.outputCommands +=['keep *_countMyPatTaus*_*_*']
+  process.out.outputCommands +=['keep *_countMyPatElectrons*_*_*']
+  process.out.outputCommands +=['keep *_countMyPatMuons*_*_*']
 
 
 
