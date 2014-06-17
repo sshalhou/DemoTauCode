@@ -211,10 +211,12 @@ process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 #from PhysicsTools.PatAlgos.cleaningLayer1.cleanPatCandidates_cff import *
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
-process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus', cut = 'pt >18. && decayMode>-1')
-
-
-
+process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
+            cut = cms.string("pt>17 && abs(eta)<2.4"+
+            " && ( tauID('byLooseCombinedIsolationDeltaBetaCorr3Hits') > 0.5 || tauID('byVLooseIsolationMVA3oldDMwLT') > 0.5 )"+
+            " && ( tauID('againstElectronLoose')>0.5 || tauID('againstElectronVLooseMVA5')>0.5 )"+
+            " && ( tauID('againstMuonLoose3')>0.5 || tauID('againstMuonLooseMVA')>0.5 )")
+                                                )
 
 
 
