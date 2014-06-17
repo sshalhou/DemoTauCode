@@ -208,6 +208,14 @@ JetTestAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
       std::cout<<" corr level "<<ll<<" = "<<SubCorrections[ll]<<" ";
     }
 
+
+    jec_->setJetEta( uncorrJet.eta() );
+    jec_->setJetPt ( uncorrJet.pt() );
+    jec_->setJetE  ( uncorrJet.energy() );
+    jec_->setJetA  ( patjet.jetArea() );
+    jec_->setRho   ( *(h_rho.product()) );
+    jec_->setNPV   ( h_pv->size() );
+
     std::cout<<std::endl;
     std::cout<<" final on-the-fly-correct jet pt = " <<jec_->getCorrection()*uncorrJet.Pt()<<std::endl;
 
