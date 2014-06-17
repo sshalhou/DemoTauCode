@@ -227,6 +227,7 @@ cut = cms.string("et > 17 * 0.9"+
 #                 " && passConversionVeto " +
 #                 " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.3 "
                 )
+                                                  )
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
