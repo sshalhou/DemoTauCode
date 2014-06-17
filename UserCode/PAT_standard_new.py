@@ -202,6 +202,21 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
+
+
+###################################################
+# apply selection cuts on physics objects
+# to keep that PATtuple to a reasonable size
+###################################################
+
+from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
+process.countMyPatTaus = cleanPatTaus.clone(src = 'cleanPatTaus', cut = 'pt >18. && decayMode>-1')
+
+
+
+
+
+
 ###################################################
 # keep selected and clean collections
 ###################################################
