@@ -6,8 +6,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
 
-RunMETUnc = False
-KeepAll = True
+KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
@@ -199,11 +198,37 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
+process.out.outputCommands +=['keep *_conversions*_*_*']
+process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
+###################################################
+# keep selected and clean collections
+###################################################
 
+process.out.outputCommands +=['keep *_selectedPat*_*_*']
+process.out.outputCommands +=['keep *_cleanPat*_*_*']
 
+###################################################
+# keeps for MET Unc. Tool
+###################################################
 
+process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
+process.out.outputCommands +=['keep recoPFJets_calibratedAK5PFJetsForPFMEtMVA__PAT']
+process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
+process.out.outputCommands +=['keep recoPFMETs_pfMet__RECO']
+process.out.outputCommands +=['keep recoGenMETs_genMetTrue__SIM']
+process.out.outputCommands +=['keep recoPFCandidates_selectedPatJets_pfCandidates_PAT']
+process.out.outputCommands +=['keep recoMuons_muons__RECO']
+process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__RECO']
+process.out.outputCommands +=['keep *_ak5GenJetsNoNu_*_PAT']
+process.out.outputCommands +=['keep *_*genParticlesForJetsNoNu*_*_PAT']
+process.out.outputCommands +=['keep *_*iterativeCone5GenJetsNoNu*_*_PAT']
+process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
+
+if runOnMC:
+    process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
+  # the above is needed for the PDF sys. tool
 
 ##################################################
 # Let it run
@@ -258,5 +283,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 10
+process.maxEvents.input = 100
 ########################################################################################################
