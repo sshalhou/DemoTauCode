@@ -219,13 +219,28 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
                                                 )
 
 
+#from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+#process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons', cut = 'pt >3.')
+#cut = cms.string("")
+
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
+      cut = cms.string("et > 24 * 0.9"+
+                       " && gsfTrack.trackerExpectedHitsInner.numberOfLostHits == 0"
+                      )
+                                                        )
+
+
+
 ###################################################
 # require an eTau or MuTau pair in the event
 ###################################################
 
 
 process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
-  electronSource = cms.InputTag("cleanPatElectrons"),
+  electronSource = cms.InputTag("countMyPatElectrons"),
   muonSource     = cms.InputTag("cleanPatMuons"),
   tauSource      = cms.InputTag("countMyPatTaus"),
   countElectronTaus = cms.bool(True),
@@ -279,6 +294,7 @@ process.p = cms.Path(
                              process.patConversions
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
+                             *process.countMyPatElectrons
                              *process.countGoodPairs
 
                                                               )
