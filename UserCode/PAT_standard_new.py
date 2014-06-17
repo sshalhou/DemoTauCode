@@ -43,10 +43,21 @@ else:
 ###################################################
 from PhysicsTools.PatAlgos.tools.jetTools import *
 
+###################################################
+# set the JEC level for MC or DATA
+###################################################
+
+jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
+
+if not runOnMC:
+  jetEnCorr.extend(['L2L3Residual'])
+
+
+
 switchJetCollection(process,cms.InputTag('ak5PFJets'),
                  doJTA        = True,
                  doBTagging   = True,
-                 jetCorrLabel = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute'])),
+                 jetCorrLabel = ('AK5PF', jetEnCorr),
                  doType1MET   = True,
                  genJetCollection=cms.InputTag("ak5GenJets"),
                  doJetID      = True
