@@ -291,6 +291,24 @@ if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
   # the above is needed for the PDF sys. tool
 
+
+#############################
+# add in some gen level jet collections
+# needed for the jet smear in MET unc.
+##############################
+
+from RecoJets.Configuration.GenJetParticles_cff import *
+from RecoJets.Configuration.RecoGenJets_cff import *
+
+
+process.genExtrasSequence = cms.Sequence(
+    genParticlesForJetsNoNu +
+    iterativeCone5GenJetsNoNu +
+    ak5GenJetsNoNu +
+    ak7GenJetsNoNu
+    )
+
+
 ##################################################
 # Let it run
 ###################################################
@@ -308,6 +326,7 @@ process.p = cms.Path(
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
                              *process.countMyPatMuons
+                             *process.genExtrasSequence
                                                               )
 
 
