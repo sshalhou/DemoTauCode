@@ -343,6 +343,7 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
+myfilelist.extend(['file:/uscms/home/shalhout/no_backup/5000.root'])
 myfilelist.extend(['file:/uscms/home/shalhout/1stSteps/Git2/DemoTauCode/CMSSW_5_3_14/src/MyOutputFile.root'])
 myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root'])
 myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/085027A0-63E9-E111-BA2C-0018F3D09670.root'])
@@ -362,5 +363,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 100
+process.maxEvents.input = 5000
 ########################################################################################################
