@@ -5,7 +5,6 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
-
 FilterEvents = True
 DropSelectedPatObjects = True
 KeepAll = False
