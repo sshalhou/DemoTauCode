@@ -157,7 +157,22 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     TupleTau CurrentTau;
 
     CurrentTau.set_p4(tau->p4());
-    CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode());
+
+
+    // correct the tau energy
+    if(!tau->genParticleEmbedded().isNull())
+    {
+      CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genParticleEmbedded().pdgId());
+    }
+    else if (iEvent.isRealData())
+    {
+      CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
+    }
+
+
+    // need to be careful here with pdgIds, as it seems the one accessed
+    // below is the pf's pdgId which is filled for data and MC
+    // the generator pdgId for MC must be accessed from genParticle
     CurrentTau.set_pdgId(tau->pdgId());
 
     // store the generator level 4-vector

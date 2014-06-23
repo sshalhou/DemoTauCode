@@ -776,10 +776,14 @@ float TupleTau::puCorrPtSum() const {return m_puCorrPtSum;}
 /////////////////////
 /////////////////////
 
-void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
+void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_, int generatorPdgId_)
 {
 
   double v4_sf = 1.0;
+
+
+
+
 
   ///////////////////
   // corrections from
@@ -797,9 +801,19 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_)
   if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.));
 
 
+  /////////////////////
+  // 1% correction for improved
+  // MSSM analysis if matched to generator
+  // level hadronic tau decay
+
+  if(generatorPdgId_ == 15 || generatorPdgId_==-15) v4_sf *= 1.01;
+
 
 
   m_corrected_p4 = v4_*v4_sf;
+
+
+
 
 
 }
