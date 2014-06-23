@@ -11,40 +11,76 @@ TupleTau::TupleTau()
   m_charge = -999;
   m_decayMode = -999;
   m_passFullId = 0;
-  m_againstMuonLoose = NAN;
-  m_againstMuonTight = NAN;
-  m_againstElectronLoose = NAN;
-  m_againstElectronTight = NAN;
-  m_againstElectronMedium = NAN;
-  m_againstMuonMedium = NAN;
-  m_byIsolationMVAraw = NAN;
-  m_byLooseIsolationMVA = NAN;
-  m_byMediumIsolationMVA = NAN;
-  m_byTightIsolationMVA = NAN;
-  m_byIsolationMVA2raw = NAN;
-  m_byLooseIsolationMVA2 = NAN;
-  m_byMediumIsolationMVA2 = NAN;
-  m_byTightIsolationMVA2 = NAN;
-  m_byLooseCombinedIsolationDeltaBetaCorr3Hits = NAN;
-  m_byMediumCombinedIsolationDeltaBetaCorr3Hits = NAN;
-  m_byTightCombinedIsolationDeltaBetaCorr3Hits = NAN;
-  m_byCombinedIsolationDeltaBetaCorrRaw3Hits = NAN;
-  m_againstElectronMVA3raw = NAN;
-  m_againstElectronMVA3category = 0;
-  m_againstElectronLooseMVA3 = NAN;
-  m_againstElectronMediumMVA3 = NAN;
-  m_againstElectronTightMVA3 = NAN;
-  m_againstElectronVTightMVA3 = NAN;
+
   m_againstElectronDeadECAL = NAN;
+  m_againstElectronLoose = NAN;
+  m_againstElectronLooseMVA5 = NAN;
+  m_againstElectronMVA5category = NAN;
+  m_againstElectronMVA5raw = NAN;
+  m_againstElectronMedium = NAN;
+  m_againstElectronMediumMVA5 = NAN;
+  m_againstElectronTight = NAN;
+  m_againstElectronTightMVA5 = NAN;
+  m_againstElectronVLooseMVA5 = NAN;
+  m_againstElectronVTightMVA5 = NAN;
+  m_againstMuonLoose = NAN;
   m_againstMuonLoose2 = NAN;
-  m_againstMuonMedium2 = NAN;
-  m_againstMuonTight2 = NAN;
   m_againstMuonLoose3 = NAN;
+  m_againstMuonLooseMVA = NAN;
+  m_againstMuonMVAraw = NAN;
+  m_againstMuonMedium = NAN;
+  m_againstMuonMedium2 = NAN;
+  m_againstMuonMediumMVA = NAN;
+  m_againstMuonTight = NAN;
+  m_againstMuonTight2 = NAN;
   m_againstMuonTight3 = NAN;
-  m_antiEMVA3NewLooseWP = NAN;
-  m_antiEMVA3NewMediumWP = NAN;
-  m_antiEMVA3NewTightWP = NAN;
-  m_antiEMVA3NewVeryTightWP = NAN;
+  m_againstMuonTightMVA = NAN;
+  m_byCombinedIsolationDeltaBetaCorrRaw = NAN;
+  m_byCombinedIsolationDeltaBetaCorrRaw3Hits = NAN;
+  m_byIsolationMVA3newDMwLTraw = NAN;
+  m_byIsolationMVA3newDMwoLTraw = NAN;
+  m_byIsolationMVA3oldDMwLTraw = NAN;
+  m_byIsolationMVA3oldDMwoLTraw = NAN;
+  m_byLooseCombinedIsolationDeltaBetaCorr = NAN;
+  m_byLooseCombinedIsolationDeltaBetaCorr3Hits = NAN;
+  m_byLooseIsolation = NAN;
+  m_byLooseIsolationMVA3newDMwLT = NAN;
+  m_byLooseIsolationMVA3newDMwoLT = NAN;
+  m_byLooseIsolationMVA3oldDMwLT = NAN;
+  m_byLooseIsolationMVA3oldDMwoLT = NAN;
+  m_byMediumCombinedIsolationDeltaBetaCorr = NAN;
+  m_byMediumCombinedIsolationDeltaBetaCorr3Hits = NAN;
+  m_byMediumIsolationMVA3newDMwLT = NAN;
+  m_byMediumIsolationMVA3newDMwoLT = NAN;
+  m_byMediumIsolationMVA3oldDMwLT = NAN;
+  m_byMediumIsolationMVA3oldDMwoLT = NAN;
+  m_byTightCombinedIsolationDeltaBetaCorr = NAN;
+  m_byTightCombinedIsolationDeltaBetaCorr3Hits = NAN;
+  m_byTightIsolationMVA3newDMwLT = NAN;
+  m_byTightIsolationMVA3newDMwoLT = NAN;
+  m_byTightIsolationMVA3oldDMwLT = NAN;
+  m_byTightIsolationMVA3oldDMwoLT = NAN;
+  m_byVLooseCombinedIsolationDeltaBetaCorr = NAN;
+  m_byVLooseIsolationMVA3newDMwLT = NAN;
+  m_byVLooseIsolationMVA3newDMwoLT = NAN;
+  m_byVLooseIsolationMVA3oldDMwLT = NAN;
+  m_byVLooseIsolationMVA3oldDMwoLT = NAN;
+  m_byVTightIsolationMVA3newDMwLT = NAN;
+  m_byVTightIsolationMVA3newDMwoLT = NAN;
+  m_byVTightIsolationMVA3oldDMwLT = NAN;
+  m_byVTightIsolationMVA3oldDMwoLT = NAN;
+  m_byVVTightIsolationMVA3newDMwLT = NAN;
+  m_byVVTightIsolationMVA3newDMwoLT = NAN;
+  m_byVVTightIsolationMVA3oldDMwLT = NAN;
+  m_byVVTightIsolationMVA3oldDMwoLT = NAN;
+  m_chargedIsoPtSum = NAN;
+  m_decayModeFinding = NAN;
+  m_decayModeFindingNewDMs = NAN;
+  m_decayModeFindingOldDMs = NAN;
+  m_neutralIsoPtSum = NAN;
+  m_puCorrPtSum = NAN;
+
+
 
 }
 
@@ -67,376 +103,674 @@ LorentzVector TupleTau::genP4() const  { return m_genP4; }
 
 
 //////////////////////////////////////////
-//againstMuonLoose
-//////////////////////////////////////////
-
-void TupleTau::set_againstMuonLoose(float againstMuonLoose_)
-{
-  m_againstMuonLoose = againstMuonLoose_;
-}
-float TupleTau::againstMuonLoose() const { return m_againstMuonLoose;}
-
-//////////////////////////////////////////
-//againstMuonTight
-//////////////////////////////////////////
-
-void TupleTau::set_againstMuonTight(float againstMuonTight_)
-{
-  m_againstMuonTight = againstMuonTight_;
-}
-float TupleTau::againstMuonTight() const { return m_againstMuonTight;}
-
-//////////////////////////////////////////
-//againstElectronLoose
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronLoose(float againstElectronLoose_)
-{
-  m_againstElectronLoose = againstElectronLoose_;
-}
-float TupleTau::againstElectronLoose() const { return m_againstElectronLoose;}
-
-//////////////////////////////////////////
-//againstElectronTight
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronTight(float againstElectronTight_)
-{
-  m_againstElectronTight = againstElectronTight_;
-}
-float TupleTau::againstElectronTight() const { return m_againstElectronTight;}
-
-//////////////////////////////////////////
-//againstElectronMedium
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronMedium(float againstElectronMedium_)
-{
-  m_againstElectronMedium = againstElectronMedium_;
-}
-float TupleTau::againstElectronMedium() const { return m_againstElectronMedium;}
-
-//////////////////////////////////////////
-//againstMuonMedium
-//////////////////////////////////////////
-
-void TupleTau::set_againstMuonMedium(float againstMuonMedium_)
-{
-  m_againstMuonMedium = againstMuonMedium_;
-}
-float TupleTau::againstMuonMedium() const { return m_againstMuonMedium;}
-
-//////////////////////////////////////////
-//byIsolationMVAraw
-//////////////////////////////////////////
-
-void TupleTau::set_byIsolationMVAraw(float byIsolationMVAraw_)
-{
-  m_byIsolationMVAraw = byIsolationMVAraw_;
-}
-float TupleTau::byIsolationMVAraw() const { return m_byIsolationMVAraw;}
-
-//////////////////////////////////////////
-//byLooseIsolationMVA
-//////////////////////////////////////////
-
-void TupleTau::set_byLooseIsolationMVA(float byLooseIsolationMVA_)
-{
-  m_byLooseIsolationMVA = byLooseIsolationMVA_;
-}
-float TupleTau::byLooseIsolationMVA() const { return m_byLooseIsolationMVA;}
-
-//////////////////////////////////////////
-//byMediumIsolationMVA
-//////////////////////////////////////////
-
-void TupleTau::set_byMediumIsolationMVA(float byMediumIsolationMVA_)
-{
-  m_byMediumIsolationMVA = byMediumIsolationMVA_;
-}
-float TupleTau::byMediumIsolationMVA() const { return m_byMediumIsolationMVA;}
-
-//////////////////////////////////////////
-//byTightIsolationMVA
-//////////////////////////////////////////
-
-void TupleTau::set_byTightIsolationMVA(float byTightIsolationMVA_)
-{
-  m_byTightIsolationMVA = byTightIsolationMVA_;
-}
-float TupleTau::byTightIsolationMVA() const { return m_byTightIsolationMVA;}
-
-//////////////////////////////////////////
-//byIsolationMVA2raw
-//////////////////////////////////////////
-
-void TupleTau::set_byIsolationMVA2raw(float byIsolationMVA2raw_)
-{
-  m_byIsolationMVA2raw = byIsolationMVA2raw_;
-}
-float TupleTau::byIsolationMVA2raw() const { return m_byIsolationMVA2raw;}
-
-//////////////////////////////////////////
-//byLooseIsolationMVA2
-//////////////////////////////////////////
-
-void TupleTau::set_byLooseIsolationMVA2(float byLooseIsolationMVA2_)
-{
-  m_byLooseIsolationMVA2 = byLooseIsolationMVA2_;
-}
-float TupleTau::byLooseIsolationMVA2() const { return m_byLooseIsolationMVA2;}
-
-//////////////////////////////////////////
-//byMediumIsolationMVA2
-//////////////////////////////////////////
-
-void TupleTau::set_byMediumIsolationMVA2(float byMediumIsolationMVA2_)
-{
-  m_byMediumIsolationMVA2 = byMediumIsolationMVA2_;
-}
-float TupleTau::byMediumIsolationMVA2() const { return m_byMediumIsolationMVA2;}
-
-//////////////////////////////////////////
-//byTightIsolationMVA2
-//////////////////////////////////////////
-
-void TupleTau::set_byTightIsolationMVA2(float byTightIsolationMVA2_)
-{
-  m_byTightIsolationMVA2 = byTightIsolationMVA2_;
-}
-float TupleTau::byTightIsolationMVA2() const { return m_byTightIsolationMVA2;}
-
-//////////////////////////////////////////
-//byLooseCombinedIsolationDeltaBetaCorr3Hits
-//////////////////////////////////////////
-
-void TupleTau::set_byLooseCombinedIsolationDeltaBetaCorr3Hits(float byLooseCombinedIsolationDeltaBetaCorr3Hits_)
-{
-  m_byLooseCombinedIsolationDeltaBetaCorr3Hits = byLooseCombinedIsolationDeltaBetaCorr3Hits_;
-}
-float TupleTau::byLooseCombinedIsolationDeltaBetaCorr3Hits() const { return m_byLooseCombinedIsolationDeltaBetaCorr3Hits;}
-
-//////////////////////////////////////////
-//byMediumCombinedIsolationDeltaBetaCorr3Hits
-//////////////////////////////////////////
-
-void TupleTau::set_byMediumCombinedIsolationDeltaBetaCorr3Hits(float byMediumCombinedIsolationDeltaBetaCorr3Hits_)
-{
-  m_byMediumCombinedIsolationDeltaBetaCorr3Hits = byMediumCombinedIsolationDeltaBetaCorr3Hits_;
-}
-float TupleTau::byMediumCombinedIsolationDeltaBetaCorr3Hits() const { return m_byMediumCombinedIsolationDeltaBetaCorr3Hits;}
-
-//////////////////////////////////////////
-//byTightCombinedIsolationDeltaBetaCorr3Hits
-//////////////////////////////////////////
-
-void TupleTau::set_byTightCombinedIsolationDeltaBetaCorr3Hits(float byTightCombinedIsolationDeltaBetaCorr3Hits_)
-{
-  m_byTightCombinedIsolationDeltaBetaCorr3Hits = byTightCombinedIsolationDeltaBetaCorr3Hits_;
-}
-float TupleTau::byTightCombinedIsolationDeltaBetaCorr3Hits() const { return m_byTightCombinedIsolationDeltaBetaCorr3Hits;}
-
-//////////////////////////////////////////
-//byCombinedIsolationDeltaBetaCorrRaw3Hits
-//////////////////////////////////////////
-
-void TupleTau::set_byCombinedIsolationDeltaBetaCorrRaw3Hits(float byCombinedIsolationDeltaBetaCorrRaw3Hits_)
-{
-  m_byCombinedIsolationDeltaBetaCorrRaw3Hits = byCombinedIsolationDeltaBetaCorrRaw3Hits_;
-}
-float TupleTau::byCombinedIsolationDeltaBetaCorrRaw3Hits() const { return m_byCombinedIsolationDeltaBetaCorrRaw3Hits;}
-
-//////////////////////////////////////////
-//againstElectronMVA3raw
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronMVA3raw(float againstElectronMVA3raw_)
-{
-  m_againstElectronMVA3raw = againstElectronMVA3raw_;
-}
-float TupleTau::againstElectronMVA3raw() const { return m_againstElectronMVA3raw;}
-
-//////////////////////////////////////////
-//againstElectronMVA3category
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronMVA3category(int againstElectronMVA3category_)
-{
-  m_againstElectronMVA3category = againstElectronMVA3category_;
-}
-int TupleTau::againstElectronMVA3category() const { return m_againstElectronMVA3category;}
-
-//////////////////////////////////////////
-//againstElectronLooseMVA3
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronLooseMVA3(float againstElectronLooseMVA3_)
-{
-  m_againstElectronLooseMVA3 = againstElectronLooseMVA3_;
-}
-float TupleTau::againstElectronLooseMVA3() const { return m_againstElectronLooseMVA3;}
-
-//////////////////////////////////////////
-//againstElectronMediumMVA3
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronMediumMVA3(float againstElectronMediumMVA3_)
-{
-  m_againstElectronMediumMVA3 = againstElectronMediumMVA3_;
-}
-float TupleTau::againstElectronMediumMVA3() const { return m_againstElectronMediumMVA3;}
-
-//////////////////////////////////////////
-//againstElectronTightMVA3
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronTightMVA3(float againstElectronTightMVA3_)
-{
-  m_againstElectronTightMVA3 = againstElectronTightMVA3_;
-}
-float TupleTau::againstElectronTightMVA3() const { return m_againstElectronTightMVA3;}
-
-//////////////////////////////////////////
-//againstElectronVTightMVA3
-//////////////////////////////////////////
-
-void TupleTau::set_againstElectronVTightMVA3(float againstElectronVTightMVA3_)
-{
-  m_againstElectronVTightMVA3 = againstElectronVTightMVA3_;
-}
-float TupleTau::againstElectronVTightMVA3() const { return m_againstElectronVTightMVA3;}
-
-//////////////////////////////////////////
-//againstElectronDeadECAL
+// againstElectronDeadECAL
 //////////////////////////////////////////
 
 void TupleTau::set_againstElectronDeadECAL(float againstElectronDeadECAL_)
 {
   m_againstElectronDeadECAL = againstElectronDeadECAL_;
 }
-float TupleTau::againstElectronDeadECAL() const { return m_againstElectronDeadECAL;}
+float TupleTau::againstElectronDeadECAL() const {return m_againstElectronDeadECAL;}
 
 //////////////////////////////////////////
-//againstMuonLoose2
+// againstElectronLoose
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronLoose(float againstElectronLoose_)
+{
+  m_againstElectronLoose = againstElectronLoose_;
+}
+float TupleTau::againstElectronLoose() const {return m_againstElectronLoose;}
+
+//////////////////////////////////////////
+// againstElectronLooseMVA5
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronLooseMVA5(float againstElectronLooseMVA5_)
+{
+  m_againstElectronLooseMVA5 = againstElectronLooseMVA5_;
+}
+float TupleTau::againstElectronLooseMVA5() const {return m_againstElectronLooseMVA5;}
+
+//////////////////////////////////////////
+// againstElectronMVA5category
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronMVA5category(float againstElectronMVA5category_)
+{
+  m_againstElectronMVA5category = againstElectronMVA5category_;
+}
+float TupleTau::againstElectronMVA5category() const {return m_againstElectronMVA5category;}
+
+//////////////////////////////////////////
+// againstElectronMVA5raw
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronMVA5raw(float againstElectronMVA5raw_)
+{
+  m_againstElectronMVA5raw = againstElectronMVA5raw_;
+}
+float TupleTau::againstElectronMVA5raw() const {return m_againstElectronMVA5raw;}
+
+//////////////////////////////////////////
+// againstElectronMedium
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronMedium(float againstElectronMedium_)
+{
+  m_againstElectronMedium = againstElectronMedium_;
+}
+float TupleTau::againstElectronMedium() const {return m_againstElectronMedium;}
+
+//////////////////////////////////////////
+// againstElectronMediumMVA5
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronMediumMVA5(float againstElectronMediumMVA5_)
+{
+  m_againstElectronMediumMVA5 = againstElectronMediumMVA5_;
+}
+float TupleTau::againstElectronMediumMVA5() const {return m_againstElectronMediumMVA5;}
+
+//////////////////////////////////////////
+// againstElectronTight
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronTight(float againstElectronTight_)
+{
+  m_againstElectronTight = againstElectronTight_;
+}
+float TupleTau::againstElectronTight() const {return m_againstElectronTight;}
+
+//////////////////////////////////////////
+// againstElectronTightMVA5
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronTightMVA5(float againstElectronTightMVA5_)
+{
+  m_againstElectronTightMVA5 = againstElectronTightMVA5_;
+}
+float TupleTau::againstElectronTightMVA5() const {return m_againstElectronTightMVA5;}
+
+//////////////////////////////////////////
+// againstElectronVLooseMVA5
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronVLooseMVA5(float againstElectronVLooseMVA5_)
+{
+  m_againstElectronVLooseMVA5 = againstElectronVLooseMVA5_;
+}
+float TupleTau::againstElectronVLooseMVA5() const {return m_againstElectronVLooseMVA5;}
+
+//////////////////////////////////////////
+// againstElectronVTightMVA5
+//////////////////////////////////////////
+
+void TupleTau::set_againstElectronVTightMVA5(float againstElectronVTightMVA5_)
+{
+  m_againstElectronVTightMVA5 = againstElectronVTightMVA5_;
+}
+float TupleTau::againstElectronVTightMVA5() const {return m_againstElectronVTightMVA5;}
+
+//////////////////////////////////////////
+// againstMuonLoose
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonLoose(float againstMuonLoose_)
+{
+  m_againstMuonLoose = againstMuonLoose_;
+}
+float TupleTau::againstMuonLoose() const {return m_againstMuonLoose;}
+
+//////////////////////////////////////////
+// againstMuonLoose2
 //////////////////////////////////////////
 
 void TupleTau::set_againstMuonLoose2(float againstMuonLoose2_)
 {
   m_againstMuonLoose2 = againstMuonLoose2_;
 }
-float TupleTau::againstMuonLoose2() const { return m_againstMuonLoose2;}
+float TupleTau::againstMuonLoose2() const {return m_againstMuonLoose2;}
 
 //////////////////////////////////////////
-//againstMuonMedium2
-//////////////////////////////////////////
-
-void TupleTau::set_againstMuonMedium2(float againstMuonMedium2_)
-{
-  m_againstMuonMedium2 = againstMuonMedium2_;
-}
-float TupleTau::againstMuonMedium2() const { return m_againstMuonMedium2;}
-
-//////////////////////////////////////////
-//againstMuonTight2
-//////////////////////////////////////////
-
-void TupleTau::set_againstMuonTight2(float againstMuonTight2_)
-{
-  m_againstMuonTight2 = againstMuonTight2_;
-}
-float TupleTau::againstMuonTight2() const { return m_againstMuonTight2;}
-
-//////////////////////////////////////////
-//againstMuonLoose3
+// againstMuonLoose3
 //////////////////////////////////////////
 
 void TupleTau::set_againstMuonLoose3(float againstMuonLoose3_)
 {
   m_againstMuonLoose3 = againstMuonLoose3_;
 }
-float TupleTau::againstMuonLoose3() const { return m_againstMuonLoose3;}
+float TupleTau::againstMuonLoose3() const {return m_againstMuonLoose3;}
 
 //////////////////////////////////////////
-//againstMuonTight3
+// againstMuonLooseMVA
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonLooseMVA(float againstMuonLooseMVA_)
+{
+  m_againstMuonLooseMVA = againstMuonLooseMVA_;
+}
+float TupleTau::againstMuonLooseMVA() const {return m_againstMuonLooseMVA;}
+
+//////////////////////////////////////////
+// againstMuonMVAraw
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonMVAraw(float againstMuonMVAraw_)
+{
+  m_againstMuonMVAraw = againstMuonMVAraw_;
+}
+float TupleTau::againstMuonMVAraw() const {return m_againstMuonMVAraw;}
+
+//////////////////////////////////////////
+// againstMuonMedium
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonMedium(float againstMuonMedium_)
+{
+  m_againstMuonMedium = againstMuonMedium_;
+}
+float TupleTau::againstMuonMedium() const {return m_againstMuonMedium;}
+
+//////////////////////////////////////////
+// againstMuonMedium2
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonMedium2(float againstMuonMedium2_)
+{
+  m_againstMuonMedium2 = againstMuonMedium2_;
+}
+float TupleTau::againstMuonMedium2() const {return m_againstMuonMedium2;}
+
+//////////////////////////////////////////
+// againstMuonMediumMVA
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonMediumMVA(float againstMuonMediumMVA_)
+{
+  m_againstMuonMediumMVA = againstMuonMediumMVA_;
+}
+float TupleTau::againstMuonMediumMVA() const {return m_againstMuonMediumMVA;}
+
+//////////////////////////////////////////
+// againstMuonTight
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonTight(float againstMuonTight_)
+{
+  m_againstMuonTight = againstMuonTight_;
+}
+float TupleTau::againstMuonTight() const {return m_againstMuonTight;}
+
+//////////////////////////////////////////
+// againstMuonTight2
+//////////////////////////////////////////
+
+void TupleTau::set_againstMuonTight2(float againstMuonTight2_)
+{
+  m_againstMuonTight2 = againstMuonTight2_;
+}
+float TupleTau::againstMuonTight2() const {return m_againstMuonTight2;}
+
+//////////////////////////////////////////
+// againstMuonTight3
 //////////////////////////////////////////
 
 void TupleTau::set_againstMuonTight3(float againstMuonTight3_)
 {
   m_againstMuonTight3 = againstMuonTight3_;
 }
-float TupleTau::againstMuonTight3() const { return m_againstMuonTight3;}
+float TupleTau::againstMuonTight3() const {return m_againstMuonTight3;}
 
+//////////////////////////////////////////
+// againstMuonTightMVA
+//////////////////////////////////////////
 
-
-// modified WP versions of the anitE MVA3
-
-/////////////////////
-//  new loose WP
-/////////////////////
-
-void TupleTau::set_antiEMVA3NewLooseWP(float againstElectronLooseMVA3raw_,
-int againstElectronMVA3category_)
+void TupleTau::set_againstMuonTightMVA(float againstMuonTightMVA_)
 {
-  int WorkingPoint = 0;
-  m_antiEMVA3NewLooseWP = TupleHelpers::passAntiEMVA(againstElectronMVA3category_,
-  againstElectronLooseMVA3raw_,
-  WorkingPoint);
-
+  m_againstMuonTightMVA = againstMuonTightMVA_;
 }
+float TupleTau::againstMuonTightMVA() const {return m_againstMuonTightMVA;}
 
-float TupleTau::antiEMVA3NewLooseWP() const { return m_antiEMVA3NewLooseWP;}
+//////////////////////////////////////////
+// byCombinedIsolationDeltaBetaCorrRaw
+//////////////////////////////////////////
 
-/////////////////////
-//  new medium WP
-/////////////////////
-
-void TupleTau::set_antiEMVA3NewMediumWP(float againstElectronLooseMVA3raw_,
-int againstElectronMVA3category_)
+void TupleTau::set_byCombinedIsolationDeltaBetaCorrRaw(float byCombinedIsolationDeltaBetaCorrRaw_)
 {
-  int WorkingPoint = 1;
-  m_antiEMVA3NewMediumWP = TupleHelpers::passAntiEMVA(againstElectronMVA3category_,
-  againstElectronLooseMVA3raw_,
-  WorkingPoint);
-
+  m_byCombinedIsolationDeltaBetaCorrRaw = byCombinedIsolationDeltaBetaCorrRaw_;
 }
+float TupleTau::byCombinedIsolationDeltaBetaCorrRaw() const {return m_byCombinedIsolationDeltaBetaCorrRaw;}
 
-float TupleTau::antiEMVA3NewMediumWP() const { return m_antiEMVA3NewMediumWP;}
+//////////////////////////////////////////
+// byCombinedIsolationDeltaBetaCorrRaw3Hits
+//////////////////////////////////////////
 
-/////////////////////
-//  new tight WP
-/////////////////////
-
-void TupleTau::set_antiEMVA3NewTightWP(float againstElectronLooseMVA3raw_,
-int againstElectronMVA3category_)
+void TupleTau::set_byCombinedIsolationDeltaBetaCorrRaw3Hits(float byCombinedIsolationDeltaBetaCorrRaw3Hits_)
 {
-
-  int WorkingPoint = 2;
-  m_antiEMVA3NewTightWP = TupleHelpers::passAntiEMVA(againstElectronMVA3category_,
-  againstElectronLooseMVA3raw_,
-  WorkingPoint);
-
+  m_byCombinedIsolationDeltaBetaCorrRaw3Hits = byCombinedIsolationDeltaBetaCorrRaw3Hits_;
 }
+float TupleTau::byCombinedIsolationDeltaBetaCorrRaw3Hits() const {return m_byCombinedIsolationDeltaBetaCorrRaw3Hits;}
 
-float TupleTau::antiEMVA3NewTightWP() const { return m_antiEMVA3NewTightWP;}
+//////////////////////////////////////////
+// byIsolationMVA3newDMwLTraw
+//////////////////////////////////////////
 
-/////////////////////
-//  new v. tight WP
-/////////////////////
-
-
-void TupleTau::set_antiEMVA3NewVeryTightWP(float againstElectronLooseMVA3raw_,
-int againstElectronMVA3category_)
+void TupleTau::set_byIsolationMVA3newDMwLTraw(float byIsolationMVA3newDMwLTraw_)
 {
-
-  int WorkingPoint = 3;
-  m_antiEMVA3NewVeryTightWP = TupleHelpers::passAntiEMVA(againstElectronMVA3category_,
-  againstElectronLooseMVA3raw_,
-  WorkingPoint);
-
+  m_byIsolationMVA3newDMwLTraw = byIsolationMVA3newDMwLTraw_;
 }
+float TupleTau::byIsolationMVA3newDMwLTraw() const {return m_byIsolationMVA3newDMwLTraw;}
 
+//////////////////////////////////////////
+// byIsolationMVA3newDMwoLTraw
+//////////////////////////////////////////
 
-float TupleTau::antiEMVA3NewVeryTightWP() const { return m_antiEMVA3NewVeryTightWP;}
+void TupleTau::set_byIsolationMVA3newDMwoLTraw(float byIsolationMVA3newDMwoLTraw_)
+{
+  m_byIsolationMVA3newDMwoLTraw = byIsolationMVA3newDMwoLTraw_;
+}
+float TupleTau::byIsolationMVA3newDMwoLTraw() const {return m_byIsolationMVA3newDMwoLTraw;}
+
+//////////////////////////////////////////
+// byIsolationMVA3oldDMwLTraw
+//////////////////////////////////////////
+
+void TupleTau::set_byIsolationMVA3oldDMwLTraw(float byIsolationMVA3oldDMwLTraw_)
+{
+  m_byIsolationMVA3oldDMwLTraw = byIsolationMVA3oldDMwLTraw_;
+}
+float TupleTau::byIsolationMVA3oldDMwLTraw() const {return m_byIsolationMVA3oldDMwLTraw;}
+
+//////////////////////////////////////////
+// byIsolationMVA3oldDMwoLTraw
+//////////////////////////////////////////
+
+void TupleTau::set_byIsolationMVA3oldDMwoLTraw(float byIsolationMVA3oldDMwoLTraw_)
+{
+  m_byIsolationMVA3oldDMwoLTraw = byIsolationMVA3oldDMwoLTraw_;
+}
+float TupleTau::byIsolationMVA3oldDMwoLTraw() const {return m_byIsolationMVA3oldDMwoLTraw;}
+
+//////////////////////////////////////////
+// byLooseCombinedIsolationDeltaBetaCorr
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseCombinedIsolationDeltaBetaCorr(float byLooseCombinedIsolationDeltaBetaCorr_)
+{
+  m_byLooseCombinedIsolationDeltaBetaCorr = byLooseCombinedIsolationDeltaBetaCorr_;
+}
+float TupleTau::byLooseCombinedIsolationDeltaBetaCorr() const {return m_byLooseCombinedIsolationDeltaBetaCorr;}
+
+//////////////////////////////////////////
+// byLooseCombinedIsolationDeltaBetaCorr3Hits
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseCombinedIsolationDeltaBetaCorr3Hits(float byLooseCombinedIsolationDeltaBetaCorr3Hits_)
+{
+  m_byLooseCombinedIsolationDeltaBetaCorr3Hits = byLooseCombinedIsolationDeltaBetaCorr3Hits_;
+}
+float TupleTau::byLooseCombinedIsolationDeltaBetaCorr3Hits() const {return m_byLooseCombinedIsolationDeltaBetaCorr3Hits;}
+
+//////////////////////////////////////////
+// byLooseIsolation
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseIsolation(float byLooseIsolation_)
+{
+  m_byLooseIsolation = byLooseIsolation_;
+}
+float TupleTau::byLooseIsolation() const {return m_byLooseIsolation;}
+
+//////////////////////////////////////////
+// byLooseIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseIsolationMVA3newDMwLT(float byLooseIsolationMVA3newDMwLT_)
+{
+  m_byLooseIsolationMVA3newDMwLT = byLooseIsolationMVA3newDMwLT_;
+}
+float TupleTau::byLooseIsolationMVA3newDMwLT() const {return m_byLooseIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byLooseIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseIsolationMVA3newDMwoLT(float byLooseIsolationMVA3newDMwoLT_)
+{
+  m_byLooseIsolationMVA3newDMwoLT = byLooseIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byLooseIsolationMVA3newDMwoLT() const {return m_byLooseIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byLooseIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseIsolationMVA3oldDMwLT(float byLooseIsolationMVA3oldDMwLT_)
+{
+  m_byLooseIsolationMVA3oldDMwLT = byLooseIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byLooseIsolationMVA3oldDMwLT() const {return m_byLooseIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byLooseIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byLooseIsolationMVA3oldDMwoLT(float byLooseIsolationMVA3oldDMwoLT_)
+{
+  m_byLooseIsolationMVA3oldDMwoLT = byLooseIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byLooseIsolationMVA3oldDMwoLT() const {return m_byLooseIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// byMediumCombinedIsolationDeltaBetaCorr
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumCombinedIsolationDeltaBetaCorr(float byMediumCombinedIsolationDeltaBetaCorr_)
+{
+  m_byMediumCombinedIsolationDeltaBetaCorr = byMediumCombinedIsolationDeltaBetaCorr_;
+}
+float TupleTau::byMediumCombinedIsolationDeltaBetaCorr() const {return m_byMediumCombinedIsolationDeltaBetaCorr;}
+
+//////////////////////////////////////////
+// byMediumCombinedIsolationDeltaBetaCorr3Hits
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumCombinedIsolationDeltaBetaCorr3Hits(float byMediumCombinedIsolationDeltaBetaCorr3Hits_)
+{
+  m_byMediumCombinedIsolationDeltaBetaCorr3Hits = byMediumCombinedIsolationDeltaBetaCorr3Hits_;
+}
+float TupleTau::byMediumCombinedIsolationDeltaBetaCorr3Hits() const {return m_byMediumCombinedIsolationDeltaBetaCorr3Hits;}
+
+//////////////////////////////////////////
+// byMediumIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumIsolationMVA3newDMwLT(float byMediumIsolationMVA3newDMwLT_)
+{
+  m_byMediumIsolationMVA3newDMwLT = byMediumIsolationMVA3newDMwLT_;
+}
+float TupleTau::byMediumIsolationMVA3newDMwLT() const {return m_byMediumIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byMediumIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumIsolationMVA3newDMwoLT(float byMediumIsolationMVA3newDMwoLT_)
+{
+  m_byMediumIsolationMVA3newDMwoLT = byMediumIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byMediumIsolationMVA3newDMwoLT() const {return m_byMediumIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byMediumIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumIsolationMVA3oldDMwLT(float byMediumIsolationMVA3oldDMwLT_)
+{
+  m_byMediumIsolationMVA3oldDMwLT = byMediumIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byMediumIsolationMVA3oldDMwLT() const {return m_byMediumIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byMediumIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byMediumIsolationMVA3oldDMwoLT(float byMediumIsolationMVA3oldDMwoLT_)
+{
+  m_byMediumIsolationMVA3oldDMwoLT = byMediumIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byMediumIsolationMVA3oldDMwoLT() const {return m_byMediumIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// byTightCombinedIsolationDeltaBetaCorr
+//////////////////////////////////////////
+
+void TupleTau::set_byTightCombinedIsolationDeltaBetaCorr(float byTightCombinedIsolationDeltaBetaCorr_)
+{
+  m_byTightCombinedIsolationDeltaBetaCorr = byTightCombinedIsolationDeltaBetaCorr_;
+}
+float TupleTau::byTightCombinedIsolationDeltaBetaCorr() const {return m_byTightCombinedIsolationDeltaBetaCorr;}
+
+//////////////////////////////////////////
+// byTightCombinedIsolationDeltaBetaCorr3Hits
+//////////////////////////////////////////
+
+void TupleTau::set_byTightCombinedIsolationDeltaBetaCorr3Hits(float byTightCombinedIsolationDeltaBetaCorr3Hits_)
+{
+  m_byTightCombinedIsolationDeltaBetaCorr3Hits = byTightCombinedIsolationDeltaBetaCorr3Hits_;
+}
+float TupleTau::byTightCombinedIsolationDeltaBetaCorr3Hits() const {return m_byTightCombinedIsolationDeltaBetaCorr3Hits;}
+
+//////////////////////////////////////////
+// byTightIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byTightIsolationMVA3newDMwLT(float byTightIsolationMVA3newDMwLT_)
+{
+  m_byTightIsolationMVA3newDMwLT = byTightIsolationMVA3newDMwLT_;
+}
+float TupleTau::byTightIsolationMVA3newDMwLT() const {return m_byTightIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byTightIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byTightIsolationMVA3newDMwoLT(float byTightIsolationMVA3newDMwoLT_)
+{
+  m_byTightIsolationMVA3newDMwoLT = byTightIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byTightIsolationMVA3newDMwoLT() const {return m_byTightIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byTightIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byTightIsolationMVA3oldDMwLT(float byTightIsolationMVA3oldDMwLT_)
+{
+  m_byTightIsolationMVA3oldDMwLT = byTightIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byTightIsolationMVA3oldDMwLT() const {return m_byTightIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byTightIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byTightIsolationMVA3oldDMwoLT(float byTightIsolationMVA3oldDMwoLT_)
+{
+  m_byTightIsolationMVA3oldDMwoLT = byTightIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byTightIsolationMVA3oldDMwoLT() const {return m_byTightIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// byVLooseCombinedIsolationDeltaBetaCorr
+//////////////////////////////////////////
+
+void TupleTau::set_byVLooseCombinedIsolationDeltaBetaCorr(float byVLooseCombinedIsolationDeltaBetaCorr_)
+{
+  m_byVLooseCombinedIsolationDeltaBetaCorr = byVLooseCombinedIsolationDeltaBetaCorr_;
+}
+float TupleTau::byVLooseCombinedIsolationDeltaBetaCorr() const {return m_byVLooseCombinedIsolationDeltaBetaCorr;}
+
+//////////////////////////////////////////
+// byVLooseIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVLooseIsolationMVA3newDMwLT(float byVLooseIsolationMVA3newDMwLT_)
+{
+  m_byVLooseIsolationMVA3newDMwLT = byVLooseIsolationMVA3newDMwLT_;
+}
+float TupleTau::byVLooseIsolationMVA3newDMwLT() const {return m_byVLooseIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byVLooseIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVLooseIsolationMVA3newDMwoLT(float byVLooseIsolationMVA3newDMwoLT_)
+{
+  m_byVLooseIsolationMVA3newDMwoLT = byVLooseIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byVLooseIsolationMVA3newDMwoLT() const {return m_byVLooseIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byVLooseIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVLooseIsolationMVA3oldDMwLT(float byVLooseIsolationMVA3oldDMwLT_)
+{
+  m_byVLooseIsolationMVA3oldDMwLT = byVLooseIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byVLooseIsolationMVA3oldDMwLT() const {return m_byVLooseIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byVLooseIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVLooseIsolationMVA3oldDMwoLT(float byVLooseIsolationMVA3oldDMwoLT_)
+{
+  m_byVLooseIsolationMVA3oldDMwoLT = byVLooseIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byVLooseIsolationMVA3oldDMwoLT() const {return m_byVLooseIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// byVTightIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVTightIsolationMVA3newDMwLT(float byVTightIsolationMVA3newDMwLT_)
+{
+  m_byVTightIsolationMVA3newDMwLT = byVTightIsolationMVA3newDMwLT_;
+}
+float TupleTau::byVTightIsolationMVA3newDMwLT() const {return m_byVTightIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byVTightIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVTightIsolationMVA3newDMwoLT(float byVTightIsolationMVA3newDMwoLT_)
+{
+  m_byVTightIsolationMVA3newDMwoLT = byVTightIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byVTightIsolationMVA3newDMwoLT() const {return m_byVTightIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byVTightIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVTightIsolationMVA3oldDMwLT(float byVTightIsolationMVA3oldDMwLT_)
+{
+  m_byVTightIsolationMVA3oldDMwLT = byVTightIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byVTightIsolationMVA3oldDMwLT() const {return m_byVTightIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byVTightIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVTightIsolationMVA3oldDMwoLT(float byVTightIsolationMVA3oldDMwoLT_)
+{
+  m_byVTightIsolationMVA3oldDMwoLT = byVTightIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byVTightIsolationMVA3oldDMwoLT() const {return m_byVTightIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// byVVTightIsolationMVA3newDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVVTightIsolationMVA3newDMwLT(float byVVTightIsolationMVA3newDMwLT_)
+{
+  m_byVVTightIsolationMVA3newDMwLT = byVVTightIsolationMVA3newDMwLT_;
+}
+float TupleTau::byVVTightIsolationMVA3newDMwLT() const {return m_byVVTightIsolationMVA3newDMwLT;}
+
+//////////////////////////////////////////
+// byVVTightIsolationMVA3newDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVVTightIsolationMVA3newDMwoLT(float byVVTightIsolationMVA3newDMwoLT_)
+{
+  m_byVVTightIsolationMVA3newDMwoLT = byVVTightIsolationMVA3newDMwoLT_;
+}
+float TupleTau::byVVTightIsolationMVA3newDMwoLT() const {return m_byVVTightIsolationMVA3newDMwoLT;}
+
+//////////////////////////////////////////
+// byVVTightIsolationMVA3oldDMwLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVVTightIsolationMVA3oldDMwLT(float byVVTightIsolationMVA3oldDMwLT_)
+{
+  m_byVVTightIsolationMVA3oldDMwLT = byVVTightIsolationMVA3oldDMwLT_;
+}
+float TupleTau::byVVTightIsolationMVA3oldDMwLT() const {return m_byVVTightIsolationMVA3oldDMwLT;}
+
+//////////////////////////////////////////
+// byVVTightIsolationMVA3oldDMwoLT
+//////////////////////////////////////////
+
+void TupleTau::set_byVVTightIsolationMVA3oldDMwoLT(float byVVTightIsolationMVA3oldDMwoLT_)
+{
+  m_byVVTightIsolationMVA3oldDMwoLT = byVVTightIsolationMVA3oldDMwoLT_;
+}
+float TupleTau::byVVTightIsolationMVA3oldDMwoLT() const {return m_byVVTightIsolationMVA3oldDMwoLT;}
+
+//////////////////////////////////////////
+// chargedIsoPtSum
+//////////////////////////////////////////
+
+void TupleTau::set_chargedIsoPtSum(float chargedIsoPtSum_)
+{
+  m_chargedIsoPtSum = chargedIsoPtSum_;
+}
+float TupleTau::chargedIsoPtSum() const {return m_chargedIsoPtSum;}
+
+//////////////////////////////////////////
+// decayModeFinding
+//////////////////////////////////////////
+
+void TupleTau::set_decayModeFinding(float decayModeFinding_)
+{
+  m_decayModeFinding = decayModeFinding_;
+}
+float TupleTau::decayModeFinding() const {return m_decayModeFinding;}
+
+//////////////////////////////////////////
+// decayModeFindingNewDMs
+//////////////////////////////////////////
+
+void TupleTau::set_decayModeFindingNewDMs(float decayModeFindingNewDMs_)
+{
+  m_decayModeFindingNewDMs = decayModeFindingNewDMs_;
+}
+float TupleTau::decayModeFindingNewDMs() const {return m_decayModeFindingNewDMs;}
+
+//////////////////////////////////////////
+// decayModeFindingOldDMs
+//////////////////////////////////////////
+
+void TupleTau::set_decayModeFindingOldDMs(float decayModeFindingOldDMs_)
+{
+  m_decayModeFindingOldDMs = decayModeFindingOldDMs_;
+}
+float TupleTau::decayModeFindingOldDMs() const {return m_decayModeFindingOldDMs;}
+
+//////////////////////////////////////////
+// neutralIsoPtSum
+//////////////////////////////////////////
+
+void TupleTau::set_neutralIsoPtSum(float neutralIsoPtSum_)
+{
+  m_neutralIsoPtSum = neutralIsoPtSum_;
+}
+float TupleTau::neutralIsoPtSum() const {return m_neutralIsoPtSum;}
+
+//////////////////////////////////////////
+// puCorrPtSum
+//////////////////////////////////////////
+
+void TupleTau::set_puCorrPtSum(float puCorrPtSum_)
+{
+  m_puCorrPtSum = puCorrPtSum_;
+}
+float TupleTau::puCorrPtSum() const {return m_puCorrPtSum;}
 
 
 /////////////////////
