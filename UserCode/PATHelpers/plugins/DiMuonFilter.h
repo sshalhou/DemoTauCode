@@ -29,7 +29,7 @@ namespace pat {
 
 
       edm::InputTag muonSource_;
-      edm::InputTag vertexSrc_;
+      edm::InputTag vertexSource_;
 
 
   };

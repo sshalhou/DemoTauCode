@@ -14,7 +14,7 @@ using namespace pat;
 
 DiMuonFilter::DiMuonFilter(const edm::ParameterSet & iConfig) {
   muonSource_     = iConfig.getParameter<edm::InputTag>( "muonSource" );
-  vertexSource_(iConfig.getParameter<edm::InputTag>("vertexSource" ))
+  vertexSource_ = iConfig.getParameter<edm::InputTag>("vertexSource" )
 }
 
 
