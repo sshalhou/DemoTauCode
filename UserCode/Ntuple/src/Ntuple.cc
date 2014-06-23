@@ -56,7 +56,7 @@ private:
 
   // ----------member data ---------------------------
 
-  edm::InputTag muonSrc_;
+
 
 };
 
@@ -72,8 +72,7 @@ private:
 //
 // constructors and destructor
 //
-Ntuple::Ntuple(const edm::ParameterSet& iConfig):
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
+Ntuple::Ntuple(const edm::ParameterSet& iConfig)
 {
   //register your products
   /* Examples
@@ -109,15 +108,6 @@ Ntuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   using namespace edm;
 
-  // get muon collection
-  edm::Handle<edm::View<pat::Muon> > muons;
-  iEvent.getByLabel(muonSrc_,muons);
-
-
-  for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon)
-  {
-    std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
-  }
 
   /* This is an event example
   //Read 'ExampleData' from the Event
