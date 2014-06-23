@@ -78,14 +78,14 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 
 
 process.p = cms.Path(process.myProducerLabel+
-      process.pfMEtMVANominal+
+      #process.pfMEtMVANominal+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
-      +process.metUncertaintySequence+
-      process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
-      +process.TupleMuonTausRecoilUp
-      +process.TupleMuonTausRecoilDown
-      +process.TupleMuonTausRecoilResUp
-      +process.TupleMuonTausRecoilResDown
+      #+process.metUncertaintySequence+
+      #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
+      #+process.TupleMuonTausRecoilUp
+      #+process.TupleMuonTausRecoilDown
+      #+process.TupleMuonTausRecoilResUp
+      #+process.TupleMuonTausRecoilResDown
                      )
 
 process.e = cms.EndPath(process.out)
