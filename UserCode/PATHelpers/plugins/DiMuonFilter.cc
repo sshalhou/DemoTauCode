@@ -7,7 +7,7 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 
 /////////////////////////
-// return 1 for events
+// return 0 for events
 // with a dimuon pair
 
 using namespace pat;
