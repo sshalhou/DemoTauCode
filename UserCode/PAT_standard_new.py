@@ -222,12 +222,14 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-process.countMyPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
-cut = cms.string("et > 17 * 0.9"+
-                 " && abs(eta) < 2.1 * 1.1"
+process.cleanPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
+cut = cms.string("pt > 10"+
+                 " && abs(eta) < 2.4"
+                +" && isPFMuon"
+                +" && isTrackerMuon "
+                +" && isGlobalMuon "
                 +" && (pfIsolationR04.sumChargedParticlePt +"
-                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.2"
-                +" && isGood('GlobalMuonPromptTight')"
+                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.3"
                 )
                                                   )
 
@@ -253,7 +255,7 @@ process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectron
 
 process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
   electronSource = cms.InputTag("countMyPatElectrons"),
-  muonSource     = cms.InputTag("countMyPatMuons"),
+  muonSource     = cms.InputTag("cleanPatMuons"),
   tauSource      = cms.InputTag("countMyPatTaus"),
   countElectronTaus = cms.bool(True),
   countMuonTaus     = cms.bool(True),
@@ -307,7 +309,7 @@ process.p = cms.Path(
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
-                             *process.countMyPatMuons
+                             *process.cleanPatMuons
                                                               )
 
 
@@ -363,5 +365,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 100
+process.maxEvents.input = 200
 ########################################################################################################
