@@ -76,14 +76,7 @@ namespace TupleHelpers
   }
 
 
-  bool passDiMuonVeto(std::vector<const pat::Muons *> muons_)
-  {
 
-  std::cout<<" SIZE "<<muons_->size()<<std::endl;
-
-  return 1;
-
-  }
 
 
 

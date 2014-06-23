@@ -24,6 +24,18 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 
 
 ##########################
+# diMuon Veto
+##########################
+
+process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
+  muonSource     = cms.InputTag("myCleanPatMuons"),
+  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
+  filter = cms.bool(True)
+)
+
+
+
+##########################
 # Nominal Systematics    #
 ##########################
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
