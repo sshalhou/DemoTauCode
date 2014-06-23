@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
 FilterEvents = True
-DropSelectedPatObjects = True #drops all except selectedPatJets
+DropSelectedPatObjects = True
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
@@ -318,7 +318,7 @@ if DropSelectedPatObjects:
   process.out.outputCommands +=['drop *_selectedPatElectrons*_*_*']
   process.out.outputCommands +=['drop *_selectedPatMuons*_*_*']
   process.out.outputCommands +=['drop *_selectedPatTaus*_*_*']
-  process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
+  process.out.outputCommands +=['drop *_selectedPatJets*_*_*']
   process.out.outputCommands +=['keep *_cleanPatElectrons*_*_*']
   process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
   process.out.outputCommands +=['keep *_cleanPatTaus*_*_*']
