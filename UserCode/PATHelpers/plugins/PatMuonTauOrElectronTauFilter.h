@@ -32,8 +32,6 @@ namespace pat {
       edm::InputTag tauSource_;
       bool          countElectronTaus_;
       bool          countMuonTaus_;
-      unsigned int  minNumber_;
-      unsigned int  maxNumber_;
 
   };
 
