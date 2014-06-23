@@ -21,7 +21,8 @@
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "Math/GenVector/VectorUtil.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
-
+#include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 
 namespace TupleHelpers
 {
@@ -64,7 +65,7 @@ namespace TupleHelpers
     {0.96,0.968,0.971,0.972,0.969,0.959,0.981,0.965,0.975,0.972,0.974,0.971,0.897,0.971,0.961,0.97};
     float cutsVeryTight[16] =
     {0.978,0.98,0.982,0.985,0.977,0.974,0.989,0.977,0.986,0.983,0.984,0.983,0.971,0.987,0.977,0.981};
-    
+
     float cut=0;
     if(WP==0) cut = cutsLoose[iCat];
     if(WP==1) cut = cutsMedium[iCat];
@@ -75,7 +76,14 @@ namespace TupleHelpers
   }
 
 
+  bool passDiMuonVeto(std::vector<const pat::Muons *> muons_)
+  {
 
+  std::cout<<" SIZE "<<muons_->size()<<std::endl;
+
+  return 1;
+
+  }
 
 
 

@@ -314,6 +314,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         //      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
         CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
 
+        ////////////////////////
+        // check the DiMuon Veto
+        bool passDiMuonVeto = TupleHelpers::passDiMuonVeto(muons);
 
 
         ////////////
