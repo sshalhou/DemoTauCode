@@ -222,9 +222,7 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
-from PhysicsTools.PatAlgos.cleaningLayer1.muonCleaner_cfi import *
-
-process.cleanPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
+process.myCleanPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
 cut = cms.string("pt > 10"+
                  " && abs(eta) < 2.4"
                 +" && isPFMuon"
@@ -257,7 +255,7 @@ process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectron
 
 process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
   electronSource = cms.InputTag("countMyPatElectrons"),
-  muonSource     = cms.InputTag("cleanPatMuons"),
+  muonSource     = cms.InputTag("myCleanPatMuons"),
   tauSource      = cms.InputTag("countMyPatTaus"),
   countElectronTaus = cms.bool(True),
   countMuonTaus     = cms.bool(True),
@@ -311,7 +309,7 @@ process.p = cms.Path(
                              *process.puJetIdSqeuence
                              *process.countMyPatTaus
                              *process.countMyPatElectrons
-                             #*process.cleanPatMuons
+                             *process.myCleanPatMuons
                                                               )
 
 
@@ -324,7 +322,8 @@ if DropSelectedPatObjects:
   process.out.outputCommands +=['drop *_selectedPatTaus*_*_*']
   process.out.outputCommands +=['drop *_selectedPatJets*_*_*']
   process.out.outputCommands +=['keep *_cleanPatElectrons*_*_*']
-  process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
+  process.out.outputCommands +=['drop *_cleanPatMuons*_*_*']
+  process.out.outputCommands +=['keep *_myCleanPatMuons*_*_*']
   process.out.outputCommands +=['keep *_cleanPatTaus*_*_*']
   process.out.outputCommands +=['keep *_cleanPatJets*_*_*']
 
