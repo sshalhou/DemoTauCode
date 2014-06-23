@@ -352,7 +352,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           LorentzVector DaughterOneP4(0,0,0,0);
           int DaughterTwoPdgId = 0;
           LorentzVector DaughterTwoP4(0,0,0,0);
-          bool ApplyRecoilCorrection = 0;
+          bool ApplyRecoilCorrection = 1;
 
 
           GenBosonDecayFinder genDecayFinder;
@@ -411,9 +411,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             correctedMET.SetEta(0.0);
             correctedMET.SetPhi(metphi);
             correctedMET.SetM(0.0);
-            // RECOIL CORR OFF
-            cout<<" recoil OFF "<<endl;
-            //            NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
+            NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
             //////////////////////
             // print out the corrected value
