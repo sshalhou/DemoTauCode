@@ -4,6 +4,7 @@
 #include "DataFormats/Common/interface/View.h"
 
 #include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
 
 /////////////////////////
 // return 1 for events
