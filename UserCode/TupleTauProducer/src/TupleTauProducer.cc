@@ -160,9 +160,9 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     // correct the tau energy
-    if(!tau->genParticle().isNull())
+    if(!tau->genParticle()->isNull())
     {
-      CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genParticle().pdgId());
+      CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genParticle()->pdgId());
     }
     else if (iEvent.isRealData())
     {
