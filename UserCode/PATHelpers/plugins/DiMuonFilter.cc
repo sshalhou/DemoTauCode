@@ -97,13 +97,13 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
     else irel_DR4 = 0.0;
 
 
-    //if(!(muon->isGlobalMuon())) passAllCuts = 0;
-    //if(!(muon->isPFMuon())) passAllCuts = 0;
-    //if(!(muon->isTrackerMuon())) passAllCuts = 0;
-    if(!(muon->p4().pt()>0.5)) passAllCuts = 0;
-    //if(!(fabs(muon->p4().eta())<2.4)) passAllCuts = 0;
-    //if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passAllCuts = 0;
-    //if(!(irel_DR4 < 0.3)) passAllCuts = 0;
+    if(!(muon->isGlobalMuon())) passAllCuts = 0;
+    if(!(muon->isPFMuon())) passAllCuts = 0;
+    if(!(muon->isTrackerMuon())) passAllCuts = 0;
+    if(!(muon->p4().pt()>15)) passAllCuts = 0;
+    if(!(fabs(muon->p4().eta())<2.4)) passAllCuts = 0;
+    if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passAllCuts = 0;
+    if(!(irel_DR4 < 0.3)) passAllCuts = 0;
 
 
     if(passAllCuts)
