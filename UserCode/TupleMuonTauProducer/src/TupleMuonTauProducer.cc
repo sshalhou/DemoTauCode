@@ -316,7 +316,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         ////////////////////////
         // check the DiMuon Veto
-        bool passDiMuonVeto = TupleHelpers::passDiMuonVeto(muons);
+        bool passDiMuonVeto = TupleHelpers::passDiMuonVeto(muonSrc_);
 
 
         ////////////
