@@ -345,6 +345,8 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
+
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/DY1JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/AODSIM/PU_S10_START53_V7A-v1/0000/001318CD-C5F4-E111-AAD9-001E67398D72.root'])
 myfilelist.extend(['file:/uscms/home/shalhout/no_backup/5000.root'])
 myfilelist.extend(['file:/uscms/home/shalhout/1stSteps/Git2/DemoTauCode/CMSSW_5_3_14/src/MyOutputFile.root'])
 myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root'])
