@@ -117,8 +117,8 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
   }
 
-  std::cout<<" DiMuon Filter returns "<<(positive_pass && negative_pass) << std::endl;
-  return (positive_pass && negative_pass);
+  std::cout<<" DiMuon Filter returns "<<!(positive_pass && negative_pass) << std::endl;
+  return !(positive_pass && negative_pass);
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
