@@ -27,7 +27,7 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 # Nominal Systematics    #
 ##########################
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
-                muonSrc =cms.InputTag('cleanPatMuons'),
+                muonSrc =cms.InputTag('myCleanPatMuons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal")
                                      )
