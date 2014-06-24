@@ -87,7 +87,7 @@ private:
 // constructors and destructor
 //
 TupleElectronProducer::TupleElectronProducer(const edm::ParameterSet& iConfig):
-electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
+electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
