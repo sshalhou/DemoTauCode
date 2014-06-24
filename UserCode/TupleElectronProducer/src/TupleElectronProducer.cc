@@ -215,14 +215,14 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_sigmaIphiIphi(electron->);
 */
 
-    if(electron->->gsfTrack())
+    if(electron->gsfTrack())
     {
 
       ////////////////
       //set_numberOfMissingInnerHits
       ////////////////
       CurrentElectron.set_numberOfMissingInnerHits(
-      electron->->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()
+      electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()
       );
 
       ////////////////
