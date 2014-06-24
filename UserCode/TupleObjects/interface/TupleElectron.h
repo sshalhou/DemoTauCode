@@ -41,7 +41,7 @@ public:
   void set_mvaTrigV0(double);
   void set_mvaTrigNoIPV0(double);
   void set_mvaNonTrigV0(double);
-  void set_pass_tight_mvaNonTrigV0(double); 
+  void set_pass_tight_mvaNonTrigV0(double);
   void set_passFullId(bool);
   void set_isEB(bool);
   void set_isEE(bool);
@@ -50,7 +50,6 @@ public:
   void set_isEBPhiGap(bool);
   void set_isEEDeeGap(bool);
   void set_isEERingGap(bool);
-  void set_isEB(bool);
   void set_sigmaEtaEta(double);
   void set_sigmaIetaIeta(double);
   void set_sigmaIphiIphic(double);
@@ -94,7 +93,6 @@ public:
   bool isEBPhiGap() const;
   bool isEEDeeGap() const;
   bool isEERingGap() const;
-  bool isEB() const;
   double sigmaEtaEta() const;
   double sigmaIetaIeta() const;
   double sigmaIphiIphi() const;
@@ -127,7 +125,6 @@ private:
   bool m_isEBPhiGap;
   bool m_isEEDeeGap;
   bool m_isEERingGap;
-  bool m_isEB;
   double m_sigmaEtaEta;
   double m_sigmaIetaIeta;
   double m_sigmaIphiIphi;

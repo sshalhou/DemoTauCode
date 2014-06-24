@@ -30,7 +30,6 @@ TupleElectron::TupleElectron()
   m_isEBPhiGap = 0;
   m_isEEDeeGap = 0;
   m_isEERingGap = 0;
-  m_isEB = 0;
   m_sigmaEtaEta = NAN;
   m_sigmaIetaIeta = NAN;
   m_sigmaIphiIphi = NAN;
@@ -225,13 +224,6 @@ bool TupleElectron::isEEDeeGap() const { return m_isEEDeeGap; }
 //////////////////
 void TupleElectron::set_isEERingGap(bool isEERingGap_) { m_isEERingGap = isEERingGap_;}
 bool TupleElectron::isEERingGap() const { return m_isEERingGap; }
-
-
-//////////////////
-// isEB
-//////////////////
-void TupleElectron::set_isEB(bool isEB_) { m_isEB = isEB_;}
-bool TupleElectron::isEB() const { return m_isEB; }
 
 
 //////////////////
