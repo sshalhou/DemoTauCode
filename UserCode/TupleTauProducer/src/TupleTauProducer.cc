@@ -158,6 +158,10 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentTau.set_p4(tau->p4());
 
+    //////////////
+    // apply tau ES correction
+    // we will keep both p4 and corrected p4
+
 
     std::cout<<" gen lepton "<<tau->genLepton()<<" is real data "<<iEvent.isRealData()<<std::endl;
     std::cout<<" Warning need to add in a MC sample check "<<std::endl;
@@ -470,22 +474,32 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     //////////////////////////
     // set the passFullId summary boolean
-    // eventually the cuts should be passed
-    // to the producer using the cutParser
-    // this is temporary since muTau, eTau, TauTau
-    // have different cut sets
 
-    bool passFullId = 1;
+    bool passFullId_muTau = 1;
+    bool passFullId_eTau = 1;
 
     ///////////////////////////
-    //if(!(tau->tauID("againstElectronLoose"))) passFullId = 0;
-    //if(!(tau->tauID("againstMuonTight"))) passFullId = 0;
-    //if(!(tau->tauID("byCombinedIsolationDeltaBetaCorrRaw3Hits") < 1.5)) passFullId = 0;
-    //if(!(CurrentTau.corrected_p4().pt()>20)) passFullId = 0;
-    //if(!(fabs(CurrentTau.corrected_p4().eta())<2.3)) passFullId = 0;
+
+    if(!(CurrentTau.corrected_p4().pt()>30))
+    {
+      passFullId_muTau = 0;
+      passFullId_eTau = 0;
+    }
+    if(!(fabs(CurrentTau.corrected_p4().eta())<2.3))
+    {
+      passFullId_muTau = 0;
+      passFullId_eTau = 0;
+    }
+    // muTau specific
+    if(!(tau->tauID("againstMuonMediumMVA") > 0.5 && tau->tauID("againstElectronLoose") > 0.5 )) passFullId_muTau = 0;
+
+    // eTau specific
+    if(!(tau->tauID("againstElectronMediumMVA5") > 0.5 && tau->tauID("againstMuonLoose3") > 0.5 )) passFullId_eTau = 0;
+
     ///////////////////////////
 
-    CurrentTau.set_passFullId(passFullId);
+    CurrentTau.set_passFullId_eTau(passFullId_eTau);
+    CurrentTau.set_passFullId_muTau(passFullId_muTau);
 
 
     ////////////

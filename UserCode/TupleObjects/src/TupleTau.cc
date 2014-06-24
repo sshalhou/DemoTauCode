@@ -10,7 +10,8 @@ TupleTau::TupleTau()
   m_pdgId = -999;
   m_charge = -999;
   m_decayMode = -999;
-  m_passFullId = 0;
+  m_passFullId_muTau = 0;
+  m_passFullId_eTau = 0;
 
   m_againstElectronDeadECAL = NAN;
   m_againstElectronLoose = NAN;
@@ -89,8 +90,12 @@ TupleTau::TupleTau()
 
 // will set this in TupleTauProducer, since we can track all cuts
 // more easily when calling the producer
-void TupleTau::set_passFullId(bool passFullId_) { m_passFullId = passFullId_;}
-bool TupleTau::passFullId() const  { return m_passFullId; }
+void TupleTau::set_passFullId_muTau(bool passFullId_muTau_) { m_passFullId_muTau = passFullId_muTau_;}
+bool TupleTau::passFullId_muTau() const  { return m_passFullId_muTau; }
+
+void TupleTau::set_passFullId_eTau(bool passFullId_eTau_) { m_passFullId_eTau = passFullId_eTau_;}
+bool TupleTau::passFullId_eTau() const  { return m_passFullId_eTau; }
+
 
 void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleTau::p4() const  { return m_p4; }

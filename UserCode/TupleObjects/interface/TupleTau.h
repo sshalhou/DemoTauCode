@@ -35,7 +35,8 @@ public:
   void set_pdgId(int);
   void set_charge(int);
   void set_decayMode(int);
-  void set_passFullId(bool); // needs to be changed to take a PSet + muTau specific
+  void set_passFullId_muTau(bool);
+  void set_passFullId_eTau(bool);
 
   // Tau Discriminators
 
@@ -119,7 +120,8 @@ public:
   int pdgId() const;
   int charge() const;
   int decayMode() const;
-  bool passFullId() const;
+  bool passFullId_muTau() const;
+  bool passFullId_eTau() const;
 
 
   float againstElectronDeadECAL() const;
@@ -201,7 +203,8 @@ private:
   int m_pdgId;
   int m_charge;
   int m_decayMode;
-  bool m_passFullId;
+  bool m_passFullId_muTau;
+  bool m_passFullId_eTau;
 
   float m_againstElectronDeadECAL;
   float m_againstElectronLoose;
