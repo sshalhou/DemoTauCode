@@ -38,6 +38,12 @@ process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
 ##########################
 # Nominal Systematics    #
 ##########################
+
+process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
+                electronSrc =cms.InputTag('cleanPatElectrons'),
+                NAME=cms.string("TupleElectronsNominal")
+                                     )
+
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('myCleanPatMuons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
@@ -91,6 +97,7 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 
 process.p = cms.Path(process.myProducerLabel+process.isDiMuonEvent+
       #process.pfMEtMVANominal+
+      process.TupleElectronsNominal+
       process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
       #+process.metUncertaintySequence+
       #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
