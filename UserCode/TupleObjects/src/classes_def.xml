@@ -11,4 +11,7 @@
   <class name="TupleUserSpecifiedData"/>
   <class name="std::vector<TupleUserSpecifiedData>"/>
   <class name="edm::Wrapper<std::vector<TupleUserSpecifiedData> >"/>
+  <class name="TupleElectron"/>
+  <class name="std::vector<TupleElectron>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectron> >"/>
 </lcgdict>

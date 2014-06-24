@@ -1,3 +1,4 @@
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
@@ -13,4 +14,7 @@ struct dictionary {
     edm::Wrapper<TupleMuonTauCollection> dummy5;
     TupleUserSpecifiedData dummy6;
     edm::Wrapper<TupleUserSpecifiedDataCollection> dummy7;
+    TupleElectronCollection dummy8;
+    edm::Wrapper<TupleElectronCollection> dummy9;
+
 };
