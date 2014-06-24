@@ -41,7 +41,7 @@ public:
   void set_mvaTrigV0(double);
   void set_mvaTrigNoIPV0(double);
   void set_mvaNonTrigV0(double);
-  void set_pass_tight_mvaNonTrigV0(double);
+  void set_pass_tight_mvaNonTrigV0(bool);
   void set_passFullId(bool);
   void set_isEB(bool);
   void set_isEE(bool);
