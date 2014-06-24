@@ -52,7 +52,7 @@ public:
   void set_isEERingGap(bool);
   void set_sigmaEtaEta(double);
   void set_sigmaIetaIeta(double);
-  void set_sigmaIphiIphic(double);
+  void set_sigmaIphiIphi(double);
 
 
   // isolation variables
