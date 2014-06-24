@@ -168,52 +168,52 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     ////////////////
     CurrentElectron.set_isEB(electron->isEB());
 
-/*
+
     ////////////////
     //set_isEE
     ////////////////
-    CurrentElectron.set_isEE(electron->);
+    CurrentElectron.set_isEE(electron->isEE());
 
     ////////////////
     //set_isEBEEGap
     ////////////////
-    CurrentElectron.set_isEBEEGap(electron->);
+    CurrentElectron.set_isEBEEGap(electron->isEBEEGap());
 
     ////////////////
     //set_isEBEtaGap
     ////////////////
-    CurrentElectron.set_isEBEtaGap(electron->);
+    CurrentElectron.set_isEBEtaGap(electron->isEBEtaGap());
 
     ////////////////
     //set_isEBPhiGap
     ////////////////
-    CurrentElectron.set_isEBPhiGap(electron->);
+    CurrentElectron.set_isEBPhiGap(electron->isEBPhiGap());
 
     ////////////////
     //set_isEEDeeGap
     ////////////////
-    CurrentElectron.set_isEEDeeGap(electron->);
+    CurrentElectron.set_isEEDeeGap(electron->isEEDeeGap());
 
     ////////////////
     //set_isEERingGap
     ////////////////
-    CurrentElectron.set_isEERingGap(electron->);
+    CurrentElectron.set_isEERingGap(electron->isEERingGap());
 
     ////////////////
     //set_sigmaEtaEta
     ////////////////
-    CurrentElectron.set_sigmaEtaEta(electron->);
+    CurrentElectron.set_sigmaEtaEta(electron->sigmaEtaEta());
 
     ////////////////
     //set_sigmaIetaIeta
     ////////////////
-    CurrentElectron.set_sigmaIetaIeta(electron->);
+    CurrentElectron.set_sigmaIetaIeta(electron->sigmaIetaIeta());
 
     ////////////////
     //set_sigmaIphiIphi
     ////////////////
-    CurrentElectron.set_sigmaIphiIphi(electron->);
-*/
+    CurrentElectron.set_sigmaIphiIphi(electron->sigmaIphiIphi());
+
 
     if(electron->gsfTrack().isNonnull())
     {
