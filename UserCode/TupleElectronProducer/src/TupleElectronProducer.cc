@@ -215,7 +215,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_sigmaIphiIphi(electron->);
 */
 
-    if(electron->gsfTrack())
+    if(electron->gsfTrack().isNonnull())
     {
 
       ////////////////
