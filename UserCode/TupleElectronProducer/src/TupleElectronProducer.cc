@@ -36,6 +36,8 @@ Implementation:
 #include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
 #include "DataFormats/PatCandidates/interface/Conversion.h"
 #include "DataFormats/PatCandidates/interface/Lepton.h"
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
