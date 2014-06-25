@@ -42,6 +42,7 @@ Implementation:
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "Math/GenVector/VectorUtil.h"
+#include "DataFormats/PatCandidates/interface/PFParticle.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
