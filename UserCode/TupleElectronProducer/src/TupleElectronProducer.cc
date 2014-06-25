@@ -164,6 +164,25 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
     ////////////////
+    //set_pfP4
+    ////////////////
+    CurrentElectron.set_pfP4(electron->pfP4());
+
+
+    ////////////////
+    //set_PFpdgId
+    ////////////////
+    CurrentElectron.set_PFpdgId(electron->pdgId());
+
+
+    if(electron->superCluster().isNonnull())
+    {
+      ////////////////
+      //set_SuperClusterEta
+      ////////////////
+      CurrentElectron.set_SuperClusterEta(electron->superCluster()->position().Eta());
+    }
+    ////////////////
     //set_isEB
     ////////////////
     CurrentElectron.set_isEB(electron->isEB());
@@ -254,43 +273,61 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
       CurrentElectron.set_GENpdgId(electron->genLepton()->pdgId());
     }
 
-    /*
 
     ////////////////
-    //set_pfP4
+    //set_chargedHadronIso
     ////////////////
-    CurrentElectron.set_pfP4(electron->);
-
-
-    ////////////////
-    //set_PFpdgId
-    ////////////////
-    CurrentElectron.set_PFpdgId(electron->);
-
-
-
-
-
+    CurrentElectron.set_chargedHadronIso(electron->chargedHadronIso());
 
     ////////////////
-    //set_SuperClusterEta
+    //set_photonIso
     ////////////////
-    CurrentElectron.set_SuperClusterEta(electron->);
+    CurrentElectron.set_photonIso(electron->photonIso());
+
+    ////////////////
+    //set_neutralHadronIso
+    ////////////////
+    CurrentElectron.set_neutralHadronIso(electron->neutralHadronIso());
+
+    ////////////////
+    //set_puChargedHadronIso
+    ////////////////
+    CurrentElectron.set_puChargedHadronIso(electron->puChargedHadronIso());
+
+    ////////////////
+    //set_relativeIso
+    ////////////////
+
+    double irel = 0;
+    double i_charged = electron->chargedHadronIso();
+    double i_photons = electron->photonIso();
+    double i_neutralhadrons = electron->neutralHadronIso();
+    double i_deltabeta = electron->puChargedHadronIso();
+    irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+    if(electron->pt()) irel/=electron->pt();
+    else irel = 0.0;
+
+    CurrentElectron.set_relativeIso(irel);
+
+
 
     ////////////////
     //set_mvaTrigV0
     ////////////////
-    CurrentElectron.set_mvaTrigV0(electron->);
+    CurrentElectron.set_mvaTrigV0(electron->electronID("mvaTrigV0"));
 
     ////////////////
     //set_mvaTrigNoIPV0
     ////////////////
-    CurrentElectron.set_mvaTrigNoIPV0(electron->);
+    CurrentElectron.set_mvaTrigNoIPV0(electron->electronID("mvaTrigNoIPV0"));
 
     ////////////////
     //set_mvaNonTrigV0
     ////////////////
-    CurrentElectron.set_mvaNonTrigV0(electron->);
+    CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
+
+
+    /*
 
     ////////////////
     //set_pass_tight_mvaNonTrigV0
@@ -302,72 +339,10 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     ////////////////
     CurrentElectron.set_passFullId(electron->);
 
-
-
-    ////////////////
-    //set_chargedHadronIso
-    ////////////////
-    CurrentElectron.set_chargedHadronIso(electron->);
-
-    ////////////////
-    //set_photonIso
-    ////////////////
-    CurrentElectron.set_photonIso(electron->);
-
-    ////////////////
-    //set_neutralHadronIso
-    ////////////////
-    CurrentElectron.set_neutralHadronIso(electron->);
-
-    ////////////////
-    //set_puChargedHadronIso
-    ////////////////
-    CurrentElectron.set_puChargedHadronIso(electron->);
-
-    ////////////////
-    //set_relativeIso
-    ////////////////
-    CurrentElectron.set_relativeIso(electron->);
-
     */
 
 
-    /*
-    void set_p4(LorentzVector);
-    void set_genP4(LorentzVector);
-    void set_pfP4(LorentzVector);
-    void set_charge(int);
-    void set_PFpdgId(int);
-    void set_GENpdgId(int);
-    void set_numberOfMissingInnerHits(int);
-    void set_passConversionVeto(bool);
-    void set_dz(double);
-    void set_SuperClusterEta(double);
-    void set_mvaTrigV0(double);
-    void set_mvaTrigNoIPV0(double);
-    void set_mvaNonTrigV0(double);
-    void set_pass_tight_mvaNonTrigV0(bool);
-    void set_passFullId(bool);
-    void set_isEB(bool);
-    void set_isEE(bool);
-    void set_isEBEEGap(bool);
-    void set_isEBEtaGap(bool);
-    void set_isEBPhiGap(bool);
-    void set_isEEDeeGap(bool);
-    void set_isEERingGap(bool);
-    void set_sigmaEtaEta(double);
-    void set_sigmaIetaIeta(double);
-    void set_sigmaIphiIphi(double);
 
-
-    // isolation variables
-    void set_chargedHadronIso(double);
-    void set_photonIso(double);
-    void set_neutralHadronIso(double);
-    void set_puChargedHadronIso(double);
-    void set_relativeIso(double);
-
-    */
 
     ////////////
     // store the electron
