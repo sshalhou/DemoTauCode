@@ -387,9 +387,11 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     bool passFullId = 1;
 
-/*
+
     if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" a "<<std::endl; }
     if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" b "<<std::endl; }
+
+/*
     if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" c "<<std::endl; }
     if(  !(relativeIsolation < 0.1)       ) {passFullId = 0; std::cout<<" d "<<std::endl; }
     if(  !(numberOfMissingInnerHits==0)   ) {passFullId = 0; std::cout<<" e "<<std::endl; }
