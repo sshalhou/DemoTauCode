@@ -37,6 +37,7 @@ public:
   void set_numberOfMissingInnerHits(int);
   void set_passConversionVeto(bool);
   void set_dz(double);
+  void set_d0(double);
   void set_SuperClusterEta(double);
   void set_mvaTrigV0(double);
   void set_mvaTrigNoIPV0(double);
@@ -75,6 +76,7 @@ public:
   int numberOfMissingInnerHits() const;
   bool passConversionVeto() const;
   double dz() const;
+  double d0() const;
   double SuperClusterEta() const;
   double mvaTrigV0() const;
   double mvaTrigNoIPV0() const;
@@ -107,6 +109,7 @@ private:
   int m_numberOfMissingInnerHits;
   bool m_passConversionVeto;
   double m_dz;
+  double m_d0;
   double m_SuperClusterEta;
   double m_mvaTrigV0;
   double m_mvaTrigNoIPV0;

@@ -132,7 +132,21 @@ namespace TupleHelpers
   }
 
 
+  //////////////////
+  // check if passes mvaNonTrigV0 'tight ID'
+  // as defined
+  // here https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingSummer2013#Electron_ID
 
+  bool doesItPassTightMVANonTrigV0(int category, double mva)
+  {
 
+    if(category == 4 && mva > 0.925 ) return 1;
+    if(category == 5 && mva > 0.975 ) return 1;
+    if(category == 6 && mva > 0.985 ) return 1;
+
+    std::cout<<" WARNING electron category = "<<category<<" -- it should be 4,5, or 6"<<std::endl
+    retrun 0;
+
+  }
 
 }

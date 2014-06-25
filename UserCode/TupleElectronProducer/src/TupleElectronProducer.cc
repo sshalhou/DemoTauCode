@@ -170,244 +170,275 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_charge(electron->charge());
 
 
-/* this does not work
+    /* this does not work
     if(electron->PFParticle().isNonnull())
     {
-      ////////////////
-      //set_pfP4
-      ////////////////
-      math::PtEtaPhiMLorentzVector ptEtPhiM(electron->PFParticle()->pt(),electron->PFParticle()->eta(),
-      electron->PFParticle()->phi(),electron->PFParticle()->mass());
+    ////////////////
+    //set_pfP4
+    ////////////////
+    math::PtEtaPhiMLorentzVector ptEtPhiM(electron->PFParticle()->pt(),electron->PFParticle()->eta(),
+    electron->PFParticle()->phi(),electron->PFParticle()->mass());
 
-      LorentzVector xyzt(ptEtPhiM.x(), ptEtPhiM.y(), ptEtPhiM.z(), ptEtPhiM.t());
+    LorentzVector xyzt(ptEtPhiM.x(), ptEtPhiM.y(), ptEtPhiM.z(), ptEtPhiM.t());
 
-      CurrentElectron.set_pfP4(xyzt);
-    }
-*/
+    CurrentElectron.set_pfP4(xyzt);
+  }
+  */
+
+  ////////////////
+  //set_PFpdgId
+  ////////////////
+  CurrentElectron.set_PFpdgId(electron->pdgId());
+
+
+
+  ////////////////
+  //set_isEB
+  ////////////////
+  CurrentElectron.set_isEB(electron->isEB());
+
+
+  ////////////////
+  //set_isEE
+  ////////////////
+  CurrentElectron.set_isEE(electron->isEE());
+
+  ////////////////
+  //set_isEBEEGap
+  ////////////////
+  CurrentElectron.set_isEBEEGap(electron->isEBEEGap());
+
+  ////////////////
+  //set_isEBEtaGap
+  ////////////////
+  CurrentElectron.set_isEBEtaGap(electron->isEBEtaGap());
+
+  ////////////////
+  //set_isEBPhiGap
+  ////////////////
+  CurrentElectron.set_isEBPhiGap(electron->isEBPhiGap());
+
+  ////////////////
+  //set_isEEDeeGap
+  ////////////////
+  CurrentElectron.set_isEEDeeGap(electron->isEEDeeGap());
+
+  ////////////////
+  //set_isEERingGap
+  ////////////////
+  CurrentElectron.set_isEERingGap(electron->isEERingGap());
+
+  ////////////////
+  //set_sigmaEtaEta
+  ////////////////
+  CurrentElectron.set_sigmaEtaEta(electron->sigmaEtaEta());
+
+  ////////////////
+  //set_sigmaIetaIeta
+  ////////////////
+  CurrentElectron.set_sigmaIetaIeta(electron->sigmaIetaIeta());
+
+  ////////////////
+  //set_sigmaIphiIphi
+  ////////////////
+  CurrentElectron.set_sigmaIphiIphi(electron->sigmaIphiIphi());
+
+
+  if(electron->gsfTrack().isNonnull())
+  {
 
     ////////////////
-    //set_PFpdgId
+    //set_numberOfMissingInnerHits
     ////////////////
-    CurrentElectron.set_PFpdgId(electron->pdgId());
-
-
-    if(electron->superCluster().isNonnull())
-    {
-      ////////////////
-      //set_SuperClusterEta
-      ////////////////
-      CurrentElectron.set_SuperClusterEta(electron->superCluster()->position().Eta());
-
-
-
-      /////////////////
-      // apply the electron
-      // ID MVA
-
-      // get the category for tight MVA id
-      int category = -1;
-      double Eta = electron->superCluster()->position().Eta();
-      category =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "TIGHT");
-
-      std::cout<<" Electron category is "<<category<<std::endl;
-
-
-    }
-    ////////////////
-    //set_isEB
-    ////////////////
-    CurrentElectron.set_isEB(electron->isEB());
-
+    int numberOfMissingInnerHits = electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits();
+    CurrentElectron.set_numberOfMissingInnerHits(numberOfMissingInnerHits);
 
     ////////////////
-    //set_isEE
+    //set_dz
     ////////////////
-    CurrentElectron.set_isEE(electron->isEE());
-
-    ////////////////
-    //set_isEBEEGap
-    ////////////////
-    CurrentElectron.set_isEBEEGap(electron->isEBEEGap());
+    CurrentElectron.set_dz(electron->gsfTrack()->dz());
 
     ////////////////
-    //set_isEBEtaGap
+    //set_d0
     ////////////////
-    CurrentElectron.set_isEBEtaGap(electron->isEBEtaGap());
+    CurrentElectron.set_dz(electron->gsfTrack()->d0());
 
-    ////////////////
-    //set_isEBPhiGap
-    ////////////////
-    CurrentElectron.set_isEBPhiGap(electron->isEBPhiGap());
+  }
 
-    ////////////////
-    //set_isEEDeeGap
-    ////////////////
-    CurrentElectron.set_isEEDeeGap(electron->isEEDeeGap());
+  ////////////////
+  //set_passConversionVeto
+  ////////////////
+  bool conversionVetoPass = electron->passConversionVeto();
+  CurrentElectron.set_passConversionVeto(conversionVetoPass);
 
-    ////////////////
-    //set_isEERingGap
-    ////////////////
-    CurrentElectron.set_isEERingGap(electron->isEERingGap());
 
-    ////////////////
-    //set_sigmaEtaEta
-    ////////////////
-    CurrentElectron.set_sigmaEtaEta(electron->sigmaEtaEta());
 
+
+
+  if(electron->genLepton())
+  {
     ////////////////
-    //set_sigmaIetaIeta
+    //set_genP4
     ////////////////
-    CurrentElectron.set_sigmaIetaIeta(electron->sigmaIetaIeta());
+    CurrentElectron.set_genP4(electron->genLepton()->p4());
 
     ////////////////
-    //set_sigmaIphiIphi
+    //set_GENpdgId
     ////////////////
-    CurrentElectron.set_sigmaIphiIphi(electron->sigmaIphiIphi());
+    CurrentElectron.set_GENpdgId(electron->genLepton()->pdgId());
+  }
 
 
-    if(electron->gsfTrack().isNonnull())
-    {
+  ////////////////
+  //set_chargedHadronIso
+  ////////////////
+  CurrentElectron.set_chargedHadronIso(electron->chargedHadronIso());
 
-      ////////////////
-      //set_numberOfMissingInnerHits
-      ////////////////
-      CurrentElectron.set_numberOfMissingInnerHits(
-      electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()
-      );
+  ////////////////
+  //set_photonIso
+  ////////////////
+  CurrentElectron.set_photonIso(electron->photonIso());
 
-      ////////////////
-      //set_dz
-      ////////////////
-      CurrentElectron.set_dz(electron->gsfTrack()->dz());
+  ////////////////
+  //set_neutralHadronIso
+  ////////////////
+  CurrentElectron.set_neutralHadronIso(electron->neutralHadronIso());
 
-    }
+  ////////////////
+  //set_puChargedHadronIso
+  ////////////////
+  CurrentElectron.set_puChargedHadronIso(electron->puChargedHadronIso());
 
+  ////////////////
+  //set_relativeIso
+  ////////////////
+
+  double irel = 0;
+  double i_charged = electron->chargedHadronIso();
+  double i_photons = electron->photonIso();
+  double i_neutralhadrons = electron->neutralHadronIso();
+  double i_deltabeta = electron->puChargedHadronIso();
+  irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+  if(electron->pt()) irel/=electron->pt();
+  else irel = 0.0;
+
+  CurrentElectron.set_relativeIso(irel);
+
+
+
+  ////////////////
+  //set_mvaTrigV0
+  ////////////////
+  CurrentElectron.set_mvaTrigV0(electron->electronID("mvaTrigV0"));
+
+  ////////////////
+  //set_mvaTrigNoIPV0
+  ////////////////
+  CurrentElectron.set_mvaTrigNoIPV0(electron->electronID("mvaTrigNoIPV0"));
+
+  ////////////////
+  //set_mvaNonTrigV0
+  ////////////////
+  CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
+
+
+  if(electron->superCluster().isNonnull())
+  {
     ////////////////
-    //set_passConversionVeto
+    //set_SuperClusterEta
     ////////////////
-    CurrentElectron.set_passConversionVeto(electron->passConversionVeto());
+    CurrentElectron.set_SuperClusterEta(electron->superCluster()->position().Eta());
 
 
 
+    /////////////////
+    // apply the electron
+    // ID MVA
 
+    // get the category for tight MVA id
+    int category = -1;
+    double Eta = electron->superCluster()->position().Eta();
+    double mva = electron->electronID("mvaNonTrigV0");
+    bool pass_fail = 0;
 
-    if(electron->genLepton())
-    {
-      ////////////////
-      //set_genP4
-      ////////////////
-      CurrentElectron.set_genP4(electron->genLepton()->p4());
+    category =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "TIGHT");
+    pass_fail = TupleHelpers::doesItPassTightMVANonTrigV0(category, mva);
 
-      ////////////////
-      //set_GENpdgId
-      ////////////////
-      CurrentElectron.set_GENpdgId(electron->genLepton()->pdgId());
-    }
-
-
-    ////////////////
-    //set_chargedHadronIso
-    ////////////////
-    CurrentElectron.set_chargedHadronIso(electron->chargedHadronIso());
-
-    ////////////////
-    //set_photonIso
-    ////////////////
-    CurrentElectron.set_photonIso(electron->photonIso());
-
-    ////////////////
-    //set_neutralHadronIso
-    ////////////////
-    CurrentElectron.set_neutralHadronIso(electron->neutralHadronIso());
-
-    ////////////////
-    //set_puChargedHadronIso
-    ////////////////
-    CurrentElectron.set_puChargedHadronIso(electron->puChargedHadronIso());
-
-    ////////////////
-    //set_relativeIso
-    ////////////////
-
-    double irel = 0;
-    double i_charged = electron->chargedHadronIso();
-    double i_photons = electron->photonIso();
-    double i_neutralhadrons = electron->neutralHadronIso();
-    double i_deltabeta = electron->puChargedHadronIso();
-    irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
-    if(electron->pt()) irel/=electron->pt();
-    else irel = 0.0;
-
-    CurrentElectron.set_relativeIso(irel);
-
-
-
-    ////////////////
-    //set_mvaTrigV0
-    ////////////////
-    CurrentElectron.set_mvaTrigV0(electron->electronID("mvaTrigV0"));
-
-    ////////////////
-    //set_mvaTrigNoIPV0
-    ////////////////
-    CurrentElectron.set_mvaTrigNoIPV0(electron->electronID("mvaTrigNoIPV0"));
-
-    ////////////////
-    //set_mvaNonTrigV0
-    ////////////////
-    CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
-
-
-
-
-
-
-    /*
+    std::cout<<" Electron category is "<<category<<std::endl;
+    std::cout<<" Electron pass_fail is  "<<pass_fail<<std::endl;
 
     ////////////////
     //set_pass_tight_mvaNonTrigV0
     ////////////////
-    CurrentElectron.set_pass_tight_mvaNonTrigV0(electron->);
+    CurrentElectron.set_pass_tight_mvaNonTrigV0(pass_fail);
 
     ////////////////
     //set_passFullId
     ////////////////
-    CurrentElectron.set_passFullId(electron->);
 
-    */
+    bool passFullId = 1;
+
+    if(  !(electron->pt() > 24)           ) passFullId = 0;
+    if(  !( fabs(electron->eta()) < 2.1)  ) passFullId = 0;
+    if(  !(pass_fail)                     ) passFullId = 0;
+    if(  !(irel < 0.1)                    ) passFullId = 0;
+    if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
+    if(  !(conversionVetoPass)            ) passFullId = 0;
+
+    if(electron->gsfTrack().isNonnull())
+    {
+
+      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) passFullId = 0;
+      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) passFullId = 0;
+
+    }
+    else passFullId = 0;
+
+    CurrentElectron.set_passFullId(passFullId);
+
+    std::cout<<" Electron fullIdCheck is  "<<passFullId<<std::endl;
 
 
 
-
-    ////////////
-    // store the electron
-
-    TupleElectrons->push_back(CurrentElectron);
 
   }
 
 
-  iEvent.put( TupleElectrons, NAME_ );
 
 
 
 
-  /* This is an event example
-  //Read 'ExampleData' from the Event
-  Handle<ExampleData> pIn;
-  iEvent.getByLabel("example",pIn);
 
-  //Use the ExampleData to create an ExampleData2 which
-  // is put into the Event
-  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-  iEvent.put(pOut);
-  */
 
-  /* this is an EventSetup example
-  //Read SetupData from the SetupRecord in the EventSetup
-  ESHandle<SetupData> pSetup;
-  iSetup.get<SetupRecord>().get(pSetup);
-  */
+  ////////////
+  // store the electron
+
+  TupleElectrons->push_back(CurrentElectron);
+
+}
+
+
+iEvent.put( TupleElectrons, NAME_ );
+
+
+
+
+/* This is an event example
+//Read 'ExampleData' from the Event
+Handle<ExampleData> pIn;
+iEvent.getByLabel("example",pIn);
+
+//Use the ExampleData to create an ExampleData2 which
+// is put into the Event
+std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+iEvent.put(pOut);
+*/
+
+/* this is an EventSetup example
+//Read SetupData from the SetupRecord in the EventSetup
+ESHandle<SetupData> pSetup;
+iSetup.get<SetupRecord>().get(pSetup);
+*/
 
 }
 
