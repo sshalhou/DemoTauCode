@@ -3,6 +3,7 @@ import FWCore.ParameterSet.Config as cms
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
 ########################################################################################################
 
 FilterEvents = True
@@ -213,12 +214,12 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 # will return -1
 ###################################################
 
-#process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#
 #pfTools.usePFIso(process)
 
 
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
+#from PhysicsTools.PatAlgos.tools.pfTools import *
+#usePFIso(process)
 #process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
