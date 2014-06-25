@@ -76,6 +76,60 @@ namespace TupleHelpers
   }
 
 
+  ///////////////
+  // get electron
+  // category as defined
+  // here https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingSummer2013#Electron_ID
+
+  int getMVAElectronIdCategory(double pt, double superClusterEta, string LOOSE_TIGHT="TIGHT")
+  {
+
+    int category = -1;
+
+    // LOOSE ID
+
+    if(LOOSE_TIGHT.compare("LOOSE"))
+    {
+
+      if( !(pt>20) )
+      {
+
+        if(fabs(superClusterEta) < 0.8) category = 1;
+        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 2;
+        else if(fabs(superClusterEta) >= 1.479) category = 3;
+
+      }
+      else
+      {
+
+        if(fabs(superClusterEta) < 0.8) category = 4;
+        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 5;
+        else if(fabs(superClusterEta) >= 1.479) category = 6;
+
+
+      }
+
+    }
+
+    // TIGHT ID
+
+    if(LOOSE_TIGHT.compare("TIGHT"))
+    {
+
+      if( (pt>20) )
+      {
+
+        if(fabs(superClusterEta) < 0.8) category = 4;
+        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 5;
+        else if(fabs(superClusterEta) >= 1.479) category = 6;
+
+      }
+
+    }
+
+
+    return category;
+  }
 
 
 

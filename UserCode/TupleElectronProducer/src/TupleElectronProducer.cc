@@ -43,6 +43,8 @@ Implementation:
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "Math/GenVector/VectorUtil.h"
 #include "DataFormats/PatCandidates/interface/PFParticle.h"
+#include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -195,6 +197,21 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
       //set_SuperClusterEta
       ////////////////
       CurrentElectron.set_SuperClusterEta(electron->superCluster()->position().Eta());
+
+
+
+      /////////////////
+      // apply the electron
+      // ID MVA
+
+      // get the category for tight MVA id
+      int category = -1;
+      double Eta = electron->superCluster()->position().Eta();
+      category =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "TIGHT");
+
+      std::cout<<" Electron category is "<<category<<std::endl;
+
+
     }
     ////////////////
     //set_isEB
@@ -339,6 +356,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     //set_mvaNonTrigV0
     ////////////////
     CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
+
+
 
 
 
