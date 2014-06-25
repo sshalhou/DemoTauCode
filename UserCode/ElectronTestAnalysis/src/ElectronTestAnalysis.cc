@@ -172,6 +172,7 @@ if(electron->pt()) irel/=electron->pt();
 else irel = 0.0;
 
 std::cout<<" isolation = "<<irel<<std::endl;
+std::cout<<" iso inputs "<<i_charged<<" "<<i_photons<<" "<<i_neutralhadrons<<" "<<i_deltabeta<<std::endl;
 
 ////////////
 // conversions
