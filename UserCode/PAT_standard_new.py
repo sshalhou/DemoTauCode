@@ -79,15 +79,7 @@ process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
 
 
-###################################################
-# setup electron pfIsolation, without this the
-# standard PAT access via chargedHadronIso etc.
-# will return -1
-###################################################
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
-process.patElectrons.pfElectronSource = 'particleFlow'
-process.patMuons.pfMuonSource = 'particleFlow'
+
 
 
 ##################################################
@@ -212,6 +204,22 @@ process.out.outputCommands +=['keep *_patConversions*_*_*']
 process.out.outputCommands +=['keep *_conversions*_*_*']
 #process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
+
+
+
+###################################################
+# setup electron pfIsolation, without this the
+# standard PAT access via chargedHadronIso etc.
+# will return -1
+###################################################
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
+pfTools.usePFIso(process)
+
+
+#from PhysicsTools.PatAlgos.tools.pfTools import *
+#usePFIso(process)
+#process.patElectrons.pfElectronSource = 'particleFlow'
+#process.patMuons.pfMuonSource = 'particleFlow'
 
 
 
