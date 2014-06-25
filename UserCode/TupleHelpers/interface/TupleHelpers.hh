@@ -88,7 +88,7 @@ namespace TupleHelpers
 
     // LOOSE ID
 
-    if(LOOSE_TIGHT.compare("LOOSE"))
+    if(LOOSE_TIGHT.compare("LOOSE")==0)
     {
 
       if( !(pt>20) )
@@ -113,7 +113,7 @@ namespace TupleHelpers
 
     // TIGHT ID
 
-    if(LOOSE_TIGHT.compare("TIGHT"))
+    if(LOOSE_TIGHT.compare("TIGHT")==0)
     {
 
       if( (pt>20) )
