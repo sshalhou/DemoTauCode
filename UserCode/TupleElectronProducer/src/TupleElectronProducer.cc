@@ -387,21 +387,21 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     bool passFullId = 1;
 
-    if(  !(electron->pt() > 24)           ) passFullId = 2;
-    if(  !( fabs(electron->eta()) < 2.1)  ) passFullId = 3;
-    if(  !(pass_fail)                     ) passFullId = 4;
-    if(  !(relativeIsolation < 0.1)                    ) passFullId = 5;
-    if(  !(numberOfMissingInnerHits==0)   ) passFullId = 6;
-    if(  !(conversionVetoPass)            ) passFullId = 7;
+    if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" a "<<std::endl; }
+    if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" b "<<std::endl; }
+    if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" c "<<std::endl; }
+    if(  !(relativeIsolation < 0.1)                    ) passFullId = 0; std::cout<<" d "<<std::endl; }
+    if(  !(numberOfMissingInnerHits==0)   ) {passFullId = 0; std::cout<<" e "<<std::endl; }
+    if(  !(conversionVetoPass)            ) {passFullId = 0; std::cout<<" f "<<std::endl; }
 
     if(electron->gsfTrack().isNonnull())
     {
 
-      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) passFullId = 8;
-      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) passFullId = 9;
+      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" g "<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" h "<<std::endl; }
 
     }
-    else passFullId = 10;
+    else {passFullId = 0; std::cout<<" i "<<std::endl; }
 
     CurrentElectron.set_passFullId(passFullId);
 
