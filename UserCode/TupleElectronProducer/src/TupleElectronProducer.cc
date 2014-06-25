@@ -388,24 +388,21 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     bool passFullId = 1;
 
 
-    if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" a "<<std::endl; }
-    if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" b "<<std::endl; }
-
-/*
-    if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" c "<<std::endl; }
-    if(  !(relativeIsolation < 0.1)       ) {passFullId = 0; std::cout<<" d "<<std::endl; }
-    if(  !(numberOfMissingInnerHits==0)   ) {passFullId = 0; std::cout<<" e "<<std::endl; }
-    if(  !(conversionVetoPass)            ) {passFullId = 0; std::cout<<" f "<<std::endl; }
+    if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" Electron a "<<std::endl; }
+    if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" Electron b "<<std::endl; }
+    if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" Electron c "<<std::endl; }
+    if(  !(relativeIsolation < 0.1)       ) {passFullId = 0; std::cout<<" Electron d "<<std::endl; }
+    if(  !(numberOfMissingInnerHits==0)   ) {passFullId = 0; std::cout<<" Electron e "<<std::endl; }
+    if(  !(conversionVetoPass)            ) {passFullId = 0; std::cout<<" Electron f "<<std::endl; }
 
     if(electron->gsfTrack().isNonnull())
     {
 
-      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" g "<<std::endl; }
-      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" h "<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<std::endl; }
 
     }
-    else {passFullId = 0; std::cout<<" i "<<std::endl; }
-*/
+    else {passFullId = 0; std::cout<<" Electron i "<<std::endl; }
 
     CurrentElectron.set_passFullId(passFullId);
 
