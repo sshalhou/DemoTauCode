@@ -270,7 +270,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     ////////////////
     //set_d0
     ////////////////
-    CurrentElectron.set_dz(electron->gsfTrack()->d0());
+    CurrentElectron.set_d0(electron->gsfTrack()->d0());
 
   }
 
@@ -398,8 +398,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(electron->gsfTrack().isNonnull())
     {
 
-      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<std::endl; }
-      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<electron->gsfTrack()->dz()<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->gsfTrack()->d0()<<std::endl; }
 
     }
     else {passFullId = 0; std::cout<<" Electron i "<<std::endl; }
