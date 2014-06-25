@@ -168,6 +168,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_charge(electron->charge());
 
 
+/* this does not work
     if(electron->PFParticle().isNonnull())
     {
       ////////////////
@@ -180,6 +181,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
       CurrentElectron.set_pfP4(xyzt);
     }
+*/
 
     ////////////////
     //set_PFpdgId
