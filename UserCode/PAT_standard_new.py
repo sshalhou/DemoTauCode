@@ -79,6 +79,15 @@ process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
 
 
+###################################################
+# setup electron pfIsolation, without this the
+# standard PAT access via chargedHadronIso etc.
+# will return -1
+###################################################
+from PhysicsTools.PatAlgos.tools.pfTools import *
+usePFIso(process)
+process.patElectrons.pfElectronSource = 'particleFlow'
+
 
 ##################################################
 # MVA MET
