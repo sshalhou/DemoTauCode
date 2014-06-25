@@ -346,7 +346,7 @@ process.p = cms.Path(
   +process.pfAllMuons
   +process.pfParticleSelectionSequence
   +process.eleIsoSequence
-  +process.muIsoSequence
+  +process.muIsoSequence+
                                process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
