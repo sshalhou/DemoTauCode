@@ -328,8 +328,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   double i_neutralhadrons = electron->neutralHadronIso();
   double i_deltabeta = electron->puChargedHadronIso();
   relativeIsolation = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
-  if(electron->pt()) relativeIsolation/=electron->pt();
-  else relativeIsolation = 0.0;
+  if(electron->pt()!=0) relativeIsolation/=electron->pt();
 
   CurrentElectron.set_relativeIso(relativeIsolation);
 
