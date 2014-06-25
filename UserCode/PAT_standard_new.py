@@ -203,6 +203,17 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 #process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
+##################################################
+# make sure we are using PF electrons and muons
+##################################################
+
+patMuons  = getattr(process, 'patMuons')
+process.patMuons.embedPFCandidate   = cms.bool(True)
+process.patMuons.useParticleFlow    = cms.bool(True)
+
+patElectrons  = getattr(process, 'patElectrons')
+process.patElectrons.embedPFCandidate   = cms.bool(True)
+process.patElectrons.useParticleFlow    = cms.bool(True)
 
 
 ###################################################
