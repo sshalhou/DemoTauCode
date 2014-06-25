@@ -222,6 +222,7 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 #process.patMuons.pfMuonSource = 'particleFlow'
 
 
+process.load("CommonTools.ParticleFlow.pfNoPileUp_cfi")
 process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
 from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
 
@@ -343,8 +344,8 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
-  #process.pfAllMuons
-  process.pfParticleSelectionSequence
+  process.pfAllMuons
+  +process.pfParticleSelectionSequence
   +process.eleIsoSequence
   +process.muIsoSequence+
                                process.recoTauClassicHPSSequence *
