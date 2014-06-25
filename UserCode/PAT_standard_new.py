@@ -87,6 +87,7 @@ process.out.outputCommands +=['keep *_puJetMva*_*_*']
 from PhysicsTools.PatAlgos.tools.pfTools import *
 usePFIso(process)
 process.patElectrons.pfElectronSource = 'particleFlow'
+process.patMuons.pfMuonSource = 'particleFlow'
 
 
 ##################################################
