@@ -214,12 +214,10 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 # will return -1
 ###################################################
 
-#
-#pfTools.usePFIso(process)
 
 
-#from PhysicsTools.PatAlgos.tools.pfTools import *
-#usePFIso(process)
+from PhysicsTools.PatAlgos.tools.pfTools import *
+usePFIso(process)
 #process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
@@ -320,6 +318,9 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
+                        process.pfParticleSelectionSequence *
+	                      process.muIsoSequence *
+	                      process.electronIsoSequence *
                              process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
