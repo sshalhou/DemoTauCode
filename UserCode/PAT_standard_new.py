@@ -343,8 +343,8 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
-  process.pfAllMuons
-  +process.pfParticleSelectionSequence
+  #process.pfAllMuons
+  process.pfParticleSelectionSequence
   +process.eleIsoSequence
   +process.muIsoSequence+
                                process.recoTauClassicHPSSequence *
