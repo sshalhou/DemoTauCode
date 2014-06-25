@@ -322,7 +322,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   //set_relativeIso
   ////////////////
 
-  relativeIsolation = 0;
+  relativeIsolation = 999.;
   double i_charged = electron->chargedHadronIso();
   double i_photons = electron->photonIso();
   double i_neutralhadrons = electron->neutralHadronIso();
@@ -387,6 +387,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     bool passFullId = 1;
 
+/*
     if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" a "<<std::endl; }
     if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" b "<<std::endl; }
     if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" c "<<std::endl; }
@@ -402,6 +403,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     }
     else {passFullId = 0; std::cout<<" i "<<std::endl; }
+*/
 
     CurrentElectron.set_passFullId(passFullId);
 
