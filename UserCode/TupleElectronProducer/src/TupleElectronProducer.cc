@@ -37,7 +37,11 @@ Implementation:
 #include "DataFormats/PatCandidates/interface/Conversion.h"
 #include "DataFormats/PatCandidates/interface/Lepton.h"
 #include "UserCode/TupleObjects/interface/TupleElectron.h"
-
+#include "DataFormats/Math/interface/LorentzVector.h"
+#include "TLorentzVector.h"
+#include "DataFormats/Math/interface/Vector3D.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
+#include "Math/GenVector/VectorUtil.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -163,11 +167,18 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_charge(electron->charge());
 
 
-    ////////////////
-    //set_pfP4
-    ////////////////
-    CurrentElectron.set_pfP4(electron->pfP4());
+    if(electron->pfCandidate().isNonnull())
+    {
+      ////////////////
+      //set_pfP4
+      ////////////////
+      math::PtEtaPhiMLorentzVector ptEtPhiM(electron->pfCandidate()->pt(),electron->pfCandidate()->eta(),
+      electron->pfCandidate()->phi(),electron->pfCandidate()->mass());
 
+      LorentzVector xyzt(ptEtPhiM.x(), ptEtPhiM.y(), ptEtPhiM.z(), ptEtPhiM.t());
+
+      CurrentElectron.set_pfP4(xyzt);
+    }
 
     ////////////////
     //set_PFpdgId
@@ -325,6 +336,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     //set_mvaNonTrigV0
     ////////////////
     CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
+
+
 
 
     /*
