@@ -310,22 +310,22 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // @ DR 3
     /////////////
 
-    double irel_DR3 = 0;
+    double relativeIsolation_DR3 = 999.;
     double i_charged_DR3 = muon->pfIsolationR03().sumChargedParticlePt;
     double i_photons_DR3 = muon->pfIsolationR03().sumPhotonEt;
     double i_neutralhadrons_DR3 = muon->pfIsolationR03().sumNeutralHadronEt;
     double i_deltabeta_DR3 = muon->pfIsolationR03().sumPUPt;
 
-    irel_DR3 = i_charged_DR3 + std::max(i_neutralhadrons_DR3+i_photons_DR3-0.5*i_deltabeta_DR3,0.0);
+    relativeIsolation_DR3 = i_charged_DR3 + std::max(i_neutralhadrons_DR3+i_photons_DR3-0.5*i_deltabeta_DR3,0.0);
 
-    if(muon->pt()) irel_DR3/=muon->pt();
-    else irel_DR3 = 0.0;
+    if(muon->pt()) relativeIsolation_DR3/=muon->pt();
+    else relativeIsolation_DR3 = 0.0;
 
     CurrentMuon.set_sumChargedParticlePt_DR3(i_charged_DR3);
     CurrentMuon.set_sumPhotonEt_DR3(i_photons_DR3);
     CurrentMuon.set_sumNeutralHadronEt_DR3(i_neutralhadrons_DR3);
     CurrentMuon.set_sumPUPt_DR3(i_deltabeta_DR3);
-    CurrentMuon.set_relativeIso_DR3(irel_DR3);
+    CurrentMuon.set_relativeIso_DR3(relativeIsolation_DR3);
 
 
     /////////////
@@ -335,22 +335,22 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // @ DR 4
     /////////////
 
-    double irel_DR4 = 0;
+    double relativeIsolation_DR4 = 999.;
     double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
     double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
     double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
     double i_deltabeta_DR4 = muon->pfIsolationR04().sumPUPt;
 
-    irel_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
+    relativeIsolation_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
 
-    if(muon->pt()) irel_DR4/=muon->pt();
-    else irel_DR4 = 0.0;
+    if(muon->pt()) relativeIsolation_DR4/=muon->pt();
+    else relativeIsolation_DR4 = 0.0;
 
     CurrentMuon.set_sumChargedParticlePt_DR4(i_charged_DR4);
     CurrentMuon.set_sumPhotonEt_DR4(i_photons_DR4);
     CurrentMuon.set_sumNeutralHadronEt_DR4(i_neutralhadrons_DR4);
     CurrentMuon.set_sumPUPt_DR4(i_deltabeta_DR4);
-    CurrentMuon.set_relativeIso_DR4(irel_DR4);
+    CurrentMuon.set_relativeIso_DR4(relativeIsolation_DR4);
 
 
     //////////////////////////
@@ -367,7 +367,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
-    if(!(irel_DR4 < 0.1)) passFullId = 0;
+    if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
     if(!(muon->p4().pt()>20)) passFullId = 0;
     if(!(fabs(muon->p4().eta())<2.1)) passFullId = 0;
     ///////////////////////////

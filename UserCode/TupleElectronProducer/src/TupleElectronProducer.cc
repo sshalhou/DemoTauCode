@@ -153,6 +153,14 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     TupleElectron CurrentElectron;
 
+    //////////////////////
+    // some values should be available in this
+    // scope
+
+    int numberOfMissingInnerHits = 999;
+    bool conversionVetoPass = 0;
+    double relativeIsolation = 999.;
+
     ////////////////////////////////////////////
     // set electron quantities
 
@@ -244,13 +252,14 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   CurrentElectron.set_sigmaIphiIphi(electron->sigmaIphiIphi());
 
 
+
   if(electron->gsfTrack().isNonnull())
   {
 
     ////////////////
     //set_numberOfMissingInnerHits
     ////////////////
-    int numberOfMissingInnerHits = electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits();
+    numberOfMissingInnerHits = electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits();
     CurrentElectron.set_numberOfMissingInnerHits(numberOfMissingInnerHits);
 
     ////////////////
@@ -268,7 +277,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   ////////////////
   //set_passConversionVeto
   ////////////////
-  bool conversionVetoPass = electron->passConversionVeto();
+  conversionVetoPass = electron->passConversionVeto();
   CurrentElectron.set_passConversionVeto(conversionVetoPass);
 
 
@@ -313,16 +322,16 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   //set_relativeIso
   ////////////////
 
-  double irel = 0;
+  relativeIsolation = 0;
   double i_charged = electron->chargedHadronIso();
   double i_photons = electron->photonIso();
   double i_neutralhadrons = electron->neutralHadronIso();
   double i_deltabeta = electron->puChargedHadronIso();
-  irel = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
-  if(electron->pt()) irel/=electron->pt();
-  else irel = 0.0;
+  relativeIsolation = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
+  if(electron->pt()) relativeIsolation/=electron->pt();
+  else relativeIsolation = 0.0;
 
-  CurrentElectron.set_relativeIso(irel);
+  CurrentElectron.set_relativeIso(relativeIsolation);
 
 
 
@@ -381,7 +390,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(  !(electron->pt() > 24)           ) passFullId = 0;
     if(  !( fabs(electron->eta()) < 2.1)  ) passFullId = 0;
     if(  !(pass_fail)                     ) passFullId = 0;
-    if(  !(irel < 0.1)                    ) passFullId = 0;
+    if(  !(relativeIsolation < 0.1)                    ) passFullId = 0;
     if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
     if(  !(conversionVetoPass)            ) passFullId = 0;
 
