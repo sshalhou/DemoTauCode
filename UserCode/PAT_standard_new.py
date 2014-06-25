@@ -216,81 +216,37 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
+#from PhysicsTools.PatAlgos.tools.pfTools import *
+#usePFIso(process)
 #process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
 
 
-#--------------------------------------------------------------------------------
+from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
 
-from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFMuonIso, setupPFElectronIso
+process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
+process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
 
-process.muIsoSequence       = setupPFMuonIso(process,'muons')
-process.electronIsoSequence = setupPFElectronIso(process,'gsfElectrons')
+process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueNeutral03NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValuePU03NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueCharged04NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueChargedAll04NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueGamma04NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValueNeutral04NoPFIdPFIso)
+process.eleIsoSequence.remove(process.elPFIsoValuePU04NoPFIdPFIso)
+process.elPFIsoValueGamma04PFIdPFIso.deposits[0].vetos      = cms.vstring('EcalEndcaps:ConeVeto(0.08)','EcalBarrel:ConeVeto(0.08)')
+process.elPFIsoValueNeutral04PFIdPFIso.deposits[0].vetos    = cms.vstring()
+process.elPFIsoValuePU04PFIdPFIso.deposits[0].vetos         = cms.vstring()
+process.elPFIsoValueCharged04PFIdPFIso.deposits[0].vetos    = cms.vstring('EcalEndcaps:ConeVeto(0.015)')
+process.elPFIsoValueChargedAll04PFIdPFIso.deposits[0].vetos = cms.vstring('EcalEndcaps:ConeVeto(0.015)','EcalBarrel:ConeVeto(0.01)')
 
-from CommonTools.ParticleFlow.pfParticleSelection_cff import pfParticleSelectionSequence
-process.pfParticleSelectionSequence = pfParticleSelectionSequence
 
 
-process.patMuons.isoDeposits = cms.PSet(
-    pfAllParticles   = cms.InputTag("muPFIsoDepositPUPFIso"),      # all PU   CH+MU+E
-    pfChargedHadrons = cms.InputTag("muPFIsoDepositChargedPFIso"), # all noPU CH
 
-    pfNeutralHadrons = cms.InputTag("muPFIsoDepositNeutralPFIso"), # all NH
-    pfPhotons        = cms.InputTag("muPFIsoDepositGammaPFIso"),   # all PH
-
-    user = cms.VInputTag(
-    cms.InputTag("muPFIsoDepositChargedAllPFIso"),                 # all noPU CH+MU+E
-    )
-    )
-
-process.patMuons.isolationValues = cms.PSet(
-    pfAllParticles   = cms.InputTag("muPFIsoValuePU04PFIso"),
-    pfChargedHadrons = cms.InputTag("muPFIsoValueCharged04PFIso"),
-
-    pfNeutralHadrons = cms.InputTag("muPFIsoValueNeutral04PFIso"),
-    pfPhotons        = cms.InputTag("muPFIsoValueGamma04PFIso"),
-
-    user = cms.VInputTag(
-    cms.InputTag("muPFIsoValueChargedAll04PFIso"),
-    )
-    )
-
-process.patElectrons.isoDeposits = cms.PSet(
-    pfAllParticles   = cms.InputTag("elPFIsoDepositPUPFIso"),      # all PU   CH+MU+E
-
-    pfChargedHadrons = cms.InputTag("elPFIsoDepositChargedPFIso"), # all noPU CH
-    pfNeutralHadrons = cms.InputTag("elPFIsoDepositNeutralPFIso"), # all NH
-
-    pfPhotons        = cms.InputTag("elPFIsoDepositGammaPFIso"),   # all PH
-    user = cms.VInputTag(
-    cms.InputTag("elPFIsoDepositChargedAllPFIso"),                 # all noPU CH+MU+E
-
-    )
-    )
-process.patElectrons.isolationValues = cms.PSet(
-    pfAllParticles   = cms.InputTag("elPFIsoValuePU04PFIdPFIso"),
-    pfChargedHadrons = cms.InputTag("elPFIsoValueCharged04PFIdPFIso"),
-
-    pfNeutralHadrons = cms.InputTag("elPFIsoValueNeutral04PFIdPFIso"),
-    pfPhotons        = cms.InputTag("elPFIsoValueGamma04PFIdPFIso"),
-
-    user = cms.VInputTag(
-    cms.InputTag("elPFIsoValueChargedAll04PFIdPFIso"),
-    cms.InputTag("elPFIsoValueChargedAll04NoPFIdPFIso"),
-
-    cms.InputTag("elPFIsoValuePU04NoPFIdPFIso"),
-    cms.InputTag("elPFIsoValueCharged04NoPFIdPFIso"),
-    cms.InputTag("elPFIsoValueGamma04NoPFIdPFIso"),
-
-    cms.InputTag("elPFIsoValueNeutral04NoPFIdPFIso")
-    )
-
-    )
-
-#--------------------------------------------------------------------------------
 
 ###################################################
 # apply selection cuts on physics objects
@@ -387,10 +343,11 @@ process.p = cms.Path(
                              process.VertexPresent*
                              process.mvaID*
                              process.PFTau*
-                        process.pfParticleSelectionSequence *
-	                      process.muIsoSequence *
-	                      process.electronIsoSequence *
-                             process.recoTauClassicHPSSequence *
+  +process.pfAllMuons
+  +process.pfParticleSelectionSequence
+  +process.eleIsoSequence
+  +process.muIsoSequence
+                               process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
