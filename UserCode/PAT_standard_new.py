@@ -222,7 +222,7 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 #process.patMuons.pfMuonSource = 'particleFlow'
 
 
-
+process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
 from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
 
 process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
