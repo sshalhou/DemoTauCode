@@ -212,13 +212,13 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 # standard PAT access via chargedHadronIso etc.
 # will return -1
 ###################################################
-from PhysicsTools.PatAlgos.tools.pfTools import pfTools as pfTools
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
-pfTools.usePFIso(process)
+
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#pfTools.usePFIso(process)
 
 
-#from PhysicsTools.PatAlgos.tools.pfTools import *
-#usePFIso(process)
+from PhysicsTools.PatAlgos.tools.pfTools import *
+usePFIso(process)
 #process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
