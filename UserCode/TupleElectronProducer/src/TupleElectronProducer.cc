@@ -167,13 +167,13 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     CurrentElectron.set_charge(electron->charge());
 
 
-    if(electron->pfCandidate_().isNonnull())
+    if(electron->PFParticle().isNonnull())
     {
       ////////////////
       //set_pfP4
       ////////////////
-      math::PtEtaPhiMLorentzVector ptEtPhiM(electron->pfCandidate_()->pt(),electron->pfCandidate_()->eta(),
-      electron->pfCandidate_()->phi(),electron->pfCandidate_()->mass());
+      math::PtEtaPhiMLorentzVector ptEtPhiM(electron->PFParticle()->pt(),electron->PFParticle()->eta(),
+      electron->PFParticle()->phi(),electron->PFParticle()->mass());
 
       LorentzVector xyzt(ptEtPhiM.x(), ptEtPhiM.y(), ptEtPhiM.z(), ptEtPhiM.t());
 
