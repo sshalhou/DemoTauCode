@@ -230,10 +230,12 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 #from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
 process.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
 process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
+process.load("CommonTools.ParticleFlow.Tools.pfIsolation")
 from PhysicsTools.PatAlgos.tools.pfTools import *
 usePFIso(process)
-process.patElectrons.pfElectronSource = 'particleFlow'
-process.patMuons.pfMuonSource = 'particleFlow'
+
+#process.patElectrons.pfElectronSource = 'particleFlow'
+#process.patMuons.pfMuonSource = 'particleFlow'
 
 #from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
 #process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
