@@ -324,7 +324,7 @@ const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
     ////////////////
     //set_d0
     ////////////////
-    CurrentElectron.set_dB());
+    CurrentElectron.set_d0(electron->dB());
 
   }
 
@@ -452,7 +452,7 @@ const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
     {
 
       if(  !( fabs(electron->gsfTrack()->dz(primary_vertex.position())) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<electron->gsfTrack()->dz()<<std::endl; }
-      if(  !( fabs(electron->gsfTrack()->dB()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->gsfTrack()->dB()<<std::endl; }
+      if(  !( fabs(electron->dB()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->dB()<<std::endl; }
 
     }
     else {passFullId = 0; std::cout<<" Electron i "<<std::endl; }
