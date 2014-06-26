@@ -239,7 +239,7 @@ usePFIso(process)
 
 from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
 process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
-process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
+#process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
 #process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
