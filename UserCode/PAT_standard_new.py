@@ -356,7 +356,7 @@ process.p = cms.Path(
                              process.mvaID*
                              process.PFTau
 
-  +process.pfNoPileUpSequence
+  #+process.pfNoPileUpSequence
   +process.pfAllMuons
   +process.pfParticleSelectionSequence
   +process.eleIsoSequence
