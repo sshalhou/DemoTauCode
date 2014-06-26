@@ -41,6 +41,7 @@ process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleElectronsNominal")
                                      )
 
