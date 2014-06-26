@@ -247,8 +247,8 @@ process.elPFIsoValuePU04PFIdPFIso.deposits[0].vetos         = cms.vstring()
 process.elPFIsoValueCharged04PFIdPFIso.deposits[0].vetos    = cms.vstring('EcalEndcaps:ConeVeto(0.015)')
 process.elPFIsoValueChargedAll04PFIdPFIso.deposits[0].vetos = cms.vstring('EcalEndcaps:ConeVeto(0.015)','EcalBarrel:ConeVeto(0.01)')
 
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
+#from PhysicsTools.PatAlgos.tools.pfTools import *
+#usePFIso(process)
 
 
 
