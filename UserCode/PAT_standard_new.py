@@ -234,12 +234,12 @@ process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
 from PhysicsTools.PatAlgos.tools.pfTools import *
 usePFIso(process)
 
-#process.patElectrons.pfElectronSource = 'particleFlow'
-#process.patMuons.pfMuonSource = 'particleFlow'
+process.patElectrons.pfElectronSource = 'particleFlow'
+process.patMuons.pfMuonSource = 'particleFlow'
 
 from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
-#process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
-#process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
+process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons', '')
+process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons', '')
 #process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
