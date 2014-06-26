@@ -216,39 +216,45 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
-process.patElectrons.pfElectronSource = 'particleFlow'
+#from PhysicsTools.PatAlgos.tools.pfTools import *
+#usePFIso(process)
+#process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
 
 #process.load("CommonTools.ParticleFlow.TopProjectors.pfNoPileUp_cfi")
 #CommonTools/ParticleFlow/python/pfNoPileUp_cff.py
-from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
+
+
+
+#from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
+pfocess.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
 process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
-from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
+from PhysicsTools.PatAlgos.tools.pfTools import *
+usePFIso(process)
+process.patElectrons.pfElectronSource = 'particleFlow'
+process.patMuons.pfMuonSource = 'particleFlow'
 
-process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
-process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
+#from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
+#process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
+#process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
+#process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueNeutral03NoPFIdPFIso)
+#rocess.eleIsoSequence.remove(process.elPFIsoValuePU03NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueCharged04NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueChargedAll04NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueGamma04NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValueNeutral04NoPFIdPFIso)
+#process.eleIsoSequence.remove(process.elPFIsoValuePU04NoPFIdPFIso)
+#process.elPFIsoValueGamma04PFIdPFIso.deposits[0].vetos      = cms.vstring('EcalEndcaps:ConeVeto(0.08)','EcalBarrel:ConeVeto(0.08)')
+#process.elPFIsoValueNeutral04PFIdPFIso.deposits[0].vetos    = cms.vstring()
+#process.elPFIsoValuePU04PFIdPFIso.deposits[0].vetos         = cms.vstring()
+#process.elPFIsoValueCharged04PFIdPFIso.deposits[0].vetos    = cms.vstring('EcalEndcaps:ConeVeto(0.015)')
+#process.elPFIsoValueChargedAll04PFIdPFIso.deposits[0].vetos = cms.vstring('EcalEndcaps:ConeVeto(0.015)','EcalBarrel:ConeVeto(0.01)')
 
-process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueNeutral03NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValuePU03NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueCharged04NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueChargedAll04NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueGamma04NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValueNeutral04NoPFIdPFIso)
-process.eleIsoSequence.remove(process.elPFIsoValuePU04NoPFIdPFIso)
-process.elPFIsoValueGamma04PFIdPFIso.deposits[0].vetos      = cms.vstring('EcalEndcaps:ConeVeto(0.08)','EcalBarrel:ConeVeto(0.08)')
-process.elPFIsoValueNeutral04PFIdPFIso.deposits[0].vetos    = cms.vstring()
-process.elPFIsoValuePU04PFIdPFIso.deposits[0].vetos         = cms.vstring()
-process.elPFIsoValueCharged04PFIdPFIso.deposits[0].vetos    = cms.vstring('EcalEndcaps:ConeVeto(0.015)')
-process.elPFIsoValueChargedAll04PFIdPFIso.deposits[0].vetos = cms.vstring('EcalEndcaps:ConeVeto(0.015)','EcalBarrel:ConeVeto(0.01)')
 
-#from PhysicsTools.PatAlgos.tools.pfTools import *
-#usePFIso(process)
 
 
 
@@ -348,11 +354,11 @@ process.p = cms.Path(
                              process.mvaID*
                              process.PFTau*
 
-  process.pfNoPileUpSequence
-  +process.pfAllMuons
-  +process.pfParticleSelectionSequence
-  +process.eleIsoSequence
-  +process.muIsoSequence+
+#  process.pfNoPileUpSequence
+#  +process.pfAllMuons
+#  +process.pfParticleSelectionSequence
+#  +process.eleIsoSequence
+#  +process.muIsoSequence+
                                process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
