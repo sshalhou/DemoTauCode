@@ -76,6 +76,7 @@ private:
   // ----------member data ---------------------------
 
   edm::InputTag electronSrc_;
+  edm::InputTag vertexSrc_;
   string NAME_;
 
 
@@ -95,6 +96,7 @@ private:
 //
 TupleElectronProducer::TupleElectronProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
+vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
@@ -134,6 +136,58 @@ TupleElectronProducer::~TupleElectronProducer()
 void
 TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+
+
+// get vertex collection
+edm::Handle<edm::View<reco::Vertex> > vertices;
+iEvent.getByLabel(vertexSrc_,vertices);
+
+edm::View<reco::Vertex>::const_iterator vertex;
+
+
+/////////////////
+// find max sum pt vertex
+// passing quality cuts
+// would really be best to do this
+// at PAT level
+
+int primary_vertex_indx = -999;
+float max_sumPt = -999;
+
+//cout<<" ---------- "<<endl;
+
+
+for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
+{
+
+  if(!vertex->isFake() && vertex->ndof() > 4.0)
+  {
+    if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
+    {
+
+      if( vertex->p4().pt() > max_sumPt)
+      {
+        max_sumPt  =     vertex->p4().pt();
+        primary_vertex_indx =    vertex - vertices->begin();
+        //cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<endl;
+
+
+      }
+
+
+
+
+
+
+    }
+
+  }
+
+}
+std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
+const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+//cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
 
 
 
@@ -265,12 +319,12 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     ////////////////
     //set_dz
     ////////////////
-    CurrentElectron.set_dz(electron->gsfTrack()->dz());
+    CurrentElectron.set_dz(electron->gsfTrack()->dz(primary_vertex.position()));
 
     ////////////////
     //set_d0
     ////////////////
-    CurrentElectron.set_d0(electron->gsfTrack()->d0());
+    CurrentElectron.set_d0(electron->gsfTrack()->d0(primary_vertex.position()));
 
   }
 
@@ -397,8 +451,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(electron->gsfTrack().isNonnull())
     {
 
-      if(  !( fabs(electron->gsfTrack()->dz()) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<electron->gsfTrack()->dz()<<std::endl; }
-      if(  !( fabs(electron->gsfTrack()->d0()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->gsfTrack()->d0()<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->dz(primary_vertex.position())) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<electron->gsfTrack()->dz()<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->d0(primary_vertex.position())) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->gsfTrack()->d0()<<std::endl; }
 
     }
     else {passFullId = 0; std::cout<<" Electron i "<<std::endl; }
