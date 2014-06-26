@@ -3,7 +3,6 @@ import FWCore.ParameterSet.Config as cms
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
 ########################################################################################################
 
 FilterEvents = True
@@ -80,7 +79,24 @@ process.out.outputCommands +=['keep *_puJetId*_*_*']
 process.out.outputCommands +=['keep *_puJetMva*_*_*']
 
 
+###################################################
+# setup electron pfIsolation, without this the
+# standard PAT access via chargedHadronIso etc.
+# will return -1
+###################################################
+from PhysicsTools.PatAlgos.tools.pfTools import *
 
+process.patElectrons.pfElectronSource = 'particleFlow'
+process.patElectrons.embedTrack = True
+process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons', '')
+process.muIsoSequence  = setupPFMuonIso(process, 'muons', '')
+adaptPFIsoMuons(process, applyPostfix(process,"patMuons",""), '')
+adaptPFIsoElectrons(process, applyPostfix(process,"patElectrons",""), '')
+
+
+
+usePFIso(process)
+#process.patElectrons.pfElectronSource = 'particleFlow'
 
 
 ##################################################
@@ -209,58 +225,6 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 ###################################################
-# setup electron pfIsolation, without this the
-# standard PAT access via chargedHadronIso etc.
-# will return -1
-###################################################
-
-
-
-#from PhysicsTools.PatAlgos.tools.pfTools import *
-#usePFIso(process)
-#process.patElectrons.pfElectronSource = 'particleFlow'
-#process.patMuons.pfMuonSource = 'particleFlow'
-
-
-#process.load("CommonTools.ParticleFlow.TopProjectors.pfNoPileUp_cfi")
-#CommonTools/ParticleFlow/python/pfNoPileUp_cff.py
-
-
-
-#from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
-process.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
-process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
-
-from PhysicsTools.PatAlgos.tools.pfTools import *
-usePFIso(process)
-
-process.patElectrons.pfElectronSource = 'particleFlow'
-process.patMuons.pfMuonSource = 'particleFlow'
-
-from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
-process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons', '')
-process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons', '')
-#process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueNeutral03NoPFIdPFIso)
-#rocess.eleIsoSequence.remove(process.elPFIsoValuePU03NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueCharged04NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueChargedAll04NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueGamma04NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValueNeutral04NoPFIdPFIso)
-#process.eleIsoSequence.remove(process.elPFIsoValuePU04NoPFIdPFIso)
-#process.elPFIsoValueGamma04PFIdPFIso.deposits[0].vetos      = cms.vstring('EcalEndcaps:ConeVeto(0.08)','EcalBarrel:ConeVeto(0.08)')
-#process.elPFIsoValueNeutral04PFIdPFIso.deposits[0].vetos    = cms.vstring()
-#process.elPFIsoValuePU04PFIdPFIso.deposits[0].vetos         = cms.vstring()
-#process.elPFIsoValueCharged04PFIdPFIso.deposits[0].vetos    = cms.vstring('EcalEndcaps:ConeVeto(0.015)')
-#process.elPFIsoValueChargedAll04PFIdPFIso.deposits[0].vetos = cms.vstring('EcalEndcaps:ConeVeto(0.015)','EcalBarrel:ConeVeto(0.01)')
-
-
-
-
-
-###################################################
 # apply selection cuts on physics objects
 # to keep that PATtuple to a reasonable size
 ###################################################
@@ -354,14 +318,13 @@ process.p = cms.Path(
                              process.UserSpecifiedData*
                              process.VertexPresent*
                              process.mvaID*
-                             process.PFTau
-
-  #+process.pfNoPileUpSequence
-  #+process.pfAllMuons
-  #+process.pfParticleSelectionSequence
-  #+process.eleIsoSequence
-  #+process.muIsoSequence
-                             +process.recoTauClassicHPSSequence *
+                             process.PFTau*
+  process.pfNoPileUpSequence+
+  process.pfAllMuons+
+  process.pfParticleSelectionSequence+
+  process.eleIsoSequence+
+  process.muIsoSequence+
+                             process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
@@ -428,5 +391,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 100
+process.maxEvents.input = 500
 ########################################################################################################
