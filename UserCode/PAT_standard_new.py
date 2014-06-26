@@ -230,16 +230,16 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 #from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
 process.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
 process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
-process.load("CommonTools.ParticleFlow.Tools.pfIsolation")
+
 from PhysicsTools.PatAlgos.tools.pfTools import *
 usePFIso(process)
 
 #process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
-#from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
-#process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
-#process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
+from CommonTools.ParticleFlow.Tools.pfIsolation import setupPFElectronIso, setupPFMuonIso
+process.eleIsoSequence = setupPFElectronIso(process, 'gsfElectrons')
+process.muIsoSequence = setupPFMuonIso(process, 'pfAllMuons')
 #process.eleIsoSequence.remove(process.elPFIsoValueCharged03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueChargedAll03NoPFIdPFIso)
 #process.eleIsoSequence.remove(process.elPFIsoValueGamma03NoPFIdPFIso)
@@ -354,14 +354,14 @@ process.p = cms.Path(
                              process.UserSpecifiedData*
                              process.VertexPresent*
                              process.mvaID*
-                             process.PFTau*
+                             process.PFTau
 
-#  process.pfNoPileUpSequence
-#  +process.pfAllMuons
-#  +process.pfParticleSelectionSequence
-#  +process.eleIsoSequence
-#  +process.muIsoSequence+
-                               process.recoTauClassicHPSSequence *
+  +process.pfNoPileUpSequence
+  +process.pfAllMuons
+  +process.pfParticleSelectionSequence
+  +process.eleIsoSequence
+  +process.muIsoSequence
+                             +process.recoTauClassicHPSSequence *
                              process.mvametPF2PATsequence*
                              process.patDefaultSequence*
                              process.patPFMetByMVA*
