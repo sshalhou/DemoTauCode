@@ -228,7 +228,7 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 #from CommonTools.ParticleFlow.pfNoPileUp_cff  import *
-pfocess.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
+process.load("CommonTools.ParticleFlow.pfNoPileUp_cff")
 process.load("CommonTools.ParticleFlow.pfNoPileUpIso_cff")
 from PhysicsTools.PatAlgos.tools.pfTools import *
 usePFIso(process)
