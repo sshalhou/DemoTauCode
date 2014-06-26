@@ -216,9 +216,9 @@ process.out.outputCommands +=['keep *_conversions*_*_*']
 
 
 
-#from PhysicsTools.PatAlgos.tools.pfTools import *
-#usePFIso(process)
-#process.patElectrons.pfElectronSource = 'particleFlow'
+from PhysicsTools.PatAlgos.tools.pfTools import *
+usePFIso(process)
+process.patElectrons.pfElectronSource = 'particleFlow'
 #process.patMuons.pfMuonSource = 'particleFlow'
 
 
