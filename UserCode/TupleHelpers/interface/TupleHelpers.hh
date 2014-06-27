@@ -81,7 +81,7 @@ namespace TupleHelpers
   // category as defined
   // here https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingSummer2013#Electron_ID
 
-  int getMVAElectronIdCategory(double pt, double superClusterEta, string LOOSE_TIGHT="TIGHT")
+  int getMVAElectronIdCategory(double pt, double superClusterEta, std::string LOOSE_TIGHT="TIGHT")
   {
 
     int category = -1;
