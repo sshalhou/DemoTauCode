@@ -219,7 +219,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 process.out.outputCommands +=['keep *_conversions*_*_*']
-#process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
+process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 
@@ -251,7 +251,12 @@ cut = cms.string("pt > 10"+
                 )
                                                   )
 
-
+#########################################################################
+# cleanPatElectron passing selection counter
+#########################################################################
+# we count those electrons in cleanPatElectrons that pass the following ID,
+# but keep the entire collection as we need to veto diElectron
+# events using looser cuts (could change this later)
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
