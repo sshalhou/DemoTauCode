@@ -119,7 +119,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   // matching information
   const pat::helper::TriggerMatchHelper matchHelper;
 
-
+/*
 std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasAccept();
@@ -195,6 +195,7 @@ std::cout<<" path HLT_Ele27_WP80 : ";
 std::cout<<" path HLT_IsoMu24 : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu24")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu24")->wasAccept();
+  */
 std::cout<<" path HLT_PFJet320 : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept();
