@@ -186,8 +186,8 @@ std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6 : ";
 
 */
 std::cout<<" path HLT_Mu17_Mu8_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasAccept()<<std::endl;
+  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasRun();
+  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasAccept()<<std::endl;
 
 /*
 std::cout<<" path HLT_Mu17_Mu8_v* : ";
