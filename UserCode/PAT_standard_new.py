@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 FilterEvents = True
 DropSelectedPatObjects = True
-KeepAll = True
+KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
@@ -392,7 +392,9 @@ triggerMatchers = cms.vstring()
 triggerMatchers.extend(['electronTriggerMatchElectrons'])
 switchOnTriggerMatchEmbedding( process, triggerMatchers )
 process.out.outputCommands +=['keep *_*patTrigger*_*_*']
-
+process.out.outputCommands +=['keep *_*TriggerResults*_*_*']
+process.out.outputCommands +=['keep *_*patTriggerEvent*_*_*']
+process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
 
 
 
