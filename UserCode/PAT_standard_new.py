@@ -390,7 +390,7 @@ from PhysicsTools.PatAlgos.tools.trigTools import *
 switchOnTrigger( process )
 triggerMatchers = cms.vstring()
 triggerMatchers.extend(['electronTriggerMatchElectrons'])
-switchOnTriggerMatch( process, triggerMatchers )
+switchOnTriggerMatching( process, triggerMatchers )
 process.out.outputCommands +=['keep *_*patTrigger*_*_*']
 process.out.outputCommands +=['keep *_*TriggerResults*_*_*']
 process.out.outputCommands +=['keep *_*patTriggerEvent*_*_*']
