@@ -24,15 +24,21 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 
 
 ##########################
-# diMuon Veto
+# diMuon & diElectron Vetoes
 ##########################
 
 process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
   muonSource     = cms.InputTag("myCleanPatMuons"),
-  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
+  vertexSource      = cms.InputTag("offlinePrimaryVerticesWithBS"),
   filter = cms.bool(True)
 )
 
+
+process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
+  muonSource     = cms.InputTag("cleanPatElectrons"),
+  vertexSource      = cms.InputTag("offlinePrimaryVerticesWithBS"),
+  filter = cms.bool(True)
+)
 
 
 ##########################
@@ -41,13 +47,13 @@ process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
                 NAME=cms.string("TupleElectronsNominal")
                                      )
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('myCleanPatMuons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
                 NAME=cms.string("TupleMuonsNominal")
                                      )
 
@@ -113,6 +119,7 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 process.p = cms.Path(
       process.myProducerLabel*
       process.isDiMuonEvent*
+      process.isDiElectronEvent*
       #process.pfMEtMVANominal+
       process.TupleElectronsNominal*
       process.TupleMuonsNominal*
