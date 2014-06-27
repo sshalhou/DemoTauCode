@@ -113,7 +113,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   // trigger event
   edm::Handle< pat::TriggerEvent > triggerEvent;
-  iEvent.getByLabel( triggerEvent_, triggerEvent );
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
   // pat trigger helper to recieve for trigger
   // matching information
