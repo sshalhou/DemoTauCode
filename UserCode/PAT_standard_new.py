@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 FilterEvents = True
 DropSelectedPatObjects = True
-KeepAll = False
+KeepAll = True
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
@@ -371,8 +371,26 @@ process.out.SelectEvents.SelectEvents = ['p']
 # be done after all modifications to the path
 ###################################################
 
+# Trigger Object Matching
+
+process.load( "PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cff" )
+
+
+process.electronTriggerMatchElectrons = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'selectedPatElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
 from PhysicsTools.PatAlgos.tools.trigTools import *
 switchOnTrigger( process )
+triggerMatchers = cms.tracked.vstring()
+triggerMatchers.extend(['electronTriggerMatchElectrons'])
+switchOnTriggerMatchEmbedding( process, triggerMatchers )
 process.out.outputCommands +=['keep *_*patTrigger*_*_*']
 
 
