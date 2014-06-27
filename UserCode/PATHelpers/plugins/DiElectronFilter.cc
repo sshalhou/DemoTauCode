@@ -108,8 +108,8 @@ bool DiElectronFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetu
 
       double superClusterEta = electron->superCluster()->position().Eta();
       double sigIetaIeta = electron->sigmaIetaIeta();
-      double deltaEta = electron->deltaEta();
-      double deltaPhi = electron->deltaPhi();
+      double deltaEta = electron->deltaEtaSuperClusterTrackAtVtx()
+      double deltaPhi = electron->deltaPhiSuperClusterTrackAtVtx();
       double HE=  electron->hadronicOverEm();
       double dZ_vtx = electron->gsfTrack()->dz(primary_vertex.position());
 
