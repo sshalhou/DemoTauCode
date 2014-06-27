@@ -74,6 +74,20 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                                      )
 
 
+process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                mvametSrc = cms.InputTag("pfMEtMVA"),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausNominal"),
+                doSVFit=cms.bool(True)
+                                     )
+
 #################################
 process.out = cms.OutputModule("PoolOutputModule",
 fileName = cms.untracked.string('NtupleFile.root'),
@@ -96,10 +110,15 @@ process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_Tu
 
 
 
-process.p = cms.Path(process.myProducerLabel+process.isDiMuonEvent+
+process.p = cms.Path(
+      process.myProducerLabel*
+      process.isDiMuonEvent*
       #process.pfMEtMVANominal+
-      process.TupleElectronsNominal+
-      process.TupleMuonsNominal*process.TupleTausNominal*process.TupleMuonTausNominal
+      process.TupleElectronsNominal*
+      process.TupleMuonsNominal*
+      process.TupleTausNominal*
+      process.TupleMuonTausNominal*
+      process.TupleElectronTausNominal
       #+process.metUncertaintySequence+
       #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
       #+process.TupleMuonTausRecoilUp
