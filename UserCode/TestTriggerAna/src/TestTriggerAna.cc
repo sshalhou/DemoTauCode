@@ -137,7 +137,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
 
-  for(size_t i = 0; i<myPaths->size(); ++i)
+  for(size_t i = 0; i<myPaths.size(); ++i)
   {
 
     std::cout<<" checking for path "<<myPaths[i]<<std::endl;
