@@ -68,6 +68,37 @@ private:
   edm::InputTag electronSrc_;
   edm::InputTag triggerEventSrc_;
   edm::InputTag electronMatchSrc_;
+
+
+  vector<string> myPaths;
+
+myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6");
+myPaths.push_back("HLT_Mu17_Mu8_v");
+myPaths.push_back("HLT_Mu17_Mu8_v");
+myPaths.push_back("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Ele27_WP80");
+myPaths.push_back("HLT_IsoMu24");
+myPaths.push_back("HLT_PFJet320");
+
 };
 
 //
@@ -129,34 +160,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
-  vector<string> myPaths;
 
-myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6");
-myPaths.push_back("HLT_Mu17_Mu8_v");
-myPaths.push_back("HLT_Mu17_Mu8_v");
-myPaths.push_back("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Ele27_WP80");
-myPaths.push_back("HLT_IsoMu24");
-myPaths.push_back("HLT_PFJet320");
 
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
@@ -173,8 +177,11 @@ myPaths.push_back("HLT_PFJet320");
       if(path.name().find(myPaths[i])!= std::string::npos)
       {
 
-        std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept()<<"\n";
-
+        if(path.wasAccept())
+        {
+         std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+         std::cout<<"in form "<<path.name()<<"\n";
+        }
 
       }
 
