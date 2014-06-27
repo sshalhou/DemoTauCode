@@ -132,7 +132,11 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
        << path.prescale() <<" , "
        << path.name() << std::endl;
-  }
+         }
+
+
+std::cout<<" xxxxxx HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
+std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<std::endl;
 
 /*
 std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
