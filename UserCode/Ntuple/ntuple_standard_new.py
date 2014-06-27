@@ -35,7 +35,7 @@ process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
 
 
 process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
-  muonSource     = cms.InputTag("cleanPatElectrons"),
+  electronSource     = cms.InputTag("cleanPatElectrons"),
   vertexSource      = cms.InputTag("offlinePrimaryVerticesWithBS"),
   filter = cms.bool(True)
 )
