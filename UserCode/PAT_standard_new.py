@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 FilterEvents = True
 DropSelectedPatObjects = True
-KeepAll = True
+KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
@@ -287,13 +287,6 @@ process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
 
 
 
-###################################################
-# add in Trigger Info
-###################################################
-
-from PhysicsTools.PatAlgos.tools.trigTools import *
-switchOnTrigger( process )
-
 
 ###################################################
 # keep selected and clean collections
@@ -370,6 +363,19 @@ if DropSelectedPatObjects:
 ###################################################
 
 process.out.SelectEvents.SelectEvents = ['p']
+
+
+
+###################################################
+# add in Trigger Info, according to twiki it should
+# be done after all modifications to the path
+###################################################
+
+from PhysicsTools.PatAlgos.tools.trigTools import *
+switchOnTrigger( process )
+process.out.outputCommands +=['keep *_*patTrigger*_*_*']
+
+
 
 
 
