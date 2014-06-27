@@ -7,7 +7,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 FilterEvents = True
 DropSelectedPatObjects = True
-KeepAll = False
+KeepAll = True
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 
@@ -287,6 +287,13 @@ process.countGoodPairs = cms.EDFilter("PatMuonTauOrElectronTauFilter",
 
 
 
+###################################################
+# add in Trigger Info
+###################################################
+
+from PhysicsTools.PatAlgos.tools.trigTools import *
+switchOnTrigger( process )
+
 
 ###################################################
 # keep selected and clean collections
@@ -396,5 +403,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 500
+process.maxEvents.input = 100
 ########################################################################################################
