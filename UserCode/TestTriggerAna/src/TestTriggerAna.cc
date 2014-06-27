@@ -138,9 +138,14 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-std::cout<<" xxxxxx HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
-std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<std::endl;
+std::cout<<" (accept, run) HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
+std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<" , ";
 std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasRun()<<std::endl;
+
+std::cout<<" (accept, run) x ";
+std::cout<<triggerEvent->path("x")->wasAccept()<<" , ";
+std::cout<<triggerEvent->path("x")->wasRun()<<std::endl;
+
 
 /*
 std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
