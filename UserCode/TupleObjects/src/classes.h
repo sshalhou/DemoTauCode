@@ -3,6 +3,7 @@
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+#include "UserCode/TupleObjects/interface/TupleElectronTau.h"
 #include "DataFormats/Common/interface/Wrapper.h"
 
 struct dictionary {
@@ -16,5 +17,7 @@ struct dictionary {
     edm::Wrapper<TupleUserSpecifiedDataCollection> dummy7;
     TupleElectronCollection dummy8;
     edm::Wrapper<TupleElectronCollection> dummy9;
+    TupleElectronTauCollection dummy10;
+    edm::Wrapper<TupleElectronTauCollection> dummy11;
 
 };

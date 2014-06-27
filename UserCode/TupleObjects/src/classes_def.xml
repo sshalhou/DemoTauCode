@@ -14,4 +14,7 @@
   <class name="TupleElectron"/>
   <class name="std::vector<TupleElectron>"/>
   <class name="edm::Wrapper<std::vector<TupleElectron> >"/>
+  <class name="TupleElectronTau"/>
+  <class name="std::vector<TupleElectronTau>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectronTau> >"/>
 </lcgdict>
