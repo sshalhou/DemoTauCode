@@ -494,7 +494,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(tau->tauID("againstMuonMediumMVA") > 0.5 && tau->tauID("againstElectronLoose") > 0.5 )) passFullId_muTau = 0;
 
     // eTau specific
-    if(!(tau->tauID("againstElectronMediumMVA5") > 0.5 && tau->tauID("againstMuonLoose3") > 0.5 )) passFullId_eTau = 0;
+    if(!(tau->tauID("againstElectronMediumMVA5") > 0.5 && tau->tauID("againstMuonLoose3") > 0.5)) passFullId_eTau = 0;
 
     ///////////////////////////
 

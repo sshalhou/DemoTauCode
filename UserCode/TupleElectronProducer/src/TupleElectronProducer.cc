@@ -441,21 +441,21 @@ const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
     bool passFullId = 1;
 
 
-    if(  !(electron->pt() > 24)           ) {passFullId = 0; std::cout<<" Electron a "<<std::endl; }
-    if(  !( fabs(electron->eta()) < 2.1)  ) {passFullId = 0; std::cout<<" Electron b "<<std::endl; }
-    if(  !(pass_fail)                     ) {passFullId = 0; std::cout<<" Electron c "<<std::endl; }
-    if(  !(relativeIsolation < 0.1)       ) {passFullId = 0; std::cout<<" Electron d "<<std::endl; }
-    if(  !(numberOfMissingInnerHits==0)   ) {passFullId = 0; std::cout<<" Electron e "<<std::endl; }
-    if(  !(conversionVetoPass)            ) {passFullId = 0; std::cout<<" Electron f "<<std::endl; }
+    if(  !(electron->pt() > 24)           ) passFullId = 0;
+    if(  !( fabs(electron->eta()) < 2.1)  ) passFullId = 0;
+    if(  !(pass_fail)                     ) passFullId = 0;
+    if(  !(relativeIsolation < 0.1)       ) passFullId = 0;
+    if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
+    if(  !(conversionVetoPass)            ) passFullId = 0;
 
     if(electron->gsfTrack().isNonnull())
     {
 
-      if(  !( fabs(electron->gsfTrack()->dz(primary_vertex.position())) < 0.2)  ) {passFullId = 0; std::cout<<" Electron g "<<electron->gsfTrack()->dz()<<std::endl; }
-      if(  !( fabs(electron->dB()) < 0.045)  ) {passFullId = 0; std::cout<<" Electron h "<<electron->dB()<<std::endl; }
+      if(  !( fabs(electron->gsfTrack()->dz(primary_vertex.position())) < 0.2)  ) passFullId = 0;
+      if(  !( fabs(electron->dB()) < 0.045)  ) passFullId = 0;
 
     }
-    else {passFullId = 0; std::cout<<" Electron i "<<std::endl; }
+    else passFullId = 0;
 
     CurrentElectron.set_passFullId(passFullId);
 

@@ -103,7 +103,6 @@ LorentzVector TupleTau::p4() const  { return m_p4; }
 void TupleTau::set_genP4(LorentzVector v4_) { m_genP4 = v4_;}
 LorentzVector TupleTau::genP4() const  { return m_genP4; }
 
-
 // the tau discriminators
 
 
