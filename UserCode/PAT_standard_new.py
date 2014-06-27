@@ -377,7 +377,7 @@ process.load( "PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cff" )
 
 
 process.electronTriggerMatchElectrons = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'selectedPatElectrons' ),
+                                                       src = cms.InputTag( 'cleanPatElectrons' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
                                                        maxDeltaR = cms.double( 0.5 ),
@@ -388,7 +388,7 @@ process.electronTriggerMatchElectrons = cms.EDProducer( "PATTriggerMatcherDRLess
 
 from PhysicsTools.PatAlgos.tools.trigTools import *
 switchOnTrigger( process )
-triggerMatchers = cms.tracked.vstring()
+triggerMatchers = cms.vstring()
 triggerMatchers.extend(['electronTriggerMatchElectrons'])
 switchOnTriggerMatchEmbedding( process, triggerMatchers )
 process.out.outputCommands +=['keep *_*patTrigger*_*_*']
