@@ -147,6 +147,8 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" decay mode "<<tau->decayMode()<<std::endl;
 
 
+std::cout<<" dB, dz "<<tau->dB()<<","<<tau->dz()<<std::endl;
+
 std::cout<<" iEvent.id() "<<iEvent.id();
 std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
 std::cout<<" againstElectronLooseMVA5 "<<tau->tauID("againstElectronLooseMVA5");
