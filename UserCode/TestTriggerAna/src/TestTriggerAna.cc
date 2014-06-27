@@ -75,6 +75,29 @@ private:
 
   vector<string> myPaths;
 
+
+
+};
+
+//
+// constants, enums and typedefs
+//
+
+//
+// static data member definitions
+//
+
+//
+// constructors and destructor
+//
+TestTriggerAna::TestTriggerAna(const edm::ParameterSet& iConfig):
+electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
+triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
+electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc" ))
+{
+  //now do what ever initialization is needed
+
+
 myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
@@ -102,25 +125,6 @@ myPaths.push_back("HLT_Ele27_WP80");
 myPaths.push_back("HLT_IsoMu24");
 myPaths.push_back("HLT_PFJet320");
 
-};
-
-//
-// constants, enums and typedefs
-//
-
-//
-// static data member definitions
-//
-
-//
-// constructors and destructor
-//
-TestTriggerAna::TestTriggerAna(const edm::ParameterSet& iConfig):
-electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
-triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
-electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc" ))
-{
-  //now do what ever initialization is needed
 
 }
 
