@@ -37,6 +37,7 @@ Implementation:
 #include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
 #include "DataFormats/PatCandidates/interface/Conversion.h"
 #include "DataFormats/PatCandidates/interface/Lepton.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 //
 // class declaration
 //
