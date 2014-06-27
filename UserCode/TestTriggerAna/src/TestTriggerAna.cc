@@ -171,6 +171,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
+  cout<<" ------------------ \n"
 
   for(size_t i = 0; i<myPaths.size(); ++i)
   {
@@ -186,7 +187,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         if(path.wasAccept())
         {
          std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept();
-         std::cout<<"in form "<<path.name()<<"\n";
+         std::cout<<" in form "<<path.name()<<"\n";
         }
 
       }
