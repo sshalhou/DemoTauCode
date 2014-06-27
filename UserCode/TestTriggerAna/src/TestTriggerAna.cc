@@ -20,6 +20,9 @@ Implementation:
 
 // system include files
 #include <memory>
+#include <string>
+#include <vector>
+
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -106,7 +109,7 @@ void
 TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   using namespace edm;
-
+  using namespace std;
 
   // get electron collection
   edm::Handle<edm::View<pat::Electron> > electrons;
@@ -125,10 +128,48 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
+vector<string> myPaths;
+myPaths.push_back("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1");
+myPaths.push_back("HLT_SHOULDFAIL");
+
+
  const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
-  for (size_t i = 0; i < paths->size(); ++i) {
-    const pat::TriggerPath& path = paths->at(i);
+
+  for(size_t=0; i<myPaths->size(); ++i)
+  {
+
+    std::cout<<" checking for path "<<myPaths[i]<<std::endl;
+
+    for (size_t ii = 0; ii < paths->size(); ++ii)
+    {
+
+       const pat::TriggerPath& path = paths->at(ii);
+       if(path.name().find(myPaths[i])!= std::string::npos)
+       {
+
+         std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept()<<"\n";
+
+
+       }
+
+
+    }
+
+
+if (s1.find(s2) != std::string::npos) {
+    std::cout << "found!" << '\n';
+}
+
+
+  }
+
+
+
+
+
+//  for (size_t i = 0; i < paths->size(); ++i) {
+//    const pat::TriggerPath& path = paths->at(i);
 //    std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
   //     << path.prescale() <<" , "
     //   << path.name() << std::endl;
@@ -138,13 +179,13 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-std::cout<<" (accept, run) HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
-std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<" , ";
-std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasRun()<<std::endl;
+//std::cout<<" (accept, run) HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
+//std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<" , ";
+//std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasRun()<<std::endl;
 
-std::cout<<" (accept, run) x ";
-std::cout<<triggerEvent->path("x")->wasAccept()<<" , ";
-std::cout<<triggerEvent->path("x")->wasRun()<<std::endl;
+//std::cout<<" (accept, run) x ";
+//std::cout<<triggerEvent->path("x")->wasAccept()<<" , ";
+//std::cout<<triggerEvent->path("x")->wasRun()<<std::endl;
 
 
 /*
