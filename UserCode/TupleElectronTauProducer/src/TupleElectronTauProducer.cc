@@ -280,7 +280,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
         cout<<" i,j = "<<i<<","<<j;
-        cout<<" electron PDGID (pf) "<<electron.pdgId();
+        cout<<" electron PDGID (pf) "<<electron.PFpdgId();
         cout<<" tau PDGID (pf) "<<tau.pdgId()<<endl;
 
 
