@@ -130,8 +130,33 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   vector<string> myPaths;
-  myPaths.push_back("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1");
-  myPaths.push_back("HLT_SHOULDFAIL");
+
+myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2");
+myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6");
+myPaths.push_back("HLT_Mu17_Mu8_v");
+myPaths.push_back("HLT_Mu17_Mu8_v");
+myPaths.push_back("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Ele27_WP80");
+myPaths.push_back("HLT_IsoMu24");
+myPaths.push_back("HLT_PFJet320");
 
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
@@ -140,7 +165,6 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(size_t i = 0; i<myPaths.size(); ++i)
   {
 
-    std::cout<<" checking for path "<<myPaths[i]<<std::endl;
 
     for (size_t ii = 0; ii < paths->size(); ++ii)
     {
