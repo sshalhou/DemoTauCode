@@ -171,7 +171,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   //    std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
   //     << path.prescale() <<" , "
   //   << path.name() << std::endl;
-}
+  //}
 
 
 
