@@ -155,7 +155,7 @@ std::cout<<electron->superCluster()->eta()<<std::endl;
 std::cout<<" electronID(mvaNonTrigV0) ";
 std::cout<<electron->electronID("mvaNonTrigV0")<<std::endl;
 
-
+std::cout<<" h/e "<<electron->hadronicOverEm()<<std::endl;
 
 
 /////// isolation info
