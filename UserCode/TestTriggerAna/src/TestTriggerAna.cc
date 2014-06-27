@@ -112,13 +112,18 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
-  // trigger event
+
+  // matching information
+//  const pat::helper::TriggerMatchHelper matchHelper;
+
+
   edm::Handle< pat::TriggerEvent > triggerEvent;
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+  if (triggerEvent.failedToGet()) {
+    std::cout << "WARNING: cannot access triggerEvent for matching" << std::endl;
+    return;
+  }
 
-  // pat trigger helper to recieve for trigger
-  // matching information
-  const pat::helper::TriggerMatchHelper matchHelper;
 
 /*
 std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
@@ -200,7 +205,7 @@ std::cout<<" path HLT_IsoMu24 : ";
 std::cout<<" path HLT_PFJet320 : ";
 //  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
   //std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept();
-
+std::cout<<std::endl;
 
 
 
