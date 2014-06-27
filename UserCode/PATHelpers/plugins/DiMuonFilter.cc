@@ -87,14 +87,14 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
     bool passAllCuts = 1;
 
-    double irel_DR4 = 0;
+    double irel_DR4 = 999.;
     double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
     double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
     double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
     double i_deltabeta_DR4 = muon->pfIsolationR04().sumPUPt;
     irel_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
     if(muon->pt()) irel_DR4/=muon->pt();
-    else irel_DR4 = 0.0;
+    else irel_DR4 = 999.;
 
 
     if(!(muon->isGlobalMuon())) passAllCuts = 0;

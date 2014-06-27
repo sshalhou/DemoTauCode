@@ -26,7 +26,7 @@
 
 namespace TupleHelpers
 {
-
+  ////////////////////////////////////////////////////
 
   ///////////////////
   // create a transverse mass
@@ -94,17 +94,17 @@ namespace TupleHelpers
       if( !(pt>20) )
       {
 
-        if(fabs(superClusterEta) < 0.8) category = 1;
-        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 2;
-        else if(fabs(superClusterEta) >= 1.479) category = 3;
+        if(fabs(superClusterEta) <= 0.8) category = 1;
+        else if(fabs(superClusterEta) > 0.8 && fabs(superClusterEta) <= 1.479) category = 2;
+        else if(fabs(superClusterEta) > 1.479) category = 3;
 
       }
       else
       {
 
-        if(fabs(superClusterEta) < 0.8) category = 4;
-        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 5;
-        else if(fabs(superClusterEta) >= 1.479) category = 6;
+        if(fabs(superClusterEta) <= 0.8) category = 4;
+        else if(fabs(superClusterEta) > 0.8 && fabs(superClusterEta) <= 1.479) category = 5;
+        else if(fabs(superClusterEta) > 1.479) category = 6;
 
 
       }
@@ -119,9 +119,9 @@ namespace TupleHelpers
       if( (pt>20) )
       {
 
-        if(fabs(superClusterEta) < 0.8) category = 4;
-        else if(fabs(superClusterEta) >= 0.8 && fabs(superClusterEta) < 1.479) category = 5;
-        else if(fabs(superClusterEta) >= 1.479) category = 6;
+        if(fabs(superClusterEta) <= 0.8) category = 4;
+        else if(fabs(superClusterEta) > 0.8 && fabs(superClusterEta) <= 1.479) category = 5;
+        else if(fabs(superClusterEta) > 1.479) category = 6;
 
       }
 
@@ -149,4 +149,55 @@ namespace TupleHelpers
 
   }
 
+
+
+  ///////////////
+  // WP95 cut based electron
+  // ID (return true if passes)
+
+
+  bool passWP95(double superClusterEta,double sigIetaIeta,double deltaEta, double deltaPhi, double HE, double dZ_vtx)
+  {
+
+    bool passesAllCuts = 1;
+
+    /////////
+    // barrel
+
+    if( fabs(superClusterEta) <= 1.479 )
+    {
+
+      if(! (sigIetaIeta<0.01) ) passesAllCuts = 0;
+      if(! (deltaEta<0.007) ) passesAllCuts = 0;
+      if(! (deltaPhi<0.8) ) passesAllCuts = 0;
+      if(! (HE<0.15) ) passesAllCuts = 0;
+      if(! (dZ_vtx<0.2) ) passesAllCuts = 0;
+      if(passesAllCuts) return 1;
+
+    }
+
+    ////////
+    // endcap
+
+
+    else if( fabs(superClusterEta) > 1.479  && fabs(superClusterEta) < 2.5 )
+    {
+
+      if(! (sigIetaIeta<0.03) ) passesAllCuts = 0;
+      if(! (deltaEta<0.01) ) passesAllCuts = 0;
+      if(! (deltaPhi<0.7) ) passesAllCuts = 0;
+      if(! (HE<999) ) passesAllCuts = 0;
+      if(! (dZ_vtx<0.2) ) passesAllCuts = 0;
+      if(passesAllCuts) return 1;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+
+  ////////////////////////////////////////////////////
 }

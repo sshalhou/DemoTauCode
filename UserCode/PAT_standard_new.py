@@ -219,7 +219,7 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 
 process.out.outputCommands +=['keep *_patConversions*_*_*']
 process.out.outputCommands +=['keep *_conversions*_*_*']
-process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
+#process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
 
 
 
