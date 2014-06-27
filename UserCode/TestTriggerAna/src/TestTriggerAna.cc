@@ -198,8 +198,8 @@ std::cout<<" path HLT_IsoMu24 : ";
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu24")->wasAccept();
   */
 std::cout<<" path HLT_PFJet320 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept();
+//  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
+  //std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept();
 
 
 
