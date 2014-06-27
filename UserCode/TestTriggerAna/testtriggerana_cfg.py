@@ -29,7 +29,3 @@ electronMatchSrc = cms.untracked.InputTag("electronTriggerMatchElectrons")
 
 
 process.p = cms.Path(process.demo)
-
-edm::InputTag electronSrc_;
-edm::InputTag triggerEventSrc_;
-edm::InputTag electronMatchSrc_;
