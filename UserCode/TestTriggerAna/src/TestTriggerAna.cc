@@ -129,9 +129,9 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   for (size_t i = 0; i < paths->size(); ++i) {
     const pat::TriggerPath& path = paths->at(i);
-    cout << setw(10) << path.wasAccept()
-      << setw(10) << path.prescale()
-      << setw(70) << path.name() << std::endl;
+    std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
+       << path.prescale() <<" , "
+       << path.name() << std::endl;
   }
 
 /*
