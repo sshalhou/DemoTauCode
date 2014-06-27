@@ -125,6 +125,15 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
+ const pat::TriggerPathCollection* paths = triggerEvent->paths();
+
+  for (size_t i = 0; i < paths->size(); ++i) {
+    const pat::TriggerPath& path = paths->at(i);
+    cout << setw(10) << path.wasAccept()
+      << setw(10) << path.prescale()
+      << setw(70) << path.name() << std::endl;
+  }
+
 /*
 std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasRun();
@@ -184,12 +193,12 @@ std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6 : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasAccept()<<std::endl;
 
-*/
+
 std::cout<<" path HLT_Mu17_Mu8_v* : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasAccept()<<std::endl;
 
-/*
+
 std::cout<<" path HLT_Mu17_Mu8_v* : ";
   std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasRun();
   std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasAccept()<<std::endl;
