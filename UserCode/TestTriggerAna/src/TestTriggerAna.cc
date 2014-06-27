@@ -31,7 +31,12 @@ Implementation:
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 
-
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "DataFormats/PatCandidates/interface/Electron.h"
+#include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
+#include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
+#include "DataFormats/PatCandidates/interface/Conversion.h"
+#include "DataFormats/PatCandidates/interface/Lepton.h"
 //
 // class declaration
 //
