@@ -350,7 +350,7 @@ if DropSelectedPatObjects:
   process.out.outputCommands +=['drop *_selectedPatTaus*_*_*']
   process.out.outputCommands +=['drop *_selectedPatJets*_*_*']
   process.out.outputCommands +=['keep *_cleanPatElectrons*_*_*']
-  process.out.outputCommands +=['drop *_cleanPatMuons*_*_*']
+  process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
   process.out.outputCommands +=['keep *_myCleanPatMuons*_*_*']
   process.out.outputCommands +=['keep *_cleanPatTaus*_*_*']
   process.out.outputCommands +=['keep *_cleanPatJets*_*_*']
@@ -416,7 +416,7 @@ process.eTrigMatchEle22 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 
 
 process.muTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatMuons' ),
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*" )' ),
@@ -428,7 +428,7 @@ process.muTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 ###################################################
 
 process.muTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatMuons' ),
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*" )' ),
@@ -441,7 +441,7 @@ process.muTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 
 
 process.muTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatMuons' ),
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_IsoMu24*" )' ),
@@ -482,7 +482,7 @@ process.tauTrigMatchEle22 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 
 
 process.tauTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatTaus' ),
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*" )' ),
@@ -494,7 +494,7 @@ process.tauTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 ###################################################
 
 process.tauTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatTaus' ),
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*" )' ),
@@ -507,7 +507,7 @@ process.tauTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
 
 
 process.tauTrigMatchJet320 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
-                                                       src = cms.InputTag( 'myCleanPatTaus' ),
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
                                                        matched = cms.InputTag( 'patTrigger' ),
                                                        andOr          = cms.bool( False ),
             matchedCuts = cms.string( 'path( "HLT_PFJet320*" )' ),
