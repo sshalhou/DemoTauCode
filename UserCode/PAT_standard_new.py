@@ -517,20 +517,47 @@ process.tauTrigMatchJet320 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
                                                        )
 
 
+###################################################
+
+
+process.tauTrigMatchEle27 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.tauTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_IsoMu24*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
 
 from PhysicsTools.PatAlgos.tools.trigTools import *
 switchOnTrigger( process )
 triggerMatchers = cms.vstring()
-triggerMatchers.extend(['eTrigMatchEle27'])
 triggerMatchers.extend(['eTrigMatchEle20'])
 triggerMatchers.extend(['eTrigMatchEle22'])
+triggerMatchers.extend(['eTrigMatchEle27'])
 triggerMatchers.extend(['muTrigMatchMu17'])
 triggerMatchers.extend(['muTrigMatchMu18'])
 triggerMatchers.extend(['muTrigMatchMu24'])
 triggerMatchers.extend(['tauTrigMatchEle20'])
 triggerMatchers.extend(['tauTrigMatchEle22'])
+triggerMatchers.extend(['tauTrigMatchEle27'])
 triggerMatchers.extend(['tauTrigMatchMu17'])
 triggerMatchers.extend(['tauTrigMatchMu18'])
+triggerMatchers.extend(['tauTrigMatchMu24'])
 triggerMatchers.extend(['tauTrigMatchJet320'])
 
 
