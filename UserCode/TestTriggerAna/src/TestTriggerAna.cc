@@ -70,7 +70,9 @@ private:
 
   edm::InputTag electronSrc_;
   edm::InputTag triggerEventSrc_;
-  edm::InputTag electronMatchSrc_;
+  edm::InputTag eTrigMatchEle20Src_;
+  edm::InputTag eTrigMatchEle22Src_;
+  edm::InputTag eTrigMatchEle27Src_;
 
 
   vector<string> eTauPaths;
@@ -94,7 +96,9 @@ private:
 TestTriggerAna::TestTriggerAna(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
 triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
-electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc" ))
+eTrigMatchEle20Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle20Src" )),
+eTrigMatchEle22Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle22Src" )),
+eTrigMatchEle27Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle27Src" ))
 {
   //now do what ever initialization is needed
 
@@ -217,15 +221,30 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
   {
 
-    const pat::TriggerObjectRef trigRefTag( matchHelper.triggerMatchObject(
-     electrons, electron_id, muonMatch_, iEvent, *triggerEvent ));
+    const pat::TriggerObjectRef trigRefTag20( matchHelper.triggerMatchObject(
+    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
 
-  if( trigRefTag.isAvailable() )
-  {
-    cout<<" trig ref available \n";
-  }
+    const pat::TriggerObjectRef trigRefTag22( matchHelper.triggerMatchObject(
+    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
+
+    const pat::TriggerObjectRef trigRefTag27( matchHelper.triggerMatchObject(
+    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
 
 
+    if( trigRefTag20.isAvailable() )
+    {
+      cout<<" trig ref 20 available \n";
+    }
+
+    if( trigRefTag22.isAvailable() )
+    {
+      cout<<" trig ref 22 available \n";
+    }
+
+    if( trigRefTag27.isAvailable() )
+    {
+      cout<<" trig ref 27 available \n";
+    }
 
   }
 
