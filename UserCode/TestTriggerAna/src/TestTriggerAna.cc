@@ -137,7 +137,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(electronSrc_,electrons);
 
   // get electrons matched to the HLT_Ele27 trigger
-  electronMatchSrc_
+  //electronMatchSrc_
 
 //   matching information
   const pat::helper::TriggerMatchHelper matchHelper;
