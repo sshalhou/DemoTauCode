@@ -73,7 +73,8 @@ private:
   edm::InputTag electronMatchSrc_;
 
 
-  vector<string> myPaths;
+  vector<string> eTauPaths;
+  vector<string> muTauPaths;
 
 
 
@@ -98,13 +99,14 @@ electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc
   //now do what ever initialization is needed
 
 
-myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Ele27_WP80");
-myPaths.push_back("HLT_IsoMu24");
-myPaths.push_back("HLT_PFJet320");
+eTauPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
+eTauPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+eTauPaths.push_back("HLT_Ele27_WP80");
+
+
+muTauPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
+muTauPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+muTauPaths.push_back("HLT_IsoMu24");
 
 
 
@@ -152,45 +154,59 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
 
-
+  /////////////////////
+  // eTau and muTau path booleans
+  bool eTauPath = 0;
+  bool muTauPath = 0;
 
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
-  cout<<" ------------------ \n";
+  cout<<" --------checking eTau Paths ---------- \n";
 
-  for(size_t i = 0; i<myPaths.size(); ++i)
+  for(size_t i = 0; i<eTauPaths.size(); ++i)
   {
-
-
     for (size_t ii = 0; ii < paths->size(); ++ii)
     {
 
       const pat::TriggerPath& path = paths->at(ii);
-      if(path.name().find(myPaths[i])!= std::string::npos)
+      if(path.name().find(eTauPaths[i])!= std::string::npos)
       {
 
         if(path.wasAccept())
         {
-         std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept();
-         std::cout<<" in form "<<path.name()<<"\n";
-
-
-
+         //std::cout<<" path "<<eTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+         //std::cout<<" in form "<<path.name()<<"\n";
+         eTauPath = 1;
         }
-
       }
-
-
     }
-
-
-
-
   }
 
+cout<<" --------checking muTau Paths ---------- \n";
+
+for(size_t i = 0; i<muTauPaths.size(); ++i)
+{
+  for (size_t ii = 0; ii < paths->size(); ++ii)
+  {
+
+    const pat::TriggerPath& path = paths->at(ii);
+    if(path.name().find(muTauPaths[i])!= std::string::npos)
+    {
+
+      if(path.wasAccept())
+      {
+       //std::cout<<" path "<<muTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+       //std::cout<<" in form "<<path.name()<<"\n";
+       muTauPath = 1;
+      }
+    }
+  }
+}
 
 
+
+ std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
 
 
   //  for (size_t i = 0; i < paths->size(); ++i) {
