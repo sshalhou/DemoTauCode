@@ -225,7 +225,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
 
 
-    const TriggerObjectRef trigRef(
+    const pat::TriggerObjectRef trigRef(
      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
 
 
