@@ -285,6 +285,27 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     // set electron quantities
 
 
+    /////////////////
+    // check the trigger matches
+
+    if(eTauPath==1)
+    {
+      size_t electron_id =  electron - electrons.begin();
+
+      const pat::TriggerObjectRef trigRefEle20(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle22(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle22Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle27(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
+      
+
+      if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull()) CurrentElectron.set_has_HltMatchEle20(1);
+      if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull()) CurrentElectron.set_has_HltMatchEle22(1);
+      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull()) CurrentElectron.set_has_HltMatchEle27(1);
+
+    }
+
 
     ////////////////
     //set_p4
