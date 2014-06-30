@@ -36,10 +36,13 @@ Implementation:
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
+using namespace pat;
 
 //
 // class declaration
@@ -66,6 +69,11 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag vertexSrc_;
   string NAME_;
+  edm::InputTag triggerEventSrc_;
+  std::string muTrigMatchMu17Src_;
+  std::string muTrigMatchMu18Src_;
+  std::string muTrigMatchMu24Src_;
+  vector<string> muTauPaths;
 
 };
 
@@ -84,8 +92,17 @@ private:
 TupleMuonProducer::TupleMuonProducer(const edm::ParameterSet& iConfig):
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" )),
-NAME_(iConfig.getParameter<string>("NAME" ))
+NAME_(iConfig.getParameter<string>("NAME" )),
+triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
+muTrigMatchMu17Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu17Src" )),
+muTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu18Src" )),
+muTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu24Src" ))
 {
+
+
+  muTauPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
+  muTauPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+  muTauPaths.push_back("HLT_IsoMu24");
 
   produces<vector<TupleMuon>>(NAME_).setBranchAlias(NAME_);
 
@@ -132,6 +149,48 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   edm::View<reco::Vertex>::const_iterator vertex;
 
+
+
+  // get the trigger info
+
+  edm::Handle< TriggerEvent > triggerEvent;
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+
+  // trigger helper
+  const pat::helper::TriggerMatchHelper matchHelper;
+
+  /////////////////////
+  // muTau path booleans
+  bool eTauPath = 0;
+
+  
+  const pat::TriggerPathCollection* paths = triggerEvent->paths();
+
+
+  cout<<" --------checking muTau Paths ---------- \n";
+
+  for(size_t i = 0; i<muTauPaths.size(); ++i)
+  {
+    for (size_t ii = 0; ii < paths->size(); ++ii)
+    {
+
+      const pat::TriggerPath& path = paths->at(ii);
+      if(path.name().find(muTauPaths[i])!= std::string::npos)
+      {
+
+        if(path.wasAccept() && path.wasRun())
+        {
+          //std::cout<<" path "<<muTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+          //std::cout<<" in form "<<path.name()<<"\n";
+          muTauPath = 1;
+        }
+      }
+    }
+  }
+
+
+
+  std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
 
   /////////////////
   // find max sum pt vertex

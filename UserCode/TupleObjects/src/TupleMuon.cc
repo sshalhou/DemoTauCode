@@ -31,7 +31,34 @@ TupleMuon::TupleMuon()
   m_dz = NAN;
   m_dxy = NAN;
   m_passFullId = 0;
+
+  m_has_HltMatchMu17 =  0;
+  m_has_HltMatchMu18 =  0;
+  m_has_HltMatchMu24 =  0;
 }
+
+
+
+//////////////////
+// has_HltMatchMu17
+//////////////////
+void TupleMuon::set_has_HltMatchMu17(bool has_HltMatchMu17_) { m_has_HltMatchMu17 = has_HltMatchMu17_;}
+bool TupleMuon::has_HltMatchMu17() const { return m_has_HltMatchMu17; }
+
+
+//////////////////
+// has_HltMatchMu18
+//////////////////
+void TupleMuon::set_has_HltMatchMu18(bool has_HltMatchMu18_) { m_has_HltMatchMu18 = has_HltMatchMu18_;}
+bool TupleMuon::has_HltMatchMu18() const { return m_has_HltMatchMu18; }
+
+
+//////////////////
+// has_HltMatchMu24
+//////////////////
+void TupleMuon::set_has_HltMatchMu24(bool has_HltMatchMu24_) { m_has_HltMatchMu24 = has_HltMatchMu24_;}
+bool TupleMuon::has_HltMatchMu24() const { return m_has_HltMatchMu24; }
+
 
 
 // will set this in TupleMuonProducer, since we can track all cuts
@@ -49,12 +76,12 @@ void TupleMuon::set_normalizedChi2(double normalizedChi2_){ m_normalizedChi2 = n
 void TupleMuon::set_numberOfValidMuonHits(int numberOfValidMuonHits_){ m_numberOfValidMuonHits = numberOfValidMuonHits_;}
 void TupleMuon::set_numberOfMatchedStations(int numberOfMatchedStations_)
 {
-   m_numberOfMatchedStations = numberOfMatchedStations_;
- }
+  m_numberOfMatchedStations = numberOfMatchedStations_;
+}
 void TupleMuon::set_numberOfValidPixelHits(int numberOfValidPixelHits_){ m_numberOfValidPixelHits = numberOfValidPixelHits_;}
 void TupleMuon::set_trackerLayersWithMeasurement(int trackerLayersWithMeasurement_)
 {
-   m_trackerLayersWithMeasurement = trackerLayersWithMeasurement_;
+  m_trackerLayersWithMeasurement = trackerLayersWithMeasurement_;
 }
 void TupleMuon::set_dB(double dB_){ m_dB = dB_;}
 void TupleMuon::set_dz(double dz_){ m_dz = dz_;}

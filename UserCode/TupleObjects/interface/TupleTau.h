@@ -109,7 +109,14 @@ public:
   void set_puCorrPtSum(float);
 
 
+  // trigger match checks
 
+  void set_has_HltMatchEle20(bool);
+  void set_has_HltMatchEle22(bool);
+  void set_has_HltMatchEle27(bool);
+  void set_has_HltMatchMu17(bool);
+  void set_has_HltMatchMu18(bool);
+  void set_has_HltMatchMu24(bool);
 
 
   // getters
@@ -191,7 +198,12 @@ public:
   float decayModeFindingOldDMs() const;
   float neutralIsoPtSum() const;
   float puCorrPtSum() const;
-
+  bool has_HltMatchEle20() const;
+  bool has_HltMatchEle22() const;
+  bool has_HltMatchEle27() const;
+  bool has_HltMatchMu17() const;
+  bool has_HltMatchMu18() const;
+  bool has_HltMatchMu24() const;
 
 
 
@@ -273,6 +285,12 @@ private:
   float m_decayModeFindingOldDMs;
   float m_neutralIsoPtSum;
   float m_puCorrPtSum;
+  bool m_has_HltMatchEle20;
+  bool m_has_HltMatchEle22;
+  bool m_has_HltMatchEle27;
+  bool m_has_HltMatchMu17;
+  bool m_has_HltMatchMu18;
+  bool m_has_HltMatchMu24;
 
 };
 

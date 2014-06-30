@@ -34,9 +34,32 @@ TupleElectron::TupleElectron()
   m_sigmaEtaEta = NAN;
   m_sigmaIetaIeta = NAN;
   m_sigmaIphiIphi = NAN;
-
+  m_has_HltMatchEle20 =  0;
+  m_has_HltMatchEle22 =  0;
+  m_has_HltMatchEle27 =  0;
 
 }
+
+
+//////////////////
+// has_HltMatchEle20
+//////////////////
+void TupleElectron::set_has_HltMatchEle20(bool has_HltMatchEle20_) { m_has_HltMatchEle20 = has_HltMatchEle20_;}
+bool TupleElectron::has_HltMatchEle20() const { return m_has_HltMatchEle20; }
+
+
+//////////////////
+// has_HltMatchEle22
+//////////////////
+void TupleElectron::set_has_HltMatchEle22(bool has_HltMatchEle22_) { m_has_HltMatchEle22 = has_HltMatchEle22_;}
+bool TupleElectron::has_HltMatchEle22() const { return m_has_HltMatchEle22; }
+
+
+//////////////////
+// has_HltMatchEle27
+//////////////////
+void TupleElectron::set_has_HltMatchEle27(bool has_HltMatchEle27_) { m_has_HltMatchEle27 = has_HltMatchEle27_;}
+bool TupleElectron::has_HltMatchEle27() const { return m_has_HltMatchEle27; }
 
 
 //////////////////

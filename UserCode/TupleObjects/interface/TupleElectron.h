@@ -63,7 +63,11 @@ public:
   void set_puChargedHadronIso(double);
   void set_relativeIso(double);
 
+  // trigger match checks
 
+  void set_has_HltMatchEle20(bool);
+  void set_has_HltMatchEle22(bool);
+  void set_has_HltMatchEle27(bool);
 
   // getters
 
@@ -99,6 +103,11 @@ public:
   double sigmaIetaIeta() const;
   double sigmaIphiIphi() const;
 
+  bool has_HltMatchEle20() const;
+  bool has_HltMatchEle22() const;
+  bool has_HltMatchEle27() const;
+
+
 private:
   LorentzVector m_p4;
   LorentzVector m_genP4;
@@ -131,7 +140,9 @@ private:
   double m_sigmaEtaEta;
   double m_sigmaIetaIeta;
   double m_sigmaIphiIphi;
-
+  bool m_has_HltMatchEle20;
+  bool m_has_HltMatchEle22;
+  bool m_has_HltMatchEle27;
 
 
 

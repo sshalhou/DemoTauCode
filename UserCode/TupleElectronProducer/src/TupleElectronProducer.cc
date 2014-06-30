@@ -44,11 +44,14 @@ Implementation:
 #include "Math/GenVector/VectorUtil.h"
 #include "DataFormats/PatCandidates/interface/PFParticle.h"
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
+using namespace pat;
 
 
 
@@ -78,6 +81,12 @@ private:
   edm::InputTag electronSrc_;
   edm::InputTag vertexSrc_;
   string NAME_;
+  edm::InputTag triggerEventSrc_;
+  std::string eTrigMatchEle20Src_;
+  std::string eTrigMatchEle22Src_;
+  std::string eTrigMatchEle27Src_;
+  vector<string> eTauPaths;
+
 
 
 };
@@ -97,8 +106,22 @@ private:
 TupleElectronProducer::TupleElectronProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" )),
-NAME_(iConfig.getParameter<string>("NAME" ))
+NAME_(iConfig.getParameter<string>("NAME" )),
+triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
+eTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle20Src" )),
+eTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle22Src" )),
+eTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle27Src" ))
 {
+
+
+  eTauPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
+  eTauPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+  eTauPaths.push_back("HLT_Ele27_WP80");
+
+
+
+
+
 
 
   produces<vector<TupleElectron>>(NAME_).setBranchAlias(NAME_);
@@ -139,55 +162,99 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 
-// get vertex collection
-edm::Handle<edm::View<reco::Vertex> > vertices;
-iEvent.getByLabel(vertexSrc_,vertices);
+  // get vertex collection
+  edm::Handle<edm::View<reco::Vertex> > vertices;
+  iEvent.getByLabel(vertexSrc_,vertices);
 
-edm::View<reco::Vertex>::const_iterator vertex;
-
-
-/////////////////
-// find max sum pt vertex
-// passing quality cuts
-// would really be best to do this
-// at PAT level
-
-int primary_vertex_indx = -999;
-float max_sumPt = -999;
-
-//cout<<" ---------- "<<endl;
+  edm::View<reco::Vertex>::const_iterator vertex;
 
 
-for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
-{
+  // get the trigger info
 
-  if(!vertex->isFake() && vertex->ndof() > 4.0)
+  edm::Handle< TriggerEvent > triggerEvent;
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+
+  // trigger helper
+  const pat::helper::TriggerMatchHelper matchHelper;
+
+
+
+  /////////////////////
+  // eTau  path booleans
+  bool eTauPath = 0;
+
+
+  const pat::TriggerPathCollection* paths = triggerEvent->paths();
+
+  cout<<" --------checking eTau Paths ---------- \n";
+
+  for(size_t i = 0; i<eTauPaths.size(); ++i)
   {
-    if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
+    for (size_t ii = 0; ii < paths->size(); ++ii)
     {
 
-      if( vertex->p4().pt() > max_sumPt)
+      const pat::TriggerPath& path = paths->at(ii);
+      if(path.name().find(eTauPaths[i])!= std::string::npos)
       {
-        max_sumPt  =     vertex->p4().pt();
-        primary_vertex_indx =    vertex - vertices->begin();
-        //cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<endl;
+
+        if(path.wasAccept() && path.wasRun())
+        {
+          //std::cout<<" path "<<eTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+          //std::cout<<" in form "<<path.name()<<"\n";
+          eTauPath = 1;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
+
+  /////////////////
+  // find max sum pt vertex
+  // passing quality cuts
+  // would really be best to do this
+  // at PAT level
+
+  int primary_vertex_indx = -999;
+  float max_sumPt = -999;
+
+  //cout<<" ---------- "<<endl;
+
+
+  for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
+  {
+
+    if(!vertex->isFake() && vertex->ndof() > 4.0)
+    {
+      if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
+      {
+
+        if( vertex->p4().pt() > max_sumPt)
+        {
+          max_sumPt  =     vertex->p4().pt();
+          primary_vertex_indx =    vertex - vertices->begin();
+          //cout<<" current max vertex sumPt = "<<vertex->p4().pt()<<endl;
+
+
+        }
+
+
+
+
 
 
       }
 
-
-
-
-
-
     }
 
   }
-
-}
-std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
-const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
-//cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
+  std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
+  const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+  //cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
 
 
 

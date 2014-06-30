@@ -80,13 +80,58 @@ TupleTau::TupleTau()
   m_decayModeFindingOldDMs = NAN;
   m_neutralIsoPtSum = NAN;
   m_puCorrPtSum = NAN;
+  m_has_HltMatchEle20 =  0;
+  m_has_HltMatchEle22 =  0;
+  m_has_HltMatchEle27 =  0;
+  m_has_HltMatchMu17 =  0;
+  m_has_HltMatchMu18 =  0;
+  m_has_HltMatchMu24 =  0;
 
 
 
 }
 
 
+//////////////////
+// has_HltMatchEle20
+//////////////////
+void TupleTau::set_has_HltMatchEle20(bool has_HltMatchEle20_) { m_has_HltMatchEle20 = has_HltMatchEle20_;}
+bool TupleTau::has_HltMatchEle20() const { return m_has_HltMatchEle20; }
 
+
+//////////////////
+// has_HltMatchEle22
+//////////////////
+void TupleTau::set_has_HltMatchEle22(bool has_HltMatchEle22_) { m_has_HltMatchEle22 = has_HltMatchEle22_;}
+bool TupleTau::has_HltMatchEle22() const { return m_has_HltMatchEle22; }
+
+
+//////////////////
+// has_HltMatchEle27
+//////////////////
+void TupleTau::set_has_HltMatchEle27(bool has_HltMatchEle27_) { m_has_HltMatchEle27 = has_HltMatchEle27_;}
+bool TupleTau::has_HltMatchEle27() const { return m_has_HltMatchEle27; }
+
+
+//////////////////
+// has_HltMatchMu17
+//////////////////
+void TupleTau::set_has_HltMatchMu17(bool has_HltMatchMu17_) { m_has_HltMatchMu17 = has_HltMatchMu17_;}
+bool TupleTau::has_HltMatchMu17() const { return m_has_HltMatchMu17; }
+
+
+//////////////////
+// has_HltMatchMu18
+//////////////////
+void TupleTau::set_has_HltMatchMu18(bool has_HltMatchMu18_) { m_has_HltMatchMu18 = has_HltMatchMu18_;}
+bool TupleTau::has_HltMatchMu18() const { return m_has_HltMatchMu18; }
+
+
+//////////////////
+// has_HltMatchMu24
+//////////////////
+void TupleTau::set_has_HltMatchMu24(bool has_HltMatchMu24_) { m_has_HltMatchMu24 = has_HltMatchMu24_;}
+bool TupleTau::has_HltMatchMu24() const { return m_has_HltMatchMu24; }
 
 // will set this in TupleTauProducer, since we can track all cuts
 // more easily when calling the producer

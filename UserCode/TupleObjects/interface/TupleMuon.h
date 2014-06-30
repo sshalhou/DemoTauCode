@@ -65,6 +65,13 @@ public:
   void set_sumPUPt_DR3(double);
   void set_relativeIso_DR3(double);
 
+  // trigger match checks
+
+  void set_has_HltMatchMu17(bool);
+  void set_has_HltMatchMu18(bool);
+  void set_has_HltMatchMu24(bool);
+
+
 
   // getters
 
@@ -98,6 +105,10 @@ public:
   bool   passFullId() const;
 
 
+  bool has_HltMatchMu17() const;
+  bool has_HltMatchMu18() const;
+  bool has_HltMatchMu24() const;
+
 private:
 
   LorentzVector m_p4;
@@ -128,7 +139,9 @@ private:
   double m_dz;
   double m_dxy;
   bool m_passFullId;
-
+  bool m_has_HltMatchMu17;
+  bool m_has_HltMatchMu18;
+  bool m_has_HltMatchMu24;
 
 
 };

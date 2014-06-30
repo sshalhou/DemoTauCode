@@ -39,10 +39,13 @@ Implementation:
 #include "UserCode/TupleTauProducer/interface/TupleTauProducer.h"
 
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
+using namespace pat;
 
 
 //
@@ -69,6 +72,15 @@ private:
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
   string NAME_;
+  edm::InputTag triggerEventSrc_;
+  std::string tauTrigMatchMu17Src_;
+  std::string tauTrigMatchMu18Src_;
+  std::string tauTrigMatchMu24Src_;
+  std::string tauTrigMatchEle20Src_;
+  std::string tauTrigMatchEle22Src_;
+  std::string tauTrigMatchEle27Src_;
+  vector<string> eTauPaths;
+  vector<string> muTauPaths;
 
 
 
@@ -88,8 +100,26 @@ private:
 //
 TupleTauProducer::TupleTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
-NAME_(iConfig.getParameter<string>("NAME" ))
+NAME_(iConfig.getParameter<string>("NAME" )),
+triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
+tauTrigMatchMu17Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu17Src" )),
+tauTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu18Src" )),
+tauTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu24Src" )),
+tauTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle20Src" )),
+tauTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle22Src" )),
+tauTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle27Src" ))
 {
+
+
+  eTauPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
+  eTauPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
+  eTauPaths.push_back("HLT_Ele27_WP80");
+
+
+  muTauPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
+  muTauPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
+  muTauPaths.push_back("HLT_IsoMu24");
+
 
   produces< vector<TupleTau> >(NAME_).setBranchAlias(NAME_);
 
@@ -137,8 +167,67 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
+  // get the trigger info
+
+  edm::Handle< TriggerEvent > triggerEvent;
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+
+  // trigger helper
+  const pat::helper::TriggerMatchHelper matchHelper;
 
 
+  /////////////////////
+  // eTau and muTau path booleans
+  bool eTauPath = 0;
+  bool muTauPath = 0;
+
+  const pat::TriggerPathCollection* paths = triggerEvent->paths();
+
+  cout<<" --------checking eTau Paths ---------- \n";
+
+  for(size_t i = 0; i<eTauPaths.size(); ++i)
+  {
+    for (size_t ii = 0; ii < paths->size(); ++ii)
+    {
+
+      const pat::TriggerPath& path = paths->at(ii);
+      if(path.name().find(eTauPaths[i])!= std::string::npos)
+      {
+
+        if(path.wasAccept() && path.wasRun())
+        {
+          //std::cout<<" path "<<eTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+          //std::cout<<" in form "<<path.name()<<"\n";
+          eTauPath = 1;
+        }
+      }
+    }
+  }
+
+  cout<<" --------checking muTau Paths ---------- \n";
+
+  for(size_t i = 0; i<muTauPaths.size(); ++i)
+  {
+    for (size_t ii = 0; ii < paths->size(); ++ii)
+    {
+
+      const pat::TriggerPath& path = paths->at(ii);
+      if(path.name().find(muTauPaths[i])!= std::string::npos)
+      {
+
+        if(path.wasAccept() && path.wasRun())
+        {
+          //std::cout<<" path "<<muTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+          //std::cout<<" in form "<<path.name()<<"\n";
+          muTauPath = 1;
+        }
+      }
+    }
+  }
+
+
+
+  std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
 
 
 
