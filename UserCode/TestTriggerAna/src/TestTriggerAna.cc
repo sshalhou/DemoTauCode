@@ -148,9 +148,9 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
   //   matching information & helper
-  const pat::TriggerObjectMatch* triggerMatch20( triggerEvent->triggerObjectMatchResult( eTrigMatchEle20Src_ ) );
-  const pat::TriggerObjectMatch* triggerMatch22( triggerEvent->triggerObjectMatchResult( eTrigMatchEle22Src_ ) );
-  const pat::TriggerObjectMatch* triggerMatch27( triggerEvent->triggerObjectMatchResult( eTrigMatchEle27Src_ ) );
+  const pat::TriggerObjectMatch* triggerMatch20( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle20Src" ) );
+  const pat::TriggerObjectMatch* triggerMatch22( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle22Src" ) );
+  const pat::TriggerObjectMatch* triggerMatch27( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle27Src" ) );
   const pat::helper::TriggerMatchHelper matchHelper;
 
 
