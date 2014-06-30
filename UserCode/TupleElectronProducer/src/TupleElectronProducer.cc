@@ -290,7 +290,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     if(eTauPath==1)
     {
-      size_t electron_id =  electron - electrons.begin();
+      size_t electron_id =  electron - electrons->begin();
 
       const pat::TriggerObjectRef trigRefEle20(
       matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
@@ -298,7 +298,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
       matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle22Src_, iEvent, *triggerEvent ) );
       const pat::TriggerObjectRef trigRefEle27(
       matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
-      
+
 
       if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull()) CurrentElectron.set_has_HltMatchEle20(1);
       if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull()) CurrentElectron.set_has_HltMatchEle22(1);
