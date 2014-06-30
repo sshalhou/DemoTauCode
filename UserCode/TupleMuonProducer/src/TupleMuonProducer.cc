@@ -161,9 +161,9 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   /////////////////////
   // muTau path booleans
-  bool eTauPath = 0;
+  bool muTauPath = 0;
 
-  
+
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
 
