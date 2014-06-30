@@ -580,14 +580,24 @@ process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
 
+
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/02BCF7EF-82E9-E111-9ADC-E41F131815F0.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/04FDED26-AEE9-E111-988D-00215E229636.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/06036C63-AFE9-E111-ABE9-00215E21DD14.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/101C2B09-B4E9-E111-B23B-00215E221170.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/12FFB05B-B5E9-E111-9D2C-00215E21D906.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/18215775-AFE9-E111-9292-00215E2599A6.root'])
+myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/0000/1AA634AD-A9E9-E111-9189-001A645C208C.root'])
+
+
 #myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/DY1JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/AODSIM/PU_S10_START53_V7A-v1/0000/001318CD-C5F4-E111-AAD9-001E67398D72.root'])
-myfilelist.extend(['file:/uscms/home/shalhout/no_backup/5000.root'])
-myfilelist.extend(['file:/uscms/home/shalhout/1stSteps/Git2/DemoTauCode/CMSSW_5_3_14/src/MyOutputFile.root'])
-myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root'])
-myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/085027A0-63E9-E111-BA2C-0018F3D09670.root'])
-myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/0E3688C3-98E9-E111-8FC6-003048FFCBB0.root'])
-myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/1289637A-69E9-E111-B26D-003048678F84.root'])
-myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/12A21961-B3E9-E111-AA11-00261894394D.root'])
+#myfilelist.extend(['file:/uscms/home/shalhout/no_backup/5000.root'])
+#myfilelist.extend(['file:/uscms/home/shalhout/1stSteps/Git2/DemoTauCode/CMSSW_5_3_14/src/MyOutputFile.root'])
+#myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/00E903E2-9FE9-E111-8B1E-003048FF86CA.root'])
+#myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/085027A0-63E9-E111-BA2C-0018F3D09670.root'])
+#myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/0E3688C3-98E9-E111-8FC6-003048FFCBB0.root'])
+#myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/1289637A-69E9-E111-B26D-003048678F84.root'])
+#myfilelist.extend(['root://cmsxrootd-site.fnal.gov//store/mc/Summer12_DR53X/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/AODSIM/PU_S10_START53_V7A-v1/0000/12A21961-B3E9-E111-AA11-00261894394D.root'])
 
 process.source = cms.Source ("PoolSource",
                       fileNames=myfilelist,
@@ -601,5 +611,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 100
+process.maxEvents.input = 1000
 ########################################################################################################
