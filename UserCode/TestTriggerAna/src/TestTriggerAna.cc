@@ -267,16 +267,21 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull())
       {
         cout<<" e trig ref 20 available \n";
+        cout<<" pt, eta, phi "<<trigRefEle20->pt()<<" , "<<trigRefEle20->eta()<<" , "<<trigRefEle20->phi()<<std::endl;
       }
 
       if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull())
       {
         cout<<" e trig ref 22 available \n";
+        cout<<" pt, eta, phi "<<trigRefEle22->pt()<<" , "<<trigRefEle22->eta()<<" , "<<trigRefEle22->phi()<<std::endl;
+
       }
 
       if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull())
       {
         cout<<" e trig ref 27 available \n";
+        cout<<" pt, eta, phi "<<trigRefEle27->pt()<<" , "<<trigRefEle27->eta()<<" , "<<trigRefEle27->phi()<<std::endl;
+
       }
 
     }
@@ -297,16 +302,22 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull())
       {
         cout<<" muon trig ref 17 available \n";
+        cout<<" pt, eta, phi "<<trigRefMu17->pt()<<" , "<<trigRefMu17->eta()<<" , "<<trigRefMu17->phi()<<std::endl;
+
       }
 
       if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull())
       {
         cout<<" muon trig ref 18 available \n";
+        cout<<" pt, eta, phi "<<trigRefMu18->pt()<<" , "<<trigRefMu18->eta()<<" , "<<trigRefMu18->phi()<<std::endl;
+
       }
 
       if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull())
       {
         cout<<" muon trig ref 24 available \n";
+        cout<<" pt, eta, phi "<<trigRefMu24->pt()<<" , "<<trigRefMu24->eta()<<" , "<<trigRefMu24->phi()<<std::endl;
+
       }
 
     }
@@ -334,16 +345,22 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( tauTrigRefMu17.isAvailable() && tauTrigRefMu17.isNonnull())
       {
         cout<<" tau trig ref 17 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefMu17->pt()<<" , "<<tauTrigRefMu17->eta()<<" , "<<tauTrigRefMu17->phi()<<std::endl;
+
       }
 
       if( tauTrigRefMu18.isAvailable() && tauTrigRefMu18.isNonnull())
       {
         cout<<" tau trig ref 18 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefMu18->pt()<<" , "<<tauTrigRefMu18->eta()<<" , "<<tauTrigRefMu18->phi()<<std::endl;
+
       }
 
       if( tauTrigRefMu24.isAvailable() && tauTrigRefMu24.isNonnull())
       {
         cout<<" tau trig ref 24 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefMu24->pt()<<" , "<<tauTrigRefMu24->eta()<<" , "<<tauTrigRefMu24->phi()<<std::endl;
+
       }
     }
     if(eTauPath)
@@ -351,16 +368,22 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( tauTrigRefEle20.isAvailable() && tauTrigRefEle20.isNonnull())
       {
         cout<<" tau trig ref 20 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefEle20->pt()<<" , "<<tauTrigRefEle20->eta()<<" , "<<tauTrigRefEle20->phi()<<std::endl;
+
       }
 
       if( tauTrigRefEle22.isAvailable() && tauTrigRefEle22.isNonnull())
       {
         cout<<" tau trig ref 22 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefEle22->pt()<<" , "<<tauTrigRefEle22->eta()<<" , "<<tauTrigRefEle22->phi()<<std::endl;
+
       }
 
       if( tauTrigRefEle27.isAvailable() && tauTrigRefEle27.isNonnull())
       {
         cout<<" tau trig ref 27 available \n";
+        cout<<" pt, eta, phi "<<tauTrigRefEle27->pt()<<" , "<<tauTrigRefEle27->eta()<<" , "<<tauTrigRefEle27->phi()<<std::endl;
+
       }
 
     }
