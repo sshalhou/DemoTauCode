@@ -21,12 +21,21 @@ process.source = cms.Source("PoolSource",
 
 process.demo = cms.EDAnalyzer('TestTriggerAna',
 electronSrc = cms.untracked.InputTag("cleanPatElectrons"),
+muonSrc = cms.untracked.InputTag("cleanPatMuons"),
+tauSrc = cms.untracked.InputTag("cleanPatTaus"),
 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
 eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
 eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
-eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
-
-
+eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27"),
+muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
+muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
+muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24"),
+tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
 
                               )
 

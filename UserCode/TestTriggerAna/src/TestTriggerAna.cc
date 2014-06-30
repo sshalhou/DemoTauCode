@@ -72,12 +72,24 @@ private:
 
   // ----------member data ---------------------------
 
+
   edm::InputTag electronSrc_;
+  edm::InputTag muonSrc_;
+  edm::InputTag tauSrc_;
   edm::InputTag triggerEventSrc_;
+
   std::string eTrigMatchEle20Src_;
   std::string eTrigMatchEle22Src_;
   std::string eTrigMatchEle27Src_;
-
+  std::string muTrigMatchMu17Src_;
+  std::string muTrigMatchMu18Src_;
+  std::string muTrigMatchMu24Src_;
+  std::string tauTrigMatchMu17Src_;
+  std::string tauTrigMatchMu18Src_;
+  std::string tauTrigMatchMu24Src_;
+  std::string tauTrigMatchEle20Src_;
+  std::string tauTrigMatchEle22Src_;
+  std::string tauTrigMatchEle27Src_;
 
   vector<string> eTauPaths;
   vector<string> muTauPaths;
@@ -99,10 +111,21 @@ private:
 //
 TestTriggerAna::TestTriggerAna(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
+muonSrc_(iConfig.getUntrackedParameter<edm::InputTag>("muonSrc" )),
+tauSrc_(iConfig.getUntrackedParameter<edm::InputTag>("tauSrc" )),
 triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
 eTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle20Src" )),
 eTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle22Src" )),
-eTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle27Src" ))
+eTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle27Src" )),
+muTrigMatchMu17Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu17Src" )),
+muTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu18Src" )),
+muTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu24Src" )),
+tauTrigMatchMu17Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu17Src" )),
+tauTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu18Src" )),
+tauTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu24Src" )),
+tauTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle20Src" )),
+tauTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle22Src" )),
+tauTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle27Src" ))
 {
   //now do what ever initialization is needed
 
@@ -142,10 +165,16 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
 
-  // get electron collection
+  // get electron, muon, and tau collections
 
   edm::Handle< ElectronCollection > electrons;
   iEvent.getByLabel( electronSrc_, electrons );
+
+  edm::Handle< MuonCollection > muons;
+  iEvent.getByLabel( muonSrc_, muons );
+
+  edm::Handle< TauCollection > taus;
+  iEvent.getByLabel( tauSrc_, taus );
 
   // get the trigger info
 
@@ -224,37 +253,112 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
   {
 
-
-    const pat::TriggerObjectRef trigRef20(
+    const pat::TriggerObjectRef trigRefEle20(
     matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
-
-    const pat::TriggerObjectRef trigRef22(
+    const pat::TriggerObjectRef trigRefEle22(
     matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle22Src_, iEvent, *triggerEvent ) );
-
-    const pat::TriggerObjectRef trigRef27(
+    const pat::TriggerObjectRef trigRefEle27(
     matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
 
 
-
-
-
-    if( trigRef20.isAvailable() )
+    if( trigRefEle20.isAvailable() )
     {
-      cout<<" trig ref 20 available \n";
+      cout<<" e trig ref 20 available \n";
     }
 
-    if( trigRef22.isAvailable() )
+    if( trigRefEle22.isAvailable() )
     {
-      cout<<" trig ref 22 available \n";
+      cout<<" e trig ref 22 available \n";
     }
 
-    if( trigRef27.isAvailable() )
+    if( trigRefEle27.isAvailable() )
     {
-      cout<<" trig ref 27 available \n";
+      cout<<" e trig ref 27 available \n";
     }
 
   }
 
+
+  for(size_t muon_id = 0; muon_id < muons->size(); ++muon_id)
+  {
+
+    const pat::TriggerObjectRef trigRefMu17(
+    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef trigRefMu28(
+    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef trigRefMu24(
+    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu24Src_, iEvent, *triggerEvent ) );
+
+
+    if( trigRefMu17.isAvailable() )
+    {
+      cout<<" muon trig ref 17 available \n";
+    }
+
+    if( trigRefMu18.isAvailable() )
+    {
+      cout<<" muon trig ref 18 available \n";
+    }
+
+    if( trigRefMu24.isAvailable() )
+    {
+      cout<<" muon trig ref 24 available \n";
+    }
+
+  }
+
+
+
+  for(size_t tau_id = 0; tau_id < taus->size(); ++tau_id)
+  {
+
+    const pat::TriggerObjectRef tauTrigRefEle20(
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle20Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef tauTrigRefEle22(
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle22Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef tauTrigRefEle27(
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle27Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef tauTrigRefMu17(
+    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef tauTrigRefMu28(
+    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+    const pat::TriggerObjectRef tauTrigRefMu24(
+    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu24Src_, iEvent, *triggerEvent ) );
+
+
+    if( tauTrigRefMu17.isAvailable() )
+    {
+      cout<<" tau trig ref 17 available \n";
+    }
+
+    if( tauTrigRefMu18.isAvailable() )
+    {
+      cout<<" tau trig ref 18 available \n";
+    }
+
+    if( tauTrigRefMu24.isAvailable() )
+    {
+      cout<<" tau trig ref 24 available \n";
+    }
+
+
+    if( tauTrigRefEle20.isAvailable() )
+    {
+      cout<<" tau trig ref 20 available \n";
+    }
+
+    if( tauTrigRefEle22.isAvailable() )
+    {
+      cout<<" tau trig ref 22 available \n";
+    }
+
+    if( tauTrigRefEle27.isAvailable() )
+    {
+      cout<<" tau trig ref 27 available \n";
+    }
+
+
+  }
 
 
 
