@@ -44,6 +44,7 @@ Implementation:
 
 using namespace edm;
 using namespace std;
+using namespace pat;
 
 //
 // class declaration
