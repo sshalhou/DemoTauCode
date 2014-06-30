@@ -142,10 +142,12 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
-  // get electrons matched to the HLT_Ele27 trigger
-  //electronMatchSrc_
 
-  //   matching information
+
+  //   matching information & helper
+  const pat::TriggerObjectMatch* triggerMatch20( triggerEvent->triggerObjectMatchResult( eTrigMatchEle20Src_ ) );
+  const pat::TriggerObjectMatch* triggerMatch22( triggerEvent->triggerObjectMatchResult( eTrigMatchEle22Src_ ) );
+  const pat::TriggerObjectMatch* triggerMatch27( triggerEvent->triggerObjectMatchResult( eTrigMatchEle27Src_ ) );
   const pat::helper::TriggerMatchHelper matchHelper;
 
 
@@ -218,157 +220,170 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   ///////////////////////////////////
 
 
+
   for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
   {
 
-    const pat::TriggerObjectRef trigRefTag20( matchHelper.triggerMatchObject(
-    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
-
-    const pat::TriggerObjectRef trigRefTag22( matchHelper.triggerMatchObject(
-    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
-
-    const pat::TriggerObjectRef trigRefTag27( matchHelper.triggerMatchObject(
-    electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
-
+    const reco::CandidateBaseRef candBaseRef( edm::Ref<std::vector<pat::Electron> >( electronSrc_, electron_id ) );
+    const pat::TriggerObjectRef trigRefTag20(
+    matchHelper.triggerMatchObject( candBaseRef, triggerMatch20, iEvent, *triggerEvent ) );
 
     if( trigRefTag20.isAvailable() )
     {
       cout<<" trig ref 20 available \n";
     }
 
-    if( trigRefTag22.isAvailable() )
-    {
-      cout<<" trig ref 22 available \n";
-    }
-
-    if( trigRefTag27.isAvailable() )
-    {
-      cout<<" trig ref 27 available \n";
-    }
-
   }
 
-
-
-  //  for (size_t i = 0; i < paths->size(); ++i) {
-  //    const pat::TriggerPath& path = paths->at(i);
-  //    std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
-  //     << path.prescale() <<" , "
-  //   << path.name() << std::endl;
-  //}
-
-
-
-
-
-  //std::cout<<" (accept, run) HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
-  //std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<" , ";
-  //std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasRun()<<std::endl;
-
-  //std::cout<<" (accept, run) x ";
-  //std::cout<<triggerEvent->path("x")->wasAccept()<<" , ";
-  //std::cout<<triggerEvent->path("x")->wasRun()<<std::endl;
-
-
   /*
-  std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasAccept()<<std::endl;
+  const pat::TriggerObjectRef trigRefTag20( matchHelper.triggerMatchObject(
+  electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
+  
+  const pat::TriggerObjectRef trigRefTag22( matchHelper.triggerMatchObject(
+  electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
+
+  const pat::TriggerObjectRef trigRefTag27( matchHelper.triggerMatchObject(
+  electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
 
 
-  std::cout<<" path HLT_Mu17_Mu8_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasAccept()<<std::endl;
+  if( trigRefTag20.isAvailable() )
+  {
+  cout<<" trig ref 20 available \n";
+}
 
+if( trigRefTag22.isAvailable() )
+{
+cout<<" trig ref 22 available \n";
+}
 
-  std::cout<<" path HLT_Mu17_Mu8_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_Ele27_WP80 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele27_WP80")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele27_WP80")->wasAccept()<<std::endl;
-  std::cout<<" path HLT_IsoMu24 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu24")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu24")->wasAccept()<<std::endl;
+if( trigRefTag27.isAvailable() )
+{
+cout<<" trig ref 27 available \n";
+}
 
-  std::cout<<" path HLT_PFJet320 : ";
-  std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
-  std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept()<<std::endl;
+}
 
-  */
+*/
+
+//  for (size_t i = 0; i < paths->size(); ++i) {
+//    const pat::TriggerPath& path = paths->at(i);
+//    std::cout<< " accept, prescale, name "<< path.wasAccept()<< " , "
+//     << path.prescale() <<" , "
+//   << path.name() << std::endl;
+//}
 
 
 
 
-  #ifdef THIS_IS_AN_EVENT_EXAMPLE
-  Handle<ExampleData> pIn;
-  iEvent.getByLabel("example",pIn);
-  #endif
 
-  #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
-  ESHandle<SetupData> pSetup;
-  iSetup.get<SetupRecord>().get(pSetup);
-  #endif
+//std::cout<<" (accept, run) HLT_Ele80_CaloIdVT_GsfTrkIdT_v1 ";
+//std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasAccept()<<" , ";
+//std::cout<<triggerEvent->path("HLT_Ele80_CaloIdVT_GsfTrkIdT_v1")->wasRun()<<std::endl;
+
+//std::cout<<" (accept, run) x ";
+//std::cout<<triggerEvent->path("x")->wasAccept()<<" , ";
+//std::cout<<triggerEvent->path("x")->wasRun()<<std::endl;
+
+
+/*
+std::cout<<" path HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2 : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2")->wasAccept()<<std::endl;
+std::cout<<" path HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6 : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6")->wasAccept()<<std::endl;
+
+
+std::cout<<" path HLT_Mu17_Mu8_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v")->wasAccept()<<std::endl;
+
+
+std::cout<<" path HLT_Mu17_Mu8_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Mu17_Mu8_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v* : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*")->wasAccept()<<std::endl;
+std::cout<<" path HLT_Ele27_WP80 : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_Ele27_WP80")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_Ele27_WP80")->wasAccept()<<std::endl;
+std::cout<<" path HLT_IsoMu24 : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_IsoMu24")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_IsoMu24")->wasAccept()<<std::endl;
+
+std::cout<<" path HLT_PFJet320 : ";
+std::cout<<"       wasRun = "<<triggerEvent->path("HLT_PFJet320")->wasRun();
+std::cout<<"       wasAccept = "<<triggerEvent->path("HLT_PFJet320")->wasAccept()<<std::endl;
+
+*/
+
+
+
+
+#ifdef THIS_IS_AN_EVENT_EXAMPLE
+Handle<ExampleData> pIn;
+iEvent.getByLabel("example",pIn);
+#endif
+
+#ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
+ESHandle<SetupData> pSetup;
+iSetup.get<SetupRecord>().get(pSetup);
+#endif
 }
 
 
