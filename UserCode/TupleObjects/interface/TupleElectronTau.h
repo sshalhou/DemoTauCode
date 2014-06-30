@@ -42,6 +42,7 @@ public:
   void set_mvaMETphiRaw(double);
   void set_mvaMETphi(double);
   void set_MAX(int);
+  void set_isGoodTriggerPair(bool);
 
   // getters
 
@@ -59,6 +60,7 @@ public:
   double mvaMETphiRaw() const;
   double mvaMETphi()const;
   int MAX() const;
+  bool isGoodTriggerPair() const;
 
 private:
 
@@ -76,6 +78,8 @@ private:
   double m_mvaMETphiRaw;
   double m_mvaMETphi;
   int m_MAX;
+  bool m_isGoodTriggerPair;
+
 
 };
 

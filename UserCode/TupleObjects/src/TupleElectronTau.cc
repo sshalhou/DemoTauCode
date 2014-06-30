@@ -18,8 +18,14 @@ TupleElectronTau::TupleElectronTau()
   m_mvaMETphiRaw = NAN;
   m_mvaMETphi = NAN;
   m_MAX = 0;
+  m_isGoodTriggerPair = 0;
+
 
 }
+
+void TupleElectronTau::set_isGoodTriggerPair(bool isGoodTriggerPair_) { m_isGoodTriggerPair = isGoodTriggerPair_;}
+bool TupleElectronTau::isGoodTriggerPair() const  { return m_isGoodTriggerPair; }
+
 
 // temp MAX pt check
 void TupleElectronTau::set_MAX(int MAX_) { m_MAX = MAX_;}
