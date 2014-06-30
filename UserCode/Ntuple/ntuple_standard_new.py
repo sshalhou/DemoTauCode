@@ -56,7 +56,7 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                                      )
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
-                muonSrc =cms.InputTag('myCleanPatMuons'),
+                muonSrc =cms.InputTag('cleanPatMuons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
