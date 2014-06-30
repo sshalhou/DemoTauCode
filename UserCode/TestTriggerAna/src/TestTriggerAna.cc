@@ -148,7 +148,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get electron collection
 
   edm::Handle< ElectronCollection > electrons;
-  iEvent.getByLabel( electronSrc_, muons );
+  iEvent.getByLabel( electronSrc_, electrons );
 
   // get the trigger info
 
@@ -158,7 +158,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   // trigger helper
-  const helper::TriggerMatchHelper matchHelper;
+  const pat::helper::TriggerMatchHelper matchHelper;
 
 
 /*
