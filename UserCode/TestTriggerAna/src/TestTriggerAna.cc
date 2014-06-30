@@ -139,7 +139,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get electrons matched to the HLT_Ele27 trigger
   electronMatchSrc_
 
-   matching information
+//   matching information
   const pat::helper::TriggerMatchHelper matchHelper;
 
 
