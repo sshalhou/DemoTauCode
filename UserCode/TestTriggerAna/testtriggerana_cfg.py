@@ -22,9 +22,10 @@ process.source = cms.Source("PoolSource",
 process.demo = cms.EDAnalyzer('TestTriggerAna',
 electronSrc = cms.untracked.InputTag("cleanPatElectrons"),
 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
-eTrigMatchEle20Src = cms.untracked.InputTag("eTrigMatchEle20"),
-eTrigMatchEle22Src = cms.untracked.InputTag("eTrigMatchEle22"),
-eTrigMatchEle27Src = cms.untracked.InputTag("eTrigMatchEle27")
+eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
+eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
+eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
+
 
 
                               )

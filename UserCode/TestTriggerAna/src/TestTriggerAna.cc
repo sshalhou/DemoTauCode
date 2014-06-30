@@ -44,6 +44,7 @@ Implementation:
 
 using namespace edm;
 using namespace std;
+
 //
 // class declaration
 //
@@ -70,9 +71,9 @@ private:
 
   edm::InputTag electronSrc_;
   edm::InputTag triggerEventSrc_;
-  edm::InputTag eTrigMatchEle20Src_;
-  edm::InputTag eTrigMatchEle22Src_;
-  edm::InputTag eTrigMatchEle27Src_;
+  std::string eTrigMatchEle20Src_;
+  std::string eTrigMatchEle22Src_;
+  std::string eTrigMatchEle27Src_;
 
 
   vector<string> eTauPaths;
@@ -96,9 +97,9 @@ private:
 TestTriggerAna::TestTriggerAna(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronSrc" )),
 triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
-eTrigMatchEle20Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle20Src" )),
-eTrigMatchEle22Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle22Src" )),
-eTrigMatchEle27Src_(iConfig.getUntrackedParameter<edm::InputTag>("eTrigMatchEle27Src" ))
+eTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle20Src" )),
+eTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle22Src" )),
+eTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("eTrigMatchEle27Src" ))
 {
   //now do what ever initialization is needed
 
@@ -147,10 +148,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< pat::TriggerEvent > triggerEvent;
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
-  //   matching information & helper
-  const pat::TriggerObjectMatch* triggerMatch20( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle20Src" ) );
-  const pat::TriggerObjectMatch* triggerMatch22( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle22Src" ) );
-  const pat::TriggerObjectMatch* triggerMatch27( triggerEvent->triggerObjectMatchResult( "eTrigMatchEle27Src" ) );
+  // trigger helper
   const pat::helper::TriggerMatchHelper matchHelper;
 
 
@@ -226,14 +224,11 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
   {
 
-    const reco::CandidateBaseRef candBaseRef( edm::Ref<std::vector<pat::Electron> >( electronSrc_, electron_id ) );
-    const pat::TriggerObjectRef trigRefTag20(
-    matchHelper.triggerMatchObject( candBaseRef, triggerMatch20, iEvent, *triggerEvent ) );
 
-    if( trigRefTag20.isAvailable() )
-    {
-      cout<<" trig ref 20 available \n";
-    }
+    const TriggerObjectRef trigRef(
+     matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
+
+
 
   }
 
