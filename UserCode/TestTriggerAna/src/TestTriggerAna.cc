@@ -25,9 +25,14 @@ Implementation:
 
 
 // user include files
+#include "FWCore/Utilities/interface/InputTag.h"
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 
+#include "TMath.h"
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 
@@ -141,25 +146,22 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   // get electron collection
-  edm::Handle<edm::View<pat::Electron> > electrons;
-  iEvent.getByLabel(electronSrc_,electrons);
 
+  edm::Handle< ElectronCollection > electrons;
+  iEvent.getByLabel( electronSrc_, muons );
 
   // get the trigger info
-  edm::Handle< pat::TriggerEvent > triggerEvent;
+
+  edm::Handle< TriggerEvent > triggerEvent;
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
+
+
   // trigger helper
-  const pat::helper::TriggerMatchHelper matchHelper;
+  const helper::TriggerMatchHelper matchHelper;
 
 
-
-  if (triggerEvent.failedToGet())
-  {
-    std::cout << "WARNING: cannot access triggerEvent for matching" << std::endl;
-    return;
-  }
-
+/*
 
   /////////////////////
   // eTau and muTau path booleans
@@ -215,7 +217,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
 
-
+*/
   //////////////////////////////////
   // if eTauPath find the electron!
   ///////////////////////////////////
