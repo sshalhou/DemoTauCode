@@ -98,35 +98,14 @@ electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc
   //now do what ever initialization is needed
 
 
-/*
 myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau25_Trk5_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk1_eta2p1_Jet30_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_v");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau30_Trk5_eta2p1_Jet30_v2");
-myPaths.push_back("HLT_DoubleMediumIsoPFTau35_Trk5_eta2p1_v6");
-myPaths.push_back("HLT_Mu17_Mu8_v");
-myPaths.push_back("HLT_Mu17_Mu8_v");
-myPaths.push_back("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
+myPaths.push_back("HLT_Ele27_WP80");
 myPaths.push_back("HLT_IsoMu24");
 myPaths.push_back("HLT_PFJet320");
-*/
 
-myPaths.push_back("HLT_Ele27_WP80");
 
 
 
