@@ -143,6 +143,9 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(electronSrc_,electrons);
 
 
+  // get the trigger info
+  edm::Handle< pat::TriggerEvent > triggerEvent;
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
   //   matching information & helper
   const pat::TriggerObjectMatch* triggerMatch20( triggerEvent->triggerObjectMatchResult( eTrigMatchEle20Src_ ) );
@@ -151,8 +154,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   const pat::helper::TriggerMatchHelper matchHelper;
 
 
-  edm::Handle< pat::TriggerEvent > triggerEvent;
-  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+
   if (triggerEvent.failedToGet())
   {
     std::cout << "WARNING: cannot access triggerEvent for matching" << std::endl;
@@ -238,7 +240,7 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   /*
   const pat::TriggerObjectRef trigRefTag20( matchHelper.triggerMatchObject(
   electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
-  
+
   const pat::TriggerObjectRef trigRefTag22( matchHelper.triggerMatchObject(
   electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ));
 
