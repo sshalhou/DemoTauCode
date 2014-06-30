@@ -323,11 +323,11 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     const pat::TriggerObjectRef tauTrigRefEle27(
     matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle27Src_, iEvent, *triggerEvent ) );
     const pat::TriggerObjectRef tauTrigRefMu17(
-    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu17Src_, iEvent, *triggerEvent ) );
     const pat::TriggerObjectRef tauTrigRefMu18(
-    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu18Src_, iEvent, *triggerEvent ) );
     const pat::TriggerObjectRef tauTrigRefMu24(
-    matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu24Src_, iEvent, *triggerEvent ) );
+    matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu24Src_, iEvent, *triggerEvent ) );
 
     if(muTauPath)
     {
