@@ -211,7 +211,7 @@ int DaughterTwoPdgId, int njet, std::string &ProcessFile, std::string &DataFile,
   ////////
   // higgs
 
-  if(BosonPdgId == 25)
+  if(abs(BosonPdgId) == 25 || abs(BosonPdgId) == 36)
   {
 
     if(njet>=3)
