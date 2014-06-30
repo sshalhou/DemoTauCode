@@ -211,7 +211,6 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
 
 
-  std::cout<<" muTauPath, eTauPath = "<<muTauPath<<" , "<<eTauPath<<std::endl;
 
   /////////////////
   // find max sum pt vertex
