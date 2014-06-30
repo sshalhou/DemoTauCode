@@ -98,6 +98,7 @@ electronMatchSrc_(iConfig.getUntrackedParameter<edm::InputTag>("electronMatchSrc
   //now do what ever initialization is needed
 
 
+/*
 myPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
 myPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
@@ -121,9 +122,13 @@ myPaths.push_back("HLT_Mu17_Mu8_v");
 myPaths.push_back("HLT_Mu17_Mu8_v");
 myPaths.push_back("HLT_Ele17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
 myPaths.push_back("HLT_Ele17_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v");
-myPaths.push_back("HLT_Ele27_WP80");
 myPaths.push_back("HLT_IsoMu24");
 myPaths.push_back("HLT_PFJet320");
+*/
+
+myPaths.push_back("HLT_Ele27_WP80");
+
+
 
 
 }
@@ -152,9 +157,11 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
+  // get electrons matched to the HLT_Ele27 trigger
+  electronMatchSrc_
 
-  // matching information
-  //  const pat::helper::TriggerMatchHelper matchHelper;
+   matching information
+  const pat::helper::TriggerMatchHelper matchHelper;
 
 
   edm::Handle< pat::TriggerEvent > triggerEvent;
@@ -188,6 +195,9 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         {
          std::cout<<" path "<<myPaths[i]<<" found and wasAccept = "<<path.wasAccept();
          std::cout<<" in form "<<path.name()<<"\n";
+
+
+
         }
 
       }
