@@ -238,17 +238,17 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-    if( trigRefTag20.isAvailable() )
+    if( trigRef20.isAvailable() )
     {
       cout<<" trig ref 20 available \n";
     }
 
-    if( trigRefTag22.isAvailable() )
+    if( trigRef22.isAvailable() )
     {
       cout<<" trig ref 22 available \n";
     }
 
-    if( trigRefTag27.isAvailable() )
+    if( trigRef27.isAvailable() )
     {
       cout<<" trig ref 27 available \n";
     }
