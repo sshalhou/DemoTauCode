@@ -244,6 +244,53 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     TupleTau CurrentTau;
 
+
+
+
+    /////////////////
+    // check the trigger matches
+
+    if(eTauPath==1)
+    {
+      size_t tau_id =  tau - taus->begin();
+
+      const pat::TriggerObjectRef trigRefEle20(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle20Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle22(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle22Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle27(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle27Src_, iEvent, *triggerEvent ) );
+
+
+      if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull()) CurrentTau.set_has_HltMatchEle20(1);
+      if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull()) CurrentTau.set_has_HltMatchEle22(1);
+      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull()) CurrentTau.set_has_HltMatchEle27(1);
+
+    }
+
+    
+    if(muTauPath==1)
+    {
+      size_t tau_id =  tau - taus->begin();
+
+      const pat::TriggerObjectRef trigRefMu17(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu18(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu24(
+      matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchMu24Src_, iEvent, *triggerEvent ) );
+
+
+      if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull()) CurrentTau.set_has_HltMatchMu17(1);
+      if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull()) CurrentTau.set_has_HltMatchMu18(1);
+      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull()) CurrentTau.set_has_HltMatchMu24(1);
+
+    }
+
+
+
+
+
     CurrentTau.set_p4(tau->p4());
 
     //////////////

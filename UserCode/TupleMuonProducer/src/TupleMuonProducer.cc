@@ -281,6 +281,29 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     */
 
 
+    /////////////////
+    // check the trigger matches
+
+    if(muTauPath==1)
+    {
+      size_t muon_id =  muon - muons->begin();
+
+      const pat::TriggerObjectRef trigRefMu17(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu18(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu24(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu24Src_, iEvent, *triggerEvent ) );
+
+
+      if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull()) CurrentMuon.set_has_HltMatchMu17(1);
+      if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull()) CurrentMuon.set_has_HltMatchMu18(1);
+      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull()) CurrentMuon.set_has_HltMatchMu24(1);
+
+    }
+
+
+
     /////
     // set 4-vectors, in our case p4 == pfP4
     // since we use PF2PAT aka PFBRECO
