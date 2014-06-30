@@ -48,18 +48,33 @@ process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
-                NAME=cms.string("TupleElectronsNominal")
+                NAME=cms.string("TupleElectronsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
+                eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
+                eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
                                      )
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('myCleanPatMuons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
-                NAME=cms.string("TupleMuonsNominal")
+                NAME=cms.string("TupleMuonsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
+                muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
+                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24")
                                      )
 
 process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
                 tauSrc =cms.InputTag('cleanPatTaus'),
-                NAME=cms.string("TupleTausNominal")
+                NAME=cms.string("TupleTausNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27")
                                                    )
 
 
