@@ -251,64 +251,66 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   ///////////////////////////////////
 
 
-
-  for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
+  if(eTauPath)
   {
-
-    const pat::TriggerObjectRef trigRefEle20(
-    matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
-    const pat::TriggerObjectRef trigRefEle22(
-    matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle22Src_, iEvent, *triggerEvent ) );
-    const pat::TriggerObjectRef trigRefEle27(
-    matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
-
-
-    if( trigRefEle20.isAvailable() )
+    for(size_t electron_id = 0; electron_id < electrons->size(); ++electron_id)
     {
-      cout<<" e trig ref 20 available \n";
-    }
 
-    if( trigRefEle22.isAvailable() )
-    {
-      cout<<" e trig ref 22 available \n";
-    }
+      const pat::TriggerObjectRef trigRefEle20(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle20Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle22(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle22Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefEle27(
+      matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
 
-    if( trigRefEle27.isAvailable() )
-    {
-      cout<<" e trig ref 27 available \n";
-    }
 
+      if( trigRefEle20.isAvailable() )
+      {
+        cout<<" e trig ref 20 available \n";
+      }
+
+      if( trigRefEle22.isAvailable() )
+      {
+        cout<<" e trig ref 22 available \n";
+      }
+
+      if( trigRefEle27.isAvailable() )
+      {
+        cout<<" e trig ref 27 available \n";
+      }
+
+    }
   }
-
-
-  for(size_t muon_id = 0; muon_id < muons->size(); ++muon_id)
+  if(muTauPath)
   {
-
-    const pat::TriggerObjectRef trigRefMu17(
-    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu17Src_, iEvent, *triggerEvent ) );
-    const pat::TriggerObjectRef trigRefMu28(
-    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu18Src_, iEvent, *triggerEvent ) );
-    const pat::TriggerObjectRef trigRefMu24(
-    matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu24Src_, iEvent, *triggerEvent ) );
-
-
-    if( trigRefMu17.isAvailable() )
+    for(size_t muon_id = 0; muon_id < muons->size(); ++muon_id)
     {
-      cout<<" muon trig ref 17 available \n";
-    }
 
-    if( trigRefMu18.isAvailable() )
-    {
-      cout<<" muon trig ref 18 available \n";
-    }
+      const pat::TriggerObjectRef trigRefMu17(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu17Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu18(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu18Src_, iEvent, *triggerEvent ) );
+      const pat::TriggerObjectRef trigRefMu24(
+      matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu24Src_, iEvent, *triggerEvent ) );
 
-    if( trigRefMu24.isAvailable() )
-    {
-      cout<<" muon trig ref 24 available \n";
-    }
 
+      if( trigRefMu17.isAvailable() )
+      {
+        cout<<" muon trig ref 17 available \n";
+      }
+
+      if( trigRefMu18.isAvailable() )
+      {
+        cout<<" muon trig ref 18 available \n";
+      }
+
+      if( trigRefMu24.isAvailable() )
+      {
+        cout<<" muon trig ref 24 available \n";
+      }
+
+    }
   }
-
 
 
   for(size_t tau_id = 0; tau_id < taus->size(); ++tau_id)
@@ -322,44 +324,46 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     matchHelper.triggerMatchObject( taus, tau_id, tauTrigMatchEle27Src_, iEvent, *triggerEvent ) );
     const pat::TriggerObjectRef tauTrigRefMu17(
     matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu17Src_, iEvent, *triggerEvent ) );
-    const pat::TriggerObjectRef tauTrigRefMu28(
+    const pat::TriggerObjectRef tauTrigRefMu18(
     matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu18Src_, iEvent, *triggerEvent ) );
     const pat::TriggerObjectRef tauTrigRefMu24(
     matchHelper.triggerMatchObject( muons, muon_id, tauTrigMatchMu24Src_, iEvent, *triggerEvent ) );
 
-
-    if( tauTrigRefMu17.isAvailable() )
+    if(muTauPath)
     {
-      cout<<" tau trig ref 17 available \n";
-    }
+      if( tauTrigRefMu17.isAvailable() )
+      {
+        cout<<" tau trig ref 17 available \n";
+      }
 
-    if( tauTrigRefMu18.isAvailable() )
+      if( tauTrigRefMu18.isAvailable() )
+      {
+        cout<<" tau trig ref 18 available \n";
+      }
+
+      if( tauTrigRefMu24.isAvailable() )
+      {
+        cout<<" tau trig ref 24 available \n";
+      }
+    }
+    if(eTauPath)
     {
-      cout<<" tau trig ref 18 available \n";
+      if( tauTrigRefEle20.isAvailable() )
+      {
+        cout<<" tau trig ref 20 available \n";
+      }
+
+      if( tauTrigRefEle22.isAvailable() )
+      {
+        cout<<" tau trig ref 22 available \n";
+      }
+
+      if( tauTrigRefEle27.isAvailable() )
+      {
+        cout<<" tau trig ref 27 available \n";
+      }
+
     }
-
-    if( tauTrigRefMu24.isAvailable() )
-    {
-      cout<<" tau trig ref 24 available \n";
-    }
-
-
-    if( tauTrigRefEle20.isAvailable() )
-    {
-      cout<<" tau trig ref 20 available \n";
-    }
-
-    if( tauTrigRefEle22.isAvailable() )
-    {
-      cout<<" tau trig ref 22 available \n";
-    }
-
-    if( tauTrigRefEle27.isAvailable() )
-    {
-      cout<<" tau trig ref 27 available \n";
-    }
-
-
   }
 
 
