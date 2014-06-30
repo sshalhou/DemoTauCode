@@ -264,17 +264,17 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       matchHelper.triggerMatchObject( electrons, electron_id, eTrigMatchEle27Src_, iEvent, *triggerEvent ) );
 
 
-      if( trigRefEle20.isAvailable() )
+      if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull())
       {
         cout<<" e trig ref 20 available \n";
       }
 
-      if( trigRefEle22.isAvailable() )
+      if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull())
       {
         cout<<" e trig ref 22 available \n";
       }
 
-      if( trigRefEle27.isAvailable() )
+      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull())
       {
         cout<<" e trig ref 27 available \n";
       }
@@ -294,17 +294,17 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       matchHelper.triggerMatchObject( muons, muon_id, muTrigMatchMu24Src_, iEvent, *triggerEvent ) );
 
 
-      if( trigRefMu17.isAvailable() )
+      if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull())
       {
         cout<<" muon trig ref 17 available \n";
       }
 
-      if( trigRefMu18.isAvailable() )
+      if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull())
       {
         cout<<" muon trig ref 18 available \n";
       }
 
-      if( trigRefMu24.isAvailable() )
+      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull())
       {
         cout<<" muon trig ref 24 available \n";
       }
@@ -331,34 +331,34 @@ TestTriggerAna::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(muTauPath)
     {
-      if( tauTrigRefMu17.isAvailable() )
+      if( tauTrigRefMu17.isAvailable() && tauTrigRefMu17.isNonnull())
       {
         cout<<" tau trig ref 17 available \n";
       }
 
-      if( tauTrigRefMu18.isAvailable() )
+      if( tauTrigRefMu18.isAvailable() && tauTrigRefMu18.isNonnull())
       {
         cout<<" tau trig ref 18 available \n";
       }
 
-      if( tauTrigRefMu24.isAvailable() )
+      if( tauTrigRefMu24.isAvailable() && tauTrigRefMu24.isNonnull())
       {
         cout<<" tau trig ref 24 available \n";
       }
     }
     if(eTauPath)
     {
-      if( tauTrigRefEle20.isAvailable() )
+      if( tauTrigRefEle20.isAvailable() && tauTrigRefEle20.isNonnull())
       {
         cout<<" tau trig ref 20 available \n";
       }
 
-      if( tauTrigRefEle22.isAvailable() )
+      if( tauTrigRefEle22.isAvailable() && tauTrigRefEle22.isNonnull())
       {
         cout<<" tau trig ref 22 available \n";
       }
 
-      if( tauTrigRefEle27.isAvailable() )
+      if( tauTrigRefEle27.isAvailable() && tauTrigRefEle27.isNonnull())
       {
         cout<<" tau trig ref 27 available \n";
       }
