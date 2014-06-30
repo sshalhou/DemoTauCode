@@ -287,7 +287,24 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         TupleElectronTau CurrentElectronTau;
 
         if(max_i == i && max_j == j) CurrentElectronTau.set_MAX(1);
-        else CurrentElectronTau.set_MAX(2);
+        else CurrentElectronTau.set_MAX(0);
+
+
+        //////////////////
+        // check triggers
+
+        if(electron.has_HltMatchEle20()==1 && tau.has_HltMatchEle20()==1)
+        {
+          CurrentElectronTau.set_isGoodTriggerPair(1);
+        }
+        else if(electron.has_HltMatchEle22()==1 && tau.has_HltMatchEle22()==1)
+        {
+          CurrentElectronTau.set_isGoodTriggerPair(1);
+        }
+        else if(electron.has_HltMatchEle27()==1 && tau.has_HltMatchEle27()==1)
+        {
+          CurrentElectronTau.set_isGoodTriggerPair(1);
+        }
 
 
         CurrentElectronTau.set_p4(  electron.p4() + tau.p4() );
