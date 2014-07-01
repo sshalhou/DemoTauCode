@@ -795,6 +795,8 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     edm::Handle< TupleTauCollection > taus;
     iEvent.getByLabel(tauSrc_, taus);
 
+    edm::Handle< TupleElectronCollection > electrons;
+    iEvent.getByLabel(leptonSrc_, electrons);
 
     for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
@@ -871,6 +873,10 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     edm::Handle< TupleTauCollection > taus;
     iEvent.getByLabel(tauSrc_, taus);
+
+
+    edm::Handle< TupleMuonCollection > muons;
+    iEvent.getByLabel(leptonSrc_, muons);
 
     for (std::size_t i = 0; i < muTaus->size(); ++i)
     {
