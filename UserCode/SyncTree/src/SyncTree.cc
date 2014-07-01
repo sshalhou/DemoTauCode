@@ -795,7 +795,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
 
-      const TupleElectronTau eTau =   ((*eTau)[i]);
+      const TupleElectronTau eTau =   ((*eTaus)[i]);
 
       /////////////////////
       // basic selection
@@ -821,13 +821,13 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
         // Visible di-tau mass
-        lmvis = eTau.p4().M();
+        lMVis = eTau.p4().M();
         // SVFit di-tau mass
-        lm_sv = eTau.correctedSVFitMass();
+        lMSV = eTau.correctedSVFitMass();
         // MVA MET
-        lmvamet = eTau.mvaMET();
+        lMet = eTau.mvaMET();
         // MVA MET phi
-        lmvametphi = eTau.mvaMETphi();
+        lMetPhi = eTau.mvaMETphi();
 
 
         //////
@@ -851,7 +851,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     for (std::size_t i = 0; i < muTaus->size(); ++i)
     {
 
-      const TupleMuonTau muTau =   ((*muTau)[i]);
+      const TupleMuonTau muTau =   ((*muTaus)[i]);
 
       /////////////////////
       // basic selection
@@ -875,13 +875,13 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
         // Visible di-tau mass
-        lmvis = muTau.p4().M();
+        lMVis = muTau.p4().M();
         // SVFit di-tau mass
-        lm_sv = muTau.correctedSVFitMass();
+        lMSV = muTau.correctedSVFitMass();
         // MVA MET
-        lmvamet = muTau.mvaMET();
+        lMet = muTau.mvaMET();
         // MVA MET phi
-        lmvametphi = muTau.mvaMETphi();
+        lMetPhi = muTau.mvaMETphi();
 
         //////
         // fill the tree
