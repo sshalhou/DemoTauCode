@@ -792,6 +792,10 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     edm::Handle< TupleElectronTauCollection > eTaus;
     iEvent.getByLabel(leptonTauSrc_, eTaus);
 
+    edm::Handle< TupleTauCollection > taus;
+    iEvent.getByLabel(tauSrc_, taus);
+
+
     for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
 
@@ -831,6 +835,15 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         // transverse mass
         lMt1 = eTau.TransverseMass();
 
+        const TupleTau tau =   ((*taus)[eTau.tauIndex()]);
+
+        // tau 4-vector
+        lPt2 = tau.p4().pt();
+        lPhi2 = tau.p4().phi();
+        lEta2 = tau.p4().eta();
+        lM2 = tau.p4().m();
+
+
         //////
         // fill the tree
 
@@ -848,6 +861,8 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     edm::Handle< TupleMuonTauCollection > muTaus;
     iEvent.getByLabel(leptonTauSrc_, muTaus);
 
+    edm::Handle< TupleTauCollection > taus;
+    iEvent.getByLabel(tauSrc_, taus);
 
     for (std::size_t i = 0; i < muTaus->size(); ++i)
     {
@@ -885,6 +900,14 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         lMetPhi = muTau.mvaMETphi();
         // transverse mass
         lMt1 = muTau.TransverseMass();
+
+        const TupleTau tau =   ((*taus)[muTau.tauIndex()]);
+
+        // tau 4-vector
+        lPt2 = tau.p4().pt();
+        lPhi2 = tau.p4().phi();
+        lEta2 = tau.p4().eta();
+        lM2 = tau.p4().m();
 
         //////
         // fill the tree
