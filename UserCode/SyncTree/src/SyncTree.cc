@@ -112,7 +112,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 
 
 
-  syncFile = new TFile(fname.c_str(), "RECREATE");
+  syncFile = new TFile(fname, "RECREATE");
   syncFile->cd();
   // Tree should be named "TauCheck" to aid scripts which
   // make comparisons between sync trees
