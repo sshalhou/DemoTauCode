@@ -279,7 +279,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   lL1Met = -999.;
   lL1MetPhi = -999.;
   lL1MetCorr = -999.;
-  lCaloMetv = -999.;
+  lCaloMet = -999.;
   lCaloMetPhi = -999.;
   lCaloMetCorr = -999.;
   lCaloMetPhiCorr = -999.;
@@ -724,7 +724,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   lL1Met = -999.;
   lL1MetPhi = -999.;
   lL1MetCorr = -999.;
-  lCaloMetv = -999.;
+  lCaloMet = -999.;
   lCaloMetPhi = -999.;
   lCaloMetCorr = -999.;
   lCaloMetPhiCorr = -999.;
