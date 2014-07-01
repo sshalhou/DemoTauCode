@@ -841,7 +841,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         lPt2 = tau.p4().pt();
         lPhi2 = tau.p4().phi();
         lEta2 = tau.p4().eta();
-        lM2 = tau.p4().m();
+        lM2 = tau.p4().M();
 
 
         //////
@@ -907,7 +907,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         lPt2 = tau.p4().pt();
         lPhi2 = tau.p4().phi();
         lEta2 = tau.p4().eta();
-        lM2 = tau.p4().m();
+        lM2 = tau.p4().M();
 
         //////
         // fill the tree
