@@ -103,7 +103,16 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   //now do what ever initialization is needed
 
 
-  syncFile = new TFile("dummy.root", "RECREATE");
+  //////////////////
+  // create a file based on the name and sample
+
+  char fname[1000];
+  sprintf(fname,"Sync_SUSYGGH120_Davis_%s",NAME.c_str());
+  cout<<" creating a file of name "<<fname<<endl;
+
+
+
+  syncFile = new TFile(fname.c_str(), "RECREATE");
   syncFile->cd();
   // Tree should be named "TauCheck" to aid scripts which
   // make comparisons between sync trees
