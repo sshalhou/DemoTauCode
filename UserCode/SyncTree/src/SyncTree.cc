@@ -27,11 +27,11 @@ Implementation:
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "UserCode/TupleObjects/interface/TupleElectrons.h"
-#include "UserCode/TupleObjects/interface/TupleMuons.h"
-#include "UserCode/TupleObjects/interface/TupleTaus.h"
-#include "UserCode/TupleObjects/interface/TupleElectronTaus.h"
-#include "UserCode/TupleObjects/interface/TupleMuonTaus.h"
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
+#include "UserCode/TupleObjects/interface/TupleMuon.h"
+#include "UserCode/TupleObjects/interface/TupleTau.h"
+#include "UserCode/TupleObjects/interface/TupleElectronTau.h"
+#include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 
 
 #include <string>
