@@ -815,7 +815,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( !(eTau.DR()>0.5) ) passAll = 0;
       if( !(eTau.sumCharge()==0) ) passAll = 0;
       if( !(eTau.TransverseMass()<30) ) passAll = 0;
-      if( !(eTau.isGoodTriggerPair()==1) ) passAll = 0;
+  //    if( !(eTau.isGoodTriggerPair()==1) ) passAll = 0;
       if( !(eTau.MAX()==1) ) passAll = 0;
 
       ///////////////////
@@ -895,7 +895,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( !(muTau.DR()>0.5) ) passAll = 0;
       if( !(muTau.sumCharge()==0) ) passAll = 0;
       if( !(muTau.TransverseMass()<30) ) passAll = 0;
-      if( !(muTau.isGoodTriggerPair()==1) ) passAll = 0;
+//      if( !(muTau.isGoodTriggerPair()==1) ) passAll = 0;
       if( !(muTau.MAX()==1) ) passAll = 0;
 
 
