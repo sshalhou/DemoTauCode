@@ -847,12 +847,13 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         const TupleElectron electron =   ((*electrons)[eTau.electronIndex()]);
 
-        // tau 4-vector
+        // electron 4-vector
         lPt1 = electron.p4().pt();
         lPhi1  = electron.p4().phi();
         lEta1 = electron.p4().eta();
         lM1 = electron.p4().M();
-
+        lD01 = electron.d0();
+        lDZ1 = electron.dz();
 
         //////
         // fill the tree
@@ -926,11 +927,13 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         const TupleMuon muon =   ((*muons)[muTau.muonIndex()]);
 
-        // tau 4-vector
+        // muon 4-vector
         lPt1 = muon.p4().pt();
         lPhi1  = muon.p4().phi();
         lEta1 = muon.p4().eta();
         lM1 = muon.p4().M();
+        lD01 = muon.dB();
+        lDZ1 = muon.dz();
 
         //////
         // fill the tree
