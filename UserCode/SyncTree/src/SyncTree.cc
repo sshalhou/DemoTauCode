@@ -107,7 +107,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   // create a file based on the name and sample
 
   char fname[1000];
-  sprintf(fname,"Sync_SUSYGGH120_Davis_%s",NAME.c_str());
+  sprintf(fname,"Sync_SUSYGGH120_Davis_%s",NAME_.c_str());
   cout<<" creating a file of name "<<fname<<endl;
 
 
