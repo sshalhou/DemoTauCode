@@ -829,7 +829,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         // MVA MET phi
         lMetPhi = eTau.mvaMETphi();
         // transverse mass
-        lMt1 = muTau.TransverseMass();
+        lMt1 = eTau.TransverseMass();
 
         //////
         // fill the tree
