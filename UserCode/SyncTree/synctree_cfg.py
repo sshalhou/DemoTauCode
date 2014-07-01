@@ -20,5 +20,10 @@ leptonTauSrc = cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntupl
 NAME = cms.string("muTau") # only muTau or eTau
 )
 
+# the following is needed
+# because not all events have both eTau and muTau
+process.options = cms.untracked.PSet(
+SkipEvent = cms.untracked.vstring('ProductNotFound')
+)
 
 process.p = cms.Path(process.demo)
