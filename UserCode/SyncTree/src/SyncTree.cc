@@ -72,6 +72,15 @@ edm::InputTag leptonSrc_;
 edm::InputTag leptonTauSrc_;
 string NAME_;
 
+
+  TFile *syncFile;
+  TTree *syncTree;
+
+  // Sync Tree Variables
+  // Definitions in HTTSync.cc
+  int   dummy;
+
+
 };
 
 //
@@ -92,6 +101,13 @@ leptonTauSrc_(iConfig.getParameter<edm::InputTag>("leptonTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
+
+
+  syncFile = new TFile("dummy.root", "RECREATE");
+  syncFile->cd();
+  // Tree should be named "TauCheck" to aid scripts which
+  // make comparisons between sync trees
+  syncTree = new TTree("TauCheck", "TauCheck");
 
 }
 
