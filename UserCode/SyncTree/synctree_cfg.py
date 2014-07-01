@@ -13,14 +13,14 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-process.demo = cms.EDAnalyzer('SyncTree',
-tauSrc = cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
-leptonSrc = cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-leptonTauSrc = cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
-NAME = cms.string("muTau") # only muTau or eTau
-)
+#process.demo = cms.EDAnalyzer('SyncTree',
+#tauSrc = cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+#leptonSrc = cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+#leptonTauSrc = cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
+#NAME = cms.string("muTau") # only muTau or eTau
+#)
 
-process.demo2 = cms.EDAnalyzer('SyncTree',
+process.demo = cms.EDAnalyzer('SyncTree',
 tauSrc = cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
 leptonSrc = cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
 leptonTauSrc = cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
@@ -33,4 +33,4 @@ process.options = cms.untracked.PSet(
 SkipEvent = cms.untracked.vstring('ProductNotFound')
 )
 
-process.p = cms.Path(process.demo+process.demo2)
+process.p = cms.Path(process.demo)
