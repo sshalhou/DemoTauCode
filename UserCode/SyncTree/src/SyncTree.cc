@@ -778,10 +778,139 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   em_vbf_mva_ = -999.;
 
 
-  //////
-  // fill the tree
+  ///////
+  // analysis is slightly different depending on
+  // what the final state is
+  // probably should replace these
+  // to avoid duplicate code
 
-    syncTree->Fill();
+
+
+  if(NAME_.compare("eTau")==0)
+  {
+
+    edm::Handle< TupleElectronTauCollection > eTaus;
+    iEvent.getByLabel(leptonTauSrc_, eTaus);
+
+    for (std::size_t i = 0; i < eTaus->size(); ++i)
+    {
+
+      const TupleTau eTau =   ((*eTau)[i]);
+
+      /////////////////////
+      // basic selection
+      // DR > 0.5
+      // sum charge = 0
+      // MAX = 1 (highest pt pair in the event)
+      // pass trigger
+      // mt < 30
+
+      bool passAll = 1;
+      if( !(eTau.DR()>0.5) ) passAll = 0;
+      if( !(eTau.sumCharge()==0) ) passAll = 0;
+      if( !(eTau.TransverseMass()<30) ) passAll = 0;
+      if( !(eTau.isGoodTriggerPair()==1) ) passAll = 0;
+      if( !(eTau.MAX()==1) ) passAll = 0;
+
+      ///////////////////
+      // if it has passed all selections
+      // fill some plots
+
+      if(passAll==1)
+      {
+
+
+        // Visible di-tau mass
+        mvis = eTau.p4().M();
+        // SVFit di-tau mass
+        m_sv = eTau.correctedSVFitMass();
+        // MVA MET
+        mvamet = eTau.mvaMET();
+        // MVA MET phi
+        mvametphi = eTau.mvaMETphi();
+
+
+        //////
+        // fill the tree
+
+        syncTree->Fill();
+      }
+
+
+    }
+
+
+  }
+
+  else if(NAME_.compare("muTau")==0)
+  {
+    edm::Handle< TupleMuonTauCollection > muTaus;
+    iEvent.getByLabel(leptonTauSrc_, muTaus);
+
+
+    for (std::size_t i = 0; i < muTaus->size(); ++i)
+    {
+
+      const TuplmuTau muTau =   ((*muTau)[i]);
+
+      /////////////////////
+      // basic selection
+      // DR > 0.5
+      // sum charge = 0
+      // MAX = 1 (highest pt pair in the event)
+      // pass trigger
+      // mt < 30
+
+      bool passAll = 1;
+      if( !(muTau.DR()>0.5) ) passAll = 0;
+      if( !(muTau.sumCharge()==0) ) passAll = 0;
+      if( !(muTau.TransverseMass()<30) ) passAll = 0;
+      if( !(muTau.isGoodTriggerPair()==1) ) passAll = 0;
+      if( !(muTau.MAX()==1) ) passAll = 0;
+
+
+      if(passAll==1)
+      {
+
+
+
+        // Visible di-tau mass
+        mvis = muTau.p4().M();
+        // SVFit di-tau mass
+        m_sv = muTau.correctedSVFitMass();
+        // MVA MET
+        mvamet = muTau.mvaMET();
+        // MVA MET phi
+        mvametphi = muTau.mvaMETphi();
+
+        //////
+        // fill the tree
+
+        syncTree->Fill();
+      }
+
+
+    }
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   #ifdef THIS_IS_AN_EVENT_EXAMPLE
   Handle<ExampleData> pIn;
