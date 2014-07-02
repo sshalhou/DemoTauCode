@@ -76,9 +76,6 @@ private:
   TFile *syncFile;
   TTree *syncTree;
 
-  int E_count[20];
-  int MU_count[20];
-
   // tree variables from
   // https://github.com/ajgilbert/ICHiggsTauTau/blob/master/Analysis/HiggsTauTau/interface/HTTSync.h
 
@@ -218,9 +215,6 @@ leptonTauSrc_(iConfig.getParameter<edm::InputTag>("leptonTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
-
-  for(int q=0;q<20;q++) {E_count[q] = 0; MU_count[q] = 0;}
-
 
 
   lRun = -999;
@@ -818,65 +812,16 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       // mt < 30
 
       bool passAll = 1;
-
-      E_count[0]++;
-
-      const TupleElectron ele =   ((*electrons)[eTau.electronIndex()]);
-      const TupleTau tauX =   ((*taus)[eTau.tauIndex()]);
-
-
-      if(ele.p4().pt()>24){
-        E_count[1]++;
-      if(fabs(ele.p4().eta())<2.1){
-        E_count[2]++;
-      if(ele.pass_tight_mvaNonTrigV0()==1){
-        E_count[3]++;
-      if(ele.relativeIso()<0.1){
-        E_count[4]++;
-      if(ele.numberOfMissingInnerHits()==0){
-        E_count[5]++;
-      if(ele.passConversionVeto()==1){
-        E_count[6]++;
-      if(fabs(ele.dz())<0.2){
-        E_count[7]++;
-      if(fabs(ele.d0())<0.045){
-        E_count[8]++;
-      if(tauX.p4().pt()>20){
-        E_count[9]++;
-      if(fabs(tauX.p4().eta())<2.3){
-        E_count[10]++;
-      if(tauX.decayModeFindingOldDMs()>0.5){
-        E_count[11]++;
-      if(tauX.byTightIsolationMVA3oldDMwLT()>0.5){
-        E_count[12]++;
-      if(tauX.againstElectronMediumMVA5()>0.5){
-        E_count[13]++;
-      if(tauX.againstMuonLoose3()>0.5){
-        E_count[14]++;
-      if( (eTau.DR()>0.5) ) {
-        E_count[15]++;
-      if( (eTau.sumCharge()==0) ){
-        E_count[16]++;
-      if( (eTau.TransverseMass()<300000) ){
-        E_count[17]++;
-      if( (eTau.isGoodTriggerPair()==1) ){
-        E_count[18]++;
-      if( (eTau.MAX()==1) ) {
-        E_count[19]++;
-
-}}}}}
-}}}}}
-}}}}}
-}}}}
-
-
-/*
       if( !(eTau.DR()>0.5) ) passAll = 0;
       if( !(eTau.sumCharge()==0) ) passAll = 0;
+
+/*
       if( !(eTau.TransverseMass()<30) ) passAll = 0;
       if( !(eTau.isGoodTriggerPair()==1) ) passAll = 0;
       if( !(eTau.MAX()==1) ) passAll = 0;
 */
+
+
       ///////////////////
       // if it has passed all selections
       // fill some plots
@@ -952,17 +897,12 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       // mt < 30
 
       bool passAll = 1;
-
-      MU_count[0]++;
-
-
-/*
       if( !(muTau.DR()>0.5) ) passAll = 0;
       if( !(muTau.sumCharge()==0) ) passAll = 0;
       if( !(muTau.TransverseMass()<30) ) passAll = 0;
       if( !(muTau.isGoodTriggerPair()==1) ) passAll = 0;
       if( !(muTau.MAX()==1) ) passAll = 0;
-*/
+
 
       if(passAll==1)
       {
@@ -1052,7 +992,6 @@ SyncTree::endJob()
 {
   syncTree->Write();
   syncFile->Close();
-for(int z=0;z<20;z++) std::cout<<" electron cut "<<z<<" = "<<4*E_count[z]<<std::endl;
 
 
 }
