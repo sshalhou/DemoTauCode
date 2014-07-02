@@ -268,7 +268,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
 
-    
+
     if(muTauPath==1)
     {
       size_t tau_id =  tau - taus->begin();
@@ -615,7 +615,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
 
-    if(!(CurrentTau.corrected_p4().pt()>30))
+    if(!(CurrentTau.corrected_p4().pt()>20))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
@@ -625,6 +625,14 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       passFullId_muTau = 0;
       passFullId_eTau = 0;
     }
+
+
+    if(!(tau->tauID("decayModeFindingOldDMs") > 0.5 && tau->tauID("byTightIsolationMVA3oldDMwLT") > 0.5))
+    {
+      passFullId_muTau = 0;
+      passFullId_eTau = 0;
+    }
+
     // muTau specific
     if(!(tau->tauID("againstMuonMediumMVA") > 0.5 && tau->tauID("againstElectronLoose") > 0.5 )) passFullId_muTau = 0;
 
