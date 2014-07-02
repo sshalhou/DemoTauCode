@@ -1052,7 +1052,7 @@ SyncTree::endJob()
 {
   syncTree->Write();
   syncFile->Close();
-for(int z=0;z<20;z++) std::cout<<" electron cut "<<z<<" = "<<E_count[z]<<std::endl;
+for(int z=0;z<20;z++) std::cout<<" electron cut "<<z<<" = "<<4*E_count[z]<<std::endl;
 
 
 }
