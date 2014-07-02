@@ -219,7 +219,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
 
-  for(int q=0;q<20;q++) {E_count[q] = 0; MU_count[q] = 0}
+  for(int q=0;q<20;q++) {E_count[q] = 0; MU_count[q] = 0};
 
 
 
