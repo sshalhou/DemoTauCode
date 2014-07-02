@@ -302,8 +302,10 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
       if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull()) CurrentElectron.set_has_HltMatchEle20(1);
       if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull()) CurrentElectron.set_has_HltMatchEle22(1);
-      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull()) CurrentElectron.set_has_HltMatchEle27(1);
-
+      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull() && electron->p4().pt()>32)
+      {
+        CurrentElectron.set_has_HltMatchEle27(1);
+      }
     }
 
 

@@ -298,8 +298,10 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull()) CurrentMuon.set_has_HltMatchMu17(1);
       if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull()) CurrentMuon.set_has_HltMatchMu18(1);
-      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull()) CurrentMuon.set_has_HltMatchMu24(1);
-
+      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull() && muon->p4().pt()>27)
+      {
+         CurrentMuon.set_has_HltMatchMu24(1);
+      }
     }
 
 

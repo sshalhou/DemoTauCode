@@ -264,7 +264,10 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( trigRefEle20.isAvailable() && trigRefEle20.isNonnull()) CurrentTau.set_has_HltMatchEle20(1);
       if( trigRefEle22.isAvailable() && trigRefEle22.isNonnull()) CurrentTau.set_has_HltMatchEle22(1);
-      if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull()) CurrentTau.set_has_HltMatchEle27(1);
+
+      // I am not sure this trigger even has a tau leg
+      //if( trigRefEle27.isAvailable() && trigRefEle27.isNonnull()) CurrentTau.set_has_HltMatchEle27(1);
+      CurrentTau.set_has_HltMatchEle27(1);
 
     }
 
@@ -283,7 +286,9 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( trigRefMu17.isAvailable() && trigRefMu17.isNonnull()) CurrentTau.set_has_HltMatchMu17(1);
       if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull()) CurrentTau.set_has_HltMatchMu18(1);
-      if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull()) CurrentTau.set_has_HltMatchMu24(1);
+      // I am not sure this trigger even has a tau leg
+      //if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull()) CurrentTau.set_has_HltMatchMu24(1);
+      CurrentTau.set_has_HltMatchMu24(1);
 
     }
 
