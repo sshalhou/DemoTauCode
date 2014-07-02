@@ -76,6 +76,9 @@ private:
   TFile *syncFile;
   TTree *syncTree;
 
+  int E_count[20];
+  int MU_count[20];
+
   // tree variables from
   // https://github.com/ajgilbert/ICHiggsTauTau/blob/master/Analysis/HiggsTauTau/interface/HTTSync.h
 
@@ -216,6 +219,8 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
 
+  E_count[] = {0};
+  MU_count[] = {0};
 
   lRun = -999;
   lLumi  = -999;
@@ -812,6 +817,11 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       // mt < 30
 
       bool passAll = 1;
+
+      E_count[0]++;
+
+
+
 /*
       if( !(eTau.DR()>0.5) ) passAll = 0;
       if( !(eTau.sumCharge()==0) ) passAll = 0;
@@ -894,6 +904,9 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       // mt < 30
 
       bool passAll = 1;
+
+      MU_count[0]++;
+
 
 /*
       if( !(muTau.DR()>0.5) ) passAll = 0;
