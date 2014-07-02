@@ -814,13 +814,9 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       bool passAll = 1;
       if( !(eTau.DR()>0.5) ) passAll = 0;
       if( !(eTau.sumCharge()==0) ) passAll = 0;
-
-/*
       if( !(eTau.TransverseMass()<30) ) passAll = 0;
       if( !(eTau.isGoodTriggerPair()==1) ) passAll = 0;
       if( !(eTau.MAX()==1) ) passAll = 0;
-*/
-
 
       ///////////////////
       // if it has passed all selections
