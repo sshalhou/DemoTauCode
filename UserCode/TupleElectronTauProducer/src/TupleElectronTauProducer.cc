@@ -275,8 +275,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
       const TupleTau tau =   ((*taus)[j]);
 
-//      if(tau.passFullId_eTau() && electron.passFullId())
-//      { // temp
+      if(tau.passFullId_eTau() && electron.passFullId())
+      { // temp
 
 
         cout<<" i,j = "<<i<<","<<j;
@@ -495,7 +495,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         TupleElectronTaus->push_back(CurrentElectronTau);
 
-//      } //temp
+      } //temp
 
     }
 
