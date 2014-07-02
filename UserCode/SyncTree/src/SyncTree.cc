@@ -857,7 +857,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         E_count[15]++;
       if( (eTau.sumCharge()==0) ){
         E_count[16]++;
-      if( (eTau.TransverseMass()<30) ){
+      if( (eTau.TransverseMass()<300000) ){
         E_count[17]++;
       if( (eTau.isGoodTriggerPair()==1) ){
         E_count[18]++;
