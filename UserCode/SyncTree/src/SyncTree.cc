@@ -76,8 +76,8 @@ private:
   TFile *syncFile;
   TTree *syncTree;
 
-  int E_count[20] = {0};
-  int MU_count[20] = {0};
+  int E_count[20];
+  int MU_count[20];
 
   // tree variables from
   // https://github.com/ajgilbert/ICHiggsTauTau/blob/master/Analysis/HiggsTauTau/interface/HTTSync.h
@@ -218,6 +218,8 @@ leptonTauSrc_(iConfig.getParameter<edm::InputTag>("leptonTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
+
+  for(int q=0;q<20;q++) {E_count[q] = 0; MU_count[q] = 0}
 
 
 
