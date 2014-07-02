@@ -358,7 +358,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           LorentzVector DaughterOneP4(0,0,0,0);
           int DaughterTwoPdgId = 0;
           LorentzVector DaughterTwoP4(0,0,0,0);
-          bool ApplyRecoilCorrection = 0;
+          bool ApplyRecoilCorrection = 1;
 
 
           GenBosonDecayFinder genDecayFinder;
@@ -369,6 +369,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           cout<<BosonPdgId<<" = BosonPdgId "<<endl;
           cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
           cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
+          ApplyRecoilCorrection = 0;
           cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
 
