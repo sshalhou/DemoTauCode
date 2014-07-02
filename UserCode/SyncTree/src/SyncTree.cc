@@ -76,8 +76,8 @@ private:
   TFile *syncFile;
   TTree *syncTree;
 
-  int E_count[20];
-  int MU_count[20];
+  int E_count[20] = {0};
+  int MU_count[20] = {0};
 
   // tree variables from
   // https://github.com/ajgilbert/ICHiggsTauTau/blob/master/Analysis/HiggsTauTau/interface/HTTSync.h
@@ -219,8 +219,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
 
-  E_count[] = {0};
-  MU_count[] = {0};
+
 
   lRun = -999;
   lLumi  = -999;
