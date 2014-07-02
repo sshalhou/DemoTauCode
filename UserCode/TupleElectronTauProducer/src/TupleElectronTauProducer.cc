@@ -471,6 +471,12 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         covMET = mvaMETpf.getSignificanceMatrix();
 
+        /////////////////////////////
+        // checking two mets
+        std:cout<<" NSVcorrectedMET "<<NSVcorrectedMET.pt()<<std::endl;
+        std:cout<<" correctedMET "<<correctedMET.pt()<<std::endl;
+
+
 
         if(doSVFit_)
         {
