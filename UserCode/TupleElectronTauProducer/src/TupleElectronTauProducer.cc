@@ -200,7 +200,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
     const pat::Jet & patjet = jets->at(i);
     float mva   = (*puJetIdMVA)[jets->refAt(i)];
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-    if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose )) njet++;
+    if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
   }
 
 
@@ -370,7 +370,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           cout<<BosonPdgId<<" = BosonPdgId "<<endl;
           cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
           cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
-          ApplyRecoilCorrection = 0;
+//          ApplyRecoilCorrection = 0;
           cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
 

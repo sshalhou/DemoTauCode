@@ -204,7 +204,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 //    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
 //    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
-    if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose )) njet++;
+    if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
   }
 
 
@@ -369,7 +369,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           cout<<BosonPdgId<<" = BosonPdgId "<<endl;
           cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
           cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
-          ApplyRecoilCorrection = 0;
+//          ApplyRecoilCorrection = 0;
           cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
 
 
