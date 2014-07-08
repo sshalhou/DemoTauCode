@@ -301,10 +301,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         {
           CurrentElectronTau.set_isGoodTriggerPair(1);
         }
-        else if(electron.has_HltMatchEle27()==1 && tau.has_HltMatchEle27()==1)
-        {
-          CurrentElectronTau.set_isGoodTriggerPair(1);
-        }
+//        else if(electron.has_HltMatchEle27()==1 && tau.has_HltMatchEle27()==1)
+  //      {
+    //      CurrentElectronTau.set_isGoodTriggerPair(1);
+      //  }
 
 
         CurrentElectronTau.set_p4(  electron.p4() + tau.p4() );

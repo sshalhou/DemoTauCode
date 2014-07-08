@@ -304,7 +304,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         if(muon.has_HltMatchMu17()==1 && tau.has_HltMatchMu17()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
         else if(muon.has_HltMatchMu18()==1 && tau.has_HltMatchMu18()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
-        else if(muon.has_HltMatchMu24()==1 && tau.has_HltMatchMu24()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
+//        else if(muon.has_HltMatchMu24()==1 && tau.has_HltMatchMu24()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
 
 
         CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
