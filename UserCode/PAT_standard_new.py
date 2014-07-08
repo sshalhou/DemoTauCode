@@ -109,8 +109,18 @@ process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
 
 
 
-process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
+#process.pfMEtMVA = process.pfMEtMVA.clone(srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"))
+#process.patPFMetByMVA = process.patMETs.clone(
+#    metSource = cms.InputTag('pfMEtMVA'),
+#    addMuonCorrections = cms.bool(True),
+#    genMETSource = cms.InputTag('genMetTrue')
+#                                                )
 
+# match to LLR
+process.pfMEtMVA = process.pfMEtMVA.clone(loadMVAfromDB = cms.bool(True),
+                                          minNumLeptons = cms.int32(2),
+                                          useType1 = cms.bool(False)
+                                          )
 
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
@@ -611,5 +621,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 1000
+process.maxEvents.input = 10
 ########################################################################################################
