@@ -117,14 +117,72 @@ process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
 #                                                )
 
 # match to LLR
-process.pfMEtMVA = process.pfMEtMVA.clone(loadMVAfromDB = cms.bool(True),
-                                          minNumLeptons = cms.int32(2),
-                                          useType1 = cms.bool(False)
-                                          )
+process.pfMEtMVA = cms.EDProducer("PFMETProducerMVA",
+    tmvaWeights = cms.string('RecoJets/JetProducers/data/TMVAClassificationCategory_JetID_MET_53X_Dec2012.weights.xml'),
+    srcVertices = cms.InputTag("offlinePrimaryVertices"),
+    tmvaSpectators = cms.vstring(),
+    useOld42 = cms.bool(False),
+    inputRecords = cms.PSet(
+        DPhi = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2'),
+        U = cms.string('mvaPFMET_53_Dec2012_U'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1')
+    ),
+    tmvaVariables = cms.vstring('nvtx',
+        'jetPt',
+        'jetEta',
+        'jetPhi',
+        'dZ',
+        'beta',
+        'betaStar',
+        'nCharged',
+        'nNeutrals',
+        'dR2Mean',
+        'ptD',
+        'frac01',
+        'frac02',
+        'frac03',
+        'frac04',
+        'frac05'),
+    useType1 = cms.bool(False),
+    loadMVAfromDB = cms.bool(True),
+    is42 = cms.bool(False),
+    version = cms.int32(-1),
+    srcUncorrJets = cms.InputTag("ak5PFJets"),
+    JetIdParams = cms.PSet(
+        Pt2030_Tight = cms.vdouble(0.3, 0.4, 0.7, 0.8),
+        Pt2030_Loose = cms.vdouble(0.0, 0.0, 0.2, 0.6),
+        Pt3050_Medium = cms.vdouble(0.3, 0.2, 0.7, 0.8),
+        Pt1020_Tight = cms.vdouble(-0.2, 0.2, 0.2, 0.6),
+        Pt2030_Medium = cms.vdouble(0.2, 0.2, 0.5, 0.7),
+        Pt010_Tight = cms.vdouble(0.5, 0.6, 0.6, 0.9),
+        Pt1020_Loose = cms.vdouble(-0.4, -0.4, -0.4, 0.4),
+        Pt010_Medium = cms.vdouble(0.2, 0.4, 0.2, 0.6),
+        Pt1020_Medium = cms.vdouble(-0.3, 0.0, 0.0, 0.5),
+        Pt010_Loose = cms.vdouble(0.0, 0.0, 0.0, 0.2),
+        Pt3050_Loose = cms.vdouble(0.0, 0.0, 0.6, 0.2),
+        Pt3050_Tight = cms.vdouble(0.5, 0.4, 0.8, 0.9)
+    ),
+    impactParTkThreshold = cms.double(0.0),
+    srcLeptons = cms.VInputTag(),
+    dZcut = cms.double(0.1),
+    srcPFCandidates = cms.InputTag("particleFlow"),
+    minNumLeptons = cms.int32(2),
+    minCorrJetPt = cms.double(-1.0),
+    tmvaMethod = cms.string('JetID'),
+    cutBased = cms.bool(False),
+    verbosity = cms.int32(0),
+    srcCorrJets = cms.InputTag("calibratedAK5PFJetsForPFMEtMVA"),
+    srcRho = cms.InputTag("kt6PFJets","rho"),
+    corrector = cms.string('ak5PFL1Fastjet'),
+    globalThreshold = cms.double(-1.0)
+)
+
+
 
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(True),
+    addMuonCorrections = cms.bool(False),
     genMETSource = cms.InputTag('genMetTrue')
                                                 )
 
