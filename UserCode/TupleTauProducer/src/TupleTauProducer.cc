@@ -620,7 +620,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
 
-    if(!(CurrentTau.corrected_p4().pt()>20))
+    if(!(CurrentTau.corrected_p4().pt()>30))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
