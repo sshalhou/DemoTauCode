@@ -119,7 +119,8 @@ process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
 # match to LLR
 
 process.pfMEtMVA = process.pfMEtMVA.clone(
-    srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),useType1 = cms.bool(False))
+    #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
+    useType1 = cms.bool(False))
 process.patPFMetByMVA = process.patMETs.clone(
     metSource = cms.InputTag('pfMEtMVA'),
     addMuonCorrections = cms.bool(False),
