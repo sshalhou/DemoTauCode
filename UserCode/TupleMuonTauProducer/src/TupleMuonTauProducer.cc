@@ -235,6 +235,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const reco::PFMET mvaMETpf =  (*mvamet)[0];
 
 
+  std::cout<<" SIZE OF MUONS "<<muons->size()<<std::endl;
+  std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
+
 
 
   // declare & init to raw value before applying recoil corrections
@@ -270,7 +273,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           max_pt = (tau.p4().pt()+muon.p4().pt());
           max_i = i;
           max_j = j;
-        }  
+        }
 
         }
 
