@@ -261,8 +261,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-      if(tau.passFullId_muTau() && muon.passFullId())
-      { // temp
+//      if(tau.passFullId_muTau() && muon.passFullId())
+//      { // temp
 
         if(tau.p4().pt()+muon.p4().pt() >= max_pt)
         {
@@ -277,7 +277,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         }
 
-      } // temp
+//      } // temp
     }
   }
 
@@ -293,8 +293,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-      if(tau.passFullId_muTau() && muon.passFullId())
-      { // temp
+  //    if(tau.passFullId_muTau() && muon.passFullId())
+    //  { // temp
 
 
         cout<<" i,j = "<<i<<","<<j;
@@ -502,7 +502,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         TupleMuonTaus->push_back(CurrentMuonTau);
 
-    } //temp
+  //  } //temp
 
     }
 
