@@ -358,7 +358,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!muon->track().isNull())
     {
       CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
-      CurrentMuon.set_dz(muon->track()->dz(primary_vertex.position()));
+      CurrentMuon.set_dz(muon->track()->dz());
 
     }
 
@@ -451,7 +451,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!muon->track().isNull())
     {
-      if(!(fabs(muon->track()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
+      if(!(fabs(muon->track()->dz()) < 0.2)) passFullId = 0;
     }
     else passFullId = 0;
     if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
