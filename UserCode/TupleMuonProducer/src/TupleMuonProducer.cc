@@ -300,7 +300,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( trigRefMu18.isAvailable() && trigRefMu18.isNonnull()) CurrentMuon.set_has_HltMatchMu18(1);
       if( trigRefMu24.isAvailable() && trigRefMu24.isNonnull() && muon->p4().pt()>27)
       {
-         CurrentMuon.set_has_HltMatchMu24(1);
+        CurrentMuon.set_has_HltMatchMu24(1);
       }
     }
 
@@ -323,7 +323,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // store selection summary booleans
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
-  //  CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
+    //  CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
     CurrentMuon.set_isTightMuon(muon->isGood("GlobalMuonPromptTight"));
     CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
@@ -357,15 +357,14 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(!muon->track().isNull())
     {
-
       CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
+      CurrentMuon.set_dz(muon->track()->dz(primary_vertex.position()));
 
     }
 
     if(!muon->muonBestTrack().isNull())
     {
 
-      CurrentMuon.set_dz(muon->track()->dz(primary_vertex.position()));
       CurrentMuon.set_dxy(muon->muonBestTrack()->dxy(primary_vertex.position()));
 
     }
@@ -450,7 +449,11 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(muon->isGood("GlobalMuonPromptTight"))) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
-    if(!(fabs(muon->track()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
+    if(!muon->track().isNull())
+    {
+      if(!(fabs(muon->track()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
+    }
+    else passFullId = 0;
     if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
     if(!(muon->p4().pt()>20)) passFullId = 0;
     if(!(fabs(muon->p4().eta())<2.1)) passFullId = 0;
