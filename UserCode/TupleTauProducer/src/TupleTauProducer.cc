@@ -295,7 +295,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-
+    std::cout<<" SETTING TAU PT TO "<<tau->p4().pt()<<std::endl;
     CurrentTau.set_p4(tau->p4());
 
     //////////////
