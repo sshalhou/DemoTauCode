@@ -244,8 +244,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   ///////////////////
   // find max pt pair
 
-  std::size_t max_i = 0;
-  std::size_t max_j = 0;
+  std::size_t max_i = -999;
+  std::size_t max_j = -999;
   int max_pt = -999;
 
   for (std::size_t i = 0; i < muons->size(); ++i)
@@ -258,17 +258,23 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-      if(tau.passFullId_muTau() && muon.passFullId())
-      { // temp
+//      if(tau.passFullId_muTau() && muon.passFullId())
+//      { // temp
 
         if(tau.p4().pt()+muon.p4().pt() >= max_pt)
+        {
+
+
+        if(tau.p4().pt()==tau.p4().pt() && muon.p4().pt()==muon.p4().pt())
         {
           max_pt = (tau.p4().pt()+muon.p4().pt());
           max_i = i;
           max_j = j;
+        }  
+
         }
 
-      }
+//      } // temp
     }
   }
 
