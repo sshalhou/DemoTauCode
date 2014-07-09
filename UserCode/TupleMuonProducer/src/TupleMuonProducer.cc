@@ -263,7 +263,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     /*
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
-    cout<<" isTightMuon "<<muon->isTightMuon(primary_vertex)<<endl;
+    cout<<" isTightMuon "<<muon->isTightMuon()<<endl;
     cout<<" isLooseMuon "<<muon->isLooseMuon()<<endl;
     cout<<" charge "<<muon->charge()<<endl;
     cout<<" pfP4.pt "<<muon->pfP4().pt()<<endl;
@@ -323,7 +323,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // store selection summary booleans
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
-    CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
+    CurrentMuon.set_isTightMuon(muon->isTightMuon());
     CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
     // store the pf isolation valid boolean
@@ -446,7 +446,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
     if(!(muon->isGlobalMuon())) passFullId = 0;
-    if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
+    if(!(muon->isTightMuon())) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passFullId = 0;
     if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
