@@ -312,8 +312,8 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       size_t hadrons = 0;
       size_t strips = 0;
 
-      if(tau->signalPFChargedHadrCands()) hadrons = tau->signalPFChargedHadrCands().size();
-      if(tau->signalPFGammaCands()) strips = tau->signalPFGammaCands().size();
+       hadrons = tau->signalPFChargedHadrCands().size();
+       strips = tau->signalPFGammaCands().size();
 
       std::cout<<" correcting a TAU with "<<hadrons<<" hadrons and "<<strips<<" strips \n";
       CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
