@@ -311,9 +311,9 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
       CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genLepton()->pdgId());
     }
-    else if (iEvent.isRealData())
+    else
     {
-      std::cout<<" real data, not applying a tau energy correction"<<std::endl;
+      std::cout<<" real data or non-gen matched tau, not applying a tau energy correction"<<std::endl;
       CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
     }
 
@@ -329,6 +329,8 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(tau->genLepton())
     {
       CurrentTau.set_genP4(tau->genLepton()->p4());
+      CurrentTau.set_pdgIdGEN(tau->genLepton()->pdgId());
+
     }
 
 

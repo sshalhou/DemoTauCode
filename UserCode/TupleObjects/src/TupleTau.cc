@@ -8,6 +8,7 @@ TupleTau::TupleTau()
   m_genP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_corrected_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_pdgId = -999;
+  m_pdgIdGEN = -999;
   m_charge = -999;
   m_decayMode = -999;
   m_passFullId_muTau = 0;
@@ -841,13 +842,13 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_, int generator
 
   // caution, these corrections should only be applied
   // for certain MC samples
-  cout<<" Warning correcting energy of all Taus, add in a sample & MC check!!!!!"<<endl;
+  //cout<<" Warning correcting energy of all Taus, add in a sample & MC check!!!!!"<<endl;
 
   // one prong, 1 pi0
-  if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.));
+  //if(decayMode_==1)   v4_sf = (1.025 + 0.001 * std::min(std::max(v4_.pt()-45.,0.),10.));
 
   // 3 prong, 0 to N pi0
-  if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.));
+  //if(decayMode_>=10 && decayMode_<=14)   v4_sf = (1.012 + 0.001 * std::min(std::max(v4_.pt()-32.,0.),18.));
 
 
   /////////////////////
@@ -855,9 +856,17 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_, int generator
   // MSSM analysis if matched to generator
   // level hadronic tau decay
 
-  if(generatorPdgId_ == 15 || generatorPdgId_==-15) v4_sf *= 1.01;
+  if(generatorPdgId_ == 15 || generatorPdgId_==-15)
+  {
 
+  // Following AN_2014_074, correct for the following taus
+  // Three Hadrons
+  // Hadron plus one Strip or Hadron plus two Strips
+  // Single hadron
 
+    v4_sf *= 1.01;
+
+  }
 
   m_corrected_p4 = v4_*v4_sf;
 
@@ -874,6 +883,9 @@ LorentzVector TupleTau::corrected_p4() const  { return m_corrected_p4; }
 
 void TupleTau::set_pdgId(int pdgId_) { m_pdgId = pdgId_;}
 int TupleTau::pdgId() const  { return m_pdgId; }
+
+void TupleTau::set_pdgIdGEN(int pdgIdGEN_) { m_pdgIdGEN = pdgIdGEN_;}
+int TupleTau::pdgIdGEN() const  { return m_pdgIdGEN; }
 
 void TupleTau::set_charge(int charge_) { m_charge = charge_;}
 int TupleTau::charge() const  { return m_charge; }

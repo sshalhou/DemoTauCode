@@ -33,6 +33,8 @@ public:
   void set_genP4(LorentzVector);
   void set_corrected_p4(LorentzVector, int, int);
   void set_pdgId(int);
+  void set_pdgIdGEN(int);
+
   void set_charge(int);
   void set_decayMode(int);
   void set_passFullId_muTau(bool);
@@ -125,6 +127,7 @@ public:
   LorentzVector genP4() const;
   LorentzVector corrected_p4() const;
   int pdgId() const;
+  int pdgIdGEN() const;
   int charge() const;
   int decayMode() const;
   bool passFullId_muTau() const;
@@ -213,6 +216,7 @@ private:
   LorentzVector m_genP4;
   LorentzVector m_corrected_p4;
   int m_pdgId;
+  int m_pdgIdGEN;
   int m_charge;
   int m_decayMode;
   bool m_passFullId_muTau;

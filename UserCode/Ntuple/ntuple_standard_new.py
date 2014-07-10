@@ -29,14 +29,14 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 
 process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
   muonSource     = cms.InputTag("myCleanPatMuons"),
-  vertexSource      = cms.InputTag("offlinePrimaryVerticesWithBS"),
+  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
   filter = cms.bool(True)
 )
 
 
 process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
   electronSource     = cms.InputTag("cleanPatElectrons"),
-  vertexSource      = cms.InputTag("offlinePrimaryVerticesWithBS"),
+  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
   filter = cms.bool(True)
 )
 
@@ -47,7 +47,7 @@ process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleElectronsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
@@ -57,7 +57,7 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('cleanPatMuons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVerticesWithBS'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
