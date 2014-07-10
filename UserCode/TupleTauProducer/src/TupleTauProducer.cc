@@ -303,14 +303,20 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // we will keep both p4 and corrected p4
 
 
-    std::cout<<" gen lepton "<<tau->genLepton()<<" is real data "<<iEvent.isRealData()<<std::endl;
-    std::cout<<" Warning need to add in a MC sample check "<<std::endl;
+
+    std::cout<<" Warning need to add in a embedded sample check for tau ES "<<std::endl;
     // correct the tau energy
-    if(tau->genLepton())
+    if(!iEvent.isRealData())
     {
       std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
-      //CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genLepton()->pdgId());
-      CurrentTau.set_corrected_p4(tau->p4(), int(tau->tauID("decayModeFindingOldDMs")), tau->genLepton()->pdgId());
+      size_t hadrons = 0;
+      size_t strips = 0;
+
+      if(tau->signalPFChargedHadrCands()) hadrons = tau->signalPFChargedHadrCands().size();
+      if(tau->signalPFGammaCands()) strips = tau->signalPFGammaCands().size();
+
+      std::cout<<" correcting a TAU with "<<hadrons<<" hadrons and "<<strips<<" strips \n";
+      CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
 
     }
     else
