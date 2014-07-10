@@ -202,8 +202,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     const pat::Jet & patjet = jets->at(i);
     float mva   = (*puJetIdMVA)[jets->refAt(i)];
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-//    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
-//    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
+    //    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
+    //    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
     if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
   }
 
@@ -261,11 +261,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-//      if(tau.passFullId_muTau() && muon.passFullId())
-//      { // temp
+      //      if(tau.passFullId_muTau() && muon.passFullId())
+      //      { // temp
 
-        if(tau.p4().pt()+muon.p4().pt() >= max_pt)
-        {
+      if(tau.p4().pt()+muon.p4().pt() >= max_pt)
+      {
 
 
         if(tau.p4().pt()==tau.p4().pt() && muon.p4().pt()==muon.p4().pt())
@@ -275,9 +275,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           max_j = j;
         }
 
-        }
+      }
 
-//      } // temp
+      //      } // temp
     }
   }
 
@@ -293,216 +293,209 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleTau tau =   ((*taus)[j]);
 
-  //    if(tau.passFullId_muTau() && muon.passFullId())
-    //  { // temp
+      //    if(tau.passFullId_muTau() && muon.passFullId())
+      //  { // temp
 
 
-        cout<<" i,j = "<<i<<","<<j;
-        cout<<" muon PDGID "<<muon.pdgId();
-        cout<<" tau PDGID "<<tau.pdgId()<<endl;
+      cout<<" i,j = "<<i<<","<<j;
+      cout<<" muon PDGID "<<muon.pdgId();
+      cout<<" tau PDGID "<<tau.pdgId()<<endl;
 
 
-        TupleMuonTau CurrentMuonTau;
+      TupleMuonTau CurrentMuonTau;
 
-        if(max_i == i && max_j == j) CurrentMuonTau.set_MAX(1);
-        else CurrentMuonTau.set_MAX(0);
-
-
-        //////////////////
-        // check triggers
-
-        if(muon.has_HltMatchMu17()==1 && tau.has_HltMatchMu17()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
-        else if(muon.has_HltMatchMu18()==1 && tau.has_HltMatchMu18()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
-//        else if(muon.has_HltMatchMu24()==1 && tau.has_HltMatchMu24()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
+      if(max_i == i && max_j == j) CurrentMuonTau.set_MAX(1);
+      else CurrentMuonTau.set_MAX(0);
 
 
-        CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
-        CurrentMuonTau.set_muonIndex(i);
-        CurrentMuonTau.set_tauIndex(j);
-        CurrentMuonTau.set_corrected_p4( muon.p4() + tau.p4()   );
-        CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.p4()  );
-        CurrentMuonTau.set_DR(muon.p4() , tau.p4()  );
-        CurrentMuonTau.set_mvaMETraw(mvaMETpf.pt());
-        CurrentMuonTau.set_mvaMETphiRaw(mvaMETpf.phi());
+      //////////////////
+      // check triggers
+
+      if(muon.has_HltMatchMu17()==1 && tau.has_HltMatchMu17()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
+      else if(muon.has_HltMatchMu18()==1 && tau.has_HltMatchMu18()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
+      //        else if(muon.has_HltMatchMu24()==1 && tau.has_HltMatchMu24()==1) CurrentMuonTau.set_isGoodTriggerPair(1);
 
 
-        //      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
-        //      CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
-        //      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
-        CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
+      CurrentMuonTau.set_p4(  muon.p4() + tau.p4() );
+      CurrentMuonTau.set_muonIndex(i);
+      CurrentMuonTau.set_tauIndex(j);
+      CurrentMuonTau.set_mvaMETraw(mvaMETpf.pt());
+      CurrentMuonTau.set_mvaMETphiRaw(mvaMETpf.phi());
+      CurrentMuonTau.set_corrected_p4( muon.p4() + tau.corrected_p4()   );
+      CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
+      CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
+      CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
 
-        ////////////
-        // apply Phil's recoil
-        // corrections to the MET before
-        // running SVFit to MC only
+      ////////////
+      // apply Phil's recoil
+      // corrections to the MET before
+      // running SVFit to MC only
 
-        if( !iEvent.isRealData() )
-        {
-          double met=mvaMETpf.pt();
-          double metphi=mvaMETpf.phi();
-          //        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
-          //        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
-          cout<<" turned off tau ES correction"<<endl;
-          double leptonPt = ( muon.p4() + tau.p4()   ).pt();
-          double leptonPhi  = ( muon.p4() + tau.p4()   ).phi();
+      if( !iEvent.isRealData() )
+      {
+        double met=mvaMETpf.pt();
+        double metphi=mvaMETpf.phi();
+        //        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
+        //        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
+        cout<<" turned off tau ES correction"<<endl;
+        double leptonPt = ( muon.p4() + tau.p4()   ).pt();
+        double leptonPhi  = ( muon.p4() + tau.p4()   ).phi();
 
-          double GenZPt = 0.0;
-          double GenZPhi = 0.0;
-          double iU1 = 0.0;
-          double iU2 = 0.0;
-
-          ////////////////
-          // There are specific corrections
-          // for H->tau tau, W, Z, and Zmm.
-          // As of Summer 2013, H,W, and Z use 53X_20pv
-          // while Zmm uses 53X_2012 for the process.
-          // For data Zmm and simulated Zmm, we use 53X_2012.
-          // The function genDecayFinder can figure out the process
-          // while whichRecoilCorrectionFiles will return the
-          // correct set of files for the correction
-
-          int BosonPdgId = 0;
-          LorentzVector BosonP4(0,0,0,0);
-          int DaughterOnePdgId = 0;
-          LorentzVector DaughterOneP4(0,0,0,0);
-          int DaughterTwoPdgId = 0;
-          LorentzVector DaughterTwoP4(0,0,0,0);
-          bool ApplyRecoilCorrection = 1;
-
-
-          GenBosonDecayFinder genDecayFinder;
-          genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
-          DaughterOneP4,DaughterTwoPdgId,
-          DaughterTwoP4,ApplyRecoilCorrection);
-
-          cout<<BosonPdgId<<" = BosonPdgId "<<endl;
-          cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
-          cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
-//          ApplyRecoilCorrection = 0;
-          cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
-
-
-          if(ApplyRecoilCorrection)
-          {
-
-            GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
-            GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
-
-            std::string DataFile;
-            std::string MCFile;
-            std::string ProcessFile;
-
-
-
-            whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
-
-            cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
-
-            // not sure what random seed we should be using?
-            // do we really want it to be random?
-            cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
-
-            RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
-            corrector.addDataFile(DataFile);
-            corrector.addMCFile(MCFile);
-
-            //////////////////////
-            // print out the uncorrected value
-            cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
-
-            corrector.CorrectType1(  met,
-            metphi,
-            GenZPt,
-            GenZPhi,
-            leptonPt,
-            leptonPhi,
-            iU1,
-            iU2,
-            iFluc_,
-            iScale_,
-            njet);
-
-            correctedMET.SetPt(met);
-            correctedMET.SetEta(0.0);
-            correctedMET.SetPhi(metphi);
-            correctedMET.SetM(0.0);
-            NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
-
-            //////////////////////
-            // print out the corrected value
-            cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
-          }
-
-
-        }
+        double GenZPt = 0.0;
+        double GenZPhi = 0.0;
+        double iU1 = 0.0;
+        double iU2 = 0.0;
 
         ////////////////
-        double Mt = TupleHelpers::GetTransverseMass(muon.p4(), NSVcorrectedMET);
-        CurrentMuonTau.set_TransverseMass(Mt);
+        // There are specific corrections
+        // for H->tau tau, W, Z, and Zmm.
+        // As of Summer 2013, H,W, and Z use 53X_20pv
+        // while Zmm uses 53X_2012 for the process.
+        // For data Zmm and simulated Zmm, we use 53X_2012.
+        // The function genDecayFinder can figure out the process
+        // while whichRecoilCorrectionFiles will return the
+        // correct set of files for the correction
 
-        cout<<" transverse mass  = "<<Mt<<endl;
-        ////////////////
+        int BosonPdgId = 0;
+        LorentzVector BosonP4(0,0,0,0);
+        int DaughterOnePdgId = 0;
+        LorentzVector DaughterOneP4(0,0,0,0);
+        int DaughterTwoPdgId = 0;
+        LorentzVector DaughterTwoP4(0,0,0,0);
+        bool ApplyRecoilCorrection = 1;
 
-        TMatrixD covMET(2, 2); // PFMET significance matrix
-        std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
 
-        ///////
-        // it seems the order matters
-        // pass the higher pt lepton 1st
+        GenBosonDecayFinder genDecayFinder;
+        genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
+        DaughterOneP4,DaughterTwoPdgId,
+        DaughterTwoP4,ApplyRecoilCorrection);
 
-        if( muon.p4().pt() >=  tau.p4().pt()  )
-        //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+        cout<<BosonPdgId<<" = BosonPdgId "<<endl;
+        cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
+        cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
+        //          ApplyRecoilCorrection = 0;
+        cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
+
+
+        if(ApplyRecoilCorrection)
         {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          muon.p4()) );
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.p4()));
-          //        tau.corrected_p4()));
+
+          GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
+          GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+
+          std::string DataFile;
+          std::string MCFile;
+          std::string ProcessFile;
+
+
+
+          whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
+          DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
+
+          cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
+
+          // not sure what random seed we should be using?
+          // do we really want it to be random?
+          cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
+
+          RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
+          corrector.addDataFile(DataFile);
+          corrector.addMCFile(MCFile);
+
+          //////////////////////
+          // print out the uncorrected value
+          cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
+
+          corrector.CorrectType1(  met,
+          metphi,
+          GenZPt,
+          GenZPhi,
+          leptonPt,
+          leptonPhi,
+          iU1,
+          iU2,
+          iFluc_,
+          iScale_,
+          njet);
+
+          correctedMET.SetPt(met);
+          correctedMET.SetEta(0.0);
+          correctedMET.SetPhi(metphi);
+          correctedMET.SetM(0.0);
+          NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
+
+          //////////////////////
+          // print out the corrected value
+          cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
         }
 
-        else
-        {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.p4()));
-          //        tau.corrected_p4()));
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          muon.p4()) );
+
+      }
+
+      ////////////////
+      double Mt = TupleHelpers::GetTransverseMass(muon.p4(), NSVcorrectedMET);
+      CurrentMuonTau.set_TransverseMass(Mt);
+
+      cout<<" transverse mass  = "<<Mt<<endl;
+      ////////////////
+
+      TMatrixD covMET(2, 2); // PFMET significance matrix
+      std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
+
+      ///////
+      // it seems the order matters
+      // pass the higher pt lepton 1st
 
 
-        }
+      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+      {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        tau.corrected_p4()));
+      }
 
-        // store the met
-        CurrentMuonTau.set_mvaMET(correctedMET.pt());
-        CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
+      else
+      {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        tau.corrected_p4()));
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
 
-        covMET = mvaMETpf.getSignificanceMatrix();
+
+      }
+
+      // store the met
+      CurrentMuonTau.set_mvaMET(correctedMET.pt());
+      CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
+
+      covMET = mvaMETpf.getSignificanceMatrix();
 
 
-        if(doSVFit_)
-        {
-          // last argument is verbosity
-          NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
-          algo.addLogM(false);
-          algo.integrateMarkovChain();
+      if(doSVFit_)
+      {
+        // last argument is verbosity
+        NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
+        algo.addLogM(false);
+        algo.integrateMarkovChain();
 
-          //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+        //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
-          CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
+        CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
 
-          //cout<<" diTauMassErr "<<algo.getMassUncert();
-          //cout<<" diTauPt "<<algo.getPt();
-          //cout<<" diTauPtErr "<<algo.getPtUncert();
-        }
-        else CurrentMuonTau.set_correctedSVFitMass(0.0);
-        measuredTauLeptons.clear();
+        //cout<<" diTauMassErr "<<algo.getMassUncert();
+        //cout<<" diTauPt "<<algo.getPt();
+        //cout<<" diTauPtErr "<<algo.getPtUncert();
+      }
+      else CurrentMuonTau.set_correctedSVFitMass(0.0);
+      measuredTauLeptons.clear();
 
-        ////////////
-        // store the MuonTau
+      ////////////
+      // store the MuonTau
 
-        TupleMuonTaus->push_back(CurrentMuonTau);
+      TupleMuonTaus->push_back(CurrentMuonTau);
 
-  //  } //temp
+      //  } //temp
 
     }
 
