@@ -831,9 +831,9 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         // SVFit di-tau mass
         lMSV = eTau.correctedSVFitMass();
         // MVA MET
-        lMet = eTau.mvaMET();
+        lMVAMet = eTau.mvaMET();
         // MVA MET phi
-        lMetPhi = eTau.mvaMETphi();
+        lMVAMetPhi = eTau.mvaMETphi();
         // transverse mass
         lMt1 = eTau.TransverseMass();
 
