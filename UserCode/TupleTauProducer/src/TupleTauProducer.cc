@@ -309,7 +309,9 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(tau->genLepton())
     {
       std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
-      CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genLepton()->pdgId());
+      //CurrentTau.set_corrected_p4(tau->p4(), tau->decayMode(), tau->genLepton()->pdgId());
+      CurrentTau.set_corrected_p4(tau->p4(), int(tau->tauID("decayModeFindingOldDMs")), tau->genLepton()->pdgId());
+
     }
     else
     {
