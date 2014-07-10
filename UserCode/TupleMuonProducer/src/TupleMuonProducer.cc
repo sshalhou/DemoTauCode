@@ -41,6 +41,7 @@ Implementation:
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidateFwd.h"
+#include "DataFormats/Math/interface/deltaR.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -271,7 +272,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     TupleMuon CurrentMuon;
     bool isTightMuon   = 1;
-    bool isPFMuon = 1;
+    bool isPFMuon = 0;
     /*
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
@@ -354,7 +355,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_isTightMuon(isTightMuon);
 
-    isPFMuon = 1;
+    isPFMuon = 0;
 
     for(size_t pf = 0; pf < pfCandidates->size(); pf++)
     {
@@ -362,11 +363,25 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
       {
-	       reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
+        reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
+
+
+        if( muonRefToPFMuon.isNonnull() )
+        {
+          if(deltaR( muonRefToPFMuon->p4() , muon->p4()) < 1e-04)
+          {
+            if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() )
+            {
+              isPFMuon = 1;
+            }
+          }
+        }
+
+
       }
     }
 
-
+    std::cout<<" Setting isTightMuon and isPFMuon to "<<isTightMuon<<" "<<isPFMuon<<std::endl;
 
 
     CurrentMuon.set_isPFMuon(isPFMuon);
@@ -497,6 +512,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(muon->isGlobalMuon())) passFullId = 0;
     //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(isTightMuon)) passFullId = 0;
+    if(!(isPFMuon)) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!muon->innerTrack().isNull())
     {
