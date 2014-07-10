@@ -62,7 +62,9 @@ process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
                 muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
-                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24")
+                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24"),
+                pfSrc = cms.untracked.string("particleFlow")
+
                                      )
 
 process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,

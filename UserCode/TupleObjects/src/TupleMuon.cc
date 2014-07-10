@@ -8,6 +8,7 @@ TupleMuon::TupleMuon()
   m_pfP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_isGlobalMuon = 0;
   m_isTightMuon = 0;
+  m_isPFMuon = 0;
   m_isLooseMuon = 0;
   m_sumChargedParticlePt_DR4 = NAN;
   m_sumPhotonEt_DR4 = NAN;
@@ -117,6 +118,12 @@ void TupleMuon::set_isGlobalMuon(bool isGlobalMuon_)
 void TupleMuon::set_isTightMuon(bool isTightMuon_)
 {
   m_isTightMuon = isTightMuon_;
+
+}
+
+void TupleMuon::set_isPFMuon(bool isPFMuon_)
+{
+  m_isPFMuon = isPFMuon_;
 
 }
 
@@ -232,6 +239,12 @@ bool TupleMuon::isGlobalMuon() const
 bool TupleMuon::isTightMuon() const
 {
   return m_isTightMuon;
+
+}
+
+bool TupleMuon::isPFMuon() const
+{
+  return m_isPFMuon;
 
 }
 

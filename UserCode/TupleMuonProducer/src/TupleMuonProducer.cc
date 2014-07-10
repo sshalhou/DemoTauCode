@@ -32,12 +32,15 @@ Implementation:
 #include <vector>
 #include <iostream>
 #include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+#include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
+#include "DataFormats/ParticleFlowCandidate/interface/PFCandidateFwd.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -74,6 +77,7 @@ private:
   std::string muTrigMatchMu18Src_;
   std::string muTrigMatchMu24Src_;
   vector<string> muTauPaths;
+  edm::InputTag pfSrc_;
 
 };
 
@@ -96,7 +100,8 @@ NAME_(iConfig.getParameter<string>("NAME" )),
 triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
 muTrigMatchMu17Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu17Src" )),
 muTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu18Src" )),
-muTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu24Src" ))
+muTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("muTrigMatchMu24Src" )),
+pfSrc_(iConfig.getParameter<edm::InputTag>("pfSrc" ))
 {
 
 
@@ -142,6 +147,10 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get muon collection
   edm::Handle<edm::View<pat::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
+
+  // get pfCandidates collection
+  edm::Handle<reco::PFCandidateCollection > pfCandidates;
+  iEvent.getByLabel(pfSrc_,pfCandidates);
 
   // get vertex collection
   edm::Handle<edm::View<reco::Vertex> > vertices;
@@ -261,7 +270,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
 
     TupleMuon CurrentMuon;
-
+    bool isTightMuon   = 1;
+    bool isPFMuon = 1;
     /*
     cout<<" muon Pt "<<muon->p4().pt()<<endl;
     cout<<" isGlobal "<<muon->isGlobalMuon()<<endl;
@@ -326,7 +336,43 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_isGlobalMuon(muon->isGlobalMuon());
     //  CurrentMuon.set_isTightMuon(muon->isTightMuon(primary_vertex));
-    CurrentMuon.set_isTightMuon(muon->isGood("GlobalMuonPromptTight"));
+
+    //    CurrentMuon.set_isTightMuon(muon->isGood("GlobalMuonPromptTight"));
+
+    isTightMuon = 1;
+    if(   !(muon->isGlobalMuon())                 ) isTightMuon = 0;
+    if(   !(muon->numberOfMatchedStations()>1)    ) isTightMuon = 0;
+    if(    muon->innerTrack().isNonnull() && muon->track().isNonnull() && muon->globalTrack().isNonnull() )
+    {
+
+      if(   !(muon->globalTrack()->normalizedChi2()<10) ) isTightMuon = 0;
+      if(   !((muon->globalTrack()->hitPattern()).numberOfValidMuonHits()>0) ) isTightMuon = 0;
+      if(   !((muon->innerTrack()->hitPattern()).numberOfValidPixelHits()>0) ) isTightMuon = 0;
+      if(   !((muon->track()->hitPattern()).trackerLayersWithMeasurement()>5) ) isTightMuon = 0;
+
+    } else isTightMuon = 0;
+
+    CurrentMuon.set_isTightMuon(isTightMuon);
+
+    isPFMuon = 1;
+
+    for(size_t pf = 0; pf < pfCandidates->size(); pf++)
+    {
+
+
+      if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
+      {
+	       reco::MuonRef muonRefToPFMuon = (*pfCandidates)[j].muonRef();
+      }
+    }
+
+
+
+
+    CurrentMuon.set_isPFMuon(isPFMuon);
+
+
+
     CurrentMuon.set_isLooseMuon(muon->isLooseMuon());
 
     // store the pf isolation valid boolean
@@ -361,7 +407,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(!muon->track().isNull())
     {
-        CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
+      CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
 
     }
 
@@ -450,7 +496,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     ///////////////////////////
     if(!(muon->isGlobalMuon())) passFullId = 0;
     //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
-    if(!(muon->isGood("GlobalMuonPromptTight"))) passFullId = 0;
+    if(!(isTightMuon)) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!muon->innerTrack().isNull())
     {

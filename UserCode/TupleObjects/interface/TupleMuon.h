@@ -36,6 +36,7 @@ public:
 
   void set_isGlobalMuon(bool);
   void set_isTightMuon(bool);
+  void set_isPFMuon(bool);
   void set_isLooseMuon(bool);
   void set_isPFIsolationValid(bool);
   void set_charge(int);
@@ -80,6 +81,7 @@ public:
   LorentzVector genP4() const;
   bool isGlobalMuon() const;
   bool isTightMuon() const;
+  bool isPFMuon() const;
   bool isLooseMuon() const;
   double sumChargedParticlePt_DR4() const;
   double sumPhotonEt_DR4() const;
@@ -116,6 +118,7 @@ private:
   LorentzVector m_genP4;
   bool   m_isGlobalMuon;
   bool   m_isTightMuon;
+  bool   m_isPFMuon;
   bool   m_isLooseMuon;
   double m_sumChargedParticlePt_DR4;
   double m_sumPhotonEt_DR4;
