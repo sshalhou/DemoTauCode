@@ -308,16 +308,19 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // correct the tau energy
     if(!iEvent.isRealData())
     {
-      std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
-      size_t hadrons = 0;
-      size_t strips = 0;
+      if ( tau->genJet() && deltaR(tau->p4(), tau->genJet()->p4()) < 0.5 && tau->genJet()->pt() > 8. )
+      {
+        std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
+        size_t hadrons = 0;
+        size_t strips = 0;
 
-       hadrons = tau->signalPFChargedHadrCands().size();
-       strips = tau->signalPFGammaCands().size();
+        hadrons = tau->signalPFChargedHadrCands().size();
+        strips = tau->signalPFGammaCands().size();
 
-      std::cout<<" correcting a TAU with "<<hadrons<<" hadrons and "<<strips<<" strips \n";
-      CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
-
+        std::cout<<" correcting a TAU with "<<hadrons<<" hadrons and "<<strips<<" strips \n";
+        CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
+      }
+      else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
     }
     else
     {
