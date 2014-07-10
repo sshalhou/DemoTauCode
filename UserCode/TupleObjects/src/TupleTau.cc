@@ -857,8 +857,12 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, int decayMode_, int generator
   // level hadronic tau decay
 
 //  if(generatorPdgId_ == 15 || generatorPdgId_==-15)
-  if(decayMode_>0.5)
+  if(decayMode_>0.5 || 1==1)
   {
+
+    std::cout<<" WARNING ----> \n";
+    std::cout<<" ALWAYS APPLYING TAU ES CORR FACTOR OF 1.01 \n";
+    std::cout<<" ASK ABOUT THIS \n";
 
   // Following AN_2014_074, correct for the following taus
   // Three Hadrons
