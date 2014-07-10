@@ -417,7 +417,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           iU2,
           iFluc_,
           iScale_,
-          TMath::Min(njet,2));
+          TMath::Min(int(njet),2));
 
           correctedMET.SetPt(met);
           correctedMET.SetEta(0.0);
