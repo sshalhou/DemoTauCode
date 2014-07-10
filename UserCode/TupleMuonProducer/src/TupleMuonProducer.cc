@@ -362,7 +362,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
       {
-	       reco::MuonRef muonRefToPFMuon = (*pfCandidates)[j].muonRef();
+	       reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
       }
     }
 
