@@ -63,7 +63,8 @@ cd -
 
 echo "checking out improved Tau ID : "
 ################################################
-git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_boostedTaus_2013Dec17
+#git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_boostedTaus_2013Dec17
+git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_tauID2014
 ################################################
 
 echo "copying MVA PF MET code from Phil Harris : "

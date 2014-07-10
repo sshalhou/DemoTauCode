@@ -232,6 +232,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
   std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+  const reco::Vertex & first_vertex = vertices->at(0);
+
   //cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
 
 
@@ -345,6 +347,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!muon->innerTrack().isNull())
     {
       CurrentMuon.set_numberOfValidPixelHits(muon->innerTrack()->hitPattern().numberOfValidPixelHits());
+      CurrentMuon.set_dz(muon->innerTrack()->dz(first_vertex));
+
     }
 
     if(!muon->globalTrack().isNull())
@@ -357,8 +361,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if(!muon->track().isNull())
     {
-      CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
-      CurrentMuon.set_dz(muon->track()->dz());
+        CurrentMuon.set_trackerLayersWithMeasurement(muon->track()->hitPattern().trackerLayersWithMeasurement());
 
     }
 
@@ -449,9 +452,9 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(muon->isGood("GlobalMuonPromptTight"))) passFullId = 0;
     if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
-    if(!muon->track().isNull())
+    if(!muon->innerTrack().isNull())
     {
-      if(!(fabs(muon->track()->dz()) < 0.2)) passFullId = 0;
+      if(!(fabs(muon->innerTrack()->dz(first_vertex)) < 0.2)) passFullId = 0;
     }
     else passFullId = 0;
     if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;

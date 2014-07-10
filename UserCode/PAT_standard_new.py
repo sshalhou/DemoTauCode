@@ -201,6 +201,11 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
+process.cleanPatTaus.preselection = 'pt>17 & abs(eta)<2.4'\
++ '& ( tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 | tauID("byVLooseIsolationMVA3oldDMwLT") > 0.5 )'\
++ ' & ( tauID("againstElectronLoose")>0.5 | tauID("againstElectronVLooseMVA5")>0.5 )'\
++ ' & ( tauID("againstMuonLoose3")>0.5 | tauID("againstMuonLooseMVA")>0.5 )'
+
 
 ###################################################
 # the MVA electron ID
