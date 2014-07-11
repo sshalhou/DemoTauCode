@@ -857,7 +857,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         lPhi1  = electron.p4().phi();
         lEta1 = electron.p4().eta();
         lM1 = electron.p4().M();
-        lD01 = electron.d0();
+        lD01 = electron.dxy();
         lDZ1 = electron.dz();
 
         //////
