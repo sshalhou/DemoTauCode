@@ -575,7 +575,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(  !( fabs(dxy) < 0.045)  ) passFullId = 0;
     if(  !( fabs(dz) < 0.2)  ) passFullId = 0;
 
-    std::cout<<" electron dz and dzy are "<<dz<<" "<<dxy<<std::endl;
+    std::cout<<" electron dz and dxy are "<<dz<<" "<<dxy<<std::endl;
 
     CurrentElectron.set_passFullId(passFullId);
 
