@@ -546,6 +546,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     int category = -1;
     double Eta = electron->superCluster()->position().Eta();
     double mva = electron->electronID("mvaNonTrigV0");
+    std::cout<<" ELEC_MVA "<<mva<<std::endl;
     bool pass_fail = 0;
 
     category =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "TIGHT");
