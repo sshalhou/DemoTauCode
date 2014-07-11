@@ -12,7 +12,8 @@ TupleElectron::TupleElectron()
   m_numberOfMissingInnerHits = -999;
   m_passConversionVeto = 0;
   m_dz = NAN;
-  m_d0 = NAN;
+  m_dxy = NAN;
+  m_dB = NAN;
   m_SuperClusterEta = NAN;
   m_mvaTrigV0 = NAN;
   m_mvaTrigNoIPV0 = NAN;
@@ -125,10 +126,16 @@ void TupleElectron::set_dz(double dz_) { m_dz = dz_;}
 double TupleElectron::dz() const { return m_dz; }
 
 //////////////////
-// d0
+// dB
 //////////////////
-void TupleElectron::set_d0(double d0_) { m_d0 = d0_;}
-double TupleElectron::d0() const { return m_d0; }
+void TupleElectron::set_dB(double dB_) { m_dB = dB_;}
+double TupleElectron::dB() const { return m_dB; }
+
+//////////////////
+// dxy
+//////////////////
+void TupleElectron::set_dxy(double dxy_) { m_dxy= dxy_;}
+double TupleElectron::dxy() const { return m_dxy; }
 
 
 //////////////////

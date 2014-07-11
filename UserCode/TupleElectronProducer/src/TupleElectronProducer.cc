@@ -253,6 +253,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   }
   std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+  const reco::Vertex & first_vertex = vertices->at(0);
   //cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
 
 
@@ -280,6 +281,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     int numberOfMissingInnerHits = 999;
     bool conversionVetoPass = 0;
     double relativeIsolation = 999.;
+    double dz = 999.;
+    double dxy = 999.;
 
     ////////////////////////////////////////////
     // set electron quantities
@@ -408,14 +411,47 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     ////////////////
     //set_dz
     ////////////////
-    CurrentElectron.set_dz(electron->gsfTrack()->dz(primary_vertex.position()));
+    CurrentElectron.set_dz(electron->gsfTrack()->dz(first_vertex.position()));
+    dz = electron->gsfTrack()->dz(first_vertex.position());
 
     ////////////////
-    //set_d0
+    //set_dxy
     ////////////////
-    CurrentElectron.set_d0(electron->dB());
+    CurrentElectron.set_dxy(electron->gsfTrack()->dxy(first_vertex.position()));
+    dxy = electron->gsfTrack()->dxy(first_vertex.position());
+
 
   }
+
+
+  else if(electron->track().isNonnull())
+  {
+
+
+    ////////////////
+    //set_dz
+    ////////////////
+    CurrentElectron.set_dz(electron->track()->dz(first_vertex.position()));
+    dz = electron->track()->dz(first_vertex.position());
+
+
+    ////////////////
+    //set_dxy
+    ////////////////
+    CurrentElectron.set_dxy(electron->track()->dxy(first_vertex.position()));
+    dxy = electron->gsfTrack()->dxy(first_vertex.position());
+
+
+  }
+
+
+
+  ////////////////
+  //set_dB
+  ////////////////
+  CurrentElectron.set_dB(electron->dB());
+
+
 
   ////////////////
   //set_passConversionVeto
@@ -536,15 +572,10 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(  !(relativeIsolation < 0.1)       ) passFullId = 0;
     if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
     if(  !(conversionVetoPass)            ) passFullId = 0;
+    if(  !( fabs(dxy) < 0.045)  ) passFullId = 0;
+    if(  !( fabs(dz) < 0.2)  ) passFullId = 0;
 
-    if(electron->gsfTrack().isNonnull())
-    {
-
-      if(  !( fabs(electron->gsfTrack()->dz(primary_vertex.position())) < 0.2)  ) passFullId = 0;
-      if(  !( fabs(electron->dB()) < 0.045)  ) passFullId = 0;
-
-    }
-    else passFullId = 0;
+    std::cout<<" electron dz and dzy are "<<dz<<" "<<dxy<<std::endl;
 
     CurrentElectron.set_passFullId(passFullId);
 
