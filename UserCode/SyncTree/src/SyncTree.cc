@@ -825,6 +825,11 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       if(passAll==1)
       {
 
+        // run, event, lumi
+        lRun = iEvent.id().run();
+        lLumi = iEvent.id().luminosityBlock();
+        lEvt = iEvent.id().event();
+
 
         // Visible di-tau mass
         lMVis = eTau.p4().M();
@@ -858,7 +863,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         //////
         // fill the tree
 
-        syncTree->Fill();
+        if(electron.passFullId() && tau.passFullId_eTau()) syncTree->Fill();
       }
 
 
@@ -904,6 +909,11 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       {
 
 
+        // run, event, lumi
+        lRun = iEvent.id().run();
+        lLumi = iEvent.id().luminosityBlock();
+        lEvt = iEvent.id().event();
+
 
         // Visible di-tau mass
         lMVis = muTau.p4().M();
@@ -937,8 +947,7 @@ SyncTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         //////
         // fill the tree
-
-        syncTree->Fill();
+        if(muon.passFullId() && tau.passFullId_muTau()) syncTree->Fill();
       }
 
 
