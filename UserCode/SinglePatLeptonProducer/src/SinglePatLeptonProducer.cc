@@ -149,15 +149,18 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
+  if(INDEX<electrons->size())
+  {
 
-  std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
-  const pat::Electron & electronToStore = electrons->at(INDEX_);
-  storedElectrons->push_back(electronToStore);
 
-  // add the electrons to the event output
-  std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
-  iEvent.put(eptr);
+    std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
+    const pat::Electron & electronToStore = electrons->at(INDEX_);
+    storedElectrons->push_back(electronToStore);
 
+    // add the electrons to the event output
+    std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
+    iEvent.put(eptr);
+  }
 
 }
 
