@@ -159,7 +159,7 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
 
     // add the electrons to the event output
     std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
-    iEvent.put(eptr);
+    iEvent.put(eptr,NAME_);
   }
 
 }
