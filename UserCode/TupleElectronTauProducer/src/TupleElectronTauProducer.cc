@@ -453,7 +453,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       double Mt = TupleHelpers::GetTransverseMass(electron.p4(), NSVcorrectedMET);
       CurrentElectronTau.set_TransverseMass(Mt);
 
-      double rawMt = TupleHelpers::GetTransverseMass(Electron.p4(), NSVrawMET);
+      double rawMt = TupleHelpers::GetTransverseMass(electron.p4(), NSVrawMET);
       CurrentElectronTau.set_rawTransverseMass(rawMt);
 
       cout<<" transverse mass  = "<<Mt<<endl;
