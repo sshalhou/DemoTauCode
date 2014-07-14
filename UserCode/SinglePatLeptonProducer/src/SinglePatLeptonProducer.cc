@@ -2,13 +2,13 @@
 //
 // Package:    SinglePatLeptonProducer
 // Class:      SinglePatLeptonProducer
-// 
+//
 /**\class SinglePatLeptonProducer SinglePatLeptonProducer.cc TEMP/SinglePatLeptonProducer/src/SinglePatLeptonProducer.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  shalhout shalhout
@@ -24,11 +24,35 @@
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDProducer.h"
-
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+// needed by ntuple electron producer
+#include <vector>
+#include <iostream>
+#include "DataFormats/PatCandidates/interface/Electron.h"
+#include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
+#include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
+#include "DataFormats/PatCandidates/interface/Conversion.h"
+#include "DataFormats/PatCandidates/interface/Lepton.h"
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
+#include "TLorentzVector.h"
+#include "DataFormats/Math/interface/Vector3D.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
+#include "Math/GenVector/VectorUtil.h"
+#include "DataFormats/PatCandidates/interface/PFParticle.h"
+#include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+
+
+typedef math::XYZTLorentzVector LorentzVector;
+using namespace std;
+using namespace edm;
+using namespace pat;
+
 
 
 //
@@ -36,23 +60,30 @@
 //
 
 class SinglePatLeptonProducer : public edm::EDProducer {
-   public:
-      explicit SinglePatLeptonProducer(const edm::ParameterSet&);
-      ~SinglePatLeptonProducer();
+public:
+  explicit SinglePatLeptonProducer(const edm::ParameterSet&);
+  ~SinglePatLeptonProducer();
 
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
-      
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      // ----------member data ---------------------------
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+
+  // ----------member data ---------------------------
+
+  // ----------member data ---------------------------
+
+  edm::InputTag electronSrc_;
+  int INDEX_;
+  string NAME_;
+
 };
 
 //
@@ -67,28 +98,38 @@ class SinglePatLeptonProducer : public edm::EDProducer {
 //
 // constructors and destructor
 //
-SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig)
+SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
+electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
+INDEX_(iConfig.getParameter<string>("INDEX" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
-   //register your products
-/* Examples
-   produces<ExampleData2>();
 
-   //if do put with a label
-   produces<ExampleData2>("label");
- 
-   //if you want to put into the Run
-   produces<ExampleData2,InRun>();
-*/
-   //now do what ever other initialization is needed
-  
+
+  produces<vector<pat::Electron>>(NAME_).setBranchAlias(NAME_);
+
+
+
+
+  //register your products
+  /* Examples
+  produces<ExampleData2>();
+
+  //if do put with a label
+  produces<ExampleData2>("label");
+
+  //if you want to put into the Run
+  produces<ExampleData2,InRun>();
+  */
+  //now do what ever other initialization is needed
+
 }
 
 
 SinglePatLeptonProducer::~SinglePatLeptonProducer()
 {
- 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -101,57 +142,56 @@ SinglePatLeptonProducer::~SinglePatLeptonProducer()
 void
 SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace edm;
-/* This is an event example
-   //Read 'ExampleData' from the Event
-   Handle<ExampleData> pIn;
-   iEvent.getByLabel("example",pIn);
 
-   //Use the ExampleData to create an ExampleData2 which 
-   // is put into the Event
-   std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-   iEvent.put(pOut);
-*/
 
-/* this is an EventSetup example
-   //Read SetupData from the SetupRecord in the EventSetup
-   ESHandle<SetupData> pSetup;
-   iSetup.get<SetupRecord>().get(pSetup);
-*/
- 
+
+  // get electron collection
+  edm::Handle<edm::View<pat::Electron> > electrons;
+  iEvent.getByLabel(electronSrc_,electrons);
+
+
+  std::vector<pat::Electron> * storedElectrons = new std::vector<Electron>();
+  const pat::Electron & electronToStore = electrons->at(INDEX_);
+  storedElectrons->push_back(electronToStore);
+
+  // add the electrons to the event output
+  std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
+  iEvent.put(eptr);
+
+
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 SinglePatLeptonProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
+void
 SinglePatLeptonProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 SinglePatLeptonProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 SinglePatLeptonProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 SinglePatLeptonProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 SinglePatLeptonProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
