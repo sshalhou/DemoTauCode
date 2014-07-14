@@ -101,7 +101,7 @@ private:
 SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 INDEX_(iConfig.getParameter<string>("INDEX" )),
-NAME_(iConfig.getParameter<string>("NAME" ))
+NAME_(iConfig.getParameter<int>("NAME" ))
 {
 
 
@@ -150,7 +150,7 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
   iEvent.getByLabel(electronSrc_,electrons);
 
 
-  std::vector<pat::Electron> * storedElectrons = new std::vector<Electron>();
+  std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
   const pat::Electron & electronToStore = electrons->at(INDEX_);
   storedElectrons->push_back(electronToStore);
 
