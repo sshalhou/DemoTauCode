@@ -81,7 +81,7 @@ private:
   // ----------member data ---------------------------
 
   edm::InputTag electronSrc_;
-  int INDEX_;
+  unsigned int INDEX_;
   string NAME_;
 
 };
@@ -100,7 +100,7 @@ private:
 //
 SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
-INDEX_(iConfig.getParameter<int>("INDEX" )),
+INDEX_(iConfig.getParameter<unsigned int>("INDEX" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
