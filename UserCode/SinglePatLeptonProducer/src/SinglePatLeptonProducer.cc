@@ -149,7 +149,7 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
   edm::Handle<edm::View<pat::Electron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
-  if(INDEX<electrons->size())
+  if(INDEX_<electrons->size())
   {
 
 
