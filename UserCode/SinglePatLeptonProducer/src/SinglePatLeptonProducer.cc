@@ -100,8 +100,8 @@ private:
 //
 SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
-INDEX_(iConfig.getParameter<string>("INDEX" )),
-NAME_(iConfig.getParameter<int>("NAME" ))
+INDEX_(iConfig.getParameter<int>("INDEX" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
 
