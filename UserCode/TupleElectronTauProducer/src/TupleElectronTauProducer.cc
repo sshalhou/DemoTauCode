@@ -453,8 +453,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       double Mt = TupleHelpers::GetTransverseMass(electron.p4(), NSVcorrectedMET);
       CurrentElectronTau.set_TransverseMass(Mt);
 
-      double rawMt = TupleHelpers::GetTransverseMass(muon.p4(), NSVrawMET);
-      CurrentMuonTau.set_rawTransverseMass(rawMt);
+      double rawMt = TupleHelpers::GetTransverseMass(Electron.p4(), NSVrawMET);
+      CurrentElectronTau.set_rawTransverseMass(rawMt);
 
       cout<<" transverse mass  = "<<Mt<<endl;
       cout<<" un-corrected transverse mass  = "<<rawMt<<endl;
@@ -509,7 +509,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
         algoRaw.addLogM(false);
         algoRaw.integrateMarkovChain();
-        CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
+        CurrentElectronTau.set_rawSVFitMass(algoRaw.getMass());
 
 
 
