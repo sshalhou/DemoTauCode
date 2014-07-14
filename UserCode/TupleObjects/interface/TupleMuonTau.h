@@ -36,7 +36,9 @@ public:
   void set_DR(LorentzVector,LorentzVector);
   void set_sumCharge(int, int);
   void set_correctedSVFitMass(double);
+  void set_rawSVFitMass(double);
   void set_TransverseMass(double);
+  void set_rawTransverseMass(double);
   void set_mvaMETraw(double);
   void set_mvaMET(double);
   void set_mvaMETphiRaw(double);
@@ -55,7 +57,9 @@ public:
   double DR() const;
   int sumCharge() const;
   double correctedSVFitMass() const;
+  double rawSVFitMass() const;
   double TransverseMass() const;
+  double rawTransverseMass() const;
   double mvaMETraw() const;
   double mvaMET() const;
   double mvaMETphiRaw() const;
@@ -74,7 +78,9 @@ private:
   double m_DR;
   int m_sumCharge;
   double m_correctedSVFitMass;
+  double m_rawSVFitMass;
   double m_TransverseMass;
+  double m_rawTransverseMass;
   double m_mvaMETraw;
   double m_mvaMET;
   double m_mvaMETphiRaw;

@@ -11,7 +11,9 @@ TupleMuonTau::TupleMuonTau()
   m_DR = NAN;
   m_sumCharge = -999;
   m_correctedSVFitMass = NAN;
+  m_rawSVFitMass = NAN;
   m_TransverseMass = NAN;
+  m_rawTransverseMass = NAN;
   // probably better to store the vectors later on
   m_mvaMETraw = NAN;
   m_mvaMET = NAN;
@@ -45,6 +47,10 @@ double TupleMuonTau::mvaMETphi() const  { return m_mvaMETphi; }
 void TupleMuonTau::set_TransverseMass(double TransverseMass_) { m_TransverseMass = TransverseMass_;}
 double TupleMuonTau::TransverseMass() const  { return m_TransverseMass; }
 
+
+void TupleMuonTau::set_rawTransverseMass(double rawTransverseMass_) { m_rawTransverseMass = rawTransverseMass_;}
+double TupleMuonTau::rawTransverseMass() const  { return m_rawTransverseMass; }
+
 void TupleMuonTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleMuonTau::p4() const  { return m_p4; }
 
@@ -68,3 +74,6 @@ double TupleMuonTau::DR() const  { return m_DR; }
 
 void TupleMuonTau::set_correctedSVFitMass(double correctedSVFitMass_) { m_correctedSVFitMass = correctedSVFitMass_;}
 double TupleMuonTau::correctedSVFitMass() const  { return m_correctedSVFitMass; }
+
+void TupleMuonTau::set_rawSVFitMass(double rawSVFitMass_) { m_rawSVFitMass = rawSVFitMass_;}
+double TupleMuonTau::rawSVFitMass() const  { return m_rawSVFitMass; }

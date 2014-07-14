@@ -245,6 +245,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
   math::PtEtaPhiMLorentzVector correctedMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
 
+  // store raw value without applying recoil corrections for use with
+  // raw versions of SVFit and Transverse mass
+  NSVfitStandalone::Vector NSVrawMET = mvaMETpf.momentum();
+  math::PtEtaPhiMLorentzVector rawMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
+
   ///////////////////
   // find max pt pair
 
@@ -437,7 +442,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       double Mt = TupleHelpers::GetTransverseMass(muon.p4(), NSVcorrectedMET);
       CurrentMuonTau.set_TransverseMass(Mt);
 
+      double rawMt = TupleHelpers::GetTransverseMass(muon.p4(), NSVrawMET);
+      CurrentMuonTau.set_rawTransverseMass(rawMt);
+
       cout<<" transverse mass  = "<<Mt<<endl;
+      cout<<" un-corrected transverse mass  = "<<rawMt<<endl;
+
       ////////////////
 
       TMatrixD covMET(2, 2); // PFMET significance matrix
@@ -483,6 +493,16 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
         CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
+
+
+        // calculate SVFit mass without recoil met corr.
+        NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
+        algoRaw.addLogM(false);
+        algoRaw.integrateMarkovChain();
+        CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
+
+
+
 
         //cout<<" diTauMassErr "<<algo.getMassUncert();
         //cout<<" diTauPt "<<algo.getPt();

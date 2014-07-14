@@ -11,7 +11,9 @@ TupleElectronTau::TupleElectronTau()
   m_DR = NAN;
   m_sumCharge = -999;
   m_correctedSVFitMass = NAN;
+  m_rawSVFitMass = NAN;
   m_TransverseMass = NAN;
+  m_rawTransverseMass = NAN;
   // probably better to store the vectors later on
   m_mvaMETraw = NAN;
   m_mvaMET = NAN;
@@ -46,6 +48,10 @@ double TupleElectronTau::mvaMETphi() const  { return m_mvaMETphi; }
 void TupleElectronTau::set_TransverseMass(double TransverseMass_) { m_TransverseMass = TransverseMass_;}
 double TupleElectronTau::TransverseMass() const  { return m_TransverseMass; }
 
+
+void TupleElectronTau::set_rawTransverseMass(double rawTransverseMass_) { m_rawTransverseMass = rawTransverseMass_;}
+double TupleElectronTau::rawTransverseMass() const  { return m_rawTransverseMass; }
+
 void TupleElectronTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
 LorentzVector TupleElectronTau::p4() const  { return m_p4; }
 
@@ -66,6 +72,10 @@ double TupleElectronTau::scalarSumPt() const  { return m_scalarSumPt; }
 
 void TupleElectronTau::set_DR(LorentzVector A_, LorentzVector B_) { m_DR = deltaR(A_, B_);}
 double TupleElectronTau::DR() const  { return m_DR; }
+
+
+void TupleElectronTau::set_rawSVFitMass(double rawSVFitMass_) { m_rawSVFitMass = rawSVFitMass_;}
+double TupleElectronTau::rawSVFitMass() const  { return m_rawSVFitMass; }
 
 void TupleElectronTau::set_correctedSVFitMass(double correctedSVFitMass_) { m_correctedSVFitMass = correctedSVFitMass_;}
 double TupleElectronTau::correctedSVFitMass() const  { return m_correctedSVFitMass; }
