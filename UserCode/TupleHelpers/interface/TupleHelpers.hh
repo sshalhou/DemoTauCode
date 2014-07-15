@@ -47,7 +47,7 @@ namespace TupleHelpers
     double sumYsq = (V1.y()+V2.y())*(V1.y()+V2.y());
     double altmt = sqrt((ptl+met)*(ptl+met) - (sumXsq+sumYsq));
 
-    std::cout<<" ptl, met"<<ptl<<" , "<<met<<std::endl;
+    std::cout<<" ptl, met "<<ptl<<" , "<<met<<std::endl;
 
 
 
