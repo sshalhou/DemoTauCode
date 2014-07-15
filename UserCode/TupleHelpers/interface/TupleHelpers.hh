@@ -54,7 +54,7 @@ namespace TupleHelpers
     double pTxMET = sqrt(V1.x()*V1.x()+V1.y()*V1.y())*sqrt(V2.x()*V2.x()+V2.y()*V2.y());
     double CosDphi = cos(deltaPhi(V1.phi(), V2.phi()));
     double MtSq = (2 * pTxMET*(1-CosDphi));
-    std::cout<<" COMPARE "<<altmt<<" "<<MtSq<<std::endl;
+    std::cout<<" COMPARE "<<altmt<<" "<<sqrt(MtSq)<<std::endl;
     return sqrt(MtSq);
 
   }
