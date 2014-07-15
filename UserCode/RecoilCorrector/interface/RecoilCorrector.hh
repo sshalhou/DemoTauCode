@@ -198,6 +198,11 @@ int DaughterTwoPdgId, int njet, std::string &ProcessFile, std::string &DataFile,
 {
 
 
+  ///////
+  // seems llr always uses the njet files
+  // so set this manually
+
+  njet = 999;
 
   char path[200];
   sprintf(path,"%s","UserCode/RecoilCorrector/recoilfits/");
