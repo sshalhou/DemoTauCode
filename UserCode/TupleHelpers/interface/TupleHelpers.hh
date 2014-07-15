@@ -38,23 +38,9 @@ namespace TupleHelpers
   inline double GetTransverseMass(SomeVector V1, AnotherVector V2)
   {
 
-    //////////////
-    // check
-
-    double ptl = sqrt(V1.x()*V1.x()+V1.y()*V1.y());
-    double met = sqrt(V2.x()*V2.x()+V2.y()*V2.y());
-    double sumXsq = (V1.x()+V2.x())*(V1.x()+V2.x());
-    double sumYsq = (V1.y()+V2.y())*(V1.y()+V2.y());
-    double altmt = sqrt((ptl+met)*(ptl+met) - (sumXsq+sumYsq));
-
-    std::cout<<" ptl, met "<<ptl<<" , "<<met<<std::endl;
-
-
-
     double pTxMET = sqrt(V1.x()*V1.x()+V1.y()*V1.y())*sqrt(V2.x()*V2.x()+V2.y()*V2.y());
     double CosDphi = cos(deltaPhi(V1.phi(), V2.phi()));
     double MtSq = (2 * pTxMET*(1-CosDphi));
-    std::cout<<" COMPARE "<<altmt<<" "<<sqrt(MtSq)<<std::endl;
     return sqrt(MtSq);
 
   }
