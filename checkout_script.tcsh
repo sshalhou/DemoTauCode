@@ -50,6 +50,7 @@ echo "checking out MET Recoil Correction Code : "
 wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.tgz
 tar -xzvf RecoilCorrector_v7.tgz
 mv RecoilCorrector_v7/recoilfits UserCode/RecoilCorrector/recoilfits
+cp /uscms/home/shalhout/public/LLR_recoilfits/*RR*.root UserCode/RecoilCorrector/recoilfits/.
 rm -rf RecoilCorrector_v7
 rm -rf RecoilCorrector_v7.tgz
 ################################################
