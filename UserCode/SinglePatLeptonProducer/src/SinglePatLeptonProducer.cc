@@ -81,17 +81,8 @@ private:
   // ----------member data ---------------------------
 
   edm::InputTag electronSrc_;
-  edm::InputTag muonSrc_;
-  edm::InputTag tauSrc_;
-  bool doElectrons_;
-  unsigned int electronINDEX_;
-  string electronNAME_;
-  bool doMuons_;
-  unsigned int muonINDEX_;
-  string muonNAME_;
-  bool doTaus_;
-  unsigned int tauINDEX_;
-  string tauNAME_;
+  unsigned int INDEX_;
+  string NAME_;
 
 };
 
@@ -109,23 +100,12 @@ private:
 //
 SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
-tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
-doElectrons_(iConfig.getParameter<bool>("doElectrons" )),
-electronINDEX_(iConfig.getParameter<unsigned int>("electronINDEX" )),
-electronNAME_(iConfig.getParameter<string>("electronNAME" )),
-doMuons_(iConfig.getParameter<bool>("doMuons" )),
-muonINDEX_(iConfig.getParameter<unsigned int>("muonINDEX" )),
-muonNAME_(iConfig.getParameter<string>("muonNAME" )),
-doTaus_(iConfig.getParameter<bool>("doTaus" )),
-tauINDEX_(iConfig.getParameter<unsigned int>("tauINDEX" )),
-tauNAME_(iConfig.getParameter<string>("tauNAME" ))
+INDEX_(iConfig.getParameter<unsigned int>("INDEX" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
 
-  produces<vector<pat::Electron>>(electronNAME_).setBranchAlias(electronNAME_);
-  produces<vector<pat::Tau>>(muonNAME_).setBranchAlias(muonNAME_);
-  produces<vector<pat::Muon>>(tauNAME_).setBranchAlias(tauNAME_);
+  produces<vector<pat::Electron>>(NAME_).setBranchAlias(NAME_);
 
 
 
@@ -164,70 +144,23 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
 {
 
 
-  if(doElectrons_)
+
+  // get electron collection
+  edm::Handle<edm::View<pat::Electron> > electrons;
+  iEvent.getByLabel(electronSrc_,electrons);
+
+  if(INDEX_<electrons->size())
   {
-    // get electron collection
-    edm::Handle<edm::View<pat::Electron> > electrons;
-    iEvent.getByLabel(electronSrc_,electrons);
-
-    if(electronINDEX_<electrons->size())
-    {
 
 
-      std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
-      const pat::Electron & electronToStore = electrons->at(electronINDEX_);
-      storedElectrons->push_back(electronToStore);
+    std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
+    const pat::Electron & electronToStore = electrons->at(INDEX_);
+    storedElectrons->push_back(electronToStore);
 
-      // add the electrons to the event output
-      std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
-      iEvent.put(eptr,electronNAME_);
-    }
+    // add the electrons to the event output
+    std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
+    iEvent.put(eptr,NAME_);
   }
-
-
-
-  if(doMuons_)
-  {
-    // get muon collection
-    edm::Handle<edm::View<pat::Muon> > muons;
-    iEvent.getByLabel(muonSrc_,muons);
-
-    if(muonINDEX_<muons->size())
-    {
-
-
-      std::vector<pat::Muon> * storedMuons = new std::vector<pat::Muon>();
-      const pat::Muon & muonToStore = muons->at(muonINDEX_);
-      storedMuons->push_back(muonToStore);
-
-      // add the muons to the event output
-      std::auto_ptr<std::vector<pat::Muon> > eptr(storedMuons);
-      iEvent.put(eptr,muonNAME_);
-    }
-  }
-
-
-  if(doTaus_)
-  {
-    // get tau collection
-    edm::Handle<edm::View<pat::Tau> > taus;
-    iEvent.getByLabel(tauSrc_,taus);
-
-    if(tauINDEX_<taus->size())
-    {
-
-
-      std::vector<pat::Tau> * storedTaus = new std::vector<pat::Tau>();
-      const pat::Tau & tauToStore = taus->at(tauINDEX_);
-      storedTaus->push_back(tauToStore);
-
-      // add the taus to the event output
-      std::auto_ptr<std::vector<pat::Tau> > eptr(storedTaus);
-      iEvent.put(eptr,tauNAME_);
-    }
-  }
-
-
 
 }
 
