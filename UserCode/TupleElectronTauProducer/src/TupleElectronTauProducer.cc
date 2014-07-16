@@ -528,9 +528,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       // Et > 30, | eta | < 4.7, DR(jet,lep) > 0.5
       // DR(jet,tau)>0.5, passes PF jet ID
 
-      unsigned int = jet1_index = -999;
+      unsigned int jet1_index = -999;
       double jet1_pt = -999;
-      unsigned int = jet2_index = -999;
+      unsigned int jet2_index = -999;
       double jet2_pt = -999;
 
       int number_of_passingJets = 0;
