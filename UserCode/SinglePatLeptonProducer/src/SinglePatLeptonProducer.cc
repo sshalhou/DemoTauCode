@@ -100,6 +100,8 @@ private:
 //
 SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 INDEX_(iConfig.getParameter<unsigned int>("INDEX" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
@@ -144,22 +146,23 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
 {
 
 
+  if(electronSrc_){
+    // get electron collection
+    edm::Handle<edm::View<pat::Electron> > electrons;
+    iEvent.getByLabel(electronSrc_,electrons);
 
-  // get electron collection
-  edm::Handle<edm::View<pat::Electron> > electrons;
-  iEvent.getByLabel(electronSrc_,electrons);
-
-  if(INDEX_<electrons->size())
-  {
+    if(INDEX_<electrons->size())
+    {
 
 
-    std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
-    const pat::Electron & electronToStore = electrons->at(INDEX_);
-    storedElectrons->push_back(electronToStore);
+      std::vector<pat::Electron> * storedElectrons = new std::vector<pat::Electron>();
+      const pat::Electron & electronToStore = electrons->at(INDEX_);
+      storedElectrons->push_back(electronToStore);
 
-    // add the electrons to the event output
-    std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
-    iEvent.put(eptr,NAME_);
+      // add the electrons to the event output
+      std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
+      iEvent.put(eptr,NAME_);
+    }
   }
 
 }
