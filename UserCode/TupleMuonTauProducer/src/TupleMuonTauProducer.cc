@@ -536,14 +536,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         bool passes_id = 1;
         bool is_btagged = 1;
 
-        if( !(patjet.pt()>20) ) passes_id = 0;
+        if( !(patjet.pt()>30) ) passes_id = 0;
         if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
         if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
         if( !(deltaR(muon.p4(), patjet.p4()) > 0.5)) passes_id = 0;
         if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
         if(passes_id == 1)
         {
-          if((patjet.pt()>30)) number_of_passingJets++;
+          number_of_passingJets++;
           std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
 
           /////////////
@@ -567,7 +567,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
           if(fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.679)
           {
-            if((patjet.pt()>30)) number_of_btagged_passingJets++;
+            number_of_btagged_passingJets++;
           }
 
 
@@ -590,9 +590,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       CurrentMuonTau.set_nbjets(number_of_btagged_passingJets);
 
 
-
-      if(jet1_index!=-999)
+      if(jets->size()>0)
+//      if(jet1_index!=-999)
       {
+        jet1_index = 0;
         const pat::Jet & patjet = jets->at(jet1_index);
         float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)];
         int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)];
@@ -606,8 +607,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       }
 
-      if(jet2_index!=-999)
+      if(jets->size()>1)
+//      if(jet2_index!=-999)
       {
+        jet2_index = 1;
         const pat::Jet & patjet = jets->at(jet2_index);
         float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)];
         int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)];
