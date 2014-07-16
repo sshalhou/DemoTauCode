@@ -204,8 +204,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
     //    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
     //    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
-  //  if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
-  if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
+    //  if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
+    if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
   }
 
 
@@ -510,6 +510,117 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       }
       else CurrentMuonTau.set_correctedSVFitMass(0.0);
       measuredTauLeptons.clear();
+
+
+
+      ////////////////////////////////
+      // store jet related variables
+      // the jet ID we are using here is
+      // Et > 30, | eta | < 4.7, DR(jet,lep) > 0.5
+      // DR(jet,tau)>0.5, passes PF jet ID
+
+      int jet1_index = -999;
+      double jet1_pt = -999.;
+      int jet2_index = -999;
+      double jet2_pt = -999.;
+
+      int number_of_passingJets = 0;
+      int number_of_btagged_passingJets = 0;
+
+      for ( unsigned int i=0; i<jets->size(); ++i )
+      {
+        const pat::Jet & patjet = jets->at(i);
+        float mva   = (*puJetIdMVA)[jets->refAt(i)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+
+        bool passes_id = 1;
+        bool is_btagged = 1;
+
+        if( !(patjet.pt()>30) ) passes_id = 0;
+        if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
+        if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+        if( !(deltaR(muon.p4(), patjet.p4()) > 0.5)) passes_id = 0;
+        if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
+        if(passes_id == 1)
+        {
+          number_of_passingJets++;
+          std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+
+          /////////////
+          // figure out the 1st and 2nd ranked jets
+          // by pt
+
+          if(patjet.pt() > jet1_pt)
+          {
+            jet1_pt =   patjet.pt();
+            jet1_index  = i;
+          }
+
+          else if(patjet.pt() > jet2_pt)
+          {
+
+            jet2_pt =   patjet.pt();
+            jet2_index  = i;
+
+          }
+
+
+          if(fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.679)
+          {
+            number_of_btagged_passingJets++;
+          }
+
+
+        }
+
+
+
+      }
+
+      std::cout<<" Number of passing jets "<<  number_of_passingJets <<std::endl;
+      std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
+      std::cout<<" jet 1  "<<  jet1_index <<std::endl;
+      std::cout<<" jet 2  "<<  jet2_index <<std::endl;
+
+      /////////////////////
+      // store the jet related quantities
+
+
+      CurrentMuonTau.set_njets(number_of_passingJets);
+      CurrentMuonTau.set_nbjets(number_of_btagged_passingJets);
+
+
+
+      if(jet1_index!=-999)
+      {
+        const pat::Jet & patjet = jets->at(jet1_index);
+        float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)];
+
+
+        CurrentMuonTau.set_jet1P4(patjet.p4());
+        CurrentMuonTau.set_jet1RawP4(patjet.p4());
+        CurrentMuonTau.set_jet1IDMVA(mva);
+        CurrentMuonTau.set_jet1BTAGMVA(patjet.bDiscriminator("combinedSecondaryVertexBJetTags"));
+
+
+      }
+
+      if(jet2_index!=-999)
+      {
+        const pat::Jet & patjet = jets->at(jet2_index);
+        float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)];
+
+
+        CurrentMuonTau.set_jet2P4(patjet.p4());
+        CurrentMuonTau.set_jet2RawP4(patjet.p4());
+        CurrentMuonTau.set_jet2IDMVA(mva);
+        CurrentMuonTau.set_jet2BTAGMVA(patjet.bDiscriminator("combinedSecondaryVertexBJetTags"));
+
+
+      }
+
 
       ////////////
       // store the MuonTau
