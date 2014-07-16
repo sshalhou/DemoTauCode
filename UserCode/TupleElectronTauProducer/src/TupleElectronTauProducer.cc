@@ -553,6 +553,26 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if(passes_id == 1)
         {
           number_of_passingJets++;
+          std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+
+          /////////////
+          // figure out the 1st and 2nd ranked jets
+          // by pt
+
+          if(patjet.pt() > jet1_pt)
+          {
+            jet1_pt =   patjet.pt();
+            jet1_index  = i;
+          }
+
+          else if(patjet.pt() > jet2_pt)
+          {
+
+            jet2_pt =   patjet.pt();
+            jet2_index  = i;
+
+          }
+
 
           if(fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.679)
           {
@@ -568,6 +588,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
       std::cout<<" Number of passing jets "<<  number_of_passingJets <<std::endl;
       std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
+      std::cout<<" jet 1  "<<  jet1_index <<std::endl;
+      std::cout<<" jet 2  "<<  jet2_index <<std::endl;
 
 
       ////////////
