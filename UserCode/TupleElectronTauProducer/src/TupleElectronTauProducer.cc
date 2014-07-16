@@ -550,7 +550,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
         if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
         if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
-        if(passes_id = 1)
+        if(passes_id == 1)
         {
           number_of_passingJets++;
 
