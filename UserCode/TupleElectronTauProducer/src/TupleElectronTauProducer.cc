@@ -202,7 +202,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
     const pat::Jet & patjet = jets->at(i);
     float mva   = (*puJetIdMVA)[jets->refAt(i)];
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-    //    std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
+     std::cout << "jet " << i << " pt " << patjet.pt() << " eta " << patjet.eta() << " PUJetIDMVA " << mva;
     //    std::cout<<" loose WP = "<<PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose );
     //  if(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) && patjet.pt()>30 && fabs(patjet.eta())<4.7) njet++;
     if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
