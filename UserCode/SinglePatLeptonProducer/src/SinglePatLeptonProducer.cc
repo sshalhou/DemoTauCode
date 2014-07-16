@@ -117,9 +117,9 @@ electronNAME_(iConfig.getParameter<string>("eNAME" )),
 doMuons_(iConfig.getParameter<bool>("doMuons" )),
 muonINDEX_(iConfig.getParameter<unsigned int>("muonINDEX" )),
 muonNAME_(iConfig.getParameter<string>("muonNAME" )),
-doTaus_(iConfig.getParameter<bool>("doTaus" ))
+doTaus_(iConfig.getParameter<bool>("doTaus" )),
 tauINDEX_(iConfig.getParameter<unsigned int>("tauINDEX" )),
-tauNAME_(iConfig.getParameter<string>("tauNAME" )),
+tauNAME_(iConfig.getParameter<string>("tauNAME" ))
 {
 
 
