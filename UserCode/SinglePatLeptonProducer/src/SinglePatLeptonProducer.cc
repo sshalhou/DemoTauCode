@@ -157,10 +157,13 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
     const pat::Electron & electronToStore = electrons->at(INDEX_);
     storedElectrons->push_back(electronToStore);
 
-    // add the electrons to the event output
-    std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
-    iEvent.put(eptr,NAME_);
+
   }
+  
+  // add the electrons to the event output
+  std::auto_ptr<std::vector<pat::Electron> > eptr(storedElectrons);
+  iEvent.put(eptr,NAME_);
+
 
 }
 
