@@ -550,7 +550,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
         if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
         if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
-        if(passes_id == 1 || 1==1)
+        if(passes_id == 1)
         {
           number_of_passingJets++;
           std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
@@ -590,6 +590,47 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
       std::cout<<" jet 1  "<<  jet1_index <<std::endl;
       std::cout<<" jet 2  "<<  jet2_index <<std::endl;
+
+      /////////////////////
+      // store the jet related quantities
+
+
+      CurrentElectronTau.set_njets(number_of_passingJets);
+      CurrentElectronTau.set_nbjets(number_of_btagged_passingJets);
+
+
+
+      if(jet1_index!=-999)
+      {
+        const pat::Jet & patjet = jets->at(jet1_index);
+        float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)];
+
+
+        CurrentElectronTau.set_jet1P4(patjet.p4());
+        CurrentElectronTau.set_jet1RawP4(patjet.p4());
+        CurrentElectronTau.set_jet1IDMVA(mva);
+        CurrentElectronTau.set_jet1BTAGMVA(patjet.bDiscriminator("combinedSecondaryVertexBJetTags"));
+
+
+      }
+
+      if(jet2_index!=-999)
+      {
+        const pat::Jet & patjet = jets->at(jet2_index);
+        float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)];
+
+
+        CurrentElectronTau.set_jet2P4(patjet.p4());
+        CurrentElectronTau.set_jet2RawP4(patjet.p4());
+        CurrentElectronTau.set_jet2IDMVA(mva);
+        CurrentElectronTau.set_jet2BTAGMVA(patjet.bDiscriminator("combinedSecondaryVertexBJetTags"));
+
+
+      }
+
+
 
 
       ////////////
