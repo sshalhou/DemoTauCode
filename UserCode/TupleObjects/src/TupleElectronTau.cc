@@ -21,9 +21,59 @@ TupleElectronTau::TupleElectronTau()
   m_mvaMETphi = NAN;
   m_MAX = 0;
   m_isGoodTriggerPair = 0;
+  m_njets = -999;
+  m_nbjets = -999;
+  m_jet1P4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_jet1RawP4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_jet1IDMVA = NAN;
+  m_jet1BTAGMVA = NAN;
+  m_jet2P4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_jet2RawP4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_jet2IDMVA = NAN;
+  m_jet2BTAGMVA = NAN;
 
 
 }
+
+void TupleElectronTau::set_njets(int njets_) {m_njets = njets_;}
+int TupleElectronTau::njets() const {return m_njets;}
+
+
+void TupleElectronTau::set_nbjets(int nbjets_) {m_nbjets = nbjets_;}
+int TupleElectronTau::nbjets() const {return m_nbjets;}
+
+
+void TupleElectronTau::set_jet1P4(LorentzVector jet1P4_) {m_jet1P4 = jet1P4_;}
+LorentzVector TupleElectronTau::jet1P4() const {return m_jet1P4;}
+
+
+void TupleElectronTau::set_jet1RawP4(LorentzVector jet1RawP4_) {m_jet1RawP4 = jet1RawP4_;}
+LorentzVector TupleElectronTau::jet1RawP4() const {return m_jet1RawP4;}
+
+
+void TupleElectronTau::set_jet1IDMVA(double jet1IDMVA_) {m_jet1IDMVA = jet1IDMVA_;}
+double TupleElectronTau::jet1IDMVA() const {return m_jet1IDMVA;}
+
+
+void TupleElectronTau::set_jet1BTAGMVA(double jet1BTAGMVA_) {m_jet1BTAGMVA = jet1BTAGMVA_;}
+double TupleElectronTau::jet1BTAGMVA() const {return m_jet1BTAGMVA;}
+
+
+void TupleElectronTau::set_jet2P4(LorentzVector jet2P4_) {m_jet2P4 = jet2P4_;}
+LorentzVector TupleElectronTau::jet2P4() const {return m_jet2P4;}
+
+
+void TupleElectronTau::set_jet2RawP4(LorentzVector jet2RawP4_) {m_jet2RawP4 = jet2RawP4_;}
+LorentzVector TupleElectronTau::jet2RawP4() const {return m_jet2RawP4;}
+
+
+void TupleElectronTau::set_jet2IDMVA(double jet2IDMVA_) {m_jet2IDMVA = jet2IDMVA_;}
+double TupleElectronTau::jet2IDMVA() const {return m_jet2IDMVA;}
+
+
+void TupleElectronTau::set_jet2BTAGMVA(double jet2BTAGMVA_) {m_jet2BTAGMVA = jet2BTAGMVA_;}
+double TupleElectronTau::jet2BTAGMVA() const {return m_jet2BTAGMVA;}
+
 
 void TupleElectronTau::set_isGoodTriggerPair(bool isGoodTriggerPair_) { m_isGoodTriggerPair = isGoodTriggerPair_;}
 bool TupleElectronTau::isGoodTriggerPair() const  { return m_isGoodTriggerPair; }

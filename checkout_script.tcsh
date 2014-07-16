@@ -51,6 +51,7 @@ wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.
 tar -xzvf RecoilCorrector_v7.tgz
 mv RecoilCorrector_v7/recoilfits UserCode/RecoilCorrector/recoilfits
 cp /uscms/home/shalhout/public/LLR_recoilfits/*RR*.root UserCode/RecoilCorrector/recoilfits/.
+cp /uscms/home/shalhout/public/53_Dec2012/*root ./RecoMET/METPUSubtraction/data/.
 rm -rf RecoilCorrector_v7
 rm -rf RecoilCorrector_v7.tgz
 ################################################

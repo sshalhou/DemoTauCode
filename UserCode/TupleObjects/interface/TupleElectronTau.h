@@ -45,6 +45,21 @@ public:
   void set_mvaMETphi(double);
   void set_MAX(int);
   void set_isGoodTriggerPair(bool);
+  void set_njets(int);
+  void set_nbjets(int);
+  void set_jet1P4(LorentzVector);
+  void set_jet1RawP4(LorentzVector);
+  void set_jet1IDMVA(double);
+  void set_jet1BTAGMVA(double);
+  void set_jet2P4(LorentzVector);
+  void set_jet2RawP4(LorentzVector);
+  void set_jet2IDMVA(double);
+  void set_jet2BTAGMVA(double);
+
+
+
+
+
 
   // getters
 
@@ -65,6 +80,16 @@ public:
   double mvaMETphi()const;
   int MAX() const;
   bool isGoodTriggerPair() const;
+  int njets() const;
+  int nbjets() const;
+  LorentzVector jet1P4() const;
+  LorentzVector jet1RawP4() const;
+  double jet1IDMVA() const;
+  double jet1BTAGMVA() const;
+  LorentzVector jet2P4() const;
+  LorentzVector jet2RawP4() const;
+  double jet2IDMVA() const;
+  double jet2BTAGMVA() const;
 
 private:
 
@@ -85,6 +110,16 @@ private:
   double m_mvaMETphi;
   int m_MAX;
   bool m_isGoodTriggerPair;
+  int m_njets;
+  int m_nbjets;
+  LorentzVector m_jet1P4;
+  LorentzVector m_jet1RawP4;
+  double m_jet1IDMVA;
+  double m_jet1BTAGMVA;
+  LorentzVector m_jet2P4;
+  LorentzVector m_jet2RawP4;
+  double m_jet2IDMVA;
+  double m_jet2BTAGMVA;
 
 
 };
