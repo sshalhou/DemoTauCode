@@ -54,7 +54,7 @@ Implementation:
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
-
+#include "DataFormats/Math/interface/deltaR.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -519,6 +519,56 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       }
       else CurrentElectronTau.set_correctedSVFitMass(0.0);
       measuredTauLeptons.clear();
+
+
+
+      ////////////////////////////////
+      // store jet related variables
+      // the jet ID we are using here is
+      // Et > 30, | eta | < 4.7, DR(jet,lep) > 0.5
+      // DR(jet,tau)>0.5, passes PF jet ID
+
+      unsigned int = jet1_index = -999;
+      double jet1_pt = -999;
+      unsigned int = jet2_index = -999;
+      double jet2_pt = -999;
+
+      int number_of_passingJets = 0;
+      int number_of_btagged_passingJets = 0;
+
+      for ( unsigned int i=0; i<jets->size(); ++i )
+      {
+        const pat::Jet & patjet = jets->at(i);
+        float mva   = (*puJetIdMVA)[jets->refAt(i)];
+        int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+
+        bool passes_id = 1;
+        bool is_btagged = 1;
+
+        if( !(patjet.pt()>30) ) passes_id = 0;
+        if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
+        if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+        if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
+        if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
+        if(passes_id = 1)
+        {
+          number_of_passingJets++;
+
+          if(fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.679)
+          {
+            number_of_btagged_passingJets++;
+          }
+
+
+        }
+
+
+
+      }
+
+      std::cout<<" Number of passing jets "<<  number_of_passingJets <<std::endl;
+      std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
+
 
       ////////////
       // store the ElectronTau

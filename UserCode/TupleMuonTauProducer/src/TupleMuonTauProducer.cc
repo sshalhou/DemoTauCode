@@ -54,7 +54,7 @@ Implementation:
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
-
+#include "DataFormats/Math/interface/deltaR.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
