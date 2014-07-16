@@ -86,10 +86,10 @@ private:
   bool doElectrons_;
   unsigned int electronINDEX_;
   string electronNAME_;
-  bool doMuons;
+  bool doMuons_;
   unsigned int muonINDEX_;
   string muonNAME_;
-  bool doTaus;
+  bool doTaus_;
   unsigned int tauINDEX_;
   string tauNAME_;
 
