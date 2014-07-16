@@ -528,10 +528,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       // Et > 30, | eta | < 4.7, DR(jet,lep) > 0.5
       // DR(jet,tau)>0.5, passes PF jet ID
 
-      unsigned int jet1_index = -999;
-      double jet1_pt = -999;
-      unsigned int jet2_index = -999;
-      double jet2_pt = -999;
+      int jet1_index = -999;
+      double jet1_pt = -999.;
+      int jet2_index = -999;
+      double jet2_pt = -999.;
 
       int number_of_passingJets = 0;
       int number_of_btagged_passingJets = 0;
@@ -550,7 +550,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
         if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
         if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
-        if(passes_id == 1)
+        if(passes_id == 1 || 1==1)
         {
           number_of_passingJets++;
           std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
