@@ -81,8 +81,17 @@ private:
   // ----------member data ---------------------------
 
   edm::InputTag electronSrc_;
-  unsigned int INDEX_;
-  string NAME_;
+  edm::InputTag muonSrc_;
+  edm::InputTag tauSrc_;
+  bool doElectrons_;
+  unsigned int electronINDEX_;
+  string electronNAME_;
+  bool doMuons;
+  unsigned int muonINDEX_;
+  string muonNAME_;
+  bool doTaus;
+  unsigned int tauINDEX_;
+  string tauNAME_;
 
 };
 
