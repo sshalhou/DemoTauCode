@@ -137,7 +137,7 @@ for eINDEX in range(MAX_ELECTRONS):
         eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
         tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
         metModule = process.pfMEtMVA.clone(
-        srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName))
+        srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)))
         setattr(process, metModuleName, metModule)
         metModule.minNumLeptons = cms.int32(2)
         pairWiseMvaMETs += metModule
