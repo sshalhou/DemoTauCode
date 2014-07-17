@@ -127,7 +127,7 @@ pairWiseMvaMETs = cms.Sequence()
 
 
 ###########
-# eTau
+# eTau METs
 ###########
 
 for eINDEX in range(MAX_ELECTRONS):
@@ -150,7 +150,7 @@ for eINDEX in range(MAX_ELECTRONS):
     pairWiseMvaMETs += metModule
 
 ###########
-# muTau
+# muTau METs
 ###########
 
 for mINDEX in range(MAX_MUONS):
@@ -171,6 +171,76 @@ for mINDEX in range(MAX_MUONS):
     setattr(process, metModuleName, metModule)
     metModule.minNumLeptons = cms.int32(2)
     pairWiseMvaMETs += metModule
+
+
+##########################
+# Nominal Systematics    #
+##########################
+
+process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
+                electronSrc =cms.InputTag('cleanPatElectrons'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                NAME=cms.string("TupleElectronsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
+                eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
+                eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
+                                     )
+
+process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
+                muonSrc =cms.InputTag('cleanPatMuons'),
+                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                NAME=cms.string("TupleMuonsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
+                muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
+                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24"),
+                pfSrc = cms.InputTag('particleFlow')
+
+                                     )
+
+process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                NAME=cms.string("TupleTausNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27")
+                                                   )
+
+
+##################
+# muTau Final Pairs
+
+allMuTauMETs = ""
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "cms.InputTag(\"muTauMet%ix%i::Ntuple\")" % (mINDEX,tINDEX)
+    allMuTauMETs.append(metModuleName)
+
+print allMuTauMETs
+
+#process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
+#                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+#                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+#                mvametSrc = cms.VInputTag("pfMEtMVA"),
+#                genSrc = cms.InputTag("genParticles"),
+#                iFluc=cms.double(0.0),
+#                iScale=cms.double(0.0),
+#                jetSrc = cms.InputTag("cleanPatJets"),
+#                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+#                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+#                NAME=cms.string("TupleMuonTausNominal"),
+#                doSVFit=cms.bool(True),
+#                maxMuons=cms.int(MAX_MUONS),
+#                maxTaus=cms.int(MAX_TAUS)
+#                                     )
+
+
 
 #################################
 process.out = cms.OutputModule("PoolOutputModule",
@@ -201,12 +271,12 @@ process.p = cms.Path(
   process.isDiMuonEvent*
   process.isDiElectronEvent*
   singlePatLeptons*
-  pairWiseMvaMETs
+  pairWiseMvaMETs*
 #process.pfMEtMVANominal+
-#      process.TupleElectronsNominal*
-#      process.TupleMuonsNominal*
+      process.TupleElectronsNominal*
+      process.TupleMuonsNominal*
 #      process.TupleTausNominal*
-#      process.TupleMuonTausNominal*
+#      process.TupleMuonTausNominal
 #      process.TupleElectronTausNominal
 #+process.metUncertaintySequence+
 #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
