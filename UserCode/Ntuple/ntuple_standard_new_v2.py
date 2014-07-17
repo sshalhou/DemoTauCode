@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 process = cms.Process("Ntuple")
-
+from PhysicsTools.PatAlgos.tools.helpers import *
 #####################
 # config parameters
 #####################
