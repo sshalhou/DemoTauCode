@@ -126,7 +126,7 @@ NAME_(iConfig.getParameter<string>("NAME" )),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
 puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
 doSVFit_(iConfig.getParameter<bool>("doSVFit" )),
-maxMuons_(iConfig.getParameter<unsigned int>("maxTaus" )),
+maxMuons_(iConfig.getParameter<unsigned int>("maxMuons" )),
 maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" ))
 {
 
