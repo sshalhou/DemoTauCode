@@ -33,7 +33,7 @@ Implementation:
 #include <iostream>
 #include "DataFormats/PatCandidates/interface/Tau.h"
 #include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
-#include "EgammaAnalysis/TauTools/interface/EGammaCutBasedEleId.h"
+#include "EgammaAnalysis/ElectronTools/interface/EGammaCutBasedEleId.h"
 #include "DataFormats/PatCandidates/interface/Conversion.h"
 #include "DataFormats/PatCandidates/interface/Lepton.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
