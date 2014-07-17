@@ -173,6 +173,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // iterate through all of the produced
   // pair-wise mva mets
 
+/*
   std::vector<reco::PFMET> mvaMETpfVec;
 
 
@@ -186,7 +187,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
 
   }
-
+*/
 // get tuple muon and tau and jet collections
 
 
@@ -311,8 +312,13 @@ for (std::size_t i = 0; i < muons->size(); ++i)
       // get the mva met corrected for muon i and tau j
       // assert a failure if met(i,j) has size 0
 
-      unsigned int n = (i*maxMuons_)+j;
-      reco::PFMET mvaMETpf  = mvaMETpfVec[n];
+        unsigned int n = (i*maxMuons_)+j;
+
+        edm::Handle <std::vector<reco::PFMET> >  mvamet;
+        iEvent.getByLabel(mvametSrc_[n], mvamet);
+        const reco::PFMET mvaMETpf =  (*mvamet)[0];
+
+       //reco::PFMET mvaMETpf  = mvaMETpfVec[n];
 
       // declare & init to raw value before applying recoil corrections
       NSVfitStandalone::Vector NSVcorrectedMET = mvaMETpf.momentum();
