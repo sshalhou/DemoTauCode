@@ -171,7 +171,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // iterate through all of the produced
   // pair-wise mva mets
 
-  std::vector<reco::PFMET mvaMETpf> mvaMETpfVec;
+  std::vector<reco::PFMET> mvaMETpfVec;
 
   for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
   {
