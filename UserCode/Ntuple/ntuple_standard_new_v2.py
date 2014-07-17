@@ -120,6 +120,33 @@ for tINDEX in range(MAX_TAUS):
         singlePatLeptons += tModule
 
 
+################################
+# create the pair-wise mva mets
+################################
+
+pairWiseMvaMETs = cms.Sequence()
+
+
+###########
+# eTau
+###########
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+        metModuleName = "eTauMet%ix%i" % (eINDEX,tINDEX)
+        eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
+        tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
+        metModule = process.pfMEtMVA.clone(
+        srcLeptons = cms.VInputTag(cms.InputTag(eModuleName)),cms.InputTag(tModuleName))
+        setattr(process, metModuleName, metModule)
+        metModule.minNumLeptons = cms.int32(2)
+        pairWiseMvaMETs += metModule
+
+###########
+# muTau
+###########
+
+
 
 #################################
 process.out = cms.OutputModule("PoolOutputModule",
@@ -149,7 +176,8 @@ process.p = cms.Path(
       process.myProducerLabel*
       process.isDiMuonEvent*
       process.isDiElectronEvent*
-      singlePatLeptons
+      singlePatLeptons*
+      pairWiseMvaMETs
       #process.pfMEtMVANominal+
 #      process.TupleElectronsNominal*
 #      process.TupleMuonsNominal*
