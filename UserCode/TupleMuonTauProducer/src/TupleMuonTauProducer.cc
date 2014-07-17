@@ -314,9 +314,9 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 
 
 
-        unsigned int n = (i*maxMuons_)+j;
+        unsigned int n = (i*maxTaus_)+j;
 
-  std::cout<<"before i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
+        std::cout<<"before i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
 
         edm::Handle <std::vector<reco::PFMET> >  mvamet;
         iEvent.getByLabel(mvametSrc_[n], mvamet);
