@@ -174,7 +174,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
   {
     edm::Handle <std::vector<reco::PFMET> >  mvamet;
-    evt.getByLabel(*mvametIter, mvamet);
+    iEvent.getByLabel(*mvametIter, mvamet);
     const reco::PFMET mvaMETpf =  (*mvamet)[0];
     std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
 
