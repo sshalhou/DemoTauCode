@@ -215,21 +215,21 @@ process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
 ##################
 # muTau Final Pairs
 
-allMuTauMETs = ""
+allMuTauMETs = cms.VInputTag()
 
 for mINDEX in range(MAX_MUONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = "\"muTauMet%ix%i::Ntuple\"," % (mINDEX,tINDEX)
+    metModuleName = cms.InputTag("muTauMet%ix%i::Ntuple") % (mINDEX,tINDEX)
     allMuTauMETs += metModuleName
 
 # delete trailing comma
-allMuTauMETs = allMuTauMETs[:-1]
+#allMuTauMETs = allMuTauMETs[:-1]
 print allMuTauMETs
 
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-                mvametSrc = cms.VInputTag(allMuTauMETs),
+                mvametSrc = allMuTauMETs,
                 genSrc = cms.InputTag("genParticles"),
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
