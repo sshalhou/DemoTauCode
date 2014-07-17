@@ -71,7 +71,7 @@ else:
 
 process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
 #from RecoMET.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
-#from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
+from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
 process.load("RecoMET.METPUSubtraction.mvaPFMET_cff")
 process.calibratedAK5PFJetsForPFMEtMVA = calibratedAK5PFJetsForPFMEtMVA.clone()
 
