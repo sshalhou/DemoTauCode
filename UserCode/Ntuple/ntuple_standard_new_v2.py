@@ -219,7 +219,7 @@ allMuTauMETs = cms.VInputTag()
 
 for mINDEX in range(MAX_MUONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = cms.InputTag('muTauMet%ix%i::Ntuple') % (mINDEX,tINDEX)
+    metModuleName = 'cms.InputTag(\"muTauMet%ix%i::Ntuple\")' % (mINDEX,tINDEX)
     allMuTauMETs + metModuleName
 
 # delete trailing comma
