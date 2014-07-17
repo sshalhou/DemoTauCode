@@ -226,21 +226,21 @@ for mINDEX in range(MAX_MUONS):
 allMuTauMETs = allMuTauMETs[:-1]
 print allMuTauMETs
 
-#process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
-#                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
-#                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-#                mvametSrc = cms.VInputTag("pfMEtMVA"),
-#                genSrc = cms.InputTag("genParticles"),
-#                iFluc=cms.double(0.0),
-#                iScale=cms.double(0.0),
-#                jetSrc = cms.InputTag("cleanPatJets"),
-#                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
-#                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
-#                NAME=cms.string("TupleMuonTausNominal"),
-#                doSVFit=cms.bool(True),
-#                maxMuons=cms.int(MAX_MUONS),
-#                maxTaus=cms.int(MAX_TAUS)
-#                                     )
+process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = cms.VInputTag(allMuTauMETs),
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausNominal"),
+                doSVFit=cms.bool(True),
+                maxMuons=cms.int(MAX_MUONS),
+                maxTaus=cms.int(MAX_TAUS)
+                                     )
 
 
 
@@ -277,8 +277,8 @@ process.p = cms.Path(
 #process.pfMEtMVANominal+
       process.TupleElectronsNominal*
       process.TupleMuonsNominal
-#      process.TupleTausNominal*
-#      process.TupleMuonTausNominal
+      process.TupleTausNominal*
+      process.TupleMuonTausNominal
 #      process.TupleElectronTausNominal
 #+process.metUncertaintySequence+
 #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
