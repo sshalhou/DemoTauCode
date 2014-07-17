@@ -238,8 +238,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausNominal"),
                 doSVFit=cms.bool(True),
-                maxMuons=cms.int(MAX_MUONS),
-                maxTaus=cms.int(MAX_TAUS)
+                maxMuons=cms.int32(MAX_MUONS),
+                maxTaus=cms.int32(MAX_TAUS)
                                      )
 
 
