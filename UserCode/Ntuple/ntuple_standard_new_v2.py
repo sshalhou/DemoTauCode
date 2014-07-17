@@ -110,7 +110,7 @@ for mINDEX in range(MAX_MUONS):
 
 for tINDEX in range(MAX_TAUS):
         tModuleName = "cleanPatTaus%i" % (tINDEX)
-        tModule = cms.EDProducer('SinglePatMuonProducer' ,
+        tModule = cms.EDProducer('SinglePatTauProducer' ,
                 tauSrc =cms.InputTag('cleanPatTaus'),
                 INDEX = cms.uint32(tINDEX),
                 NAME=cms.string(tModuleName))
