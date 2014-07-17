@@ -312,10 +312,12 @@ for (std::size_t i = 0; i < muons->size(); ++i)
       // get the mva met corrected for muon i and tau j
       // assert a failure if met(i,j) has size 0
 
-        std::cout<<" i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
-        std::cout<<" mvaMETpf before "<<mvaMETpf.pt()<<std::endl;
+
 
         unsigned int n = (i*maxMuons_)+j;
+
+  std::cout<<" i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
+  std::cout<<" mvaMETpf before "<<mvaMETpf.pt()<<std::endl;
 
         edm::Handle <std::vector<reco::PFMET> >  mvamet;
         iEvent.getByLabel(mvametSrc_[n], mvamet);
