@@ -145,7 +145,7 @@ process.p = cms.Path(
       process.myProducerLabel*
       process.isDiMuonEvent*
       process.isDiElectronEvent*
-      process.singlePatLeptons
+      singlePatLeptons
       #process.pfMEtMVANominal+
 #      process.TupleElectronsNominal*
 #      process.TupleMuonsNominal*
