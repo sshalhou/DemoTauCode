@@ -276,7 +276,7 @@ process.p = cms.Path(
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+
       process.TupleElectronsNominal*
-      process.TupleMuonsNominal
+      process.TupleMuonsNominal*
       process.TupleTausNominal*
       process.TupleMuonTausNominal
 #      process.TupleElectronTausNominal
