@@ -9,7 +9,7 @@ runOnMC = True
 MAX_ELECTRONS = 20 # max number of leptons to consider in the cleanPat collections
 MAX_MUONS = 20
 MAX_TAUS = 20
-listModules = True
+printListOfModules = True
 KeepAll = True
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -167,5 +167,5 @@ process.p = cms.Path(
 process.e = cms.EndPath(process.out)
 
 
-if listModules:
+if printListOfModules:
   print listModules(process.p)
