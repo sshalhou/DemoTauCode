@@ -177,17 +177,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-//  for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
-//  {
-
-    vInputTag::const_iterator mvametIter = mvametSrc_.begin();
+  for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
+  {
     edm::Handle <std::vector<reco::PFMET> >  mvamet;
     iEvent.getByLabel(*mvametIter, mvamet);
     reco::PFMET mvaMETpf =  (*mvamet)[0];
     mvaMETpfVec.push_back(mvaMETpf);
     //std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
 
-//  }
+  }
 
 // get tuple muon and tau and jet collections
 
@@ -314,7 +312,6 @@ for (std::size_t i = 0; i < muons->size(); ++i)
       // assert a failure if met(i,j) has size 0
 
       unsigned int n = (i*maxMuons_)+j;
-      n = 0;
       reco::PFMET mvaMETpf  = mvaMETpfVec[n];
 
       // declare & init to raw value before applying recoil corrections
