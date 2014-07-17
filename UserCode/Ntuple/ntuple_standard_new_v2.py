@@ -9,6 +9,8 @@ runOnMC = True
 MAX_ELECTRONS = 20 # max number of leptons to consider in the cleanPat collections
 MAX_MUONS = 20
 MAX_TAUS = 20
+listModules = True
+KeepAll = True
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
@@ -133,6 +135,8 @@ outputCommands = cms.untracked.vstring('drop *')
 #################################
 process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
 
+if KeepAll:
+  process.out.outputCommands +=['keep *_*_*_*']
 
 #################################
 # keep UserSpecifiedData
@@ -161,3 +165,7 @@ process.p = cms.Path(
                      )
 
 process.e = cms.EndPath(process.out)
+
+
+if listModules:
+  print listModules(process.p)
