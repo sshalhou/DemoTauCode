@@ -21,6 +21,8 @@ Implementation:
 // system include files
 #include <memory>
 #include <string>
+#include <stdio.h>
+#include <assert.h>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -250,6 +252,8 @@ TupleMuonTaus->reserve( TupleMuonTauSize );
 
 std::cout<<" SIZE OF MUONS "<<muons->size()<<std::endl;
 std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
+assert(muons->size()<maxMuons_);
+assert(taus->size()<maxTaus_);
 
 
 ///////////////////
