@@ -99,6 +99,8 @@ private:
   bool doSVFit_;
   unsigned int maxMuons_;
   unsigned int maxTaus_;
+  std::vector<reco::PFMET> mvaMETpfVec;
+
 
 };
 
@@ -137,6 +139,23 @@ maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" ))
   produces< vector<TupleMuonTau> >(NAME_).setBranchAlias(NAME_);
 
 
+// iterate through all of the produced
+// pair-wise mva mets
+
+
+
+
+for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
+{
+  edm::Handle <std::vector<reco::PFMET> >  mvamet;
+  iEvent.getByLabel(*mvametIter, mvamet);
+  reco::PFMET mvaMETpf =  (*mvamet)[0];
+  mvaMETpfVec.push_back(mvaMETpf);
+  //std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
+
+}
+
+
   //register your products
   /* Examples
   produces<ExampleData2>();
@@ -170,22 +189,7 @@ void
 TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
-  // iterate through all of the produced
-  // pair-wise mva mets
 
-  std::vector<reco::PFMET> mvaMETpfVec;
-
-
-
-  for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
-  {
-    edm::Handle <std::vector<reco::PFMET> >  mvamet;
-    iEvent.getByLabel(*mvametIter, mvamet);
-    reco::PFMET mvaMETpf =  (*mvamet)[0];
-    mvaMETpfVec.push_back(mvaMETpf);
-    //std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
-
-  }
 
 // get tuple muon and tau and jet collections
 
