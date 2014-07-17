@@ -24,201 +24,200 @@ if runOnMC:
   process.GlobalTag.globaltag = 'START53_V23::All'
 else:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
-  process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
 
 
-  myfilelist = cms.untracked.vstring()
-  myfilelist.extend(['file:/uscms/home/shalhout/no_backup/patTuple_testing.root'])
+myfilelist = cms.untracked.vstring()
+myfilelist.extend(['file:/uscms/home/shalhout/no_backup/patTuple_testing.root'])
 
-  process.source = cms.Source ("PoolSource",
+process.source = cms.Source ("PoolSource",
   fileNames=myfilelist,
   skipEvents=cms.untracked.uint32(0)
-  )
+)
 
 
 
 
-  process.myProducerLabel = cms.EDProducer('Ntuple')
-  #################################
+process.myProducerLabel = cms.EDProducer('Ntuple')
+#################################
 
 
-  ##########################
-  # diMuon & diElectron Vetoes
-  ##########################
+##########################
+# diMuon & diElectron Vetoes
+##########################
 
-  process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
+process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
   muonSource     = cms.InputTag("cleanPatMuons"),
   vertexSource      = cms.InputTag("offlinePrimaryVertices"),
   filter = cms.bool(True)
-  )
+)
 
 
-  process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
+process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
   electronSource     = cms.InputTag("cleanPatElectrons"),
   vertexSource      = cms.InputTag("offlinePrimaryVertices"),
   filter = cms.bool(True)
-  )
+)
 
 
-  ####################################
-  # setup the MVA MET calculation
-  #####################################
+####################################
+# setup the MVA MET calculation
+#####################################
 
-  process.load("JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff")
-  if runOnMC:
-    process.prefer("ak5PFL1FastL2L3")
-  else:
-    process.prefer("ak5PFL1FastL2L3Residual")
+process.load("JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff")
+if runOnMC:
+  process.prefer("ak5PFL1FastL2L3")
+else:
+  process.prefer("ak5PFL1FastL2L3Residual")
 
-    process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-    #from RecoMET.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
-    from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
-    process.load("RecoMET.METPUSubtraction.mvaPFMET_cff")
-    process.calibratedAK5PFJetsForPFMEtMVA = calibratedAK5PFJetsForPFMEtMVA.clone()
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#from RecoMET.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
+from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
+process.load("RecoMET.METPUSubtraction.mvaPFMET_cff")
+process.calibratedAK5PFJetsForPFMEtMVA = calibratedAK5PFJetsForPFMEtMVA.clone()
 
-    if runOnMC:
-      process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3")
-    else:
-      process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3Residual")
-
-      ##############################
-
-      ##############################
-      # produce the single electron,
-      # muon, and tau collections
-      # that will be used for pair-wise
-      # mvaMet calculation
-
-      singlePatLeptons = cms.Sequence()
-
-      for eINDEX in range(MAX_ELECTRONS):
-        eModuleName = "cleanPatElectrons%i" % (eINDEX)
-        eModule = cms.EDProducer('SinglePatElectronProducer' ,
-        electronSrc =cms.InputTag('cleanPatElectrons'),
-        INDEX = cms.uint32(eINDEX),
-        NAME=cms.string(eModuleName))
-        setattr(process, eModuleName, eModule)
-        singlePatLeptons += eModule
-
-        for mINDEX in range(MAX_MUONS):
-          mModuleName = "cleanPatMuons%i" % (mINDEX)
-          mModule = cms.EDProducer('SinglePatMuonProducer' ,
-          muonSrc =cms.InputTag('cleanPatMuons'),
-          INDEX = cms.uint32(mINDEX),
-          NAME=cms.string(mModuleName))
-          setattr(process, mModuleName, mModule)
-          singlePatLeptons += mModule
-
-          for tINDEX in range(MAX_TAUS):
-            tModuleName = "cleanPatTaus%i" % (tINDEX)
-            tModule = cms.EDProducer('SinglePatTauProducer' ,
-            tauSrc =cms.InputTag('cleanPatTaus'),
-            INDEX = cms.uint32(tINDEX),
-            NAME=cms.string(tModuleName))
-            setattr(process, tModuleName, tModule)
-            singlePatLeptons += tModule
+if runOnMC:
+  process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3")
+else:
+  process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3Residual")
 
 
-            ################################
-            # create the pair-wise mva mets
-            ################################
+##############################
+# produce the single electron,
+# muon, and tau collections
+# that will be used for pair-wise
+# mvaMet calculation
 
-            pairWiseMvaMETs = cms.Sequence()
+singlePatLeptons = cms.Sequence()
 
+for eINDEX in range(MAX_ELECTRONS):
+  eModuleName = "cleanPatElectrons%i" % (eINDEX)
+  eModule = cms.EDProducer('SinglePatElectronProducer' ,
+    electronSrc =cms.InputTag('cleanPatElectrons'),
+    INDEX = cms.uint32(eINDEX),
+    NAME=cms.string(eModuleName))
+  setattr(process, eModuleName, eModule)
+  singlePatLeptons += eModule
 
-            ###########
-            # eTau
-            ###########
+for mINDEX in range(MAX_MUONS):
+  mModuleName = "cleanPatMuons%i" % (mINDEX)
+  mModule = cms.EDProducer('SinglePatMuonProducer' ,
+    muonSrc =cms.InputTag('cleanPatMuons'),
+    INDEX = cms.uint32(mINDEX),
+    NAME=cms.string(mModuleName))
+  setattr(process, mModuleName, mModule)
+  singlePatLeptons += mModule
 
-            for eINDEX in range(MAX_ELECTRONS):
-              for tINDEX in range(MAX_TAUS):
-                metModuleName = "eTauMet%ix%i" % (eINDEX,tINDEX)
-                eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
-                tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
-                metModule = process.pfMEtMVA.clone(
-                srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
-                useType1 = cms.bool(False),
-                minCorrJetPt = cms.double(-1),
-                inputFileNames = cms.PSet(
-                U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
-                DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
-                CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
-                CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
-                ))
-                setattr(process, metModuleName, metModule)
-                metModule.minNumLeptons = cms.int32(2)
-                pairWiseMvaMETs += metModule
-
-                ###########
-                # muTau
-                ###########
-
-                for mINDEX in range(MAX_MUONS):
-                  for tINDEX in range(MAX_TAUS):
-                    metModuleName = "muTauMet%ix%i" % (mINDEX,tINDEX)
-                    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
-                    tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
-                    metModule = process.pfMEtMVA.clone(
-                    srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
-                    useType1 = cms.bool(False),
-                    minCorrJetPt = cms.double(-1),
-                    inputFileNames = cms.PSet(
-                    U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
-                    DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
-                    CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
-                    CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
-                    ))
-                    setattr(process, metModuleName, metModule)
-                    metModule.minNumLeptons = cms.int32(2)
-                    pairWiseMvaMETs += metModule
-
-                    #################################
-                    process.out = cms.OutputModule("PoolOutputModule",
-                    fileName = cms.untracked.string('NtupleFile.root'),
-                    outputCommands = cms.untracked.vstring('drop *')
-                    #SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p')
-                    )
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTaus%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('cleanPatTaus'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
 
 
+################################
+# create the pair-wise mva mets
+################################
 
-                    #################################
-                    # keep everything produced by Tuepl-Ntuple
-                    #################################
-                    process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
+pairWiseMvaMETs = cms.Sequence()
 
-                    if KeepAll:
-                      process.out.outputCommands +=['keep *_*_*_*']
 
-                      #################################
-                      # keep UserSpecifiedData
-                      #################################
-                      process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
+###########
+# eTau
+###########
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMet%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      minCorrJetPt = cms.double(-1),
+      inputFileNames = cms.PSet(
+        U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+        DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+        CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+        CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      ))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETs += metModule
+
+###########
+# muTau
+###########
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMet%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      minCorrJetPt = cms.double(-1),
+      inputFileNames = cms.PSet(
+        U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+        DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+        CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+        CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      ))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETs += metModule
+
+#################################
+process.out = cms.OutputModule("PoolOutputModule",
+  fileName = cms.untracked.string('NtupleFile.root'),
+  outputCommands = cms.untracked.vstring('drop *')
+  #SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p')
+)
 
 
 
-                      process.p = cms.Path(
-                      process.myProducerLabel*
-                      process.isDiMuonEvent*
-                      process.isDiElectronEvent*
-                      singlePatLeptons*
-                      pairWiseMvaMETs
-                      #process.pfMEtMVANominal+
-                      #      process.TupleElectronsNominal*
-                      #      process.TupleMuonsNominal*
-                      #      process.TupleTausNominal*
-                      #      process.TupleMuonTausNominal*
-                      #      process.TupleElectronTausNominal
-                      #+process.metUncertaintySequence+
-                      #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
-                      #+process.TupleMuonTausRecoilUp
-                      #+process.TupleMuonTausRecoilDown
-                      #+process.TupleMuonTausRecoilResUp
-                      #+process.TupleMuonTausRecoilResDown
-                      )
+#################################
+# keep everything produced by Tuepl-Ntuple
+#################################
+process.out.outputCommands +=['keep Tuple*_*_*_Ntuple']
 
-                      process.e = cms.EndPath(process.out)
+if KeepAll:
+  process.out.outputCommands +=['keep *_*_*_*']
+
+#################################
+# keep UserSpecifiedData
+#################################
+process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
 
 
-                      if printListOfModules:
-                        print listModules(process.p)
+
+process.p = cms.Path(
+  process.myProducerLabel*
+  process.isDiMuonEvent*
+  process.isDiElectronEvent*
+  singlePatLeptons*
+  pairWiseMvaMETs
+#process.pfMEtMVANominal+
+#      process.TupleElectronsNominal*
+#      process.TupleMuonsNominal*
+#      process.TupleTausNominal*
+#      process.TupleMuonTausNominal*
+#      process.TupleElectronTausNominal
+#+process.metUncertaintySequence+
+#process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
+#+process.TupleMuonTausRecoilUp
+#+process.TupleMuonTausRecoilDown
+#+process.TupleMuonTausRecoilResUp
+#+process.TupleMuonTausRecoilResDown
+)
+
+process.e = cms.EndPath(process.out)
+
+
+if printListOfModules:
+  print listModules(process.p)
