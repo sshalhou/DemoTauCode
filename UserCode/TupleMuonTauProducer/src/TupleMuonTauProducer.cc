@@ -173,6 +173,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   std::vector<reco::PFMET> mvaMETpfVec;
 
+
+
   for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
   {
     edm::Handle <std::vector<reco::PFMET> >  mvamet;
@@ -183,6 +185,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   }
 
+  for(unsigned int i = 0; i<maxMuons_; i++)
+  {
+    for(unsigned int j = 0; j<maxTaus_; j++)
+    {
+
+    unsigned int n = (i*maxMuons_)+j;
+    std::cout<<" i, j , n "<<i<<" , "<<j<<" , "<<n;
+
+
+    reco::PFMET mvaMETpf  = mvaMETpfVec[n];
+    std::cout<<"  "<<mvaMETpf.pt()<<std::endl;
+
+
+    }
+  }
 
 
 
