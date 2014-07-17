@@ -95,8 +95,8 @@ private:
   edm::InputTag puJetIdMVASrc_;
   edm::InputTag puJetIdFlagSrc_;
   bool doSVFit_;
-  int maxMuons_;
-  int maxTaus_;
+  unsigned int maxMuons_;
+  unsigned int maxTaus_;
 
 };
 
@@ -124,8 +124,8 @@ NAME_(iConfig.getParameter<string>("NAME" )),
 puJetIdMVASrc_(iConfig.getParameter<edm::InputTag>("puJetIdMVASrc" )),
 puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
 doSVFit_(iConfig.getParameter<bool>("doSVFit" )),
-maxMuons_(iConfig.getParameter<double>("maxTaus" )),
-maxTaus_(iConfig.getParameter<double>("maxTaus" ))
+maxMuons_(iConfig.getParameter<unsigned int>("maxTaus" )),
+maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" ))
 {
 
 
