@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    SinglePatLeptonProducer
-// Class:      SinglePatLeptonProducer
+// Package:    SinglePatElectronProducer
+// Class:      SinglePatElectronProducer
 //
-/**\class SinglePatLeptonProducer SinglePatLeptonProducer.cc TEMP/SinglePatLeptonProducer/src/SinglePatLeptonProducer.cc
+/**\class SinglePatElectronProducer SinglePatElectronProducer.cc TEMP/SinglePatElectronProducer/src/SinglePatElectronProducer.cc
 
 Description: [one line class summary]
 
@@ -59,10 +59,10 @@ using namespace pat;
 // class declaration
 //
 
-class SinglePatLeptonProducer : public edm::EDProducer {
+class SinglePatElectronProducer : public edm::EDProducer {
 public:
-  explicit SinglePatLeptonProducer(const edm::ParameterSet&);
-  ~SinglePatLeptonProducer();
+  explicit SinglePatElectronProducer(const edm::ParameterSet&);
+  ~SinglePatElectronProducer();
 
   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -98,7 +98,7 @@ private:
 //
 // constructors and destructor
 //
-SinglePatLeptonProducer::SinglePatLeptonProducer(const edm::ParameterSet& iConfig):
+SinglePatElectronProducer::SinglePatElectronProducer(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 INDEX_(iConfig.getParameter<unsigned int>("INDEX" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
@@ -125,7 +125,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 }
 
 
-SinglePatLeptonProducer::~SinglePatLeptonProducer()
+SinglePatElectronProducer::~SinglePatElectronProducer()
 {
 
   // do anything here that needs to be done at desctruction time
@@ -140,7 +140,7 @@ SinglePatLeptonProducer::~SinglePatLeptonProducer()
 
 // ------------ method called to produce the data  ------------
 void
-SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
+SinglePatElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
 
@@ -171,42 +171,42 @@ SinglePatLeptonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSet
 
 // ------------ method called once each job just before starting event loop  ------------
 void
-SinglePatLeptonProducer::beginJob()
+SinglePatElectronProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void
-SinglePatLeptonProducer::endJob() {
+SinglePatElectronProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
 void
-SinglePatLeptonProducer::beginRun(edm::Run&, edm::EventSetup const&)
+SinglePatElectronProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
 void
-SinglePatLeptonProducer::endRun(edm::Run&, edm::EventSetup const&)
+SinglePatElectronProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
 void
-SinglePatLeptonProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
+SinglePatElectronProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
 void
-SinglePatLeptonProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
+SinglePatElectronProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-SinglePatLeptonProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+SinglePatElectronProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
@@ -215,4 +215,4 @@ SinglePatLeptonProducer::fillDescriptions(edm::ConfigurationDescriptions& descri
 }
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(SinglePatLeptonProducer);
+DEFINE_FWK_MODULE(SinglePatElectronProducer);

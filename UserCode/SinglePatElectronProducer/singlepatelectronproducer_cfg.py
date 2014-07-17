@@ -13,14 +13,14 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-process.myProducerLabel = cms.EDProducer('SinglePatLeptonProducer'
+process.myProducerLabel = cms.EDProducer('SinglePatElectronProducer'
 )
 
 process.out = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('myOutputFile.root')
 )
 
-  
+
 process.p = cms.Path(process.myProducerLabel)
 
 process.e = cms.EndPath(process.out)
