@@ -173,21 +173,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // iterate through all of the produced
   // pair-wise mva mets
 
-/*
-  std::vector<reco::PFMET> mvaMETpfVec;
+
+//  std::vector<reco::PFMET> mvaMETpfVec;
 
 
-
+ int lmn  = 0;
   for(vInputTag::const_iterator mvametIter = mvametSrc_.begin();mvametIter != mvametSrc_.end();++mvametIter)
   {
     edm::Handle <std::vector<reco::PFMET> >  mvamet;
     iEvent.getByLabel(*mvametIter, mvamet);
-    reco::PFMET mvaMETpf =  (*mvamet)[0];
-    mvaMETpfVec.push_back(mvaMETpf);
-    //std::cout<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
-
+  //  reco::PFMET mvaMETpf =  (*mvamet)[0];
+//    mvaMETpfVec.push_back(mvaMETpf);
+    std::cout<<" instance "<<lmn<<" mvaMETpf.pt() "<<mvaMETpf.pt()<<std::endl;
+    lmn ++ ;
   }
-*/
+
 // get tuple muon and tau and jet collections
 
 
