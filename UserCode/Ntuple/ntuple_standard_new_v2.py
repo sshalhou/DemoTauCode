@@ -14,6 +14,7 @@ KeepAll = False
 # lepton collections
 # to consider for building the final states, any additional
 # leptons will be ignored by the eTau and muTau producers
+# all leptons are still considered for the vetos
 
 MAX_ELECTRONS = 5
 MAX_MUONS = 5
@@ -235,8 +236,7 @@ for mINDEX in range(MAX_MUONS):
     metModuleNameTag = cms.InputTag(metModuleName)
     allMuTauMETs.append(metModuleNameTag)
 
-# delete trailing comma
-#allMuTauMETs = allMuTauMETs[:-1]
+
 print allMuTauMETs
 
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
@@ -252,7 +252,40 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 NAME=cms.string("TupleMuonTausNominal"),
                 doSVFit=cms.bool(False),
                 maxMuons=cms.uint32(MAX_MUONS),
-                maxTaus=cms.uint32(MAX_TAUS)
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True)
+                                     )
+
+##################
+# eTau Final Pairs
+
+allElecTauMETs = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMet%ix%i::Ntuple" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETs.append(metModuleNameTag)
+
+
+print allElecTauMETs
+
+
+process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                mvametSrc = allElecTauMETs,
+                genSrc = cms.InputTag("genParticles"),
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausNominal"),
+                doSVFit=cms.bool(False),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True)
                                      )
 
 
@@ -292,8 +325,8 @@ process.p = cms.Path(
       process.TupleElectronsNominal*
       process.TupleMuonsNominal*
       process.TupleTausNominal*
-      process.TupleMuonTausNominal
-#      process.TupleElectronTausNominal
+      process.TupleMuonTausNominal*
+      process.TupleElectronTausNominal
 #+process.metUncertaintySequence+
 #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
 #+process.TupleMuonTausRecoilUp
