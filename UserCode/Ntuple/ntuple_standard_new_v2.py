@@ -58,14 +58,14 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 
 process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
   muonSource     = cms.InputTag("cleanPatMuons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVertices"),
+  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
   filter = cms.bool(True)
 )
 
 
 process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
   electronSource     = cms.InputTag("cleanPatElectrons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVertices"),
+  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
   filter = cms.bool(True)
 )
 
