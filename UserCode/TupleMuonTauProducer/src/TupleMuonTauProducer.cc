@@ -302,8 +302,8 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 // mva met, print a warning if not all are
 // considerd
 
-   unsigned int lastTauIndex = min(maxTaus_,taus->size());
-   unsigned int lastMuonIndex = min(maxMuons_,muons->size());
+   unsigned int lastTauIndex = min(maxTaus_,unsigned int(taus->size());
+   unsigned int lastMuonIndex = min(maxMuons_,unsigned int(muons->size()));
 
 /////////////////////////////
 // Print the warning
