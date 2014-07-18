@@ -52,6 +52,19 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 #################################
 
 
+
+
+###################################
+# create a new primary vertex collection
+###################################
+
+process.selectedPrimaryVertices = cms.EDFilter(
+    "VertexSelector",
+    src = cms.InputTag('offlinePrimaryVertices'),
+    cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
+    filter = cms.bool(False)
+)
+
 ##########################
 # diMuon & diElectron Vetoes
 ##########################
@@ -69,17 +82,6 @@ process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
   filter = cms.bool(True)
 )
 
-
-###################################
-# create a new primary vertex collection
-###################################
-
-process.selectedPrimaryVertices = cms.EDFilter(
-    "VertexSelector",
-    src = cms.InputTag('offlinePrimaryVertices'),
-    cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
-    filter = cms.bool(False)
-)
 
 ####################################
 # setup the MVA MET calculation
@@ -330,9 +332,9 @@ process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck",ignoreTotal = cms.un
 
 process.p = cms.Path(
   process.myProducerLabel*
+  process.selectedPrimaryVertices*
   process.isDiMuonEvent*
   process.isDiElectronEvent*
-  process.selectedPrimaryVertices*
   singlePatLeptons*
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+
