@@ -6,15 +6,15 @@ from PhysicsTools.PatAlgos.tools.helpers import *
 #####################
 
 runOnMC = True
-MAX_ELECTRONS = 20 # max number of leptons to consider in the cleanPat collections
-MAX_MUONS = 20
-MAX_TAUS = 20
+MAX_ELECTRONS = 5 # max number of leptons to consider in the cleanPat collections
+MAX_MUONS = 5
+MAX_TAUS = 5
 printListOfModules = False
 KeepAll = True
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(15) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 ######################
 # set the global tag
