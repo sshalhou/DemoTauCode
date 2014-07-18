@@ -276,7 +276,7 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausNominal"),
-                doSVFit=cms.bool(True),
+                doSVFit=cms.bool(False),
                 maxMuons=cms.uint32(MAX_MUONS),
                 maxTaus=cms.uint32(MAX_TAUS)
                                      )
