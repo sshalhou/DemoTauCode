@@ -302,8 +302,8 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 // mva met, print a warning if not all are
 // considerd
 
-   unsigned int lastTauIndex = min(maxTaus_,unsigned int(taus->size());
-   unsigned int lastMuonIndex = min(maxMuons_,unsigned int(muons->size()));
+   std::size_t lastTauIndex = min(std::size_t(maxTaus_),taus->size());
+   std::size_t lastMuonIndex = min(std::size_t(maxMuons_),muons->size());
 
 /////////////////////////////
 // Print the warning
@@ -314,7 +314,7 @@ for (std::size_t i = 0; i < muons->size(); ++i)
     std::cout<<" WARNING : \n";
     std::cout<<" considering "<<lastTauIndex<<" of "<<taus->size()<<" taus \n";
     std::cout<<" considering "<<lastMuonIndex<<" of "<<muons->size()<<" taus \n";
-    std::cout<<" --------------- "
+    std::cout<<" --------------- ";
 
   }
 
@@ -322,12 +322,12 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 
 
 
-  for (unsigned int i = 0; i < lastMuonIndex; ++i)
+  for (ustd::size_t i = 0; i < lastMuonIndex; ++i)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
 
-    for (unsigned int j = 0; j < lastTauIndex; ++j)
+    for (std::size_t j = 0; j < lastTauIndex; ++j)
     {
 
       const TupleTau tau =   ((*taus)[j]);
