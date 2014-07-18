@@ -220,9 +220,9 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleElectronsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
-                eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
-                eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
-                eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
+                eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20::Ntuple"),
+                eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22::Ntuple"),
+                eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27::Ntuple")
                                      )
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
@@ -230,9 +230,9 @@ process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
-                muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
-                muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
-                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24"),
+                muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17::Ntuple"),
+                muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18::Ntuple"),
+                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24::Ntuple"),
                 pfSrc = cms.InputTag('particleFlow')
 
                                      )
