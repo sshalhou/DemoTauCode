@@ -16,9 +16,9 @@ KeepAll = False
 # leptons will be ignored by the eTau and muTau producers
 # all leptons are still considered for the vetos
 
-MAX_ELECTRONS = 5
-MAX_MUONS = 5
-MAX_TAUS = 5
+MAX_ELECTRONS = 10
+MAX_MUONS = 10
+MAX_TAUS = 10
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -149,6 +149,7 @@ for eINDEX in range(MAX_ELECTRONS):
     eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
     tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
+      corrector = cms.string('ak5PFL1FastL2L3'),
       srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
       useType1 = cms.bool(False),
       minCorrJetPt = cms.double(-1),
@@ -172,6 +173,7 @@ for mINDEX in range(MAX_MUONS):
     mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
     tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
+      corrector = cms.string('ak5PFL1FastL2L3'),
       srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
       useType1 = cms.bool(False),
       minCorrJetPt = cms.double(-1),
