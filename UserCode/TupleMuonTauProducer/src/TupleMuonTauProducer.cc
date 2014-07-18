@@ -253,8 +253,8 @@ TupleMuonTaus->reserve( TupleMuonTauSize );
 
 std::cout<<" SIZE OF MUONS "<<muons->size()<<std::endl;
 std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
-assert(muons->size()<maxMuons_);
-assert(taus->size()<maxTaus_);
+//assert(muons->size()<maxMuons_);
+//assert(taus->size()<maxTaus_);
 
 
 ///////////////////
@@ -295,13 +295,39 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 }
 
 
+///////////////////////////////////////
+// instead of looping over all muon+tau
+// pairs, only consider those for which
+// we have attempted to produce
+// mva met, print a warning if not all are
+// considerd
 
-  for (std::size_t i = 0; i < muons->size(); ++i)
+   unsigned int lastTauIndex = min(maxTaus_,taus->size());
+   unsigned int lastMuonIndex = min(maxMuons_,muons->size());
+
+/////////////////////////////
+// Print the warning
+  if(lastTauIndex<taus->size() || lastMuonIndex<muons->size())
+  {
+
+    std::cout<<" --------------- ";
+    std::cout<<" WARNING : \n";
+    std::cout<<" considering "<<lastTauIndex<<" of "<<taus->size()<<" taus \n";
+    std::cout<<" considering "<<lastMuonIndex<<" of "<<muons->size()<<" taus \n";
+    std::cout<<" --------------- "
+
+  }
+
+
+
+
+
+  for (unsigned int i = 0; i < lastMuonIndex; ++i)
   {
 
     const TupleMuon muon =   ((*muons)[i]);
 
-    for (std::size_t j = 0; j < taus->size(); ++j)
+    for (unsigned int j = 0; j < lastTauIndex; ++j)
     {
 
       const TupleTau tau =   ((*taus)[j]);
@@ -310,9 +336,6 @@ for (std::size_t i = 0; i < muons->size(); ++i)
 
 
       // get the mva met corrected for muon i and tau j
-      // assert a failure if met(i,j) has size 0
-
-
 
         unsigned int n = (i*maxTaus_)+j;
 
