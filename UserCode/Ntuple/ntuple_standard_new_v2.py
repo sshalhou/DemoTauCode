@@ -10,11 +10,11 @@ MAX_ELECTRONS = 5 # max number of leptons to consider in the cleanPat collection
 MAX_MUONS = 5
 MAX_TAUS = 5
 printListOfModules = False
-KeepAll = False
+KeepAll = True
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(24) )
 
 ######################
 # set the global tag
@@ -406,7 +406,7 @@ process.p = cms.Path(
   process.muTrigMatchMu24+
   process.eTrigMatchEle20+
   process.eTrigMatchEle22+
-  process.eTrigMatchEle27+ 
+  process.eTrigMatchEle27+
   singlePatLeptons*
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+
