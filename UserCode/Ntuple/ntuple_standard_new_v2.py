@@ -292,6 +292,93 @@ process.out = cms.OutputModule("PoolOutputModule",
 
 
 
+###################################################
+# add in Trigger Info, according to twiki it should
+# be done after all modifications to the path
+###################################################
+
+# Trigger Object Matching
+
+process.load( "PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cff" )
+
+###################################################
+
+process.eTrigMatchEle27 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+process.eTrigMatchEle20 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+###################################################
+
+process.eTrigMatchEle22 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.muTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+process.muTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.muTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'candidateMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu24*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+####################################################
+
 #################################
 # keep everything produced by Tuepl-Ntuple
 #################################
@@ -314,6 +401,12 @@ process.p = cms.Path(
   process.isDiElectronEvent*
   process.candidateMuons*
   process.candidateElectrons*
+  process.muTrigMatchMu17+
+  process.muTrigMatchMu18+
+  process.muTrigMatchMu24+
+  process.eTrigMatchEle20+
+  process.eTrigMatchEle22+
+  process.eTrigMatchEle27+ 
   singlePatLeptons*
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+
