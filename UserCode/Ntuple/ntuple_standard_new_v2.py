@@ -8,6 +8,7 @@ from PhysicsTools.PatAlgos.tools.helpers import *
 runOnMC = True
 printListOfModules = False
 KeepAll = False
+CheckMemoryUsage = False
 
 ##########################################
 # the following 3 parameters set the first X  leptons in the
@@ -327,8 +328,8 @@ if KeepAll:
 #################################
 process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
 
-
-process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck",ignoreTotal = cms.untracked.int32(1) )
+if CheckMemoryUsage:
+  process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck",ignoreTotal = cms.untracked.int32(1) )
 
 process.p = cms.Path(
   process.myProducerLabel*
