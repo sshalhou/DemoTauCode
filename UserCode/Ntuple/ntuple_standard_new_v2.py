@@ -10,7 +10,7 @@ MAX_ELECTRONS = 5 # max number of leptons to consider in the cleanPat collection
 MAX_MUONS = 5
 MAX_TAUS = 5
 printListOfModules = False
-KeepAll = True
+KeepAll = False
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
