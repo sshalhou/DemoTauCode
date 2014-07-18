@@ -310,11 +310,11 @@ for (std::size_t i = 0; i < muons->size(); ++i)
   if(lastTauIndex<taus->size() || lastMuonIndex<muons->size())
   {
 
-    std::cout<<" --------------- ";
+    std::cout<<" --------------- \n";
     std::cout<<" WARNING : \n";
-    std::cout<<" considering "<<lastTauIndex<<" of "<<taus->size()<<" taus \n";
-    std::cout<<" considering "<<lastMuonIndex<<" of "<<muons->size()<<" taus \n";
-    std::cout<<" --------------- ";
+    std::cout<<" WARNING considering "<<lastTauIndex<<" of "<<taus->size()<<" taus \n";
+    std::cout<<" WARNING considering "<<lastMuonIndex<<" of "<<muons->size()<<" muons \n";
+    std::cout<<" --------------- \n";
 
   }
 

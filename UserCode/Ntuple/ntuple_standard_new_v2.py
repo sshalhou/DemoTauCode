@@ -6,15 +6,23 @@ from PhysicsTools.PatAlgos.tools.helpers import *
 #####################
 
 runOnMC = True
-MAX_ELECTRONS = 5 # max number of leptons to consider in the cleanPat collections
-MAX_MUONS = 5
-MAX_TAUS = 5
 printListOfModules = False
 KeepAll = False
 
+##########################################
+# the following 3 parameters set the first X  leptons in the
+# lepton collections
+# to consider for building the final states, any additional
+# leptons will be ignored by the eTau and muTau producers
+
+MAX_ELECTRONS = 5
+MAX_MUONS = 5
+MAX_TAUS = 5
+
+
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(15) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 ######################
 # set the global tag
