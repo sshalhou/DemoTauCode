@@ -58,17 +58,28 @@ process.myProducerLabel = cms.EDProducer('Ntuple')
 
 process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
   muonSource     = cms.InputTag("cleanPatMuons"),
-  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
+  vertexSource      = cms.InputTag("selectedPrimaryVertices"),
   filter = cms.bool(True)
 )
 
 
 process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
   electronSource     = cms.InputTag("cleanPatElectrons"),
-  vertexSource      = cms.InputTag("offlinePrimaryVertices"),
+  vertexSource      = cms.InputTag("selectedPrimaryVertices"),
   filter = cms.bool(True)
 )
 
+
+###################################
+# create a new primary vertex collection
+###################################
+
+process.selectedPrimaryVertices = cms.EDFilter(
+    "VertexSelector",
+    src = cms.InputTag('offlinePrimaryVertices'),
+    cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
+    filter = cms.bool(False)
+)
 
 ####################################
 # setup the MVA MET calculation
@@ -194,7 +205,7 @@ for mINDEX in range(MAX_MUONS):
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices'),
                 NAME=cms.string("TupleElectronsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
@@ -204,7 +215,7 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('cleanPatMuons'),
-                vertexSrc =cms.InputTag('offlinePrimaryVertices'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
@@ -321,6 +332,7 @@ process.p = cms.Path(
   process.myProducerLabel*
   process.isDiMuonEvent*
   process.isDiElectronEvent*
+  process.selectedPrimaryVertices*
   singlePatLeptons*
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+

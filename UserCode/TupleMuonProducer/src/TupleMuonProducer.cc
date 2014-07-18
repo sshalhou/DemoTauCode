@@ -409,6 +409,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
       CurrentMuon.set_numberOfValidPixelHits(muon->innerTrack()->hitPattern().numberOfValidPixelHits());
       CurrentMuon.set_dz(muon->innerTrack()->dz(first_vertex.position()));
+      CurrentMuon.set_dxy(muon->innerTrack()->dxy(first_vertex.position()));
+
 
     }
 
@@ -426,12 +428,12 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
 
-    if(!muon->muonBestTrack().isNull())
-    {
+  //  if(!muon->muonBestTrack().isNull())
+  //  {
 
-      CurrentMuon.set_dxy(muon->muonBestTrack()->dxy(primary_vertex.position()));
+    //  CurrentMuon.set_dxy(muon->muonBestTrack()->dxy(primary_vertex.position()));
 
-    }
+    //}
 
 
 
@@ -513,10 +515,12 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(isTightMuon)) passFullId = 0;
     if(!(isPFMuon)) passFullId = 0;
-    if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
+    //if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
     if(!muon->innerTrack().isNull())
     {
       if(!(fabs(muon->innerTrack()->dz(first_vertex.position())) < 0.2)) passFullId = 0;
+      if(!(fabs(muon->innerTrack()->dxy(first_vertex.position())) < 0.045)) passFullId = 0;
+
     }
     else passFullId = 0;
     if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
