@@ -428,7 +428,7 @@ process.p = cms.Path(
 
 
 from PhysicsTools.PatAlgos.tools.trigTools import *
-switchOnTrigger( process )
+switchOnTriggerStandAlone( process )
 triggerMatchers = cms.vstring()
 triggerMatchers.extend(['eTrigMatchEle20'])
 triggerMatchers.extend(['eTrigMatchEle22'])
@@ -436,7 +436,7 @@ triggerMatchers.extend(['eTrigMatchEle27'])
 triggerMatchers.extend(['muTrigMatchMu17'])
 triggerMatchers.extend(['muTrigMatchMu18'])
 triggerMatchers.extend(['muTrigMatchMu24'])
-switchOnTriggerMatching( process, triggerMatchers )
+switchOnTriggerMatchingStandAlone( process, triggerMatchers )
 
 
 process.e = cms.EndPath(process.out)
