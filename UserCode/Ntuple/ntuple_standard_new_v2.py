@@ -83,6 +83,44 @@ else:
   process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3Residual")
 
 
+
+#############################
+# cleanPatElectrons & cleanPatMuons
+# are pretty large, so trim them down 1st
+
+
+from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
+process.candidateMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
+cut = cms.string("pt > 10"+
+                 " && abs(eta) < 2.4"
+                +" && isPFMuon"
+                +" && isTrackerMuon "
+                +" && isGlobalMuon "
+                +" && (pfIsolationR04.sumChargedParticlePt +"
+                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.3"
+                )
+                                                  )
+
+#########################################################################
+# cleanPatElectron passing selection counter
+#########################################################################
+# we count those electrons in cleanPatElectrons that pass the following ID,
+# but keep the entire collection as we need to veto diElectron
+# events using looser cuts (could change this later)
+
+from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
+process.candidateElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
+      cut = cms.string("et > 24 * 0.9"+
+                       " && gsfTrack.trackerExpectedHitsInner.numberOfLostHits == 0"+
+                       " && abs(eta) < 2.1 * 1.1" +
+                       " && electronID('mvaNonTrigV0') >= 0.85 " +
+                       " && passConversionVeto " +
+                       " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.2 "
+                      )
+                                                        )
+
+
+
 ##############################
 # produce the single electron,
 # muon, and tau collections
@@ -94,7 +132,7 @@ singlePatLeptons = cms.Sequence()
 for eINDEX in range(MAX_ELECTRONS):
   eModuleName = "cleanPatElectrons%i" % (eINDEX)
   eModule = cms.EDProducer('SinglePatElectronProducer' ,
-    electronSrc =cms.InputTag('cleanPatElectrons'),
+    electronSrc =cms.InputTag('candidateElectrons'),
     INDEX = cms.uint32(eINDEX),
     NAME=cms.string(eModuleName))
   setattr(process, eModuleName, eModule)
@@ -103,7 +141,7 @@ for eINDEX in range(MAX_ELECTRONS):
 for mINDEX in range(MAX_MUONS):
   mModuleName = "cleanPatMuons%i" % (mINDEX)
   mModule = cms.EDProducer('SinglePatMuonProducer' ,
-    muonSrc =cms.InputTag('cleanPatMuons'),
+    muonSrc =cms.InputTag('candidateMuons'),
     INDEX = cms.uint32(mINDEX),
     NAME=cms.string(mModuleName))
   setattr(process, mModuleName, mModule)
@@ -178,7 +216,7 @@ for mINDEX in range(MAX_MUONS):
 ##########################
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
-                electronSrc =cms.InputTag('cleanPatElectrons'),
+                electronSrc =cms.InputTag('candidateElectrons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleElectronsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
@@ -188,7 +226,7 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                                      )
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
-                muonSrc =cms.InputTag('cleanPatMuons'),
+                muonSrc =cms.InputTag('candidateMuons'),
                 vertexSrc =cms.InputTag('offlinePrimaryVertices'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
@@ -274,6 +312,8 @@ process.p = cms.Path(
   process.myProducerLabel*
   process.isDiMuonEvent*
   process.isDiElectronEvent*
+  process.candidateMuons*
+  process.candidateElectrons*
   singlePatLeptons*
   pairWiseMvaMETs*
 #process.pfMEtMVANominal+
