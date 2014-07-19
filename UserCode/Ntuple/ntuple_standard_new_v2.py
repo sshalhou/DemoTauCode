@@ -24,7 +24,7 @@ MAX_TAUS = 10
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(15) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 ######################
 # set the global tag
@@ -150,7 +150,7 @@ for mINDEX in range(MAX_MUONS):
 for tINDEX in range(MAX_TAUS):
   tModuleName = "cleanPatTaus%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('cleanPatTaus'),
+    tauSrc =cms.InputTag('EsCorrectedTaus::Ntuple'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
