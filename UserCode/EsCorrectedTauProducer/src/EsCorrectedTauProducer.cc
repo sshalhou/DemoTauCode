@@ -146,7 +146,7 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     // store the corrected tau
 
 
-    EsCorrectedTaus->push_back(CurrentTau);
+    EsCorrectedTaus->push_back(tau);
 
   }
 
