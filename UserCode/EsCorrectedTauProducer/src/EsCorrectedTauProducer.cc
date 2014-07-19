@@ -142,10 +142,52 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
   {
 
 
+    //////////
+    // new tau
+    pat::Tau correctedTau(*tau);
+
+    /////////
+    // should write a single function used
+    // here and by TupleTau, but for now
+
+    size_t hadrons = 0;
+    size_t strips = 0;
+
+    hadrons = tau->signalPFChargedHadrCands().size();
+    strips = tau->signalPFGammaCands().size();
+
+
+    double v4_sf = 1.0;
+
+    /////////////////////
+    // 1% correction for improved
+    // MSSM analysis if matched to generator
+    // level hadronic tau decay
+
+    if((hadrons==1 && strips>0) || (hadrons==1 && strips==0) || (hadrons==3))
+    {
+
+
+      v4_sf *= 1.01;
+
+    }
+
+    //////////////
+    // scale the 4-vector
+    reco::Candidate::LorentzVector EsCorrectedP4 = tau->p4();
+    EsCorrectedP4 *= v4_sf;
+
+    //////////////////
+    // store the new P4
+
+    correctedTau.setP4(EsCorrectedP4);
+
+  
+
     /////////
     // store the corrected tau
 
-    pat::Tau correctedTau(*tau);
+
     EsCorrectedTaus->push_back(correctedTau);
 
   }
