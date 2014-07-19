@@ -2,13 +2,13 @@
 //
 // Package:    EsCorrectedTauProducer
 // Class:      EsCorrectedTauProducer
-// 
+//
 /**\class EsCorrectedTauProducer EsCorrectedTauProducer.cc TEMP/EsCorrectedTauProducer/src/EsCorrectedTauProducer.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  shalhout shalhout
@@ -20,39 +20,57 @@
 
 // system include files
 #include <memory>
+#include <string>
+#include <vector>
+#include <iostream>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDProducer.h"
-
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
+
+#include "FWCore/Framework/interface/EventSetup.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/Utilities/interface/InputTag.h"
+#include "CommonTools/Utils/interface/StringCutObjectSelector.h"
+#include "DataFormats/Candidate/interface/Candidate.h"
+#include "DataFormats/PatCandidates/interface/Tau.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
+#include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+
+typedef math::XYZTLorentzVector LorentzVector;
+using namespace std;
+using namespace edm;
+using namespace pat;
 
 //
 // class declaration
 //
 
 class EsCorrectedTauProducer : public edm::EDProducer {
-   public:
-      explicit EsCorrectedTauProducer(const edm::ParameterSet&);
-      ~EsCorrectedTauProducer();
+public:
+  explicit EsCorrectedTauProducer(const edm::ParameterSet&);
+  ~EsCorrectedTauProducer();
 
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
-      
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      // ----------member data ---------------------------
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+
+  // ----------member data ---------------------------
+  edm::InputTag tauSrc_;
+
 };
 
 //
@@ -67,28 +85,34 @@ class EsCorrectedTauProducer : public edm::EDProducer {
 //
 // constructors and destructor
 //
-EsCorrectedTauProducer::EsCorrectedTauProducer(const edm::ParameterSet& iConfig)
+EsCorrectedTauProducer::EsCorrectedTauProducer(const edm::ParameterSet& iConfig):
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" ))
 {
-   //register your products
-/* Examples
-   produces<ExampleData2>();
 
-   //if do put with a label
-   produces<ExampleData2>("label");
- 
-   //if you want to put into the Run
-   produces<ExampleData2,InRun>();
-*/
-   //now do what ever other initialization is needed
-  
+  produces< vector<pat::Tau> >();
+
+
+
+  //register your products
+  /* Examples
+  produces<ExampleData2>();
+
+  //if do put with a label
+  produces<ExampleData2>("label");
+
+  //if you want to put into the Run
+  produces<ExampleData2,InRun>();
+  */
+  //now do what ever other initialization is needed
+
 }
 
 
 EsCorrectedTauProducer::~EsCorrectedTauProducer()
 {
- 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -101,57 +125,85 @@ EsCorrectedTauProducer::~EsCorrectedTauProducer()
 void
 EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-   using namespace edm;
-/* This is an event example
-   //Read 'ExampleData' from the Event
-   Handle<ExampleData> pIn;
-   iEvent.getByLabel("example",pIn);
 
-   //Use the ExampleData to create an ExampleData2 which 
-   // is put into the Event
-   std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
-   iEvent.put(pOut);
-*/
 
-/* this is an EventSetup example
-   //Read SetupData from the SetupRecord in the EventSetup
-   ESHandle<SetupData> pSetup;
-   iSetup.get<SetupRecord>().get(pSetup);
-*/
- 
+  // get tau collection
+  edm::Handle<edm::View<pat::Tau> > taus;
+  iEvent.getByLabel(tauSrc_,taus);
+
+  auto_ptr<vector<pat::Tau>> EsCorrectedTaus (new vector<pat::Tau>);
+
+  std::size_t patTauSize = taus->size();
+  EsCorrectedTaus->reserve( patTauSize );
+
+
+  edm::View<pat::Tau>::const_iterator tau;
+  for(tau=taus->begin(); tau!=taus->end(); ++tau)
+  {
+
+
+    /////////
+    // store the corrected tau
+
+
+    EsCorrectedTaus->push_back(CurrentTau);
+
+  }
+
+
+  iEvent.put( EsCorrectedTaus, "" );
+
+
+  /* This is an event example
+  //Read 'ExampleData' from the Event
+  Handle<ExampleData> pIn;
+  iEvent.getByLabel("example",pIn);
+
+  //Use the ExampleData to create an ExampleData2 which
+  // is put into the Event
+  std::auto_ptr<ExampleData2> pOut(new ExampleData2(*pIn));
+  iEvent.put(pOut);
+  */
+
+  /* this is an EventSetup example
+  //Read SetupData from the SetupRecord in the EventSetup
+  ESHandle<SetupData> pSetup;
+  iSetup.get<SetupRecord>().get(pSetup);
+  */
+
 }
 
 // ------------ method called once each job just before starting event loop  ------------
-void 
+void
 EsCorrectedTauProducer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
-void 
+void
 EsCorrectedTauProducer::endJob() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-void 
+void
 EsCorrectedTauProducer::beginRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a run  ------------
-void 
+void
 EsCorrectedTauProducer::endRun(edm::Run&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when starting to processes a luminosity block  ------------
-void 
+void
 EsCorrectedTauProducer::beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }
 
 // ------------ method called when ending the processing of a luminosity block  ------------
-void 
+void
 EsCorrectedTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&)
 {
 }

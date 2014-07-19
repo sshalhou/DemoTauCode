@@ -24,7 +24,7 @@ MAX_TAUS = 10
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(15) )
 
 ######################
 # set the global tag
@@ -65,6 +65,17 @@ process.selectedPrimaryVertices = cms.EDFilter(
     cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
     filter = cms.bool(False)
 )
+
+###################################
+# create an ES corrected tau collection
+# (only pass this to mva met, since
+# trigger matching does not exist)
+###################################
+
+process.EsCorrectedTaus = cms.EDProducer('EsCorrectedTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus')
+                                     )
+
 
 ##########################
 # diMuon & diElectron Vetoes
@@ -334,6 +345,7 @@ if CheckMemoryUsage:
 process.p = cms.Path(
   process.myProducerLabel*
   process.selectedPrimaryVertices*
+  process.EsCorrectedTaus*
   process.isDiMuonEvent*
   process.isDiElectronEvent*
   singlePatLeptons*
