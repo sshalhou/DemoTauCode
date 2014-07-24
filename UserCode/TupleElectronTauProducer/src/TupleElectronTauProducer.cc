@@ -497,23 +497,23 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         // pass the higher pt lepton 1st
 
 
-        if( electron.p4().pt() >=  tau.corrected_p4().pt()  )
-        {
+        //if( electron.p4().pt() >=  tau.corrected_p4().pt()  )
+        //{
           measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
           electron.p4()) );
           measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
           tau.corrected_p4()));
-        }
+        //}
 
-        else
-        {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.corrected_p4()));
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          electron.p4()) );
+        //else
+        //{
+          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+          //tau.corrected_p4()));
+          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+          //electron.p4()) );
 
 
-        }
+        //}
 
         // store the met
         CurrentElectronTau.set_mvaMET(correctedMET.pt());
