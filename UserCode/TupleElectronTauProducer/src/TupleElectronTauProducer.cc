@@ -527,9 +527,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           // last argument is verbosity
           NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
           algo.addLogM(false);
-          algo.integrateMarkovChain();
+          //algo.integrateMarkovChain();
 
-          //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
+          algo.integrateVEGAS(); ////Use this instead for VEGAS integration
 
           CurrentElectronTau.set_correctedSVFitMass(algo.getMass());
 
@@ -537,7 +537,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           // calculate SVFit mass without recoil met corr.
           NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
           algoRaw.addLogM(false);
-          algoRaw.integrateMarkovChain();
+          //algoRaw.integrateMarkovChain();
+          algoRaw.integrateVEGAS();
           CurrentElectronTau.set_rawSVFitMass(algoRaw.getMass());
 
 
@@ -675,7 +676,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         TupleElectronTaus->push_back(CurrentElectronTau);
 
       }
-      
+
     }
 
   }

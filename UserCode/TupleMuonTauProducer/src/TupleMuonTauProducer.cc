@@ -535,17 +535,16 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           // last argument is verbosity
           NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
           algo.addLogM(false);
-          algo.integrateMarkovChain();
-
-          //algo.integrateVEGAS(); ////Use this instead for VEGAS integration
-
+          //algo.integrateMarkovChain();
+          algo.integrateVEGAS();
           CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
 
 
           // calculate SVFit mass without recoil met corr.
           NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
           algoRaw.addLogM(false);
-          algoRaw.integrateMarkovChain();
+//          algoRaw.integrateMarkovChain();
+          algoRaw.integrateVEGAS();
           CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
 
 
