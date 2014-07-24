@@ -505,29 +505,33 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // pass the higher pt lepton 1st
 
 
-        if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
-        {
+  //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+    //    {
           measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
           muon.p4()) );
           measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
           tau.corrected_p4()));
-        }
+      //  }
 
-        else
-        {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.corrected_p4()));
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          muon.p4()) );
+        //else
+        //{
+          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+          //tau.corrected_p4()));
+          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+          //muon.p4()) );
 
 
-        }
+        //}
 
         // store the met
         CurrentMuonTau.set_mvaMET(correctedMET.pt());
         CurrentMuonTau.set_mvaMETphi(correctedMET.phi());
 
         covMET = mvaMETpf.getSignificanceMatrix();
+        CurrentMuonTau.set_cov00(mvaMETpf.getSignificanceMatrix()(0,0));
+        CurrentMuonTau.set_cov01(mvaMETpf.getSignificanceMatrix()(0,1));
+        CurrentMuonTau.set_cov10(mvaMETpf.getSignificanceMatrix()(1,0));
+        CurrentMuonTau.set_cov11(mvaMETpf.getSignificanceMatrix()(1,1));
 
 
         if(doSVFit_)

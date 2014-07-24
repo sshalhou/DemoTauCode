@@ -520,6 +520,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         CurrentElectronTau.set_mvaMETphi(correctedMET.phi());
 
         covMET = mvaMETpf.getSignificanceMatrix();
+        CurrentElectronTau.set_cov00(mvaMETpf.getSignificanceMatrix()(0,0));
+        CurrentElectronTau.set_cov01(mvaMETpf.getSignificanceMatrix()(0,1));
+        CurrentElectronTau.set_cov10(mvaMETpf.getSignificanceMatrix()(1,0));
+        CurrentElectronTau.set_cov11(mvaMETpf.getSignificanceMatrix()(1,1));
 
 
         if(doSVFit_)

@@ -55,7 +55,10 @@ public:
   void set_jet2RawP4(LorentzVector);
   void set_jet2IDMVA(double);
   void set_jet2BTAGMVA(double);
-
+  void set_cov00(double);
+  void set_cov01(double);
+  void set_cov10(double);
+  void set_cov11(double);
 
 
 
@@ -90,6 +93,10 @@ public:
   LorentzVector jet2RawP4() const;
   double jet2IDMVA() const;
   double jet2BTAGMVA() const;
+  double cov00() const;
+  double cov01() const;
+  double cov10() const;
+  double cov11() const;
 
 private:
 
@@ -120,6 +127,10 @@ private:
   LorentzVector m_jet2RawP4;
   double m_jet2IDMVA;
   double m_jet2BTAGMVA;
+  double m_cov00;
+  double m_cov01;
+  double m_cov10;
+  double m_cov11;
 
 
 };

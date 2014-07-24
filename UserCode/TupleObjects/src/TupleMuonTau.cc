@@ -31,8 +31,27 @@ TupleMuonTau::TupleMuonTau()
   m_jet2RawP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_jet2IDMVA = NAN;
   m_jet2BTAGMVA = NAN;
+  m_cov00 = NAN;
+  m_cov01 = NAN;
+  m_cov10 = NAN;
+  m_cov11 = NAN;
+
 
 }
+
+
+
+void TupleMuonTau::set_cov00(int cov00_) {m_cov00 = cov00_;}
+int TupleMuonTau::cov00() const {return m_cov00;}
+
+void TupleMuonTau::set_cov01(int cov01_) {m_cov01 = cov01_;}
+int TupleMuonTau::cov01() const {return m_cov01;}
+
+void TupleMuonTau::set_cov10(int cov10_) {m_cov10 = cov10_;}
+int TupleMuonTau::cov10() const {return m_cov10;}
+
+void TupleMuonTau::set_cov11(int cov11_) {m_cov11 = cov11_;}
+int TupleMuonTau::cov11() const {return m_cov11;}
 
 void TupleMuonTau::set_njets(int njets_) {m_njets = njets_;}
 int TupleMuonTau::njets() const {return m_njets;}
