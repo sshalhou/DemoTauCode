@@ -529,7 +529,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if(doSVFit_)
         {
           // last argument is verbosity
-          NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
+          NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 1);
           algo.addLogM(false);
           //algo.integrateMarkovChain();
 
