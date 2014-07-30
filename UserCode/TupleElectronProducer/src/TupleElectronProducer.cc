@@ -582,7 +582,22 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     std::cout<<" Electron fullIdCheck is  "<<passFullId<<std::endl;
 
+    ///////////////
+    // check if this electron
+    // would force event rejection due to the
+    // tri-lepton veto if not used in H->tau tau recon.
 
+    bool triLeptonVetoCuts = 1;
+
+    if(!(electron->p4().pt()>10)) triLeptonVetoCuts = 0;
+    if(!(fabs(electron->p4().eta())<2.5)) triLeptonVetoCuts = 0;
+    if(!(relativeIsolation < 0.3)) triLeptonVetoCuts = 0;
+
+    int category2 =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "LOOSE");
+    bool pass_fail = TupleHelpers::doesItPassTightMVANonTrigV0(category2, mva);
+    if(  !(pass_fail)                     ) triLeptonVetoCuts = 0;
+
+    CurrentElectron.set_isTriLeptonVetoCandidate(triLeptonVetoCuts);
 
 
   }

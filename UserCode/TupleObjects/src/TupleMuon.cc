@@ -36,9 +36,17 @@ TupleMuon::TupleMuon()
   m_has_HltMatchMu17 =  0;
   m_has_HltMatchMu18 =  0;
   m_has_HltMatchMu24 =  0;
+  m_isTriLeptonVetoCandidate = 0;
+
 }
 
 
+///////////////////
+// isTriLeptonVetoCandidate
+////////////////////
+
+void TupleMuon::set_isTriLeptonVetoCandidate(bool isTriLeptonVetoCandidate_) { m_isTriLeptonVetoCandidate = isTriLeptonVetoCandidate_;}
+bool TupleMuon::isTriLeptonVetoCandidate() const { return m_isTriLeptonVetoCandidate; }
 
 //////////////////
 // has_HltMatchMu17

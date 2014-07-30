@@ -56,6 +56,10 @@ public:
   void set_sigmaIetaIeta(double);
   void set_sigmaIphiIphi(double);
 
+// set true if the lepton should cause event rejection, when it is
+// not used in the H pair
+
+  void set_isTriLeptonVetoCandidate(bool);
 
   // isolation variables
   void set_chargedHadronIso(double);
@@ -108,7 +112,7 @@ public:
   bool has_HltMatchEle20() const;
   bool has_HltMatchEle22() const;
   bool has_HltMatchEle27() const;
-
+  bool isTriLeptonVetoCandidate() const;
 
 private:
   LorentzVector m_p4;
@@ -146,6 +150,7 @@ private:
   bool m_has_HltMatchEle20;
   bool m_has_HltMatchEle22;
   bool m_has_HltMatchEle27;
+  bool m_isTriLeptonVetoCandidate;
 
 
 

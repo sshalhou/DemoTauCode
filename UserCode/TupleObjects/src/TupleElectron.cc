@@ -38,8 +38,17 @@ TupleElectron::TupleElectron()
   m_has_HltMatchEle20 =  0;
   m_has_HltMatchEle22 =  0;
   m_has_HltMatchEle27 =  0;
+  m_isTriLeptonVetoCandidate = 0;
+
 
 }
+
+///////////////////
+// isTriLeptonVetoCandidate
+////////////////////
+
+void TupleElectron::set_isTriLeptonVetoCandidate(bool isTriLeptonVetoCandidate_) { m_isTriLeptonVetoCandidate = isTriLeptonVetoCandidate_;}
+bool TupleElectron::isTriLeptonVetoCandidate() const { return m_isTriLeptonVetoCandidate; }
 
 
 //////////////////

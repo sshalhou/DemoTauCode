@@ -72,6 +72,10 @@ public:
   void set_has_HltMatchMu18(bool);
   void set_has_HltMatchMu24(bool);
 
+// set true if the lepton should cause event rejection, when it is
+// not used in the H pair
+
+  void set_isTriLeptonVetoCandidate(bool);
 
 
   // getters
@@ -110,6 +114,8 @@ public:
   bool has_HltMatchMu17() const;
   bool has_HltMatchMu18() const;
   bool has_HltMatchMu24() const;
+  bool isTriLeptonVetoCandidate() const;
+
 
 private:
 
@@ -145,6 +151,7 @@ private:
   bool m_has_HltMatchMu17;
   bool m_has_HltMatchMu18;
   bool m_has_HltMatchMu24;
+  bool m_isTriLeptonVetoCandidate;
 
 
 };

@@ -531,6 +531,23 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_passFullId(passFullId);
 
+
+    ///////////////
+    // check if this muon
+    // would force event rejection due to the
+    // tri-lepton veto if not used in H->tau tau recon.
+
+    bool triLeptonVetoCuts = 1;
+
+    if(!(muon->p4().pt()>10)) triLeptonVetoCuts = 0;
+    if(!(fabs(muon->p4().eta())<2.4)) triLeptonVetoCuts = 0;
+    if(!(relativeIsolation_DR4 < 0.3)) triLeptonVetoCuts = 0;
+    if(!(isTightMuon)) triLeptonVetoCuts = 0;
+
+    CurrentMuon.set_isTriLeptonVetoCandidate(triLeptonVetoCuts);
+
+
+
     ////////////
     // store the muon
 
