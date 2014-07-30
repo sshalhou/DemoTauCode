@@ -594,8 +594,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(!(relativeIsolation < 0.3)) triLeptonVetoCuts = 0;
 
     int category2 =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "LOOSE");
-    bool pass_fail = TupleHelpers::doesItPassTightMVANonTrigV0(category2, mva);
-    if(  !(pass_fail)                     ) triLeptonVetoCuts = 0;
+    bool pass_fail2 = TupleHelpers::doesItPassTightMVANonTrigV0(category2, mva);
+    if(  !(pass_fail2)                     ) triLeptonVetoCuts = 0;
 
     CurrentElectron.set_isTriLeptonVetoCandidate(triLeptonVetoCuts);
 
