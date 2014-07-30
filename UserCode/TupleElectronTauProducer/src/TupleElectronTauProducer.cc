@@ -388,7 +388,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         // check triLepton Veto
 
         bool passVeto = TupleHelpers::pairPassesTriLeptonVeto(i, 9999, electrons, muons);
-        CurrentMuonTau.set_passesTriLeptonVeto(passVeto);
+        CurrentElectronTau.set_passesTriLeptonVeto(passVeto);
 
 
         ////////////
