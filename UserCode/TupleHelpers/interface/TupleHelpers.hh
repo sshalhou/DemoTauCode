@@ -53,7 +53,7 @@ namespace TupleHelpers
       {
 
       const TupleElectron electron =   ((*electrons)[i]);
-      if(electron.isTriLeptonVetoCandidate()) return 0;
+      //if(electron.isTriLeptonVetoCandidate()) return 0;
 
       }
 
@@ -68,7 +68,7 @@ namespace TupleHelpers
       if(i!=muIndex)
       {
       const TupleMuon muon =   ((*muons)[i]);
-      if(muon.isTriLeptonVetoCandidate()) return 0;
+      //if(muon.isTriLeptonVetoCandidate()) return 0;
 
 
 
