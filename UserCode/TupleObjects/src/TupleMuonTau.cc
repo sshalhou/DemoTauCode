@@ -35,11 +35,14 @@ TupleMuonTau::TupleMuonTau()
   m_cov01 = NAN;
   m_cov10 = NAN;
   m_cov11 = NAN;
+  m_passesTriLeptonVeto = 0;
 
 
 }
 
 
+void TupleMuonTau::set_passesTriLeptonVeto(bool passesTriLeptonVeto_) { m_passesTriLeptonVeto = passesTriLeptonVeto_;}
+bool TupleMuonTau::passesTriLeptonVeto() const  { return m_passesTriLeptonVeto; }
 
 void TupleMuonTau::set_cov00(double cov00_) {m_cov00 = cov00_;}
 double TupleMuonTau::cov00() const {return m_cov00;}

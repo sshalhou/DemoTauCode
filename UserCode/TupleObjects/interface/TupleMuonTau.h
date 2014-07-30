@@ -59,6 +59,8 @@ public:
   void set_cov01(double);
   void set_cov10(double);
   void set_cov11(double);
+  void set_passesTriLeptonVeto(double);
+
 
   // getters
 
@@ -93,6 +95,8 @@ public:
   double cov01() const;
   double cov10() const;
   double cov11() const;
+  double passesTriLeptonVeto() const;
+
 
 
 private:
@@ -128,6 +132,8 @@ private:
   double m_cov01;
   double m_cov10;
   double m_cov11;
+  double m_passesTriLeptonVeto;
+
 };
 
 typedef std::vector<TupleMuonTau> TupleMuonTauCollection;

@@ -35,11 +35,14 @@ TupleElectronTau::TupleElectronTau()
   m_cov01 = NAN;
   m_cov10 = NAN;
   m_cov11 = NAN;
+  m_passesTriLeptonVeto = 0;
+
 
 
 }
 
-
+void TupleElectronTau::set_passesTriLeptonVeto(bool passesTriLeptonVeto_) { m_passesTriLeptonVeto = passesTriLeptonVeto_;}
+bool TupleElectronTau::passesTriLeptonVeto() const  { return m_passesTriLeptonVeto; }
 
 void TupleElectronTau::set_cov00(double cov00_) {m_cov00 = cov00_;}
 double TupleElectronTau::cov00() const {return m_cov00;}

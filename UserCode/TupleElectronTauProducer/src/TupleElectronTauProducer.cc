@@ -99,6 +99,8 @@ private:
   unsigned int maxElectrons_;
   unsigned int maxTaus_;
   bool doNotRequireFullIdForLeptons_;
+  edm::InputTag muonSrc_;
+
 
 
 };
@@ -129,7 +131,8 @@ puJetIdFlagSrc_(iConfig.getParameter<edm::InputTag>("puJetIdFlagSrc" )),
 doSVFit_(iConfig.getParameter<bool>("doSVFit" )),
 maxElectrons_(iConfig.getParameter<unsigned int>("maxElectrons" )),
 maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" )),
-doNotRequireFullIdForLeptons_(iConfig.getParameter<bool>("doNotRequireFullIdForLeptons" ))
+doNotRequireFullIdForLeptons_(iConfig.getParameter<bool>("doNotRequireFullIdForLeptons" )),
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
 {
 
 
@@ -173,12 +176,20 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 {
 
 
+  // get the muons for tri-lepton veto
+  edm::Handle< TupleMuonCollection > muons;
+  iEvent.getByLabel(muonSrc_, muons);
+
+
 
   // get tuple electron and tau and jet collections
 
 
   edm::Handle< TupleElectronCollection > electrons;
   iEvent.getByLabel(electronSrc_, electrons);
+
+
+
 
   edm::Handle< TupleTauCollection > taus;
   iEvent.getByLabel(tauSrc_, taus);
@@ -371,6 +382,14 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         CurrentElectronTau.set_scalarSumPt(electron.p4() , tau.corrected_p4()  );
         CurrentElectronTau.set_DR(electron.p4() , tau.corrected_p4()  );
         CurrentElectronTau.set_sumCharge(electron.charge() , tau.charge()  );
+
+
+        /////////////////
+        // check triLepton Veto
+
+        bool passVeto = TupleHelpers::pairPassesTriLeptonVeto(i, 9999, electrons, muons);
+        CurrentMuonTau.set_passesTriLeptonVeto(passVeto);
+
 
         ////////////
         // apply Phil's recoil
