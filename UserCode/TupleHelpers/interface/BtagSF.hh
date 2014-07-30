@@ -43,6 +43,10 @@ BtagSF::~BtagSF() {
 
 Bool_t BtagSF::isbtagged(Float_t pt, Float_t eta, Float_t csv, Int_t jetflavor, Bool_t isdata, UInt_t btagsys, UInt_t mistagsys, Bool_t is2012)
 {
+
+  std::cout<<" CSV arguments : "<<pt<<" "<<eta<<" "<<csv<<" "<<jetflavor<<" "<<isdata<<" "<<btagsys<<" "<<mistagsys<<" "<<is2012<<std::endl;
+
+
   randm->SetSeed((int)((eta+5)*100000));
 
   Bool_t btagged = kFALSE;
