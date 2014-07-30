@@ -280,7 +280,9 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 doSVFit=cms.bool(False),
                 maxMuons=cms.uint32(MAX_MUONS),
                 maxTaus=cms.uint32(MAX_TAUS),
-                doNotRequireFullIdForLeptons = cms.bool(True)
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+
                                      )
 
 ##################
@@ -312,7 +314,9 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 doSVFit=cms.bool(False),
                 maxElectrons=cms.uint32(MAX_ELECTRONS),
                 maxTaus=cms.uint32(MAX_TAUS),
-                doNotRequireFullIdForLeptons = cms.bool(True)
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+
                                      )
 
 
