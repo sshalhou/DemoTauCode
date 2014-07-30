@@ -601,9 +601,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 
           bool passes_id = 1;
-          bool is_btagged = 1;
 
-          if( !(patjet.pt()>30) ) passes_id = 0;
+          if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
           if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
@@ -639,7 +638,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             iEvent.isRealData(),
             0,0,1);
 
-
+            std::cout<<"CSV "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags")<< " isTag "<<isbtagged<<std::endl;
 
 
             if(fabs(patjet.eta())<2.4 && isbtagged)

@@ -604,7 +604,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 
           bool passes_id = 1;
-          bool is_btagged = 1;
 
           if( !(patjet.pt()>30) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
@@ -641,6 +640,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             iEvent.isRealData(),
             0,0,1);
 
+
+            std::cout<<"CSV "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags")<< " isTag "<<isbtagged<<std::endl;
 
             if(fabs(patjet.eta())<2.4 && isbtagged)
             {
