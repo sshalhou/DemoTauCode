@@ -97,7 +97,7 @@ public:
   double cov01() const;
   double cov10() const;
   double cov11() const;
-  double passesTriLeptonVeto() const;
+  bool passesTriLeptonVeto() const;
 
 
 private:
@@ -133,7 +133,7 @@ private:
   double m_cov01;
   double m_cov10;
   double m_cov11;
-  double m_passesTriLeptonVeto;
+  bool m_passesTriLeptonVeto;
 
 
 };
