@@ -52,6 +52,7 @@ Implementation:
 #include "DataFormats/JetReco/interface/Jet.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
+#include "UserCode/TupleHelpers/interface/BtagSF.hh"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 #include "DataFormats/Math/interface/deltaR.h"
