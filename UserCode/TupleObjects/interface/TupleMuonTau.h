@@ -59,7 +59,7 @@ public:
   void set_cov01(double);
   void set_cov10(double);
   void set_cov11(double);
-  void set_passesTriLeptonVeto(double);
+  void set_passesTriLeptonVeto(bool);
 
 
   // getters
