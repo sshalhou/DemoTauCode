@@ -23,9 +23,37 @@
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "DataFormats/PatCandidates/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
+#include "UserCode/TupleObjects/interface/TupleMuon.h"
+
+
 
 namespace TupleHelpers
 {
+
+
+  ////////////////////////////////
+  // set the pair-wise TriLepton Veto
+
+
+  bool pairPassesTriLeptonVeto(int eIndex,
+                               int muIndex,
+                               std::vector <TupleElectrons> Electrons,
+                               std::vector <TupleMuons> Muons)
+  {
+
+    bool passesTriLepVeto = 1;
+
+
+
+
+
+    return passesTriLepVeto;
+
+  }
+
+
+
   ////////////////////////////////////////////////////
 
   ///////////////////
