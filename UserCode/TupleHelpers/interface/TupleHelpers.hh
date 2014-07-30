@@ -36,8 +36,8 @@ namespace TupleHelpers
   // set the pair-wise TriLepton Veto
 
 
-  bool pairPassesTriLeptonVeto(int eIndex,
-  int muIndex,
+  bool pairPassesTriLeptonVeto(unsigned int eIndex,
+  unsigned int muIndex,
   edm::Handle< TupleElectronCollection > electrons,
   edm::Handle< TupleMuonCollection > muons)
   {
@@ -53,7 +53,7 @@ namespace TupleHelpers
       {
 
       const TupleElectron electron =   ((*electrons)[i]);
-      if(electron->isTriLeptonVetoCandidate()) return 0;
+      if(electron.isTriLeptonVetoCandidate()) return 0;
 
       }
 
@@ -68,7 +68,7 @@ namespace TupleHelpers
       if(i!=muIndex)
       {
       const TupleMuon muon =   ((*muons)[i]);
-      if(muon->isTriLeptonVetoCandidate()) return 0;
+      if(muon.isTriLeptonVetoCandidate()) return 0;
 
 
 
