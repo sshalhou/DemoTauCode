@@ -249,6 +249,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   std::cout<<" SIZE OF MUONS "<<muons->size()<<std::endl;
   std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
 
+  ///////////////
+  // init btag scale factor tool
+
+  BtagSF btagSFtool(0);
 
 
   ///////////////////
@@ -630,8 +634,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
             }
 
+            bool isbtagged = btagSFtool.isbtagged(
+            patjet.pt(), patjet.eta(),
+            patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
+            patjet.partonFlavour(),
+            iEvent.isRealData(),
+            0,0,1);
 
-            if(fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.679)
+
+            if(fabs(patjet.eta())<2.4 && isbtagged)
             {
               number_of_btagged_passingJets++;
             }
