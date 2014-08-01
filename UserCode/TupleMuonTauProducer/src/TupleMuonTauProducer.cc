@@ -597,6 +597,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
+std::cout<<" JET_INFO "<<" event ID  "<< iEvent.id()<<std::endl;
+std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std::endl;
+
+
         for ( unsigned int i=0; i<jets->size(); ++i )
         {
           const pat::Jet & patjet = jets->at(i);
@@ -604,6 +608,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 
           bool passes_id = 1;
+
+
+std::cout<<" JET_INFO "<<" jet index = "<<i;
+std::cout<<" jet pt = "<<patjet.pt();
+std::cout<<" jet eta = "<<patjet.eta();
+std::cout<<" mva value for pileup ID? = "<<mva;
+std::cout<<" CSV value = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
+std::cout<<std::endl;
+
 
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
