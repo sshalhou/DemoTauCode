@@ -148,18 +148,22 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 
-std::cout<<" iEvent.id() "<<iEvent.id();
-std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
-std::cout<<" againstElectronLooseMVA5 "<<tau->tauID("againstElectronLooseMVA5");
-std::cout<<" againstElectronMVA5raw  "<<tau->tauID("againstElectronMVA5raw");
-std::cout<<" againstElectronMVA5category "<<tau->tauID("againstElectronMVA5category");
+//std::cout<<" iEvent.id() "<<iEvent.id();
+//std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
+//std::cout<<" againstElectronLooseMVA5 "<<tau->tauID("againstElectronLooseMVA5");
+//std::cout<<" againstElectronMVA5raw  "<<tau->tauID("againstElectronMVA5raw");
+//std::cout<<" againstElectronMVA5category "<<tau->tauID("againstElectronMVA5category");
 //std::cout<<" newLOOSEWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 0);
-std::cout<<" decay mode "<<tau->decayMode();
+//std::cout<<" decay mode "<<tau->decayMode();
 //std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
 
 
+std::cout<<"xyz iEvent.id() "<<iEvent.id();
+std::cout<<" byTightIsolationMVA3oldDMwLT "<<tau->tauID("byTightIsolationMVA3oldDMwLT");
+
+
                     } // tau loop
-  std::cout<<" ntau = "<<ntau<<std::endl;
+  //std::cout<<" ntau = "<<ntau<<std::endl;
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
