@@ -128,7 +128,7 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 
-
+/*
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
 
@@ -145,7 +145,7 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" byCombinedIsolationDeltaBetaCorrRaw = ";
           std::cout<<tau->tauID("byCombinedIsolationDeltaBetaCorrRaw")<<std::endl;
           std::cout<<" decay mode "<<tau->decayMode()<<std::endl;
-
+*/
 
 
 //std::cout<<" iEvent.id() "<<iEvent.id();
@@ -159,6 +159,7 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 std::cout<<"xyz iEvent.id() "<<iEvent.id();
+std::cout<<" tau pt "<<tau->p4().pt();
 std::cout<<" byTightIsolationMVA3oldDMwLT "<<tau->tauID("byTightIsolationMVA3oldDMwLT");
 
 
