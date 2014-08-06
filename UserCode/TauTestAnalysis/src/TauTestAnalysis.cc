@@ -160,6 +160,7 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 std::cout<<"xyz iEvent.id() "<<iEvent.id();
 std::cout<<" tau pt "<<tau->p4().pt();
+std::cout<<" tau eta "<<tau->p4().eta();
 std::cout<<" byTightIsolationMVA3oldDMwLT "<<tau->tauID("byTightIsolationMVA3oldDMwLT");
 std::cout<<std::endl;
 
