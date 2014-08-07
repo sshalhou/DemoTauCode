@@ -623,9 +623,12 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
           if(passes_id == 1)
           {
-            number_of_passingJets++;
-            std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
 
+            if(patjet.pt()>30)
+            {
+              number_of_passingJets++;
+              std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+            }
             /////////////
             // figure out the 1st and 2nd ranked jets
             // by pt
