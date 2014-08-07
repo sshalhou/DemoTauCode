@@ -21,15 +21,75 @@
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "Math/GenVector/VectorUtil.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
+#include "DataFormats/Math/interface/deltaR.h"
 #include "DataFormats/PatCandidates/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "UserCode/TupleObjects/interface/TupleElectron.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
-
+#include "DataFormats/PatCandidates/interface/Jet.h"
+#include "DataFormats/JetReco/interface/Jet.h"
 
 
 namespace TupleHelpers
 {
+
+
+  ////////////////////////////////
+  // fill a vector with
+  // indices of jets that
+  // have DR > 0.1 overlap eliminated
+
+  void getNonOverlappingJetIndices(edm::Handle<edm::View<pat::Jet> > jets,
+  vector <unsigned int> & goodIndices)
+  {
+
+    /////////////////////
+    // store the jets that do not overlap
+    // with other jets, in case of overlap
+    // remove the lower pt jet's index
+    bool keep_jet_index = 1;
+    goodIndices.clear();
+
+
+    for (std::size_t i = 0; i < jets->size(); ++i)
+    {
+
+      const pat::Jet & patjet_i = jets->at(i);
+
+
+      for (std::size_t ii = i+1; ii < jets->size(); ++ii)
+      {
+
+        const pat::Jet & patjet_ii = jets->at(ii);
+        if(patjet_i.pt() <= patjet_ii.pt() && deltaR(patjet_i.p4(),patjet_ii.p4()))
+        {
+
+          keep_jet_index = 0;
+
+        }
+
+
+
+
+      }
+
+      /////////
+      // check if we should store
+      // the jet's index
+
+      if(keep_jet_index) goodIndices.push_back(i);
+      else std::cout<<" Rejecting jet with index = "<<i<<std::endl;
+
+    }
+
+
+    return;
+
+
+
+
+  }
+
 
 
   ////////////////////////////////
@@ -52,8 +112,8 @@ namespace TupleHelpers
       if(i!=eIndex)
       {
 
-      const TupleElectron electron =   ((*electrons)[i]);
-      if(electron.isTriLeptonVetoCandidate()) return 0;
+        const TupleElectron electron =   ((*electrons)[i]);
+        if(electron.isTriLeptonVetoCandidate()) return 0;
 
       }
 
@@ -67,8 +127,8 @@ namespace TupleHelpers
     {
       if(i!=muIndex)
       {
-      const TupleMuon muon =   ((*muons)[i]);
-      if(muon.isTriLeptonVetoCandidate()) return 0;
+        const TupleMuon muon =   ((*muons)[i]);
+        if(muon.isTriLeptonVetoCandidate()) return 0;
 
 
 
