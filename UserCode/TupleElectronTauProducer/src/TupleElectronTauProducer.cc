@@ -232,8 +232,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   for ( unsigned int i=0; i<jets->size(); ++i )
   {
     const pat::Jet & patjet = jets->at(i);
-    float mva   = (*puJetIdMVA)[jets->refAt(i)];
-    int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+    float mva   = (*puJetIdMVA)[jets->refAt(i)->originalObjectRef()];
+    int    idflag = (*puJetIdFlag)[jets->refAt(i)->originalObjectRef()];
     if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
   }
 
@@ -611,8 +611,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         {
           unsigned int i = goodIndices[ii];
           const pat::Jet & patjet = jets->at(i);
-          float mva   = (*puJetIdMVA)[jets->refAt(i)];
-          int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+          float mva   = (*puJetIdMVA)[jets->refAt(i)->originalObjectRef()];
+          int    idflag = (*puJetIdFlag)[jets->refAt(i)->originalObjectRef()];
 
           bool passes_id = 1;
 
@@ -688,8 +688,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           jet1_index = 0;
 
           const pat::Jet & patjet = jets->at(jet1_index);
-          float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)];
-          int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)];
+          float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)->originalObjectRef()];
+          int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)->originalObjectRef()];
 
 
           CurrentElectronTau.set_jet1P4(patjet.p4());
@@ -706,8 +706,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
           jet2_index = 1;
           const pat::Jet & patjet = jets->at(jet2_index);
-          float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)];
-          int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)];
+          float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)->originalObjectRef()];
+          int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)->originalObjectRef()];
 
 
           CurrentElectronTau.set_jet2P4(patjet.p4());
