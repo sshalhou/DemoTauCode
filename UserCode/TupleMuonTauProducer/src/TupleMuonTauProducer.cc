@@ -203,9 +203,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // those that overlap other jets
 
     vector <unsigned int> goodIndices;
-    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices);
+    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.9);
     std::cout<<" number of jets to start with "<<njet;
-    std::cout<<" after DR 0.1 "<<goodIndices.size()<<std::endl;
+    std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
 
 
 
@@ -613,9 +613,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 std::cout<<" JET_INFO "<<" event ID  "<< iEvent.id()<<std::endl;
 std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std::endl;
 
-
-        for ( unsigned int i=0; i<jets->size(); ++i )
+        for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
+//        for ( unsigned int i=0; i<jets->size(); ++i )
         {
+
+          unsigned int i = goodIndices[ii];
+
           const pat::Jet & patjet = jets->at(i);
           float mva   = (*puJetIdMVA)[jets->refAt(i)];
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
