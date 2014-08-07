@@ -29,6 +29,7 @@ public:
 
   // setters
 
+  void set_pfJetRefP4(LorentzVector);
   void set_p4(LorentzVector);
   void set_genP4(LorentzVector);
   void set_corrected_p4(LorentzVector, std::size_t, std::size_t);
@@ -123,6 +124,7 @@ public:
 
   // getters
 
+  LorentzVector pfJetRefP4() const;
   LorentzVector p4() const;
   LorentzVector genP4() const;
   LorentzVector corrected_p4() const;
@@ -212,6 +214,7 @@ public:
 
 private:
 
+  LorentzVector m_pfJetRefP4;
   LorentzVector m_p4;
   LorentzVector m_genP4;
   LorentzVector m_corrected_p4;

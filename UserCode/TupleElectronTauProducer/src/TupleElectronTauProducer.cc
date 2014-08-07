@@ -200,6 +200,18 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   std::size_t njet = jets->size();
 
+
+
+  ////////////////////////////////
+  // get a list of jet indices that filters
+  // those that overlap other jets
+
+    vector <unsigned int> goodIndices;
+    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
+    std::cout<<" number of jets to start with "<<njet;
+    std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
+
+
   ///////////////////////////////////////
   // figure out how many of these jets
   // pass the loose WP
@@ -594,8 +606,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
-        for ( unsigned int i=0; i<jets->size(); ++i )
+        for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
+        //for ( unsigned int i=0; i<jets->size(); ++i )
         {
+          unsigned int i = goodIndices[ii];
           const pat::Jet & patjet = jets->at(i);
           float mva   = (*puJetIdMVA)[jets->refAt(i)];
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
@@ -605,8 +619,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
-          if( !(deltaR(electron.p4(), patjet.p4()) > 0.5)) passes_id = 0;
-          if( !(deltaR(tau.corrected_p4(), patjet.p4()) > 0.5)) passes_id = 0;
+          if( !(deltaR(electron.p4(), patjet.p4()) > 0.3)) passes_id = 0;
+          if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
           if(passes_id == 1)
           {
             number_of_passingJets++;

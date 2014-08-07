@@ -298,6 +298,10 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     std::cout<<" SETTING TAU PT TO "<<tau->p4().pt()<<std::endl;
     CurrentTau.set_p4(tau->p4());
 
+
+    LorentzVector leg2p4 = ( (tau->pfJetRef()).isNonnull() ) ? tau->pfJetRef()->p4() : tau->p4();
+    CurrentTau.set_pfJetRefP4(leg2p4);
+
     //////////////
     // apply tau ES correction
     // we will keep both p4 and corrected p4

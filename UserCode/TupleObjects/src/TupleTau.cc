@@ -4,6 +4,8 @@
 
 TupleTau::TupleTau()
 {
+
+  m_pfJetRefP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_corrected_p4.SetXYZT(NAN,NAN,NAN,NAN);
@@ -141,6 +143,10 @@ bool TupleTau::passFullId_muTau() const  { return m_passFullId_muTau; }
 
 void TupleTau::set_passFullId_eTau(bool passFullId_eTau_) { m_passFullId_eTau = passFullId_eTau_;}
 bool TupleTau::passFullId_eTau() const  { return m_passFullId_eTau; }
+
+
+void TupleTau::set_pfJetRefP4(LorentzVector v4_) { m_pfJetRefP4 = v4_;}
+LorentzVector TupleTau::pfJetRefP4() const  { return m_pfJetRefP4; }
 
 
 void TupleTau::set_p4(LorentzVector v4_) { m_p4 = v4_;}
