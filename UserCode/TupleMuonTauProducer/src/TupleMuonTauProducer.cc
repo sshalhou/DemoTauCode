@@ -203,7 +203,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // those that overlap other jets
 
     vector <unsigned int> goodIndices;
-    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.9);
+    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
     std::cout<<" number of jets to start with "<<njet;
     std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
 
