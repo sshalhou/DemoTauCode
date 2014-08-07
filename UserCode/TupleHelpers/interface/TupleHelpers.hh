@@ -61,7 +61,7 @@ namespace TupleHelpers
       {
 
         const pat::Jet & patjet_ii = jets->at(ii);
-        if(patjet_i.pt() <= patjet_ii.pt() && deltaR(patjet_i.p4(),patjet_ii.p4())<0.1 && i!=ii)
+        if(patjet_i.pt() <= patjet_ii.pt() && deltaR(patjet_i.p4(),patjet_ii.p4())<0.9 && i!=ii)
         {
 
           keep_jet_index = 0;
