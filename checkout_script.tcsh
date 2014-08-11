@@ -1,23 +1,10 @@
 #!/bin/tcsh
 
-echo "checking out basic stuff : "
 
+echo "checking out improved Tau ID : "
 ################################################
-git cms-addpkg DataFormats/MuonReco
-git cms-addpkg DataFormats/PatCandidates
-git cms-addpkg DataFormats/TauReco
-git cms-addpkg FWCore/Version
-git cms-addpkg PhysicsTools/PatAlgos
-git cms-addpkg PhysicsTools/PatExamples
-git cms-addpkg RecoTauTag/RecoTau
-git cms-addpkg EgammaAnalysis/ElectronTools
-git cms-addpkg PhysicsTools/Utilities
-git cms-addpkg SimDataFormats/PileupSummaryInfo
-git cms-addpkg RecoTauTag/Configuration
-git cms-addpkg DataFormats/VertexReco
-git cms-addpkg DataFormats/Common
-git cms-addpkg CondFormats/JetMETObjects
-git cms-addpkg CommonTools/UtilAlgos
+git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_boostedTaus_2013Dec17
+#git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_tauID2014
 ################################################
 
 echo "soft link to UserCode "
@@ -25,13 +12,6 @@ echo "soft link to UserCode "
 ln -s ../../UserCode UserCode
 ################################################
 
-echo "some needed Fixes "
-################################################
-git cms-merge-topic cms-analysis-tools:5_3_14-updateSelectorUtils
-git cms-merge-topic cms-analysis-tools:5_3_13_patch2-testNewTau
-git cms-merge-topic -u TaiSakuma:53X-met-131120-01
-git cms-merge-topic -u cms-met:53X-MVaNoPuMET-20131217-01
-################################################
 
 echo "checking out SVFit code : "
 
@@ -44,11 +24,24 @@ mv TauAnalysis-CandidateTools-TauAnalysis-CandidateTools-V00-02-03s TauAnalysis/
 rm -rf TauAnalysis-CandidateTools-V00-02-03s
 ################################################
 
+
+echo "copying MVA PF MET code from Phil Harris : "
+################################################
+cp -r /uscms/home/shalhout/public/RecoMET .
+#mkdir $CMSSW_BASE/src/RecoMET
+#cp -r  /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET .
+#cp /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET/METPUSubtraction/python/mvaPFMET_leptons_cff.py
+#$CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
+#cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
+################################################
+
+
 echo "checking out MET Recoil Correction Code : "
 
 ################################################
 wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.tgz
 tar -xzvf RecoilCorrector_v7.tgz
+rm -rf UserCode/RecoilCorrector/recoilfits
 mv RecoilCorrector_v7/recoilfits UserCode/RecoilCorrector/recoilfits
 cp /uscms/home/shalhout/public/LLR_recoilfits/*RR*.root UserCode/RecoilCorrector/recoilfits/.
 cp /uscms/home/shalhout/public/53_Dec2012/*root ./RecoMET/METPUSubtraction/data/.
@@ -63,21 +56,7 @@ cat download.url | xargs wget
 cd -
 ################################################
 
-echo "checking out improved Tau ID : "
-################################################
-#git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_boostedTaus_2013Dec17
-git cms-merge-topic -u cms-tau-pog:CMSSW_5_3_X_tauID2014
-################################################
 
-echo "copying MVA PF MET code from Phil Harris : "
-################################################
-cp -r /uscms/home/shalhout/public/RecoMET .
-#mkdir $CMSSW_BASE/src/RecoMET
-#cp -r  /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET .
-#cp /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET/METPUSubtraction/python/mvaPFMET_leptons_cff.py
-#$CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
-#cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
-################################################
 
 echo "soft link MVA MET leptons PAT config :"
 ################################################
@@ -88,10 +67,13 @@ cd -
 
 echo " copy pile up jet ID configs "
 ################################################
-cp /uscms/home/shalhout/public/PU_JET_ID/*py RecoJets/JetProducers/python/.
-cp /uscms/home/shalhout/public/PU_JET_ID/PileupJetIdAlgo.cc ./RecoJets/JetProducers/src/PileupJetIdAlgo.cc
-cp /uscms/home/shalhout/public/PU_JET_ID/BuildFile.xml RecoJets/JetProducers/BuildFile.xml
-touch RecoJets/JetProducers/data/dummy.txt
+rm -rf RecoJets
+cp -r /uscms/home/shalhout/public/RecoJets .
+rm -rf DataFormats/JetReco
+cp -r /uscms/home/shalhout/public/JetReco_v2 DataFormats/JetReco
+rm -rf DataFormats/METReco
+cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
+
 ################################################
 
 
