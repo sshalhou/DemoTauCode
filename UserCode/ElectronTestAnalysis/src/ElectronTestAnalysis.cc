@@ -40,6 +40,7 @@
 #include "DataFormats/PatCandidates/interface/Isolation.h"
 #include "EgammaAnalysis/ElectronTools/interface/ElectronEffectiveArea.h"
 
+using namespace reco::isodeposit;
 
 //
 // class declaration
@@ -146,17 +147,10 @@ int nelectrons = 0;
 for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
 
- reco::isodeposit::ConeVetos  vetos2012EBPFIdCharged;
- reco::isodeposit::ConeVetos  vetos2012EBPFIdPhotons;
- reco::isodeposit::ConeVetos  vetos2012EEPFIdCharged;
- reco::isodeposit::ConeVetos  vetos2012EEPFIdPhotons;
- reco::isodeposit::ConeVetos  vetos2012EBPFIdNeutral;
- reco::isodeposit::ConeVetos  vetos2012EEPFIdNeutral;
+AbsVetos  vetos2012EBPFIdCharged;
+ConeVeto AXZ(Direction(electron->eta(),electron->phi()),0.010);
 
-
-reco::isodeposit::ConeVeto AXZ(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.010);
-
-vetos2012EBPFIdCharged.push_back(AXZ);
+//vetos2012EBPFIdCharged.push_back(AXZ);
 
 
 /*
