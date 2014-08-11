@@ -202,7 +202,7 @@ double inew = 0;
 
 
 
-std::cout<<"EB, EE "<<electron->isEB()<<" , "<< electron->isEE() <<endl;
+std::cout<<"EB, EE "<<electron->isEB()<<" , "<< electron->isEE() <<std::endl;
 
 std::cout<<" xyz "<<iEvent.id();
 std::cout<<" old isolation "<<irel;
