@@ -159,7 +159,7 @@ float nhIso04PFId  = 0.0;
 float allChIso04PFId = 0.0;
 float phIso04PFId  = 0.0;
 float nhIsoPU04PFId = 0.0;
-/*
+
 std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<std::endl;
 std::cout<<" pat::User1Iso "<<pat::User1Iso<<std::endl;
 std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<std::endl;
@@ -172,7 +172,7 @@ std::cout<<"  electron->isoDeposit(pat::PfAllParticleIso) "<< electron->isoDepos
 
 electron->isoDeposit(pat::PfNeutralHadronIso)->print();
 
-
+/*
 vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
 vetos2012EBPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.08));
 vetos2012EEPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.015));
