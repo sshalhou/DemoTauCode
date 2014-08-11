@@ -243,7 +243,10 @@ std::cout<<" PassConversionVeto = "<<electron->passConversionVeto()<<std::endl;
 
 
 double inew = 0;
+inew = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
 
+if(electron->pt()) inew/=electron->pt();
+else inew = 0.0;
 
 
 std::cout<<"EB, EE "<<electron->isEB()<<" , "<< electron->isEE() <<std::endl;
