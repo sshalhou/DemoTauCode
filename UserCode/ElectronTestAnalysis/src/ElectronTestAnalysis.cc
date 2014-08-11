@@ -136,6 +136,13 @@ std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
 
 int nelectrons = 0;
 
+reco::isodeposit::AbsVetos vetos2012EBPFIdCharged;
+reco::isodeposit::AbsVetos vetos2012EBPFIdPhotons;
+reco::isodeposit::AbsVetos vetos2012EEPFIdCharged;
+reco::isodeposit::AbsVetos vetos2012EEPFIdPhotons;
+
+
+
 for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
 
@@ -192,6 +199,10 @@ std::cout<<" PassConversionVeto = "<<electron->passConversionVeto()<<std::endl;
 
 
 double inew = 0;
+
+
+
+std::cout<<"EB, EE "<<electron->isEB()<<" , "<< electron->isEE() <<endl;
 
 std::cout<<" xyz "<<iEvent.id();
 std::cout<<" old isolation "<<irel;
