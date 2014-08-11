@@ -148,7 +148,7 @@ for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electr
 
 
 AbsVetos  vetos2012EBPFIdCharged;
-ConeVeto AXZ(Direction(electron->eta(),electron->phi()),0.010);
+AbsVeto AXZ(Direction(electron->eta(),electron->phi()),0.010);
 
 vetos2012EBPFIdCharged.push_back(AXZ);
 
