@@ -155,12 +155,17 @@ AbsVetos  vetos2012EEPFIdCharged;
 AbsVetos  vetos2012EEPFIdPhotons;
 AbsVetos  vetos2012EEPFIdNeutral;
 
+float nhIso04PFId  = 0.0;
+float allChIso04PFId = 0.0;
+float phIso04PFId  = 0.0;
+float nhIsoPU04PFId = 0.0;
+
+std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<" "<<electron->isoDeposit(pat::PfNeutralHadronIso)->size()<<std::endl;
+std::cout<<" pat::User1Iso "<<pat::User1Iso<<" "<<electron->isoDeposit(pat::User1Iso)->size()<<std::endl;
+std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<" "<<electron->isoDeposit(pat::PfGammaIso)->size()<<std::endl;
+std::cout<<" pat::PfAllParticleIso "<<pat::PfAllParticleIso<<" "<<electron->isoDeposit(pat::PfAllParticleIso)->size()<<std::endl;
 
 
-std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<std::endl;
-std::cout<<" pat::User1Iso "<<pat::User1Iso<<std::endl;
-std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<std::endl;
-std::cout<<" pat::PfAllParticleIso "<<pat::PfAllParticleIso<<std::endl;
 
 
 vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
@@ -173,7 +178,7 @@ std::cout<<" a1 \n";
 
 float nhIso04EBPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
 float nhIso04EEPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
-float nhIso04PFId =  (electron->isEB())*nhIso04EBPFId + (electron->isEE())*nhIso04EEPFId ;
+ nhIso04PFId =  (electron->isEB())*nhIso04EBPFId + (electron->isEE())*nhIso04EEPFId ;
 
 
 std::cout<<" a2 \n";
@@ -183,7 +188,7 @@ std::cout<<" a2 \n";
 
 float allChIso04EBPFId =    electron->isoDeposit(pat::User1Iso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
 float allChIso04EEPFId =  electron->isoDeposit(pat::User1Iso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
-float allChIso04PFId =  (electron->isEB())*allChIso04EBPFId + (electron->isEE())*allChIso04EEPFId ;
+ allChIso04PFId =  (electron->isEB())*allChIso04EBPFId + (electron->isEE())*allChIso04EEPFId ;
 
 std::cout<<" a3 \n";
 
@@ -195,7 +200,7 @@ std::cout<<" a3 \n";
 
 float phIso04EBPFId =   electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EBPFIdPhotons).first;
 float phIso04EEPFId = electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EEPFIdPhotons).first;
-float phIso04PFId =  (electron->isEB())*phIso04EBPFId + (electron->isEE())*phIso04EEPFId ;
+ phIso04PFId =  (electron->isEB())*phIso04EBPFId + (electron->isEE())*phIso04EEPFId ;
 
 std::cout<<" a4 \n";
 
@@ -204,7 +209,7 @@ std::cout<<" a4 \n";
 
 float nhIsoPU04EBPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
 float nhIsoPU04EEPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
-float nhIsoPU04PFId =     (electron->isEB())*nhIsoPU04EBPFId + (electron->isEE())*nhIsoPU04EEPFId ;
+ nhIsoPU04PFId =     (electron->isEB())*nhIsoPU04EBPFId + (electron->isEE())*nhIsoPU04EEPFId ;
 
 
 std::cout<<" a5 \n";
