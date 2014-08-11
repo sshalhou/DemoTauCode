@@ -35,6 +35,11 @@
 #include "DataFormats/PatCandidates/interface/Conversion.h"
 #include "DataFormats/PatCandidates/interface/Lepton.h"
 
+#include "DataFormats/RecoCandidate/interface/IsoDeposit.h"
+#include "DataFormats/RecoCandidate/interface/IsoDepositVetos.h"
+#include "DataFormats/PatCandidates/interface/Isolation.h"
+#include "EgammaAnalysis/ElectronTools/interface/ElectronEffectiveArea.h"
+
 
 //
 // class declaration
