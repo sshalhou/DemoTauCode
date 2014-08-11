@@ -159,7 +159,7 @@ float nhIso04PFId  = 0.0;
 float allChIso04PFId = 0.0;
 float phIso04PFId  = 0.0;
 float nhIsoPU04PFId = 0.0;
-
+/*
 std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<std::endl;
 std::cout<<" pat::User1Iso "<<pat::User1Iso<<std::endl;
 std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<std::endl;
@@ -218,6 +218,8 @@ float nhIsoPU04EEPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAn
 
 
 std::cout<<" a5 \n";
+
+*/
 
             nelectrons++;
 
