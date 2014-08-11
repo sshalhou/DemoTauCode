@@ -174,8 +174,8 @@ std::cout<<" a2 \n";
 
 
 
-float allChIso04EBPFId =    electron->isoDeposit(pat::User1Iso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
-float allChIso04EEPFId =  electron->isoDeposit(pat::User1Iso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
+float allChIso04EBPFId =    electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
+float allChIso04EEPFId =  electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
 float allChIso04PFId =  (electron->isEB())*allChIso04EBPFId + (electron->isEE())*allChIso04EEPFId ;
 
 std::cout<<" a3 \n";
