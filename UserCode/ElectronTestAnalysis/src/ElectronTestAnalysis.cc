@@ -170,6 +170,26 @@ std::cout<<"  electron->isoDeposit(pat::PfPUChargedHadronIso) "<< electron->isoD
 std::cout<<"  electron->isoDeposit(pat::PfGammaIso) "<< electron->isoDeposit(pat::PfGammaIso)<<std::endl;
 std::cout<<"  electron->isoDeposit(pat::PfChargedAllIso) "<< electron->isoDeposit(pat::PfChargedAllIso)<<std::endl;
 
+std::cout<<"  electron->isoDeposit(pat::TrackIso) "<< electron->isoDeposit(pat::TrackIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::EcalIso) "<< electron->isoDeposit(pat::EcalIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::HcalIso) "<< electron->isoDeposit(pat::HcalIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfAllParticleIso) "<< electron->isoDeposit(pat::PfAllParticleIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfChargedHadronIso) "<< electron->isoDeposit(pat::PfChargedHadronIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfNeutralHadronIso) "<< electron->isoDeposit(pat::PfNeutralHadronIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfGammaIso) "<< electron->isoDeposit(pat::PfGammaIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User1Iso) "<< electron->isoDeposit(pat::User1Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User2Iso) "<< electron->isoDeposit(pat::User2Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User3Iso) "<< electron->isoDeposit(pat::User3Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User4Iso) "<< electron->isoDeposit(pat::User4Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User5Iso) "<< electron->isoDeposit(pat::User5Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::UserBaseIso) "<< electron->isoDeposit(pat::UserBaseIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::CaloIso) "<< electron->isoDeposit(pat::CaloIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfPUChargedHadronIso) "<< electron->isoDeposit(pat::PfPUChargedHadronIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfChargedAllIso) "<< electron->isoDeposit(pat::PfChargedAllIso)<<std::endl;
+
+
+
+
 
 
 electron->isoDeposit(pat::PfNeutralHadronIso)->print();
