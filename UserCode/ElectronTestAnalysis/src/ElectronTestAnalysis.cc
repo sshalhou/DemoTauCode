@@ -122,7 +122,7 @@ edm::Handle<edm::View<pat::Electron> > electrons;
 iEvent.getByLabel(electronSrc_,electrons);
 
 
-
+/*
 
 // get beamspot
 edm::Handle < reco::BeamSpot > beamspot;
@@ -138,7 +138,7 @@ iEvent.getByLabel(recoconversionSrc_, recoconversion);
 
 
 std::cout<<" beamspot is valid ? "<<beamspot.isValid()<<std::endl;
-
+*/
 
 int nelectrons = 0;
 
