@@ -168,7 +168,7 @@ std::cout<<" pat::PfAllParticleIso "<<pat::PfAllParticleIso<<std::endl;
 std::cout<<"  electron->isoDeposit(pat::PfNeutralHadronIso) "<< electron->isoDeposit(pat::PfNeutralHadronIso)<<std::endl;
 std::cout<<"  electron->isoDeposit(pat::User1Iso) "<< electron->isoDeposit(pat::User1Iso)<<std::endl;
 std::cout<<"  electron->isoDeposit(pat::PfGammaIso) "<< electron->isoDeposit(pat::PfGammaIso)<<std::endl;
-std::cout<<"  electron->isoDeposit(pat::PfAllParticleIso) "<< electron->isoDeposit(pat::PfAllParticleIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfChargedAllIso) "<< electron->isoDeposit(pat::PfChargedAllIso)<<std::endl;
 
 electron->isoDeposit(pat::PfNeutralHadronIso)->print();
 
