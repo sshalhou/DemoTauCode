@@ -51,6 +51,7 @@ rm -rf RecoilCorrector_v7.tgz
 
 echo "checking out Electron MVA Code : "
 ################################################
+git cms-addpkg EgammaAnalysis/ElectronTools
 cd EgammaAnalysis/ElectronTools/data/
 cat download.url | xargs wget
 cd -
