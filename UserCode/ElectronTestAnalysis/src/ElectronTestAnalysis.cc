@@ -154,7 +154,7 @@ for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electr
   std::vector< reco::isodeposit::AbsVetos > vetos2012EEPFIdNeutral;
 
 
-reco::isodeposit::ConeVeto AXZ(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.010));
+reco::isodeposit::ConeVeto AXZ(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.010);
 
 vetos2012EBPFIdCharged.push_back(AXZ);
 
