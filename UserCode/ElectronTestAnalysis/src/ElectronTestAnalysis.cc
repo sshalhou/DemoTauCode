@@ -166,7 +166,11 @@ std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<std::endl;
 std::cout<<" pat::PfAllParticleIso "<<pat::PfAllParticleIso<<std::endl;
 
 std::cout<<"  electron->isoDeposit(pat::PfNeutralHadronIso) "<< electron->isoDeposit(pat::PfNeutralHadronIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::User1Iso) "<< electron->isoDeposit(pat::User1Iso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfGammaIso) "<< electron->isoDeposit(pat::PfGammaIso)<<std::endl;
+std::cout<<"  electron->isoDeposit(pat::PfAllParticleIso) "<< electron->isoDeposit(pat::PfAllParticleIso)<<std::endl;
 
+electron->isoDeposit(pat::PfNeutralHadronIso)->print();
 
 
 vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
