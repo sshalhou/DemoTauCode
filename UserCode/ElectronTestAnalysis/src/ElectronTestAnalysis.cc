@@ -148,15 +148,21 @@ for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electr
 
 
 AbsVetos  vetos2012EBPFIdCharged;
-//ConeVeto AXZ(Direction(electron->eta(),electron->phi()),0.010);
+AbsVetos  vetos2012EBPFIdPhotons;
+AbsVetos  vetos2012EBPFIdNeutral;
+
+AbsVetos  vetos2012EEPFIdCharged;
+AbsVetos  vetos2012EEPFIdPhotons;
+AbsVetos  vetos2012EEPFIdNeutral;
+
 
 vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
+vetos2012EBPFIdPhotons.push_back(new ConeVeto(Direction(aElectron.eta(),aElectron.phi()),0.08));
+vetos2012EEPFIdCharged.push_back(new ConeVeto(Direction(aElectron.eta(),aElectron.phi()),0.015));
+vetos2012EEPFIdPhotons.push_back(new ConeVeto(Direction(aElectron.eta(),aElectron.phi()),0.08));
 
 
-/*
-vetos2012EBPFIdPhotons.push_back(new reco::isodeposit::ConeVeto(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.08));
-vetos2012EEPFIdCharged.push_back(new reco::isodeposit::ConeVeto(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.015));
-vetos2012EEPFIdPhotons.push_back(new reco::isodeposit::ConeVeto(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.08));
+
 
 
 
@@ -180,7 +186,7 @@ float nhIsoPU04PFId =     (electron->isEB())*nhIsoPU04EBPFId + (electron->isEE()
 float nhIsoPU04EBPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
 float nhIsoPU04EEPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
 
-*/
+
 
             nelectrons++;
 
