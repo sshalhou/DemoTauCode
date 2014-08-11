@@ -146,12 +146,12 @@ int nelectrons = 0;
 for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
 
- reco::isodeposit::AbsVetos  vetos2012EBPFIdCharged;
- reco::isodeposit::AbsVetos  vetos2012EBPFIdPhotons;
- reco::isodeposit::AbsVetos  vetos2012EEPFIdCharged;
- reco::isodeposit::AbsVetos  vetos2012EEPFIdPhotons;
- reco::isodeposit::AbsVetos  vetos2012EBPFIdNeutral;
- reco::isodeposit::AbsVetos  vetos2012EEPFIdNeutral;
+ reco::isodeposit::ConeVetos  vetos2012EBPFIdCharged;
+ reco::isodeposit::ConeVetos  vetos2012EBPFIdPhotons;
+ reco::isodeposit::ConeVetos  vetos2012EEPFIdCharged;
+ reco::isodeposit::ConeVetos  vetos2012EEPFIdPhotons;
+ reco::isodeposit::ConeVetos  vetos2012EBPFIdNeutral;
+ reco::isodeposit::ConeVetos  vetos2012EEPFIdNeutral;
 
 
 reco::isodeposit::ConeVeto AXZ(reco::isodeposit::Direction(electron->eta(),electron->phi()),0.010);
