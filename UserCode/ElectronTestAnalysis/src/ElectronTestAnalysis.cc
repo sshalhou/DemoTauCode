@@ -186,6 +186,8 @@ float phIso04EBPFId =   electron->isoDeposit(pat::PfGammaIso)->depositAndCountWi
 float phIso04EEPFId = electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EEPFIdPhotons).first;
 float phIso04PFId =  (electron->isEB())*phIso04EBPFId + (electron->isEE())*phIso04EEPFId ;
 
+std::cout<<" before neutrals "<<std::endl;
+std::cout<<" before neutrals "<<std::endl;
 
 
 float nhIsoPU04EBPFId =   electron->isoDeposit(pat::PfAllParticleIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
