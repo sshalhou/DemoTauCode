@@ -158,8 +158,7 @@ AbsVetos  vetos2012EEPFIdNeutral;
 
 
 std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<std::endl;
-std::cout<<" pat::PfNeutralHadronIso "<<pat::PfNeutralHadronIso<<std::endl;
-
+std::cout<<" pat::User1Iso "<<pat::User1Iso<<std::endl;
 std::cout<<" pat::PfGammaIso "<<pat::PfGammaIso<<std::endl;
 std::cout<<" pat::PfAllParticleIso "<<pat::PfAllParticleIso<<std::endl;
 
