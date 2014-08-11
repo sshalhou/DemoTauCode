@@ -138,6 +138,11 @@ int nelectrons = 0;
 
 for(edm::View<pat::Electron>::const_iterator electron=electrons->begin(); electron!=electrons->end(); ++electron) {
 
+
+
+
+
+
             nelectrons++;
 
 std::cout<<" number missing inner hits ";
@@ -184,6 +189,16 @@ std::cout<<" iso inputs "<<i_charged<<" "<<i_photons<<" "<<i_neutralhadrons<<" "
 
 
 std::cout<<" PassConversionVeto = "<<electron->passConversionVeto()<<std::endl;
+
+
+double inew = 0;
+
+std::cout<<" xyz "<<iEvent.id();
+std::cout<<" old isolation "<<irel;
+std::cout<<" new isolation "<<inew<<std::endl;
+
+
+
           }
 
 std::cout<<" event has "<<nelectrons<<" cleanPatElectrons "<<std::endl;
