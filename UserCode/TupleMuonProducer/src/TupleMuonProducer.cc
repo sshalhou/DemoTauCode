@@ -43,10 +43,15 @@ Implementation:
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidateFwd.h"
 #include "DataFormats/Math/interface/deltaR.h"
 
+#include "DataFormats/RecoCandidate/interface/IsoDeposit.h"
+#include "DataFormats/RecoCandidate/interface/IsoDepositVetos.h"
+#include "DataFormats/PatCandidates/interface/Isolation.h"
+
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
 using namespace pat;
+using namespace reco::isodeposit;
 
 //
 // class declaration
