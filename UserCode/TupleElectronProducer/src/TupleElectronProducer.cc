@@ -57,7 +57,7 @@ typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
 using namespace pat;
-using namespace reco;
+using namespace reco::isodeposit;
 
 
 //
