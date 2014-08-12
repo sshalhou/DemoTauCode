@@ -571,13 +571,19 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   CurrentElectron.set_relativeIso(relativeIsolation);
 
 
-  delete  vetos2012EBPFIdCharged;
-  delete  vetos2012EBPFIdPhotons;
-  delete  vetos2012EBPFIdNeutral;
+  for(unsigned int i = 0; i <vetos2012EBPFIdCharged.size(); i++) delete vetos2012EBPFIdCharged[i];
 
-  delete  vetos2012EEPFIdCharged;
-  delete  vetos2012EEPFIdPhotons;
-  delete  vetos2012EEPFIdNeutral;
+  for(unsigned int i = 0; i <vetos2012EBPFIdPhotons.size(); i++) delete vetos2012EBPFIdPhotons[i];
+
+  for(unsigned int i = 0; i <vetos2012EBPFIdNeutral.size(); i++) delete vetos2012EBPFIdNeutral[i];
+
+  for(unsigned int i = 0; i <vetos2012EEPFIdCharged.size(); i++) delete vetos2012EEPFIdCharged[i];
+
+  for(unsigned int i = 0; i <vetos2012EEPFIdPhotons.size(); i++) delete vetos2012EEPFIdPhotons[i];
+
+  for(unsigned int i = 0; i <vetos2012EEPFIdNeutral.size(); i++) delete vetos2012EEPFIdNeutral[i];
+
+
 
   ////////////////
   //set_mvaTrigV0
