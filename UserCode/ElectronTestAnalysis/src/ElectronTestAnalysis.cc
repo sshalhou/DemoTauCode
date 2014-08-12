@@ -204,7 +204,7 @@ vetos2012EEPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron
 std::cout<<" a1 \n";
 
 
-inew = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
+
 
 
 
