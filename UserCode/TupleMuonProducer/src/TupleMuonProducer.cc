@@ -429,8 +429,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
 
-  //  if(!muon->muonBestTrack().isNull())
-  //  {
+    //  if(!muon->muonBestTrack().isNull())
+    //  {
 
     //  CurrentMuon.set_dxy(muon->muonBestTrack()->dxy(primary_vertex.position()));
 
@@ -486,6 +486,78 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     /////////////
 
     double relativeIsolation_DR4 = 999.;
+
+
+
+
+    AbsVetos  vetos2012PFIdCharged;
+    AbsVetos  vetos2012PFIdPhotons;
+    AbsVetos  vetos2012PFIdNeutral;
+    AbsVetos  vetos2012PFIdPUCharged;
+
+
+    float nhIso04PFId  = 0.0;
+    float allChIso04PFId = 0.0;
+    float phIso04PFId  = 0.0;
+    float nhIsoPU04PFId = 0.0;
+
+
+
+    vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.00010));
+    vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
+
+    vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+    vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
+
+    vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+    vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
+
+    vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+    vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
+
+
+
+
+    allChIso04PFId = muon->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
+
+    nhIso04PFId = muon->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+
+    phIso04PFId = muon->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EBPFIdPhotons).first;
+
+    nhIsoPU04PFId = muon->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+
+
+
+
+
+    relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
+    if(muon->pt()!=0) relativeIsolation_DR4/=muon->pt();
+
+
+    CurrentMuon.set_sumChargedParticlePt_DR4(allChIso04PFId);
+    CurrentMuon.set_sumPhotonEt_DR4(phIso04PFId);
+    CurrentMuon.set_sumNeutralHadronEt_DR4(nhIso04PFId);
+    CurrentMuon.set_sumPUPt_DR4(nhIsoPU04PFId);
+    CurrentMuon.set_relativeIso_DR4(relativeIsolation_DR4);
+
+
+
+    for(unsigned int i = 0; i <vetos2012EBPFIdCharged.size(); i++) delete vetos2012EBPFIdCharged[i];
+
+    for(unsigned int i = 0; i <vetos2012EBPFIdPhotons.size(); i++) delete vetos2012EBPFIdPhotons[i];
+
+    for(unsigned int i = 0; i <vetos2012EBPFIdNeutral.size(); i++) delete vetos2012EBPFIdNeutral[i];
+
+    for(unsigned int i = 0; i <vetos2012EEPFIdCharged.size(); i++) delete vetos2012EEPFIdCharged[i];
+
+    for(unsigned int i = 0; i <vetos2012EEPFIdPhotons.size(); i++) delete vetos2012EEPFIdPhotons[i];
+
+    for(unsigned int i = 0; i <vetos2012EEPFIdNeutral.size(); i++) delete vetos2012EEPFIdNeutral[i];
+
+
+
+
+    /* old
     double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
     double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
     double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
@@ -500,7 +572,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_sumNeutralHadronEt_DR4(i_neutralhadrons_DR4);
     CurrentMuon.set_sumPUPt_DR4(i_deltabeta_DR4);
     CurrentMuon.set_relativeIso_DR4(relativeIsolation_DR4);
-
+    */
 
     //////////////////////////
     // set the passFullId summary boolean
