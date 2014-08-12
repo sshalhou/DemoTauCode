@@ -701,10 +701,10 @@ std::cout<<std::endl;
         CurrentMuonTau.set_nbjets(number_of_btagged_passingJets);
 
 
-        if(jets->size()>0)
-        //      if(jet1_index!=-999)
+        //if(jets->size()>0)
+              if(jet1_index!=-999)
         {
-          jet1_index = 0;
+          //jet1_index = 0;
           const pat::Jet & patjet = jets->at(jet1_index);
           float mva   = (*puJetIdMVA)[jets->refAt(jet1_index)];
           int    idflag = (*puJetIdFlag)[jets->refAt(jet1_index)];
@@ -718,10 +718,10 @@ std::cout<<std::endl;
 
         }
 
-        if(jets->size()>1)
-        //      if(jet2_index!=-999)
+        //if(jets->size()>1)
+              if(jet2_index!=-999)
         {
-          jet2_index = 1;
+          //jet2_index = 1;
           const pat::Jet & patjet = jets->at(jet2_index);
           float mva   = (*puJetIdMVA)[jets->refAt(jet2_index)];
           int    idflag = (*puJetIdFlag)[jets->refAt(jet2_index)];
