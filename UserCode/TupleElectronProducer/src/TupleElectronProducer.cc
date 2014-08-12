@@ -47,12 +47,17 @@ Implementation:
 #include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
+#include "DataFormats/RecoCandidate/interface/IsoDeposit.h"
+#include "DataFormats/RecoCandidate/interface/IsoDepositVetos.h"
+#include "DataFormats/PatCandidates/interface/Isolation.h"
+#include "EgammaAnalysis/ElectronTools/interface/ElectronEffectiveArea.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
 using namespace edm;
 using namespace pat;
-
+using namespace reco;
 
 
 //
@@ -502,16 +507,77 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   ////////////////
 
   relativeIsolation = 999.;
+
+  /* old method
   double i_charged = electron->chargedHadronIso();
   double i_photons = electron->photonIso();
   double i_neutralhadrons = electron->neutralHadronIso();
   double i_deltabeta = electron->puChargedHadronIso();
   relativeIsolation = i_charged + std::max(i_neutralhadrons+i_photons-0.5*i_deltabeta,0.0);
   if(electron->pt()!=0) relativeIsolation/=electron->pt();
+  */
+
+
+
+  AbsVetos  vetos2012EBPFIdCharged;
+  AbsVetos  vetos2012EBPFIdPhotons;
+  AbsVetos  vetos2012EBPFIdNeutral;
+
+  AbsVetos  vetos2012EEPFIdCharged;
+  AbsVetos  vetos2012EEPFIdPhotons;
+  AbsVetos  vetos2012EEPFIdNeutral;
+
+  float nhIso04PFId  = 0.0;
+  float allChIso04PFId = 0.0;
+  float phIso04PFId  = 0.0;
+  float nhIsoPU04PFId = 0.0;
+
+  vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
+  vetos2012EBPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.08));
+  vetos2012EEPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.015));
+  vetos2012EEPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.08));
+
+
+  float allChIso04EBPFId =    electron->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
+  float allChIso04EEPFId =  electron->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
+  allChIso04PFId =  (electron->isEB())*allChIso04EBPFId + (electron->isEE())*allChIso04EEPFId ;
+
+
+  float nhIso04EBPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+  float nhIso04EEPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
+  nhIso04PFId =  (electron->isEB())*nhIso04EBPFId + (electron->isEE())*nhIso04EEPFId ;
+
+
+
+  float phIso04EBPFId =   electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EBPFIdPhotons).first;
+  float phIso04EEPFId = electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EEPFIdPhotons).first;
+  phIso04PFId =  (electron->isEB())*phIso04EBPFId + (electron->isEE())*phIso04EEPFId ;
+
+
+
+
+
+  float nhIsoPU04EBPFId =   electron->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+  float nhIsoPU04EEPFId =   electron->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
+  nhIsoPU04PFId =     (electron->isEB())*nhIsoPU04EBPFId + (electron->isEE())*nhIsoPU04EEPFId ;
+
+
+
+
+  relativeIsolation = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
+  if(electron->pt()!=0) relativeIsolation/=electron->pt();
+
 
   CurrentElectron.set_relativeIso(relativeIsolation);
 
 
+  delete  vetos2012EBPFIdCharged;
+  delete  vetos2012EBPFIdPhotons;
+  delete  vetos2012EBPFIdNeutral;
+
+  delete  vetos2012EEPFIdCharged;
+  delete  vetos2012EEPFIdPhotons;
+  delete  vetos2012EEPFIdNeutral;
 
   ////////////////
   //set_mvaTrigV0
