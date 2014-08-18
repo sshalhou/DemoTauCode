@@ -512,7 +512,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
 
   if( !(patjet.pt()>20) ) passes_id = 0;
-  if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
+  if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
   if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
   if( !(deltaR(muon.p4(), patjet.p4()) > 0.3)) passes_id = 0;
   if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
