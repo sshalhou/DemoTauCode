@@ -466,8 +466,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           if(ApplyRecoilCorrection)
           {
 
-            GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
-            GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+            //GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
+            //GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+            GenZPt = BosonP4.pt();
+            GenZPhi = BosonP4.phi();
+
 
             std::string DataFile;
             std::string MCFile;
