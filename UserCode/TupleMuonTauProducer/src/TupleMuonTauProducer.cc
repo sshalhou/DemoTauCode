@@ -530,6 +530,9 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 /////////////////
 
 
+std::cout<<iEvent.id()<<" lmno "<<met<<" "<<metphi<<" "<<GenZPt<<" "<<GenZPhi<<" ";
+std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<std::endl;
+
             corrector.CorrectType1(  met,
             metphi,
             GenZPt,
