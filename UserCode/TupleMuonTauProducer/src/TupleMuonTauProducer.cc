@@ -518,7 +518,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
     if(patjet.pt()>30)
     {
-      number_of_passingJets++;
+      number_of_passingJets_x++;
       std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
     }
 
