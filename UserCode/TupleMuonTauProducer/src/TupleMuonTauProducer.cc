@@ -202,10 +202,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get a list of jet indices that filters
   // those that overlap other jets
 
-    vector <unsigned int> goodIndices;
-    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
-    std::cout<<" number of jets to start with "<<njet;
-    std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
+  vector <unsigned int> goodIndices;
+  TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
+  std::cout<<" number of jets to start with "<<njet;
+  std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
 
 
 
@@ -233,9 +233,27 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     const pat::Jet & patjet = jets->at(i);
     float mva   = (*puJetIdMVA)[jets->refAt(i)];
     int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-    if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
-  }
+    
+    bool passes_id_x = 1;
+    if( !(patjet.pt()>20) ) passes_id_x = 0;
+    if( !( fabs(patjet.eta())<4.7) ) passes_id_x = 0;
+    if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id_x = 0;
+    if( !(deltaR(muon.p4(), patjet.p4()) > 0.3)) passes_id_x = 0;
+    if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id_x = 0;
+    if(passes_id_x == 1)
+    {
 
+      if(patjet.pt()>30)
+      {
+        njet++;
+        std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+      }
+
+
+
+
+    }
+  }
 
   ///////////////////////////////////
 
@@ -423,6 +441,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           double metphi=mvaMETpf.phi();
           //        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
           //        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
+          cout<<" turned off tau ES correction"<<endl;
           double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
           double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
 
@@ -537,20 +556,20 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // pass the higher pt lepton 1st
 
 
-  //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
-    //    {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          muon.p4()) );
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.corrected_p4()));
-      //  }
+        //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+        //    {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        tau.corrected_p4()));
+        //  }
 
         //else
         //{
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          //tau.corrected_p4()));
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          //muon.p4()) );
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        //tau.corrected_p4()));
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        //muon.p4()) );
 
 
         //}
@@ -579,7 +598,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           // calculate SVFit mass without recoil met corr.
           NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
           algoRaw.addLogM(false);
-//          algoRaw.integrateMarkovChain();
+          //          algoRaw.integrateMarkovChain();
           algoRaw.integrateVEGAS();
           CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
 
@@ -609,11 +628,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
-std::cout<<" JET_INFO "<<" event ID  "<< iEvent.id()<<std::endl;
-std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std::endl;
+        std::cout<<" JET_INFO "<<" event ID  "<< iEvent.id()<<std::endl;
+        std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std::endl;
 
         for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
-//        for ( unsigned int i=0; i<jets->size(); ++i )
+        //        for ( unsigned int i=0; i<jets->size(); ++i )
         {
 
           unsigned int i = goodIndices[ii];
@@ -625,12 +644,12 @@ std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std:
           bool passes_id = 1;
 
 
-std::cout<<" JET_INFO "<<" jet index = "<<i;
-std::cout<<" jet pt = "<<patjet.pt();
-std::cout<<" jet eta = "<<patjet.eta();
-std::cout<<" mva value for pileup ID? = "<<mva;
-std::cout<<" CSV value = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
-std::cout<<std::endl;
+          std::cout<<" JET_INFO "<<" jet index = "<<i;
+          std::cout<<" jet pt = "<<patjet.pt();
+          std::cout<<" jet eta = "<<patjet.eta();
+          std::cout<<" mva value for pileup ID? = "<<mva;
+          std::cout<<" CSV value = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
+          std::cout<<std::endl;
 
 
           if( !(patjet.pt()>20) ) passes_id = 0;
@@ -701,7 +720,7 @@ std::cout<<std::endl;
 
 
         //if(jets->size()>0)
-              if(jet1_index!=-999)
+        if(jet1_index!=-999)
         {
           //jet1_index = 0;
           const pat::Jet & patjet = jets->at(jet1_index);
@@ -718,7 +737,7 @@ std::cout<<std::endl;
         }
 
         //if(jets->size()>1)
-              if(jet2_index!=-999)
+        if(jet2_index!=-999)
         {
           //jet2_index = 1;
           const pat::Jet & patjet = jets->at(jet2_index);
