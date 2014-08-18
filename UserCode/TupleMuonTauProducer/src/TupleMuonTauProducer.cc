@@ -423,9 +423,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           double metphi=mvaMETpf.phi();
           //        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
           //        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
-          cout<<" turned off tau ES correction"<<endl;
-          double leptonPt = ( muon.p4() + tau.p4()   ).pt();
-          double leptonPhi  = ( muon.p4() + tau.p4()   ).phi();
+          double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
+          double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
 
           double GenZPt = 0.0;
           double GenZPhi = 0.0;
