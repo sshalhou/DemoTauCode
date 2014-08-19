@@ -40,7 +40,7 @@ namespace TupleHelpers
   // have DR > 0.1 overlap eliminated
 
   void getNonOverlappingJetIndices(edm::Handle<edm::View<pat::Jet> > jets,
-  vector <unsigned int> & goodIndices, double DRcut)
+  std::vector <unsigned int> & goodIndices, double DRcut)
   {
 
     /////////////////////
