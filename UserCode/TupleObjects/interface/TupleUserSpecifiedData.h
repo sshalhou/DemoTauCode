@@ -14,8 +14,8 @@
 #include "DataFormats/Math/interface/LorentzVector.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
-using namespace std;
-using namespace edm;
+//using namespace std;
+//using namespace edm;
 
 class TupleUserSpecifiedData
 {
