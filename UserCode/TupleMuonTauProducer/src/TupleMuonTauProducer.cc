@@ -487,9 +487,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             // do we really want it to be random?
             cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
 
-            RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
-            corrector.addDataFile(MCFile);
-            corrector.addMCFile(DataFile);
+            RecoilCorrector corrector(ProcessFile);
+            corrector.addMCFile(MCFile);
+            corrector.addDataFile(DataFile);
 
             //////////////////////
             // print out the uncorrected value
@@ -544,13 +544,6 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
    /////////////////
 
-
-
-
-
-
-
-  if( !(patjet.pt()>20) ) passes_id = 0;
   if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
   //if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
   if( !(deltaR(compareLeg1, patjet.p4()) > 0.3)) passes_id = 0;
@@ -561,7 +554,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
     if(patjet.pt()>30)
     {
       number_of_passingJets_x++;
-      std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+      std::cout<<" counted jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
     }
 
 }
