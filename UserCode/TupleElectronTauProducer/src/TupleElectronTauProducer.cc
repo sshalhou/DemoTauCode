@@ -206,10 +206,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   // get a list of jet indices that filters
   // those that overlap other jets
 
-    vector <unsigned int> goodIndices;
-    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
-    std::cout<<" number of jets to start with "<<njet;
-    std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
+  vector <unsigned int> goodIndices;
+  TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
+  std::cout<<" number of jets to start with "<<njet;
+  std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
 
 
   ///////////////////////////////////////
@@ -419,7 +419,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           double metphi=mvaMETpf.phi();
           //        double leptonPt = ( electron.p4() + tau.corrected_p4()   ).pt();
           //        double leptonPhi  = ( electron.p4() + tau.corrected_p4()   ).phi();
-          cout<<" turned ON tau ES correction"<<endl;
+          cout<<" turned off tau ES correction"<<endl;
           double leptonPt = ( electron.p4() + tau.corrected_p4()   ).pt();
           double leptonPhi  = ( electron.p4() + tau.corrected_p4()   ).phi();
 
@@ -462,8 +462,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           if(ApplyRecoilCorrection)
           {
 
-            GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
-            GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+            //GenZPt = (DaughterOneP4+DaughterTwoP4).pt();
+            //GenZPhi = (DaughterOneP4+DaughterTwoP4).phi();
+            GenZPt = BosonP4.pt();
+            GenZPhi = BosonP4.phi();
+
 
             std::string DataFile;
             std::string MCFile;
@@ -474,19 +477,89 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
             DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-            cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
+            cout<<" files = "<<" ProcessFile = "<<ProcessFile<<" DataFile = "<<DataFile<<" MCFile =  "<<MCFile<<endl;
 
             // not sure what random seed we should be using?
             // do we really want it to be random?
             cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
 
-            RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
-            corrector.addDataFile(DataFile);
+            RecoilCorrector corrector(ProcessFile);
             corrector.addMCFile(MCFile);
+            corrector.addDataFile(DataFile);
 
             //////////////////////
             // print out the uncorrected value
             cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
+
+
+            /////////////////
+            int number_of_passingJets_x = 0;
+
+            ///////////////////////
+            // determine gen - reco overlap
+            // for leptons
+
+
+
+
+
+            for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
+            {
+
+              unsigned int i = goodIndices[ii];
+
+              const pat::Jet & patjet = jets->at(i);
+              float mva   = (*puJetIdMVA)[jets->refAt(i)];
+              int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+
+              bool passes_id = 1;
+
+
+
+              LorentzVector compareLeg1(0,0,0,0);
+              LorentzVector compareLeg2(0,0,0,0);
+
+
+              if( 11 == abs(DaughterOnePdgId) && (deltaR(electron.p4(), DaughterOneP4) < 0.3) ) compareLeg1 = electron.p4();
+              else  compareLeg1 = DaughterOneP4;
+
+              if( 15 == abs(DaughterOnePdgId) && (deltaR(tau.corrected_p4(), DaughterOneP4) < 0.3) ) compareLeg1 = tau.corrected_p4();
+              else  compareLeg1 = DaughterOneP4;
+
+
+              if( 11 == abs(DaughterTwoPdgId) && (deltaR(electron.p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = electron.p4();
+              else  compareLeg2 = DaughterTwoP4;
+
+              if( 15 == abs(DaughterTwoPdgId) && (deltaR(tau.corrected_p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = tau.corrected_p4();
+              else  compareLeg2 = DaughterTwoP4;
+
+
+
+
+
+
+              /////////////////
+
+              if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
+              //if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+              if( !(deltaR(compareLeg1, patjet.p4()) > 0.3)) passes_id = 0;
+              if( !(deltaR(compareLeg2, patjet.p4()) > 0.3)) passes_id = 0;
+              if(passes_id == 1)
+              {
+
+                if(patjet.pt()>30)
+                {
+                  number_of_passingJets_x++;
+                  std::cout<<" counted jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+                }
+
+              }
+            }
+            /////////////////
+
+
+            std::cout<<iEvent.id()<<" lmno "<<met<<" "<<metphi<<" "<<GenZPt<<" "<<GenZPhi<<" ";
+            std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<" ";
 
             corrector.CorrectType1(  met,
             metphi,
@@ -498,7 +571,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             iU2,
             iFluc_,
             iScale_,
-            TMath::Min(int(njet),2));
+            TMath::Min(int(number_of_passingJets_x),2));
+
+
+            std::cout<<met<<" "<<metphi<<std::endl;
 
             correctedMET.SetPt(met);
             correctedMET.SetEta(0.0);
@@ -508,6 +584,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
             //////////////////////
             // print out the corrected value
+
             cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
           }
 
@@ -535,18 +612,18 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         //if( electron.p4().pt() >=  tau.corrected_p4().pt()  )
         //{
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          electron.p4()) );
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.corrected_p4()));
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        electron.p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        tau.corrected_p4()));
         //}
 
         //else
         //{
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          //tau.corrected_p4()));
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          //electron.p4()) );
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        //tau.corrected_p4()));
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        //electron.p4()) );
 
 
         //}

@@ -54,6 +54,7 @@ bool& ApplyRecoilCorrection)
 
 
     if( abs(genparticles[mc].pdgId())  == 24 || abs(genparticles[mc].pdgId())  == 36 ||
+    abs(genparticles[mc].pdgId())  == 35 || abs(genparticles[mc].pdgId())  == 34 ||
     genparticles[mc].pdgId()  == 23  ||
     genparticles[mc].pdgId()  == 25 )
     {
