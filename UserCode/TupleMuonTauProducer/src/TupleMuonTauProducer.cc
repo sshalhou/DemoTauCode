@@ -670,14 +670,21 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-          retpf.set(false);
-          if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
-          std::cout<<" pf jet ID "<<pfjetIDLoose( patjet, retpf )<<std::endl;
+
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
           if( !(deltaR(muon.p4(), patjet.p4()) > 0.3)) passes_id = 0;
           if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
+          if(passes_id==1)
+          {
+
+            retpf.set(false);
+            if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
+
+          }
+
+
           if(passes_id == 1)
           {
 
