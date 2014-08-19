@@ -191,7 +191,6 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
-  cout<<" --------checking eTau Paths ---------- \n";
 
   for(size_t i = 0; i<eTauPaths.size(); ++i)
   {

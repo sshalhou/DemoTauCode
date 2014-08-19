@@ -258,7 +258,7 @@ namespace TupleHelpers
     if(category == 5 && mva > 0.975 ) return 1;
     if(category == 6 && mva > 0.985 ) return 1;
 
-    std::cout<<" WARNING electron category = "<<category<<" -- it should be 4,5, or 6"<<std::endl;
+//    std::cout<<" WARNING electron category = "<<category<<" -- it should be 4,5, or 6"<<std::endl;
     return 0;
 
   }

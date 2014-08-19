@@ -183,7 +183,6 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
-  cout<<" --------checking eTau Paths ---------- \n";
 
   for(size_t i = 0; i<eTauPaths.size(); ++i)
   {
@@ -204,7 +203,6 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
   }
 
-  cout<<" --------checking muTau Paths ---------- \n";
 
   for(size_t i = 0; i<muTauPaths.size(); ++i)
   {
@@ -295,7 +293,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-    std::cout<<" SETTING TAU PT TO "<<tau->p4().pt()<<std::endl;
+
     CurrentTau.set_p4(tau->p4());
 
 
@@ -321,7 +319,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         hadrons = tau->signalPFChargedHadrCands().size();
         strips = tau->signalPFGammaCands().size();
 
-        std::cout<<" correcting a TAU with "<<hadrons<<" hadrons and "<<strips<<" strips \n";
+
         CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
       }
       else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
