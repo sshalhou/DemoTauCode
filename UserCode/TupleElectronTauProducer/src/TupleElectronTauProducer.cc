@@ -60,7 +60,7 @@ Implementation:
 
 //#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
 //#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
-#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 
 
@@ -70,8 +70,7 @@ Implementation:
 
 typedef math::XYZTLorentzVector LorentzVector;
 typedef std::vector<edm::InputTag> vInputTag;
-using namespace std;
-using namespace edm;
+
 
 
 //
