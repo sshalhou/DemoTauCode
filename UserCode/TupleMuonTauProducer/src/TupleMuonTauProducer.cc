@@ -481,7 +481,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
             DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-            cout<<" files = "<<ProcessFile<<" "<<DataFile<<" "<<MCFile<<endl;
+            cout<<" files = "<<" ProcessFile = "<<ProcessFile<<" DataFile = "<<DataFile<<" MCFile =  "<<MCFile<<endl;
 
             // not sure what random seed we should be using?
             // do we really want it to be random?
