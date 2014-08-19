@@ -238,8 +238,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   ///////////////////////////////////
   //  set up the PF jet ID (loose)
-   PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
-   pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
+//   PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
+  // pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
 
 
 
