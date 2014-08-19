@@ -4,15 +4,5 @@
 <use name="DataFormats/PatCandidates"/>
 <use name="UserCode/TupleObjects"/>
 <use name="TauAnalysis/CandidateTools"/>
-<use name="PhysicsTools/SelectorUtils"/>
 <use name="rootrflx"/>
-<use name="CommonTools/Utils"/>
-<use name="DataFormats/Math"/>
-<use name="DataFormats/BeamSpot"/>
-<use name="DataFormats/Common"/>
-<use name="FWCore/Common"/>
-<use name="FWCore/FWLite"/>
-<use name="FWCore/Utilities"/>
-<use name="rootcore"/>
-<use name="root"/>
 <flags EDM_PLUGIN="1"/>
