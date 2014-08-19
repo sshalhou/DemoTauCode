@@ -183,6 +183,8 @@ protected:
 
 RecoilCorrector::RecoilCorrector(string iNameZ, int iSeed) {
 
+std::cout<<" process file = "<<iNameZ<<std::endl;
+
   fRandom = new TRandom1(iSeed);
   // get fits for Z data
   readRecoil(fF1U1Fit,fF1U1RMSSMFit,fF1U1RMS1Fit,fF1U1RMS2Fit,fF1U2Fit,fF1U2RMSSMFit,fF1U2RMS1Fit,fF1U2RMS2Fit,iNameZ,"PF");
@@ -216,7 +218,7 @@ int DaughterTwoPdgId, int njet, std::string &ProcessFile, std::string &DataFile,
   ////////
   // higgs
 
-  if(abs(BosonPdgId) == 25 || abs(BosonPdgId) == 36)
+  if(abs(BosonPdgId) == 25 || abs(BosonPdgId) == 36 || abs(BosonPdgId) == 34 || abs(BosonPdgId) == 35)
   {
 
     if(njet>=3)
