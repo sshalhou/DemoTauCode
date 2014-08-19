@@ -58,9 +58,9 @@ Implementation:
 #include "DataFormats/Math/interface/deltaR.h"
 
 
-#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
-#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
-#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
+//#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 
 

@@ -59,9 +59,9 @@ Implementation:
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 #include "DataFormats/Math/interface/deltaR.h"
 
-#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
-#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
-#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
+//#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 
 
