@@ -219,12 +219,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-  edm::Handle<ValueMap<float> > puJetIdMVA;
+  edm::Handle<edm::ValueMap<float> > puJetIdMVA;
   //iEvent.getByLabel("puJetMva","full53xDiscriminant",puJetIdMVA);
   iEvent.getByLabel(puJetIdMVASrc_,puJetIdMVA);
 
 
-  edm::Handle<ValueMap<int> > puJetIdFlag;
+  edm::Handle<edm::ValueMap<int> > puJetIdFlag;
   //iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
   iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
 
