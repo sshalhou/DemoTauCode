@@ -60,7 +60,7 @@ Implementation:
 
 //#include "PhysicsTools/SelectorUtils/interface/EventSelector.h"
 //#include "PhysicsTools/SelectorUtils/interface/JetIDSelectionFunctor.h"
-#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
+//#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 
 
@@ -239,8 +239,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   ///////////////////////////////////
   //  set up the PF jet ID (loose)
-//  PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
-  //pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
+   PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
+   pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
 
 
 
