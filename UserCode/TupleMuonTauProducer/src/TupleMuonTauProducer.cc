@@ -671,8 +671,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
           retpf.set(false);
-          if( !pfjetIDLoose( *patjet, retpf ) ) passes_id = 0;
-          std::cout<<" pf jet ID "<<pfjetIDLoose( *patjet, retpf )<<std::endl;
+          if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
+          std::cout<<" pf jet ID "<<pfjetIDLoose( patjet, retpf )<<std::endl;
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
