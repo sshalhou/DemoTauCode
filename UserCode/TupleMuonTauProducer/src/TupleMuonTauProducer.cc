@@ -488,8 +488,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
 
             RecoilCorrector corrector(ProcessFile,0xDEADBEEF);
-            corrector.addDataFile(DataFile);
             corrector.addMCFile(MCFile);
+            corrector.addDataFile(DataFile);
 
             //////////////////////
             // print out the uncorrected value
