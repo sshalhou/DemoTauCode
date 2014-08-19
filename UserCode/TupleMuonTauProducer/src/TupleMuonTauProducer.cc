@@ -499,6 +499,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 /////////////////
 int number_of_passingJets_x = 0;
 
+///////////////////////
+// determine gen - reco overlap
+// for leptons
+
+
+
+
+
 for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 {
 
@@ -511,11 +519,42 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
   bool passes_id = 1;
 
 
+
+    LorentzVector compareLeg1(0,0,0,0);
+    LorentzVector compareLeg2(0,0,0,0);
+
+
+   if( 13 == abs(DaughterOnePdgId) && (deltaR(muon.p4(), DaughterOneP4) < 0.3) ) compareLeg1 = muon.p4();
+   else  compareLeg1 = DaughterOneP4;
+
+   if( 15 == abs(DaughterOnePdgId) && (deltaR(tau.corrected_p4(), DaughterOneP4) < 0.3) ) compareLeg1 = tau.corrected_p4();
+   else  compareLeg1 = DaughterOneP4;
+
+
+  if( 13 == abs(DaughterTwoPdgId) && (deltaR(muon.p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = muon.p4();
+  else  compareLeg2 = DaughterTwoP4;
+
+  if( 15 == abs(DaughterTwoPdgId) && (deltaR(tau.corrected_p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = tau.corrected_p4();
+  else  compareLeg2 = DaughterTwoP4;
+
+
+
+
+
+
+   /////////////////
+
+
+
+
+
+
+
   if( !(patjet.pt()>20) ) passes_id = 0;
   if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
   if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
-  if( !(deltaR(muon.p4(), patjet.p4()) > 0.3)) passes_id = 0;
-  if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
+  if( !(deltaR(compareLeg1, patjet.p4()) > 0.3)) passes_id = 0;
+  if( !(deltaR(compareLeg2, patjet.p4()) > 0.3)) passes_id = 0;
   if(passes_id == 1)
   {
 
@@ -531,7 +570,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
 
 std::cout<<iEvent.id()<<" lmno "<<met<<" "<<metphi<<" "<<GenZPt<<" "<<GenZPhi<<" ";
-std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<std::endl;
+std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<" ";
 
             corrector.CorrectType1(  met,
             metphi,
@@ -544,6 +583,9 @@ std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScal
             iFluc_,
             iScale_,
             TMath::Min(int(number_of_passingJets_x),2));
+
+
+std::cout<<met<<" "<<metphi<<std::endl;
 
             correctedMET.SetPt(met);
             correctedMET.SetEta(0.0);
