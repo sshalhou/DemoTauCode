@@ -74,7 +74,7 @@ rm -rf DataFormats/JetReco
 cp -r /uscms/home/shalhout/public/JetReco_v2 DataFormats/JetReco
 rm -rf DataFormats/METReco
 cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
-
+cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
 ################################################
 
 

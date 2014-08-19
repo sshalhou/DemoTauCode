@@ -204,8 +204,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     vector <unsigned int> goodIndices;
     TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
-    std::cout<<" number of jets to start with "<<njet;
-    std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
 
 
 
@@ -247,9 +245,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<std::vector<reco::GenParticle> > gen;
   iEvent.getByLabel(genSrc_, gen);
 
-  // print the parameters passed by the config file
 
-  cout<<" NAME_, iFluc_, iScale_ "<<NAME_<<" "<<iFluc_<<" "<<iScale_<<endl;
 
   ////////////
 
@@ -259,8 +255,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   TupleMuonTaus->reserve( TupleMuonTauSize );
 
 
-  std::cout<<" SIZE OF MUONS "<<muons->size()<<std::endl;
-  std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
 
   ///////////////
   // init btag scale factor tool
@@ -350,12 +344,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       unsigned int n = (i*maxTaus_)+j;
 
-      std::cout<<"before i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
+
 
       edm::Handle <std::vector<reco::PFMET> >  mvamet;
       iEvent.getByLabel(mvametSrc_[n], mvamet);
       const reco::PFMET mvaMETpf =  (*mvamet)[0];
-      std::cout<<" mvaMETpf after "<<mvaMETpf.pt()<<std::endl;
+
 
       //reco::PFMET mvaMETpf  = mvaMETpfVec[n];
 
@@ -376,9 +370,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       {
 
 
-        cout<<" i,j = "<<i<<","<<j;
-        cout<<" muon PDGID "<<muon.pdgId();
-        cout<<" tau PDGID "<<tau.pdgId()<<endl;
+
 
 
         TupleMuonTau CurrentMuonTau;
@@ -423,7 +415,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           double metphi=mvaMETpf.phi();
           //        double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
           //        double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
-          cout<<" turned off tau ES correction"<<endl;
+
           double leptonPt = ( muon.p4() + tau.corrected_p4()   ).pt();
           double leptonPhi  = ( muon.p4() + tau.corrected_p4()   ).phi();
 
@@ -456,12 +448,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           DaughterOneP4,DaughterTwoPdgId,
           DaughterTwoP4,ApplyRecoilCorrection);
 
-          cout<<BosonPdgId<<" = BosonPdgId "<<endl;
-          cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
-          cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
-          //          ApplyRecoilCorrection = 0;
-          cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
-
 
           if(ApplyRecoilCorrection)
           {
@@ -481,19 +467,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
             DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-            cout<<" files = "<<" ProcessFile = "<<ProcessFile<<" DataFile = "<<DataFile<<" MCFile =  "<<MCFile<<endl;
 
-            // not sure what random seed we should be using?
-            // do we really want it to be random?
-            cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
 
             RecoilCorrector corrector(ProcessFile);
             corrector.addMCFile(MCFile);
             corrector.addDataFile(DataFile);
 
-            //////////////////////
-            // print out the uncorrected value
-            cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
+
+
 
 
 /////////////////
@@ -554,7 +535,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
     if(patjet.pt()>30)
     {
       number_of_passingJets_x++;
-      std::cout<<" counted jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+
     }
 
 }
@@ -562,8 +543,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 /////////////////
 
 
-std::cout<<iEvent.id()<<" lmno "<<met<<" "<<metphi<<" "<<GenZPt<<" "<<GenZPhi<<" ";
-std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<" ";
+
 
             corrector.CorrectType1(  met,
             metphi,
@@ -578,7 +558,7 @@ std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScal
             TMath::Min(int(number_of_passingJets_x),2));
 
 
-std::cout<<met<<" "<<metphi<<std::endl;
+
 
             correctedMET.SetPt(met);
             correctedMET.SetEta(0.0);
@@ -586,9 +566,7 @@ std::cout<<met<<" "<<metphi<<std::endl;
             correctedMET.SetM(0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
-            //////////////////////
-            // print out the corrected value
-            cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
+
           }
 
 
@@ -601,8 +579,7 @@ std::cout<<met<<" "<<metphi<<std::endl;
         double rawMt = TupleHelpers::GetTransverseMass(muon.p4(), NSVrawMET);
         CurrentMuonTau.set_rawTransverseMass(rawMt);
 
-        cout<<" transverse mass  = "<<Mt<<endl;
-        cout<<" un-corrected transverse mass  = "<<rawMt<<endl;
+
 
         ////////////////
 
@@ -663,9 +640,7 @@ std::cout<<met<<" "<<metphi<<std::endl;
 
 
 
-          //cout<<" diTauMassErr "<<algo.getMassUncert();
-          //cout<<" diTauPt "<<algo.getPt();
-          //cout<<" diTauPtErr "<<algo.getPtUncert();
+
         }
         else CurrentMuonTau.set_correctedSVFitMass(0.0);
         measuredTauLeptons.clear();
@@ -686,9 +661,6 @@ std::cout<<met<<" "<<metphi<<std::endl;
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
-std::cout<<" JET_INFO "<<" event ID  "<< iEvent.id()<<std::endl;
-std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std::endl;
-
         for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 //        for ( unsigned int i=0; i<jets->size(); ++i )
         {
@@ -702,12 +674,7 @@ std::cout<<" JET_INFO "<<" number of jets (no selection) = "<<jets->size()<<std:
           bool passes_id = 1;
 
 
-std::cout<<" JET_INFO "<<" jet index = "<<i;
-std::cout<<" jet pt = "<<patjet.pt();
-std::cout<<" jet eta = "<<patjet.eta();
-std::cout<<" mva value for pileup ID? = "<<mva;
-std::cout<<" CSV value = "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags");
-std::cout<<std::endl;
+
 
 
           if( !(patjet.pt()>20) ) passes_id = 0;
@@ -721,7 +688,6 @@ std::cout<<std::endl;
             if(patjet.pt()>30)
             {
               number_of_passingJets++;
-              std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
             }
 
             /////////////
@@ -750,8 +716,6 @@ std::cout<<std::endl;
             0,0,1);
 
 
-            std::cout<<"CSV "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags")<< " isTag "<<isbtagged<<std::endl;
-
             if(fabs(patjet.eta())<2.4 && isbtagged)
             {
               number_of_btagged_passingJets++;
@@ -764,10 +728,7 @@ std::cout<<std::endl;
 
         }
 
-        std::cout<<" Number of passing jets "<<  number_of_passingJets <<std::endl;
-        std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
-        std::cout<<" jet 1  "<<  jet1_index <<std::endl;
-        std::cout<<" jet 2  "<<  jet2_index <<std::endl;
+
 
         /////////////////////
         // store the jet related quantities

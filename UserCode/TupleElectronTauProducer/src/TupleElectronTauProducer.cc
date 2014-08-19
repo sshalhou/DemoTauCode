@@ -208,8 +208,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   vector <unsigned int> goodIndices;
   TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
-  std::cout<<" number of jets to start with "<<njet;
-  std::cout<<" after DR 0.01 "<<goodIndices.size()<<std::endl;
+
 
 
   ///////////////////////////////////////
@@ -243,9 +242,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   edm::Handle<std::vector<reco::GenParticle> > gen;
   iEvent.getByLabel(genSrc_, gen);
 
-  // print the parameters passed by the config file
 
-  cout<<" NAME_, iFluc_, iScale_ "<<NAME_<<" "<<iFluc_<<" "<<iScale_<<endl;
+
+
 
   ////////////
 
@@ -255,8 +254,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   TupleElectronTaus->reserve( TupleElectronTauSize );
 
 
-  std::cout<<" SIZE OF ELECTRONS "<<electrons->size()<<std::endl;
-  std::cout<<" SIZE OF TAUS "<<taus->size()<<std::endl;
+
 
   ///////////////
   // init btag scale factor tool
@@ -338,12 +336,12 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
       unsigned int n = (i*maxTaus_)+j;
 
-      std::cout<<"before i = "<<i<<" j  = "<<j<<" n  = "<<n<<std::endl;
+
 
       edm::Handle <std::vector<reco::PFMET> >  mvamet;
       iEvent.getByLabel(mvametSrc_[n], mvamet);
       const reco::PFMET mvaMETpf =  (*mvamet)[0];
-      std::cout<<" mvaMETpf after "<<mvaMETpf.pt()<<std::endl;
+
 
       //reco::PFMET mvaMETpf  = mvaMETpfVec[n];
 
@@ -360,9 +358,6 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       {
 
 
-        cout<<" i,j = "<<i<<","<<j;
-        cout<<" electron PDGID (pf) "<<electron.PFpdgId();
-        cout<<" tau PDGID (pf) "<<tau.pdgId()<<endl;
 
 
         TupleElectronTau CurrentElectronTau;
@@ -419,7 +414,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           double metphi=mvaMETpf.phi();
           //        double leptonPt = ( electron.p4() + tau.corrected_p4()   ).pt();
           //        double leptonPhi  = ( electron.p4() + tau.corrected_p4()   ).phi();
-          cout<<" turned off tau ES correction"<<endl;
+
           double leptonPt = ( electron.p4() + tau.corrected_p4()   ).pt();
           double leptonPhi  = ( electron.p4() + tau.corrected_p4()   ).phi();
 
@@ -452,11 +447,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           DaughterOneP4,DaughterTwoPdgId,
           DaughterTwoP4,ApplyRecoilCorrection);
 
-          cout<<BosonPdgId<<" = BosonPdgId "<<endl;
-          cout<<DaughterOnePdgId<<" = DaughterOnePdgId "<<endl;
-          cout<<DaughterTwoPdgId<<" = DaughterTwoPdgId "<<endl;
-          //          ApplyRecoilCorrection = 0;
-          cout<<ApplyRecoilCorrection<<" = ApplyRecoilCorrection "<<endl;
+
 
 
           if(ApplyRecoilCorrection)
@@ -477,19 +468,16 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
             DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
 
-            cout<<" files = "<<" ProcessFile = "<<ProcessFile<<" DataFile = "<<DataFile<<" MCFile =  "<<MCFile<<endl;
 
-            // not sure what random seed we should be using?
-            // do we really want it to be random?
-            cout<<" applying recoil corrections with random seed : 0xDEADBEEF"<<endl;
+
+
+
 
             RecoilCorrector corrector(ProcessFile);
             corrector.addMCFile(MCFile);
             corrector.addDataFile(DataFile);
 
-            //////////////////////
-            // print out the uncorrected value
-            cout<<" Before Correction : "<<met<<" "<<metphi<<endl;
+
 
 
             /////////////////
@@ -550,7 +538,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
                 if(patjet.pt()>30)
                 {
                   number_of_passingJets_x++;
-                  std::cout<<" counted jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+
                 }
 
               }
@@ -558,8 +546,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             /////////////////
 
 
-            std::cout<<iEvent.id()<<" lmno "<<met<<" "<<metphi<<" "<<GenZPt<<" "<<GenZPhi<<" ";
-            std::cout<<leptonPt<<" "<<leptonPhi<<" "<<iU1<<" "<<iU2<<" "<<iFluc_<<" "<<iScale_<<" "<<TMath::Min(int(number_of_passingJets_x),2)<<" ";
+
 
             corrector.CorrectType1(  met,
             metphi,
@@ -574,7 +561,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             TMath::Min(int(number_of_passingJets_x),2));
 
 
-            std::cout<<met<<" "<<metphi<<std::endl;
+
 
             correctedMET.SetPt(met);
             correctedMET.SetEta(0.0);
@@ -582,10 +569,6 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             correctedMET.SetM(0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
-            //////////////////////
-            // print out the corrected value
-
-            cout<<" Post Correction : "<<met<<" "<<metphi<<endl;
           }
 
 
@@ -598,8 +581,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         double rawMt = TupleHelpers::GetTransverseMass(electron.p4(), NSVrawMET);
         CurrentElectronTau.set_rawTransverseMass(rawMt);
 
-        cout<<" transverse mass  = "<<Mt<<endl;
-        cout<<" un-corrected transverse mass  = "<<rawMt<<endl;
+
         ////////////////
 
         TMatrixD covMET(2, 2); // PFMET significance matrix
@@ -660,9 +642,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
 
-          //cout<<" diTauMassErr "<<algo.getMassUncert();
-          //cout<<" diTauPt "<<algo.getPt();
-          //cout<<" diTauPtErr "<<algo.getPtUncert();
+
         }
         else CurrentElectronTau.set_correctedSVFitMass(0.0);
         measuredTauLeptons.clear();
@@ -704,7 +684,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             if(patjet.pt()>30)
             {
               number_of_passingJets++;
-              std::cout<<" jet "<<i<<" pt  = "<<patjet.pt()<<std::endl;
+
             }
             /////////////
             // figure out the 1st and 2nd ranked jets
@@ -732,7 +712,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             iEvent.isRealData(),
             0,0,1);
 
-            std::cout<<"CSV "<<patjet.bDiscriminator("combinedSecondaryVertexBJetTags")<< " isTag "<<isbtagged<<std::endl;
+
 
 
             if(fabs(patjet.eta())<2.4 && isbtagged)
@@ -747,10 +727,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         }
 
-        std::cout<<" Number of passing jets "<<  number_of_passingJets <<std::endl;
-        std::cout<<" Number of passing b-jets "<<  number_of_btagged_passingJets <<std::endl;
-        std::cout<<" jet 1  "<<  jet1_index <<std::endl;
-        std::cout<<" jet 2  "<<  jet2_index <<std::endl;
+
 
         /////////////////////
         // store the jet related quantities
