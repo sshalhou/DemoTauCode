@@ -182,7 +182,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
 
-  cout<<" --------checking muTau Paths ---------- \n";
 
   for(size_t i = 0; i<muTauPaths.size(); ++i)
   {
@@ -245,7 +244,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
 
   }
-  std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
   const reco::Vertex & first_vertex = vertices->at(0);
 
@@ -386,7 +384,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       }
     }
 
-    std::cout<<" Setting isTightMuon and isPFMuon to "<<isTightMuon<<" "<<isPFMuon<<std::endl;
 
 
     CurrentMuon.set_isPFMuon(isPFMuon);

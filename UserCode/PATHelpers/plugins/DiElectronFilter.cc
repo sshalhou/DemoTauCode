@@ -70,7 +70,6 @@ bool DiElectronFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetu
 
   /////////////////////////
 
-  std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
 
 
@@ -145,7 +144,6 @@ bool DiElectronFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetu
 
   }
 
-  std::cout<<" DiElectron Filter returns "<<!(positive_pass && negative_pass) << std::endl;
   return !(positive_pass && negative_pass);
 }
 

@@ -183,7 +183,7 @@ protected:
 
 RecoilCorrector::RecoilCorrector(string iNameZ, int iSeed) {
 
-std::cout<<" process file = "<<iNameZ<<std::endl;
+
 
   fRandom = new TRandom1(iSeed);
   // get fits for Z data
@@ -335,7 +335,6 @@ int DaughterTwoPdgId, int njet, std::string &ProcessFile, std::string &DataFile,
 
 void RecoilCorrector::addDataFile(std::string iNameData) {
 
-std::cout<<" adding data file "<<iNameData<<std::endl;
   readRecoil(fD1U1Fit,fD1U1RMSSMFit,fD1U1RMS1Fit,fD1U1RMS2Fit,fD1U2Fit,fD1U2RMSSMFit,fD1U2RMS1Fit,fD1U2RMS2Fit,iNameData,"PF");
   readRecoil(fD2U1Fit,fD2U1RMSSMFit,fD2U1RMS1Fit,fD2U1RMS2Fit,fD2U2Fit,fD2U2RMSSMFit,fD2U2RMS1Fit,fD2U2RMS2Fit,iNameData,"TK");
   //readCorr(iNameData);
@@ -343,7 +342,6 @@ std::cout<<" adding data file "<<iNameData<<std::endl;
 }
 void RecoilCorrector::addMCFile  (std::string iNameMC) {
   fId++;
-  std::cout<<" adding MC file "<<iNameMC<<std::endl;
 
   readRecoil(fM1U1Fit,fM1U1RMSSMFit,fM1U1RMS1Fit,fM1U1RMS2Fit,fM1U2Fit,fM1U2RMSSMFit,fM1U2RMS1Fit,fM1U2RMS2Fit,iNameMC,"PF");
   readRecoil(fM2U1Fit,fM2U1RMSSMFit,fM2U1RMS1Fit,fM2U1RMS2Fit,fM2U2Fit,fM2U2RMSSMFit,fM2U2RMS1Fit,fM2U2RMS2Fit,iNameMC,"TK");

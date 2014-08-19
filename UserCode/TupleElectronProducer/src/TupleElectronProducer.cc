@@ -256,7 +256,6 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     }
 
   }
-  std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
   const reco::Vertex & first_vertex = vertices->at(0);
   //cout<<" final max pt "<<primary_vertex.p4().pt()<<endl;
@@ -618,14 +617,12 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     int category = -1;
     double Eta = electron->superCluster()->position().Eta();
     double mva = electron->electronID("mvaNonTrigV0");
-    std::cout<<" ELEC_MVA "<<mva<<std::endl;
     bool pass_fail = 0;
 
     category =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "TIGHT");
     pass_fail = TupleHelpers::doesItPassTightMVANonTrigV0(category, mva);
 
-    std::cout<<" Electron category is "<<category<<std::endl;
-    std::cout<<" Electron pass_fail is  "<<pass_fail<<std::endl;
+
 
     ////////////////
     //set_pass_tight_mvaNonTrigV0
@@ -648,11 +645,9 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(  !( fabs(dxy) < 0.045)  ) passFullId = 0;
     if(  !( fabs(dz) < 0.2)  ) passFullId = 0;
 
-    std::cout<<" electron dz and dxy are "<<dz<<" "<<dxy<<std::endl;
 
     CurrentElectron.set_passFullId(passFullId);
 
-    std::cout<<" Electron fullIdCheck is  "<<passFullId<<std::endl;
 
     ///////////////
     // check if this electron

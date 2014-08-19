@@ -69,7 +69,6 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
   /////////////////////////
 
-  std::cout<<" FOUND VERTEX AT INDEX "<<primary_vertex_indx<<std::endl;
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
 
 
@@ -117,7 +116,6 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
   }
 
-  std::cout<<" DiMuon Filter returns "<<!(positive_pass && negative_pass) << std::endl;
   return !(positive_pass && negative_pass);
 }
 

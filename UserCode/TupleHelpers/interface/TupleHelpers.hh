@@ -78,7 +78,6 @@ namespace TupleHelpers
       // the jet's index
 
       if(keep_jet_index) goodIndices.push_back(i);
-      else std::cout<<" Rejecting jet with index = "<<i<<std::endl;
 
     }
 
