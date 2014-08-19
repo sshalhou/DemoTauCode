@@ -70,8 +70,8 @@ Implementation:
 
 typedef math::XYZTLorentzVector LorentzVector;
 typedef std::vector<edm::InputTag> vInputTag;
-using namespace std;
-using namespace edm;
+//using namespace std;
+//using namespace edm;
 
 
 //
