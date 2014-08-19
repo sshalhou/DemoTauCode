@@ -56,6 +56,7 @@ Implementation:
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 typedef std::vector<edm::InputTag> vInputTag;
@@ -198,7 +199,6 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   edm::Handle<edm::View<pat::Jet> > jets;
   iEvent.getByLabel(jetSrc_,jets);
 
-  std::size_t njet = jets->size();
 
 
 
@@ -226,15 +226,12 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   //iEvent.getByLabel("puJetMva","full53xId",puJetIdFlag);
   iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
 
-  njet = 0;
 
-  for ( unsigned int i=0; i<jets->size(); ++i )
-  {
-    const pat::Jet & patjet = jets->at(i);
-    float mva   = (*puJetIdMVA)[jets->refAt(i)];
-    int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-    if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
-  }
+  ///////////////////////////////////
+  //  set up the PF jet ID (loose)
+  PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
+  pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
+
 
 
   // get the gen particles
@@ -466,7 +463,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
+            DaughterTwoPdgId, 100, ProcessFile, DataFile, MCFile);
 
 
 
@@ -481,7 +478,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
             /////////////////
-            int number_of_passingJets_x = 0;
+            int number_of_passingJets_ForRecoil = 0;
 
             ///////////////////////
             // determine gen - reco overlap
@@ -537,7 +534,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
                 if(patjet.pt()>30)
                 {
-                  number_of_passingJets_x++;
+                  number_of_passingJets_ForRecoil++;
 
                 }
 
@@ -558,7 +555,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             iU2,
             iFluc_,
             iScale_,
-            TMath::Min(int(number_of_passingJets_x),2));
+            TMath::Min(int(number_of_passingJets_ForRecoil),2));
 
 
 
@@ -673,6 +670,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
           bool passes_id = 1;
 
+          retpf.set(false);
+          int passjetLoose = 0;
+          if( !pfjetIDLoose( *patjet, retpf ) ) passes_id = 0;
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;

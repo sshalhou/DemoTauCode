@@ -58,6 +58,7 @@ Implementation:
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 typedef std::vector<edm::InputTag> vInputTag;
@@ -195,15 +196,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<pat::Jet> > jets;
   iEvent.getByLabel(jetSrc_,jets);
 
-  std::size_t njet = jets->size();
+
 
 
   ////////////////////////////////
   // get a list of jet indices that filters
   // those that overlap other jets
 
-    vector <unsigned int> goodIndices;
-    TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
+  vector <unsigned int> goodIndices;
+  TupleHelpers::getNonOverlappingJetIndices(jets,goodIndices,0.01);
 
 
 
@@ -224,19 +225,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   iEvent.getByLabel(puJetIdFlagSrc_,puJetIdFlag);
 
 
-  njet = 0;
-
-  for ( unsigned int i=0; i<jets->size(); ++i )
-  {
-    const pat::Jet & patjet = jets->at(i);
-    float mva   = (*puJetIdMVA)[jets->refAt(i)];
-    int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-    if(patjet.pt()>30 && fabs(patjet.eta())<4.5) njet++;
-  }
 
 
   ///////////////////////////////////
-
+  //  set up the PF jet ID (loose)
+  PFJetIDSelectionFunctor pfjetIDLoose( PFJetIDSelectionFunctor::FIRSTDATA, PFJetIDSelectionFunctor::LOOSE );
+  pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
 
 
 
@@ -465,7 +459,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
-            DaughterTwoPdgId, njet, ProcessFile, DataFile, MCFile);
+            DaughterTwoPdgId, 100, ProcessFile, DataFile, MCFile);
 
 
 
@@ -477,70 +471,70 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-/////////////////
-int number_of_passingJets_x = 0;
+            /////////////////
+            int number_of_passingJets_ForRecoil = 0;
 
-///////////////////////
-// determine gen - reco overlap
-// for leptons
-
-
-
-
-
-for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
-{
-
-  unsigned int i = goodIndices[ii];
-
-  const pat::Jet & patjet = jets->at(i);
-  float mva   = (*puJetIdMVA)[jets->refAt(i)];
-  int    idflag = (*puJetIdFlag)[jets->refAt(i)];
-
-  bool passes_id = 1;
-
-
-
-    LorentzVector compareLeg1(0,0,0,0);
-    LorentzVector compareLeg2(0,0,0,0);
-
-
-   if( 13 == abs(DaughterOnePdgId) && (deltaR(muon.p4(), DaughterOneP4) < 0.3) ) compareLeg1 = muon.p4();
-   else  compareLeg1 = DaughterOneP4;
-
-   if( 15 == abs(DaughterOnePdgId) && (deltaR(tau.corrected_p4(), DaughterOneP4) < 0.3) ) compareLeg1 = tau.corrected_p4();
-   else  compareLeg1 = DaughterOneP4;
-
-
-  if( 13 == abs(DaughterTwoPdgId) && (deltaR(muon.p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = muon.p4();
-  else  compareLeg2 = DaughterTwoP4;
-
-  if( 15 == abs(DaughterTwoPdgId) && (deltaR(tau.corrected_p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = tau.corrected_p4();
-  else  compareLeg2 = DaughterTwoP4;
+            ///////////////////////
+            // determine gen - reco overlap
+            // for leptons
 
 
 
 
 
+            for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
+            {
 
-   /////////////////
+              unsigned int i = goodIndices[ii];
 
-  if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
-  //if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
-  if( !(deltaR(compareLeg1, patjet.p4()) > 0.3)) passes_id = 0;
-  if( !(deltaR(compareLeg2, patjet.p4()) > 0.3)) passes_id = 0;
-  if(passes_id == 1)
-  {
+              const pat::Jet & patjet = jets->at(i);
+              float mva   = (*puJetIdMVA)[jets->refAt(i)];
+              int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 
-    if(patjet.pt()>30)
-    {
-      number_of_passingJets_x++;
+              bool passes_id = 1;
 
-    }
 
-}
-}
-/////////////////
+
+              LorentzVector compareLeg1(0,0,0,0);
+              LorentzVector compareLeg2(0,0,0,0);
+
+
+              if( 13 == abs(DaughterOnePdgId) && (deltaR(muon.p4(), DaughterOneP4) < 0.3) ) compareLeg1 = muon.p4();
+              else  compareLeg1 = DaughterOneP4;
+
+              if( 15 == abs(DaughterOnePdgId) && (deltaR(tau.corrected_p4(), DaughterOneP4) < 0.3) ) compareLeg1 = tau.corrected_p4();
+              else  compareLeg1 = DaughterOneP4;
+
+
+              if( 13 == abs(DaughterTwoPdgId) && (deltaR(muon.p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = muon.p4();
+              else  compareLeg2 = DaughterTwoP4;
+
+              if( 15 == abs(DaughterTwoPdgId) && (deltaR(tau.corrected_p4(), DaughterTwoP4) < 0.3) ) compareLeg2 = tau.corrected_p4();
+              else  compareLeg2 = DaughterTwoP4;
+
+
+
+
+
+
+              /////////////////
+
+              if( !( fabs(patjet.eta())<4.5) ) passes_id = 0;
+              //if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+              if( !(deltaR(compareLeg1, patjet.p4()) > 0.3)) passes_id = 0;
+              if( !(deltaR(compareLeg2, patjet.p4()) > 0.3)) passes_id = 0;
+              if(passes_id == 1)
+              {
+
+                if(patjet.pt()>30)
+                {
+                  number_of_passingJets_ForRecoil++;
+
+                }
+
+              }
+            }
+            /////////////////
 
 
 
@@ -555,7 +549,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
             iU2,
             iFluc_,
             iScale_,
-            TMath::Min(int(number_of_passingJets_x),2));
+            TMath::Min(int(number_of_passingJets_ForRecoil),2));
 
 
 
@@ -591,20 +585,20 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
         // pass the higher pt lepton 1st
 
 
-  //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
-    //    {
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          muon.p4()) );
-          measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          tau.corrected_p4()));
-      //  }
+        //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
+        //    {
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        muon.p4()) );
+        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        tau.corrected_p4()));
+        //  }
 
         //else
         //{
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-          //tau.corrected_p4()));
-          //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-          //muon.p4()) );
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
+        //tau.corrected_p4()));
+        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
+        //muon.p4()) );
 
 
         //}
@@ -633,7 +627,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
           // calculate SVFit mass without recoil met corr.
           NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
           algoRaw.addLogM(false);
-//          algoRaw.integrateMarkovChain();
+          //          algoRaw.integrateMarkovChain();
           algoRaw.integrateVEGAS();
           CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
 
@@ -662,7 +656,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
         int number_of_btagged_passingJets = 0;
 
         for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
-//        for ( unsigned int i=0; i<jets->size(); ++i )
+        //        for ( unsigned int i=0; i<jets->size(); ++i )
         {
 
           unsigned int i = goodIndices[ii];
@@ -675,8 +669,9 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
 
 
-
-
+          retpf.set(false);
+          int passjetLoose = 0;
+          if( !pfjetIDLoose( *patjet, retpf ) ) passes_id = 0;
           if( !(patjet.pt()>20) ) passes_id = 0;
           if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
           if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
@@ -739,7 +734,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
 
 
         //if(jets->size()>0)
-              if(jet1_index!=-999)
+        if(jet1_index!=-999)
         {
           //jet1_index = 0;
           const pat::Jet & patjet = jets->at(jet1_index);
@@ -756,7 +751,7 @@ for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
         }
 
         //if(jets->size()>1)
-              if(jet2_index!=-999)
+        if(jet2_index!=-999)
         {
           //jet2_index = 1;
           const pat::Jet & patjet = jets->at(jet2_index);
