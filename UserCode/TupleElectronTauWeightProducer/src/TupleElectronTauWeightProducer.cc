@@ -199,7 +199,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_NumTruePileUpInt(NumTruePileUpInt);
     CurrentElectronTauWeight.set_NumPileupIntM1(NumPileupIntM1);
     CurrentElectronTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
-    CurrentElectronTauWeight.set_NumPileupIntP1(NumPileupIntP);
+    CurrentElectronTauWeight.set_NumPileupIntP1(NumPileupIntP1);
     CurrentElectronTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
 
     /////////////

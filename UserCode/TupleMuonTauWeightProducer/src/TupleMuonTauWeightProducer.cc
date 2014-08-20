@@ -146,6 +146,14 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   const int TupleMuonTauWeightsSize = muonTaus->size();
   TupleMuonTauWeights->reserve( TupleMuonTauWeightsSize );
 
+
+
+  ////////////////
+  // read in pileUpInfo
+
+  edm::Handle<std::vector<PileupSummaryInfo> > PupInfo;
+  iEvent.getByLabel(pileupSrc_, PupInfo);
+
   //////////////////////
   // Since the pileup weight is the same
   // for all pairs compute outside of the loop
@@ -190,7 +198,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_NumTruePileUpInt(NumTruePileUpInt);
     CurrentMuonTauWeight.set_NumPileupIntM1(NumPileupIntM1);
     CurrentMuonTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
-    CurrentMuonTauWeight.set_NumPileupIntP1(NumPileupIntP);
+    CurrentMuonTauWeight.set_NumPileupIntP1(NumPileupIntP1);
     CurrentMuonTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
 
 
