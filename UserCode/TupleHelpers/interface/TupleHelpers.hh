@@ -41,9 +41,9 @@ namespace TupleHelpers
 
   void getPileUpWeight(edm::Handle<std::vector<PileupSummaryInfo> > PupInfo,
   bool isRealData, double & puWeight, double & puWeightM1, double & puWeightP1,
-  float NumPileupInt, float NumTruePileUpInt,
-  float NumPileupIntM1, float NumTruePileUpIntM1,
-  float NumPileupIntP1, float NumTruePileUpIntP1  )
+  float & NumPileupInt, float & NumTruePileUpInt,
+  float & NumPileupIntM1, float & NumTruePileUpIntM1,
+  float & NumPileupIntP1, float & NumTruePileUpIntP1  )
   {
 
 
