@@ -141,7 +141,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   // reserve space for
   // the weights
 
-  auto_ptr<TupleMuonTauWeightCollection> TupleMuonTauWeights (new TupleMuonTauWeightCollection);
+  std::auto_ptr<TupleMuonTauWeightCollection> TupleMuonTauWeights (new TupleMuonTauWeightCollection);
 
   const int TupleMuonTauWeightsSize = muonTaus->size();
   TupleMuonTauWeights->reserve( TupleMuonTauWeightsSize );

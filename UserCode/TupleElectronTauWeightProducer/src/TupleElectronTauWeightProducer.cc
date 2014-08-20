@@ -141,7 +141,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   // reserve space for
   // the weights
 
-  auto_ptr<TupleElectronTauWeightCollection> TupleElectronTauWeights (new TupleElectronTauWeightCollection);
+  std::auto_ptr<TupleElectronTauWeightCollection> TupleElectronTauWeights (new TupleElectronTauWeightCollection);
 
   const int TupleElectronTauWeightsSize = electronTaus->size();
   TupleElectronTauWeights->reserve( TupleElectronTauWeightsSize );
@@ -207,7 +207,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     // to the collection
 
 
-    
+
     TupleElectronTauWeights->push_back(CurrentElectronTauWeight);
 
 
