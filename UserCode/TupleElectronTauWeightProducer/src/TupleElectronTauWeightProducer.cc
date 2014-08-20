@@ -173,9 +173,9 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   TupleHelpers::getPileUpWeight(PupInfo, iEvent.isRealData(), puWeight, puWeightM1, puWeightP1,
   NumPileupInt, NumTruePileUpInt, NumPileupIntM1, NumTruePileUpIntM1, NumPileupIntP1, NumTruePileUpIntP1);
 
-  std::cout<<" PU "<<puWeight<<" , "<<puWeightM1<<" , "<<puWeightP1<<" , ";
-  std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
-  std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
+  //std::cout<<" PU "<<puWeight<<" , "<<puWeightM1<<" , "<<puWeightP1<<" , ";
+  //std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
+  //std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
 
 
 

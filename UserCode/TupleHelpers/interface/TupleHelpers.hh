@@ -34,6 +34,132 @@
 namespace TupleHelpers
 {
 
+  ///////////////////////
+  // Integrated Crystal Ball Function
+
+  double IntegratedCrystalBallEfficiencyForElectrons(double m, double m0, double sigma,
+  double alpha, double n, double norm) const
+  {
+    const double sqrtPiOver2 = 1.2533141373;
+    const double sqrt2 = 1.4142135624;
+
+    double sig = fabs((double) sigma);
+
+    double t = (m - m0)/sig;
+
+    if (alpha < 0) t = -t;
+
+    double absAlpha = fabs(alpha / sig);
+    double a = TMath::Power(n/absAlpha,n)*exp(-0.5*absAlpha*absAlpha);
+    double b = absAlpha - n/absAlpha;
+
+    if (a>=std::numeric_limits<double>::max()) return -1. ;
+
+    double ApproxErf ;
+    double arg = absAlpha / sqrt2 ;
+    if (arg > 5.) ApproxErf = 1 ;
+    else if (arg < -5.) ApproxErf = -1 ;
+    else ApproxErf = erf(arg) ;
+
+    double leftArea = (1 + ApproxErf) * sqrtPiOver2 ;
+    double rightArea = ( a * 1/TMath::Power(absAlpha - b,n-1)) / (n - 1);
+    double area = leftArea + rightArea;
+
+    if ( t <= absAlpha )
+    {
+      arg = t / sqrt2 ;
+      if (arg > 5.) ApproxErf = 1 ;
+      else if (arg < -5.) ApproxErf = -1 ;
+      else ApproxErf = erf(arg) ;
+      return norm * (1 + ApproxErf) * sqrtPiOver2 / area ;
+    }
+    else
+    {
+      return norm*(leftArea+a*(1/TMath::Power(t-b,n-1)-1/TMath::Power(absAlpha - b,n-1)) / (1 - n))/area;
+    }
+
+  }
+
+
+  /////////////////////////////////
+  // fill the trigger weights
+  // for the HLT ELE20 and ELE22
+  // Triggers
+  // based on imp. by Garrett Funk
+
+  void getTriggerWeightsELE20andELE22(bool isRealData,
+  double & EffDataELE20andELE22, double & EffMcELE20andELE22,  const TupleElectron electron)
+  {
+
+    // return 1.0 if Data, or if trigger not fired
+    if(isRealData || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()))
+    {
+
+      EffDataELE20andELE22 = 1.0;
+      EffMcELE20andELE22 = 1.0;
+      return;
+
+    }
+
+    // return weights if !Data
+    else if((electron.has_HltMatchEle20() || electron.has_HltMatchEle22()))
+    {
+
+      double cbELegDataM0 = NAN;
+      double cbELegDataSigma = NAN;
+      double cbELegDataAlpha = NAN;
+      double cbELegDataN = NAN;
+      double cbELegDataNorm = NAN;
+
+      double cbELegMCM0 = NAN;
+      double cbELegMCSigma = NAN;
+      double cbELegMCAlpha = NAN;
+      double cbELegMCN = NAN;
+      double cbELegMCNorm = NAN;
+
+
+      if (electron.isEB())
+      {
+        cbELegDataM0 = 22.9704;
+        cbELegDataSigma = 1.0258;
+        cbELegDataAlpha = 1.26889;
+        cbELegDataN = 1.31024;
+        cbELegDataNorm = 1.06409;
+
+        cbELegMCM0 = 21.7243;
+        cbELegMCSigma = 0.619015;
+        cbELegMCAlpha = 0.739301;
+        cbELegMCN = 1.34903;
+        cbELegMCNorm = 1.02594;
+      }
+      else if (electron.isEE())
+      {
+        cbELegDataM0 = 21.9816;
+        cbELegDataSigma = 1.40993;
+        cbELegDataAlpha = 0.978597;
+        cbELegDataN = 2.33144;
+        cbELegDataNorm = 0.937552;
+
+        cbELegMCM0 = 22.1217;
+        cbELegMCSigma = 1.34054;
+        cbELegMCAlpha = 1.8885;
+        cbELegMCN = 1.01855;
+        cbELegMCNorm = 4.7241;
+      }
+      
+      EffDataELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
+      cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
+      EffMcELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
+      cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
+
+      return;
+    }
+
+    return;
+
+  }
+
+
 
   /////////////////////////////////
   // fill the event's pile-up
@@ -114,9 +240,9 @@ namespace TupleHelpers
     }
     else
     {
-    puWeight = LumiWeights_.weight( NumTruePileUpInt );
-    puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
-    puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
+      puWeight = LumiWeights_.weight( NumTruePileUpInt );
+      puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
+      puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
     }
     return;
 
