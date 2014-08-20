@@ -12,12 +12,23 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_NumTruePileUpIntM1 = NAN;
   m_NumPileupIntP1 = NAN;
   m_NumTruePileUpIntP1 = NAN;
-
-
+  m_EffDataELE20andELE22 = NAN;
+  m_EffMcELE20andELE22 = NAN;
 
 }
 
 //Setting Weights
+
+///////////////////////
+// electron trigger
+// weights
+
+void TupleElectronTauWeight::set_EffDataELE20andELE22(double EffDataELE20andELE22_) { m_EffDataELE20andELE22  =  EffDataELE20andELE22_;}
+double TupleElectronTauWeight::EffDataELE20andELE22() const { return m_EffDataELE20andELE22; }
+
+void TupleElectronTauWeight::set_EffMcELE20andELE22(double EffMcELE20andELE22_) { m_EffMcELE20andELE22  =  EffMcELE20andELE22_;}
+double TupleElectronTauWeight::EffMcELE20andELE22() const { return m_EffMcELE20andELE22; }
+
 
 
 ////////////////////////

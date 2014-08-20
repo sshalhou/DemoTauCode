@@ -82,6 +82,8 @@ private:
   std::string NAME_;
   edm::InputTag pileupSrc_;
   edm::InputTag electrontauSrc_;
+  edm::InputTag electronSrc_;
+
 
 };
 
@@ -103,7 +105,9 @@ private:
 TupleElectronTauWeightProducer::TupleElectronTauWeightProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
-electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc"))
+electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc")),
+electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc"))
+
 {
 
   produces<std::vector<TupleElectronTauWeight>>(NAME_).setBranchAlias(NAME_);
@@ -136,6 +140,11 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   edm::Handle< TupleElectronTauCollection > electronTaus;
   iEvent.getByLabel(electrontauSrc_, electronTaus);
 
+  //////////////
+  // read in the electrons
+
+  edm::Handle< TupleElectronCollection > electrons;
+  iEvent.getByLabel(electronSrc_, electrons);
 
   ////////////////
   // reserve space for
@@ -189,6 +198,9 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     const TupleElectronTau electronTau =   ((*electronTaus)[i]);
     TupleElectronTauWeight CurrentElectronTauWeight;
 
+    const TupleElectron electron = ((*electrons)[electronTau.electronIndex()]);
+
+
     //////////
     // set pile-up related info
 
@@ -201,6 +213,21 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
     CurrentElectronTauWeight.set_NumPileupIntP1(NumPileupIntP1);
     CurrentElectronTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
+
+
+    ///////////
+    // get the Electron Trigger Weights
+    double EffDataELE20andELE22 = 1.0;
+    double EffMcELE20andELE22 = 1.0;
+
+
+    TupleHelpers::getTriggerWeightsELE20andELE22(iEvent.isRealData(),
+    EffDataELE20andELE22, EffMcELE20andELE22, electron);
+
+    CurrentElectronTauWeight.set_EffDataELE20andELE22(EffDataELE20andELE22);
+    CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
+
+
 
     /////////////
     // add the current pair

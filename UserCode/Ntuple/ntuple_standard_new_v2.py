@@ -322,14 +322,16 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 maxElectrons=cms.uint32(MAX_ELECTRONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
-                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple')
 
                                      )
 
 process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
                 NAME=cms.string("TupleElectronTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
-                electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple')
+                electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple')
+
                                      )
 
 
