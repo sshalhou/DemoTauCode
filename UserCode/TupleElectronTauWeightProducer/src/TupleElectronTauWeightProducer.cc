@@ -5,10 +5,10 @@
 //
 /**\class TupleElectronTauWeightProducer TupleElectronTauWeightProducer.cc TempDirect/TupleElectronTauWeightProducer/src/TupleElectronTauWeightProducer.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  Garrett Funk
@@ -62,25 +62,26 @@ typedef math::XYZTLorentzVector LorentzVector;
 
 class TupleElectronTauWeightProducer : public edm::EDProducer
 {
-   public:
-      explicit TupleElectronTauWeightProducer(const edm::ParameterSet&);
-      ~TupleElectronTauWeightProducer();
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+public:
+  explicit TupleElectronTauWeightProducer(const edm::ParameterSet&);
+  ~TupleElectronTauWeightProducer();
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
-      // ----------member data ---------------------------
+  // ----------member data ---------------------------
 
-    std::string NAME_;
-    edm::InputTag pileupSrc_;
+  std::string NAME_;
+  edm::InputTag pileupSrc_;
+  edm::InputTag electrontauSrc_;
 
 };
 
@@ -101,12 +102,11 @@ class TupleElectronTauWeightProducer : public edm::EDProducer
 
 TupleElectronTauWeightProducer::TupleElectronTauWeightProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
-pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc"))
+pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
+electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc"))
 {
 
-    produces<std::vector<TupleElectronTauWeight>>(NAME_).setBranchAlias(NAME_);
-
-
+  produces<std::vector<TupleElectronTauWeight>>(NAME_).setBranchAlias(NAME_);
 
 
 }
@@ -115,8 +115,8 @@ pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc"))
 TupleElectronTauWeightProducer::~TupleElectronTauWeightProducer()
 {
 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -129,6 +129,92 @@ TupleElectronTauWeightProducer::~TupleElectronTauWeightProducer()
 void
 TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+  ///////////////
+  // read in electronTaus
+
+  edm::Handle< TupleElectronTauCollection > electronTaus;
+  iEvent.getByLabel(electrontauSrc_, electronTaus);
+
+
+  ////////////////
+  // reserve space for
+  // the weights
+
+  auto_ptr<TupleElectronTauWeightCollection> TupleElectronTauWeights (new TupleElectronTauWeightCollection);
+
+  const int TupleElectronTauWeightsSize = electronTaus->size();
+  TupleElectronTauWeights->reserve( TupleElectronTauWeightsSize );
+
+
+
+  ////////////////
+  // read in pileUpInfo
+
+  edm::Handle<std::vector<PileupSummaryInfo> > PupInfo;
+  iEvent.getByLabel(pileupSrc_, PupInfo);
+
+
+  //////////////////////
+  // Since the pileup weight is the same
+  // for all pairs compute outside of the loop
+  // over pairs
+
+  double puWeight = 1.0;
+  double puWeightM1 = 1.0;
+  double puWeightP1 = 1.0;
+  float NumPileupInt = 1.0;
+  float NumTruePileUpInt = 1.0;
+  float NumPileupIntM1 = 1.0;
+  float NumTruePileUpIntM1 = 1.0;
+  float NumPileupIntP1 = 1.0;
+  float NumTruePileUpIntP1 = 1.0;
+
+  TupleHelpers::getPileUpWeight(PupInfo, iEvent.isRealData(), puWeight, puWeightM1, puWeightP1,
+  NumPileupInt, NumTruePileUpInt, NumPileupIntM1, NumTruePileUpIntM1, NumPileupIntP1, NumTruePileUpIntP1);
+
+  std::cout<<" PU "<<puWeight<<" , "<<puWeightM1<<" , "<<puWeightP1<<" , ";
+  std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
+  std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
+
+
+
+
+  //////////////////
+  // begin loop over electronTaus
+
+  for (std::size_t i = 0; i < electronTaus->size(); ++i)
+  {
+
+    const TupleElectronTau electronTau =   ((*electronTaus)[i]);
+    TupleElectronTauWeight CurrentElectronTauWeight;
+
+    //////////
+    // set pile-up related info
+
+    CurrentElectronTauWeight.set_puWeight(puWeight);
+    CurrentElectronTauWeight.set_puWeightM1(puWeightM1);
+    CurrentElectronTauWeight.set_puWeightP1(puWeightP1);
+    CurrentElectronTauWeight.set_NumPileupInt(NumPileupInt);
+    CurrentElectronTauWeight.set_NumTruePileUpInt(NumTruePileUpInt);
+    CurrentElectronTauWeight.set_NumPileupIntM1(NumPileupIntM1);
+    CurrentElectronTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
+    CurrentElectronTauWeight.set_NumPileupIntP1(NumPileupIntP);
+    CurrentElectronTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
+
+    /////////////
+    // add the current pair
+    // to the collection
+
+
+    
+    TupleElectronTauWeights->push_back(CurrentElectronTauWeight);
+
+
+  }
+
+  iEvent.put( TupleElectronTauWeights, NAME_ );
+
 
 }
 

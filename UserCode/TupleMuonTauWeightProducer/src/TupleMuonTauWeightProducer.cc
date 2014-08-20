@@ -5,10 +5,10 @@
 //
 /**\class TupleMuonTauWeightProducer TupleMuonTauWeightProducer.cc TempDirect/TupleMuonTauWeightProducer/src/TupleMuonTauWeightProducer.cc
 
- Description: [one line class summary]
+Description: [one line class summary]
 
- Implementation:
-     [Notes on implementation]
+Implementation:
+[Notes on implementation]
 */
 //
 // Original Author:  Garrett Funk
@@ -61,25 +61,26 @@ typedef math::XYZTLorentzVector LorentzVector;
 
 class TupleMuonTauWeightProducer : public edm::EDProducer
 {
-   public:
-      explicit TupleMuonTauWeightProducer(const edm::ParameterSet&);
-      ~TupleMuonTauWeightProducer();
-      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+public:
+  explicit TupleMuonTauWeightProducer(const edm::ParameterSet&);
+  ~TupleMuonTauWeightProducer();
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-   private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+private:
+  virtual void beginJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
 
-      virtual void beginRun(edm::Run&, edm::EventSetup const&);
-      virtual void endRun(edm::Run&, edm::EventSetup const&);
-      virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
-      virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void beginRun(edm::Run&, edm::EventSetup const&);
+  virtual void endRun(edm::Run&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
-      // ----------member data ---------------------------
+  // ----------member data ---------------------------
 
-    std::string NAME_;
-    edm::InputTag pileupSrc_;
+  std::string NAME_;
+  edm::InputTag pileupSrc_;
+  edm::InputTag muontauSrc_;
 
 };
 
@@ -100,11 +101,11 @@ class TupleMuonTauWeightProducer : public edm::EDProducer
 
 TupleMuonTauWeightProducer::TupleMuonTauWeightProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
-pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc"))
+pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
+muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc"))
 {
 
-    produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
-
+  produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
 
 
 
@@ -114,8 +115,8 @@ pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc"))
 TupleMuonTauWeightProducer::~TupleMuonTauWeightProducer()
 {
 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
 
 }
 
@@ -128,6 +129,86 @@ TupleMuonTauWeightProducer::~TupleMuonTauWeightProducer()
 void
 TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+  ///////////////
+  // read in muonTaus
+
+  edm::Handle< TupleMuonTauCollection > muonTaus;
+  iEvent.getByLabel(muontauSrc_, muonTaus);
+
+
+  ////////////////
+  // reserve space for
+  // the weights
+
+  auto_ptr<TupleMuonTauWeightCollection> TupleMuonTauWeights (new TupleMuonTauWeightCollection);
+
+  const int TupleMuonTauWeightsSize = muonTaus->size();
+  TupleMuonTauWeights->reserve( TupleMuonTauWeightsSize );
+
+  //////////////////////
+  // Since the pileup weight is the same
+  // for all pairs compute outside of the loop
+  // over pairs
+
+  double puWeight = 1.0;
+  double puWeightM1 = 1.0;
+  double puWeightP1 = 1.0;
+  float NumPileupInt = 1.0;
+  float NumTruePileUpInt = 1.0;
+  float NumPileupIntM1 = 1.0;
+  float NumTruePileUpIntM1 = 1.0;
+  float NumPileupIntP1 = 1.0;
+  float NumTruePileUpIntP1 = 1.0;
+
+  TupleHelpers::getPileUpWeight(PupInfo, iEvent.isRealData(), puWeight, puWeightM1, puWeightP1,
+  NumPileupInt, NumTruePileUpInt, NumPileupIntM1, NumTruePileUpIntM1, NumPileupIntP1, NumTruePileUpIntP1);
+
+  std::cout<<" PU "<<puWeight<<" , "<<puWeightM1<<" , "<<puWeightP1<<" , ";
+  std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
+  std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
+
+
+
+  //////////////////
+  // begin loop over muonTaus
+
+  for (std::size_t i = 0; i < muonTaus->size(); ++i)
+  {
+
+    const TupleMuonTau muonTau =   ((*muonTaus)[i]);
+    TupleMuonTauWeight CurrentMuonTauWeight;
+
+
+    //////////
+    // set pile-up related info
+
+    CurrentMuonTauWeight.set_puWeight(puWeight);
+    CurrentMuonTauWeight.set_puWeightM1(puWeightM1);
+    CurrentMuonTauWeight.set_puWeightP1(puWeightP1);
+    CurrentMuonTauWeight.set_NumPileupInt(NumPileupInt);
+    CurrentMuonTauWeight.set_NumTruePileUpInt(NumTruePileUpInt);
+    CurrentMuonTauWeight.set_NumPileupIntM1(NumPileupIntM1);
+    CurrentMuonTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
+    CurrentMuonTauWeight.set_NumPileupIntP1(NumPileupIntP);
+    CurrentMuonTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
+
+
+    /////////////
+    // add the current pair
+    // to the collection
+
+
+
+    TupleMuonTauWeights->push_back(CurrentMuonTauWeight);
+
+
+
+  }
+
+
+
+  iEvent.put( TupleMuonTauWeights, NAME_ );
 
 }
 
