@@ -33,20 +33,20 @@ double TupleElectronTauWeight::puWeightM1() const { return m_puWeightM1; }
 void TupleElectronTauWeight::set_puWeightP1(double puWeightP1_) { m_puWeightP1  =  puWeightP1_;}
 double TupleElectronTauWeight::puWeightP1() const { return m_puWeightP1; }
 
-void TupleElectronTauWeight::set_NumPileupInt(double NumPileupInt_) { m_NumPileupInt  =  NumPileupInt_;}
-double TupleElectronTauWeight::NumPileupInt() const { return m_NumPileupInt; }
+void TupleElectronTauWeight::set_NumPileupInt(float NumPileupInt_) { m_NumPileupInt  =  NumPileupInt_;}
+float TupleElectronTauWeight::NumPileupInt() const { return m_NumPileupInt; }
 
-void TupleElectronTauWeight::set_NumTruePileUpInt(double NumTruePileUpInt_) { m_NumTruePileUpInt  =  NumTruePileUpInt_;}
-double TupleElectronTauWeight::NumTruePileUpInt() const { return m_NumTruePileUpInt; }
+void TupleElectronTauWeight::set_NumTruePileUpInt(float NumTruePileUpInt_) { m_NumTruePileUpInt  =  NumTruePileUpInt_;}
+float TupleElectronTauWeight::NumTruePileUpInt() const { return m_NumTruePileUpInt; }
 
-void TupleElectronTauWeight::set_NumPileupIntM1(double NumPileupIntM1_) { m_NumPileupIntM1  =  NumPileupIntM1_;}
-double TupleElectronTauWeight::NumPileupIntM1() const { return m_NumPileupIntM1; }
+void TupleElectronTauWeight::set_NumPileupIntM1(float NumPileupIntM1_) { m_NumPileupIntM1  =  NumPileupIntM1_;}
+float TupleElectronTauWeight::NumPileupIntM1() const { return m_NumPileupIntM1; }
 
-void TupleElectronTauWeight::set_NumTruePileUpIntM1(double NumTruePileUpIntM1_) { m_NumTruePileUpIntM1  =  NumTruePileUpIntM1_;}
-double TupleElectronTauWeight::NumTruePileUpIntM1() const { return m_NumTruePileUpIntM1; }
+void TupleElectronTauWeight::set_NumTruePileUpIntM1(float NumTruePileUpIntM1_) { m_NumTruePileUpIntM1  =  NumTruePileUpIntM1_;}
+float TupleElectronTauWeight::NumTruePileUpIntM1() const { return m_NumTruePileUpIntM1; }
 
-void TupleElectronTauWeight::set_NumPileupIntP1(double NumPileupIntP1_) { m_NumPileupIntP1  =  NumPileupIntP1_;}
-double TupleElectronTauWeight::NumPileupIntP1() const { return m_NumPileupIntP1; }
+void TupleElectronTauWeight::set_NumPileupIntP1(float NumPileupIntP1_) { m_NumPileupIntP1  =  NumPileupIntP1_;}
+float TupleElectronTauWeight::NumPileupIntP1() const { return m_NumPileupIntP1; }
 
-void TupleElectronTauWeight::set_NumTruePileUpIntP1(double NumTruePileUpIntP1_) { m_NumTruePileUpIntP1  =  NumTruePileUpIntP1_;}
-double TupleElectronTauWeight::NumTruePileUpIntP1() const { return m_NumTruePileUpIntP1; }
+void TupleElectronTauWeight::set_NumTruePileUpIntP1(float NumTruePileUpIntP1_) { m_NumTruePileUpIntP1  =  NumTruePileUpIntP1_;}
+float TupleElectronTauWeight::NumTruePileUpIntP1() const { return m_NumTruePileUpIntP1; }

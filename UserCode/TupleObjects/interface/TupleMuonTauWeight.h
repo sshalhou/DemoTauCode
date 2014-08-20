@@ -25,36 +25,36 @@ public:
   void set_puWeight(double);
   void set_puWeightM1(double);
   void set_puWeightP1(double);
-  void set_NumPileupInt(double);
-  void set_NumTruePileUpInt(double);
-  void set_NumPileupIntM1(double);
-  void set_NumTruePileUpIntM1(double);
-  void set_NumPileupIntP1(double);
-  void set_NumTruePileUpIntP1(double);
+  void set_NumPileupInt(float);
+  void set_NumTruePileUpInt(float);
+  void set_NumPileupIntM1(float);
+  void set_NumTruePileUpIntM1(float);
+  void set_NumPileupIntP1(float);
+  void set_NumTruePileUpIntP1(float);
 
 
   // getters
   double puWeight() const;
   double puWeightM1() const;
   double puWeightP1() const;
-  double NumPileupInt() const;
-  double NumTruePileUpInt() const;
-  double NumPileupIntM1() const;
-  double NumTruePileUpIntM1() const;
-  double NumPileupIntP1() const;
-  double NumTruePileUpIntP1() const;
+  float NumPileupInt() const;
+  float NumTruePileUpInt() const;
+  float NumPileupIntM1() const;
+  float NumTruePileUpIntM1() const;
+  float NumPileupIntP1() const;
+  float NumTruePileUpIntP1() const;
 
 private:
 
   double m_puWeight;
   double m_puWeightM1;
   double m_puWeightP1;
-  double m_NumPileupInt;
-  double m_NumTruePileUpInt;
-  double m_NumPileupIntM1;
-  double m_NumTruePileUpIntM1;
-  double m_NumPileupIntP1;
-  double m_NumTruePileUpIntP1;
+  float m_NumPileupInt;
+  float m_NumTruePileUpInt;
+  float m_NumPileupIntM1;
+  float m_NumTruePileUpIntM1;
+  float m_NumPileupIntP1;
+  float m_NumTruePileUpIntP1;
 
 
 
