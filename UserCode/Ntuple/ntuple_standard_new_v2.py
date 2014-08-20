@@ -286,7 +286,7 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                                      )
 
 
-process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightsProducer' ,
+process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
                 NAME=cms.string("TupleMuonTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
                 muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple')
@@ -326,7 +326,7 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
 
                                      )
 
-process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightsProducer' ,
+process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
                 NAME=cms.string("TupleElectronTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
                 electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElecronTausNominal','Ntuple')
