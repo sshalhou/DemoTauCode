@@ -78,7 +78,7 @@ class TupleMuonTauWeightProducer : public edm::EDProducer
 
       // ----------member data ---------------------------
 
-    string NAME_;
+    std::string NAME_;
     edm::InputTag pileupSrc_;
 
 };
@@ -99,10 +99,11 @@ class TupleMuonTauWeightProducer : public edm::EDProducer
 //
 
 TupleMuonTauWeightProducer::TupleMuonTauWeightProducer(const edm::ParameterSet& iConfig):
+NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc"))
 {
 
-    produces<vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
+    produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
 
 
 
