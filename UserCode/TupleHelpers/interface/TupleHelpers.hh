@@ -38,7 +38,7 @@ namespace TupleHelpers
   // Integrated Crystal Ball Function
 
   double IntegratedCrystalBallEfficiencyForElectrons(double m, double m0, double sigma,
-  double alpha, double n, double norm) const
+  double alpha, double n, double norm) 
   {
     const double sqrtPiOver2 = 1.2533141373;
     const double sqrt2 = 1.4142135624;
@@ -146,7 +146,7 @@ namespace TupleHelpers
         cbELegMCN = 1.01855;
         cbELegMCNorm = 4.7241;
       }
-      
+
       EffDataELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
       cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
       EffMcELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
