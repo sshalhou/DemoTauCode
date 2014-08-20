@@ -28,10 +28,99 @@
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/Jet.h"
-
+#include "PhysicsTools/Utilities/interface/LumiReWeighting.h"
+#include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
 
 namespace TupleHelpers
 {
+
+
+  /////////////////////////////////
+  // fill the event's pile-up
+  // weight;  returns 1.0 if data
+
+  void getPileUpWeight(edm::Handle<std::vector<PileupSummaryInfo> > PupInfo,
+  bool isRealData, double & puWeight, double & puWeightM1, double & puWeightP1,
+  double NumPileupInt, double NumTruePileUpInt,
+  double NumPileupIntM1, double NumTruePileUpIntM1,
+  double NumPileupIntP1, double NumTruePileUpIntP1  )
+  {
+
+
+    ///////////////
+    // non-valid PU Collection
+
+
+    if(!PupInfo.isValid())
+    {
+
+      puWeight = 1.0;
+      puWeightM1 = 1.0;
+      puWeightP1 = 1.0;
+      NumPileupInt = 1.0;
+      NumTruePileUpInt = 1.0;
+      NumPileupIntM1 = 1.0;
+      NumTruePileUpIntM1 = 1.0;
+      NumPileupIntP1 = 1.0;
+      NumTruePileUpIntP1 = 1.0;
+
+      return;
+    }
+
+
+    /////////////////
+    // for non-data, return a pileup weight
+
+
+    edm::LumiReWeighting LumiWeights_(
+    "UserCode/PileUpReWeightFiles/MC_Summer12_PU_S10-600bins.root",
+    "UserCode/PileUpReWeightFiles/Data_Pileup_2012_ReRecoPixel-600bins.root",
+    "pileup",
+    "pileup");
+
+
+    std::vector<PileupSummaryInfo>::const_iterator PVI;
+
+
+    for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI)
+    {
+
+      int BX = PVI->getBunchCrossing();
+
+
+
+      if(BX==0)
+      {
+        NumTruePileUpInt = PVI->getTrueNumInteractions();
+        NumPileupInt = PVI->getPU_NumInteractions();
+      }
+      else if(BX == -1)
+      {
+        NumTruePileUpIntM1 = PVI->getTrueNumInteractions();
+        NumPileupIntM1 = PVI->getPU_NumInteractions();
+      }
+      else if(BX == 1)
+      {
+        NumTruePileUpIntP1 = PVI->getTrueNumInteractions();
+        NumPileupIntP1 = PVI->getPU_NumInteractions();
+      }
+    }
+
+    if(isRealData==1)
+    {
+      puWeight = 1.0;
+      puWeightM1 = 1.0;
+      puWeightP1 = 1.0;
+    }
+    else
+    {
+    puWeight = LumiWeights_.weight( NumTruePileUpInt );
+    puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
+    puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
+    }
+    return;
+
+  }
 
 
   ////////////////////////////////
@@ -258,7 +347,7 @@ namespace TupleHelpers
     if(category == 5 && mva > 0.975 ) return 1;
     if(category == 6 && mva > 0.985 ) return 1;
 
-//    std::cout<<" WARNING electron category = "<<category<<" -- it should be 4,5, or 6"<<std::endl;
+    //    std::cout<<" WARNING electron category = "<<category<<" -- it should be 4,5, or 6"<<std::endl;
     return 0;
 
   }

@@ -77,6 +77,13 @@ cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
 cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
 ################################################
 
+ehco "getting pile-up correction root files "
+####################################################
+
+mkdir UserCode/PileUpReWeightFiles
+cp /afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root UserCode/PileUpReWeightFiles/.
+cp /afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root UserCode/PileUpReWeightFiles/.
+####################################################
 
 echo "setting up JEC and uncertainty "
 ################################################
