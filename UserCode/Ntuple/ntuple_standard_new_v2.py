@@ -285,6 +285,13 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
 
                                      )
 
+
+process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightsProducer' ,
+                NAME=cms.string("TupleMuonTausNominalWeights"),
+                pileupSrc = cms.InputTag("addPileupInfo"),
+                muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple')
+                                     )
+
 ##################
 # eTau Final Pairs
 
@@ -319,6 +326,11 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
 
                                      )
 
+process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightsProducer' ,
+                NAME=cms.string("TupleElectronTausNominalWeights"),
+                pileupSrc = cms.InputTag("addPileupInfo"),
+                electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElecronTausNominal','Ntuple')
+                                     )
 
 
 #################################
@@ -359,7 +371,9 @@ process.p = cms.Path(
       process.TupleMuonsNominal*
       process.TupleTausNominal*
       process.TupleMuonTausNominal*
-      process.TupleElectronTausNominal
+      process.TupleElectronTausNominal*
+      process.TupleMuonTausNominalWeights*
+      process.TupleElectronTausNominalWeights
 #+process.metUncertaintySequence+
 #process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
 #+process.TupleMuonTausRecoilUp
