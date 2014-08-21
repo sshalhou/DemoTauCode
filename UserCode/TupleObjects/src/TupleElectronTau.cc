@@ -36,10 +36,18 @@ TupleElectronTau::TupleElectronTau()
   m_cov10 = NAN;
   m_cov11 = NAN;
   m_passesTriLeptonVeto = 0;
-
+  m_passNonTopEmbeddedTriggerAndMass50  = 0;
+  m_set_passSignalGeneratorMass70to130Cut = 0;
 
 
 }
+
+void TupleElectronTau::set_passNonTopEmbeddedTriggerAndMass50(bool passNonTopEmbeddedTriggerAndMass50_) { m_passNonTopEmbeddedTriggerAndMass50  =  passNonTopEmbeddedTriggerAndMass50_;}
+bool TupleElectronTau::passNonTopEmbeddedTriggerAndMass50() const { return m_passNonTopEmbeddedTriggerAndMass50; }
+
+void TupleElectronTau::set_passSignalGeneratorMass70to130Cut(bool passSignalGeneratorMass70to130Cut_) { m_passSignalGeneratorMass70to130Cut  =  passSignalGeneratorMass70to130Cut_;}
+bool TupleElectronTau::passSignalGeneratorMass70to130Cut() const { return m_passSignalGeneratorMass70to130Cut; }
+
 
 void TupleElectronTau::set_passesTriLeptonVeto(bool passesTriLeptonVeto_) { m_passesTriLeptonVeto = passesTriLeptonVeto_;}
 bool TupleElectronTau::passesTriLeptonVeto() const  { return m_passesTriLeptonVeto; }

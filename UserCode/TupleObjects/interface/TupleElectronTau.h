@@ -60,9 +60,10 @@ public:
   void set_cov10(double);
   void set_cov11(double);
   void set_passesTriLeptonVeto(bool);
-
-
-
+  // pass trigger + mass cut. gen level mass on DiLeptons
+  // always one if not Z->tau tau Embedded
+  void set_passNonTopEmbeddedTriggerAndMass50(bool);
+  void set_passSignalGeneratorMass70to130Cut(bool);
 
   // getters
 
@@ -98,6 +99,9 @@ public:
   double cov10() const;
   double cov11() const;
   bool passesTriLeptonVeto() const;
+  bool passNonTopEmbeddedTriggerAndMass50() const;
+  bool passSignalGeneratorMass70to130Cut() const;
+
 
 
 private:
@@ -134,8 +138,8 @@ private:
   double m_cov10;
   double m_cov11;
   bool m_passesTriLeptonVeto;
-
-
+  bool m_passNonTopEmbeddedTriggerAndMass50;
+  bool m_passSignalGeneratorMass70to130Cut;
 };
 
 typedef std::vector<TupleElectronTau> TupleElectronTauCollection;

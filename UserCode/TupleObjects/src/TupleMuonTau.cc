@@ -36,9 +36,18 @@ TupleMuonTau::TupleMuonTau()
   m_cov10 = NAN;
   m_cov11 = NAN;
   m_passesTriLeptonVeto = 0;
+  m_passNonTopEmbeddedTriggerAndMass50  = 0;
+  m_set_passSignalGeneratorMass70to130Cut = 0;
 
 
 }
+
+
+void TupleMuonTau::set_passNonTopEmbeddedTriggerAndMass50(bool passNonTopEmbeddedTriggerAndMass50_) { m_passNonTopEmbeddedTriggerAndMass50  =  passNonTopEmbeddedTriggerAndMass50_;}
+bool TupleMuonTau::passNonTopEmbeddedTriggerAndMass50() const { return m_passNonTopEmbeddedTriggerAndMass50; }
+
+void TupleMuonTau::set_passSignalGeneratorMass70to130Cut(bool passSignalGeneratorMass70to130Cut_) { m_passSignalGeneratorMass70to130Cut  =  passSignalGeneratorMass70to130Cut_;}
+bool TupleMuonTau::passSignalGeneratorMass70to130Cut() const { return m_passSignalGeneratorMass70to130Cut; }
 
 
 void TupleMuonTau::set_passesTriLeptonVeto(bool passesTriLeptonVeto_) { m_passesTriLeptonVeto = passesTriLeptonVeto_;}
