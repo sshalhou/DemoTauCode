@@ -19,8 +19,8 @@ void TupleUserSpecifiedData::set_PhysicsProcess(std::string astring_) { m_Physic
 std::string TupleUserSpecifiedData::PhysicsProcess() const  { return m_PhysicsProcess; }
 
 
-void TupleUserSpecifiedData::set_isNonTopEmbeddedSample(bool astring_) { m_isNonTopEmbeddedSample = isNonTopEmbeddedSample_;}
+void TupleUserSpecifiedData::set_isNonTopEmbeddedSample(bool isNonTopEmbeddedSample_) { m_isNonTopEmbeddedSample = isNonTopEmbeddedSample_;}
 bool TupleUserSpecifiedData::isNonTopEmbeddedSample() const  { return m_isNonTopEmbeddedSample; }
 
-void TupleUserSpecifiedData::set_isTopEmbeddedSample(bool astring_) { m_isTopEmbeddedSample = astring_;}
+void TupleUserSpecifiedData::set_isTopEmbeddedSample(bool isTopEmbeddedSample_) { m_isTopEmbeddedSample = isTopEmbeddedSample_;}
 bool TupleUserSpecifiedData::isTopEmbeddedSample() const  { return m_isTopEmbeddedSample; }
