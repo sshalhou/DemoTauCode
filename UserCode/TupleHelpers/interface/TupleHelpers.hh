@@ -27,6 +27,7 @@
 #include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "UserCode/TupleObjects/interface/TupleElectron.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
+#include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "DataFormats/JetReco/interface/Jet.h"
 #include "PhysicsTools/Utilities/interface/LumiReWeighting.h"
@@ -79,6 +80,86 @@ namespace TupleHelpers
     {
       return norm*(leftArea+a*(1/TMath::Power(t-b,n-1)-1/TMath::Power(absAlpha - b,n-1)) / (1 - n))/area;
     }
+
+  }
+
+
+  ////////////////////////////////////////////////////////////////
+  // IMPORTANT NOTE: should be applied to events
+  // with pT(tau) > 140 GeV (barrel) and pT(tau)>60 GeV in end caps.
+  // Should not be applied otherwise.
+  // For barrel (end caps), weight for tau with pT > 800 (400)
+  // is weight for pT = 800 (400) GeV.
+
+
+
+  void getHighPtHadronicTauTriggerWeights(const TupleTau tau, double & EffDataHighPtTauTrigger,
+  double & EffMcHighPtTauTrigger)
+  {
+
+    double ABSETA = fabs(tau.p4().eta());
+    double PT = tau.p4().pt();
+
+    ///////////////////////
+    // if PT < 140 in the barrel
+    // or if  PT < 60 in the endcaps
+    // the weights should be set to
+    // 1.0
+
+    if((ABSETA<1.5 && PT<140) || (ABSETA=>1.5 && PT<60))
+    {
+      EffDataHighPtTauTrigger = 1.0;
+      EffMcHighPtTauTrigger = 1.0;
+      return;
+    }
+
+    ////////////////////////
+    // compute weights for high
+    // pt barrel muon, max valid
+    // PT is 800
+
+    if((ABSETA<1.5 && PT>=140))
+    {
+      double PTx = PT;
+      if(PT>800) PTx = 800;
+
+      TF1 *TWBarrel = new TF1("AddTWBarrel","1-9.01280e-04*(x-140) + 4.81592e-07*(x-140)*(x-140)",0.,800.);
+
+      EffDataHighPtTauTrigger  = 0.3+0.7*TWBarrel->Eval(PTx);
+      EffMcHighPtTauTrigger    = TWBarrel->Eval(PTx);
+
+      delete TWBarrel;
+
+    }
+
+    ////////////////////////
+    // compute weights for high
+    // pt endcap muon, max valid
+    // PT is 400
+
+    if((ABSETA>=1.5 && PT>=60))
+    {
+      double PTx = PT;
+      if(PT>400) PTx = 400;
+
+      TF1 *TWEndcaps = new TF1("AddTWEndcaps","1-1.81148e-03*(x-60) + 5.44335e-07*(x-60)*(x-60)",0.,800.);
+
+      EffDataHighPtTauTrigger  = 0.3+0.7*TWEndcaps->Eval(PTx);
+      EffMcHighPtTauTrigger    = TWEndcaps->Eval(PTx);
+
+      delete TWEndcaps;
+
+    }
+
+    ///////////
+    // default to 1.0
+
+    EffDataHighPtTauTrigger = 1.0;
+    EffMcHighPtTauTrigger = 1.0;
+    return;
+
+
+
 
   }
 
