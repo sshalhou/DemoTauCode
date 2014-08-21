@@ -57,6 +57,8 @@ Implementation:
 #include "DataFormats/JetReco/interface/PileupJetIdentifier.h"
 #include "DataFormats/Math/interface/deltaR.h"
 #include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
 
 
@@ -107,6 +109,10 @@ private:
   unsigned int maxTaus_;
   bool doNotRequireFullIdForLeptons_;
   edm::InputTag muonSrc_;
+  edm::InputTag triggerEventSrc_;
+  edm::InputTag userDataSrc_;
+
+
 
 
 
@@ -139,9 +145,10 @@ doSVFit_(iConfig.getParameter<bool>("doSVFit" )),
 maxElectrons_(iConfig.getParameter<unsigned int>("maxElectrons" )),
 maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" )),
 doNotRequireFullIdForLeptons_(iConfig.getParameter<bool>("doNotRequireFullIdForLeptons" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
+triggerEventSrc_(iConfig.getParameter<edm::InputTag>("triggerEventSrc" )),
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
-
 
 
 
@@ -181,6 +188,24 @@ TupleElectronTauProducer::~TupleElectronTauProducer()
 void
 TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+
+  ////////////////
+  // read in the UserSpecifiedData
+
+  edm::Handle< TupleUserSpecifiedDataCollection > userData;
+  iEvent.getByLabel(userDataSrc_, userData);
+
+  const TupleUserSpecifiedData userData0 =   ((*userData)[0]);
+
+  // get the trigger info
+
+  edm::Handle< TriggerEvent > triggerEvent;
+  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
+
+  const TriggerEvent triggerEvent0 =   ((*triggerEvent0)[0]);
+
+
 
 
   // get the muons for tri-lepton veto
