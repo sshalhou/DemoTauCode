@@ -58,6 +58,8 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
       // ----------member data ---------------------------
       string SampleName_;
       string PhysicsProcess_;
+      bool isNonTopEmbeddedSample_;
+      bool isTopEmbeddedSample_;
 };
 
 //
@@ -74,7 +76,9 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
 //
 TupleUserSpecifiedDataProducer::TupleUserSpecifiedDataProducer(const edm::ParameterSet& iConfig):
 SampleName_(iConfig.getParameter<string>("SampleName" )),
-PhysicsProcess_(iConfig.getParameter<string>("PhysicsProcess" ))
+PhysicsProcess_(iConfig.getParameter<string>("PhysicsProcess" )),
+isNonTopEmbeddedSample_(iConfig.getParameter<string>("isNonTopEmbeddedSample" )),
+isTopEmbeddedSample_(iConfig.getParameter<string>("isTopEmbeddedSample" ))
 {
 
 
@@ -123,6 +127,9 @@ UserData->reserve( 1 );
 TupleUserSpecifiedData CurrentTupleUserSpecifiedData;
 CurrentTupleUserSpecifiedData.set_SampleName(SampleName_);
 CurrentTupleUserSpecifiedData.set_PhysicsProcess(PhysicsProcess_);
+CurrentTupleUserSpecifiedData.set_isNonTopEmbeddedSample(isNonTopEmbeddedSample_);
+CurrentTupleUserSpecifiedData.set_isTopEmbeddedSample(isTopEmbeddedSample_);
+
 
 ////////////
 // store the TupleUserSpecifiedData

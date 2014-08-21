@@ -37,8 +37,8 @@ namespace TupleHelpers
   ///////////////////////
   // Integrated Crystal Ball Function
 
-  double IntegratedCrystalBallEfficiencyForElectrons(double m, double m0, double sigma,
-  double alpha, double n, double norm) 
+  double IntegratedCrystalBallEfficiency(double m, double m0, double sigma,
+  double alpha, double n, double norm)
   {
     const double sqrtPiOver2 = 1.2533141373;
     const double sqrt2 = 1.4142135624;
@@ -86,6 +86,10 @@ namespace TupleHelpers
   // for the HLT ELE20 and ELE22
   // Triggers
   // based on imp. by Garrett Funk
+  // important to keep the ratio sep.
+  // since for embedded samples
+  // we only apply the Data Value as the weight
+  // instead of the ratio as for MC
 
   void getTriggerWeightsELE20andELE22(bool isRealData,
   double & EffDataELE20andELE22, double & EffMcELE20andELE22,  const TupleElectron electron)
@@ -118,7 +122,7 @@ namespace TupleHelpers
       double cbELegMCNorm = NAN;
 
 
-      if (electron.isEB())
+      if ( fabs(electron.p4().eta()) < 1.479) // barrel
       {
         cbELegDataM0 = 22.9704;
         cbELegDataSigma = 1.0258;
@@ -132,7 +136,7 @@ namespace TupleHelpers
         cbELegMCN = 1.34903;
         cbELegMCNorm = 1.02594;
       }
-      else if (electron.isEE())
+      else // endcap
       {
         cbELegDataM0 = 21.9816;
         cbELegDataSigma = 1.40993;
@@ -147,9 +151,9 @@ namespace TupleHelpers
         cbELegMCNorm = 4.7241;
       }
 
-      EffDataELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
+      EffDataELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
       cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
-      EffMcELE20andELE22 = IntegratedCrystalBallEfficiencyForElectrons(electron.p4().pt(),
+      EffMcELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
       cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
 
       return;

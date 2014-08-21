@@ -10,6 +10,9 @@ DropSelectedPatObjects = True
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
+isNonTopEmbeddedSample_ = 0
+isTopEmbeddedSample_ = 0
+
 
 
 ###################################################
@@ -18,9 +21,11 @@ PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 # options
 ###################################################
 
-process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer' ,
+process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             SampleName=cms.string(SampleName_),
-                                            PhysicsProcess=cms.string(PhysicsProcess_)
+                                            PhysicsProcess=cms.string(PhysicsProcess_),
+                                            isNonTopEmbeddedSample=cms.bool(isNonTopEmbeddedSample_),
+                                            isTopEmbeddedSample_=cms.bool(isTopEmbeddedSample_)
                                             )
 
 ###################################################
