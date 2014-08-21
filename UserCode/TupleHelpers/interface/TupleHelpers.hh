@@ -84,6 +84,102 @@ namespace TupleHelpers
 
   /////////////////////////////////
   // fill the trigger weights
+  // for the HLT ISOMU and ISOMU17
+  // Triggers
+  // based on imp. by Garrett Funk
+  // important to keep the ratio sep.
+  // since for embedded samples
+  // we only apply the Data Value as the weight
+  // instead of the ratio as for MC
+
+  void getTriggerWeightsISOMU17andISOMU18(bool isRealData,
+  double & EffDataISOMU17andISOMU18, double & EffMcISOMU17andISOMU18,  const TupleMuon muon,
+  const TupleUserSpecifiedData userData0)
+  {
+
+    //////////////////////////
+    // return 1.0 if Data, or if trigger not fired
+    // and is not an embedded sample
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) || !(muon.has_HltMatchMu17() || muon.has_HltMatchMu18()) )
+    {
+
+      EffDataISOMU17andISOMU18 = 1.0;
+      EffMcISOMU17andISOMU18 = 1.0;
+      return;
+
+    }
+
+
+    // return weights if !Data
+    else if((muon.has_HltMatchMu17() || muon.has_HltMatchMu18()))
+    {
+
+
+      double MCpar[5];
+      double DATApar[5];
+      double ETA = muon.p4().eta();
+
+      if(ETA<-1.2)
+      {
+        DATApar[] = {15.9977,	7.64004e-05,	6.4951e-08,	1.57403,	0.865325};
+        MCpar[] = {16.0051,	2.45144e-05,	4.3335e-09,	1.66134,	0.87045};
+      }
+      else if(-1.2 <= ETA < -0.8 )
+      {
+        DATApar[] = {17.3974,	0.804001,	1.47145,	1.24295,	0.928198};
+        MCpar[] = {17.3135,	0.747636,	1.21803,	1.40611,	0.934983};
+      }
+      else if(-0.8 <= ETA < 0)
+      {
+        DATApar[] = {16.4307,	0.226312,	0.265553,	1.55756,	0.974462};
+        MCpar[] = {15.9556,	0.0236127,	0.00589832,	1.75409,	0.981338};
+      }
+      else if(0.0 <= ETA < 0.8)
+      {
+        DATApar[] = {17.313,	0.662731,	1.3412,	1.05778,	1.26624};
+        MCpar[] = {15.9289,	0.0271317,	0.00448573,	1.92101,	0.978625};
+      }
+      else if(0.8 <= ETA < 1.2)
+      {
+        DATApar[] = {16.9966,	0.550532,	0.807863,	1.55402,	0.885134};
+        MCpar[] = {16.5678,	0.328333,	0.354533,	1.67085,	0.916992};
+      }
+      else if(1.2 <= ETA)
+      {
+        DATApar[] = {15.9962,	0.000106195,	4.95058e-08,	1.9991,	0.851294};
+        MCpar[] = {15.997,	7.90069e-05,	4.40036e-08,	1.66272,	0.884502};
+      }
+
+
+
+
+
+      EffDataISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
+      DATApar[0], DATApar[1], DATApar[2], DATApar[3], DATApar[4]);
+      EffMcISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
+      MCpar[0], MCpar[1], MCpar[2], MCpar[3], MCpar[4]);
+
+
+      /////////
+      // even if embedded, keep both values
+      // although final weight for embedded is just  EffDataELE20andELE22
+      // and not the ratio
+
+      return;
+    }
+
+    return;
+
+
+
+
+
+  }
+
+
+  /////////////////////////////////
+  // fill the trigger weights
   // for the HLT ELE20 and ELE22
   // Triggers
   // based on imp. by Garrett Funk
