@@ -37,7 +37,7 @@ TupleMuonTau::TupleMuonTau()
   m_cov11 = NAN;
   m_passesTriLeptonVeto = 0;
   m_passNonTopEmbeddedTriggerAndMass50  = 0;
-  m_set_passSignalGeneratorMass70to130Cut = 0;
+  m_passSignalGeneratorMass70to130Cut = 0;
 
 
 }
