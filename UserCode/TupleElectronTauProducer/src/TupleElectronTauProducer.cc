@@ -200,10 +200,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   // get the trigger info
 
-  edm::Handle< TriggerEvent > triggerEvent;
+  edm::Handle< pat::TriggerEvent > triggerEvent;
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
-  const TriggerEvent triggerEvent0 =   ((*triggerEvent0)[0]);
+  const pat::TriggerEvent triggerEvent0 =   ((*triggerEvent0)[0]);
 
 
 
