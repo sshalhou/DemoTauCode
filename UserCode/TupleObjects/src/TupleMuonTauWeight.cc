@@ -12,11 +12,23 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_NumTruePileUpIntM1 = NAN;
   m_NumPileupIntP1 = NAN;
   m_NumTruePileUpIntP1 = NAN;
-
+  m_EffDataISOMU17andISOMU18 = NAN;
+  m_EffMcISOMU17andISOMU18 = NAN;
 
 }
 
 //Setting Weights
+
+
+///////////////////////
+// muon trigger weights
+////////////////////////
+
+void TupleMuonTauWeight::set_EffDataISOMU17andISOMU18(double EffDataISOMU17andISOMU18_) { m_EffDataISOMU17andISOMU18  =  EffDataISOMU17andISOMU18_;}
+double TupleMuonTauWeight::EffDataISOMU17andISOMU18() const { return m_EffDataISOMU17andISOMU18; }
+
+void TupleMuonTauWeight::set_EffMcISOMU17andISOMU18(double EffMcISOMU17andISOMU18_) { m_EffMcISOMU17andISOMU18  =  EffMcISOMU17andISOMU18_;}
+double TupleMuonTauWeight::EffMcISOMU17andISOMU18() const { return m_EffMcISOMU17andISOMU18; }
 
 
 ////////////////////////
