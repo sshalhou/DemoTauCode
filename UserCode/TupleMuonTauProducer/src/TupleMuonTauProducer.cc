@@ -198,7 +198,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< pat::TriggerEvent > triggerEvent;
   iEvent.getByLabel( triggerEventSrc_, triggerEvent );
 
-  const pat::TriggerEvent triggerEvent0 =   ((*triggerEvent0)[0]);
+  const pat::TriggerPathCollection* paths = triggerEvent->paths();
 
 
   // get the electrons for tri-lepton veto
