@@ -128,7 +128,7 @@ namespace TupleHelpers
         DATApar[3] = 1.57403;     MCpar[3] = 1.66134;
         DATApar[4] = 0.865325;    MCpar[4] = 0.87045;
       }
-      else if(-1.2 <= ETA < -0.8 )
+      else if(-1.2 <= ETA && ETA < -0.8 )
       {
         DATApar[0] = 17.3974;     MCpar[0] = 17.3135;
         DATApar[1] = 0.804001;    MCpar[1] = 0.747636;
@@ -136,7 +136,7 @@ namespace TupleHelpers
         DATApar[3] = 1.24295;     MCpar[3] = 1.40611;
         DATApar[4] = 0.928198;    MCpar[4] = 0.934983;
       }
-      else if(-0.8 <= ETA < 0)
+      else if(-0.8 <= ETA && ETA < 0)
       {
         DATApar[0] = 16.4307;     MCpar[0] = 15.9556;
         DATApar[1] = 0.226312;    MCpar[1] = 0.0236127;
@@ -144,7 +144,7 @@ namespace TupleHelpers
         DATApar[3] = 1.55756;     MCpar[3] = 1.75409;
         DATApar[4] = 0.974462;    MCpar[4] = 0.981338;
       }
-      else if(0.0 <= ETA < 0.8)
+      else if(0.0 <= ETA && ETA < 0.8)
       {
 
         DATApar[0] = 17.313;     MCpar[0] = 15.9289;
@@ -154,7 +154,7 @@ namespace TupleHelpers
         DATApar[4] = 1.26624;    MCpar[4] = 0.978625;
 
       }
-      else if(0.8 <= ETA < 1.2)
+      else if(0.8 <= ETA && ETA < 1.2)
       {
 
         DATApar[0] = 16.9966;     MCpar[0] = 16.5678;
