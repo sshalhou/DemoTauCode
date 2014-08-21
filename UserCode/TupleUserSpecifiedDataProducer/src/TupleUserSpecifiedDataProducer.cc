@@ -77,8 +77,8 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
 TupleUserSpecifiedDataProducer::TupleUserSpecifiedDataProducer(const edm::ParameterSet& iConfig):
 SampleName_(iConfig.getParameter<string>("SampleName" )),
 PhysicsProcess_(iConfig.getParameter<string>("PhysicsProcess" )),
-isNonTopEmbeddedSample_(iConfig.getParameter<string>("isNonTopEmbeddedSample" )),
-isTopEmbeddedSample_(iConfig.getParameter<string>("isTopEmbeddedSample" ))
+isNonTopEmbeddedSample_(iConfig.getParameter<bool>("isNonTopEmbeddedSample" )),
+isTopEmbeddedSample_(iConfig.getParameter<bool>("isTopEmbeddedSample" ))
 {
 
 
