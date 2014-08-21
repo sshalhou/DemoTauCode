@@ -14,6 +14,7 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include "TF1.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "TauAnalysis/CandidateTools/interface/NSVfitStandaloneAlgorithm.h"
 #include "TLorentzVector.h"
