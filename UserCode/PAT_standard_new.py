@@ -10,8 +10,8 @@ DropSelectedPatObjects = True
 KeepAll = False
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
-isNonTopEmbeddedSample_ = 0
-isTopEmbeddedSample_ = 0
+isNonTopEmbeddedSample_ = True
+isTopEmbeddedSample_ = True
 
 
 
