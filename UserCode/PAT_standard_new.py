@@ -25,7 +25,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             SampleName=cms.string(SampleName_),
                                             PhysicsProcess=cms.string(PhysicsProcess_),
                                             isNonTopEmbeddedSample=cms.bool(isNonTopEmbeddedSample_),
-                                            isTopEmbeddedSample_=cms.bool(isTopEmbeddedSample_)
+                                            isTopEmbeddedSample=cms.bool(isTopEmbeddedSample_)
                                             )
 
 ###################################################
