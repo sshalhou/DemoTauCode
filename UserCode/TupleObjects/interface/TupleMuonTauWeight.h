@@ -31,7 +31,8 @@ public:
   void set_NumTruePileUpIntM1(float);
   void set_NumPileupIntP1(float);
   void set_NumTruePileUpIntP1(float);
-
+  void set_EffDataISOMU17andISOMU18(float);
+  void set_EffMcISOMU17andISOMU18(float);
 
   // getters
   double puWeight() const;
@@ -43,6 +44,8 @@ public:
   float NumTruePileUpIntM1() const;
   float NumPileupIntP1() const;
   float NumTruePileUpIntP1() const;
+  double EffDataISOMU17andISOMU18() const;
+  double EffMcISOMU17andISOMU18() const;
 
 private:
 
@@ -55,6 +58,8 @@ private:
   float m_NumTruePileUpIntM1;
   float m_NumPileupIntP1;
   float m_NumTruePileUpIntP1;
+  double m_EffDataISOMU17andISOMU18;
+  double m_EffMcISOMU17andISOMU18;
 
 
 

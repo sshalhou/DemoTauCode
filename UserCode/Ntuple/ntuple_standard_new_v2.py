@@ -290,6 +290,7 @@ process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer
                 NAME=cms.string("TupleMuonTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
                 muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
                                      )
 

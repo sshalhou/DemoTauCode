@@ -83,6 +83,7 @@ private:
   std::string NAME_;
   edm::InputTag pileupSrc_;
   edm::InputTag muontauSrc_;
+  edm::InputTag muonSrc_;
   edm::InputTag userDataSrc_;
 
 };
@@ -106,6 +107,7 @@ TupleMuonTauWeightProducer::TupleMuonTauWeightProducer(const edm::ParameterSet& 
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
 muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc")),
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc")),
 userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
 
@@ -149,6 +151,13 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   edm::Handle< TupleMuonTauCollection > muonTaus;
   iEvent.getByLabel(muontauSrc_, muonTaus);
 
+
+  //////////////////
+  // read in the muons
+
+
+  edm::Handle< TupleMuonCollection > muons;
+  iEvent.getByLabel(muonSrc_, muons);
 
   ////////////////
   // reserve space for
@@ -200,6 +209,8 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     const TupleMuonTau muonTau =   ((*muonTaus)[i]);
     TupleMuonTauWeight CurrentMuonTauWeight;
 
+    const TupleMuon muon = ((*muons)[muonTau.muonIndex()]);
+
 
     //////////
     // set pile-up related info
@@ -213,6 +224,20 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_NumTruePileUpIntM1(NumTruePileUpIntM1);
     CurrentMuonTauWeight.set_NumPileupIntP1(NumPileupIntP1);
     CurrentMuonTauWeight.set_NumTruePileUpIntP1(NumTruePileUpIntP1);
+
+
+    ////////////////
+    // get the muon trigger weights
+    double EffDataISOMU17andISOMU18 = 1.0;
+    double EffMcISOMU17andISOMU18 = 1.0;
+
+
+    TupleHelpers::getTriggerWeightsISOMU17andISOMU18(iEvent.isRealData(),
+    EffDataISOMU17andISOMU18, EffMcISOMU17andISOMU18, muon, userData0);
+
+    CurrentMuonTauWeight.set_EffDataISOMU17andISOMU18(EffDataISOMU17andISOMU18);
+    CurrentMuonTauWeight.set_EffMcISOMU17andISOMU18(EffMcISOMU17andISOMU18);
+
 
 
     /////////////
