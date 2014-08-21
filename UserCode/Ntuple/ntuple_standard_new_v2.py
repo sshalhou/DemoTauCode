@@ -289,7 +289,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
 process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
                 NAME=cms.string("TupleMuonTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
-                muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple')
+                muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
                                      )
 
 ##################
@@ -330,8 +331,8 @@ process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeight
                 NAME=cms.string("TupleElectronTausNominalWeights"),
                 pileupSrc = cms.InputTag("addPileupInfo"),
                 electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
-                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple')
-
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
                                      )
 
 

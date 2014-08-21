@@ -30,6 +30,7 @@
 #include "DataFormats/JetReco/interface/Jet.h"
 #include "PhysicsTools/Utilities/interface/LumiReWeighting.h"
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 
 namespace TupleHelpers
 {
@@ -92,11 +93,16 @@ namespace TupleHelpers
   // instead of the ratio as for MC
 
   void getTriggerWeightsELE20andELE22(bool isRealData,
-  double & EffDataELE20andELE22, double & EffMcELE20andELE22,  const TupleElectron electron)
+  double & EffDataELE20andELE22, double & EffMcELE20andELE22,  const TupleElectron electron,
+  const TupleUserSpecifiedData userData0)
   {
 
+
+    //////////////////////////
     // return 1.0 if Data, or if trigger not fired
-    if(isRealData || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()))
+    // and is not an embedded sample
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample || userData0.isNonTopEmbeddedSample)) || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()) )
     {
 
       EffDataELE20andELE22 = 1.0;
@@ -155,6 +161,11 @@ namespace TupleHelpers
       cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
       EffMcELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
       cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
+
+      /////////
+      // even if embedded, keep both values
+      // although final weight for embedded is just  EffDataELE20andELE22
+      // and not the ratio
 
       return;
     }

@@ -52,6 +52,8 @@ Implementation:
 #include "TF1.h"
 #include "TH1.h"
 #include "TMath.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 
@@ -81,6 +83,7 @@ private:
   std::string NAME_;
   edm::InputTag pileupSrc_;
   edm::InputTag muontauSrc_;
+  edm::InputTag userDataSrc_;
 
 };
 
@@ -102,7 +105,8 @@ private:
 TupleMuonTauWeightProducer::TupleMuonTauWeightProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
-muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc"))
+muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc")),
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
 
   produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
@@ -129,6 +133,15 @@ TupleMuonTauWeightProducer::~TupleMuonTauWeightProducer()
 void
 TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+  ////////////////
+  // read in the UserSpecifiedData
+
+  edm::Handle< TupleUserSpecifiedDataCollection > userData;
+  iEvent.getByLabel(userDataSrc_, userData);
+
+  const TupleUserSpecifiedData userData0 =   ((*userData)[0]);
+
 
   ///////////////
   // read in muonTaus

@@ -52,6 +52,8 @@ Implementation:
 #include "TF1.h"
 #include "TH1.h"
 #include "TMath.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 
@@ -83,6 +85,8 @@ private:
   edm::InputTag pileupSrc_;
   edm::InputTag electrontauSrc_;
   edm::InputTag electronSrc_;
+  edm::InputTag userDataSrc_;
+
 
 
 };
@@ -106,8 +110,8 @@ TupleElectronTauWeightProducer::TupleElectronTauWeightProducer(const edm::Parame
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
 electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc")),
-electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc"))
-
+electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc")),
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
 
   produces<std::vector<TupleElectronTauWeight>>(NAME_).setBranchAlias(NAME_);
@@ -133,6 +137,17 @@ TupleElectronTauWeightProducer::~TupleElectronTauWeightProducer()
 void
 TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+
+  ////////////////
+  // read in the UserSpecifiedData
+
+  edm::Handle< TupleUserSpecifiedDataCollection > userData;
+  iEvent.getByLabel(userDataSrc_, userData);
+
+  const TupleUserSpecifiedData userData0 =   ((*userData)[0]);
+
+
 
   ///////////////
   // read in electronTaus
@@ -222,7 +237,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
 
     TupleHelpers::getTriggerWeightsELE20andELE22(iEvent.isRealData(),
-    EffDataELE20andELE22, EffMcELE20andELE22, electron);
+    EffDataELE20andELE22, EffMcELE20andELE22, electron, userData0);
 
     CurrentElectronTauWeight.set_EffDataELE20andELE22(EffDataELE20andELE22);
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
