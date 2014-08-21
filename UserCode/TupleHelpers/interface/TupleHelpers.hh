@@ -106,7 +106,7 @@ namespace TupleHelpers
     // the weights should be set to
     // 1.0
 
-    if((ABSETA<1.5 && PT<140) || (ABSETA=>1.5 && PT<60))
+    if((ABSETA<1.5 && PT<140) || (ABSETA>=1.5 && PT<60))
     {
       EffDataHighPtTauTrigger = 1.0;
       EffMcHighPtTauTrigger = 1.0;
