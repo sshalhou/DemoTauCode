@@ -102,7 +102,7 @@ namespace TupleHelpers
     // return 1.0 if Data, or if trigger not fired
     // and is not an embedded sample
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample || userData0.isNonTopEmbeddedSample)) || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()) )
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()) )
     {
 
       EffDataELE20andELE22 = 1.0;
