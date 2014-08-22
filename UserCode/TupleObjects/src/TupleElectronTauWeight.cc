@@ -18,10 +18,35 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_HadronicTauMcTrigEffAntiEMed = NAN;
   m_HadronicTauDataTrigEffAntiETight = NAN;
   m_HadronicTauMcTrigEffAntiETight = NAN;
+  m_electronDataIDweight = NAN;
+  m_electronMcIDweight = NAN;
+  m_electronDataISOLweight = NAN;
+  m_electronMcISOLweight = NAN;
 
 }
 
 //Setting Weights
+
+//////////////////
+// electron ID and ISOL
+
+
+void TupleElectronTauWeight::set_electronDataIDweight(double electronDataIDweight_) { m_electronDataIDweight  =  electronDataIDweight_;}
+double TupleElectronTauWeight::electronDataIDweight() const { return m_electronDataIDweight; }
+
+void TupleElectronTauWeight::set_electronMcIDweight(double electronMcIDweight_) { m_electronMcIDweight  =  electronMcIDweight_;}
+double TupleElectronTauWeight::electronMcIDweight() const { return m_electronMcIDweight; }
+
+void TupleElectronTauWeight::set_electronDataISOLweight(double electronDataISOLweight_) { m_electronDataISOLweight  =  electronDataISOLweight_;}
+double TupleElectronTauWeight::electronDataISOLweight() const { return m_electronDataISOLweight; }
+
+void TupleElectronTauWeight::set_electronMcISOLweight(double electronMcISOLweight_) { m_electronMcISOLweight  =  electronMcISOLweight_;}
+double TupleElectronTauWeight::electronMcISOLweight() const { return m_electronMcISOLweight; }
+
+
+
+
+
 
 /////////////////
 // tau weights for eTau

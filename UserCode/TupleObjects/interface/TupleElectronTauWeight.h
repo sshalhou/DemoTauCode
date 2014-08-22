@@ -37,6 +37,11 @@ public:
   void set_HadronicTauMcTrigEffAntiEMed(double);
   void set_HadronicTauDataTrigEffAntiETight(double);
   void set_HadronicTauMcTrigEffAntiETight(double);
+  void set_electronDataIDweight(double);
+  void set_electronMcIDweight(double);
+  void set_electronDataISOLweight(double);
+  void set_electronMcISOLweight(double);
+
 
   // getters
   double puWeight() const;
@@ -54,6 +59,10 @@ public:
   double HadronicTauMcTrigEffAntiEMed() const;
   double HadronicTauDataTrigEffAntiETight() const;
   double HadronicTauMcTrigEffAntiETight() const;
+  double electronDataIDweight() const;
+  double electronMcIDweight() const;
+  double electronDataISOLweight() const;
+  double electronMcISOLweight() const;
 
 private:
 
@@ -72,6 +81,10 @@ private:
   double m_HadronicTauMcTrigEffAntiEMed;
   double m_HadronicTauDataTrigEffAntiETight;
   double m_HadronicTauMcTrigEffAntiETight;
+  double m_electronDataIDweight;
+  double m_electronMcIDweight;
+  double m_electronDataISOLweight;
+  double m_electronMcISOLweight;
 
 
 

@@ -66,6 +66,7 @@ public:
   void set_passSignalGeneratorMass70to130Cut(bool);
 
 
+
   // getters
 
   LorentzVector p4() const;

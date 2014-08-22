@@ -65,6 +65,7 @@ public:
   void set_passNonTopEmbeddedTriggerAndMass50(bool);
   void set_passSignalGeneratorMass70to130Cut(bool);
 
+
   // getters
 
   LorentzVector p4() const;
@@ -140,6 +141,7 @@ private:
   bool m_passesTriLeptonVeto;
   bool m_passNonTopEmbeddedTriggerAndMass50;
   bool m_passSignalGeneratorMass70to130Cut;
+
 };
 
 typedef std::vector<TupleElectronTau> TupleElectronTauCollection;

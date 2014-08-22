@@ -260,7 +260,27 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_HadronicTauDataTrigEffAntiMuMed(HadronicTauDataTrigEffAntiMuMed);
     CurrentMuonTauWeight.set_HadronicTauMcTrigEffAntiMuMed(HadronicTauMcTrigEffAntiMuMed);
 
-    std::cout<<" TRIG "<<HadronicTauMcTrigEffAntiMuMed<<" "<<HadronicTauDataTrigEffAntiMuMed<<"\n";
+    /////////////
+    // get the muon ID and ISOL weights
+
+    double muonDataIDweight = 1.0;
+    double muonMcIDweight = 1.0;
+    double muonDataISOLweight = 1.0;
+    double muonMcISOLweight = 1.0;
+
+    TupleHelpers::muonIDSF(iEvent.isRealData(), muon,
+    userData0, muonDataIDweight, muonMcIDweight );
+
+    TupleHelpers::muonISOLSF(iEvent.isRealData(), muon,
+    userData0, muonDataISOLweight, muonMcISOLweight );
+
+    CurrentMuonTauWeight.set_muonDataIDweight(muonDataIDweight);
+    CurrentMuonTauWeight.set_muonMcIDweight(muonMcIDweight);
+    CurrentMuonTauWeight.set_muonDataISOLweight(muonDataISOLweight);
+    CurrentMuonTauWeight.set_muonMcISOLweight(muonMcISOLweight);
+
+
+
 
     /////////////
     // add the current pair

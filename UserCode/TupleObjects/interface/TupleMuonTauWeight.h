@@ -35,6 +35,10 @@ public:
   void set_EffMcISOMU17andISOMU18(double);
   void set_HadronicTauDataTrigEffAntiMuMed(double);
   void set_HadronicTauMcTrigEffAntiMuMed(double);
+  void set_muonDataIDweight(double);
+  void set_muonMcIDweight(double);
+  void set_muonDataISOLweight(double);
+  void set_muonMcISOLweight(double);
 
   // getters
   double puWeight() const;
@@ -50,6 +54,11 @@ public:
   double EffMcISOMU17andISOMU18() const;
   double HadronicTauDataTrigEffAntiMuMed() const;
   double HadronicTauMcTrigEffAntiMuMed() const;
+  double muonDataIDweight() const;
+  double muonMcIDweight() const;
+  double muonDataISOLweight() const;
+  double muonMcISOLweight() const;
+
 
 private:
 
@@ -66,6 +75,10 @@ private:
   double m_EffMcISOMU17andISOMU18;
   double m_HadronicTauDataTrigEffAntiMuMed;
   double m_HadronicTauMcTrigEffAntiMuMed;
+  double m_muonDataIDweight;
+  double m_muonMcIDweight;
+  double m_muonDataISOLweight;
+  double m_muonMcISOLweight;
 
 
 

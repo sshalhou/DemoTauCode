@@ -271,6 +271,26 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_HadronicTauMcTrigEffAntiETight(HadronicTauMcTrigEffAntiETight);
 
     /////////////
+    // get the electron ID and ISOL weights
+
+    double electronDataIDweight = 1.0;
+    double electronMcIDweight = 1.0;
+    double electronDataISOLweight = 1.0;
+    double electronMcISOLweight = 1.0;
+
+    TupleHelpers::electronIDSF(iEvent.isRealData(), electron,
+    userData0, electronDataIDweight, electronMcIDweight );
+
+    TupleHelpers::electronISOLSF(iEvent.isRealData(), electron,
+    userData0, electronDataISOLweight, electronMcISOLweight );
+
+    CurrentElectronTauWeight.set_electronDataIDweight(electronDataIDweight);
+    CurrentElectronTauWeight.set_electronMcIDweight(electronMcIDweight);
+    CurrentElectronTauWeight.set_electronDataISOLweight(electronDataISOLweight);
+    CurrentElectronTauWeight.set_electronMcISOLweight(electronMcISOLweight);
+
+
+    /////////////
     // add the current pair
     // to the collection
 

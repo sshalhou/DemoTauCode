@@ -16,10 +16,31 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_EffMcISOMU17andISOMU18 = NAN;
   m_HadronicTauDataTrigEffAntiMuMed = NAN;
   m_HadronicTauMcTrigEffAntiMuMed = NAN;
+  m_muonDataIDweight = NAN;
+  m_muonMcIDweight = NAN;
+  m_muonDataISOLweight = NAN;
+  m_muonMcISOLweight = NAN;
 
 }
 
 //Setting Weights
+
+//////////////////
+// muon ID and ISOL
+
+
+void TupleMuonTauWeight::set_muonDataIDweight(double muonDataIDweight_) { m_muonDataIDweight  =  muonDataIDweight_;}
+double TupleMuonTauWeight::muonDataIDweight() const { return m_muonDataIDweight; }
+
+void TupleMuonTauWeight::set_muonMcIDweight(double muonMcIDweight_) { m_muonMcIDweight  =  muonMcIDweight_;}
+double TupleMuonTauWeight::muonMcIDweight() const { return m_muonMcIDweight; }
+
+void TupleMuonTauWeight::set_muonDataISOLweight(double muonDataISOLweight_) { m_muonDataISOLweight  =  muonDataISOLweight_;}
+double TupleMuonTauWeight::muonDataISOLweight() const { return m_muonDataISOLweight; }
+
+void TupleMuonTauWeight::set_muonMcISOLweight(double muonMcISOLweight_) { m_muonMcISOLweight  =  muonMcISOLweight_;}
+double TupleMuonTauWeight::muonMcISOLweight() const { return m_muonMcISOLweight; }
+
 
 ////////////////////
 // had tau trigger wt
