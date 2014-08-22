@@ -86,14 +86,80 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
 
     bool passAllCuts = 1;
 
-    double irel_DR4 = 999.;
-    double i_charged_DR4 = muon->pfIsolationR04().sumChargedParticlePt;
-    double i_photons_DR4 = muon->pfIsolationR04().sumPhotonEt;
-    double i_neutralhadrons_DR4 = muon->pfIsolationR04().sumNeutralHadronEt;
-    double i_deltabeta_DR4 = muon->pfIsolationR04().sumPUPt;
-    irel_DR4 = i_charged_DR4 + std::max(i_neutralhadrons_DR4+i_photons_DR4-0.5*i_deltabeta_DR4,0.0);
-    if(muon->pt()) irel_DR4/=muon->pt();
-    else irel_DR4 = 999.;
+
+/////////////
+// compute
+// and store
+// isolation parameters
+// @ DR 4
+/////////////
+
+double relativeIsolation_DR4 = 999.;
+
+
+
+
+AbsVetos  vetos2012PFIdCharged;
+AbsVetos  vetos2012PFIdPhotons;
+AbsVetos  vetos2012PFIdNeutral;
+AbsVetos  vetos2012PFIdPUCharged;
+
+
+float nhIso04PFId  = 0.0;
+float allChIso04PFId = 0.0;
+float phIso04PFId  = 0.0;
+float nhIsoPU04PFId = 0.0;
+
+
+
+vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.00010));
+vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
+
+vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
+
+vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
+
+vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
+vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
+
+
+
+
+allChIso04PFId = muon->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
+
+nhIso04PFId = muon->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
+
+phIso04PFId = muon->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
+
+nhIsoPU04PFId = muon->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
+
+
+
+
+
+relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
+if(muon->pt()!=0) relativeIsolation_DR4/=muon->pt();
+
+
+
+
+
+
+for(unsigned int i = 0; i <vetos2012PFIdCharged.size(); i++) delete vetos2012PFIdCharged[i];
+
+for(unsigned int i = 0; i <vetos2012PFIdNeutral.size(); i++) delete vetos2012PFIdNeutral[i];
+
+for(unsigned int i = 0; i <vetos2012PFIdPhotons.size(); i++) delete vetos2012PFIdPhotons[i];
+
+for(unsigned int i = 0; i <vetos2012PFIdPUCharged.size(); i++) delete vetos2012PFIdPUCharged[i];
+
+
+
+
+
+
 
 
     if(!(muon->isGlobalMuon())) passAllCuts = 0;
@@ -102,7 +168,7 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
     if(!(muon->p4().pt()>15)) passAllCuts = 0;
     if(!(fabs(muon->p4().eta())<2.4)) passAllCuts = 0;
     if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passAllCuts = 0;
-    if(!(irel_DR4 < 0.3)) passAllCuts = 0;
+    if(!(relativeIsolation_DR4 < 0.3)) passAllCuts = 0;
 
 
     if(passAllCuts)

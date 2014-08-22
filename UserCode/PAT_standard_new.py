@@ -5,15 +5,18 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
-FilterEvents = True
-DropSelectedPatObjects = True
-KeepAll = False
+
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
+runOnMC = True
 
 
+FilterEvents = True
+DropSelectedPatObjects = True
+KeepAll = False
+PrintProductIDs = False
 
 ###################################################
 # Store SampleName and PhysicsProcess
@@ -35,7 +38,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
 ###################################################
 from PhysicsTools.PatAlgos.tools.coreTools import *
 
-runOnMC = True
+
 if runOnMC:
   process.GlobalTag.globaltag = 'START53_V23::All'
 else:
@@ -53,6 +56,14 @@ jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
 
 if not runOnMC:
   jetEnCorr.extend(['L2L3Residual'])
+
+
+###################################################
+# debug info including productId will be printed
+###################################################
+
+process.printEventContent = cms.EDAnalyzer("EventContentAnalyzer")
+
 
 ###################################################
 # pu jet id requires PF jets as input
@@ -336,6 +347,21 @@ if runOnMC:
   # the above is needed for the PDF sys. tool
 
 ##################################################
+# stuff needed for the embedded samples
+##################################################
+
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+from PhysicsTools.PatAlgos.tools.trigTools import *
+switchOnTrigger( process )
+
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
+    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+    process.patTriggerEvent.processName = 'HLT'
+
+##################################################
 # Let it run
 ###################################################
 process.p = cms.Path(
@@ -375,6 +401,17 @@ if DropSelectedPatObjects:
   process.out.outputCommands +=['keep *_cleanPatJets*_*_*']
 
 
+# always keep the following, really needed for embedded
+process.out.outputCommands +=['keep *_tmfTracks_*_*']
+process.out.outputCommands +=['keep *_generator_minVisPtFilter_*']
+process.out.outputCommands +=['keep *_generator_*_*']
+process.out.outputCommands +=['keep *_particleFlow__*']
+process.out.outputCommands +=['keep *_particleFlowDisplacedVertex_*_*']
+process.out.outputCommands +=['keep recoMuons_muons__EmbeddedRECO']
+process.out.outputCommands +=['keep recoPFJets_ak5PFJets__EmbeddedRECO']
+
+if PrintProductIDs
+  process.p *= process.printEventContent
 
 
 ###################################################
@@ -562,8 +599,7 @@ process.tauTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
                                                        resolveByMatchQuality = cms.bool( True )
                                                        )
 
-from PhysicsTools.PatAlgos.tools.trigTools import *
-switchOnTrigger( process )
+
 triggerMatchers = cms.vstring()
 triggerMatchers.extend(['eTrigMatchEle20'])
 triggerMatchers.extend(['eTrigMatchEle22'])
