@@ -436,14 +436,14 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         // should be true for all other samples
 
         bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
-        CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
+        CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
 
         ////////////////
         // check if passes SUSY Signal
         // Generator Mass 70% to 130% Cut
 
         bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
-        CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
+        CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
 
 
         ////////////

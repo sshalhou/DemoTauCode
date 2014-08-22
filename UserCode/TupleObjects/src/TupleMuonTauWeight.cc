@@ -14,10 +14,21 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_NumTruePileUpIntP1 = NAN;
   m_EffDataISOMU17andISOMU18 = NAN;
   m_EffMcISOMU17andISOMU18 = NAN;
+  m_HadronicTauDataTrigEffAntiMuMed = NAN;
+  m_HadronicTauMcTrigEffAntiMuMed = NAN;
 
 }
 
 //Setting Weights
+
+////////////////////
+// had tau trigger wt
+
+void TupleMuonTauWeight::set_HadronicTauDataTrigEffAntiMuMed(double HadronicTauDataTrigEffAntiMuMed_) { m_HadronicTauDataTrigEffAntiMuMed  =  HadronicTauDataTrigEffAntiMuMed_;}
+double TupleMuonTauWeight::HadronicTauDataTrigEffAntiMuMed() const { return m_HadronicTauDataTrigEffAntiMuMed; }
+
+void TupleMuonTauWeight::set_HadronicTauMcTrigEffAntiMuMed(double HadronicTauMcTrigEffAntiMuMed_) { m_HadronicTauMcTrigEffAntiMuMed  =  HadronicTauMcTrigEffAntiMuMed_;}
+double TupleMuonTauWeight::HadronicTauMcTrigEffAntiMuMed() const { return m_HadronicTauMcTrigEffAntiMuMed; }
 
 
 ///////////////////////

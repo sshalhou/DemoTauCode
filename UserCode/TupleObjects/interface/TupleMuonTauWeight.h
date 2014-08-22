@@ -33,6 +33,8 @@ public:
   void set_NumTruePileUpIntP1(float);
   void set_EffDataISOMU17andISOMU18(double);
   void set_EffMcISOMU17andISOMU18(double);
+  void set_HadronicTauDataTrigEffAntiMuMed(double);
+  void set_HadronicTauMcTrigEffAntiMuMed(double);
 
   // getters
   double puWeight() const;
@@ -46,6 +48,8 @@ public:
   float NumTruePileUpIntP1() const;
   double EffDataISOMU17andISOMU18() const;
   double EffMcISOMU17andISOMU18() const;
+  double HadronicTauDataTrigEffAntiMuMed() const;
+  double HadronicTauMcTrigEffAntiMuMed() const;
 
 private:
 
@@ -60,6 +64,8 @@ private:
   float m_NumTruePileUpIntP1;
   double m_EffDataISOMU17andISOMU18;
   double m_EffMcISOMU17andISOMU18;
+  double m_HadronicTauDataTrigEffAntiMuMed;
+  double m_HadronicTauMcTrigEffAntiMuMed;
 
 
 
