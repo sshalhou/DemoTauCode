@@ -5,12 +5,16 @@
 
 #include "DataFormats/PatCandidates/interface/Muon.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include "DataFormats/RecoCandidate/interface/IsoDeposit.h"
+#include "DataFormats/RecoCandidate/interface/IsoDepositVetos.h"
+#include "DataFormats/PatCandidates/interface/Isolation.h"
 
 /////////////////////////
 // return 0 for events
 // with a dimuon pair
 
 using namespace pat;
+using namespace reco::isodeposit;
 
 
 DiMuonFilter::DiMuonFilter(const edm::ParameterSet & iConfig) {
