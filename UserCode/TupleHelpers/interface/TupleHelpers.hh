@@ -33,6 +33,8 @@
 #include "PhysicsTools/Utilities/interface/LumiReWeighting.h"
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+#include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+
 
 namespace TupleHelpers
 {
