@@ -322,12 +322,6 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
     else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
 
-    else
-    {
-      std::cout<<" real data or non-gen matched tau, not applying a tau energy correction"<<std::endl;
-      CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
-    }
-
 
     // need to be careful here with pdgIds, as it seems the one accessed
     // below is the pf's pdgId which is filled for data and MC

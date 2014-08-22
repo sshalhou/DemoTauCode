@@ -242,8 +242,8 @@ namespace TupleHelpers
     =  { { { 0.732434 , 0.888954} , { 0.807757 , 0.915259} } , // ABCD
     { { 0.777811 , 0.906771} , { 0.852909 , 0.924465} } }; // MC ABCD
 
-    electronDataISOLweight = electronID[0][nEta][nPt];
-    electronMcISOLweight = electronID[1][nEta][nPt];
+    electronDataISOLweight = electronISOL[0][nEta][nPt];
+    electronMcISOLweight = electronISOL[1][nEta][nPt];
     return;
   }
 
