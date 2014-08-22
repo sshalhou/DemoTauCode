@@ -154,10 +154,10 @@ namespace TupleHelpers
       {
 
 
-          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgId()<<" "<<genparticles[mc].status() == 3)<<std::endl;
+          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgId()<<" "<<genparticles[mc].status()<<std::endl;
 
 
-        
+
       }
 
 
