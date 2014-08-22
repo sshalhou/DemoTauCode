@@ -409,6 +409,8 @@ process.out.outputCommands +=['keep *_particleFlow__*']
 process.out.outputCommands +=['keep *_particleFlowDisplacedVertex_*_*']
 process.out.outputCommands +=['keep recoMuons_muons__EmbeddedRECO']
 process.out.outputCommands +=['keep recoPFJets_ak5PFJets__EmbeddedRECO']
+process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__EmbeddedRECO']
+
 
 if PrintProductIDs
   process.p *= process.printEventContent

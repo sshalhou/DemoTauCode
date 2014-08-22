@@ -35,6 +35,7 @@
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 
+typedef math::XYZTLorentzVector LorentzVector;
 
 namespace TupleHelpers
 {
@@ -149,19 +150,29 @@ namespace TupleHelpers
       // mass is > 50
 
       bool passesGenLevelMassCut = 0;
+      LorentzVector LegPlus, LegMinus;
 
       for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
       {
 
+        if(genparticles[mc].status()==2)
+        {
 
-          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgId()<<" "<<genparticles[mc].status()<<std::endl;
+          if(genparticles[mc].pdgId()==-15) LegMius = genparticles[mc].p4();
+          if(genparticles[mc].pdgId()==15) LegPlus = genparticles[mc].p4();
 
+
+        }
 
 
       }
+      if( (LegMius+LegPlus).M() > 50.0) passesGenLevelMassCut = 1;
 
 
+    if(triggerOK && passesGenLevelMassCut) pass = 1;
+    else pass = 0;
 
+    std::cout<<" pass "<<triggerOK<<" "<<passesGenLevelMassCut<<"\n";
 
     }
 
