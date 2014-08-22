@@ -40,6 +40,217 @@ typedef math::XYZTLorentzVector LorentzVector;
 namespace TupleHelpers
 {
 
+
+  //////////////////
+  // muon ID scale factor
+
+  void muonIDSF(bool isRealData, const TupleElectron muon,
+  const TupleUserSpecifiedData userData0, double & muonDataIDweight,
+  double & muonMcIDweight)
+  {
+
+    //////////
+    // return 1 if data, or not embedded
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      muonDataIDweight = 1.0;
+      muonMcIDweight = 1.0;
+      return;
+
+    }
+
+    //////////////
+    // compute sf if MC or embedded samples
+
+
+    double ABSETA = fabs(muon.p4().eta());
+    double PT = muon.p4().pt();
+
+    int nEta = 0;
+    int nPt = 0;
+
+    if(PT<30) nPt = 0;
+    else nPt = 1;
+
+    if(ABSETA<0.8) nEta = 0;
+    else if(0.8<=ABSETA && ABSETA<1.2) nEta = 1;
+    else if(1.2<=ABSETA && ABSETA<2.1) nEta = 2;
+
+
+    /////////////////////
+    // weights matrix with [nRun][nEta][nPt]
+
+    double muonID[2][3][2]
+    = { { { 0.947122 , 0.94881} , { 0.942154 , 0.943422} , { 0.938653 , 0.938045} } , // ABCD
+    { { 0.964696 , 0.963092} , { 0.958555 , 0.957613} , { 0.951103 , 0.949022} } }; // MC ABCD
+
+
+
+
+    muonDataIDweight = muonID[0][nEta][nPt];
+    muonMcIDweight = muonID[1][nEta][nPt];
+    return;
+  }
+
+
+  //////////////////
+  // muon ISOL scale factor
+
+  void muonISOLSF(bool isRealData, const TupleElectron muon,
+  const TupleUserSpecifiedData userData0, double & muonDataISOLweight,
+  double & muonMcISOLweight)
+  {
+
+    //////////
+    // return 1 if data, or not embedded
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      muonDataISOLweight = 1.0;
+      muonMcISOLweight = 1.0;
+      return;
+
+    }
+
+    //////////////
+    // compute sf if MC or embedded samples
+
+
+    double ABSETA = fabs(muon.p4().eta());
+    double PT = muon.p4().pt();
+
+    int nEta = 0;
+    int nPt = 0;
+
+    if(PT<30) nPt = 0;
+    else nPt = 1;
+
+    if(ABSETA<0.8) nEta = 0;
+    else if(0.8<=ABSETA && ABSETA<1.2) nEta = 1;
+    else if(1.2<=ABSETA && ABSETA<2.1) nEta = 2;
+
+
+    /////////////////////
+    // weights matrix with [nRun][nEta][nPt]
+
+    double muonISOL[2][3][2]
+    =  { { { 0.74406 , 0.902759} , { 0.806595 , 0.923013} , { 0.844972 , 0.937799} } , // ABCD
+    { { 0.783752 , 0.913384} , { 0.820126 , 0.928884} , { 0.851507 , 0.938155} } }; // MC ABCD
+
+
+
+    muonDataISOLweight = muonISOL[0][nEta][nPt];
+    muonMcISOLweight = muonISOL[1][nEta][nPt];
+    return;
+  }
+
+  //////////////////
+  // electron ID scale factor
+
+  void electronIDSF(bool isRealData, const TupleElectron electron,
+  const TupleUserSpecifiedData userData0, double & electronDataIDweight,
+  double & electronMcIDweight )
+  {
+
+    //////////
+    // return 1 if data, or not embedded
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      electronDataIDweight = 1.0;
+      electronMcIDweight = 1.0;
+      return;
+
+    }
+
+    //////////////
+    // compute sf if MC or embedded samples
+
+
+    double ABSETA = fabs(electron.p4().eta());
+    double PT = electron.p4().pt();
+
+    int nEta = 0;
+    int nPt = 0;
+
+    if(PT<30) nPt = 0;
+    else nPt = 1;
+
+    if(ABSETA<1.479) nEta = 0;
+    else nEta = 1;
+
+
+    /////////////////////
+    // weights matrix with [nRun][nEta][nPt]
+
+    double electronID[2][2][2]
+    = { { { 0.737978 , 0.849993} , { 0.331858 , 0.534207} } ,  // ABCD
+    { { 0.82005 , 0.896069} , { 0.41771 , 0.602545} } };  // MC ABCD
+
+
+    electronDataIDweight = electronID[0][nEta][nPt];
+    electronMcIDweight = electronID[1][nEta][nPt];
+    return;
+  }
+
+
+  //////////////////
+  // electron ISOL scale factor
+
+  void electronISOLSF(bool isRealData, const TupleElectron electron,
+  const TupleUserSpecifiedData userData0, double & electronDataISOLweight,
+  double & electronMcISOLweight )
+  {
+
+    //////////
+    // return 1 if data, or not embedded
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      electronDataISOLweight = 1.0;
+      electronMcISOLweight = 1.0;
+      return;
+
+    }
+
+    //////////////
+    // compute sf if MC or embedded samples
+
+
+    double ABSETA = fabs(electron.p4().eta());
+    double PT = electron.p4().pt();
+
+    int nEta = 0;
+    int nPt = 0;
+
+    if(PT<30) nPt = 0;
+    else nPt = 1;
+
+    if(ABSETA<1.479) nEta = 0;
+    else nEta = 1;
+
+
+    /////////////////////
+    // weights matrix with [nRun][nEta][nPt]
+
+    double electronISOL[2][2][2]
+    =  { { { 0.732434 , 0.888954} , { 0.807757 , 0.915259} } , // ABCD
+    { { 0.777811 , 0.906771} , { 0.852909 , 0.924465} } }; // MC ABCD
+
+    electronDataISOLweight = electronID[0][nEta][nPt];
+    electronMcISOLweight = electronID[1][nEta][nPt];
+    return;
+  }
+
+
+
+
+
   ///////////////////////
   // Integrated Crystal Ball Function
 
@@ -286,7 +497,7 @@ namespace TupleHelpers
       double tightMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
       double tightDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
 
-      double ABSETA = fabs(tau.p4().eta());
+      double ABSETA = fabs(tau.corrected_p4().eta());
 
 
 
@@ -330,16 +541,16 @@ namespace TupleHelpers
 
 
 
-      HadronicTauDataTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauDataTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
 
-      HadronicTauMcTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauMcTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
 
-      HadronicTauDataTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauDataTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       tightDATApar[0], tightDATApar[1], tightDATApar[2], tightDATApar[3], tightDATApar[4]);
 
-      HadronicTauMcTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauMcTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       tightMCpar[0], tightMCpar[1], tightMCpar[2], tightMCpar[3], tightMCpar[4]);
 
 
@@ -394,7 +605,7 @@ namespace TupleHelpers
 
       double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
       double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double ABSETA = fabs(tau.p4().eta());
+      double ABSETA = fabs(tau.corrected_p4().eta());
 
       if(ABSETA<1.5)
       {
@@ -420,10 +631,10 @@ namespace TupleHelpers
 
 
 
-      HadronicTauDataTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauDataTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
 
-      HadronicTauMcTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      HadronicTauMcTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
       medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
 
 
@@ -458,8 +669,8 @@ namespace TupleHelpers
   double & EffMcHighPtTauTrigger)
   {
 
-    double ABSETA = fabs(tau.p4().eta());
-    double PT = tau.p4().pt();
+    double ABSETA = fabs(tau.corrected_p4().eta());
+    double PT = tau.corrected_p4().pt();
 
     ///////////////////////
     // if PT < 140 in the barrel

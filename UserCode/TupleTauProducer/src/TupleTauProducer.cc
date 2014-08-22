@@ -306,24 +306,22 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
-    std::cout<<" Warning need to add in a embedded sample check for tau ES "<<std::endl;
-    // correct the tau energy
-    if(!iEvent.isRealData())
+    // this should prevent correction for any un-needed samples
+
+    if ( tau->genJet() && deltaR(tau->p4(), tau->genJet()->p4()) < 0.5 && tau->genJet()->pt() > 8. )
     {
-      if ( tau->genJet() && deltaR(tau->p4(), tau->genJet()->p4()) < 0.5 && tau->genJet()->pt() > 8. )
-      {
-        std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
-        size_t hadrons = 0;
-        size_t strips = 0;
+      std::cout<<" embedded gen particle exists, correcting tau energy"<<std::endl;
+      size_t hadrons = 0;
+      size_t strips = 0;
 
-        hadrons = tau->signalPFChargedHadrCands().size();
-        strips = tau->signalPFGammaCands().size();
+      hadrons = tau->signalPFChargedHadrCands().size();
+      strips = tau->signalPFGammaCands().size();
 
 
-        CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
-      }
-      else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
+      CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
     }
+    else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
+
     else
     {
       std::cout<<" real data or non-gen matched tau, not applying a tau energy correction"<<std::endl;

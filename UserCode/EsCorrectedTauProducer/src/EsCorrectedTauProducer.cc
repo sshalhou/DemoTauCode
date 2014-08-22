@@ -41,6 +41,8 @@ Implementation:
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+#include "DataFormats/Math/interface/deltaR.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 using namespace std;
@@ -164,12 +166,16 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     // MSSM analysis if matched to generator
     // level hadronic tau decay
 
-    if((hadrons==1 && strips>0) || (hadrons==1 && strips==0) || (hadrons==3))
+    if ( tau->genJet() && deltaR(tau->p4(), tau->genJet()->p4()) < 0.5 && tau->genJet()->pt() > 8. )
     {
 
+      if((hadrons==1 && strips>0) || (hadrons==1 && strips==0) || (hadrons==3))
+      {
 
-      v4_sf *= 1.01;
 
+        v4_sf *= 1.01;
+
+      }
     }
 
     //////////////
@@ -182,7 +188,7 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
 
     correctedTau.setP4(EsCorrectedP4);
 
-  
+
 
     /////////
     // store the corrected tau
