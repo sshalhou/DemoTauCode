@@ -103,7 +103,6 @@ namespace TupleHelpers
     // return 1 for anything other than
     // nonTop embedded
 
-    std::cout<<" userData0 "<<userData0.isNonTopEmbeddedSample()<<" "<<userData0.isTopEmbeddedSample()<<" \n";
 
     if(userData0.isNonTopEmbeddedSample()!=1)
     {
@@ -197,9 +196,9 @@ namespace TupleHelpers
 
 
 
-    if(userData.SampleName().find("SUSY") != std::string::npos) SUSY = 1;
-    if(userData.SampleName().find("susy") != std::string::npos) SUSY = 1;
-    if(userData.SampleName().find("Susy") != std::string::npos) SUSY = 1;
+    if(userData0.SampleName().find("SUSY") != std::string::npos) SUSY = 1;
+    if(userData0.SampleName().find("susy") != std::string::npos) SUSY = 1;
+    if(userData0.SampleName().find("Susy") != std::string::npos) SUSY = 1;
 
     if(!SUSY)
     {
@@ -240,7 +239,7 @@ namespace TupleHelpers
 
 
           }
-          
+
         }
 
       }
