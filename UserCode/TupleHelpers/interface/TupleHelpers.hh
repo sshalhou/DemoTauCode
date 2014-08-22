@@ -102,7 +102,7 @@ namespace TupleHelpers
     // return 1 for anything other than
     // nonTop embedded
 
-    if(userData0.isNonTopEmbeddedSample()!=1)
+    if(userData0.isNonTopEmbeddedSample()!=1 && 1==11)
     {
       pass = 1;
       return pass;
