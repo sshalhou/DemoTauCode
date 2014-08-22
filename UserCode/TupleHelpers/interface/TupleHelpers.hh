@@ -172,7 +172,6 @@ namespace TupleHelpers
     if(triggerOK && passesGenLevelMassCut) pass = 1;
     else pass = 0;
 
-    std::cout<<" pass "<<triggerOK<<" "<<passesGenLevelMassCut<<"\n";
 
     }
 
@@ -193,6 +192,8 @@ namespace TupleHelpers
   const reco::GenParticleCollection & genparticles)
   {
     bool pass = 1;
+
+    
 
 
     return pass;
