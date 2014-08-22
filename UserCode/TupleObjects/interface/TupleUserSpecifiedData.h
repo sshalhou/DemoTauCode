@@ -40,14 +40,14 @@ public:
   std::string PhysicsProcess() const;
   bool isNonTopEmbeddedSample() const;
   bool isTopEmbeddedSample() const;
-  bool MASS() const;
+  double MASS() const;
 private:
 
   std::string m_SampleName;
   std::string m_PhysicsProcess;
   bool m_isNonTopEmbeddedSample;
   bool m_isTopEmbeddedSample;
-  bool m_MASS;
+  double m_MASS;
 
 };
 
