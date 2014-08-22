@@ -158,7 +158,7 @@ namespace TupleHelpers
         if(genparticles[mc].status()==2)
         {
 
-          if(genparticles[mc].pdgId()==-15) LegMius = genparticles[mc].p4();
+          if(genparticles[mc].pdgId()==-15) LegMinus = genparticles[mc].p4();
           if(genparticles[mc].pdgId()==15) LegPlus = genparticles[mc].p4();
 
 
@@ -166,7 +166,7 @@ namespace TupleHelpers
 
 
       }
-      if( (LegMius+LegPlus).M() > 50.0) passesGenLevelMassCut = 1;
+      if( (LegMinus+LegPlus).M() > 50.0) passesGenLevelMassCut = 1;
 
 
     if(triggerOK && passesGenLevelMassCut) pass = 1;
