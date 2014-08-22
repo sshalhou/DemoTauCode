@@ -153,12 +153,11 @@ namespace TupleHelpers
       for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
       {
 
-        if( genparticles[mc].status() == 3)
-        {
-          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgId()<<std::endl;
+
+          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgId()<<" "<<genparticles[mc].status() == 3)<<std::endl;
 
 
-        }
+        
       }
 
 
