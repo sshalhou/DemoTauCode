@@ -169,8 +169,8 @@ namespace TupleHelpers
       if( (LegMinus+LegPlus).M() > 50.0) passesGenLevelMassCut = 1;
 
 
-    if(triggerOK && passesGenLevelMassCut) pass = 1;
-    else pass = 0;
+      if(triggerOK && passesGenLevelMassCut) pass = 1;
+      else pass = 0;
 
 
     }
@@ -192,9 +192,59 @@ namespace TupleHelpers
   const reco::GenParticleCollection & genparticles)
   {
     bool pass = 1;
+    bool SUSY = 0;
 
-    
 
+
+
+    if(userData.SampleName().find("SUSY") != std::string::npos) SUSY = 1;
+    if(userData.SampleName().find("susy") != std::string::npos) SUSY = 1;
+    if(userData.SampleName().find("Susy") != std::string::npos) SUSY = 1;
+
+    if(!SUSY)
+    {
+      pass = 1;
+      return pass;
+    }
+
+    else
+    {
+      double low = 0.7 * userData0.MASS();
+      double high = 1.30 * userData0.MASS();
+
+
+      for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
+      {
+
+        if(genparticles[mc].status()==3)
+        {
+
+          if( abs(genparticles[mc].pdgId())  == 25 || abs(genparticles[mc].pdgId())  == 36 ||
+          abs(genparticles[mc].pdgId())  == 35 || abs(genparticles[mc].pdgId())  == 37)
+          {
+
+
+            if(genparticles[mc].p4().M()<low || genparticles[mc].p4().M()>high)
+            {
+              pass  = 0;
+              std::cout<<" FAIL MASS "<<genparticles[mc].p4().M()<<std::endl;
+              return pass;
+            }
+
+            else if(genparticles[mc].p4().M()>=low && genparticles[mc].p4().M()<=high)
+            {
+              pass  = 1;
+              std::cout<<" PASS MASS "<<genparticles[mc].p4().M()<<std::endl;
+              return pass;
+            }
+
+
+          }
+          
+        }
+
+      }
+    }
 
     return pass;
   }
