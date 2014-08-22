@@ -83,6 +83,36 @@ namespace TupleHelpers
 
   }
 
+  ///////////////////////
+  // for embedded samples, the normal trigger paths
+  // and matching is not done
+
+  bool passNonTopEmbeddedTriggerAndMass50(const TupleUserSpecifiedData userData0,
+  const reco::GenParticleCollection & genparticles, const pat::TriggerPathCollection* paths)
+  {
+    bool pass = 1;
+
+
+    return pass;
+  }
+
+
+  ///////////////////////
+  // for SUSY signal samples,
+  // must reject events outside of
+  // 70% to 130% of the nominal
+  // generator mass
+
+
+  bool passSignalGeneratorMass70to130Cut(const TupleUserSpecifiedData userData0,
+  const reco::GenParticleCollection & genparticles)
+  {
+    bool pass = 1;
+
+
+    return pass;
+  }
+
 
   ////////////////////////////////////////////////////////////////
   // IMPORTANT NOTE: should be applied to events
@@ -180,10 +210,10 @@ namespace TupleHelpers
   {
 
     //////////////////////////
-    // return 1.0 if Data, or if trigger not fired
+    // return 1.0 if Data
     // and is not an embedded sample
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) || !(muon.has_HltMatchMu17() || muon.has_HltMatchMu18()) )
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
     {
 
       EffDataISOMU17andISOMU18 = 1.0;
@@ -194,7 +224,7 @@ namespace TupleHelpers
 
 
     // return weights if !Data
-    else if((muon.has_HltMatchMu17() || muon.has_HltMatchMu18()))
+    else
     {
 
 
@@ -301,7 +331,7 @@ namespace TupleHelpers
     // return 1.0 if Data, or if trigger not fired
     // and is not an embedded sample
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) || !(electron.has_HltMatchEle20() || electron.has_HltMatchEle22()) )
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
     {
 
       EffDataELE20andELE22 = 1.0;
@@ -311,7 +341,7 @@ namespace TupleHelpers
     }
 
     // return weights if !Data
-    else if((electron.has_HltMatchEle20() || electron.has_HltMatchEle22()))
+    else
     {
 
       double cbELegDataM0 = NAN;
