@@ -102,14 +102,14 @@ namespace TupleHelpers
     // return 1 for anything other than
     // nonTop embedded
 
-    if(userData0.isNonTopEmbeddedSample()!=1 && 1==11)
+    if(userData0.isNonTopEmbeddedSample()!=1)
     {
       pass = 1;
       return pass;
     }
 
 
-    if(userData0.isNonTopEmbeddedSample()==1 || 1==1)
+    if(userData0.isNonTopEmbeddedSample()==1)
     {
 
       bool triggerOK = 0;
@@ -140,6 +140,22 @@ namespace TupleHelpers
               triggerOK = 1;
             }
           }
+        }
+      }
+
+      // now check if the gen level dilepton
+      // mass is > 50
+
+      bool passesGenLevelMassCut = 0;
+
+      for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
+      {
+        
+        if( genparticles[mc].status() == 3)
+        {
+          std::cout<<" pdg id "<<mc<<" "<<genparticles[mc].pdgID()<<std::endl;
+
+
         }
       }
 
