@@ -44,7 +44,7 @@ namespace TupleHelpers
   //////////////////
   // muon ID scale factor
 
-  void muonIDSF(bool isRealData, const TupleElectron muon,
+  void muonIDSF(bool isRealData, const TupleMuon muon,
   const TupleUserSpecifiedData userData0, double & muonDataIDweight,
   double & muonMcIDweight)
   {
@@ -98,7 +98,7 @@ namespace TupleHelpers
   //////////////////
   // muon ISOL scale factor
 
-  void muonISOLSF(bool isRealData, const TupleElectron muon,
+  void muonISOLSF(bool isRealData, const TupleMuon muon,
   const TupleUserSpecifiedData userData0, double & muonDataISOLweight,
   double & muonMcISOLweight)
   {
