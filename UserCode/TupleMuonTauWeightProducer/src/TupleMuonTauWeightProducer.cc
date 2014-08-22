@@ -84,6 +84,7 @@ private:
   edm::InputTag pileupSrc_;
   edm::InputTag muontauSrc_;
   edm::InputTag muonSrc_;
+  edm::InputTag tauSrc_;
   edm::InputTag userDataSrc_;
 
 };
@@ -108,6 +109,7 @@ NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
 muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc")),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc")),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc")),
 userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
 
@@ -158,6 +160,12 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
   edm::Handle< TupleMuonCollection > muons;
   iEvent.getByLabel(muonSrc_, muons);
+
+  //////////////
+  // read in the taus
+
+  edm::Handle< TupleTauCollection > taus;
+  iEvent.getByLabel(tauSrc_, taus);
 
   ////////////////
   // reserve space for
@@ -210,6 +218,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     TupleMuonTauWeight CurrentMuonTauWeight;
 
     const TupleMuon muon = ((*muons)[muonTau.muonIndex()]);
+    const TupleTau tau = ((*taus)[muonTau.tauIndex()]);
 
 
     //////////

@@ -85,6 +85,7 @@ private:
   edm::InputTag pileupSrc_;
   edm::InputTag electrontauSrc_;
   edm::InputTag electronSrc_;
+  edm::InputTag tauSrc_;
   edm::InputTag userDataSrc_;
 
 
@@ -111,6 +112,7 @@ NAME_(iConfig.getParameter<std::string>("NAME" )),
 pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
 electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc")),
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc")),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc")),
 userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
 {
 
@@ -160,6 +162,12 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
   edm::Handle< TupleElectronCollection > electrons;
   iEvent.getByLabel(electronSrc_, electrons);
+
+  //////////////
+  // read in the taus
+
+  edm::Handle< TupleTauCollection > taus;
+  iEvent.getByLabel(tauSrc_, taus);
 
   ////////////////
   // reserve space for
@@ -214,6 +222,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     TupleElectronTauWeight CurrentElectronTauWeight;
 
     const TupleElectron electron = ((*electrons)[electronTau.electronIndex()]);
+    const TupleTau tau = ((*taus)[electronTau.tauIndex()]);
 
 
     //////////
@@ -242,6 +251,22 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_EffDataELE20andELE22(EffDataELE20andELE22);
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
 
+
+    //////////////
+    // get the hadronic tau trigger weights
+
+    double HadronicTauDataTrigEffAntiEMed = 1.0;
+    double HadronicTauMcTrigEffAntiEMed = 1.0;
+    double HadronicTauDataTrigEffAntiETight = 1.0;
+    double HadronicTauMcTrigEffAntiETight = 1.0;
+
+    void getTriggerWeightsHadTauETAU(iEvent.isRealData(),
+    HadronicTauDataTrigEffAntiEMed, HadronicTauMcTrigEffAntiEMed,
+    HadronicTauDataTrigEffAntiETight, HadronicTauMcTrigEffAntiETight,
+    tau, userData0);
+
+    std::cout<<" TAU TRIG "<<HadronicTauDataTrigEffAntiEMed<<" "<<HadronicTauMcTrigEffAntiEMed<<" ";
+    std:cout<<HadronicTauDataTrigEffAntiETight<<" "<<HadronicTauMcTrigEffAntiETight<<" \n";
 
 
     /////////////

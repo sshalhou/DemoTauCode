@@ -250,6 +250,118 @@ namespace TupleHelpers
   // compute hadronic tau trigger weights
   //
 
+  /////////////////////////////////
+  // fill the trigger weights
+  // for hadronic taus in eTau
+
+  void getTriggerWeightsHadTauETAU(bool isRealData,
+  double & HadronicTauDataTrigEffAntiEMed, double & HadronicTauMcTrigEffAntiEMed,
+  double & HadronicTauDataTrigEffAntiETight, double & HadronicTauMcTrigEffAntiETight,
+  const TupleTau tau, const TupleUserSpecifiedData userData0)
+  {
+
+    //////////////////////////
+    // return 1.0 if Data
+    // and is not an embedded sample
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      HadronicTauDataTrigEffAntiEMed = 1.0;
+      HadronicTauDataTrigEffAntiETight = 1.0;
+      HadronicTauDataTrigEffAntiETight = 1.0;
+      HadronicTauMcTrigEffAntiETight = 1.0;
+      return;
+
+    }
+
+
+    // return weights if !Data
+    else
+    {
+
+
+      double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+      double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+      double tightMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+      double tightDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+
+      double ABSETA = fabs(tau.p4().eta());
+
+
+
+
+
+
+      if(ABSETA<1.5)
+      {
+        medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
+        medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
+        medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
+        medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
+        medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
+
+        tightDATApar[0] = 18.895025;     tightMCpar[0] = 18.520018;
+        tightDATApar[1] = 1.695306;      tightMCpar[1] = 0.294271;
+        tightDATApar[2] = 1.922852;      tightMCpar[2] = 0.127877;
+        tightDATApar[3] = 34.020744;     tightMCpar[3] = 5.275917;
+        tightDATApar[4] = 0.903446;      tightMCpar[4] = 0.918806;
+
+
+      }
+      else if(ABSETA>1.5)
+      {
+
+        medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
+        medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
+        medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
+        medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
+        medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
+
+        tightDATApar[0] = 18.711233;     tightMCpar[0] = 18.657221;
+        tightDATApar[1] = 0.255624;      tightMCpar[1] = 0.770777;
+        tightDATApar[2] = 0.131574;      tightMCpar[2] = 0.648889;
+        tightDATApar[3] = 3.648101;      tightMCpar[3] = 138.380600;
+        tightDATApar[4] = 0.857139;      tightMCpar[4] = 0.870723;
+
+      }
+
+
+
+
+
+      HadronicTauDataTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
+
+      HadronicTauMcTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
+
+      HadronicTauDataTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      tightDATApar[0], tightDATApar[1], tightDATApar[2], tightDATApar[3], tightDATApar[4]);
+
+      HadronicTauMcTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      tightMCpar[0], tightMCpar[1], tightMCpar[2], tightMCpar[3], tightMCpar[4]);
+
+
+
+
+      /////////
+      // even if embedded, keep both values
+      // although final weight for embedded is just  EffDataELE20andELE22
+      // and not the ratio
+
+      return;
+    }
+
+    return;
+
+
+
+
+
+  }
+
+
 
   ////////////////////////////////////////////////////////////////
   // IMPORTANT NOTE: should be applied to events
