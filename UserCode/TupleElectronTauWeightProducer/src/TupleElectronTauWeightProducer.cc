@@ -260,13 +260,13 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     double HadronicTauDataTrigEffAntiETight = 1.0;
     double HadronicTauMcTrigEffAntiETight = 1.0;
 
-    void getTriggerWeightsHadTauETAU(iEvent.isRealData(),
+    TupleHelpers::getTriggerWeightsHadTauETAU(iEvent.isRealData(),
     HadronicTauDataTrigEffAntiEMed, HadronicTauMcTrigEffAntiEMed,
     HadronicTauDataTrigEffAntiETight, HadronicTauMcTrigEffAntiETight,
     tau, userData0);
 
     std::cout<<" TAU TRIG "<<HadronicTauDataTrigEffAntiEMed<<" "<<HadronicTauMcTrigEffAntiEMed<<" ";
-    std:cout<<HadronicTauDataTrigEffAntiETight<<" "<<HadronicTauMcTrigEffAntiETight<<" \n";
+    std::cout<<HadronicTauDataTrigEffAntiETight<<" "<<HadronicTauMcTrigEffAntiETight<<" \n";
 
 
     /////////////
