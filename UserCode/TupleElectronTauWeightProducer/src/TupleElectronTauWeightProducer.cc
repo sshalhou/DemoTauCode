@@ -265,9 +265,10 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     HadronicTauDataTrigEffAntiETight, HadronicTauMcTrigEffAntiETight,
     tau, userData0);
 
-    std::cout<<" TAU TRIG "<<HadronicTauDataTrigEffAntiEMed<<" "<<HadronicTauMcTrigEffAntiEMed<<" ";
-    std::cout<<HadronicTauDataTrigEffAntiETight<<" "<<HadronicTauMcTrigEffAntiETight<<" \n";
-
+    CurrentElectronTauWeight.set_HadronicTauDataTrigEffAntiEMed(HadronicTauDataTrigEffAntiEMed);
+    CurrentElectronTauWeight.set_HadronicTauMcTrigEffAntiEMed(HadronicTauMcTrigEffAntiEMed);
+    CurrentElectronTauWeight.set_HadronicTauDataTrigEffAntiETight(HadronicTauDataTrigEffAntiETight);
+    CurrentElectronTauWeight.set_HadronicTauMcTrigEffAntiETight(HadronicTauMcTrigEffAntiETight);
 
     /////////////
     // add the current pair

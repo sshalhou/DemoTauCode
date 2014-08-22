@@ -362,6 +362,88 @@ namespace TupleHelpers
   }
 
 
+  /////////////
+  // fill the trigger weights for hadronic taus
+  // for muTau
+
+
+
+  void getTriggerWeightsHadTauMUTAU(bool isRealData,
+  double & HadronicTauDataTrigEffAntiMuMed, double & HadronicTauMcTrigEffAntiMuMed,
+  const TupleTau tau, const TupleUserSpecifiedData userData0)
+  {
+
+    //////////////////////////
+    // return 1.0 if Data
+    // and is not an embedded sample
+
+    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
+    {
+
+      HadronicTauDataTrigEffAntiMuMed = 1.0;
+      HadronicTauMcTrigEffAntiMuMed = 1.0;
+      return;
+
+    }
+
+
+    // return weights if !Data
+    else
+    {
+
+
+      double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+      double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+      double ABSETA = fabs(tau.p4().eta());
+
+      if(ABSETA<1.5)
+      {
+        medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
+        medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
+        medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
+        medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
+        medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
+
+      }
+      else if(ABSETA>1.5)
+      {
+
+        medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
+        medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
+        medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
+        medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
+        medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
+
+      }
+
+
+
+
+
+      HadronicTauDataTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
+
+      HadronicTauMcTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.p4().pt(),
+      medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
+
+
+      /////////
+      // even if embedded, keep both values
+      // although final weight for embedded is just  EffDataELE20andELE22
+      // and not the ratio
+
+      return;
+    }
+
+    return;
+
+
+
+
+
+  }
+
+
 
   ////////////////////////////////////////////////////////////////
   // IMPORTANT NOTE: should be applied to events

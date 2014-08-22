@@ -247,7 +247,20 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_EffDataISOMU17andISOMU18(EffDataISOMU17andISOMU18);
     CurrentMuonTauWeight.set_EffMcISOMU17andISOMU18(EffMcISOMU17andISOMU18);
 
+    //////////////////
+    // get the tau trigger weights for muTau
 
+    double HadronicTauDataTrigEffAntiMuMed = 1.0;
+    double HadronicTauMcTrigEffAntiMuMed = 1.0;
+
+    TupleHelpers::getTriggerWeightsHadTauMUTAU(iEvent.isRealData(),
+    HadronicTauDataTrigEffAntiMuMed, HadronicTauMcTrigEffAntiMuMed,
+    tau, userData0);
+
+    CurrentMuonTauWeight.set_HadronicTauDataTrigEffAntiMuMed(HadronicTauDataTrigEffAntiMuMed);
+    CurrentMuonTauWeight.set_HadronicTauMcTrigEffAntiMuMed(HadronicTauMcTrigEffAntiMuMed);
+
+    std::cout<<" TRIG "<<HadronicTauMcTrigEffAntiMuMed<<" "<<HadronicTauDataTrigEffAntiMuMed<<"\n";
 
     /////////////
     // add the current pair
