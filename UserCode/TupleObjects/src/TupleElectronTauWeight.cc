@@ -14,10 +14,10 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_NumTruePileUpIntP1 = NAN;
   m_EffDataELE20andELE22 = NAN;
   m_EffMcELE20andELE22 = NAN;
-  m_HadronicTauDataTrigEff_antiEMed = NAN;
-  m_HadronicTauMcTrigEff_antiEMed = NAN;
-  m_HadronicTauDataTrigEff_antiETight = NAN;
-  m_HadronicTauMcTrigEff_antiETight = NAN;
+  m_HadronicTauDataTrigEffAntiEMed = NAN;
+  m_HadronicTauMcTrigEffAntiEMed = NAN;
+  m_HadronicTauDataTrigEffAntiETight = NAN;
+  m_HadronicTauMcTrigEffAntiETight = NAN;
 
 }
 
@@ -26,17 +26,17 @@ TupleElectronTauWeight::TupleElectronTauWeight()
 /////////////////
 // tau weights for eTau
 
-void TupleElectronTauWeight::set_HadronicTauDataTrigEff_antiEMed(double HadronicTauDataTrigEff_antiEMed_) { m_HadronicTauDataTrigEff_antiEMed  =  HadronicTauDataTrigEff_antiEMed_;}
-double TupleElectronTauWeight::HadronicTauDataTrigEff_antiEMed() const { return m_HadronicTauDataTrigEff_antiEMed; }
+void TupleElectronTauWeight::set_HadronicTauDataTrigEffAntiEMed(double HadronicTauDataTrigEffAntiEMed_) { m_HadronicTauDataTrigEffAntiEMed  =  HadronicTauDataTrigEffAntiEMed_;}
+double TupleElectronTauWeight::HadronicTauDataTrigEffAntiEMed() const { return m_HadronicTauDataTrigEffAntiEMed; }
 
-void TupleElectronTauWeight::set_HadronicTauMcTrigEff_antiEMed(double HadronicTauMcTrigEff_antiEMed_) { m_HadronicTauMcTrigEff_antiEMed  =  HadronicTauMcTrigEff_antiEMed_;}
-double TupleElectronTauWeight::HadronicTauMcTrigEff_antiEMed() const { return m_HadronicTauMcTrigEff_antiEMed; }
+void TupleElectronTauWeight::set_HadronicTauMcTrigEffAntiEMed(double HadronicTauMcTrigEffAntiEMed_) { m_HadronicTauMcTrigEffAntiEMed  =  HadronicTauMcTrigEffAntiEMed_;}
+double TupleElectronTauWeight::HadronicTauMcTrigEffAntiEMed() const { return m_HadronicTauMcTrigEffAntiEMed; }
 
-void TupleElectronTauWeight::set_HadronicTauDataTrigEff_antiETight(double HadronicTauDataTrigEff_antiETight_) { m_HadronicTauDataTrigEff_antiETight  =  HadronicTauDataTrigEff_antiETight_;}
-double TupleElectronTauWeight::HadronicTauDataTrigEff_antiETight() const { return m_HadronicTauDataTrigEff_antiETight; }
+void TupleElectronTauWeight::set_HadronicTauDataTrigEffAntiETight(double HadronicTauDataTrigEffAntiETight_) { m_HadronicTauDataTrigEffAntiETight  =  HadronicTauDataTrigEffAntiETight_;}
+double TupleElectronTauWeight::HadronicTauDataTrigEffAntiETight() const { return m_HadronicTauDataTrigEffAntiETight; }
 
-void TupleElectronTauWeight::set_HadronicTauMcTrigEff_antiETight(double HadronicTauMcTrigEff_antiETight_) { m_HadronicTauMcTrigEff_antiETight  =  HadronicTauMcTrigEff_antiETight_;}
-double TupleElectronTauWeight::HadronicTauMcTrigEff_antiETight() const { return m_HadronicTauMcTrigEff_antiETight; }
+void TupleElectronTauWeight::set_HadronicTauMcTrigEffAntiETight(double HadronicTauMcTrigEffAntiETight_) { m_HadronicTauMcTrigEffAntiETight  =  HadronicTauMcTrigEffAntiETight_;}
+double TupleElectronTauWeight::HadronicTauMcTrigEffAntiETight() const { return m_HadronicTauMcTrigEffAntiETight; }
 
 
 
