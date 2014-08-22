@@ -32,7 +32,7 @@ public:
   void set_PhysicsProcess(std::string);
   void set_isNonTopEmbeddedSample(bool);
   void set_isTopEmbeddedSample(bool);
-
+  void set_MASS(double);
 
   // getters
 
@@ -40,14 +40,14 @@ public:
   std::string PhysicsProcess() const;
   bool isNonTopEmbeddedSample() const;
   bool isTopEmbeddedSample() const;
-
+  bool MASS() const;
 private:
 
   std::string m_SampleName;
   std::string m_PhysicsProcess;
   bool m_isNonTopEmbeddedSample;
   bool m_isTopEmbeddedSample;
-
+  bool m_MASS;
 
 };
 

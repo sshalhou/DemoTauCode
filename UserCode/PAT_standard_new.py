@@ -8,6 +8,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
 PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
+MASS_=120
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
 runOnMC = True
@@ -29,6 +30,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             PhysicsProcess=cms.string(PhysicsProcess_),
                                             isNonTopEmbeddedSample=cms.bool(isNonTopEmbeddedSample_),
                                             isTopEmbeddedSample=cms.bool(isTopEmbeddedSample_)
+                                            MASS=cms.double(MASS_)
                                             )
 
 ###################################################
@@ -412,7 +414,7 @@ process.out.outputCommands +=['keep recoPFJets_ak5PFJets__EmbeddedRECO']
 process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__EmbeddedRECO']
 
 
-if PrintProductIDs
+if PrintProductIDs:
   process.p *= process.printEventContent
 
 
