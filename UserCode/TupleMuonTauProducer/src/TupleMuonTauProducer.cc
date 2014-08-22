@@ -264,6 +264,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
+
   ////////////
 
   auto_ptr<TupleMuonTauCollection> TupleMuonTaus (new TupleMuonTauCollection);
@@ -419,6 +420,22 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         bool passVeto = TupleHelpers::pairPassesTriLeptonVeto(9999, i, electrons, muons);
         CurrentMuonTau.set_passesTriLeptonVeto(passVeto);
+
+
+        //////////////////
+        // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
+        // cuts for embedded (non-tt) samples
+        // should be true for all other samples
+
+        bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
+        CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
+
+        ////////////////
+        // check if passes SUSY Signal
+        // Generator Mass 70% to 130% Cut
+
+        bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
+        CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
 
 
         ////////////
