@@ -430,6 +430,21 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         bool passVeto = TupleHelpers::pairPassesTriLeptonVeto(i, 9999, electrons, muons);
         CurrentElectronTau.set_passesTriLeptonVeto(passVeto);
 
+        //////////////////
+        // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
+        // cuts for embedded (non-tt) samples
+        // should be true for all other samples
+
+        bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
+        CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
+
+        ////////////////
+        // check if passes SUSY Signal
+        // Generator Mass 70% to 130% Cut
+
+        bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
+        CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
+
 
         ////////////
         // apply Phil's recoil

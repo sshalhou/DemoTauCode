@@ -427,7 +427,6 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         // cuts for embedded (non-tt) samples
         // should be true for all other samples
 
-        std::cout<<" calling CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50 \n";
         bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
         CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
 

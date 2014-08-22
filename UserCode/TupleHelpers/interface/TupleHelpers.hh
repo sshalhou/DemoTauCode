@@ -226,14 +226,12 @@ namespace TupleHelpers
             if(genparticles[mc].p4().M()<low || genparticles[mc].p4().M()>high)
             {
               pass  = 0;
-              std::cout<<" FAIL MASS "<<genparticles[mc].p4().M()<<std::endl;
               return pass;
             }
 
             else if(genparticles[mc].p4().M()>=low && genparticles[mc].p4().M()<=high)
             {
               pass  = 1;
-              std::cout<<" PASS MASS "<<genparticles[mc].p4().M()<<std::endl;
               return pass;
             }
 
@@ -247,6 +245,10 @@ namespace TupleHelpers
 
     return pass;
   }
+
+  /////////////////////////////////////////
+  // compute hadronic tau trigger weights
+  //
 
 
   ////////////////////////////////////////////////////////////////

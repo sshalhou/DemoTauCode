@@ -14,10 +14,31 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_NumTruePileUpIntP1 = NAN;
   m_EffDataELE20andELE22 = NAN;
   m_EffMcELE20andELE22 = NAN;
+  m_HadronicTauDataTrigEff_antiEMed = NAN;
+  m_HadronicTauMcTrigEff_antiEMed = NAN;
+  m_HadronicTauDataTrigEff_antiETight = NAN;
+  m_HadronicTauMcTrigEff_antiETight = NAN;
 
 }
 
 //Setting Weights
+
+/////////////////
+// tau weights for eTau
+
+void TupleElectronTauWeight::set_HadronicTauDataTrigEff_antiEMed(double HadronicTauDataTrigEff_antiEMed_) { m_HadronicTauDataTrigEff_antiEMed  =  HadronicTauDataTrigEff_antiEMed_;}
+double TupleElectronTauWeight::HadronicTauDataTrigEff_antiEMed() const { return m_HadronicTauDataTrigEff_antiEMed; }
+
+void TupleElectronTauWeight::set_HadronicTauMcTrigEff_antiEMed(double HadronicTauMcTrigEff_antiEMed_) { m_HadronicTauMcTrigEff_antiEMed  =  HadronicTauMcTrigEff_antiEMed_;}
+double TupleElectronTauWeight::HadronicTauMcTrigEff_antiEMed() const { return m_HadronicTauMcTrigEff_antiEMed; }
+
+void TupleElectronTauWeight::set_HadronicTauDataTrigEff_antiETight(double HadronicTauDataTrigEff_antiETight_) { m_HadronicTauDataTrigEff_antiETight  =  HadronicTauDataTrigEff_antiETight_;}
+double TupleElectronTauWeight::HadronicTauDataTrigEff_antiETight() const { return m_HadronicTauDataTrigEff_antiETight; }
+
+void TupleElectronTauWeight::set_HadronicTauMcTrigEff_antiETight(double HadronicTauMcTrigEff_antiETight_) { m_HadronicTauMcTrigEff_antiETight  =  HadronicTauMcTrigEff_antiETight_;}
+double TupleElectronTauWeight::HadronicTauMcTrigEff_antiETight() const { return m_HadronicTauMcTrigEff_antiETight; }
+
+
 
 ///////////////////////
 // electron trigger

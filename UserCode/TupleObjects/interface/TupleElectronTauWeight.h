@@ -33,6 +33,10 @@ public:
   void set_NumTruePileUpIntP1(float);
   void set_EffDataELE20andELE22(double);
   void set_EffMcELE20andELE22(double);
+  void set_HadronicTauDataTrigEff_antiEMed(double);
+  void set_HadronicTauMcTrigEff_antiEMed(double);
+  void set_HadronicTauDataTrigEff_antiETight(double);
+  void set_HadronicTauMcTrigEff_antiETight(double);
 
   // getters
   double puWeight() const;
@@ -46,6 +50,10 @@ public:
   float NumTruePileUpIntP1() const;
   double EffDataELE20andELE22() const;
   double EffMcELE20andELE22() const;
+  double set_HadronicTauDataTrigEff_antiEMed() const;
+  double set_HadronicTauMcTrigEff_antiEMed() const;
+  double set_HadronicTauDataTrigEff_antiETight() const;
+  double set_HadronicTauMcTrigEff_antiETight() const;
 
 private:
 
@@ -60,6 +68,10 @@ private:
   float m_NumTruePileUpIntP1;
   double m_EffDataELE20andELE22;
   double m_EffMcELE20andELE22;
+  double m_HadronicTauDataTrigEff_antiEMed;
+  double m_HadronicTauMcTrigEff_antiEMed;
+  double m_HadronicTauDataTrigEff_antiETight;
+  double m_HadronicTauMcTrigEff_antiETight;
 
 
 
