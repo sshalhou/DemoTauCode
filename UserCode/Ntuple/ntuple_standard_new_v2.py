@@ -197,6 +197,11 @@ for eINDEX in range(MAX_ELECTRONS):
       useType1 = cms.bool(False),
       loadMVAfromDB = cms.bool(True),
       minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')),
       inputFileNames = cms.PSet(
         U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
         DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
@@ -222,6 +227,11 @@ for mINDEX in range(MAX_MUONS):
       useType1 = cms.bool(False),
       loadMVAfromDB = cms.bool(True),
       minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')),
       inputFileNames = cms.PSet(
         U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
         DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
