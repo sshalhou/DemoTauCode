@@ -75,6 +75,7 @@ cp -r /uscms/home/shalhout/public/JetReco_v2 DataFormats/JetReco
 rm -rf DataFormats/METReco
 cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
 cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
+cp -r /uscms/home/shalhout/public/TauSpinnerInterface TauSpinnerInterface
 ################################################
 
 ehco "getting pile-up correction root files "

@@ -60,6 +60,13 @@ if not runOnMC:
   jetEnCorr.extend(['L2L3Residual'])
 
 
+#####################################
+# compute the tau spinner weigts
+#####################################
+
+process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
+
+
 ###################################################
 # debug info including productId will be printed
 ###################################################
@@ -390,6 +397,9 @@ process.p = cms.Path(
 
 if FilterEvents:
   process.p *= process.countGoodPairs
+
+if runOnMC:
+  process.p *= process.TauSpinnerReco  
 
 if DropSelectedPatObjects:
   process.out.outputCommands +=['drop *_selectedPatElectrons*_*_*']
