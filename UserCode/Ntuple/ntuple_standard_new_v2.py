@@ -164,6 +164,24 @@ for tINDEX in range(MAX_TAUS):
 pairWiseMvaMETs = cms.Sequence()
 
 
+#################################
+# set the correct jet en. corr
+#################################
+corrector_ = cms.string('ak5PFL1FastL2L3')
+
+if runOnMC:
+  corrector_ = cms.string('ak5PFL1FastL2L3')
+else:
+  corrector_ = cms.string('ak5PFL1FastL2L3Residual')
+
+
+##################################
+# setup MVA DB access
+##################################
+
+from RecoMET.METPUSubtraction.mvaPFMET_db_cfi import mvaPFMEtGBRForestsFromDB
+
+
 ###########
 # eTau METs
 ###########
@@ -174,9 +192,10 @@ for eINDEX in range(MAX_ELECTRONS):
     eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
     tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
-      corrector = cms.string('ak5PFL1FastL2L3'),
+      corrector = corrector_,
       srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
       useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
       minCorrJetPt = cms.double(-1),
       inputFileNames = cms.PSet(
         U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
@@ -198,9 +217,10 @@ for mINDEX in range(MAX_MUONS):
     mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
     tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
-      corrector = cms.string('ak5PFL1FastL2L3'),
+      corrector = corrector_,
       srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
       useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
       minCorrJetPt = cms.double(-1),
       inputFileNames = cms.PSet(
         U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
