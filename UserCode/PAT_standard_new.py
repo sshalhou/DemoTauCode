@@ -61,7 +61,7 @@ if not runOnMC:
 
 
 #####################################
-# compute the tau spinner weigts
+# compute the tau spinner weights
 #####################################
 
 process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
@@ -350,6 +350,7 @@ process.out.outputCommands +=['keep *_ak5GenJetsNoNu_*_PAT']
 process.out.outputCommands +=['keep *_*genParticlesForJetsNoNu*_*_PAT']
 process.out.outputCommands +=['keep *_*iterativeCone5GenJetsNoNu*_*_PAT']
 process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
+process.out.outputCommands +=['keep TauSpinnerReco*_*_*_*']
 
 if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
@@ -399,7 +400,7 @@ if FilterEvents:
   process.p *= process.countGoodPairs
 
 if runOnMC:
-  process.p *= process.TauSpinnerReco  
+  process.p *= process.TauSpinnerReco
 
 if DropSelectedPatObjects:
   process.out.outputCommands +=['drop *_selectedPatElectrons*_*_*']

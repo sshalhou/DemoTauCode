@@ -76,6 +76,7 @@ rm -rf DataFormats/METReco
 cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
 cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
 cp -r /uscms/home/shalhout/public/TauSpinnerInterface TauSpinnerInterface
+cp /uscms/home/shalhout/public/mvaPFMEt_53_Dec2012.db RecoMET/METPUSubtraction/data/.
 ################################################
 
 ehco "getting pile-up correction root files "
