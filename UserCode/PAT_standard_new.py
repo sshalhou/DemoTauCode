@@ -6,9 +6,9 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 ########################################################################################################
 
 
-SampleName_='GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
-PhysicsProcess_='gg->H->tautau[SM_125_8TeV]'
-MASS_=125.0
+SampleName_='SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/AODSIM'
+PhysicsProcess_='ggA0tautau[SUSY_120_8TeV]'
+MASS_=120.0
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
 runOnMC = True
@@ -681,5 +681,5 @@ process.source = cms.Source ("PoolSource",
 ########################################################################################################
 
 
-process.maxEvents.input = 10
+process.maxEvents.input = -1
 ########################################################################################################
