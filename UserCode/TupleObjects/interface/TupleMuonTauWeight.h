@@ -49,8 +49,8 @@ public:
   void set_nominalPOWHEGmhmod(double);
   void set_upPOWHEGmhmod(double);
   void set_downPOWHEGmhmod(double);
-  void etaDepQCDShapeTemplateCorrection(double);
-  void inclusiveQCDShapeTemplateCorrection(double);
+  void set_etaDepQCDShapeTemplateCorrection(double);
+  void set_inclusiveQCDShapeTemplateCorrection(double);
 
   // getters
   double puWeight() const;
