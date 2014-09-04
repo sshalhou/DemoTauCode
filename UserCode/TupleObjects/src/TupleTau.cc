@@ -16,8 +16,8 @@ TupleTau::TupleTau()
   m_decayMode = -999;
   m_passFullId_muTau = 0;
   m_passFullId_eTau = 0;
-  m_numStrips = NAN;
-  m_numHadrons = NAN;
+  m_numStrips = -999;
+  m_numHadrons = -999;
 
   m_againstElectronDeadECAL = NAN;
   m_againstElectronLoose = NAN;
@@ -101,8 +101,8 @@ TupleTau::TupleTau()
 // number of strips
 /////////////////////
 
-void TupleTau::set_numStrips(double numStrips_) { m_numStrips  =  numStrips_;}
-double TupleTau::numStrips() const { return m_numStrips; }
+void TupleTau::set_numStrips(int numStrips_) { m_numStrips  =  numStrips_;}
+int TupleTau::numStrips() const { return m_numStrips; }
 
 
 
@@ -111,8 +111,8 @@ double TupleTau::numStrips() const { return m_numStrips; }
 /////////////////////
 
 
-void TupleTau::set_numHadrons(double numHadrons_) { m_numHadrons  =  numHadrons_;}
-double TupleTau::numHadrons() const { return m_numHadrons; }
+void TupleTau::set_numHadrons(int numHadrons_) { m_numHadrons  =  numHadrons_;}
+int TupleTau::numHadrons() const { return m_numHadrons; }
 
 //////////////////
 // has_HltMatchEle20

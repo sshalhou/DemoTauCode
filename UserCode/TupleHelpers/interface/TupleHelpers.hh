@@ -41,6 +41,46 @@ namespace TupleHelpers
 {
 
 
+  //////////////////////
+  // decay mode correction
+  // for Z->tau tau and
+  // signal samples (will store for all if needed)
+
+  double getDecayModeCorrectionFactor(const TupleTau tau)
+  {
+
+    double correction = 1.0;
+    double ABSETA = fabs(tau.corrected_p4().eta());
+    int strips  = tau.numStrips();
+    int hadrons = tau.numHadrons();
+
+    ////////////////
+    // barrel
+    if(ABSETA<1.5)
+    {
+
+      if(hadrons==1 && strips>0)          correction = 1.06;
+      else if(hadrons==1 && strips==0)    correction = 0.87;
+      else if(hadrons==3)                 correction = 1.02;
+
+
+    }
+
+    ///////////////
+    // endcap
+    if(ABSETA>=1.5)
+    {
+
+      if(hadrons==1 && strips>0)          correction = 1.0;
+      else if(hadrons==1 && strips==0)    correction = 0.96;
+      else if(hadrons==3)                 correction = 1.06;
+
+
+    }
+
+    return correction;
+
+  }
 
   /////////////////
   // Jet-to-Tau Fake correction

@@ -251,6 +251,17 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_EffDataELE20andELE22(EffDataELE20andELE22);
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
 
+
+    //////////////////
+    // get the decay mode correction
+    // factor, used for Z->tau tau + signal
+
+    double DecayModeCorrectionFactor = TupleHelpers::getDecayModeCorrectionFactor(tau);
+    CurrentElectronTauWeight.set_DecayModeCorrectionFactor(DecayModeCorrectionFactor);
+
+
+
+
     //////////////////
     // get the W+jets jet to tau fake correction
 

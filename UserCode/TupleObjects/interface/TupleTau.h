@@ -41,8 +41,8 @@ public:
   void set_decayMode(int);
   void set_passFullId_muTau(bool);
   void set_passFullId_eTau(bool);
-  void set_numStrips(double);
-  void set_numHadrons(double);
+  void set_numStrips(int);
+  void set_numHadrons(int);
 
 
   // Tau Discriminators
@@ -139,8 +139,8 @@ public:
   int decayMode() const;
   bool passFullId_muTau() const;
   bool passFullId_eTau() const;
-  double numStrips() const;
-  double numHadrons() const;
+  int numStrips() const;
+  int numHadrons() const;
 
 
   float againstElectronDeadECAL() const;
@@ -232,8 +232,8 @@ private:
   int m_decayMode;
   bool m_passFullId_muTau;
   bool m_passFullId_eTau;
-  double m_numStrips;
-  double m_numHadrons;
+  int m_numStrips;
+  int m_numHadrons;
 
   float m_againstElectronDeadECAL;
   float m_againstElectronLoose;

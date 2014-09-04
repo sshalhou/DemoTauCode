@@ -23,10 +23,21 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_EffDataHighPtTauTrigger = NAN;
   m_EffMcHighPtTauTrigger = NAN;
   m_TauFakeCorrection = NAN;
+  m_DecayModeCorrectionFactor = NAN;
 
 }
 
 //Setting Weights
+
+
+////////////////////
+// decay mode corr.
+// for Z->tau tau
+// and signal
+
+void TupleMuonTauWeight::set_DecayModeCorrectionFactor(double DecayModeCorrectionFactor_) { m_DecayModeCorrectionFactor  =  DecayModeCorrectionFactor_;}
+double TupleMuonTauWeight::DecayModeCorrectionFactor() const { return m_DecayModeCorrectionFactor; }
+
 
 
 ///////////////////

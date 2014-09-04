@@ -248,6 +248,15 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_EffMcISOMU17andISOMU18(EffMcISOMU17andISOMU18);
 
     //////////////////
+    // get the decay mode correction
+    // factor, used for Z->tau tau + signal
+
+    double DecayModeCorrectionFactor = TupleHelpers::getDecayModeCorrectionFactor(tau);
+    CurrentMuonTauWeight.set_DecayModeCorrectionFactor(DecayModeCorrectionFactor);
+
+
+
+    //////////////////
     // get the W+jets jet to tau fake correction
 
     double TauFakeCorrection = TupleHelpers::getTauFakeCorrection(tau.corrected_p4().pt());
