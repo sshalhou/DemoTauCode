@@ -490,7 +490,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           DaughterOneP4,DaughterTwoPdgId,
           DaughterTwoP4,ApplyRecoilCorrection);
 
+          ///////
+          // store the boson p4 at gen level
 
+          CurrentElectronTau.set_genBosonP4(BosonP4);
 
 
           if(ApplyRecoilCorrection)

@@ -38,10 +38,14 @@ TupleMuonTau::TupleMuonTau()
   m_passesTriLeptonVeto = 0;
   m_passNonTopEmbeddedTriggerAndMass50  = 0;
   m_passSignalGeneratorMass70to130Cut = 0;
+  m_genBosonP4.SetXYZT(NAN,NAN,NAN,NAN);
+
 
 
 }
 
+void TupleMuonTau::set_genBosonP4(LorentzVector genBosonP4_) { m_genBosonP4  =  genBosonP4_;}
+LorentzVector TupleMuonTau::genBosonP4() const { return m_genBosonP4; }
 
 void TupleMuonTau::set_passNonTopEmbeddedTriggerAndMass50(bool passNonTopEmbeddedTriggerAndMass50_) { m_passNonTopEmbeddedTriggerAndMass50  =  passNonTopEmbeddedTriggerAndMass50_;}
 bool TupleMuonTau::passNonTopEmbeddedTriggerAndMass50() const { return m_passNonTopEmbeddedTriggerAndMass50; }

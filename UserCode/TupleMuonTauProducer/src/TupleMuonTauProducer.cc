@@ -482,6 +482,11 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           DaughterOneP4,DaughterTwoPdgId,
           DaughterTwoP4,ApplyRecoilCorrection);
 
+          ///////
+          // store the boson p4 at gen level
+
+          CurrentMuonTau.set_genBosonP4(BosonP4);
+
 
           if(ApplyRecoilCorrection)
           {

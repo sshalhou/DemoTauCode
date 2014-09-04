@@ -306,6 +306,32 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_muonMcISOLweight(muonMcISOLweight);
 
 
+    //////////////
+    // get the higgs pt reweight
+    // for SUSY samples
+
+    double nominalHIGLUXHQTmhmax = 1.0;
+    double upHIGLUXHQTmhmax = 1.0;
+    double downHIGLUXHQTmhmax = 1.0;
+    double nominalPOWHEGmhmod = 1.0;
+    double upPOWHEGmhmod = 1.0;
+    double downPOWHEGmhmod = 1.0;
+
+    TupleHelpers::getHiggsPtWeights(userData0, muonTau.genBosonP4,
+    nominalHIGLUXHQTmhmax,
+    upHIGLUXHQTmhmax,
+    downHIGLUXHQTmhmax,
+    nominalPOWHEGmhmod,
+    upPOWHEGmhmod,
+    downPOWHEGmhmod);
+
+    CurrentMuonTauWeight.set_nominalHIGLUXHQTmhmax(nominalHIGLUXHQTmhmax);
+    CurrentMuonTauWeight.set_upHIGLUXHQTmhmax(upHIGLUXHQTmhmax);
+    CurrentMuonTauWeight.set_downHIGLUXHQTmhmax(downHIGLUXHQTmhmax);
+    CurrentMuonTauWeight.set_nominalPOWHEGmhmod(nominalPOWHEGmhmod);
+    CurrentMuonTauWeight.set_upPOWHEGmhmod(upPOWHEGmhmod);
+    CurrentMuonTauWeight.set_downPOWHEGmhmod(downPOWHEGmhmod);
+
 
 
     /////////////

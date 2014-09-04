@@ -326,6 +326,33 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_electronDataISOLweight(electronDataISOLweight);
     CurrentElectronTauWeight.set_electronMcISOLweight(electronMcISOLweight);
 
+    //////////////
+    // get the higgs pt reweight
+    // for SUSY samples
+
+    double nominalHIGLUXHQTmhmax = 1.0;
+    double upHIGLUXHQTmhmax = 1.0;
+    double downHIGLUXHQTmhmax = 1.0;
+    double nominalPOWHEGmhmod = 1.0;
+    double upPOWHEGmhmod = 1.0;
+    double downPOWHEGmhmod = 1.0;
+
+    TupleHelpers::getHiggsPtWeights(userData0, electronTau.genBosonP4,
+    nominalHIGLUXHQTmhmax,
+    upHIGLUXHQTmhmax,
+    downHIGLUXHQTmhmax,
+    nominalPOWHEGmhmod,
+    upPOWHEGmhmod,
+    downPOWHEGmhmod);
+
+    CurrentElectronTauWeight.set_nominalHIGLUXHQTmhmax(nominalHIGLUXHQTmhmax);
+    CurrentElectronTauWeight.set_upHIGLUXHQTmhmax(upHIGLUXHQTmhmax);
+    CurrentElectronTauWeight.set_downHIGLUXHQTmhmax(downHIGLUXHQTmhmax);
+    CurrentElectronTauWeight.set_nominalPOWHEGmhmod(nominalPOWHEGmhmod);
+    CurrentElectronTauWeight.set_upPOWHEGmhmod(upPOWHEGmhmod);
+    CurrentElectronTauWeight.set_downPOWHEGmhmod(downPOWHEGmhmod);
+
+
 
     /////////////
     // add the current pair

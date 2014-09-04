@@ -76,7 +76,7 @@ namespace TupleHelpers
     if(userData0.SampleName().find("susy") != std::string::npos) SUSY = 1;
     if(userData0.SampleName().find("Susy") != std::string::npos) SUSY = 1;
 
-    if(BosonP4.px() == BosonP4.px()) VALIDVEC = 1;
+    if(BosonP4.px() == BosonP4.px() && BosonP4.pt()>0.0) VALIDVEC = 1;
 
     //////////
     // return with 1.0 if invalid

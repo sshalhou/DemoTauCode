@@ -43,6 +43,13 @@ public:
   void set_EffMcHighPtTauTrigger(double);
   void set_TauFakeCorrection(double);
   void set_DecayModeCorrectionFactor(double);
+  void set_nominalHIGLUXHQTmhmax(double);
+  void set_upHIGLUXHQTmhmax(double);
+  void set_downHIGLUXHQTmhmax(double);
+  void set_nominalPOWHEGmhmod(double);
+  void set_upPOWHEGmhmod(double);
+  void set_downPOWHEGmhmod(double);
+
 
   // getters
   double puWeight() const;
@@ -66,6 +73,14 @@ public:
   double EffMcHighPtTauTrigger() const;
   double TauFakeCorrection() const;
   double DecayModeCorrectionFactor() const;
+  double nominalHIGLUXHQTmhmax() const;
+  double upHIGLUXHQTmhmax() const;
+  double downHIGLUXHQTmhmax() const;
+  double nominalPOWHEGmhmod() const;
+  double upPOWHEGmhmod() const;
+  double downPOWHEGmhmod() const;
+
+
 
 
 private:
@@ -91,6 +106,12 @@ private:
   double m_EffMcHighPtTauTrigger;
   double m_TauFakeCorrection;
   double m_DecayModeCorrectionFactor;
+  double m_nominalHIGLUXHQTmhmax;
+  double m_upHIGLUXHQTmhmax;
+  double m_downHIGLUXHQTmhmax;
+  double m_nominalPOWHEGmhmod;
+  double m_upPOWHEGmhmod;
+  double m_downPOWHEGmhmod;
 
 
 

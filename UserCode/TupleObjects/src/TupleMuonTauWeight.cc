@@ -24,10 +24,40 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_EffMcHighPtTauTrigger = NAN;
   m_TauFakeCorrection = NAN;
   m_DecayModeCorrectionFactor = NAN;
+  m_nominalHIGLUXHQTmhmax = NAN;
+  m_upHIGLUXHQTmhmax = NAN;
+  m_downHIGLUXHQTmhmax = NAN;
+  m_nominalPOWHEGmhmod = NAN;
+  m_upPOWHEGmhmod = NAN;
+  m_downPOWHEGmhmod = NAN;
+
 
 }
 
 //Setting Weights
+
+
+///////////////
+// higgs pt weight for SUSY signal
+
+void TupleMuonTauWeight::set_nominalHIGLUXHQTmhmax(double nominalHIGLUXHQTmhmax_) { m_nominalHIGLUXHQTmhmax  =  nominalHIGLUXHQTmhmax_;}
+double TupleMuonTauWeight::nominalHIGLUXHQTmhmax() const { return m_nominalHIGLUXHQTmhmax; }
+
+void TupleMuonTauWeight::set_upHIGLUXHQTmhmax(double upHIGLUXHQTmhmax_) { m_upHIGLUXHQTmhmax  =  upHIGLUXHQTmhmax_;}
+double TupleMuonTauWeight::upHIGLUXHQTmhmax() const { return m_upHIGLUXHQTmhmax; }
+
+void TupleMuonTauWeight::set_downHIGLUXHQTmhmax(double downHIGLUXHQTmhmax_) { m_downHIGLUXHQTmhmax  =  downHIGLUXHQTmhmax_;}
+double TupleMuonTauWeight::downHIGLUXHQTmhmax() const { return m_downHIGLUXHQTmhmax; }
+
+void TupleMuonTauWeight::set_nominalPOWHEGmhmod(double nominalPOWHEGmhmod_) { m_nominalPOWHEGmhmod  =  nominalPOWHEGmhmod_;}
+double TupleMuonTauWeight::nominalPOWHEGmhmod() const { return m_nominalPOWHEGmhmod; }
+
+void TupleMuonTauWeight::set_upPOWHEGmhmod(double upPOWHEGmhmod_) { m_upPOWHEGmhmod  =  upPOWHEGmhmod_;}
+double TupleMuonTauWeight::upPOWHEGmhmod() const { return m_upPOWHEGmhmod; }
+
+void TupleMuonTauWeight::set_downPOWHEGmhmod(double downPOWHEGmhmod_) { m_downPOWHEGmhmod  =  downPOWHEGmhmod_;}
+double TupleMuonTauWeight::downPOWHEGmhmod() const { return m_downPOWHEGmhmod; }
+
 
 
 ////////////////////

@@ -64,6 +64,7 @@ public:
   // always one if not Z->tau tau Embedded
   void set_passNonTopEmbeddedTriggerAndMass50(bool);
   void set_passSignalGeneratorMass70to130Cut(bool);
+  void set_genBosonP4(LorentzVector);
 
 
   // getters
@@ -102,6 +103,7 @@ public:
   bool passesTriLeptonVeto() const;
   bool passNonTopEmbeddedTriggerAndMass50() const;
   bool passSignalGeneratorMass70to130Cut() const;
+  LorentzVector genBosonP4() const;
 
 
 
@@ -141,6 +143,7 @@ private:
   bool m_passesTriLeptonVeto;
   bool m_passNonTopEmbeddedTriggerAndMass50;
   bool m_passSignalGeneratorMass70to130Cut;
+  LorentzVector m_genBosonP4;
 
 };
 
