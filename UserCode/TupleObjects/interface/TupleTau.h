@@ -32,6 +32,7 @@ public:
   void set_pfJetRefP4(LorentzVector);
   void set_p4(LorentzVector);
   void set_genP4(LorentzVector);
+  void set_genJet(LorentzVector);
   void set_corrected_p4(LorentzVector, std::size_t, std::size_t);
   void set_pdgId(int);
   void set_pdgIdGEN(int);
@@ -40,6 +41,9 @@ public:
   void set_decayMode(int);
   void set_passFullId_muTau(bool);
   void set_passFullId_eTau(bool);
+  void set_numStrips(double);
+  void set_numHadrons(double);
+
 
   // Tau Discriminators
 
@@ -127,6 +131,7 @@ public:
   LorentzVector pfJetRefP4() const;
   LorentzVector p4() const;
   LorentzVector genP4() const;
+  LorentzVector genJet() const;
   LorentzVector corrected_p4() const;
   int pdgId() const;
   int pdgIdGEN() const;
@@ -134,6 +139,8 @@ public:
   int decayMode() const;
   bool passFullId_muTau() const;
   bool passFullId_eTau() const;
+  double numStrips() const;
+  double numHadrons() const;
 
 
   float againstElectronDeadECAL() const;
@@ -217,6 +224,7 @@ private:
   LorentzVector m_pfJetRefP4;
   LorentzVector m_p4;
   LorentzVector m_genP4;
+  LorentzVector m_genJet;
   LorentzVector m_corrected_p4;
   int m_pdgId;
   int m_pdgIdGEN;
@@ -224,6 +232,8 @@ private:
   int m_decayMode;
   bool m_passFullId_muTau;
   bool m_passFullId_eTau;
+  double m_numStrips;
+  double m_numHadrons;
 
   float m_againstElectronDeadECAL;
   float m_againstElectronLoose;

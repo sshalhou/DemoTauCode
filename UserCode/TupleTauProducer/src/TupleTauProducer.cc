@@ -303,8 +303,16 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     //////////////
     // apply tau ES correction
     // we will keep both p4 and corrected p4
+    // and store number of strips and hadrons
+    // and genJet
 
+    CurrentTau.set_numStrips(tau->signalPFGammaCands().size());
+    CurrentTau.set_numHadrons(tau->signalPFChargedHadrCands().size());
 
+    if ( tau->genJet())
+    {
+      CurrentTau.set_genJet(tau->genJet());
+    }
 
     // this should prevent correction for any un-needed samples
 

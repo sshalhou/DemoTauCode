@@ -8,6 +8,7 @@ TupleTau::TupleTau()
   m_pfJetRefP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genP4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genJet.SetXYZT(NAN,NAN,NAN,NAN);
   m_corrected_p4.SetXYZT(NAN,NAN,NAN,NAN);
   m_pdgId = -999;
   m_pdgIdGEN = -999;
@@ -15,6 +16,8 @@ TupleTau::TupleTau()
   m_decayMode = -999;
   m_passFullId_muTau = 0;
   m_passFullId_eTau = 0;
+  m_numStrips = NAN;
+  m_numHadrons = NAN;
 
   m_againstElectronDeadECAL = NAN;
   m_againstElectronLoose = NAN;
@@ -94,6 +97,22 @@ TupleTau::TupleTau()
 
 }
 
+///////////////////
+// number of strips
+/////////////////////
+
+void TupleTau::set_numStrips(double numStrips_) { m_numStrips  =  numStrips_;}
+double TupleTau::numStrips() const { return m_numStrips; }
+
+
+
+////////////////////
+// number of hadrons
+/////////////////////
+
+
+void TupleTau::set_numHadrons(double numHadrons_) { m_numHadrons  =  numHadrons_;}
+double TupleTau::numHadrons() const { return m_numHadrons; }
 
 //////////////////
 // has_HltMatchEle20
@@ -154,6 +173,10 @@ LorentzVector TupleTau::p4() const  { return m_p4; }
 
 void TupleTau::set_genP4(LorentzVector v4_) { m_genP4 = v4_;}
 LorentzVector TupleTau::genP4() const  { return m_genP4; }
+
+
+void TupleTau::set_genJet(LorentzVector v4_) { m_genJet = v4_;}
+LorentzVector TupleTau::genJet() const  { return m_genJet; }
 
 // the tau discriminators
 
