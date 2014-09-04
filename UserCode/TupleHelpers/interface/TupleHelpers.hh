@@ -70,7 +70,7 @@ namespace TupleHelpers
 
     bool SUSY = 0;
     bool VALIDVEC = 0;
-    int MASS = static_cast<int>(userData0.MASS());
+    double MASS = userData0.MASS();
 
     if(userData0.SampleName().find("SUSY") != std::string::npos) SUSY = 1;
     if(userData0.SampleName().find("susy") != std::string::npos) SUSY = 1;
