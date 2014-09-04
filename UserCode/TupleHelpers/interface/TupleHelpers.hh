@@ -1,6 +1,7 @@
 // system include files
 #include <memory>
 #include <string>
+#include <stdio.h>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -40,6 +41,138 @@ typedef math::XYZTLorentzVector LorentzVector;
 namespace TupleHelpers
 {
 
+
+  /////////////////////
+  // higgs pt reweight for SUSY
+  // signal samples
+
+  // called to set bin within bounds for weight access
+  void BoundaryCheckBin(int & bin, int numBins  )
+  {
+    if ( bin < 1 ) bin = 1;
+    if ( bin > numBins ) bin = numBins;
+    return;
+  }
+
+
+  void getHiggsPtWeights(const TupleUserSpecifiedData userData0, LorentzVector BosonP4,
+  double & nominalHIGLUXHQTmhmax,
+  double & upHIGLUXHQTmhmax,
+  double & downHIGLUXHQTmhmax,
+  double & nominalPOWHEGmhmod,
+  double & upPOWHEGmhmod,
+  double & downPOWHEGmhmod)
+  {
+
+    ///////////
+    // check if a valid SUSY sample
+    // and if valid boson 4-vector
+
+    bool SUSY = 0;
+    bool VALIDVEC = 0;
+    int MASS = static_cast<int>(userData0.MASS());
+
+    if(userData0.SampleName().find("SUSY") != std::string::npos) SUSY = 1;
+    if(userData0.SampleName().find("susy") != std::string::npos) SUSY = 1;
+    if(userData0.SampleName().find("Susy") != std::string::npos) SUSY = 1;
+
+    if(BosonP4.px() == BosonP4.px()) VALIDVEC = 1;
+
+    //////////
+    // return with 1.0 if invalid
+
+    if(!SUSY || !VALIDVEC)
+    {
+      nominalHIGLUXHQTmhmax = 1.0;
+      upHIGLUXHQTmhmax  = 1.0;
+      downHIGLUXHQTmhmax  = 1.0;
+      nominalPOWHEGmhmod  = 1.0;
+      upPOWHEGmhmod  = 1.0;
+      downPOWHEGmhmod  = 1.0;
+      return;
+
+    }
+
+    ////////////////
+    // set weights otherwise
+
+    else
+    {
+
+      std::string file1Name = "UserCode/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmax.root";
+      std::string file2Name = "UserCode/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmod_POWHEG.root";
+      TFile* file1 = new TFile(file1Name.data());
+      TFile* file2 = new TFile(file2Name.data());
+
+      /////////////
+      // load in the histograms (3 per file)
+      // and get the weights
+
+      int bin = 0;
+      double PT = BosonP4.pt();
+      char histName[100];
+
+      ////////
+      // nominal
+
+      sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_central", MASS, MASS);
+
+      TH1 * file1HistNom = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      bin = file1HistNom->FindBin(PT);
+      BoundaryCheckBin(bin, file1HistNom->GetNbinsX());
+      nominalHIGLUXHQTmhmax = file1HistNom->GetBinContent(bin);
+
+      TH1 * file2HistNom = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      bin = file2HistNom->FindBin(PT);
+      BoundaryCheckBin(bin, file2HistNom->GetNbinsX());
+      nominalPOWHEGmhmod = file2HistNom->GetBinContent(bin);
+
+      ////////
+      // high
+
+      sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_tanBetaHigh", MASS, MASS);
+
+      TH1 * file1HistUp = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      bin = file1HistUp->FindBin(PT);
+      BoundaryCheckBin(bin, file1HistUp->GetNbinsX());
+      upHIGLUXHQTmhmax = file1HistUp->GetBinContent(bin);
+
+      TH1 * file2HistUp = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      bin = file2HistUp->FindBin(PT);
+      BoundaryCheckBin(bin, file2HistUp->GetNbinsX());
+      upPOWHEGmhmod = file2HistUp->GetBinContent(bin);
+
+      ////////
+      // low
+
+      sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_tanBetaLow", MASS, MASS);
+
+      TH1 * file1HistDown = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      bin = file1HistDown->FindBin(PT);
+      BoundaryCheckBin(bin, file1HistDown->GetNbinsX());
+      downHIGLUXHQTmhmax = file1HistDown->GetBinContent(bin);
+
+      TH1 * file2HistDown = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      bin = file2HistDown->FindBin(PT);
+      BoundaryCheckBin(bin, file2HistDown->GetNbinsX());
+      downPOWHEGmhmod = file2HistDown->GetBinContent(bin);
+
+      delete file1;
+      delete file2;
+      delete file1HistNom;
+      delete file1HistUp;
+      delete file1HistDown;
+      delete file2HistNom;
+      delete file2HistUp;
+      delete file2HistDown;
+
+
+    }
+
+
+  return;
+
+  }
 
 
   //////////////////////

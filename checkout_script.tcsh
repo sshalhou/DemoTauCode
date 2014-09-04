@@ -78,6 +78,7 @@ cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
 cp -r /uscms/home/shalhout/public/PhysicsTools_Utilities PhysicsTools/Utilities
 cp -r /uscms/home/shalhout/public/TauSpinnerInterface TauSpinnerInterface
 cp /uscms/home/shalhout/public/mvaPFMEt_53_Dec2012.db RecoMET/METPUSubtraction/data/.
+cp -r /uscms/home/shalhout/public/HiggsPtReweightFiles UserCode/.
 ################################################
 
 ehco "getting pile-up correction root files "
