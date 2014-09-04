@@ -247,9 +247,15 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_EffDataISOMU17andISOMU18(EffDataISOMU17andISOMU18);
     CurrentMuonTauWeight.set_EffMcISOMU17andISOMU18(EffMcISOMU17andISOMU18);
 
+    //////////////////
+    // get the W+jets jet to tau fake correction
+
+    double TauFakeCorrection = TupleHelpers::getTauFakeCorrection(tau.corrected_p4().pt());
+    CurrentMuonTauWeight.set_TauFakeCorrection(TauFakeCorrection);
+
     ///////////////////
     // get the tau high Pt bug fix weights
-    
+
     double EffDataHighPtTauTrigger = 1.0;
     double EffMcHighPtTauTrigger = 1.0;
 

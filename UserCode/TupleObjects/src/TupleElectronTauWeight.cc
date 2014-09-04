@@ -24,10 +24,21 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_electronMcISOLweight = NAN;
   m_EffDataHighPtTauTrigger = NAN;
   m_EffMcHighPtTauTrigger = NAN;
+  m_TauFakeCorrection = NAN;
 
 }
 
 //Setting Weights
+
+
+///////////////////
+// jet to tau fake weight
+// for w+jets
+
+void TupleElectronTauWeight::set_TauFakeCorrection(double TauFakeCorrection_) { m_TauFakeCorrection  =  TauFakeCorrection_;}
+double TupleElectronTauWeight::TauFakeCorrection() const { return m_TauFakeCorrection; }
+
+
 
 //////////////////
 // hight pt tau trigger bug

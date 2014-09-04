@@ -22,10 +22,19 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_muonMcISOLweight = NAN;
   m_EffDataHighPtTauTrigger = NAN;
   m_EffMcHighPtTauTrigger = NAN;
+  m_TauFakeCorrection = NAN;
 
 }
 
 //Setting Weights
+
+
+///////////////////
+// jet to tau fake weight
+// for w+jets
+
+void TupleMuonTauWeight::set_TauFakeCorrection(double TauFakeCorrection_) { m_TauFakeCorrection  =  TauFakeCorrection_;}
+double TupleMuonTauWeight::TauFakeCorrection() const { return m_TauFakeCorrection; }
 
 
 //////////////////

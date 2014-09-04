@@ -251,6 +251,13 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_EffDataELE20andELE22(EffDataELE20andELE22);
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
 
+    //////////////////
+    // get the W+jets jet to tau fake correction
+
+    double TauFakeCorrection = TupleHelpers::getTauFakeCorrection(tau.corrected_p4().pt());
+    CurrentElectronTauWeight.set_TauFakeCorrection(TauFakeCorrection);
+
+
 
     ///////////////////
     // get the tau high Pt bug fix weights
@@ -261,7 +268,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     TupleHelpers::getHighPtHadronicTauTriggerWeights(tau, EffDataHighPtTauTrigger,EffMcHighPtTauTrigger);
 
     CurrentElectronTauWeight.set_EffDataHighPtTauTrigger(EffDataHighPtTauTrigger);
-    CurrentElectronTauWeight.set_EffMcHighPtTauTrigger(EffMcHighPtTauTrigger);  
+    CurrentElectronTauWeight.set_EffMcHighPtTauTrigger(EffMcHighPtTauTrigger);
 
 
     //////////////

@@ -43,6 +43,7 @@ public:
   void set_electronMcISOLweight(double);
   void set_EffDataHighPtTauTrigger(double);
   void set_EffMcHighPtTauTrigger(double);
+  void set_TauFakeCorrection(double);
 
   // getters
   double puWeight() const;
@@ -66,7 +67,7 @@ public:
   double electronMcISOLweight() const;
   double EffDataHighPtTauTrigger() const;
   double EffMcHighPtTauTrigger() const;
-
+  double TauFakeCorrection() const;
 
 private:
 
@@ -91,7 +92,7 @@ private:
   double m_electronMcISOLweight;
   double m_EffDataHighPtTauTrigger;
   double m_EffMcHighPtTauTrigger;
-
+  double m_TauFakeCorrection;
 
 
 };

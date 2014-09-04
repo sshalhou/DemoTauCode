@@ -41,6 +41,27 @@ namespace TupleHelpers
 {
 
 
+
+  /////////////////
+  // Jet-to-Tau Fake correction
+  // intended for W+jets, but will
+  // be computed for all samples just in case
+
+  double getTauFakeCorrection(double pt)
+  {
+    //new corrections (Mar14, new T-ES correction)
+    double correction = 0;
+    double p0 =  0.787452;
+    double p1 = -0.146412;
+    double p2 = -0.0276803;
+    double p3 = -0.0824184;
+    double X = (pt-149.832)/100;//(x-meanPt)/100
+    correction = p0+p1*X+p2*X*X+p3*X*X*X;
+
+    return correction;
+  }
+
+
   //////////////////
   // muon ID scale factor
 

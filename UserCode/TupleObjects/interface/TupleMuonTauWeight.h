@@ -41,6 +41,7 @@ public:
   void set_muonMcISOLweight(double);
   void set_EffDataHighPtTauTrigger(double);
   void set_EffMcHighPtTauTrigger(double);
+  void set_TauFakeCorrection(double);
 
   // getters
   double puWeight() const;
@@ -62,6 +63,7 @@ public:
   double muonMcISOLweight() const;
   double EffDataHighPtTauTrigger() const;
   double EffMcHighPtTauTrigger() const;
+  double TauFakeCorrection() const;
 
 
 private:
@@ -85,6 +87,7 @@ private:
   double m_muonMcISOLweight;
   double m_EffDataHighPtTauTrigger;
   double m_EffMcHighPtTauTrigger;
+  double m_TauFakeCorrection;
 
 
 
