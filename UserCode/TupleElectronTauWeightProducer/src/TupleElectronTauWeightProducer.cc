@@ -337,7 +337,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     double upPOWHEGmhmod = 1.0;
     double downPOWHEGmhmod = 1.0;
 
-    TupleHelpers::getHiggsPtWeights(userData0, electronTau.genBosonP4,
+    TupleHelpers::getHiggsPtWeights(userData0, electronTau.genBosonP4(),
     nominalHIGLUXHQTmhmax,
     upHIGLUXHQTmhmax,
     downHIGLUXHQTmhmax,
