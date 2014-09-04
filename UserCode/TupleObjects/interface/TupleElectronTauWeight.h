@@ -52,6 +52,8 @@ public:
   void set_nominalPOWHEGmhmod(double);
   void set_upPOWHEGmhmod(double);
   void set_downPOWHEGmhmod(double);
+  void etaDepQCDShapeTemplateCorrection(double);
+  void inclusiveQCDShapeTemplateCorrection(double);
 
   // getters
   double puWeight() const;
@@ -84,6 +86,8 @@ public:
   double nominalPOWHEGmhmod() const;
   double upPOWHEGmhmod() const;
   double downPOWHEGmhmod() const;
+  double etaDepQCDShapeTemplateCorrection() const;
+  double inclusiveQCDShapeTemplateCorrection() const;
 
 private:
 
@@ -117,6 +121,8 @@ private:
   double m_nominalPOWHEGmhmod;
   double m_upPOWHEGmhmod;
   double m_downPOWHEGmhmod;
+  double m_etaDepQCDShapeTemplateCorrection;
+  double m_inclusiveQCDShapeTemplateCorrection;
 
 };
 

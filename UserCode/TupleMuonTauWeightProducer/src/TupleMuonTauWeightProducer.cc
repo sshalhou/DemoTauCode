@@ -333,6 +333,20 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_downPOWHEGmhmod(downPOWHEGmhmod);
 
 
+    ////////////////
+    // QCD template
+    // reweights
+
+    double etaDepQCDShapeTemplateCorrection = 1.0;
+    double inclusiveQCDShapeTemplateCorrection = 1.0;
+
+    TupleHelpers::getQCDShapeTemplateCorrections(etaDepQCDShapeTemplateCorrection,
+    inclusiveQCDShapeTemplateCorrection, tau);
+
+    CurrentMuonTauWeight.set_etaDepQCDShapeTemplateCorrection(etaDepQCDShapeTemplateCorrection);
+    CurrentMuonTauWeight.set_inclusiveQCDShapeTemplateCorrection(inclusiveQCDShapeTemplateCorrection);
+
+
 
     /////////////
     // add the current pair

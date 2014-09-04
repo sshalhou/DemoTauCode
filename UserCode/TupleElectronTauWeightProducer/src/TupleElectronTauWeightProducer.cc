@@ -352,6 +352,18 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_upPOWHEGmhmod(upPOWHEGmhmod);
     CurrentElectronTauWeight.set_downPOWHEGmhmod(downPOWHEGmhmod);
 
+    ////////////////
+    // QCD template
+    // reweights
+
+    double etaDepQCDShapeTemplateCorrection = 1.0;
+    double inclusiveQCDShapeTemplateCorrection = 1.0;
+
+    TupleHelpers::getQCDShapeTemplateCorrections(etaDepQCDShapeTemplateCorrection,
+    inclusiveQCDShapeTemplateCorrection, tau);
+
+    CurrentElectronTauWeight.set_etaDepQCDShapeTemplateCorrection(etaDepQCDShapeTemplateCorrection);
+    CurrentElectronTauWeight.set_inclusiveQCDShapeTemplateCorrection(inclusiveQCDShapeTemplateCorrection);
 
 
     /////////////

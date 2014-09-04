@@ -42,6 +42,76 @@ namespace TupleHelpers
 {
 
 
+  ///////////////////////
+  // QCD Shape Temp. Correction
+  // Weights
+  // will be filled for all samples
+
+  void getQCDShapeTemplateCorrections(double & etaDepQCDShapeTemplateCorrection,
+  double & inclusiveQCDShapeTemplateCorrection, const TupleTau tau)
+  {
+
+    double ABSETA = fabs(tau.corrected_p4().eta());
+    double PT = tau.corrected_p4().pt();
+
+
+    TF1* QCDWeight_mutau_inclusive = new TF1("QCDWeight_mutau_inclusive","1.25E+00+(-6.31E-03)*x",30.,2000.);
+    QCDWeight_mutau_inclusive->SetNpx(25600);
+    //QCDWeight_mutau_inclusive->Write();
+    inclusiveQCDShapeTemplateCorrection = QCDWeight_mutau_inclusive->Eval(PT);
+    if(inclusiveQCDShapeTemplateCorrection<0.0) inclusiveQCDShapeTemplateCorrection = 0.0;
+
+    delete QCDWeight_mutau_inclusive;
+
+
+
+
+    if(ABSETA <= 1.2)
+    {
+      TF1* QCDWeight_mutau_central = new TF1("QCDWeight_mutau_central","1.22E+00+(-5.71E-03)*x",30.,2000.);
+      QCDWeight_mutau_central->SetNpx(25600);
+      //QCDWeight_mutau_central->Write();
+
+      etaDepQCDShapeTemplateCorrection = QCDWeight_mutau_central->Eval(PT);
+      if(etaDepQCDShapeTemplateCorrection<0.0) etaDepQCDShapeTemplateCorrection = 0.0;
+
+      delete QCDWeight_mutau_central;
+    }
+
+    else if(ABSETA>1.2 && ABSETA<=1.7)
+    {
+      TF1* QCDWeight_mutau_medium = new TF1("QCDWeight_mutau_medium","1.52E+00+(-1.34E-02)*x",30.,2000.);
+      QCDWeight_mutau_medium->SetNpx(25600);
+      //QCDWeight_mutau_medium->Write();
+
+      etaDepQCDShapeTemplateCorrection = QCDWeight_mutau_medium->Eval(PT);
+      if(etaDepQCDShapeTemplateCorrection<0.0) etaDepQCDShapeTemplateCorrection = 0.0;
+
+
+      delete QCDWeight_mutau_medium;
+    }
+
+    else if(ABSETA>1.7)
+    {
+      TF1* QCDWeight_mutau_forward = new TF1("QCDWeight_mutau_forward","1.43E+00+(-1.09E-02)*x",30.,2000.);
+      QCDWeight_mutau_forward->SetNpx(25600);
+      //QCDWeight_mutau_forward->Write();
+
+      etaDepQCDShapeTemplateCorrection = QCDWeight_mutau_forward->Eval(PT);
+      if(etaDepQCDShapeTemplateCorrection<0.0) etaDepQCDShapeTemplateCorrection = 0.0;
+
+
+
+      delete QCDWeight_mutau_forward;
+    }
+
+
+    return;
+  }
+
+
+
+
   /////////////////////
   // higgs pt reweight for SUSY
   // signal samples
@@ -170,7 +240,7 @@ namespace TupleHelpers
     }
 
 
-  return;
+    return;
 
   }
 

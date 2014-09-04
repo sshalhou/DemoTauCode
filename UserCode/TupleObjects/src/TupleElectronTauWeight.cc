@@ -33,10 +33,22 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_nominalPOWHEGmhmod = NAN;
   m_upPOWHEGmhmod = NAN;
   m_downPOWHEGmhmod = NAN;
+  m_etaDepQCDShapeTemplateCorrection = NAN;
+  m_inclusiveQCDShapeTemplateCorrection = NAN;
 
 }
 
 //Setting Weights
+
+
+///////////////
+// QCD template reweight
+
+void TupleElectronTauWeight::set_etaDepQCDShapeTemplateCorrection(double etaDepQCDShapeTemplateCorrection_) { m_etaDepQCDShapeTemplateCorrection  =  etaDepQCDShapeTemplateCorrection_;}
+double TupleElectronTauWeight::etaDepQCDShapeTemplateCorrection() const { return m_etaDepQCDShapeTemplateCorrection; }
+
+void TupleElectronTauWeight::set_inclusiveQCDShapeTemplateCorrection(double inclusiveQCDShapeTemplateCorrection_) { m_inclusiveQCDShapeTemplateCorrection  =  inclusiveQCDShapeTemplateCorrection_;}
+double TupleElectronTauWeight::inclusiveQCDShapeTemplateCorrection() const { return m_inclusiveQCDShapeTemplateCorrection; }
 
 
 ///////////////
