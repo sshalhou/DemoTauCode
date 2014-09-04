@@ -311,7 +311,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     if ( tau->genJet())
     {
-      CurrentTau.set_genJet(tau->genJet());
+      CurrentTau.set_genJet(tau->genJet()->p4());
     }
 
     // this should prevent correction for any un-needed samples
