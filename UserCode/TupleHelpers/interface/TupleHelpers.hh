@@ -701,6 +701,7 @@ namespace TupleHelpers
       EffMcHighPtTauTrigger    = TWBarrel->Eval(PTx);
 
       delete TWBarrel;
+      return;
 
     }
 
@@ -720,6 +721,7 @@ namespace TupleHelpers
       EffMcHighPtTauTrigger    = TWEndcaps->Eval(PTx);
 
       delete TWEndcaps;
+      return;
 
     }
 

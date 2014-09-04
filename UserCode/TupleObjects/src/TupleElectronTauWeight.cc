@@ -22,10 +22,23 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_electronMcIDweight = NAN;
   m_electronDataISOLweight = NAN;
   m_electronMcISOLweight = NAN;
+  m_EffDataHighPtTauTrigger = NAN;
+  m_EffMcHighPtTauTrigger = NAN;
 
 }
 
 //Setting Weights
+
+//////////////////
+// hight pt tau trigger bug
+
+void TupleElectronTauWeight::set_EffDataHighPtTauTrigger(double EffDataHighPtTauTrigger_) { m_EffDataHighPtTauTrigger  =  EffDataHighPtTauTrigger_;}
+double TupleElectronTauWeight::EffDataHighPtTauTrigger() const { return m_EffDataHighPtTauTrigger; }
+
+void TupleElectronTauWeight::set_EffMcHighPtTauTrigger(double EffMcHighPtTauTrigger_) { m_EffMcHighPtTauTrigger  =  EffMcHighPtTauTrigger_;}
+double TupleElectronTauWeight::EffMcHighPtTauTrigger() const { return m_EffMcHighPtTauTrigger; }
+
+
 
 //////////////////
 // electron ID and ISOL

@@ -252,6 +252,18 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
 
 
+    ///////////////////
+    // get the tau high Pt bug fix weights
+
+    double EffDataHighPtTauTrigger = 1.0;
+    double EffMcHighPtTauTrigger = 1.0;
+
+    TupleHelpers::getHighPtHadronicTauTriggerWeights(tau, EffDataHighPtTauTrigger,EffMcHighPtTauTrigger);
+
+    CurrentElectronTauWeight.set_EffDataHighPtTauTrigger(EffDataHighPtTauTrigger);
+    CurrentElectronTauWeight.set_EffMcHighPtTauTrigger(EffMcHighPtTauTrigger);  
+
+
     //////////////
     // get the hadronic tau trigger weights
 

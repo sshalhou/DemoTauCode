@@ -41,7 +41,8 @@ public:
   void set_electronMcIDweight(double);
   void set_electronDataISOLweight(double);
   void set_electronMcISOLweight(double);
-
+  void set_EffDataHighPtTauTrigger(double);
+  void set_EffMcHighPtTauTrigger(double);
 
   // getters
   double puWeight() const;
@@ -63,6 +64,9 @@ public:
   double electronMcIDweight() const;
   double electronDataISOLweight() const;
   double electronMcISOLweight() const;
+  double EffDataHighPtTauTrigger() const;
+  double EffMcHighPtTauTrigger() const;
+
 
 private:
 
@@ -85,6 +89,8 @@ private:
   double m_electronMcIDweight;
   double m_electronDataISOLweight;
   double m_electronMcISOLweight;
+  double m_EffDataHighPtTauTrigger;
+  double m_EffMcHighPtTauTrigger;
 
 
 

@@ -20,10 +20,22 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_muonMcIDweight = NAN;
   m_muonDataISOLweight = NAN;
   m_muonMcISOLweight = NAN;
+  m_EffDataHighPtTauTrigger = NAN;
+  m_EffMcHighPtTauTrigger = NAN;
 
 }
 
 //Setting Weights
+
+
+//////////////////
+// hight pt tau trigger bug
+
+void TupleMuonTauWeight::set_EffDataHighPtTauTrigger(double EffDataHighPtTauTrigger_) { m_EffDataHighPtTauTrigger  =  EffDataHighPtTauTrigger_;}
+double TupleMuonTauWeight::EffDataHighPtTauTrigger() const { return m_EffDataHighPtTauTrigger; }
+
+void TupleMuonTauWeight::set_EffMcHighPtTauTrigger(double EffMcHighPtTauTrigger_) { m_EffMcHighPtTauTrigger  =  EffMcHighPtTauTrigger_;}
+double TupleMuonTauWeight::EffMcHighPtTauTrigger() const { return m_EffMcHighPtTauTrigger; }
 
 //////////////////
 // muon ID and ISOL
