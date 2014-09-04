@@ -252,6 +252,13 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_EffMcELE20andELE22(EffMcELE20andELE22);
 
 
+    ////////////////
+    // get the Zee e->tau_h fake
+    // rate correction
+
+    double ZeeScaleFactor = TupleHelpers::getZeeScaleFactor(tau);
+    CurrentElectronTauWeight.set_ZeeScaleFactor(ZeeScaleFactor);
+
     //////////////////
     // get the decay mode correction
     // factor, used for Z->tau tau + signal

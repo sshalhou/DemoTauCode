@@ -45,6 +45,7 @@ public:
   void set_EffMcHighPtTauTrigger(double);
   void set_TauFakeCorrection(double);
   void set_DecayModeCorrectionFactor(double);
+  void set_ZeeScaleFactor(double);
 
   // getters
   double puWeight() const;
@@ -70,6 +71,7 @@ public:
   double EffMcHighPtTauTrigger() const;
   double TauFakeCorrection() const;
   double DecayModeCorrectionFactor() const;
+  double ZeeScaleFactor() const;
 
 private:
 
@@ -96,6 +98,7 @@ private:
   double m_EffMcHighPtTauTrigger;
   double m_TauFakeCorrection;
   double m_DecayModeCorrectionFactor;
+  double m_ZeeScaleFactor;
 
 
 };

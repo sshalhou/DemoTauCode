@@ -41,6 +41,49 @@ namespace TupleHelpers
 {
 
 
+
+  //////////////////////
+  // Z->ee e->tau_h scale
+  // factors for eTau channels
+  // will store for all samples
+
+  double getZeeScaleFactor(const TupleTau tau)
+  {
+
+    double correction = 1.0;
+    double ABSETA = fabs(tau.corrected_p4().eta());
+    int strips  = tau.numStrips();
+    int hadrons = tau.numHadrons();
+
+    ////////////////
+    // barrel
+    if(ABSETA<1.5)
+    {
+
+      if(hadrons==1 && strips>0)          correction = 1.84;
+      else if(hadrons==1 && strips==0)    correction = 1.37;
+      else if(hadrons==3)                 correction = 1.0;
+
+
+    }
+
+    ///////////////
+    // endcap
+    if(ABSETA>=1.5)
+    {
+
+      if(hadrons==1 && strips>0)          correction = 0.83;
+      else if(hadrons==1 && strips==0)    correction = 0.72;
+      else if(hadrons==3)                 correction = 1.0;
+
+
+    }
+
+    return correction;
+
+
+  }
+
   //////////////////////
   // decay mode correction
   // for Z->tau tau and

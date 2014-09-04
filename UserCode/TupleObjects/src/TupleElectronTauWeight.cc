@@ -26,10 +26,19 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_EffMcHighPtTauTrigger = NAN;
   m_TauFakeCorrection = NAN;
   m_DecayModeCorrectionFactor = NAN;
+  m_ZeeScaleFactor = NAN;
 
 }
 
 //Setting Weights
+
+
+/////////////////
+// Zee sample e->tau_h
+// fake correction
+
+void TupleElectronTauWeight::set_ZeeScaleFactor(double ZeeScaleFactor_) { m_ZeeScaleFactor  =  ZeeScaleFactor_;}
+double TupleElectronTauWeight::ZeeScaleFactor() const { return m_ZeeScaleFactor; }
 
 
 ////////////////////
