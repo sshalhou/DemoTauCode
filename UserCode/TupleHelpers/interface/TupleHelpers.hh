@@ -117,12 +117,12 @@ namespace TupleHelpers
 
       sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_central", MASS, MASS);
 
-      TH1 * file1HistNom = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      TH1 * file1HistNom = dynamic_cast<TH1*>(file1->Get(histName));
       bin = file1HistNom->FindBin(PT);
       BoundaryCheckBin(bin, file1HistNom->GetNbinsX());
       nominalHIGLUXHQTmhmax = file1HistNom->GetBinContent(bin);
 
-      TH1 * file2HistNom = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      TH1 * file2HistNom = dynamic_cast<TH1*>(file2->Get(histName));
       bin = file2HistNom->FindBin(PT);
       BoundaryCheckBin(bin, file2HistNom->GetNbinsX());
       nominalPOWHEGmhmod = file2HistNom->GetBinContent(bin);
@@ -132,12 +132,12 @@ namespace TupleHelpers
 
       sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_tanBetaHigh", MASS, MASS);
 
-      TH1 * file1HistUp = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      TH1 * file1HistUp = dynamic_cast<TH1*>(file1->Get(histName));
       bin = file1HistUp->FindBin(PT);
       BoundaryCheckBin(bin, file1HistUp->GetNbinsX());
       upHIGLUXHQTmhmax = file1HistUp->GetBinContent(bin);
 
-      TH1 * file2HistUp = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      TH1 * file2HistUp = dynamic_cast<TH1*>(file2->Get(histName));
       bin = file2HistUp->FindBin(PT);
       BoundaryCheckBin(bin, file2HistUp->GetNbinsX());
       upPOWHEGmhmod = file2HistUp->GetBinContent(bin);
@@ -147,12 +147,12 @@ namespace TupleHelpers
 
       sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_tanBetaLow", MASS, MASS);
 
-      TH1 * file1HistDown = dynamic_cast<TH1*>(file1->Get(histName.c_str()));
+      TH1 * file1HistDown = dynamic_cast<TH1*>(file1->Get(histName));
       bin = file1HistDown->FindBin(PT);
       BoundaryCheckBin(bin, file1HistDown->GetNbinsX());
       downHIGLUXHQTmhmax = file1HistDown->GetBinContent(bin);
 
-      TH1 * file2HistDown = dynamic_cast<TH1*>(file2->Get(histName.c_str()));
+      TH1 * file2HistDown = dynamic_cast<TH1*>(file2->Get(histName));
       bin = file2HistDown->FindBin(PT);
       BoundaryCheckBin(bin, file2HistDown->GetNbinsX());
       downPOWHEGmhmod = file2HistDown->GetBinContent(bin);
