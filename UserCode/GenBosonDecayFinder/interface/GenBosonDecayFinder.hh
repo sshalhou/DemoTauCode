@@ -59,6 +59,8 @@ bool& ApplyRecoilCorrection)
     genparticles[mc].pdgId()  == 25 || abs(genparticles[mc].pdgId()) == 6)
     {
       // only care about the hard interaction
+      // for the embedded ttbar sample the Z->tau tau
+      // has status 2 and won't be kept
       if( genparticles[mc].status() == 3)
       {
 

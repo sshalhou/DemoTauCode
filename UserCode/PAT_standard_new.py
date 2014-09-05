@@ -350,7 +350,8 @@ process.out.outputCommands +=['keep *_ak5GenJetsNoNu_*_PAT']
 process.out.outputCommands +=['keep *_*genParticlesForJetsNoNu*_*_PAT']
 process.out.outputCommands +=['keep *_*iterativeCone5GenJetsNoNu*_*_PAT']
 process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
-process.out.outputCommands +=['keep TauSpinnerReco*_*_*_*']
+process.out.outputCommands +=['keep *_*TauSpinnerReco*_*_*'] 
+
 
 if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
