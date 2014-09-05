@@ -347,6 +347,13 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     CurrentMuonTauWeight.set_inclusiveQCDShapeTemplateCorrection(inclusiveQCDShapeTemplateCorrection);
 
 
+    /////////////
+    // tt Pt reweight
+
+    double TTbarPtWeight = TupleHelpers::getTTbarPtWeight(
+    muonTau.genTOPp4().pt(), muonTau.genTOPBARp4().pt());
+
+    CurrentMuonTauWeight.set_TTbarPtWeight(TTbarPtWeight);
 
     /////////////
     // add the current pair

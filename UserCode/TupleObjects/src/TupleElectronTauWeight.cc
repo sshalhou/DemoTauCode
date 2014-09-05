@@ -35,11 +35,18 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_downPOWHEGmhmod = NAN;
   m_etaDepQCDShapeTemplateCorrection = NAN;
   m_inclusiveQCDShapeTemplateCorrection = NAN;
+  m_TTbarPtWeight = NAN;
+
 
 }
 
 //Setting Weights
 
+/////////////
+// tt pt reweight
+
+void TupleElectronTauWeight::set_TTbarPtWeight(double TTbarPtWeight_) { m_TTbarPtWeight  =  TTbarPtWeight_;}
+double TupleElectronTauWeight::TTbarPtWeight() const { return m_TTbarPtWeight; }
 
 ///////////////
 // QCD template reweight

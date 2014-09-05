@@ -51,6 +51,7 @@ public:
   void set_downPOWHEGmhmod(double);
   void set_etaDepQCDShapeTemplateCorrection(double);
   void set_inclusiveQCDShapeTemplateCorrection(double);
+  void set_TTbarPtWeight(double);
 
   // getters
   double puWeight() const;
@@ -82,6 +83,8 @@ public:
   double downPOWHEGmhmod() const;
   double etaDepQCDShapeTemplateCorrection() const;
   double inclusiveQCDShapeTemplateCorrection() const;
+  double TTbarPtWeight() const;
+
 
 
 
@@ -117,6 +120,8 @@ private:
   double m_downPOWHEGmhmod;
   double m_etaDepQCDShapeTemplateCorrection;
   double m_inclusiveQCDShapeTemplateCorrection;
+  double m_TTbarPtWeight;
+
 
 
 

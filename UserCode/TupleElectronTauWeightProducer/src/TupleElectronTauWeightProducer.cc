@@ -365,6 +365,14 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_etaDepQCDShapeTemplateCorrection(etaDepQCDShapeTemplateCorrection);
     CurrentElectronTauWeight.set_inclusiveQCDShapeTemplateCorrection(inclusiveQCDShapeTemplateCorrection);
 
+    /////////////
+    // tt Pt reweight
+
+    double TTbarPtWeight = TupleHelpers::getTTbarPtWeight(
+    electronTau.genTOPp4().pt(), electronTau.genTOPBARp4().pt());
+
+    CurrentElectronTauWeight.set_TTbarPtWeight(TTbarPtWeight);
+
 
     /////////////
     // add the current pair

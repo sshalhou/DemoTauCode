@@ -35,12 +35,41 @@
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+#include "TMath.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 
 namespace TupleHelpers
 {
 
+
+  //////////////////////
+  // ttBAR sample pt reweight
+
+
+  double compTopPtWeight(double topPt)
+  {
+    const double a = 0.156;
+    const double b = -0.00137;
+    return TMath::Exp(a + b*topPt);
+  }
+
+  double getTTbarPtWeight(double ptTOP, double ptTOPBAR)
+  {
+    double weight = 1.0;
+
+    ////////////
+    // check for valid pt
+
+    if(ptTOP==ptTOP && ptTOPBAR==ptTOPBAR)
+    {
+      weight = compTopPtWeight(ptTOP)*compTopPtWeight(ptTOPBAR);
+      return ( weight > 0. ) ? TMath::Sqrt(weight) : 0.;
+    }
+
+    else return 1.0;
+
+  }
 
   ///////////////////////
   // QCD Shape Temp. Correction
