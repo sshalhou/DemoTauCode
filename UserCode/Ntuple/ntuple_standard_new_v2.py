@@ -28,16 +28,16 @@ MAX_TAUS = 10
 # gen particle sources depend on isNonTopEmbeddedSample
 # and isTopEmbeddedSample
 
-InputTag genSrcInputTag = 'genParticles::SIM'
-InputTag genTTembeddedSrcInputTag = ''
+genSrcInputTag = cms.InputTag('genParticles::SIM')
+genTTembeddedSrcInputTag = cms.InputTag('')
 
 if isNonTopEmbeddedSample:
-  genSrcInputTag = 'genParticles::EmbeddedRECO'
-  genTTembeddedSrcInputTag = ''
+  genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
+  genTTembeddedSrcInputTag = cms.InputTag('')
 
 elif isTopEmbeddedSample:
-  genSrcInputTag = 'genParticles::EmbeddedRECO'
-  genTTembeddedSrcInputTag = 'genParticles::SIM'
+  genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
+  genTTembeddedSrcInputTag = cms.InputTag('genParticles::SIM')
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
