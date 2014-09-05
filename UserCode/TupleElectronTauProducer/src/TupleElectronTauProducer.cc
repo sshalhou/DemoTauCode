@@ -458,22 +458,24 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           bool fillTop = 0;
           bool fillTopBar = 0;
 
-          edm::View<reco::GenParticleCollection>::const_iterator genparticle;
-          for(genparticle=gen->begin(); genparticle!=gen->end(); ++genparticle)
-          {
 
-            if(genparticle->status()==3)
+          for(size_t mc = 0; mc < gen->size(); ++ mc)
+          {
+            const reco::GenParticle & genparticle = (*gen)[mc];
+
+
+            if(genparticle.status()==3)
             {
 
-              if(!fillTop && genparticle->pdgId()==6)
+              if(!fillTop && genparticle.pdgId()==6)
               {
                 fillTop = 1;
-                CurrentElectronTau.set_genTOPp4(genparticle->p4());
+                CurrentElectronTau.set_genTOPp4(genparticle.p4());
               }
-              if(!fillTopBar && genparticle->pdgId()==-6)
+              if(!fillTopBar && genparticle.pdgId()==-6)
               {
                 fillTopBar = 1;
-                CurrentElectronTau.set_genTOPBARp4(genparticle->p4());
+                CurrentElectronTau.set_genTOPBARp4(genparticle.p4());
               }
               if(fillTop && fillTopBar) break; // speed it up a bit
 

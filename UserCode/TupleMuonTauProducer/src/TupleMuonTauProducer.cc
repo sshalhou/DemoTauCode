@@ -448,26 +448,26 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           bool fillTop = 0;
           bool fillTopBar = 0;
 
-
-          edm::View<reco::GenParticleCollection>::const_iterator genparticle;
-          for(genparticle=gen->begin(); genparticle!=gen->end(); ++genparticle)
+          for(size_t mc = 0; mc < gen->size(); ++ mc)
           {
+            const reco::GenParticle & genparticle = (*gen)[mc];
 
-            if(genparticle->status()==3)
+
+            if(genparticle.status()==3)
             {
 
-              if(!fillTop && genparticle->pdgId()==6)
+              if(!fillTop && genparticle.pdgId()==6)
               {
                 fillTop = 1;
-                CurrentMuonTau.set_genTOPp4(genparticle->p4());
+                CurrentMuonTau.set_genTOPp4(genparticle.p4());
               }
-              if(!fillTopBar && genparticle->pdgId()==-6)
+              if(!fillTopBar && genparticle.pdgId()==-6)
               {
                 fillTopBar = 1;
-                CurrentMuonTau.set_genTOPBARp4(genparticle->p4());
+                CurrentMuonTau.set_genTOPBARp4(genparticle.p4());
               }
               if(fillTop && fillTopBar) break; // speed it up a bit
-
+              
             }
             else break; // speed it up a bit
 
