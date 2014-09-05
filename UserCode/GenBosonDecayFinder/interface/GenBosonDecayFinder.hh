@@ -56,56 +56,95 @@ bool& ApplyRecoilCorrection)
     if( abs(genparticles[mc].pdgId())  == 24 || abs(genparticles[mc].pdgId())  == 36 ||
     abs(genparticles[mc].pdgId())  == 35 || abs(genparticles[mc].pdgId())  == 34 ||
     genparticles[mc].pdgId()  == 23  ||
-    genparticles[mc].pdgId()  == 25 )
+    genparticles[mc].pdgId()  == 25 || abs(genparticles[mc].pdgId()) == 6)
     {
       // only care about the hard interaction
       if( genparticles[mc].status() == 3)
       {
 
         // as of yet, we have no correctins for
-        // di-Boson events
+        // di-Boson events or top events
         // thus, filter those out here
-        if(ApplyRecoilCorrection) {ApplyRecoilCorrection = 0; return;}
-        else ApplyRecoilCorrection = 1;
 
-        BosonPdgId = genparticles[mc].pdgId();
-        BosonP4 = genparticles[mc].p4();
-
-        std::size_t nDaughters = genparticles[mc].numberOfDaughters();
-        vector <int> daughter_indices;
-        daughter_indices.clear();
-
-        for(std::size_t d = 0; d<nDaughters; ++d )
+        /////////////////
+        // filter out tt-bar
+        if(abs(genparticles[mc].pdgId()) == 6)
         {
-          int pdgId = abs(genparticles[mc].daughter(d)->pdgId());
-          if(pdgId == 11 || pdgId == 13 || pdgId ==15) daughter_indices.push_back(d);
+          ApplyRecoilCorrection = 0;
+          BosonPdgId = 0;
+          BosonP4.SetXYZT(0,0,0,0);
+          DaughterOnePdgId = 0;
+          DaughterOneP4.SetXYZT(0,0,0,0);
+          DaughterTwoPdgId = 0;
+          DaughterTwoP4.SetXYZT(0,0,0,0);
+          return;
         }
 
 
-        if(daughter_indices.size()>=1)
-        {
-          int d1 = daughter_indices[0];
-          DaughterOnePdgId  = genparticles[mc].daughter(d1)->pdgId();
-          DaughterOneP4  = genparticles[mc].daughter(d1)->p4();
+        /////////////////
+        // filter out diboson events
+        // here we catch them on the second instant
+        // and reset everything to zero before returning
 
+        else if(ApplyRecoilCorrection)
+        {
+          ApplyRecoilCorrection = 0;
+          BosonPdgId = 0;
+          BosonP4.SetXYZT(0,0,0,0);
+          DaughterOnePdgId = 0;
+          DaughterOneP4.SetXYZT(0,0,0,0);
+          DaughterTwoPdgId = 0;
+          DaughterTwoP4.SetXYZT(0,0,0,0);
+          return;
         }
 
-        if(daughter_indices.size()>=1)
+        ////////////////////
+        // if first time through, and have
+        // not been found as diboson or top
+        // continue assuming Z, W or H
+
+        else if(!ApplyRecoilCorrection)
         {
-          int d2 = daughter_indices[1];
-          DaughterTwoPdgId  = genparticles[mc].daughter(d2)->pdgId();
-          DaughterTwoP4  = genparticles[mc].daughter(d2)->p4();
+          ApplyRecoilCorrection = 1;
+
+          BosonPdgId = genparticles[mc].pdgId();
+          BosonP4 = genparticles[mc].p4();
+
+          std::size_t nDaughters = genparticles[mc].numberOfDaughters();
+          vector <int> daughter_indices;
+          daughter_indices.clear();
+
+          for(std::size_t d = 0; d<nDaughters; ++d )
+          {
+            int pdgId = abs(genparticles[mc].daughter(d)->pdgId());
+            if(pdgId == 11 || pdgId == 13 || pdgId ==15) daughter_indices.push_back(d);
+          }
+
+
+          if(daughter_indices.size()>0)
+          {
+            int d1 = daughter_indices[0];
+            DaughterOnePdgId  = genparticles[mc].daughter(d1)->pdgId();
+            DaughterOneP4  = genparticles[mc].daughter(d1)->p4();
+
+          }
+
+          if(daughter_indices.size()>1)
+          {
+            int d2 = daughter_indices[1];
+            DaughterTwoPdgId  = genparticles[mc].daughter(d2)->pdgId();
+            DaughterTwoP4  = genparticles[mc].daughter(d2)->p4();
+          }
+
+
+          daughter_indices.clear();
+
+
+
+
+
+
         }
-
-
-        daughter_indices.clear();
-
-
-
-
-
-
-
       }
 
     }
