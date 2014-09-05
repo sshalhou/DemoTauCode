@@ -65,7 +65,9 @@ public:
   void set_passNonTopEmbeddedTriggerAndMass50(bool);
   void set_passSignalGeneratorMass70to130Cut(bool);
   void set_genBosonP4(LorentzVector);
-
+  // the next two are needed for tt events
+  void set_genTOPp4(LorentzVector);
+  void set_genTOPBARp4(LorentzVector);
 
 
   // getters
@@ -105,6 +107,8 @@ public:
   bool passNonTopEmbeddedTriggerAndMass50() const;
   bool passSignalGeneratorMass70to130Cut() const;
   LorentzVector genBosonP4() const;
+  LorentzVector genTOPp4() const;
+  LorentzVector genTOPBARp4() const;
 
 
 
@@ -145,6 +149,8 @@ private:
   bool m_passNonTopEmbeddedTriggerAndMass50;
   bool m_passSignalGeneratorMass70to130Cut;
   LorentzVector m_genBosonP4;
+  LorentzVector m_genTOPp4;
+  LorentzVector m_genTOPBARp4;
 
 
 

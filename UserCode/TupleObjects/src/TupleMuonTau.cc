@@ -39,10 +39,19 @@ TupleMuonTau::TupleMuonTau()
   m_passNonTopEmbeddedTriggerAndMass50  = 0;
   m_passSignalGeneratorMass70to130Cut = 0;
   m_genBosonP4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genTOPp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genTOPBARp4.SetXYZT(NAN,NAN,NAN,NAN);
 
 
 
 }
+
+
+void TupleMuonTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}
+LorentzVector TupleMuonTau::genTOPp4() const { return m_genTOPp4; }
+
+void TupleMuonTau::set_genTOPBARp4(LorentzVector genTOPBARp4_) { m_genTOPBARp4  =  genTOPBARp4_;}
+LorentzVector TupleMuonTau::genTOPBARp4() const { return m_genTOPBARp4; }
 
 void TupleMuonTau::set_genBosonP4(LorentzVector genBosonP4_) { m_genBosonP4  =  genBosonP4_;}
 LorentzVector TupleMuonTau::genBosonP4() const { return m_genBosonP4; }

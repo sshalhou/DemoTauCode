@@ -83,7 +83,7 @@ bool& ApplyRecoilCorrection)
 
         /////////////////
         // filter out diboson events
-        // here we catch them on the second instant
+        // here we catch them on the second instance
         // and reset everything to zero before returning
 
         else if(ApplyRecoilCorrection)

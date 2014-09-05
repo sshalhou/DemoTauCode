@@ -430,20 +430,32 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         bool passVeto = TupleHelpers::pairPassesTriLeptonVeto(i, 9999, electrons, muons);
         CurrentElectronTau.set_passesTriLeptonVeto(passVeto);
 
-        //////////////////
-        // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
-        // cuts for embedded (non-tt) samples
-        // should be true for all other samples
 
-        bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
-        CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
+        if ( gen.isValid() )
+        {
 
-        ////////////////
-        // check if passes SUSY Signal
-        // Generator Mass 70% to 130% Cut
+          //////////////////
+          // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
+          // cuts for embedded (non-tt) samples
+          // should be true for all other samples
 
-        bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
-        CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
+
+          bool passEmbedTrig = TupleHelpers::passNonTopEmbeddedTriggerAndMass50(userData0, *gen, paths);
+          CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(passEmbedTrig);
+
+          ////////////////
+          // check if passes SUSY Signal
+          // Generator Mass 70% to 130% Cut
+
+          bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
+          CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
+        }
+
+        else
+        {
+          CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(0);
+          CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(0);
+        }
 
 
         ////////////
@@ -486,9 +498,14 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
           GenBosonDecayFinder genDecayFinder;
-          genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
-          DaughterOneP4,DaughterTwoPdgId,
-          DaughterTwoP4,ApplyRecoilCorrection);
+
+          if ( gen.isValid() )
+          {
+            genDecayFinder.findBosonAndDaugters(*gen,BosonPdgId,BosonP4,DaughterOnePdgId,
+            DaughterOneP4,DaughterTwoPdgId,
+            DaughterTwoP4,ApplyRecoilCorrection);
+          }
+          else ApplyRecoilCorrection = 0;
 
           ///////
           // store the boson p4 at gen level

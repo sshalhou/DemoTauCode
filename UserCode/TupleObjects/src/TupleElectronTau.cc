@@ -39,10 +39,17 @@ TupleElectronTau::TupleElectronTau()
   m_passNonTopEmbeddedTriggerAndMass50  = 0;
   m_passSignalGeneratorMass70to130Cut = 0;
   m_genBosonP4.SetXYZT(NAN,NAN,NAN,NAN);
-
+  m_genTOPp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_genTOPBARp4.SetXYZT(NAN,NAN,NAN,NAN);
 
 
 }
+
+void TupleElectronTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}
+LorentzVector TupleElectronTau::genTOPp4() const { return m_genTOPp4; }
+
+void TupleElectronTau::set_genTOPBARp4(LorentzVector genTOPBARp4_) { m_genTOPBARp4  =  genTOPBARp4_;}
+LorentzVector TupleElectronTau::genTOPBARp4() const { return m_genTOPBARp4; }
 
 void TupleElectronTau::set_genBosonP4(LorentzVector genBosonP4_) { m_genBosonP4  =  genBosonP4_;}
 LorentzVector TupleElectronTau::genBosonP4() const { return m_genBosonP4; }
