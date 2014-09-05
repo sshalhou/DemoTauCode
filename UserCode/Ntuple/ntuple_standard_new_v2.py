@@ -28,8 +28,8 @@ MAX_TAUS = 10
 # gen particle sources depend on isNonTopEmbeddedSample
 # and isTopEmbeddedSample
 
-genSrcInputTag = 'genParticles::SIM'
-genTTembeddedSrcInputTag = ''
+InputTag genSrcInputTag = 'genParticles::SIM'
+InputTag genTTembeddedSrcInputTag = ''
 
 if isNonTopEmbeddedSample:
   genSrcInputTag = 'genParticles::EmbeddedRECO'
