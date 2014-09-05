@@ -25,19 +25,19 @@ MAX_TAUS = 10
 
 
 ###########################################
-# gen particle sources depend on isNonTopEmbeddedSample_
-# and isTopEmbeddedSample_
+# gen particle sources depend on isNonTopEmbeddedSample
+# and isTopEmbeddedSample
 
-genSrcString = cms.string("genParticles::SIM")
-genTTembeddedSrcString = cms.string("")
+genSrcInputTag = genParticles::SIM
+genTTembeddedSrcInputTag = ''
 
 if isNonTopEmbeddedSample:
-  genSrcString = cms.string("genParticles::EmbeddedRECO")
-  genTTembeddedSrcString = cms.string("")
+  genSrcInputTag = genParticles::EmbeddedRECO
+  genTTembeddedSrcInputTag = ''
 
 elif isTopEmbeddedSample:
-  genSrcString = cms.string("genParticles::EmbeddedRECO")
-  genTTembeddedSrcString = cms.string("genParticles::SIM")
+  genSrcInputTag = genParticles::EmbeddedRECO
+  genTTembeddedSrcInputTag = genParticles::SIM
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -312,8 +312,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = allMuTauMETs,
-                genSrc = genSrcString,
-                genTTembeddedSrc = genTTembeddedSrcString,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("cleanPatJets"),
@@ -361,8 +361,8 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 mvametSrc = allElecTauMETs,
-                genSrc = genSrcString,
-                genTTembeddedSrc = genTTembeddedSrcString,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("cleanPatJets"),
