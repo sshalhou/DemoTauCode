@@ -461,7 +461,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           for (std::size_t mc = 0; mc < gen->size(); ++i)
           {
 
-            const reco::GenParticleCollection genparticle = ((*gen)[mc]);
+            const reco::GenParticleCollection & genparticle = ((*gen)[mc]);
 
             if(genparticle[mc].status()==3)
             {
