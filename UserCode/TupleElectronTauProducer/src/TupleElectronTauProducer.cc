@@ -75,7 +75,8 @@ typedef std::vector<edm::InputTag> vInputTag;
 // class declaration
 //
 
-class TupleElectronTauProducer : public edm::EDProducer {
+class TupleElectronTauProducer : public edm::EDProducer
+{
 public:
   explicit TupleElectronTauProducer(const edm::ParameterSet&);
   ~TupleElectronTauProducer();
@@ -449,8 +450,39 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
           bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
           CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
-        }
 
+          ////////////////
+          // store the top quark 4-vectors
+          // at gen level if any are present
+
+          bool fillTop = 0;
+          bool fillTopBar = 0;
+
+          for(std::size_t mc = 0; mc < gen.size(); ++mc)
+          {
+
+            if(gen[mc].status()==3)
+            {
+
+              if(!fillTop && gen[mc].pdgId()==6)
+              {
+                fillTop = 1;
+                CurrentElectronTau.set_genTOPp4(gen[mc].p4());
+              }
+              if(!fillTopBar && gen[mc].pdgId()==-6)
+              {
+                fillTopBar = 1;
+                CurrentElectronTau.set_genTOPBARp4(gen[mc].p4());
+              }
+              if(fillTop && fillTopBar) break; // speed it up a bit
+
+            }
+            else break; // speed it up a bit
+
+          }
+        }
+        ////////////////////////////
+        // invalid gen particle collection
         else
         {
           CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(0);
@@ -917,7 +949,8 @@ TupleElectronTauProducer::endLuminosityBlock(edm::LuminosityBlock&, edm::EventSe
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-TupleElectronTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+TupleElectronTauProducer::fillDescriptions(edm::ConfigurationDescriptions& descriptions)
+{
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
