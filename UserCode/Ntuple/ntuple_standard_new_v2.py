@@ -6,6 +6,8 @@ from PhysicsTools.PatAlgos.tools.helpers import *
 #####################
 
 runOnMC = True
+isNonTopEmbeddedSample = False
+isTopEmbeddedSample = False
 printListOfModules = False
 KeepAll = False
 CheckMemoryUsage = False
@@ -20,6 +22,22 @@ CheckMemoryUsage = False
 MAX_ELECTRONS = 10
 MAX_MUONS = 10
 MAX_TAUS = 10
+
+
+###########################################
+# gen particle sources depend on isNonTopEmbeddedSample_
+# and isTopEmbeddedSample_
+
+genSrcString = cms.string("genParticles::SIM")
+genTTembeddedSrcString = cms.string("")
+
+if isNonTopEmbeddedSample:
+  genSrcString = cms.string("genParticles::EmbeddedRECO")
+  genTTembeddedSrcString = cms.string("")
+
+elif isTopEmbeddedSample:
+  genSrcString = cms.string("genParticles::EmbeddedRECO")
+  genTTembeddedSrcString = cms.string("genParticles::SIM")
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -294,7 +312,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 mvametSrc = allMuTauMETs,
-                genSrc = cms.InputTag("genParticles"),
+                genSrc = genSrcString,
+                genTTembeddedSrc = genTTembeddedSrcString,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("cleanPatJets"),
@@ -342,7 +361,8 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 mvametSrc = allElecTauMETs,
-                genSrc = cms.InputTag("genParticles"),
+                genSrc = genSrcString,
+                genTTembeddedSrc = genTTembeddedSrcString,
                 iFluc=cms.double(0.0),
                 iScale=cms.double(0.0),
                 jetSrc = cms.InputTag("cleanPatJets"),

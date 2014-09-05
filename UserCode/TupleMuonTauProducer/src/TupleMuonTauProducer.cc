@@ -95,6 +95,7 @@ private:
   edm::InputTag muonSrc_;
   vInputTag mvametSrc_;
   edm::InputTag genSrc_;
+  edm::InputTag genTTembeddedSrc_;
   edm::InputTag jetSrc_;
   double iFluc_;
   double iScale_;
@@ -256,11 +257,35 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   pat::strbitset retpf = pfjetIDLoose.getBitTemplate();
 
 
-
   // get the gen particles
+
+  /////////////////////////
+  // this is pretty confusing, but we have 3 cases to consider
+  // [1] standard MC --> want genParticles::SIM for everything
+  // [2] data dervied embedded Z->tau tau samples --> want genParticles::EmbeddedRECO
+  //     for everything
+  // -------------------------------
+  // -------------------------------
+  // 1 and 2  are straight forward since there is only one version of genParticles
+  // 3rd case is where issues creep in :
+  // [3] mc derived embedded TTbar samples --> want both versions of genParticles,
+  // for tau related stuff use genParticles::EmbeddedRECO
+  // for top related stuff use genParticles::SIM
+
+
+  /////////////////
+  // gen will be our default case for [1] and [2]
 
   edm::Handle<std::vector<reco::GenParticle> > gen;
   iEvent.getByLabel(genSrc_, gen);
+
+  ///////////////
+  // genTTembedded will be used for case [3]
+
+  edm::Handle<std::vector<reco::GenParticle> > genTTembedded;
+  iEvent.getByLabel(genTTembeddedSrc_, genTTembedded);
+
+
 
 
 
@@ -441,6 +466,63 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
           CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
 
+          ////////////////////
+          // for everything except ttbar embedded samples
+          // check this here
+
+          if(!userData0.isTopEmbeddedSample())
+          {
+
+            ////////////////
+            // store the top quark 4-vectors
+            // at gen level if any are present
+
+            bool fillTop = 0;
+            bool fillTopBar = 0;
+
+            for(size_t mc = 0; mc < gen->size(); ++ mc)
+            {
+              const reco::GenParticle & genparticle = (*gen)[mc];
+
+
+              if(genparticle.status()==3)
+              {
+
+                if(!fillTop && genparticle.pdgId()==6)
+                {
+                  fillTop = 1;
+                  CurrentMuonTau.set_genTOPp4(genparticle.p4());
+                }
+                if(!fillTopBar && genparticle.pdgId()==-6)
+                {
+                  fillTopBar = 1;
+                  CurrentMuonTau.set_genTOPBARp4(genparticle.p4());
+                }
+                if(fillTop && fillTopBar) break; // speed it up a bit
+
+              }
+              else break; // speed it up a bit
+
+            }
+          }
+
+        }
+        ////////////////////////////
+        // invalid gen particle collection
+        else
+        {
+          CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(0);
+          CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(0);
+        }
+
+
+        //////////////////////
+        // get the ttbar info for
+        // the top embedded samples
+
+        if ( genTTembedded.isValid() && userData0.isTopEmbeddedSample())
+        {
+
           ////////////////
           // store the top quark 4-vectors
           // at gen level if any are present
@@ -448,9 +530,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           bool fillTop = 0;
           bool fillTopBar = 0;
 
-          for(size_t mc = 0; mc < gen->size(); ++ mc)
+          for(size_t mc = 0; mc < genTTembedded->size(); ++ mc)
           {
-            const reco::GenParticle & genparticle = (*gen)[mc];
+            const reco::GenParticle & genparticle = (*genTTembedded)[mc];
 
 
             if(genparticle.status()==3)
@@ -467,20 +549,16 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
                 CurrentMuonTau.set_genTOPBARp4(genparticle.p4());
               }
               if(fillTop && fillTopBar) break; // speed it up a bit
-              
+
             }
             else break; // speed it up a bit
 
           }
 
+
         }
-        ////////////////////////////
-        // invalid gen particle collection
-        else
-        {
-          CurrentMuonTau.set_passNonTopEmbeddedTriggerAndMass50(0);
-          CurrentMuonTau.set_passSignalGeneratorMass70to130Cut(0);
-        }
+
+
 
         ////////////
         // apply Phil's recoil

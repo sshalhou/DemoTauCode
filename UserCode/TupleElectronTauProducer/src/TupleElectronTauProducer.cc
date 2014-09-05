@@ -99,6 +99,7 @@ private:
   edm::InputTag electronSrc_;
   vInputTag mvametSrc_;
   edm::InputTag genSrc_;
+  edm::InputTag genTTembeddedSrc_;
   edm::InputTag jetSrc_;
   double iFluc_;
   double iScale_;
@@ -268,8 +269,31 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
   // get the gen particles
 
+  /////////////////////////
+  // this is pretty confusing, but we have 3 cases to consider
+  // [1] standard MC --> want genParticles::SIM for everything
+  // [2] data dervied embedded Z->tau tau samples --> want genParticles::EmbeddedRECO
+  //     for everything
+  // -------------------------------
+  // -------------------------------
+  // 1 and 2  are straight forward since there is only one version of genParticles
+  // 3rd case is where issues creep in :
+  // [3] mc derived embedded TTbar samples --> want both versions of genParticles,
+  // for tau related stuff use genParticles::EmbeddedRECO
+  // for top related stuff use genParticles::SIM
+
+
+  /////////////////
+  // gen will be our default case for [1] and [2]
+
   edm::Handle<std::vector<reco::GenParticle> > gen;
   iEvent.getByLabel(genSrc_, gen);
+
+  ///////////////
+  // genTTembedded will be used for case [3]
+
+  edm::Handle<std::vector<reco::GenParticle> > genTTembedded;
+  iEvent.getByLabel(genTTembeddedSrc_, genTTembedded);
 
 
 
@@ -451,6 +475,66 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           bool passSusyGenMassCut = TupleHelpers::passSignalGeneratorMass70to130Cut(userData0, *gen);
           CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(passSusyGenMassCut);
 
+          ////////////////////
+          // for everything except ttbar embedded samples
+          // check this here
+
+          if(!userData0.isTopEmbeddedSample())
+          {
+
+            ////////////////
+            // store the top quark 4-vectors
+            // at gen level if any are present
+
+            bool fillTop = 0;
+            bool fillTopBar = 0;
+
+
+            for(size_t mc = 0; mc < gen->size(); ++ mc)
+            {
+              const reco::GenParticle & genparticle = (*gen)[mc];
+
+
+              if(genparticle.status()==3)
+              {
+
+                if(!fillTop && genparticle.pdgId()==6)
+                {
+                  fillTop = 1;
+                  CurrentElectronTau.set_genTOPp4(genparticle.p4());
+                }
+                if(!fillTopBar && genparticle.pdgId()==-6)
+                {
+                  fillTopBar = 1;
+                  CurrentElectronTau.set_genTOPBARp4(genparticle.p4());
+                }
+                if(fillTop && fillTopBar) break; // speed it up a bit
+
+              }
+              else break; // speed it up a bit
+
+
+            }
+          }
+
+        }
+        ////////////////////////////
+        // invalid gen particle collection
+
+        else
+        {
+          CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(0);
+          CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(0);
+        }
+
+
+        //////////////////////
+        // get the ttbar info for
+        // the top embedded samples
+
+        if ( genTTembedded.isValid() && userData0.isTopEmbeddedSample())
+        {
+
           ////////////////
           // store the top quark 4-vectors
           // at gen level if any are present
@@ -458,10 +542,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           bool fillTop = 0;
           bool fillTopBar = 0;
 
-
-          for(size_t mc = 0; mc < gen->size(); ++ mc)
+          for(size_t mc = 0; mc < genTTembedded->size(); ++ mc)
           {
-            const reco::GenParticle & genparticle = (*gen)[mc];
+            const reco::GenParticle & genparticle = (*genTTembedded)[mc];
 
 
             if(genparticle.status()==3)
@@ -482,18 +565,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             }
             else break; // speed it up a bit
 
-
           }
 
-        }
-        ////////////////////////////
-        // invalid gen particle collection
 
-        else
-        {
-          CurrentElectronTau.set_passNonTopEmbeddedTriggerAndMass50(0);
-          CurrentElectronTau.set_passSignalGeneratorMass70to130Cut(0);
         }
+
 
 
         ////////////
