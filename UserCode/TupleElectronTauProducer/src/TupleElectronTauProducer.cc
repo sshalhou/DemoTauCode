@@ -59,7 +59,7 @@ Implementation:
 #include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
-
+#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
 
 

@@ -61,7 +61,7 @@ Implementation:
 #include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
-
+#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
@@ -447,7 +447,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
           bool fillTop = 0;
           bool fillTopBar = 0;
-          
+
 
           edm::View<reco::GenParticleCollection>::const_iterator genparticle;
           for(genparticle=gen->begin(); genparticle!=gen->end(); ++genparticle)
