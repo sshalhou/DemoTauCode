@@ -307,7 +307,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
     CurrentMuonTauWeight.set_weightHEPNUP_DYJets(weightHEPNUP_DYJets);
     CurrentMuonTauWeight.set_weightHEPNUP_WJets(weightHEPNUP_WJets);
-
+    CurrentMuonTauWeight.set_hepNUP(hepNUP);
 
     ////////////////
     // set the tau spinnor weights
