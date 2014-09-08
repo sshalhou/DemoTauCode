@@ -33,12 +33,49 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_etaDepQCDShapeTemplateCorrection = NAN;
   m_inclusiveQCDShapeTemplateCorrection = NAN;
   m_TTbarPtWeight = NAN;
-
+  m_TauSpinnerWT = NAN;
+  m_TauSpinnerWTFlip = NAN;
+  m_TauSpinnerWThminus = NAN;
+  m_TauSpinnerWThplus = NAN;
+  m_hepNUP = -999;
+  m_weightHEPNUP_DYJets = NAN;
+  m_weightHEPNUP_WJets = NAN;
 
 
 }
 
 //Setting Weights
+
+
+//////////////
+// tau spinner weights
+
+void TupleMuonTauWeight::set_TauSpinnerWT(double TauSpinnerWT_) { m_TauSpinnerWT  =  TauSpinnerWT_;}
+double TupleMuonTauWeight::TauSpinnerWT() const { return m_TauSpinnerWT; }
+
+void TupleMuonTauWeight::set_TauSpinnerWTFlip(double TauSpinnerWTFlip_) { m_TauSpinnerWTFlip  =  TauSpinnerWTFlip_;}
+double TupleMuonTauWeight::TauSpinnerWTFlip() const { return m_TauSpinnerWTFlip; }
+
+void TupleMuonTauWeight::set_TauSpinnerWThminus(double TauSpinnerWThminus_) { m_TauSpinnerWThminus  =  TauSpinnerWThminus_;}
+double TupleMuonTauWeight::TauSpinnerWThminus() const { return m_TauSpinnerWThminus; }
+
+void TupleMuonTauWeight::set_TauSpinnerWThplus(double TauSpinnerWThplus_) { m_TauSpinnerWThplus  =  TauSpinnerWThplus_;}
+double TupleMuonTauWeight::TauSpinnerWThplus() const { return m_TauSpinnerWThplus; }
+
+
+///////////////
+// n parton weights
+
+void TupleMuonTauWeight::set_hepNUP(int hepNUP_) { m_hepNUP  =  hepNUP_;}
+int TupleMuonTauWeight::hepNUP() const { return m_hepNUP; }
+
+void TupleMuonTauWeight::set_weightHEPNUP_DYJets(double weightHEPNUP_DYJets_) { m_weightHEPNUP_DYJets  =  weightHEPNUP_DYJets_;}
+double TupleMuonTauWeight::weightHEPNUP_DYJets() const { return m_weightHEPNUP_DYJets; }
+
+void TupleMuonTauWeight::set_weightHEPNUP_WJets(double weightHEPNUP_WJets_) { m_weightHEPNUP_WJets  =  weightHEPNUP_WJets_;}
+double TupleMuonTauWeight::weightHEPNUP_WJets() const { return m_weightHEPNUP_WJets; }
+
+
 
 /////////////
 // tt pt reweight

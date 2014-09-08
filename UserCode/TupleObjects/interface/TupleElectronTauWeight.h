@@ -55,6 +55,13 @@ public:
   void set_etaDepQCDShapeTemplateCorrection(double);
   void set_inclusiveQCDShapeTemplateCorrection(double);
   void set_TTbarPtWeight(double);
+  void set_TauSpinnerWT(double);
+  void set_TauSpinnerWTFlip(double);
+  void set_TauSpinnerWThminus(double);
+  void set_TauSpinnerWThplus(double);
+  void set_hepNUP(int);
+  void set_weightHEPNUP_DYJets(double);
+  void set_weightHEPNUP_WJets(double);
 
 
   // getters
@@ -91,6 +98,13 @@ public:
   double etaDepQCDShapeTemplateCorrection() const;
   double inclusiveQCDShapeTemplateCorrection() const;
   double TTbarPtWeight() const;
+  double TauSpinnerWT() const;
+  double TauSpinnerWTFlip() const;
+  double TauSpinnerWThminus() const;
+  double TauSpinnerWThplus() const;
+  int    hepNUP() const;
+  double weightHEPNUP_DYJets() const;
+  double weightHEPNUP_WJets() const;
 
 
 private:
@@ -128,6 +142,14 @@ private:
   double m_etaDepQCDShapeTemplateCorrection;
   double m_inclusiveQCDShapeTemplateCorrection;
   double m_TTbarPtWeight;
+  double m_TauSpinnerWT;
+  double m_TauSpinnerWTFlip;
+  double m_TauSpinnerWThminus;
+  double m_TauSpinnerWThplus;
+  int    m_hepNUP;
+  double m_weightHEPNUP_DYJets;
+  double m_weightHEPNUP_WJets;
+
 
 
 };
