@@ -219,33 +219,15 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   //std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
   //std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
 
-  ////////////////////////
-  // read in and set the tau
-  // spinnor weights (if valid)
 
-  edm::Handle<bool> TauSpinnerWTisValidSrc;
-  iEvent.getByLabel(TauSpinnerWTisValidSrc_, TauSpinnerWTisValidSrc);
-
-  edm::Handle<double> TauSpinnerWTSrc;
-  iEvent.getByLabel(TauSpinnerWTSrc_, TauSpinnerWTSrc);
-
-  edm::Handle<double> TauSpinnerWTFlipSrc;
-  iEvent.getByLabel(TauSpinnerWTFlipSrc_, TauSpinnerWTFlipSrc);
-
-  edm::Handle<double> TauSpinnerWThminusSrc;
-  iEvent.getByLabel(TauSpinnerWThminusSrc_, TauSpinnerWThminusSrc);
-
-  edm::Handle<double> TauSpinnerWThplusSrc;
-  iEvent.getByLabel(TauSpinnerWThplusSrc_, TauSpinnerWThplusSrc);
-
-  // init weights to 1.0
+  // init tau spinor weights to 1.0
 
   double TauSpinnerWT = 1.0;
   double TauSpinnerWTFlip = 1.0;
   double TauSpinnerWThminus = 1.0;
   double TauSpinnerWThplus = 1.0;
 
-  if(TauSpinnerWTisValidSrc.isValid())
+  if(TauSpinnerWTisValidSrc_.isValid())
   {
     if(TauSpinnerWTisValidSrc)
     {
@@ -254,12 +236,13 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
       // will store in the pair loop
       // below
 
-      TauSpinnerWT = TauSpinnerWTSrc;
-      TauSpinnerWTFlip = TauSpinnerWTFlipSrc;
-      TauSpinnerWThminus = TauSpinnerWThminusSrc;
-      TauSpinnerWThplus = TauSpinnerWThplusSrc;
+      TauSpinnerWT = TauSpinnerWTSrc_;
+      TauSpinnerWTFlip = TauSpinnerWTFlipSrc_;
+      TauSpinnerWThminus = TauSpinnerWThminusSrc_;
+      TauSpinnerWThplus = TauSpinnerWThplusSrc_;
     }
   }
+
 
 
   //////////////////
