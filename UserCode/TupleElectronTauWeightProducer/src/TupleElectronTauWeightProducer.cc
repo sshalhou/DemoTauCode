@@ -54,6 +54,7 @@ Implementation:
 #include "TMath.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "TauSpinnerInterface/TauSpinnerInterface/interface/TauSpinnerCMS.h"
+#include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 
@@ -92,6 +93,7 @@ private:
   edm::InputTag TauSpinnerWTFlipSrc_;
   edm::InputTag TauSpinnerWThminusSrc_;
   edm::InputTag TauSpinnerWThplusSrc_;
+  edm::InputTag LHEEventProductSrc_;
 
 };
 
@@ -121,7 +123,8 @@ TauSpinnerWTisValidSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTisValid
 TauSpinnerWTSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTSrc")),
 TauSpinnerWTFlipSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTFlipSrc")),
 TauSpinnerWThminusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThminusSrc")),
-TauSpinnerWThplusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThplusSrc"))
+TauSpinnerWThplusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThplusSrc")),
+LHEEventProductSrc_(iConfig.getParameter<edm::InputTag>("LHEEventProductSrc"))
 {
 
 
@@ -262,6 +265,29 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     }
   }
 
+  //////////////////
+  // read in the LHEEventProduct
+  // and get the weights
+  // store below for pairs
+
+  edm::Handle<LHEEventProduct > LHEHandle;
+  const LHEEventProduct* LHE = 0;
+  iEvent.getByLabel(LHEEventProductSrc_,LHEHandle);
+  int hepNUP = -999;
+  double weightHEPNUP_DYJets = 1.0;
+  double weightHEPNUP_WJets = 1.0;
+
+
+  if(LHEHandle.isValid())
+  {
+    LHE = LHEHandle.product();
+    hepNUP = (LHE->hepeup()).NUP;
+
+    weightHEPNUP_DYJets = TupleHelpers::getWeightHEPNUP_DYJets(hepNUP);
+    weightHEPNUP_WJets = TupleHelpers::getWeightHEPNUP_WJets(hepNUP);
+  }
+
+
 
   //////////////////
   // begin loop over electronTaus
@@ -274,6 +300,13 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
     const TupleElectron electron = ((*electrons)[electronTau.electronIndex()]);
     const TupleTau tau = ((*taus)[electronTau.tauIndex()]);
+
+    /////////////////
+    // set the W+jets and DY+jets
+    // parton sample stitching weigts
+
+    CurrentElectronTauWeight.set_weightHEPNUP_DYJets(weightHEPNUP_DYJets);
+    CurrentElectronTauWeight.set_weightHEPNUP_WJets(weightHEPNUP_WJets);
 
 
     ////////////////

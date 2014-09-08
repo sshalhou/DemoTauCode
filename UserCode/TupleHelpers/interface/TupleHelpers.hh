@@ -44,6 +44,41 @@ namespace TupleHelpers
 
 
   //////////////////////
+  // stitching weights
+  // DY + jets
+
+
+  double getWeightHEPNUP_DYJets(int hepNUP)
+  {
+
+    int nJets = hepNUP-5;
+
+    if(nJets==0)      return 0.115028141;
+    else if(nJets==1) return 0.022330692;
+    else if(nJets==2) return 0.009068275;
+    else if(nJets==3) return 0.005270592;
+    else if(nJets>=4) return 0.004113813;
+    else return 1 ;
+
+  }
+
+  double getWeightHEPNUP_WJets(int hepNUP,)
+  {
+
+    int nJets = hepNUP-5;
+
+    if(nJets==0)      return 0.492871535;
+    else if(nJets==1) return 0.100267473;
+    else if(nJets==2) return 0.031238278;
+    else if(nJets==3) return 0.019961315;
+    else if(nJets>=4) return 0.018980202;
+    else return 1 ;
+
+  }
+
+
+
+  //////////////////////
   // ttBAR sample pt reweight
 
 
