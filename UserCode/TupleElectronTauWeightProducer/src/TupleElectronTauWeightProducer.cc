@@ -87,8 +87,11 @@ private:
   edm::InputTag electronSrc_;
   edm::InputTag tauSrc_;
   edm::InputTag userDataSrc_;
-
-
+  bool TauSpinnerWTisValidSrc_;
+  double TauSpinnerWTSrc_;
+  double TauSpinnerWTFlipSrc_;
+  double TauSpinnerWThminusSrc_;
+  double TauSpinnerWThplusSrc_;
 
 };
 
@@ -113,8 +116,15 @@ pileupSrc_(iConfig.getParameter<edm::InputTag>("pileupSrc")),
 electrontauSrc_(iConfig.getParameter<edm::InputTag>("electrontauSrc")),
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc")),
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc")),
-userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc")),
+TauSpinnerWTisValidSrc_(iConfig.getParameter<bool>("TauSpinnerWTisValidSrc")),
+TauSpinnerWTSrc_(iConfig.getParameter<double>("TauSpinnerWTSrc")),
+TauSpinnerWTFlipSrc_(iConfig.getParameter<double>("TauSpinnerWTFlipSrc")),
+TauSpinnerWThminusSrc_(iConfig.getParameter<double>("TauSpinnerWThminusSrc")),
+TauSpinnerWThplusSrc_(iConfig.getParameter<double>("TauSpinnerWThplusSrc"))
 {
+
+
 
   produces<std::vector<TupleElectronTauWeight>>(NAME_).setBranchAlias(NAME_);
 
@@ -209,7 +219,47 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   //std::cout<<NumPileupInt<<" , "<<NumTruePileUpInt<<" , "<<NumPileupIntM1<<" , "<<NumTruePileUpIntM1<<" , ";
   //std::cout<<NumPileupIntP1<<" , "<<NumTruePileUpIntP1<<std::endl;
 
+  ////////////////////////
+  // read in and set the tau
+  // spinnor weights (if valid)
 
+  edm::HandleM<bool> TauSpinnerWTisValidSrc;
+  iEvent.getByLabel(TauSpinnerWTisValidSrc_, TauSpinnerWTisValidSrc);
+
+  edm::Handle<double> TauSpinnerWTSrc;
+  iEvent.getByLabel(TauSpinnerWTSrc_, TauSpinnerWTSrc);
+
+  edm::Handle<double> TauSpinnerWTFlipSrc;
+  iEvent.getByLabel(TauSpinnerWTFlipSrc_, TauSpinnerWTFlipSrc);
+
+  edm::Handle<double> TauSpinnerWThminusSrc;
+  iEvent.getByLabel(TauSpinnerWThminusSrc_, TauSpinnerWThminusSrc);
+
+  edm::Handle<double> TauSpinnerWThplusSrc;
+  iEvent.getByLabel(TauSpinnerWThplusSrc_, TauSpinnerWThplusSrc);
+
+  // init weights to 1.0
+
+  double TauSpinnerWT = 1.0;
+  double TauSpinnerWTFlip = 1.0;
+  double TauSpinnerWThminus = 1.0;
+  double TauSpinnerWThplus = 1.0;
+
+  if(TauSpinnerWTisValidSrc.isValid())
+  {
+    if(TauSpinnerWTisValidSrc)
+    {
+      /////////////
+      // change if valid values
+      // will store in the pair loop
+      // below
+
+      TauSpinnerWT = TauSpinnerWTSrc;
+      TauSpinnerWTFlip = TauSpinnerWTFlipSrc;
+      TauSpinnerWThminus = TauSpinnerWThminusSrc;
+      TauSpinnerWThplus = TauSpinnerWThplusSrc;
+    }
+  }
 
 
   //////////////////
@@ -223,6 +273,15 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
     const TupleElectron electron = ((*electrons)[electronTau.electronIndex()]);
     const TupleTau tau = ((*taus)[electronTau.tauIndex()]);
+
+
+    ////////////////
+    // set the tau spinnor weights
+
+    CurrentElectronTauWeight.set_TauSpinnerWT(TauSpinnerWT);
+    CurrentElectronTauWeight.set_TauSpinnerWTFlip(TauSpinnerWTFlip);
+    CurrentElectronTauWeight.set_TauSpinnerWThminus(TauSpinnerWThminus);
+    CurrentElectronTauWeight.set_TauSpinnerWThplus(TauSpinnerWThplus);
 
 
     //////////

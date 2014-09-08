@@ -339,7 +339,12 @@ process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer
                 muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
-                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.bool('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.double('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.double('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.double('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.double('TauSpinnerReco','TauSpinnerWThplus','PAT')
                                      )
 
 ##################
@@ -386,7 +391,12 @@ process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeight
                 electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
-                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.bool('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.double('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.double('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.double('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.double('TauSpinnerReco','TauSpinnerWThplus','PAT')
                                      )
 
 
