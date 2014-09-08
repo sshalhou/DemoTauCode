@@ -221,7 +221,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   // read in and set the tau
   // spinnor weights (if valid)
 
-  edm::HandleM<bool> TauSpinnerWTisValidSrc;
+  edm::Handle<bool> TauSpinnerWTisValidSrc;
   iEvent.getByLabel(TauSpinnerWTisValidSrc_, TauSpinnerWTisValidSrc);
 
   edm::Handle<double> TauSpinnerWTSrc;
@@ -270,7 +270,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
     const TupleMuonTau muonTau =   ((*muonTaus)[i]);
     TupleMuonTauWeight CurrentMuonTauWeight;
-    
+
     const TupleMuon muon = ((*muons)[muonTau.muonIndex()]);
     const TupleTau tau = ((*taus)[muonTau.tauIndex()]);
 

@@ -223,7 +223,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   // read in and set the tau
   // spinnor weights (if valid)
 
-  edm::HandleM<bool> TauSpinnerWTisValidSrc;
+  edm::Handle<bool> TauSpinnerWTisValidSrc;
   iEvent.getByLabel(TauSpinnerWTisValidSrc_, TauSpinnerWTisValidSrc);
 
   edm::Handle<double> TauSpinnerWTSrc;
