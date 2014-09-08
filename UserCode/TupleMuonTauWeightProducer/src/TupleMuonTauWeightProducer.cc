@@ -222,19 +222,19 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   // read in and set the tau
   // spinnor weights (if valid)
 
-  edm::Handle<edm::InputTag> TauSpinnerWTisValidSrc;
+  edm::Handle<bool> TauSpinnerWTisValidSrc;
   iEvent.getByLabel(TauSpinnerWTisValidSrc_, TauSpinnerWTisValidSrc);
 
-  edm::Handle<edm::InputTag> TauSpinnerWTSrc;
+  edm::Handle<double> TauSpinnerWTSrc;
   iEvent.getByLabel(TauSpinnerWTSrc_, TauSpinnerWTSrc);
 
-  edm::Handle<edm::InputTag> TauSpinnerWTFlipSrc;
+  edm::Handle<double> TauSpinnerWTFlipSrc;
   iEvent.getByLabel(TauSpinnerWTFlipSrc_, TauSpinnerWTFlipSrc);
 
-  edm::Handle<edm::InputTag> TauSpinnerWThminusSrc;
+  edm::Handle<double> TauSpinnerWThminusSrc;
   iEvent.getByLabel(TauSpinnerWThminusSrc_, TauSpinnerWThminusSrc);
 
-  edm::Handle<edm::InputTag> TauSpinnerWThplusSrc;
+  edm::Handle<double> TauSpinnerWThplusSrc;
   iEvent.getByLabel(TauSpinnerWThplusSrc_, TauSpinnerWThplusSrc);
 
   // init weights to 1.0
