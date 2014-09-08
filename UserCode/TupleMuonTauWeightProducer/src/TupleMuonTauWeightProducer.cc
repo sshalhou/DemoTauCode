@@ -116,11 +116,11 @@ muontauSrc_(iConfig.getParameter<edm::InputTag>("muontauSrc")),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc")),
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc")),
 userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc")),
-TauSpinnerWTisValidSrc_(iConfig.getParameter<bool>("TauSpinnerWTisValidSrc")),
-TauSpinnerWTSrc_(iConfig.getParameter<double>("TauSpinnerWTSrc")),
-TauSpinnerWTFlipSrc_(iConfig.getParameter<double>("TauSpinnerWTFlipSrc")),
-TauSpinnerWThminusSrc_(iConfig.getParameter<double>("TauSpinnerWThminusSrc")),
-TauSpinnerWThplusSrc_(iConfig.getParameter<double>("TauSpinnerWThplusSrc"))
+TauSpinnerWTisValidSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTisValidSrc")),
+TauSpinnerWTSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTSrc")),
+TauSpinnerWTFlipSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTFlipSrc")),
+TauSpinnerWThminusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThminusSrc")),
+TauSpinnerWThplusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThplusSrc"))
 {
 
   produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
