@@ -58,11 +58,11 @@ namespace TupleHelpers
     else if(nJets==2) return 0.009068275;
     else if(nJets==3) return 0.005270592;
     else if(nJets>=4) return 0.004113813;
-    else return 1 ;
+    else return 1. ;
 
   }
 
-  double getWeightHEPNUP_WJets(int hepNUP,)
+  double getWeightHEPNUP_WJets(int hepNUP)
   {
 
     int nJets = hepNUP-5;
@@ -72,7 +72,7 @@ namespace TupleHelpers
     else if(nJets==2) return 0.031238278;
     else if(nJets==3) return 0.019961315;
     else if(nJets>=4) return 0.018980202;
-    else return 1 ;
+    else return 1. ;
 
   }
 
