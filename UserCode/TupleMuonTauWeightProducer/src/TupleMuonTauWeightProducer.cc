@@ -86,11 +86,11 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag tauSrc_;
   edm::InputTag userDataSrc_;
-  bool TauSpinnerWTisValidSrc_;
-  double TauSpinnerWTSrc_;
-  double TauSpinnerWTFlipSrc_;
-  double TauSpinnerWThminusSrc_;
-  double TauSpinnerWThplusSrc_;
+  edm::InputTag TauSpinnerWTisValidSrc_;
+  edm::InputTag TauSpinnerWTSrc_;
+  edm::InputTag TauSpinnerWTFlipSrc_;
+  edm::InputTag TauSpinnerWThminusSrc_;
+  edm::InputTag TauSpinnerWThplusSrc_;
 
 };
 

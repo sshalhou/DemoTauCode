@@ -340,11 +340,11 @@ process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
-                TauSpinnerWTisValidSrc=cms.bool('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
-                TauSpinnerWTSrc=cms.double('TauSpinnerReco','TauSpinnerWT','PAT'),
-                TauSpinnerWTFlipSrc=cms.double('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
-                TauSpinnerWThminusSrc=cms.double('TauSpinnerReco','TauSpinnerWThminus','PAT'),
-                TauSpinnerWThplusSrc=cms.double('TauSpinnerReco','TauSpinnerWThplus','PAT')
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT')
                                      )
 
 ##################
@@ -392,11 +392,11 @@ process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeight
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
-                TauSpinnerWTisValidSrc=cms.bool('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
-                TauSpinnerWTSrc=cms.double('TauSpinnerReco','TauSpinnerWT','PAT'),
-                TauSpinnerWTFlipSrc=cms.double('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
-                TauSpinnerWThminusSrc=cms.double('TauSpinnerReco','TauSpinnerWThminus','PAT'),
-                TauSpinnerWThplusSrc=cms.double('TauSpinnerReco','TauSpinnerWThplus','PAT')
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT')
                                      )
 
 
