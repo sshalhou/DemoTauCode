@@ -227,7 +227,7 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   double TauSpinnerWThplus = 1.0;
 
 
-  if(TauSpinnerWTisValidSrc)
+  if(TauSpinnerWTisValidSrc_)
   {
     /////////////
     // change if valid values

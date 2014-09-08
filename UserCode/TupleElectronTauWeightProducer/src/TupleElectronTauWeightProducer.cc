@@ -228,7 +228,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   double TauSpinnerWThplus = 1.0;
 
 
-  if(TauSpinnerWTisValidSrc)
+  if(TauSpinnerWTisValidSrc_)
   {
     /////////////
     // change if valid values
@@ -240,7 +240,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     TauSpinnerWThminus = TauSpinnerWThminusSrc_;
     TauSpinnerWThplus = TauSpinnerWThplusSrc_;
   }
-  
+
 
 
 
