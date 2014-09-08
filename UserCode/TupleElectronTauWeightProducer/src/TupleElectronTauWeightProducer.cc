@@ -227,21 +227,20 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   double TauSpinnerWThminus = 1.0;
   double TauSpinnerWThplus = 1.0;
 
-  if(TauSpinnerWTisValidSrc_.isValid())
-  {
-    if(TauSpinnerWTisValidSrc)
-    {
-      /////////////
-      // change if valid values
-      // will store in the pair loop
-      // below
 
-      TauSpinnerWT = TauSpinnerWTSrc_;
-      TauSpinnerWTFlip = TauSpinnerWTFlipSrc_;
-      TauSpinnerWThminus = TauSpinnerWThminusSrc_;
-      TauSpinnerWThplus = TauSpinnerWThplusSrc_;
-    }
+  if(TauSpinnerWTisValidSrc)
+  {
+    /////////////
+    // change if valid values
+    // will store in the pair loop
+    // below
+
+    TauSpinnerWT = TauSpinnerWTSrc_;
+    TauSpinnerWTFlip = TauSpinnerWTFlipSrc_;
+    TauSpinnerWThminus = TauSpinnerWThminusSrc_;
+    TauSpinnerWThplus = TauSpinnerWThplusSrc_;
   }
+  
 
 
 
