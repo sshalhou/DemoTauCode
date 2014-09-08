@@ -53,7 +53,7 @@ Implementation:
 #include "TH1.h"
 #include "TMath.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
-
+#include "TauSpinnerInterface/TauSpinnerInterface/interface/TauSpinnerCMS.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 
@@ -247,6 +247,7 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
   if(TauSpinnerWTisValidSrc.isValid())
   {
+
     if(*TauSpinnerWTisValidSrc)
     {
       /////////////

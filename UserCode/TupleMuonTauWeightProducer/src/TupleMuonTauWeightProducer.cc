@@ -53,6 +53,7 @@ Implementation:
 #include "TH1.h"
 #include "TMath.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
+#include "TauSpinnerInterface/TauSpinnerInterface/interface/TauSpinnerCMS.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
