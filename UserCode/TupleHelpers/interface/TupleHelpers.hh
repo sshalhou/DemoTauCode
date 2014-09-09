@@ -68,11 +68,12 @@ namespace TupleHelpers
         if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
         {
 
+          numberOfGoodVertices_++;
+
           if( vertex->p4().pt() > max_sumPt)
           {
             max_sumPt  =     vertex->p4().pt();
             primary_vertex_indx =    vertex - vertices->begin();
-            numberOfGoodVertices_++;
           }
         }
       }
