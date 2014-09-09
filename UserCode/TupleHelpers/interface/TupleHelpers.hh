@@ -420,20 +420,10 @@ namespace TupleHelpers
   double & muonMcIDweight)
   {
 
-    //////////
-    // return 1 if data, or not embedded
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      muonDataIDweight = 1.0;
-      muonMcIDweight = 1.0;
-      return;
-
-    }
 
     //////////////
-    // compute sf if MC or embedded samples
+    // compute sf if MC, data, or embedded samples
 
 
     double ABSETA = fabs(muon.p4().eta());
@@ -474,20 +464,10 @@ namespace TupleHelpers
   double & muonMcISOLweight)
   {
 
-    //////////
-    // return 1 if data, or not embedded
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      muonDataISOLweight = 1.0;
-      muonMcISOLweight = 1.0;
-      return;
-
-    }
 
     //////////////
-    // compute sf if MC or embedded samples
+    // compute sf if MC, data, or embedded samples
 
 
     double ABSETA = fabs(muon.p4().eta());
@@ -526,20 +506,10 @@ namespace TupleHelpers
   double & electronMcIDweight )
   {
 
-    //////////
-    // return 1 if data, or not embedded
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      electronDataIDweight = 1.0;
-      electronMcIDweight = 1.0;
-      return;
-
-    }
 
     //////////////
-    // compute sf if MC or embedded samples
+    // compute sf if MC, data, or embedded samples
 
 
     double ABSETA = fabs(electron.p4().eta());
@@ -577,20 +547,10 @@ namespace TupleHelpers
   double & electronMcISOLweight )
   {
 
-    //////////
-    // return 1 if data, or not embedded
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      electronDataISOLweight = 1.0;
-      electronMcISOLweight = 1.0;
-      return;
-
-    }
 
     //////////////
-    // compute sf if MC or embedded samples
+    // compute sf if MC, data,  or embedded samples
 
 
     double ABSETA = fabs(electron.p4().eta());
@@ -842,27 +802,6 @@ namespace TupleHelpers
   const TupleTau tau, const TupleUserSpecifiedData userData0)
   {
 
-    //////////////////////////
-    // return 1.0 if Data
-    // and is not an embedded sample
-
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      HadronicTauDataTrigEffAntiEMed = 1.0;
-      HadronicTauDataTrigEffAntiETight = 1.0;
-      HadronicTauDataTrigEffAntiETight = 1.0;
-      HadronicTauMcTrigEffAntiETight = 1.0;
-      return;
-
-    }
-
-
-    // return weights if !Data
-    else
-    {
-
-
       double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
       double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
       double tightMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
@@ -928,14 +867,13 @@ namespace TupleHelpers
 
 
       /////////
-      // even if embedded, keep both values
+      // even if embedded or data, keep both values
       // although final weight for embedded is just  EffDataELE20andELE22
       // and not the ratio
 
       return;
-    }
 
-    return;
+
 
 
 
@@ -955,23 +893,6 @@ namespace TupleHelpers
   const TupleTau tau, const TupleUserSpecifiedData userData0)
   {
 
-    //////////////////////////
-    // return 1.0 if Data
-    // and is not an embedded sample
-
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      HadronicTauDataTrigEffAntiMuMed = 1.0;
-      HadronicTauMcTrigEffAntiMuMed = 1.0;
-      return;
-
-    }
-
-
-    // return weights if !Data
-    else
-    {
 
 
       double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
@@ -1015,9 +936,7 @@ namespace TupleHelpers
       // and not the ratio
 
       return;
-    }
 
-    return;
 
 
 
@@ -1124,23 +1043,8 @@ namespace TupleHelpers
   const TupleUserSpecifiedData userData0)
   {
 
-    //////////////////////////
-    // return 1.0 if Data
-    // and is not an embedded sample
-
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      EffDataISOMU17andISOMU18 = 1.0;
-      EffMcISOMU17andISOMU18 = 1.0;
-      return;
-
-    }
 
 
-    // return weights if !Data
-    else
-    {
 
 
       double MCpar[5] = {NAN,NAN,NAN,NAN,NAN};
@@ -1210,12 +1114,10 @@ namespace TupleHelpers
 
 
       /////////
-      // even if embedded, keep both values
+      // even if embedded or data, keep both values
       // although final weight for embedded is just  EffDataELE20andELE22
       // and not the ratio
 
-      return;
-    }
 
     return;
 
@@ -1242,22 +1144,7 @@ namespace TupleHelpers
   {
 
 
-    //////////////////////////
-    // return 1.0 if Data, or if trigger not fired
-    // and is not an embedded sample
 
-    if( (isRealData && !(userData0.isTopEmbeddedSample() || userData0.isNonTopEmbeddedSample())) )
-    {
-
-      EffDataELE20andELE22 = 1.0;
-      EffMcELE20andELE22 = 1.0;
-      return;
-
-    }
-
-    // return weights if !Data
-    else
-    {
 
       double cbELegDataM0 = NAN;
       double cbELegDataSigma = NAN;
@@ -1307,12 +1194,10 @@ namespace TupleHelpers
       cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
 
       /////////
-      // even if embedded, keep both values
+      // even if embedded or data, keep both values
       // although final weight for embedded is just  EffDataELE20andELE22
       // and not the ratio
 
-      return;
-    }
 
     return;
 
