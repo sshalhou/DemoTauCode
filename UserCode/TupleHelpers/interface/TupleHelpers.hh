@@ -78,10 +78,10 @@ namespace TupleHelpers
         }
       }
     }
-    const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
 
     if(primary_vertex_indx!=-999)
     {
+      const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
       numberOfGoodVertices = numberOfGoodVertices_;
       PVz = primary_vertex.z();
       PVpositionRho = primary_vertex.position().Rho();
