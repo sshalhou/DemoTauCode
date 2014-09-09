@@ -64,7 +64,7 @@ namespace TupleHelpers
     edm::View<reco::Vertex>::const_iterator vertex;
     for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
     {
-      if(vertex->isValid && !vertex->isFake() && vertex->ndof() > 4.0)
+      if(vertex->isValid() && !vertex->isFake() && vertex->ndof() > 4.0)
       {
         if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
         {
