@@ -36,11 +36,61 @@
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 #include "TMath.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 
 namespace TupleHelpers
 {
+
+
+  ///////////////////
+  // helper function for
+  // finding PV and storing related
+  // info
+
+
+  void findPrimaryVertexAndGetInfo(
+  edm::View<reco::Vertex>::const_iterator vertex,
+  int & numberOfGoodVertices, double & PVz, double & PVpositionRho, LorentzVector & PVp4)
+  {
+
+    int primary_vertex_indx = -999;
+    double max_sumPt = -999.0;
+    int numberOfGoodVertices_ = 0;
+
+
+    for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
+    {
+      if(vertex->isValid && !vertex->isFake() && vertex->ndof() > 4.0)
+      {
+        if(fabs(vertex->z()) < 24.0 && vertex->position().Rho() < 2)
+        {
+
+          if( vertex->p4().pt() > max_sumPt)
+          {
+            max_sumPt  =     vertex->p4().pt();
+            primary_vertex_indx =    vertex - vertices->begin();
+            numberOfGoodVertices_++;
+          }
+        }
+      }
+    }
+    const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+
+    if(primary_vertex_indx!=-999)
+    {
+      numberOfGoodVertices = numberOfGoodVertices_;
+      PVz = primary_vertex->z();
+      PVpositionRho = primary_vertex->position().Rho()
+      PVp4 = primary_vertex->p4();
+    }
+
+    return;
+
+
+  }
 
 
   //////////////////////
@@ -802,76 +852,76 @@ namespace TupleHelpers
   const TupleTau tau, const TupleUserSpecifiedData userData0)
   {
 
-      double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double tightMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double tightDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double tightMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double tightDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
 
-      double ABSETA = fabs(tau.corrected_p4().eta());
-
-
-
-
-
-
-      if(ABSETA<1.5)
-      {
-        medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
-        medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
-        medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
-        medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
-        medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
-
-        tightDATApar[0] = 18.895025;     tightMCpar[0] = 18.520018;
-        tightDATApar[1] = 1.695306;      tightMCpar[1] = 0.294271;
-        tightDATApar[2] = 1.922852;      tightMCpar[2] = 0.127877;
-        tightDATApar[3] = 34.020744;     tightMCpar[3] = 5.275917;
-        tightDATApar[4] = 0.903446;      tightMCpar[4] = 0.918806;
-
-
-      }
-      else if(ABSETA>1.5)
-      {
-
-        medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
-        medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
-        medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
-        medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
-        medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
-
-        tightDATApar[0] = 18.711233;     tightMCpar[0] = 18.657221;
-        tightDATApar[1] = 0.255624;      tightMCpar[1] = 0.770777;
-        tightDATApar[2] = 0.131574;      tightMCpar[2] = 0.648889;
-        tightDATApar[3] = 3.648101;      tightMCpar[3] = 138.380600;
-        tightDATApar[4] = 0.857139;      tightMCpar[4] = 0.870723;
-
-      }
+    double ABSETA = fabs(tau.corrected_p4().eta());
 
 
 
 
 
-      HadronicTauDataTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
 
-      HadronicTauMcTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
+    if(ABSETA<1.5)
+    {
+      medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
+      medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
+      medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
+      medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
+      medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
 
-      HadronicTauDataTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      tightDATApar[0], tightDATApar[1], tightDATApar[2], tightDATApar[3], tightDATApar[4]);
-
-      HadronicTauMcTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      tightMCpar[0], tightMCpar[1], tightMCpar[2], tightMCpar[3], tightMCpar[4]);
-
-
+      tightDATApar[0] = 18.895025;     tightMCpar[0] = 18.520018;
+      tightDATApar[1] = 1.695306;      tightMCpar[1] = 0.294271;
+      tightDATApar[2] = 1.922852;      tightMCpar[2] = 0.127877;
+      tightDATApar[3] = 34.020744;     tightMCpar[3] = 5.275917;
+      tightDATApar[4] = 0.903446;      tightMCpar[4] = 0.918806;
 
 
-      /////////
-      // even if embedded or data, keep both values
-      // although final weight for embedded is just  EffDataELE20andELE22
-      // and not the ratio
+    }
+    else if(ABSETA>1.5)
+    {
 
-      return;
+      medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
+      medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
+      medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
+      medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
+      medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
+
+      tightDATApar[0] = 18.711233;     tightMCpar[0] = 18.657221;
+      tightDATApar[1] = 0.255624;      tightMCpar[1] = 0.770777;
+      tightDATApar[2] = 0.131574;      tightMCpar[2] = 0.648889;
+      tightDATApar[3] = 3.648101;      tightMCpar[3] = 138.380600;
+      tightDATApar[4] = 0.857139;      tightMCpar[4] = 0.870723;
+
+    }
+
+
+
+
+
+    HadronicTauDataTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
+
+    HadronicTauMcTrigEffAntiEMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
+
+    HadronicTauDataTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    tightDATApar[0], tightDATApar[1], tightDATApar[2], tightDATApar[3], tightDATApar[4]);
+
+    HadronicTauMcTrigEffAntiETight = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    tightMCpar[0], tightMCpar[1], tightMCpar[2], tightMCpar[3], tightMCpar[4]);
+
+
+
+
+    /////////
+    // even if embedded or data, keep both values
+    // although final weight for embedded is just  EffDataELE20andELE22
+    // and not the ratio
+
+    return;
 
 
 
@@ -895,47 +945,47 @@ namespace TupleHelpers
 
 
 
-      double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double ABSETA = fabs(tau.corrected_p4().eta());
+    double medMCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double medDATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double ABSETA = fabs(tau.corrected_p4().eta());
 
-      if(ABSETA<1.5)
-      {
-        medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
-        medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
-        medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
-        medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
-        medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
+    if(ABSETA<1.5)
+    {
+      medDATApar[0] = 1.83211e+01;     medMCpar[0] = 1.83709e+01;
+      medDATApar[1] = -1.89051e+00;    medMCpar[1] = 1.37806e-01;
+      medDATApar[2] = 3.71081e+00;     medMCpar[2] = 1.64478e-01;
+      medDATApar[3] = 1.06628e+00;     medMCpar[3] = 1.44798e+00;
+      medDATApar[4] = 1.28559e+00;     medMCpar[4] = 9.92673e-01;
 
-      }
-      else if(ABSETA>1.5)
-      {
+    }
+    else if(ABSETA>1.5)
+    {
 
-        medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
-        medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
-        medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
-        medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
-        medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
+      medDATApar[0] = 1.80812e+01;     medMCpar[0] = 1.83074e+01;
+      medDATApar[1] = 1.39482e+00;     medMCpar[1] = 1.43406e+00;
+      medDATApar[2] = 1.14305e+00;     medMCpar[2] = 1.40743e+00;
+      medDATApar[3] = 1.08989e+01;     medMCpar[3] = 1.41501e+02;
+      medDATApar[4] = 8.97087e-01;     medMCpar[4] = 9.19457e-01;
 
-      }
-
-
+    }
 
 
 
-      HadronicTauDataTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
-
-      HadronicTauMcTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
-      medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
 
 
-      /////////
-      // even if embedded, keep both values
-      // although final weight for embedded is just  EffDataELE20andELE22
-      // and not the ratio
+    HadronicTauDataTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    medDATApar[0], medDATApar[1], medDATApar[2], medDATApar[3], medDATApar[4]);
 
-      return;
+    HadronicTauMcTrigEffAntiMuMed = IntegratedCrystalBallEfficiency(tau.corrected_p4().pt(),
+    medMCpar[0], medMCpar[1], medMCpar[2], medMCpar[3], medMCpar[4]);
+
+
+    /////////
+    // even if embedded, keep both values
+    // although final weight for embedded is just  EffDataELE20andELE22
+    // and not the ratio
+
+    return;
 
 
 
@@ -1047,76 +1097,76 @@ namespace TupleHelpers
 
 
 
-      double MCpar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double DATApar[5] = {NAN,NAN,NAN,NAN,NAN};
-      double ETA = muon.p4().eta();
+    double MCpar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double DATApar[5] = {NAN,NAN,NAN,NAN,NAN};
+    double ETA = muon.p4().eta();
 
-      if(ETA<-1.2)
-      {
-        DATApar[0] = 15.9977;     MCpar[0] = 16.0051;
-        DATApar[1] = 7.64004e-05; MCpar[1] = 2.45144e-05;
-        DATApar[2] = 6.4951e-08;  MCpar[2] = 4.3335e-09;
-        DATApar[3] = 1.57403;     MCpar[3] = 1.66134;
-        DATApar[4] = 0.865325;    MCpar[4] = 0.87045;
-      }
-      else if(-1.2 <= ETA && ETA < -0.8 )
-      {
-        DATApar[0] = 17.3974;     MCpar[0] = 17.3135;
-        DATApar[1] = 0.804001;    MCpar[1] = 0.747636;
-        DATApar[2] = 1.47145;     MCpar[2] = 1.21803;
-        DATApar[3] = 1.24295;     MCpar[3] = 1.40611;
-        DATApar[4] = 0.928198;    MCpar[4] = 0.934983;
-      }
-      else if(-0.8 <= ETA && ETA < 0)
-      {
-        DATApar[0] = 16.4307;     MCpar[0] = 15.9556;
-        DATApar[1] = 0.226312;    MCpar[1] = 0.0236127;
-        DATApar[2] = 0.265553;    MCpar[2] = 0.00589832;
-        DATApar[3] = 1.55756;     MCpar[3] = 1.75409;
-        DATApar[4] = 0.974462;    MCpar[4] = 0.981338;
-      }
-      else if(0.0 <= ETA && ETA < 0.8)
-      {
+    if(ETA<-1.2)
+    {
+      DATApar[0] = 15.9977;     MCpar[0] = 16.0051;
+      DATApar[1] = 7.64004e-05; MCpar[1] = 2.45144e-05;
+      DATApar[2] = 6.4951e-08;  MCpar[2] = 4.3335e-09;
+      DATApar[3] = 1.57403;     MCpar[3] = 1.66134;
+      DATApar[4] = 0.865325;    MCpar[4] = 0.87045;
+    }
+    else if(-1.2 <= ETA && ETA < -0.8 )
+    {
+      DATApar[0] = 17.3974;     MCpar[0] = 17.3135;
+      DATApar[1] = 0.804001;    MCpar[1] = 0.747636;
+      DATApar[2] = 1.47145;     MCpar[2] = 1.21803;
+      DATApar[3] = 1.24295;     MCpar[3] = 1.40611;
+      DATApar[4] = 0.928198;    MCpar[4] = 0.934983;
+    }
+    else if(-0.8 <= ETA && ETA < 0)
+    {
+      DATApar[0] = 16.4307;     MCpar[0] = 15.9556;
+      DATApar[1] = 0.226312;    MCpar[1] = 0.0236127;
+      DATApar[2] = 0.265553;    MCpar[2] = 0.00589832;
+      DATApar[3] = 1.55756;     MCpar[3] = 1.75409;
+      DATApar[4] = 0.974462;    MCpar[4] = 0.981338;
+    }
+    else if(0.0 <= ETA && ETA < 0.8)
+    {
 
-        DATApar[0] = 17.313;     MCpar[0] = 15.9289;
-        DATApar[1] = 0.662731;   MCpar[1] = 0.0271317;
-        DATApar[2] = 1.3412;     MCpar[2] = 0.00448573;
-        DATApar[3] = 1.05778;    MCpar[3] = 1.92101;
-        DATApar[4] = 1.26624;    MCpar[4] = 0.978625;
+      DATApar[0] = 17.313;     MCpar[0] = 15.9289;
+      DATApar[1] = 0.662731;   MCpar[1] = 0.0271317;
+      DATApar[2] = 1.3412;     MCpar[2] = 0.00448573;
+      DATApar[3] = 1.05778;    MCpar[3] = 1.92101;
+      DATApar[4] = 1.26624;    MCpar[4] = 0.978625;
 
-      }
-      else if(0.8 <= ETA && ETA < 1.2)
-      {
+    }
+    else if(0.8 <= ETA && ETA < 1.2)
+    {
 
-        DATApar[0] = 16.9966;     MCpar[0] = 16.5678;
-        DATApar[1] = 0.550532;    MCpar[1] = 0.328333;
-        DATApar[2] = 0.807863;    MCpar[2] = 0.354533;
-        DATApar[3] = 1.55402;     MCpar[3] = 1.67085;
-        DATApar[4] = 0.885134;    MCpar[4] = 0.916992;
-      }
-      else if(1.2 <= ETA)
-      {
-        DATApar[0] = 15.9962;    MCpar[0] = 15.997;
-        DATApar[1] = 0.000106195;    MCpar[1] = 7.90069e-05;
-        DATApar[2] = 4.95058e-08;    MCpar[2] = 4.40036e-08;
-        DATApar[3] = 1.9991;    MCpar[3] = 1.66272;
-        DATApar[4] = 0.851294;    MCpar[4] = 0.884502;
-      }
-
-
+      DATApar[0] = 16.9966;     MCpar[0] = 16.5678;
+      DATApar[1] = 0.550532;    MCpar[1] = 0.328333;
+      DATApar[2] = 0.807863;    MCpar[2] = 0.354533;
+      DATApar[3] = 1.55402;     MCpar[3] = 1.67085;
+      DATApar[4] = 0.885134;    MCpar[4] = 0.916992;
+    }
+    else if(1.2 <= ETA)
+    {
+      DATApar[0] = 15.9962;    MCpar[0] = 15.997;
+      DATApar[1] = 0.000106195;    MCpar[1] = 7.90069e-05;
+      DATApar[2] = 4.95058e-08;    MCpar[2] = 4.40036e-08;
+      DATApar[3] = 1.9991;    MCpar[3] = 1.66272;
+      DATApar[4] = 0.851294;    MCpar[4] = 0.884502;
+    }
 
 
 
-      EffDataISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
-      DATApar[0], DATApar[1], DATApar[2], DATApar[3], DATApar[4]);
-      EffMcISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
-      MCpar[0], MCpar[1], MCpar[2], MCpar[3], MCpar[4]);
 
 
-      /////////
-      // even if embedded or data, keep both values
-      // although final weight for embedded is just  EffDataELE20andELE22
-      // and not the ratio
+    EffDataISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
+    DATApar[0], DATApar[1], DATApar[2], DATApar[3], DATApar[4]);
+    EffMcISOMU17andISOMU18 = IntegratedCrystalBallEfficiency(muon.p4().pt(),
+    MCpar[0], MCpar[1], MCpar[2], MCpar[3], MCpar[4]);
+
+
+    /////////
+    // even if embedded or data, keep both values
+    // although final weight for embedded is just  EffDataELE20andELE22
+    // and not the ratio
 
 
     return;
@@ -1146,57 +1196,57 @@ namespace TupleHelpers
 
 
 
-      double cbELegDataM0 = NAN;
-      double cbELegDataSigma = NAN;
-      double cbELegDataAlpha = NAN;
-      double cbELegDataN = NAN;
-      double cbELegDataNorm = NAN;
+    double cbELegDataM0 = NAN;
+    double cbELegDataSigma = NAN;
+    double cbELegDataAlpha = NAN;
+    double cbELegDataN = NAN;
+    double cbELegDataNorm = NAN;
 
-      double cbELegMCM0 = NAN;
-      double cbELegMCSigma = NAN;
-      double cbELegMCAlpha = NAN;
-      double cbELegMCN = NAN;
-      double cbELegMCNorm = NAN;
+    double cbELegMCM0 = NAN;
+    double cbELegMCSigma = NAN;
+    double cbELegMCAlpha = NAN;
+    double cbELegMCN = NAN;
+    double cbELegMCNorm = NAN;
 
 
-      if ( fabs(electron.p4().eta()) < 1.479) // barrel
-      {
-        cbELegDataM0 = 22.9704;
-        cbELegDataSigma = 1.0258;
-        cbELegDataAlpha = 1.26889;
-        cbELegDataN = 1.31024;
-        cbELegDataNorm = 1.06409;
+    if ( fabs(electron.p4().eta()) < 1.479) // barrel
+    {
+      cbELegDataM0 = 22.9704;
+      cbELegDataSigma = 1.0258;
+      cbELegDataAlpha = 1.26889;
+      cbELegDataN = 1.31024;
+      cbELegDataNorm = 1.06409;
 
-        cbELegMCM0 = 21.7243;
-        cbELegMCSigma = 0.619015;
-        cbELegMCAlpha = 0.739301;
-        cbELegMCN = 1.34903;
-        cbELegMCNorm = 1.02594;
-      }
-      else // endcap
-      {
-        cbELegDataM0 = 21.9816;
-        cbELegDataSigma = 1.40993;
-        cbELegDataAlpha = 0.978597;
-        cbELegDataN = 2.33144;
-        cbELegDataNorm = 0.937552;
+      cbELegMCM0 = 21.7243;
+      cbELegMCSigma = 0.619015;
+      cbELegMCAlpha = 0.739301;
+      cbELegMCN = 1.34903;
+      cbELegMCNorm = 1.02594;
+    }
+    else // endcap
+    {
+      cbELegDataM0 = 21.9816;
+      cbELegDataSigma = 1.40993;
+      cbELegDataAlpha = 0.978597;
+      cbELegDataN = 2.33144;
+      cbELegDataNorm = 0.937552;
 
-        cbELegMCM0 = 22.1217;
-        cbELegMCSigma = 1.34054;
-        cbELegMCAlpha = 1.8885;
-        cbELegMCN = 1.01855;
-        cbELegMCNorm = 4.7241;
-      }
+      cbELegMCM0 = 22.1217;
+      cbELegMCSigma = 1.34054;
+      cbELegMCAlpha = 1.8885;
+      cbELegMCN = 1.01855;
+      cbELegMCNorm = 4.7241;
+    }
 
-      EffDataELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
-      cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
-      EffMcELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
-      cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
+    EffDataELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
+    cbELegDataM0, cbELegDataSigma, cbELegDataAlpha, cbELegDataN, cbELegDataNorm);
+    EffMcELE20andELE22 = IntegratedCrystalBallEfficiency(electron.p4().pt(),
+    cbELegMCM0, cbELegMCSigma, cbELegMCAlpha, cbELegMCN, cbELegMCNorm);
 
-      /////////
-      // even if embedded or data, keep both values
-      // although final weight for embedded is just  EffDataELE20andELE22
-      // and not the ratio
+    /////////
+    // even if embedded or data, keep both values
+    // although final weight for embedded is just  EffDataELE20andELE22
+    // and not the ratio
 
 
     return;
@@ -1277,9 +1327,9 @@ namespace TupleHelpers
     }
 
 
-      puWeight = LumiWeights_.weight( NumTruePileUpInt );
-      puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
-      puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
+    puWeight = LumiWeights_.weight( NumTruePileUpInt );
+    puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
+    puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
 
     return;
 
