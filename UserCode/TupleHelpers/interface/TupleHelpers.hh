@@ -84,7 +84,7 @@ namespace TupleHelpers
     {
       numberOfGoodVertices = numberOfGoodVertices_;
       PVz = primary_vertex->z();
-      PVpositionRho = primary_vertex->position().Rho()
+      PVpositionRho = primary_vertex->position().Rho();
       PVp4 = primary_vertex->p4();
     }
 
