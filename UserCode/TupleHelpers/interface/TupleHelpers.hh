@@ -83,9 +83,9 @@ namespace TupleHelpers
     if(primary_vertex_indx!=-999)
     {
       numberOfGoodVertices = numberOfGoodVertices_;
-      PVz = primary_vertex->z();
-      PVpositionRho = primary_vertex->position().Rho();
-      PVp4 = primary_vertex->p4();
+      PVz = primary_vertex.z();
+      PVpositionRho = primary_vertex.position().Rho();
+      PVp4 = primary_vertex.p4();
     }
 
     return;
