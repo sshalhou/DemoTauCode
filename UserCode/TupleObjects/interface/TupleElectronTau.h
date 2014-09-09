@@ -68,6 +68,12 @@ public:
   // the next two are needed for tt events
   void set_genTOPp4(LorentzVector);
   void set_genTOPBARp4(LorentzVector);
+  void set_numberOfGoodVertices(int); // passing basic qual. cuts
+  void set_PVndof(int);
+  void set_PVz(double);
+  void set_PVpositionRho(double);
+  void set_PVp4(LorentzVector);
+
 
 
   // getters
@@ -109,7 +115,11 @@ public:
   LorentzVector genBosonP4() const;
   LorentzVector genTOPp4() const;
   LorentzVector genTOPBARp4() const;
-
+  int numberOfGoodVertices() const;
+  int PVndof() const;
+  double PVz() const;
+  double PVpositionRho() const;
+  LorentzVector PVp4() const;
 
 
 private:
@@ -151,6 +161,11 @@ private:
   LorentzVector m_genBosonP4;
   LorentzVector m_genTOPp4;
   LorentzVector m_genTOPBARp4;
+  int m_numberOfGoodVertices;
+  int m_PVndof;
+  double m_PVz;
+  double m_PVpositionRho;
+  LorentzVector m_PVp4;
 
 };
 

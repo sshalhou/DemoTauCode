@@ -113,6 +113,8 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag triggerEventSrc_;
   edm::InputTag userDataSrc_;
+  edm::InputTag vertexSrc_;
+
 
 
 
@@ -150,7 +152,8 @@ maxTaus_(iConfig.getParameter<unsigned int>("maxTaus" )),
 doNotRequireFullIdForLeptons_(iConfig.getParameter<bool>("doNotRequireFullIdForLeptons" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 triggerEventSrc_(iConfig.getParameter<edm::InputTag>("triggerEventSrc" )),
-userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc"))
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc")),
+vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" ))
 {
 
 
@@ -191,6 +194,10 @@ TupleElectronTauProducer::~TupleElectronTauProducer()
 void
 TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+  // get vertex collection
+  edm::Handle<edm::View<reco::Vertex> > vertices;
+  iEvent.getByLabel(vertexSrc_,vertices);
 
 
   ////////////////

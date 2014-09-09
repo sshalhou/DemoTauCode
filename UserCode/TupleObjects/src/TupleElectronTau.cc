@@ -41,9 +41,29 @@ TupleElectronTau::TupleElectronTau()
   m_genBosonP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genTOPp4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genTOPBARp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_numberOfGoodVertices = -999;
+  m_PVndof = -999;
+  m_PVz = NAN;
+  m_PVpositionRho = NAN;
+  m_PVp4.SetXYZT(NAN,NAN,NAN,NAN);
 
 
 }
+
+void TupleElectronTau::set_numberOfGoodVertices(int numberOfGoodVertices_) { m_numberOfGoodVertices  =  numberOfGoodVertices_;}
+int TupleElectronTau::numberOfGoodVertices() const { return m_numberOfGoodVertices; }
+
+void TupleElectronTau::set_PVndof(int PVndof_) { m_PVndof  =  PVndof_;}
+int TupleElectronTau::PVndof() const { return m_PVndof; }
+
+void TupleElectronTau::set_PVz(double PVz_) { m_PVz  =  PVz_;}
+double TupleElectronTau::PVz() const { return m_PVz; }
+
+void TupleElectronTau::set_PVpositionRho(double PVpositionRho_) { m_PVpositionRho  =  PVpositionRho_;}
+double TupleElectronTau::PVpositionRho() const { return m_PVpositionRho; }
+
+void TupleElectronTau::set_PVp4(LorentzVector PVp4_) { m_PVp4  =  PVp4_;}
+LorentzVector TupleElectronTau::PVp4() const { return m_PVp4; }
 
 void TupleElectronTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}
 LorentzVector TupleElectronTau::genTOPp4() const { return m_genTOPp4; }

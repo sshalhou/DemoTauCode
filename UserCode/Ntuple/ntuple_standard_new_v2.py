@@ -261,7 +261,7 @@ for mINDEX in range(MAX_MUONS):
 
 process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
                 electronSrc =cms.InputTag('cleanPatElectrons'),
-                vertexSrc =cms.InputTag('selectedPrimaryVertices'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple'),
                 NAME=cms.string("TupleElectronsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
@@ -271,7 +271,7 @@ process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
 
 process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                 muonSrc =cms.InputTag('cleanPatMuons'),
-                vertexSrc =cms.InputTag('selectedPrimaryVertices'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple'),
                 NAME=cms.string("TupleMuonsNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
@@ -326,7 +326,8 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 doNotRequireFullIdForLeptons = cms.bool(True),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 triggerEventSrc = cms.InputTag("patTriggerEvent"),
-                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
 
 
 
@@ -382,7 +383,9 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 doNotRequireFullIdForLeptons = cms.bool(True),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 triggerEventSrc = cms.InputTag("patTriggerEvent"),
-                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT')
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
+
 
 
                                      )

@@ -41,10 +41,31 @@ TupleMuonTau::TupleMuonTau()
   m_genBosonP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genTOPp4.SetXYZT(NAN,NAN,NAN,NAN);
   m_genTOPBARp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_numberOfGoodVertices = -999;
+  m_PVndof = -999;
+  m_PVz = NAN;
+  m_PVpositionRho = NAN;
+  m_PVp4.SetXYZT(NAN,NAN,NAN,NAN);
 
 
 
 }
+
+void TupleMuonTau::set_numberOfGoodVertices(int numberOfGoodVertices_) { m_numberOfGoodVertices  =  numberOfGoodVertices_;}
+int TupleMuonTau::numberOfGoodVertices() const { return m_numberOfGoodVertices; }
+
+void TupleMuonTau::set_PVndof(int PVndof_) { m_PVndof  =  PVndof_;}
+int TupleMuonTau::PVndof() const { return m_PVndof; }
+
+void TupleMuonTau::set_PVz(double PVz_) { m_PVz  =  PVz_;}
+double TupleMuonTau::PVz() const { return m_PVz; }
+
+void TupleMuonTau::set_PVpositionRho(double PVpositionRho_) { m_PVpositionRho  =  PVpositionRho_;}
+double TupleMuonTau::PVpositionRho() const { return m_PVpositionRho; }
+
+void TupleMuonTau::set_PVp4(LorentzVector PVp4_) { m_PVp4  =  PVp4_;}
+LorentzVector TupleMuonTau::PVp4() const { return m_PVp4; }
+
 
 
 void TupleMuonTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}
