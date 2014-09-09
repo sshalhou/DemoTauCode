@@ -59,6 +59,7 @@ Implementation:
 #include "PhysicsTools/SelectorUtils/interface/PFJetIDSelectionFunctor.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
 
@@ -194,10 +195,26 @@ TupleElectronTauProducer::~TupleElectronTauProducer()
 void
 TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+  //////////////
+  // get vertex collection and init info
+  // we plan to store
 
-  // get vertex collection
   edm::Handle<edm::View<reco::Vertex> > vertices;
   iEvent.getByLabel(vertexSrc_,vertices);
+
+  int numberOfGoodVertices = -999;
+  int PVndof = -999;
+  double PVz = NAN;
+  double PVpositionRho = NAN;
+  LorentzVector PVp4(NAN,NAN,NAN,NAN);
+
+  TupleHelpers::findPrimaryVertexAndGetInfo(vertices, numberOfGoodVertices,
+  PVndof, PVz, PVpositionRho, PVp4);
+
+
+
+
+
 
 
   ////////////////
@@ -455,6 +472,17 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         CurrentElectronTau.set_scalarSumPt(electron.p4() , tau.corrected_p4()  );
         CurrentElectronTau.set_DR(electron.p4() , tau.corrected_p4()  );
         CurrentElectronTau.set_sumCharge(electron.charge() , tau.charge()  );
+
+        ///////////////////
+        // set PV info
+
+        CurrentMuonTau.set_numberOfGoodVertices(numberOfGoodVertices);
+        CurrentMuonTau.set_PVndof(PVndof);
+        CurrentMuonTau.set_PVz(PVz);
+        CurrentMuonTau.set_PVpositionRho(PVpositionRho);
+        CurrentMuonTau.set_PVp4(PVp4);
+
+
 
 
         /////////////////

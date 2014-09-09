@@ -53,9 +53,8 @@ namespace TupleHelpers
 
   void findPrimaryVertexAndGetInfo(
   edm::Handle<edm::View<reco::Vertex> > vertices,
-  int & numberOfGoodVertices, double & PVz, double & PVpositionRho, LorentzVector & PVp4)
+  int & numberOfGoodVertices, int & PVndof, double & PVz, double & PVpositionRho, LorentzVector & PVp4)
   {
-
 
     int primary_vertex_indx = -999;
     double max_sumPt = -999.0;
@@ -83,6 +82,7 @@ namespace TupleHelpers
     {
       const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
       numberOfGoodVertices = numberOfGoodVertices_;
+      PVndof = primary_vertex.ndof();
       PVz = primary_vertex.z();
       PVpositionRho = primary_vertex.position().Rho();
       PVp4 = primary_vertex.p4();

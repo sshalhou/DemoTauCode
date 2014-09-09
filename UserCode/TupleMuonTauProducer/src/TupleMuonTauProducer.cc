@@ -62,6 +62,8 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include "DataFormats/VertexReco/interface/Vertex.h"
+
 
 
 typedef math::XYZTLorentzVector LorentzVector;
@@ -191,9 +193,22 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
 
-  // get vertex collection
+  //////////////
+  // get vertex collection and init info
+  // we plan to store
+
   edm::Handle<edm::View<reco::Vertex> > vertices;
   iEvent.getByLabel(vertexSrc_,vertices);
+
+  int numberOfGoodVertices = -999;
+  int PVndof = -999;
+  double PVz = NAN;
+  double PVpositionRho = NAN;
+  LorentzVector PVp4(NAN,NAN,NAN,NAN);
+
+  TupleHelpers::findPrimaryVertexAndGetInfo(vertices, numberOfGoodVertices,
+  PVndof, PVz, PVpositionRho, PVp4);
+
 
   ////////////////
   // read in the UserSpecifiedData
@@ -448,6 +463,17 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         CurrentMuonTau.set_scalarSumPt(muon.p4() , tau.corrected_p4()  );
         CurrentMuonTau.set_DR(muon.p4() , tau.corrected_p4()  );
         CurrentMuonTau.set_sumCharge(muon.charge() , tau.charge()  );
+
+        ///////////////////
+        // set PV info
+
+        CurrentMuonTau.set_numberOfGoodVertices(numberOfGoodVertices);
+        CurrentMuonTau.set_PVndof(PVndof);
+        CurrentMuonTau.set_PVz(PVz);
+        CurrentMuonTau.set_PVpositionRho(PVpositionRho);
+        CurrentMuonTau.set_PVp4(PVp4);
+
+
 
         /////////////////
         // check triLepton Veto
