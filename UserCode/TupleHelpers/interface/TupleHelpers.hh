@@ -52,15 +52,16 @@ namespace TupleHelpers
 
 
   void findPrimaryVertexAndGetInfo(
-  edm::View<reco::Vertex>::const_iterator vertex,
+  edm::Handle<edm::View<reco::Vertex> > vertices,
   int & numberOfGoodVertices, double & PVz, double & PVpositionRho, LorentzVector & PVp4)
   {
+
 
     int primary_vertex_indx = -999;
     double max_sumPt = -999.0;
     int numberOfGoodVertices_ = 0;
 
-
+    edm::View<reco::Vertex>::const_iterator vertex;
     for(vertex=vertices->begin(); vertex!=vertices->end(); ++vertex)
     {
       if(vertex->isValid && !vertex->isFake() && vertex->ndof() > 4.0)
