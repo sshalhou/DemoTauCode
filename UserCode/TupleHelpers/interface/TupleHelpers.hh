@@ -1391,18 +1391,11 @@ namespace TupleHelpers
       }
     }
 
-    if(isRealData==1)
-    {
-      puWeight = 1.0;
-      puWeightM1 = 1.0;
-      puWeightP1 = 1.0;
-    }
-    else
-    {
+
       puWeight = LumiWeights_.weight( NumTruePileUpInt );
       puWeightM1 = LumiWeights_.weight( NumTruePileUpIntM1 );
       puWeightP1 = LumiWeights_.weight( NumTruePileUpIntP1 );
-    }
+
     return;
 
   }
