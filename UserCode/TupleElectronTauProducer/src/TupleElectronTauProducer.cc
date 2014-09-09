@@ -476,11 +476,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         ///////////////////
         // set PV info
 
-        CurrentMuonTau.set_numberOfGoodVertices(numberOfGoodVertices);
-        CurrentMuonTau.set_PVndof(PVndof);
-        CurrentMuonTau.set_PVz(PVz);
-        CurrentMuonTau.set_PVpositionRho(PVpositionRho);
-        CurrentMuonTau.set_PVp4(PVp4);
+        CurrentElectronTau.set_numberOfGoodVertices(numberOfGoodVertices);
+        CurrentElectronTau.set_PVndof(PVndof);
+        CurrentElectronTau.set_PVz(PVz);
+        CurrentElectronTau.set_PVpositionRho(PVpositionRho);
+        CurrentElectronTau.set_PVp4(PVp4);
 
 
 
