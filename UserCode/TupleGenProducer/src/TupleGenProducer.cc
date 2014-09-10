@@ -159,7 +159,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   if ( gen.isValid() )
   {
-    for(size_t mc = 0; mc < TMath::Min(gen->size(),30); ++ mc)
+    for(size_t mc = 0; mc < TMath::Min(UInt_t(gen->size()),30); ++ mc)
     {
       const reco::GenParticle & genparticle = (*gen)[mc];
 
@@ -179,14 +179,14 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   if ( genTTembedded.isValid() )
   {
-    for(size_t mc = 0; mc < TMath::Min(gen->size(),30); ++ mc)
+    for(size_t mc = 0; mc < TMath::Min(UInt_t(genTTembedded->size()),30); ++ mc)
     {
-      const reco::GenParticle & genparticle = (*gen)[mc];
+      const reco::GenParticle & genparticle = (*genTTembedded)[mc];
 
       TupleGen CurrentGen;
       CurrentGen.set_p4(genparticle.p4());
       CurrentGen.set_pdgId(genparticle.pdgId());
-      CurrentGen.set_status(genparticle.status())
+      CurrentGen.set_status(genparticle.status());
 
       ////////////
       // store the CurrentGen
