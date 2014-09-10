@@ -22,6 +22,8 @@ Implementation:
 #include <memory>
 #include <string>
 #include <TMath.h>
+#include <vector>
+
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -58,7 +60,7 @@ private:
   virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
 
   // ----------member data ---------------------------
-  string NAME_;
+  std::string NAME_;
   edm::InputTag genSrc_;
   edm::InputTag genTTembeddedSrc_;
 };
@@ -82,7 +84,7 @@ genTTembeddedSrc_(iConfig.getParameter<edm::InputTag>("genTTembeddedSrc" ))
 {
 
 
-  produces< vector<TupleGen> >(NAME_).setBranchAlias(NAME_);
+  produces< std::vector<TupleGen> >(NAME_).setBranchAlias(NAME_);
 
 
   //register your products
@@ -150,7 +152,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   ////////////
 
-  auto_ptr<TupleGenCollection> TupleGens (new TupleGenCollection);
+  std::auto_ptr<TupleGenCollection> TupleGens (new TupleGenCollection);
 
 
   if ( gen.isValid() )
