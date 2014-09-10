@@ -299,7 +299,7 @@ cut = cms.string("pt > 10"+
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
-      cut = cms.string("et > 24 * 0.9"+
+      cut = cms.string("et > 20 * 0.9"+
                        " && gsfTrack.trackerExpectedHitsInner.numberOfLostHits == 0"+
                        " && abs(eta) < 2.1 * 1.1" +
                        " && electronID('mvaNonTrigV0') >= 0.85 " +
