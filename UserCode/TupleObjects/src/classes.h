@@ -7,6 +7,8 @@
 #include "DataFormats/Common/interface/Wrapper.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTauWeight.h"
+#include "UserCode/TupleObjects/interface/TupleGen.h"
+
 
 struct dictionary
 {
@@ -26,6 +28,8 @@ struct dictionary
   edm::Wrapper<TupleMuonTauWeightCollection> dummy13;
   TupleElectronTauWeightCollection dummy14;
   edm::Wrapper<TupleElectronTauWeightCollection> dummy15;
+  TupleGenCollection dummy16;
+  edm::Wrapper<TupleGenCollection> dummy17;
 
 
 };
