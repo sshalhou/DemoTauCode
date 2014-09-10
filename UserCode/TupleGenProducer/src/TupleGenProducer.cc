@@ -180,7 +180,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   if ( genTTembedded.isValid() )
   {
-    for(size_t mc = 0; mc < genTTembedded->size() ++ mc)
+    for(size_t mc = 0; mc < genTTembedded->size(); ++ mc)
     {
       if(mc>30) break;
       const reco::GenParticle & genparticle = (*genTTembedded)[mc];
