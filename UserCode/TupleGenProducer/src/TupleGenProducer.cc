@@ -34,6 +34,8 @@ Implementation:
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include "UserCode/TupleObjects/interface/TupleGen.h"
+
 
 typedef math::XYZTLorentzVector LorentzVector;
 
@@ -78,7 +80,7 @@ private:
 // constructors and destructor
 //
 TupleGenProducer::TupleGenProducer(const edm::ParameterSet& iConfig):
-NAME_(iConfig.getParameter<string>("NAME" )),
+NAME_(iConfig.getParameter<std::string>("NAME" )),
 genSrc_(iConfig.getParameter<edm::InputTag>("genSrc" )),
 genTTembeddedSrc_(iConfig.getParameter<edm::InputTag>("genTTembeddedSrc" ))
 {
