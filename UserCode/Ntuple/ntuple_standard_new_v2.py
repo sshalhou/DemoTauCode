@@ -406,6 +406,14 @@ process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeight
                                      )
 
 
+
+process.TupleGen = cms.EDProducer('TupleGenProducer' ,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                NAME=cms.string("TupleGen")
+                                  )
+
+
 #################################
 process.out = cms.OutputModule("PoolOutputModule",
   fileName = cms.untracked.string('NtupleFile.root'),
@@ -434,6 +442,7 @@ if CheckMemoryUsage:
 process.p = cms.Path(
   process.myProducerLabel*
   process.selectedPrimaryVertices*
+  process.TupleGen*
   process.EsCorrectedTaus*
   process.isDiMuonEvent*
   process.isDiElectronEvent*
