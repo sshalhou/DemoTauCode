@@ -27,9 +27,12 @@ MAX_TAUS = 10
 ###########################################
 # gen particle sources depend on isNonTopEmbeddedSample
 # and isTopEmbeddedSample
+# also use alternate pileUp source for tt embedded samples
 
 genSrcInputTag = cms.InputTag('genParticles::SIM')
 genTTembeddedSrcInputTag = cms.InputTag('')
+pileupSrcInputTag = cms.InputTag('addPileupInfo'),
+
 
 if isNonTopEmbeddedSample:
   genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
@@ -38,6 +41,7 @@ if isNonTopEmbeddedSample:
 elif isTopEmbeddedSample:
   genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
   genTTembeddedSrcInputTag = cms.InputTag('genParticles::SIM')
+  pileupSrcInputTag = cms.InputTag('addPileupInfo::HLT'),
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
@@ -336,7 +340,7 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
 
 process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
                 NAME=cms.string("TupleMuonTausNominalWeights"),
-                pileupSrc = cms.InputTag("addPileupInfo"),
+                pileupSrc = pileupSrcInputTag,
                 muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
@@ -392,7 +396,7 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
 
 process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
                 NAME=cms.string("TupleElectronTausNominalWeights"),
-                pileupSrc = cms.InputTag("addPileupInfo"),
+                pileupSrc = pileupSrcInputTag,
                 electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
