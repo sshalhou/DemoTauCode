@@ -19,9 +19,9 @@ CheckMemoryUsage = False
 # leptons will be ignored by the eTau and muTau producers
 # all leptons are still considered for the vetos
 
-MAX_ELECTRONS = 10
-MAX_MUONS = 10
-MAX_TAUS = 10
+MAX_ELECTRONS = 3
+MAX_MUONS = 3
+MAX_TAUS = 3
 
 
 ###########################################
@@ -94,9 +94,26 @@ process.selectedPrimaryVertices = cms.EDFilter(
 # trigger matching does not exist)
 ###################################
 
-process.EsCorrectedTaus = cms.EDProducer('EsCorrectedTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus')
+process.EsCorrectedTausNominal = cms.EDProducer('EsCorrectedTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                TauESshift=cms.double(1.0),
+                NAME=cms.string("EsCorrectedTausNominal")
                                      )
+
+
+process.EsCorrectedTausUp = cms.EDProducer('EsCorrectedTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                TauESshift=cms.double(1.03),
+                NAME=cms.string("EsCorrectedTausUp")
+                                     )
+
+
+process.EsCorrectedTausDown = cms.EDProducer('EsCorrectedTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                TauESshift=cms.double(0.97),
+                NAME=cms.string("EsCorrectedTausDown")
+                                     )
+
 
 
 ##########################
@@ -171,20 +188,42 @@ for mINDEX in range(MAX_MUONS):
   singlePatLeptons += mModule
 
 for tINDEX in range(MAX_TAUS):
-  tModuleName = "cleanPatTaus%i" % (tINDEX)
+  tModuleName = "cleanPatTausNominal%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('EsCorrectedTaus::Ntuple'),
+    tauSrc =cms.InputTag('EsCorrectedTausNominal:EsCorrectedTausNominal:Ntuple'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
   singlePatLeptons += tModule
 
 
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTausUp%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('EsCorrectedTausUp:EsCorrectedTausUp:Ntuple'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
+
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTausDown%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('EsCorrectedTausDown:EsCorrectedTausDown:Ntuple'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
+
+
+
 ################################
 # create the pair-wise mva mets
 ################################
 
-pairWiseMvaMETs = cms.Sequence()
+pairWiseMvaMETsNominal = cms.Sequence()
+pairWiseMvaMETsUp = cms.Sequence()
+pairWiseMvaMETsDown = cms.Sequence()
 
 
 #################################
@@ -204,9 +243,9 @@ else:
 
 for eINDEX in range(MAX_ELECTRONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = "eTauMet%ix%i" % (eINDEX,tINDEX)
+    metModuleName = "eTauMetNominal%ix%i" % (eINDEX,tINDEX)
     eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
-    tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
+    tModuleName = "cleanPatTausNominal%i:cleanPatTausNominal%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
       corrector = corrector_,
       srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
@@ -226,7 +265,62 @@ for eINDEX in range(MAX_ELECTRONS):
       #))
     setattr(process, metModuleName, metModule)
     metModule.minNumLeptons = cms.int32(2)
-    pairWiseMvaMETs += metModule
+    pairWiseMvaMETsNominal += metModule
+
+
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetUp%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTausUp%i:cleanPatTausUp%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsUp += metModule
+
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetDown%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:Ntuple" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTausDown%i:cleanPatTausDown%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsDown += metModule
 
 ###########
 # muTau METs
@@ -234,9 +328,9 @@ for eINDEX in range(MAX_ELECTRONS):
 
 for mINDEX in range(MAX_MUONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = "muTauMet%ix%i" % (mINDEX,tINDEX)
+    metModuleName = "muTauMetNominal%ix%i" % (mINDEX,tINDEX)
     mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
-    tModuleName = "cleanPatTaus%i:cleanPatTaus%i:Ntuple" % (tINDEX,tINDEX)
+    tModuleName = "cleanPatTausNominal%i:cleanPatTausNominal%i:Ntuple" % (tINDEX,tINDEX)
     metModule = process.pfMEtMVA.clone(
       corrector = corrector_,
       srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
@@ -256,7 +350,60 @@ for mINDEX in range(MAX_MUONS):
       #))
     setattr(process, metModuleName, metModule)
     metModule.minNumLeptons = cms.int32(2)
-    pairWiseMvaMETs += metModule
+    pairWiseMvaMETsNominal += metModule
+
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetUp%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTausUp%i:cleanPatTausUp%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsUp += metModule
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetDown%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:Ntuple" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTausDown%i:cleanPatTausDown%i:Ntuple" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsDown += metModule
 
 
 ##########################
@@ -294,28 +441,56 @@ process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
                 tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
                 tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
                 tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
-                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27")
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(1.0)
+                                                   )
+
+
+process.TupleTausUp = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                NAME=cms.string("TupleTausUp"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(1.03)
+                                                   )
+
+process.TupleTausDown = cms.EDProducer('TupleTauProducer' ,
+                tauSrc =cms.InputTag('cleanPatTaus'),
+                NAME=cms.string("TupleTausDown"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(0.97)
                                                    )
 
 
 ##################
 # muTau Final Pairs
 
-allMuTauMETs = cms.VInputTag()
+allMuTauMETsNominal = cms.VInputTag()
 
 for mINDEX in range(MAX_MUONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = "muTauMet%ix%i::Ntuple" % (mINDEX,tINDEX)
+    metModuleName = "muTauMetNominal%ix%i::Ntuple" % (mINDEX,tINDEX)
     metModuleNameTag = cms.InputTag(metModuleName)
-    allMuTauMETs.append(metModuleNameTag)
+    allMuTauMETsNominal.append(metModuleNameTag)
 
 
-print allMuTauMETs
+print allMuTauMETsNominal
 
 process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
-                mvametSrc = allMuTauMETs,
+                mvametSrc = allMuTauMETsNominal,
                 genSrc = genSrcInputTag,
                 genTTembeddedSrc = genTTembeddedSrcInputTag,
                 iFluc=cms.double(0.0),
@@ -357,22 +532,22 @@ process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer
 ##################
 # eTau Final Pairs
 
-allElecTauMETs = cms.VInputTag()
+allElecTauMETsNominal = cms.VInputTag()
 
 for eINDEX in range(MAX_ELECTRONS):
   for tINDEX in range(MAX_TAUS):
-    metModuleName = "eTauMet%ix%i::Ntuple" % (eINDEX,tINDEX)
+    metModuleName = "eTauMetNominal%ix%i::Ntuple" % (eINDEX,tINDEX)
     metModuleNameTag = cms.InputTag(metModuleName)
-    allElecTauMETs.append(metModuleNameTag)
+    allElecTauMETsNominal.append(metModuleNameTag)
 
 
-print allElecTauMETs
+print allElecTauMETsNominal
 
 
 process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','Ntuple'),
                 electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
-                mvametSrc = allElecTauMETs,
+                mvametSrc = allElecTauMETsNominal,
                 genSrc = genSrcInputTag,
                 genTTembeddedSrc = genTTembeddedSrcInputTag,
                 iFluc=cms.double(0.0),
@@ -409,6 +584,235 @@ process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeight
                 LHEEventProductSrc=cms.InputTag('source','','LHE')
                                      )
 
+
+##################
+# muTau Final Pairs Up
+
+allMuTauMETsUp = cms.VInputTag()
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetUp%ix%i::Ntuple" % (mINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allMuTauMETsUp.append(metModuleNameTag)
+
+
+print allMuTauMETsUp
+
+process.TupleMuonTausUp = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = allMuTauMETsUp,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausUp"),
+                doSVFit=cms.bool(False),
+                maxMuons=cms.uint32(MAX_MUONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
+
+
+
+                                     )
+
+
+process.TupleMuonTausUpWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
+                NAME=cms.string("TupleMuonTausUpWeights"),
+                pileupSrc = pileupSrcInputTag,
+                muontauSrc=cms.InputTag('TupleMuonTausUp','TupleMuonTausUp','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+
+                                     )
+
+##################
+# eTau Final Pairs Up
+
+allElecTauMETsUp = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetUp%ix%i::Ntuple" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETsUp.append(metModuleNameTag)
+
+
+print allElecTauMETsUp
+
+
+process.TupleElectronTausUp = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                mvametSrc = allElecTauMETsUp,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausUp"),
+                doSVFit=cms.bool(False),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
+
+
+
+                                     )
+
+process.TupleElectronTausUpWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
+                NAME=cms.string("TupleElectronTausUpWeights"),
+                pileupSrc = pileupSrcInputTag,
+                electrontauSrc=cms.InputTag('TupleElectronTausUp','TupleElectronTausUp','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+                                     )
+
+
+
+
+##################
+# muTau Final Pairs Down
+
+allMuTauMETsDown = cms.VInputTag()
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetDown%ix%i::Ntuple" % (mINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allMuTauMETsDown.append(metModuleNameTag)
+
+
+print allMuTauMETsDown
+
+process.TupleMuonTausDown = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                mvametSrc = allMuTauMETsDown,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausDown"),
+                doSVFit=cms.bool(False),
+                maxMuons=cms.uint32(MAX_MUONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
+
+
+
+                                     )
+
+
+process.TupleMuonTausDownWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
+                NAME=cms.string("TupleMuonTausDownWeights"),
+                pileupSrc = pileupSrcInputTag,
+                muontauSrc=cms.InputTag('TupleMuonTausDown','TupleMuonTausDown','Ntuple'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+
+                                     )
+
+##################
+# eTau Final Pairs Down
+
+allElecTauMETsDown = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetDown%ix%i::Ntuple" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETsDown.append(metModuleNameTag)
+
+
+print allElecTauMETsDown
+
+
+process.TupleElectronTausDown = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                mvametSrc = allElecTauMETsDown,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausDown"),
+                doSVFit=cms.bool(False),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(True),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','Ntuple'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVertices::Ntuple')
+
+
+
+                                     )
+
+process.TupleElectronTausDownWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
+                NAME=cms.string("TupleElectronTausDownWeights"),
+                pileupSrc = pileupSrcInputTag,
+                electrontauSrc=cms.InputTag('TupleElectronTausDown','TupleElectronTausDown','Ntuple'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','Ntuple'),
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','Ntuple'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+                                     )
+
+
+################
+################
 
 
 process.TupleGen = cms.EDProducer('TupleGenProducer' ,
@@ -447,26 +851,40 @@ process.p = cms.Path(
   process.myProducerLabel*
   process.selectedPrimaryVertices*
   process.TupleGen*
-  process.EsCorrectedTaus*
+  process.EsCorrectedTausNominal*
+  process.EsCorrectedTausUp* # needed here even for data
+  process.EsCorrectedTausDown* # needed here even for data
   process.isDiMuonEvent*
   process.isDiElectronEvent*
   singlePatLeptons*
-  pairWiseMvaMETs*
-#process.pfMEtMVANominal+
-      process.TupleElectronsNominal*
-      process.TupleMuonsNominal*
-      process.TupleTausNominal*
-      process.TupleMuonTausNominal*
-      process.TupleElectronTausNominal*
-      process.TupleMuonTausNominalWeights*
-      process.TupleElectronTausNominalWeights
-#+process.metUncertaintySequence+
-#process.TupleTausTauEnDown*process.TupleMuonTausTauEnDown
-#+process.TupleMuonTausRecoilUp
-#+process.TupleMuonTausRecoilDown
-#+process.TupleMuonTausRecoilResUp
-#+process.TupleMuonTausRecoilResDown
-)
+  pairWiseMvaMETsNominal*
+  process.TupleElectronsNominal*
+  process.TupleMuonsNominal*
+  process.TupleTausNominal*
+  process.TupleMuonTausNominal*
+  process.TupleElectronTausNominal*
+  process.TupleMuonTausNominalWeights*
+  process.TupleElectronTausNominalWeights
+  )
+
+
+
+
+
+if runOnMC:
+    process.p *= pairWiseMvaMETsUp
+    process.p *= pairWiseMvaMETsDown
+    process.p *= process.TupleTausUp
+    process.p *= process.TupleTausDown
+    process.p *= process.TupleMuonTausUp
+    process.p *= process.TupleElectronTausUp
+    process.p *= process.TupleMuonTausUpWeights
+    process.p *= process.TupleElectronTausUpWeights
+    process.p *= process.TupleMuonTausDown
+    process.p *= process.TupleElectronTausDown
+    process.p *= process.TupleMuonTausDownWeights
+    process.p *= process.TupleElectronTausDownWeights
+
 
 process.e = cms.EndPath(process.out)
 
