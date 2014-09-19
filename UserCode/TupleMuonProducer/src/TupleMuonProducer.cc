@@ -614,6 +614,14 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(!(fabs(muon->p4().eta())<2.4)) triLeptonVetoCuts = 0;
     if(!(relativeIsolation_DR4 < 0.3)) triLeptonVetoCuts = 0;
     if(!(isTightMuon)) triLeptonVetoCuts = 0;
+    if(!(isPFMuon)) triLeptonVetoCuts = 0;
+    if(!muon->innerTrack().isNull())
+    {
+      if(!(fabs(muon->innerTrack()->dz(first_vertex.position())) < 0.2)) triLeptonVetoCuts = 0;
+      if(!(fabs(muon->innerTrack()->dxy(first_vertex.position())) < 0.045)) triLeptonVetoCuts = 0;
+
+    }
+    else triLeptonVetoCuts = 0;
 
     CurrentMuon.set_isTriLeptonVetoCandidate(triLeptonVetoCuts);
 

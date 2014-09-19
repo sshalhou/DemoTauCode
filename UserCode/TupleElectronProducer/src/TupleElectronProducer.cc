@@ -658,6 +658,10 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(!(electron->p4().pt()>10)) triLeptonVetoCuts = 0;
     if(!(fabs(electron->p4().eta())<2.5)) triLeptonVetoCuts = 0;
     if(!(relativeIsolation < 0.3)) triLeptonVetoCuts = 0;
+    if(  !(conversionVetoPass)            ) triLeptonVetoCuts = 0;
+    if(  !(numberOfMissingInnerHits==0)   ) triLeptonVetoCuts = 0;
+    if(  !( fabs(dxy) < 0.045)  ) triLeptonVetoCuts = 0;
+    if(  !( fabs(dz) < 0.2)  ) triLeptonVetoCuts = 0;
 
     int category2 =  TupleHelpers::getMVAElectronIdCategory(electron->pt(), Eta, "LOOSE");
     bool pass_fail2 = TupleHelpers::doesItPassTightMVANonTrigV0(category2, mva);
