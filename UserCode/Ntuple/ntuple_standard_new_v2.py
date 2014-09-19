@@ -31,7 +31,7 @@ MAX_TAUS = 10
 
 genSrcInputTag = cms.InputTag('genParticles::SIM')
 genTTembeddedSrcInputTag = cms.InputTag('')
-pileupSrcInputTag = cms.InputTag('addPileupInfo'),
+pileupSrcInputTag = cms.InputTag('addPileupInfo')
 
 
 if isNonTopEmbeddedSample:
@@ -41,7 +41,7 @@ if isNonTopEmbeddedSample:
 elif isTopEmbeddedSample:
   genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
   genTTembeddedSrcInputTag = cms.InputTag('genParticles::SIM')
-  pileupSrcInputTag = cms.InputTag('addPileupInfo::HLT'),
+  pileupSrcInputTag = cms.InputTag('addPileupInfo::HLT')
 
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
