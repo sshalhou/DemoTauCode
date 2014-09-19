@@ -81,6 +81,7 @@ private:
   std::string tauTrigMatchEle27Src_;
   vector<string> eTauPaths;
   vector<string> muTauPaths;
+  double TauESshift_;
 
 
 
@@ -107,7 +108,8 @@ tauTrigMatchMu18Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu1
 tauTrigMatchMu24Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchMu24Src" )),
 tauTrigMatchEle20Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle20Src" )),
 tauTrigMatchEle22Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle22Src" )),
-tauTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle27Src" ))
+tauTrigMatchEle27Src_(iConfig.getUntrackedParameter<std::string>("tauTrigMatchEle27Src" )),
+TauESshift_(iConfig.getParameter<double>("TauESshift" ))
 {
 
 
@@ -326,9 +328,9 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       strips = tau->signalPFGammaCands().size();
 
 
-      CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips );
+      CurrentTau.set_corrected_p4(tau->p4(), hadrons, strips, TauESshift_ );
     }
-    else CurrentTau.set_corrected_p4(tau->p4(), 0, 0);
+    else CurrentTau.set_corrected_p4(tau->p4(), 0, 0, TauESshift_);
 
 
     // need to be careful here with pdgIds, as it seems the one accessed

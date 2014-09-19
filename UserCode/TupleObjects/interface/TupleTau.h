@@ -33,7 +33,7 @@ public:
   void set_p4(LorentzVector);
   void set_genP4(LorentzVector);
   void set_genJet(LorentzVector);
-  void set_corrected_p4(LorentzVector, std::size_t, std::size_t);
+  void set_corrected_p4(LorentzVector, std::size_t, std::size_t, double);
   void set_pdgId(int);
   void set_pdgIdGEN(int);
 

@@ -855,7 +855,7 @@ float TupleTau::puCorrPtSum() const {return m_puCorrPtSum;}
 /////////////////////
 /////////////////////
 
-void TupleTau::set_corrected_p4(LorentzVector v4_, size_t hadrons, size_t strips)
+void TupleTau::set_corrected_p4(LorentzVector v4_, size_t hadrons, size_t strips, double ESshift)
 {
 
   double v4_sf = 1.0;
@@ -873,7 +873,7 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, size_t hadrons, size_t strips
 
   }
 
-  m_corrected_p4 = v4_*v4_sf;
+  m_corrected_p4 = v4_*v4_sf*ESshift;
 
 
 

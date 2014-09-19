@@ -72,6 +72,8 @@ private:
 
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
+  double TauESshift_;
+
 
 };
 
@@ -88,7 +90,8 @@ private:
 // constructors and destructor
 //
 EsCorrectedTauProducer::EsCorrectedTauProducer(const edm::ParameterSet& iConfig):
-tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" ))
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
+TauESshift_(iConfig.getParameter<double>("TauESshift" ))
 {
 
   produces< vector<pat::Tau> >();
@@ -181,7 +184,7 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     //////////////
     // scale the 4-vector
     reco::Candidate::LorentzVector EsCorrectedP4 = tau->p4();
-    EsCorrectedP4 *= v4_sf;
+    EsCorrectedP4 *= v4_sf*TauESshift_;
 
     //////////////////
     // store the new P4
