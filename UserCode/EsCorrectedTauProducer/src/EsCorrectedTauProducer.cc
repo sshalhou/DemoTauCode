@@ -73,6 +73,8 @@ private:
   // ----------member data ---------------------------
   edm::InputTag tauSrc_;
   double TauESshift_;
+  string NAME_;
+
 
 
 };
@@ -91,11 +93,12 @@ private:
 //
 EsCorrectedTauProducer::EsCorrectedTauProducer(const edm::ParameterSet& iConfig):
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
-TauESshift_(iConfig.getParameter<double>("TauESshift" ))
+TauESshift_(iConfig.getParameter<double>("TauESshift" )),
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
 
-  produces< vector<pat::Tau> >();
 
+  produces< vector<pat::Tau> >(NAME_).setBranchAlias(NAME_);
 
 
   //register your products
@@ -202,7 +205,8 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
   }
 
 
-  iEvent.put( EsCorrectedTaus, "" );
+  
+  iEvent.put( EsCorrectedTaus, NAME_ );
 
 
   /* This is an event example
