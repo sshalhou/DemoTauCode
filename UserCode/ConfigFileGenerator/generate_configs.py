@@ -90,4 +90,6 @@ for element in root.findall('Sample'):
     patTupleConfigName = "PAT_"+OneWordName+"_"+dateSuffix+".py"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
-    
+    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v1/PAT_template.py"
+    CatCommand += ">> "+ patTupleConfigName
+    os.system(CatCommand)
