@@ -87,7 +87,7 @@ for element in root.findall('Sample'):
     dateSuffix = dateSuffix.replace(":","")
     dateSuffix = dateSuffix.rstrip('\n')
 
-    patTupleConfigName = "PAT_"+OneWordName+dateSuffix+".py"
+    patTupleConfigName = "PAT_"+OneWordName+"_"+dateSuffix+".py"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
 
