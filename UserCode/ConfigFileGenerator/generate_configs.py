@@ -40,7 +40,7 @@ for element in root.findall('Sample'):
 
     BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/das_client.py --query=\""
 
-    WhiteListCommand+=BaseCommand
+    WhiteListCommand=BaseCommand
     WhiteListCommand+="site dataset="
     WhiteListCommand+=interested_in
     WhiteListCommand+="\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
