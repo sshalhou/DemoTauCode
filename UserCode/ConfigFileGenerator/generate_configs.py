@@ -72,7 +72,7 @@ for element in root.findall('Sample'):
     TypeCommand=BaseCommand
     TypeCommand+="datatype dataset="
     TypeCommand+=interested_in
-    TypeCommand+="\" --verbose=1 | grep \".\""
+    TypeCommand+="\" --verbose=1 | egrep \"mc|data\""
     getType = os.popen(TypeCommand)
     type = getType.read()
     print "type = ", type
