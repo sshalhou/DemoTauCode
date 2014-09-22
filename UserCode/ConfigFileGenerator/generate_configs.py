@@ -39,6 +39,8 @@ for element in root.findall('Sample'):
     isNonTopEmbeddedSample = element.get("isNonTopEmbeddedSample")
     isTopEmbeddedSample = element.get("isTopEmbeddedSample")
     runOnMC = element.get("runOnMC")
+    OneWordName=element.get("OneWordName")
+
 
     BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/das_client.py --query=\""
 
@@ -82,7 +84,13 @@ for element in root.findall('Sample'):
     DateCommand = os.popen('date')
     dateSuffix = DateCommand.read()
     dateSuffix = dateSuffix.replace(" ","")
+    dateSuffix = dateSuffix.replace(":","")
     dateSuffix = dateSuffix.rstrip('\n')
-    print dateSuffix
+
+    patTupleConfigName = "PAT_"+OneWordName+dateSuffix+".py"
+    print "creating a patTupleConfigFile called = ", patTupleConfigName
+
+
+
 
 #    if type == mc:

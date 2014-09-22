@@ -4,6 +4,7 @@
 
 	<Sample
 		SampleName="/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+		OneWordName="WjetsLNuV2"
 		PhysicsProcess="W+jets to lepton + neutrino (v2)"
 		CrossSection="36257.0"
 		Mass="-1.0"
@@ -18,6 +19,7 @@
 
 		<Sample
 			SampleName="x/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+			OneWordName="WjetsLNuV2"
 			PhysicsProcess="W+jets to lepton + neutrino (v2)"
 			CrossSection="36257.0"
 			Mass="-1.0"
@@ -32,6 +34,7 @@
 
 		<Sample
 			SampleName="y/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+			OneWordName="WjetsLNuV2"
 			PhysicsProcess="W+jets to lepton + neutrino (v2)"
 			CrossSection="36257.0"
 			Mass="-1.0"
