@@ -33,7 +33,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             isTopEmbeddedSample=cms.bool(isTopEmbeddedSample_),
                                             MASS=cms.double(MASS_),
                                             crossSection=cms.double(crossSection_),
-                                            numberEvents=cms.uint32(numberEvents_)
+                                            numberEvents=cms.int32(numberEvents_)
                                             )
 
 ###################################################
