@@ -42,7 +42,7 @@ for element in root.findall('Sample'):
 
     BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/das_client.py --query=\""
 
-
+    # get list of T2/T3 sites hosting the data
 
     WhiteListCommand=BaseCommand
     WhiteListCommand+="site dataset="
@@ -51,6 +51,8 @@ for element in root.findall('Sample'):
     getWhiteList = os.popen(WhiteListCommand)
     whiteList = getWhiteList.read()
     print "list = ", whiteList
+
+    # get basic info
 
     SummaryCommand=BaseCommand
     SummaryCommand+="summary dataset="
@@ -65,3 +67,12 @@ for element in root.findall('Sample'):
     nlumis = summarySplit[31]
     file_size = summarySplit[33]
     print "nfiles, nevents, nblocks, nlumis, file_size = ", nfiles, nevents, nblocks, nlumis, file_size
+
+    # get the dataType mc or data
+    TypeCommand=BaseCommand
+    TypeCommand+="datatype dataset="
+    TypeCommand+=interested_in
+    TypeCommand+="\" --verbose=1 "
+    getType = os.popen(TypeCommand)
+    type = getType.read()
+    print "type = ", type
