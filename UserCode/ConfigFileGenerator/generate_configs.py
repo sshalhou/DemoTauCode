@@ -77,8 +77,19 @@ for element in root.findall('Sample'):
     TypeCommand+="\" --verbose=1 | egrep \"mc|data\""
     getType = os.popen(TypeCommand)
     type = getType.read()
-    typeX = type.rstrip('\n')
-    print "type = ", typeX
+    type = type.rstrip('\n')
+    print "type = ", type
+
+    # update values in the xml file, careful it will be overwritten
+    element.set('Files', str(nfiles))
+    element.set('Events', str(nevents))
+    element.set('Nblocks', str(nblocks))
+    element.set('Nlumis', str(nlumis))
+    element.set('Size', str(file_size))
+    element.set('Type', str(type))
+    element.set('WhiteList', str(whiteList))
+    tree.write(fileNameXML)
+
 
     # create mc patTuple and crab files
     DateCommand = os.popen('date')
@@ -93,3 +104,11 @@ for element in root.findall('Sample'):
     CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v1/PAT_template.py"
     CatCommand += ">> "+ patTupleConfigName
     os.system(CatCommand)
+
+    # need to do the following :
+    #- sed the configurable parameters
+    #- set up options for crab jobs, Davis vs LPC, small test jobs, etc
+    #- repeat for ntuple jobs
+    #- fold in database parameters back into xml file to keep it current
+    #element.set('Mass', '-1000.0')
+    #tree.write(fileNameXML)
