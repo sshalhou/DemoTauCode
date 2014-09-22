@@ -140,7 +140,7 @@ process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
 
 process.load("JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff")
 from JetMETCorrections.Configuration.DefaultJEC_cff import *
-if runOnMC:
+if runOnMC and not isNonTopEmbeddedSample:
   process.prefer("ak5PFL1FastL2L3")
 else:
   process.prefer("ak5PFL1FastL2L3Residual")
@@ -151,7 +151,7 @@ from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
 process.load("RecoMET.METPUSubtraction.mvaPFMET_cff")
 process.calibratedAK5PFJetsForPFMEtMVA = calibratedAK5PFJetsForPFMEtMVA.clone()
 
-if runOnMC:
+if runOnMC and not isNonTopEmbeddedSample:
   process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3")
 else:
   process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3Residual")
@@ -231,7 +231,7 @@ pairWiseMvaMETsDown = cms.Sequence()
 #################################
 corrector_ = cms.string('ak5PFL1FastL2L3')
 
-if runOnMC:
+if runOnMC and not isNonTopEmbeddedSample:
   corrector_ = cms.string('ak5PFL1FastL2L3')
 else:
   corrector_ = cms.string('ak5PFL1FastL2L3Residual')

@@ -11,7 +11,7 @@ PhysicsProcess_='ggA0tautau[SUSY_120_8TeV]'
 MASS_=120.0
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
-runOnMC = True
+runOnMC = True # true for MC, and all topTopBar and Ztautau embedded samples
 
 
 FilterEvents = True
@@ -59,6 +59,8 @@ jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
 if not runOnMC:
   jetEnCorr.extend(['L2L3Residual'])
 
+if isNonTopEmbeddedSample_:
+  jetEnCorr.extend(['L2L3Residual'])
 
 #####################################
 # compute the tau spinner weights
