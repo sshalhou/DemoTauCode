@@ -75,4 +75,5 @@ for element in root.findall('Sample'):
     TypeCommand+="\" --verbose=1 | egrep \"mc|data\""
     getType = os.popen(TypeCommand)
     type = getType.read()
+    type.rstrip('\n')
     print "type = ", type
