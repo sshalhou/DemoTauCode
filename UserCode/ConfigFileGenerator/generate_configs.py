@@ -77,3 +77,12 @@ for element in root.findall('Sample'):
     type = getType.read()
     typeX = type.rstrip('\n')
     print "type = ", typeX
+
+    # create mc patTuple and crab files
+    DateCommand = os.popen('date')
+    dateSuffix = DateCommand.read()
+    dateSuffix = dateSuffix.replace(" ","")
+    dateSuffix = dateSuffix.rstrip('\n')
+    print dateSuffix
+
+#    if type == mc:
