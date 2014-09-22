@@ -90,7 +90,4 @@ for element in root.findall('Sample'):
     patTupleConfigName = "PAT_"+OneWordName+"_"+dateSuffix+".py"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
-
-
-
-#    if type == mc:
+    
