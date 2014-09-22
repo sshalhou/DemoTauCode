@@ -51,10 +51,10 @@ for element in root.findall('Sample'):
     print "list = ", whiteList
 
     SummaryCommand=BaseCommand
-    SummaryCommad+="summary dataset="
-    SummaryCommad+=interested_in
+    SummaryCommand+="summary dataset="
+    SummaryCommand+=interested_in
 
-    nFilesCommand = SummaryCommad+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
-    getNfiles = os.popen(SummaryCommad)
+    nFilesCommand = SummaryCommand+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
+    getNfiles = os.popen(SummaryCommand)
     nfiles = getNfiles.read()
     print "nfiles = ", nfiles
