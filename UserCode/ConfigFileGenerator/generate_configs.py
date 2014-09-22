@@ -55,6 +55,6 @@ for element in root.findall('Sample'):
     SummaryCommand+=interested_in
 
     nFilesCommand = SummaryCommand+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
-    getNfiles = os.popen(SummaryCommand)
+    getNfiles = os.popen(nFilesCommand)
     nfiles = getNfiles.read()
     print "nfiles = ", nfiles
