@@ -53,8 +53,28 @@ for element in root.findall('Sample'):
     SummaryCommand=BaseCommand
     SummaryCommand+="summary dataset="
     SummaryCommand+=interested_in
+    SummaryCommand+"\" --verbose=1 "
+    getSummary = os.popen(SummaryCommand)
+    summary = getSummary.read()
+    print summary
 
-    nFilesCommand = SummaryCommand+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
-    getNfiles = os.popen(nFilesCommand)
-    nfiles = getNfiles.read()
-    print "nfiles = ", nfiles
+
+#    nFilesCommand = SummaryCommand+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
+#    getNfiles = os.popen(nFilesCommand)
+#    nfiles = getNfiles.read()
+#    print "nfiles = ", nfiles
+
+#    nEventsCommand = SummaryCommand+"\" --verbose=1 | grep nevents | awk \'{ print $3 }\'"
+#    getNevents = os.popen(nEventsCommand)
+#    nevents = getNevents.read()
+#    print "nevents = ", nevents
+
+#    nBlocksCommand = SummaryCommand+"\" --verbose=1 | grep nblocks | awk \'{ print $3 }\'"
+#    getNblocks = os.popen(nBlocksCommand)
+#    nblocks = getNblocks.read()
+#    print "nblocks = ", nblocks
+
+#    nBlocksCommand = SummaryCommand+"\" --verbose=1 | grep nblocks | awk \'{ print $3 }\'"
+#    getNblocks = os.popen(nBlocksCommand)
+#    nblocks = getNblocks.read()
+#    print "nblocks = ", nblocks
