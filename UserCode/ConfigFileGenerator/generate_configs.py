@@ -42,10 +42,10 @@ for element in root.findall('Sample'):
     SizeTB = element.get("SizeTB")
     print "Mass = ", Mass
     print "SizeTB = ", SizeTB
-    WhiteListCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/"
-    WhiteListCommand+="das_client.py --query=\"site dataset="
-    WhiteListCommand+=interested_in
-    WhiteListCommand+="\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
+    BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/"
+    BaseCommand+="das_client.py --query=\"site dataset="
+    BaseCommand+=interested_in
+    WhiteListCommand=BaseCommand+"\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
     getWhiteList = os.popen(WhiteListCommand)
     whiteList = getWhiteList.read()
     print "list = ", whiteList
