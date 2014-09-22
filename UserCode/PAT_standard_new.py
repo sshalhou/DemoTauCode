@@ -48,6 +48,11 @@ else:
   removeMCMatching(process, ['All'])
   runOnData(process)
 
+if isNonTopEmbeddedSample_:
+  process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
+  runOnData(process)
+
+
 
 ###################################################
 # set the JEC level for MC or DATA

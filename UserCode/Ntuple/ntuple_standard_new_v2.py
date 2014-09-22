@@ -56,6 +56,11 @@ if runOnMC:
   process.GlobalTag.globaltag = 'START53_V23::All'
 else:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
+
+if isNonTopEmbeddedSample_:
+  process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
+
+
 process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
 
