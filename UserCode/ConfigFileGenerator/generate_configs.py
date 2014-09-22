@@ -40,6 +40,8 @@ for element in root.findall('Sample'):
 
     BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/das_client.py --query=\""
 
+
+
     WhiteListCommand=BaseCommand
     WhiteListCommand+="site dataset="
     WhiteListCommand+=interested_in
@@ -47,3 +49,12 @@ for element in root.findall('Sample'):
     getWhiteList = os.popen(WhiteListCommand)
     whiteList = getWhiteList.read()
     print "list = ", whiteList
+
+    SummaryCommand=BaseCommand
+    SummaryCommad+="summary dataset="
+    SummaryCommad+=interested_in
+
+    nFilesCommand = SummaryCommad+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
+    getNfiles = os.popen(SummaryCommad)
+    nfiles = getNfiles.read()
+    print "nfiles = ", nfiles
