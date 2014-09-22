@@ -37,3 +37,6 @@ for element in tree.iterfind('Sample[@SampleName="/WJetsToLNu_TuneZ2Star_8TeV-ma
   SizeTB = element.get("SizeTB")
   print "Mass = ", Mass
   print "SizeTB = ", SizeTB
+
+from subprocess import call
+call(['./das_client.py','--query="file dataset=/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM" --verbose=1'])
