@@ -61,6 +61,8 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
       bool isNonTopEmbeddedSample_;
       bool isTopEmbeddedSample_;
       double MASS_;
+      double crossSection_;
+      int numberEvents_;
 };
 
 //
@@ -80,8 +82,9 @@ SampleName_(iConfig.getParameter<string>("SampleName" )),
 PhysicsProcess_(iConfig.getParameter<string>("PhysicsProcess" )),
 isNonTopEmbeddedSample_(iConfig.getParameter<bool>("isNonTopEmbeddedSample" )),
 isTopEmbeddedSample_(iConfig.getParameter<bool>("isTopEmbeddedSample" )),
-MASS_(iConfig.getParameter<double>("MASS" ))
-
+MASS_(iConfig.getParameter<double>("MASS" )),
+crossSection_(iConfig.getParameter<double>("crossSection")),
+numberEvents_(iConfig.getParameter<int>("numberEvents"))
 {
 
 
@@ -133,6 +136,8 @@ CurrentTupleUserSpecifiedData.set_PhysicsProcess(PhysicsProcess_);
 CurrentTupleUserSpecifiedData.set_isNonTopEmbeddedSample(isNonTopEmbeddedSample_);
 CurrentTupleUserSpecifiedData.set_isTopEmbeddedSample(isTopEmbeddedSample_);
 CurrentTupleUserSpecifiedData.set_MASS(MASS_);
+CurrentTupleUserSpecifiedData.set_crossSection(crossSection_);
+CurrentTupleUserSpecifiedData.set_numberEvents(numberEvents_);
 
 
 ////////////

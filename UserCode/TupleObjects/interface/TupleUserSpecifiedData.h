@@ -33,6 +33,8 @@ public:
   void set_isNonTopEmbeddedSample(bool);
   void set_isTopEmbeddedSample(bool);
   void set_MASS(double);
+  void set_crossSection(double);
+  void set_numberEvents(int);
 
   // getters
 
@@ -41,6 +43,9 @@ public:
   bool isNonTopEmbeddedSample() const;
   bool isTopEmbeddedSample() const;
   double MASS() const;
+  double crossSection() const;
+  int numberEvents() const;
+
 private:
 
   std::string m_SampleName;
@@ -48,6 +53,8 @@ private:
   bool m_isNonTopEmbeddedSample;
   bool m_isTopEmbeddedSample;
   double m_MASS;
+  double m_crossSection;
+  int m_numberEvents;
 
 };
 

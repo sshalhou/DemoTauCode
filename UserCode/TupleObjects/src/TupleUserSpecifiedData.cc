@@ -9,8 +9,18 @@ TupleUserSpecifiedData::TupleUserSpecifiedData()
   m_isNonTopEmbeddedSample = 0;
   m_isTopEmbeddedSample = 0;
   m_MASS = -1.0;
+  m_crossSection = NAN;
+  m_numberEvents = 0;
 
 }
+
+void TupleUserSpecifiedData::set_crossSection(double crossSection_) { m_crossSection = crossSection_;}
+double TupleUserSpecifiedData::crossSection() const  { return m_crossSection; }
+
+void TupleUserSpecifiedData::set_numberEvents(int numberEvents_) { m_numberEvents = numberEvents_;}
+int TupleUserSpecifiedData::numberEvents() const  { return m_numberEvents; }
+
+
 
 void TupleUserSpecifiedData::set_SampleName(std::string astring_) { m_SampleName = astring_;}
 std::string TupleUserSpecifiedData::SampleName() const  { return m_SampleName; }
