@@ -37,15 +37,13 @@ for element in root.findall('Sample'):
     isNonTopEmbeddedSample = element.get("isNonTopEmbeddedSample")
     isTopEmbeddedSample = element.get("isTopEmbeddedSample")
     runOnMC = element.get("runOnMC")
-    Events = element.get("Events")
-    Files = element.get("Files")
-    SizeTB = element.get("SizeTB")
-    print "Mass = ", Mass
-    print "SizeTB = ", SizeTB
-    BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/"
-    BaseCommand+="das_client.py --query=\"site dataset="
-    BaseCommand+=interested_in
-    WhiteListCommand=BaseCommand+"\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
+
+    BaseCommand=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/das_client.py --query=\""
+
+    WhiteListCommand+=BaseCommand
+    WhiteListCommand+="site dataset="
+    WhiteListCommand+=interested_in
+    WhiteListCommand+="\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
     getWhiteList = os.popen(WhiteListCommand)
     whiteList = getWhiteList.read()
     print "list = ", whiteList
