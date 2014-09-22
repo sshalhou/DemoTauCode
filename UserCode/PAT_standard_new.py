@@ -12,7 +12,8 @@ MASS_=120.0
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
 runOnMC = True # true for MC, and all topTopBar and Ztautau embedded samples
-
+crossSection_ = 999.99
+numberEvents_ = 999
 
 FilterEvents = True
 DropSelectedPatObjects = True
@@ -30,7 +31,9 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             PhysicsProcess=cms.string(PhysicsProcess_),
                                             isNonTopEmbeddedSample=cms.bool(isNonTopEmbeddedSample_),
                                             isTopEmbeddedSample=cms.bool(isTopEmbeddedSample_),
-                                            MASS=cms.double(MASS_)
+                                            MASS=cms.double(MASS_),
+                                            crossSection=cms.double(crossSection_),
+                                            numberEvents=cms.int(numberEvents)
                                             )
 
 ###################################################
