@@ -2,6 +2,8 @@
 
 import sys
 import os
+import re
+
 
 
 if len(sys.argv) is 2:
@@ -53,28 +55,13 @@ for element in root.findall('Sample'):
     SummaryCommand=BaseCommand
     SummaryCommand+="summary dataset="
     SummaryCommand+=interested_in
-    SummaryCommand+"\" --verbose=1 "
+    SummaryCommand+="\" --verbose=1 "
     getSummary = os.popen(SummaryCommand)
     summary = getSummary.read()
-    print summary
-
-
-#    nFilesCommand = SummaryCommand+"\" --verbose=1 | grep nfiles | awk \'{ print $3 }\'"
-#    getNfiles = os.popen(nFilesCommand)
-#    nfiles = getNfiles.read()
-#    print "nfiles = ", nfiles
-
-#    nEventsCommand = SummaryCommand+"\" --verbose=1 | grep nevents | awk \'{ print $3 }\'"
-#    getNevents = os.popen(nEventsCommand)
-#    nevents = getNevents.read()
-#    print "nevents = ", nevents
-
-#    nBlocksCommand = SummaryCommand+"\" --verbose=1 | grep nblocks | awk \'{ print $3 }\'"
-#    getNblocks = os.popen(nBlocksCommand)
-#    nblocks = getNblocks.read()
-#    print "nblocks = ", nblocks
-
-#    nBlocksCommand = SummaryCommand+"\" --verbose=1 | grep nblocks | awk \'{ print $3 }\'"
-#    getNblocks = os.popen(nBlocksCommand)
-#    nblocks = getNblocks.read()
-#    print "nblocks = ", nblocks
+    summarySplit = re.split(' |\n',summary)
+    nfiles = summarySplit[18]
+    nevents  = summarySplit[22]
+    nblocks = summarySplit[26]
+    nlumis = summarySplit[31]
+    file_size = summarySplit[33]
+    print "nfiles, nevents, nblocks, nlumis, file_size = ", nfiles, nevents, nblocks, nlumis, file_size
