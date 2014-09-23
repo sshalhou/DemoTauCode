@@ -18,6 +18,7 @@
 		Size="-1"
 		Type="-1"
 		WhiteList="-1"
+		lumi_mask="NULL"
 		/>
 
 <Sample
@@ -36,6 +37,7 @@
 	Size="-1"
 	Type="-1"
 	WhiteList="-1"
+	lumi_mask="NULL"
 	/>
 
 
@@ -55,6 +57,7 @@
 	Size="-1"
 	Type="-1"
 	WhiteList="-1"
+	lumi_mask="NULL"
 	/>
 
 

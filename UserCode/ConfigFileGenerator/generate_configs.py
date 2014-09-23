@@ -105,10 +105,23 @@ for element in root.findall('Sample'):
     CatCommand += ">> "+ patTupleConfigName
     os.system(CatCommand)
 
+    # set parameters specific to the requested dataset
+    # in the patTuple job config file
+
+    writeSampleName = "sed -i \'s/DUMMY_SampleName/"+interested_in+"/g\'"
+    os.system(writeSampleName)
+
+#SampleName_='DUMMY_SampleName'
+#PhysicsProcess_='DUMMY_PhysicsProcess'
+#MASS_= DUMMY_MASS
+#isNonTopEmbeddedSample_ = DUMMY_isNonTopEmbeddedSample
+#isTopEmbeddedSample_ = DUMMY_isTopEmbeddedSample
+#runOnMC =  DUMMY_runOnMC # true for MC, and all topTopBar and Ztautau embedded samples
+#crossSection_ = DUMMY_crossSection
+#numberEvents_ = DUMMY_numberEvents
+
+
     # need to do the following :
     #- sed the configurable parameters
     #- set up options for crab jobs, Davis vs LPC, small test jobs, etc
     #- repeat for ntuple jobs
-    #- fold in database parameters back into xml file to keep it current
-    #element.set('Mass', '-1000.0')
-    #tree.write(fileNameXML)
