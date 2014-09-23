@@ -382,29 +382,48 @@ if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
     process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
     process.patTriggerEvent.processName = 'HLT'
 
+################
+# btagging must be rerun for Ztau tau embedded
+# samples (not sure about ttMC embedded)
+
+if isNonTopEmbeddedSample_:
+     process.load('RecoBTag.Configuration.RecoBTag_cff')
+     process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+     process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+     process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
+
+
+
+
+
+
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(
-                             process.UserSpecifiedData*
-                             process.VertexPresent*
-                             process.mvaID*
-                             process.PFTau*
-  process.pfNoPileUpSequence+
-  process.pfAllMuons+
-  process.pfParticleSelectionSequence+
-  process.eleIsoSequence+
-  process.muIsoSequence+
-                             process.recoTauClassicHPSSequence *
-                             process.mvametPF2PATsequence*
-                             process.patDefaultSequence*
-                             process.patPFMetByMVA*
-                             process.patConversions
-                             *process.puJetIdSqeuence
-                             *process.countMyPatTaus
-                             *process.countMyPatElectrons
-                             *process.myCleanPatMuons
-                                                              )
+process.p = cms.Path(process.UserSpecifiedData)
+process.p *= process.VertexPresent
+
+if isNonTopEmbeddedSample_:
+    process.p *= process.ak5JetTracksAssociatorAtVertex
+    process.p *= process.btagging
+
+process.p *= process.mvaID
+process.p *= process.PFTau
+process.p *= process.pfNoPileUpSequence
+process.p *= process.pfAllMuons
+process.p *= process.pfParticleSelectionSequence
+process.p *= process.eleIsoSequence
+process.p *= process.muIsoSequence
+process.p *= process.recoTauClassicHPSSequence
+process.p *= process.mvametPF2PATsequence
+process.p *= process.patDefaultSequence
+process.p *= process.patPFMetByMVA
+process.p *= process.patConversions
+process.p *= process.puJetIdSqeuence
+process.p *= process.countMyPatTaus
+process.p *= process.countMyPatElectrons
+process.p *= process.myCleanPatMuons
+
 
 
 if FilterEvents:

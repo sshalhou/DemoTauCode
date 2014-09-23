@@ -57,7 +57,7 @@ if runOnMC:
 else:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 
-if isNonTopEmbeddedSample_:
+if isNonTopEmbeddedSample:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 
 
