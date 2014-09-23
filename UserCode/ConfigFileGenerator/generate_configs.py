@@ -22,9 +22,10 @@ else:
 # prepare crab job directory to keep CMSSW_BASE/src from
 # getting out of hand
 
-shortDate = "date | awk \'{print $2$3$6}\'"
+shortDate = "date | awk \'{printf $2$3$6}\'"
 getShortDate = os.popen(shortDate)
 shortDate = getShortDate.read()
+
 crabJobLocation = os.environ['CMSSW_BASE']+"/src/CRAB_JOBS"
 
 if os.path.isdir(crabJobLocation) is False:
