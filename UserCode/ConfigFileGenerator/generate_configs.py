@@ -19,7 +19,16 @@ if len(sys.argv) is 2:
   getShortDate = os.popen(shortDate)
   shortDate = getShortDate.read()
   crabJobLocation = os.environ['CMSSW_BASE']+"/src/CRAB_JOBS"
-  print(os.path.isdir(crabJobLocation))
+
+  if not os.path.isdir(crabJobLocation):
+    makeCrabDir = "mkdir"+crabJobLocation
+    os.system(makeCrabDir)
+
+  crabJobLocation += "/"+ shortDate
+
+  if not os.path.isdir(crabJobLocation):
+    makeCrabDir = "mkdir"+crabJobLocation
+    os.system(makeCrabDir)
 
   print "generated crab files will reside in ", crabJobLocation
 
