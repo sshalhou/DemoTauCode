@@ -10,10 +10,14 @@ if len(sys.argv) is 2:
   print "------------------------"
   print "Will generate crab and config files for sample :"
   print sys.argv[1]
+  shortDate = "date | awk \'{print $2$3$6}\'"
+  getShortDate = os.popen(shortDate)
+  shortDate = getShortDate.read()
+  print shortDate
   print "------------------------\n"
 
 else:
-  print "usage : python generate_configs.py <full sample name>"
+  print "usage : python UserCode/ConfigFileGenerator/generate_configs.py <full sample name>"
   print " for example : python generate_configs.py /WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
   sys.exit()
 
