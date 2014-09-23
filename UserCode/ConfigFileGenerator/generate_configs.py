@@ -10,10 +10,20 @@ if len(sys.argv) is 2:
   print "------------------------"
   print "Will generate crab and config files for sample :"
   print sys.argv[1]
+
+  ###############
+  # prepare crab job directory to keep CMSSW_BASE/src from
+  # getting out of hand
+
   shortDate = "date | awk \'{print $2$3$6}\'"
   getShortDate = os.popen(shortDate)
   shortDate = getShortDate.read()
-  print shortDate
+  crabJobLocation = os.environ['CMSSW_BASE']+"/src/CRAB_JOBS"
+  print(os.path.isdir(crabJobLocation))
+
+  print "generated crab files will reside in ", crabJobLocation
+
+
   print "------------------------\n"
 
 else:
