@@ -34,7 +34,7 @@ for element in root.findall('Sample'):
   SampleName = element.get("SampleName")
   if interested_in == SampleName:
     PhysicsProcess = element.get("PhysicsProcess")
-    CrossSection = element.get("CrossSection")
+    crossSection = element.get("CrossSection")
     Mass = element.get("Mass")
     isNonTopEmbeddedSample = element.get("isNonTopEmbeddedSample")
     isTopEmbeddedSample = element.get("isTopEmbeddedSample")
@@ -71,6 +71,8 @@ for element in root.findall('Sample'):
     print "nfiles, nevents, nblocks, nlumis, file_size = ", nfiles, nevents, nblocks, nlumis, file_size
 
     # get the dataType mc or data
+    # note: this is not used to set runOnMC, but
+    # only to decide if we need a lumi_mask or not
     TypeCommand=BaseCommand
     TypeCommand+="datatype dataset="
     TypeCommand+=interested_in
@@ -109,17 +111,29 @@ for element in root.findall('Sample'):
     # in the patTuple job config file
 
     writeSampleName = "sed -i \'s/DUMMY_SampleName/"+interested_in.replace("/","\/")+"/g\'"+" "+patTupleConfigName
-    print writeSampleName
     os.system(writeSampleName)
 
-#SampleName_='DUMMY_SampleName'
-#PhysicsProcess_='DUMMY_PhysicsProcess'
-#MASS_= DUMMY_MASS
-#isNonTopEmbeddedSample_ = DUMMY_isNonTopEmbeddedSample
-#isTopEmbeddedSample_ = DUMMY_isTopEmbeddedSample
-#runOnMC =  DUMMY_runOnMC # true for MC, and all topTopBar and Ztautau embedded samples
-#crossSection_ = DUMMY_crossSection
-#numberEvents_ = DUMMY_numberEvents
+    writePhysicsProcess = "sed -i \'s/DUMMY_PhysicsProcess/"+PhysicsProcess+"/g\'"+" "+patTupleConfigName
+    os.system(writePhysicsProcess)
+
+    writeMASS = "sed -i \'s/DUMMY_MASS/"+Mass+"/g\'"+" "+patTupleConfigName
+    os.system(writeMASS)
+
+    writeisNonTopEmbeddedSample = "sed -i \'s/DUMMY_isNonTopEmbeddedSample/"+isNonTopEmbeddedSample+"/g\'"+" "+patTupleConfigName
+    os.system(writeisNonTopEmbeddedSample)
+
+    writeisTopEmbeddedSample = "sed -i \'s/DUMMY_isTopEmbeddedSample/"+isTopEmbeddedSample+"/g\'"+" "+patTupleConfigName
+    os.system(writeisTopEmbeddedSample)
+
+    writerunOnMC = "sed -i \'s/DUMMY_runOnMC/"+runOnMC+"/g\'"+" "+patTupleConfigName
+    os.system(writerunOnMC)
+
+    writecrossSection = "sed -i \'s/DUMMY_crossSection/"+crossSection+"/g\'"+" "+patTupleConfigName
+    os.system(writecrossSection)
+
+    writenevents = "sed -i \'s/DUMMY_numberEvents/"+nevents+"/g\'"+" "+patTupleConfigName
+    os.system(writenevents)
+
 
 
     # need to do the following :
