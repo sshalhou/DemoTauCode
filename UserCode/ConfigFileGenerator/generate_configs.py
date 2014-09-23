@@ -10,35 +10,34 @@ if len(sys.argv) is 2:
   print "------------------------"
   print "Will generate crab and config files for sample :"
   print sys.argv[1]
-
-  ###############
-  # prepare crab job directory to keep CMSSW_BASE/src from
-  # getting out of hand
-
-  shortDate = "date | awk \'{print $2$3$6}\'"
-  getShortDate = os.popen(shortDate)
-  shortDate = getShortDate.read()
-  crabJobLocation = os.environ['CMSSW_BASE']+"/src/CRAB_JOBS"
-
-  if not os.path.isdir(crabJobLocation):
-    makeCrabDir = "mkdir "+crabJobLocation
-    os.system(makeCrabDir)
-
-  crabJobLocation += "/"+ shortDate
-
-  if not os.path.isdir(crabJobLocation):
-    makeCrabDir = "mkdir "+crabJobLocation
-    os.system(makeCrabDir)
-
-  print "generated crab files will reside in ", crabJobLocation
-
-
   print "------------------------\n"
 
 else:
   print "usage : python UserCode/ConfigFileGenerator/generate_configs.py <full sample name>"
   print " for example : python generate_configs.py /WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
   sys.exit()
+
+
+###############
+# prepare crab job directory to keep CMSSW_BASE/src from
+# getting out of hand
+
+shortDate = "date | awk \'{print $2$3$6}\'"
+getShortDate = os.popen(shortDate)
+shortDate = getShortDate.read()
+crabJobLocation = os.environ['CMSSW_BASE']+"/src/CRAB_JOBS"
+
+if not os.path.isdir(crabJobLocation):
+  makeCrabDir = "mkdir "+crabJobLocation
+  os.system(makeCrabDir)
+
+crabJobLocation += "/"+ shortDate
+
+if not os.path.isdir(crabJobLocation):
+  makeCrabDir = "mkdir "+crabJobLocation
+  os.system(makeCrabDir)
+
+print "generated crab files will reside in ", crabJobLocation
 
 
 fileNameXML=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/test.xml"
