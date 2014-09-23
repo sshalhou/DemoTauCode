@@ -31,7 +31,7 @@ if os.path.isdir(crabJobLocation) is False:
   makeCrabDir = "mkdir "+crabJobLocation
   os.system(makeCrabDir)
 
-
+crabJobLocation += "/"+ shortDate
 
 if os.path.isdir(crabJobLocation) is False:
   makeCrabDir = "mkdir "+crabJobLocation
