@@ -123,7 +123,7 @@ for element in root.findall('Sample'):
     dateSuffix = dateSuffix.replace(":","")
     dateSuffix = dateSuffix.rstrip('\n')
 
-    patTupleConfigName = "PAT_"+OneWordName+"_"+dateSuffix+".py"
+    patTupleConfigName = crabJobLocation+"/PAT_"+OneWordName+"_"+dateSuffix+".py"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
     CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v1/PAT_template.py"
