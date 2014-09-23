@@ -108,7 +108,8 @@ for element in root.findall('Sample'):
     # set parameters specific to the requested dataset
     # in the patTuple job config file
 
-    writeSampleName = "sed -i \'s/DUMMY_SampleName/"+interested_in+"/g\'"
+    writeSampleName = "sed -i \'s/DUMMY_SampleName/"+interested_in+"/g\'"+" "+fileNameXML
+    print writeSampleName
     os.system(writeSampleName)
 
 #SampleName_='DUMMY_SampleName'
