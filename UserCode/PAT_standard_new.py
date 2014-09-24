@@ -53,7 +53,7 @@ else:
 
 if isNonTopEmbeddedSample_:
   process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
-  runOnData(process)
+#  runOnData(process)
 
 
 
@@ -82,6 +82,43 @@ process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
 ###################################################
 
 process.printEventContent = cms.EDAnalyzer("EventContentAnalyzer")
+
+
+
+
+##################################################
+# stuff needed for the embedded samples
+##################################################
+
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+from PhysicsTools.PatAlgos.tools.trigTools import *
+switchOnTrigger( process )
+
+##################################################
+# setup rerunning of b-tagging
+##################################################
+
+process.load('RecoBTag.Configuration.RecoBTag_cff')
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
+    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+    process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
+    process.patTriggerEvent.processName = 'HLT'
+
+
+
+if runOnMC and not isNonTopEmbeddedSample_:
+    process.load("RecoJets.Configuration.GenJetParticles_cff")
+    process.load("RecoJets.Configuration.RecoGenJets_cff")
+    process.genJetsNoNu = cms.Sequence(process.genParticlesForJetsNoNu* process.ak5GenJetsNoNu)
+    process.patDefaultSequence.replace(process.patJetGenJetMatch, process.genJetsNoNu* process.patJetGenJetMatch)
+    process.patJetGenJetMatch.matched = cms.InputTag("ak5GenJetsNoNu")
+
+
 
 
 ###################################################
@@ -367,41 +404,16 @@ if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
   # the above is needed for the PDF sys. tool
 
-##################################################
-# stuff needed for the embedded samples
-##################################################
-
-process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
-
-from PhysicsTools.PatAlgos.tools.trigTools import *
-switchOnTrigger( process )
-
-
-if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
-    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
-    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
-    process.patTriggerEvent.processName = 'HLT'
-
-################
-# btagging must be rerun for Ztau tau embedded
-# samples (not sure about ttMC embedded)
-
-if isNonTopEmbeddedSample_:
-     process.load('RecoBTag.Configuration.RecoBTag_cff')
-     process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
-     process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
-     process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
-
-
-
-
-
 
 ##################################################
 # Let it run
 ###################################################
 process.p = cms.Path(process.UserSpecifiedData)
 process.p *= process.VertexPresent
+
+# always rerun b-tagging before the pat default seq.
+process.p *= process.ak5JetTracksAssociatorAtVertex
+process.p *= process.btagging
 
 if isNonTopEmbeddedSample_:
     process.p *= process.ak5JetTracksAssociatorAtVertex
