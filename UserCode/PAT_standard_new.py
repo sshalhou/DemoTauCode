@@ -86,38 +86,6 @@ process.printEventContent = cms.EDAnalyzer("EventContentAnalyzer")
 
 
 
-##################################################
-# stuff needed for the embedded samples
-##################################################
-
-process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
-
-from PhysicsTools.PatAlgos.tools.trigTools import *
-switchOnTrigger( process )
-
-##################################################
-# setup rerunning of b-tagging
-##################################################
-
-process.load('RecoBTag.Configuration.RecoBTag_cff')
-process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
-
-
-if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
-    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
-    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
-    process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
-    process.patTriggerEvent.processName = 'HLT'
-
-
-
-if runOnMC and not isNonTopEmbeddedSample_:
-    process.load("RecoJets.Configuration.GenJetParticles_cff")
-    process.load("RecoJets.Configuration.RecoGenJets_cff")
-    process.genJetsNoNu = cms.Sequence(process.genParticlesForJetsNoNu* process.ak5GenJetsNoNu)
-    process.patDefaultSequence.replace(process.patJetGenJetMatch, process.genJetsNoNu* process.patJetGenJetMatch)
-    process.patJetGenJetMatch.matched = cms.InputTag("ak5GenJetsNoNu")
-
 
 
 
@@ -403,6 +371,40 @@ process.out.outputCommands +=['keep *_*_*_LHE']
 if runOnMC:
     process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
   # the above is needed for the PDF sys. tool
+
+
+
+##################################################
+# stuff needed for the embedded samples
+##################################################
+
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+from PhysicsTools.PatAlgos.tools.trigTools import *
+switchOnTrigger( process )
+
+##################################################
+# setup rerunning of b-tagging
+##################################################
+
+process.load('RecoBTag.Configuration.RecoBTag_cff')
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
+    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+    process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
+    process.patTriggerEvent.processName = 'HLT'
+
+
+
+if runOnMC and not isNonTopEmbeddedSample_:
+    process.load("RecoJets.Configuration.GenJetParticles_cff")
+    process.load("RecoJets.Configuration.RecoGenJets_cff")
+    process.genJetsNoNu = cms.Sequence(process.genParticlesForJetsNoNu* process.ak5GenJetsNoNu)
+    process.patDefaultSequence.replace(process.patJetGenJetMatch, process.genJetsNoNu* process.patJetGenJetMatch)
+    process.patJetGenJetMatch.matched = cms.InputTag("ak5GenJetsNoNu")
 
 
 ##################################################
