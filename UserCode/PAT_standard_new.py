@@ -413,13 +413,7 @@ if runOnMC and not isNonTopEmbeddedSample_:
 process.p = cms.Path(process.UserSpecifiedData)
 process.p *= process.VertexPresent
 
-# always rerun b-tagging before the pat default seq.
-process.p *= process.ak5JetTracksAssociatorAtVertex
-process.p *= process.btagging
 
-if isNonTopEmbeddedSample_:
-    process.p *= process.ak5JetTracksAssociatorAtVertex
-    process.p *= process.btagging
 
 process.p *= process.mvaID
 process.p *= process.PFTau
@@ -430,6 +424,11 @@ process.p *= process.eleIsoSequence
 process.p *= process.muIsoSequence
 process.p *= process.recoTauClassicHPSSequence
 process.p *= process.mvametPF2PATsequence
+
+# always rerun b-tagging before the pat default seq.
+process.p *= process.ak5JetTracksAssociatorAtVertex
+process.p *= process.btagging
+
 process.p *= process.patDefaultSequence
 process.p *= process.patPFMetByMVA
 process.p *= process.patConversions
