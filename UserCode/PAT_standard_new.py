@@ -99,7 +99,7 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
                  doJTA        = True,
                  doBTagging   = True,
                  jetCorrLabel = ('AK5PF', jetEnCorr),
-                 doType1MET   = True,
+                 doType1MET   = False,
                  genJetCollection=cms.InputTag("ak5GenJets"),
                  doJetID      = True
                  )
