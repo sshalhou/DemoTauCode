@@ -95,6 +95,25 @@ process.printEventContent = cms.EDAnalyzer("EventContentAnalyzer")
 
 from PhysicsTools.PatAlgos.tools.jetTools import *
 
+###################################################
+# must rerun b-tagging at PAT creation
+# in order to get embedded sample b-tags correct
+###################################################
+
+process.patJets.addTagInfos = True
+process.load('RecoBTag.Configuration.RecoBTag_cff')
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+###################################################
+# special case stuff for embedded samples
+###################################################
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+        print "EMBEDDED STUFF "
+        process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+        process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
+
+
 switchJetCollection(process,cms.InputTag('ak5PFJets'),
                  doJTA        = True,
                  doBTagging   = True,
@@ -241,6 +260,15 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 
 from PhysicsTools.PatAlgos.tools.tauTools import *
 switchToPFTauHPS(process)
+
+#########################
+# embedded sample settings
+#########################
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+  print "EMBEDDED STUFF "
+  process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
+
 process.cleanPatTaus.preselection = 'pt>17 & abs(eta)<2.4'\
 + '& ( tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 | tauID("byVLooseIsolationMVA3oldDMwLT") > 0.5 )'\
 + ' & ( tauID("againstElectronLoose")>0.5 | tauID("againstElectronVLooseMVA5")>0.5 )'\
@@ -383,19 +411,10 @@ process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
 from PhysicsTools.PatAlgos.tools.trigTools import *
 switchOnTrigger( process )
 
-##################################################
-# setup rerunning of b-tagging
-##################################################
-
-process.load('RecoBTag.Configuration.RecoBTag_cff')
-process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
-
 
 if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
-    process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
-    process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
-    process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
-    process.patTriggerEvent.processName = 'HLT'
+  print "EMBEDDED SETTING "
+  process.patTriggerEvent.processName = 'HLT'
 
 
 
