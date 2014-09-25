@@ -906,6 +906,7 @@ process.p = cms.Path(
   process.myProducerLabel*
   process.selectedPrimaryVertices*
   process.TupleGen*
+  process.TauGenMatchesForEmbedded* # will do nothing unless embedded
   process.EsCorrectedTausNominal*
   process.EsCorrectedTausUp* # needed here even for data
   process.EsCorrectedTausDown* # needed here even for data

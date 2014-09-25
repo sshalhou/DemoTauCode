@@ -1,7 +1,6 @@
 <export>
 </export>
 <library   name="UserCodePATHelpers_plugins" file="*.cc">
-  <use   name="UserCode/PATHelpers"/>
   <use   name="PhysicsTools/PatAlgos"/>
   <use   name="FWCore/Framework"/>
   <use   name="FWCore/ParameterSet"/>
