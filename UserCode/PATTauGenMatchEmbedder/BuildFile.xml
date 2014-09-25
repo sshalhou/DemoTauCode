@@ -24,7 +24,4 @@
 <use   name="boost"/>
 <use   name="rootcore"/>
 <use   name="rootrflx"/>
-
-<library   name="PATTauGenMatchEmbedder" file="*.cc">
-  <flags   EDM_PLUGIN="1"/>
-</library>
+<flags EDM_PLUGIN="1"/>

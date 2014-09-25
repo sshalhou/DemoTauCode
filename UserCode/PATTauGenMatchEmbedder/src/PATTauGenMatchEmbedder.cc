@@ -1,4 +1,4 @@
-#include "UserCode/interface/PATTauGenMatchEmbedder.h"
+#include "UserCode/PATTauGenMatchEmbedder/interface/PATTauGenMatchEmbedder.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
 
@@ -23,8 +23,8 @@ PATTauGenMatchEmbedder::PATTauGenMatchEmbedder(const edm::ParameterSet& cfg)
 
   produces<pat::TauCollection>();
 }
-  
-PATTauGenMatchEmbedder::~PATTauGenMatchEmbedder() 
+
+PATTauGenMatchEmbedder::~PATTauGenMatchEmbedder()
 {
   // nothing to be done yet
 }
@@ -49,12 +49,12 @@ void PATTauGenMatchEmbedder::produce(edm::Event& evt, const edm::EventSetup& es)
   size_t numTaus = inputTaus->size();
   for ( size_t idx = 0; idx < numTaus; ++idx ) {
     pat::TauRef inputTauRef(inputTaus, idx);
-    
+
     pat::Tau outputTau(*inputTauRef);
 
     reco::GenParticleRef genParticle_matched = (*genParticleMatch)[inputTauRef];
     if ( genParticle_matched.isNonnull() && genParticle_matched.isAvailable() ) {
-      outputTau.setGenParticle(*genParticle_matched); 
+      outputTau.setGenParticle(*genParticle_matched);
     }
 
     reco::GenJetRef genJet_matched = (*genJetMatch)[inputTauRef];
@@ -64,7 +64,7 @@ void PATTauGenMatchEmbedder::produce(edm::Event& evt, const edm::EventSetup& es)
 
     outputTaus->push_back(outputTau);
   }
-  
+
   evt.put(outputTaus);
 }
 
