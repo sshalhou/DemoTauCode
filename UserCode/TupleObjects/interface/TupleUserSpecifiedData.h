@@ -34,6 +34,7 @@ public:
   void set_isTopEmbeddedSample(bool);
   void set_MASS(double);
   void set_crossSection(double);
+  void set_branchingFraction(double);
   void set_numberEvents(int);
 
   // getters
@@ -44,6 +45,7 @@ public:
   bool isTopEmbeddedSample() const;
   double MASS() const;
   double crossSection() const;
+  double branchingFraction() const;
   int numberEvents() const;
 
 private:
@@ -54,6 +56,7 @@ private:
   bool m_isTopEmbeddedSample;
   double m_MASS;
   double m_crossSection;
+  double m_branchingFraction;
   int m_numberEvents;
 
 };

@@ -10,9 +10,13 @@ TupleUserSpecifiedData::TupleUserSpecifiedData()
   m_isTopEmbeddedSample = 0;
   m_MASS = -1.0;
   m_crossSection = NAN;
+  m_branchingFraction = NAN;
   m_numberEvents = 0;
 
 }
+
+void TupleUserSpecifiedData::set_branchingFraction(double branchingFraction_) { m_branchingFraction = branchingFraction_;}
+double TupleUserSpecifiedData::branchingFraction() const  { return m_branchingFraction; }
 
 void TupleUserSpecifiedData::set_crossSection(double crossSection_) { m_crossSection = crossSection_;}
 double TupleUserSpecifiedData::crossSection() const  { return m_crossSection; }

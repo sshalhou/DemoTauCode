@@ -62,6 +62,7 @@ class TupleUserSpecifiedDataProducer : public edm::EDProducer {
       bool isTopEmbeddedSample_;
       double MASS_;
       double crossSection_;
+      double branchingFraction_;
       int numberEvents_;
 };
 
@@ -84,6 +85,7 @@ isNonTopEmbeddedSample_(iConfig.getParameter<bool>("isNonTopEmbeddedSample" )),
 isTopEmbeddedSample_(iConfig.getParameter<bool>("isTopEmbeddedSample" )),
 MASS_(iConfig.getParameter<double>("MASS" )),
 crossSection_(iConfig.getParameter<double>("crossSection")),
+branchingFraction_(iConfig.getParameter<double>("branchingFraction")),
 numberEvents_(iConfig.getParameter<int>("numberEvents"))
 {
 
@@ -137,6 +139,7 @@ CurrentTupleUserSpecifiedData.set_isNonTopEmbeddedSample(isNonTopEmbeddedSample_
 CurrentTupleUserSpecifiedData.set_isTopEmbeddedSample(isTopEmbeddedSample_);
 CurrentTupleUserSpecifiedData.set_MASS(MASS_);
 CurrentTupleUserSpecifiedData.set_crossSection(crossSection_);
+CurrentTupleUserSpecifiedData.set_branchingFraction(branchingFraction_);
 CurrentTupleUserSpecifiedData.set_numberEvents(numberEvents_);
 
 

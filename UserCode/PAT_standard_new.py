@@ -12,6 +12,7 @@ MASS_=120.0
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
 runOnMC = True # true for MC, and all topTopBar and Ztautau embedded samples
+branchingFraction_ = 999.99
 crossSection_ = 999.99
 numberEvents_ = 999
 
@@ -33,6 +34,7 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             isTopEmbeddedSample=cms.bool(isTopEmbeddedSample_),
                                             MASS=cms.double(MASS_),
                                             crossSection=cms.double(crossSection_),
+                                            branchingFraction=cms.double(branchingFraction_),
                                             numberEvents=cms.int32(numberEvents_)
                                             )
 
@@ -109,7 +111,7 @@ process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
 ###################################################
 
 if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
-        print "EMBEDDED STUFF "
+        print "EMBEDDED SETTING "
         process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
         process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
 
@@ -266,7 +268,7 @@ switchToPFTauHPS(process)
 #########################
 
 if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
-  print "EMBEDDED STUFF "
+  print "EMBEDDED SETTING "
   process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
 
 process.cleanPatTaus.preselection = 'pt>17 & abs(eta)<2.4'\

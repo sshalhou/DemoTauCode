@@ -93,6 +93,56 @@ process.selectedPrimaryVertices = cms.EDFilter(
     filter = cms.bool(False)
 )
 
+
+##################################################
+# will use cleanPatTaus, except for embedded
+# where we will set to patTausGenMatched::Ntuple
+# below
+###################################################
+
+TausToUse = cms.InputTag('cleanPatTaus')
+
+###################################################
+# rerun tau - gen matching for embedded samples
+###################################################
+
+process.TauGenMatchesForEmbedded = cms.Sequence()
+tausToMatch = "cleanPatTaus"
+
+if isNonTopEmbeddedSample or isTopEmbeddedSample:
+    print "EMBEDDED STUFF "
+    from PhysicsTools.PatAlgos.mcMatchLayer0.tauMatch_cfi import tauMatch, tauGenJetMatch
+    process.tauMatchEmbeddedRECO = tauMatch.clone(
+    src = cms.InputTag(tausToMatch),
+    matched = cms.InputTag("genParticles::EmbeddedRECO")
+     						)
+    process.TauGenMatchesForEmbedded += process.tauMatchEmbeddedRECO
+
+    from PhysicsTools.JetMCAlgos.TauGenJets_cfi import tauGenJets
+    process.tauGenJetsEmbeddedRECO = tauGenJets.clone(
+    GenParticles = cms.InputTag("genParticles::EmbeddedRECO")
+    )
+    process.TauGenMatchesForEmbedded += process.tauGenJetsEmbeddedRECO
+    from PhysicsTools.JetMCAlgos.TauGenJetsDecayModeSelectorAllHadrons_cfi import tauGenJetsSelectorAllHadrons
+    process.tauGenJetsSelectorAllHadronsEmbeddedRECO = tauGenJetsSelectorAllHadrons.clone(
+    src = cms.InputTag("tauGenJetsEmbeddedRECO")
+    )
+    process.TauGenMatchesForEmbedded += process.tauGenJetsSelectorAllHadronsEmbeddedRECO
+    process.tauGenJetMatchEmbeddedRECO = tauGenJetMatch.clone(
+    src = cms.InputTag(tausToMatch),
+    matched = cms.InputTag("tauGenJetsSelectorAllHadronsEmbeddedRECO")
+    )
+    process.TauGenMatchesForEmbedded += process.tauGenJetMatchEmbeddedRECO
+
+    process.patTausGenMatched = cms.EDProducer("PATTauGenMatchEmbedder",
+    src = cms.InputTag(tausToMatch),
+    srcGenParticleMatch = cms.InputTag("tauMatchEmbeddedRECO"),
+    srcGenJetMatch = cms.InputTag("tauGenJetMatchEmbeddedRECO")
+    )
+    process.TauGenMatchesForEmbedded += process.patTausGenMatched
+    TausToUse = cms.InputTag('patTausGenMatched::Ntuple')
+
+
 ###################################
 # create an ES corrected tau collection
 # (only pass this to mva met, since
@@ -100,21 +150,21 @@ process.selectedPrimaryVertices = cms.EDFilter(
 ###################################
 
 process.EsCorrectedTausNominal = cms.EDProducer('EsCorrectedTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 TauESshift=cms.double(1.0),
                 NAME=cms.string("EsCorrectedTausNominal")
                                      )
 
 
 process.EsCorrectedTausUp = cms.EDProducer('EsCorrectedTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 TauESshift=cms.double(1.03),
                 NAME=cms.string("EsCorrectedTausUp")
                                      )
 
 
 process.EsCorrectedTausDown = cms.EDProducer('EsCorrectedTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 TauESshift=cms.double(0.97),
                 NAME=cms.string("EsCorrectedTausDown")
                                      )
@@ -438,7 +488,7 @@ process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
                                      )
 
 process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 NAME=cms.string("TupleTausNominal"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
@@ -452,7 +502,7 @@ process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
 
 
 process.TupleTausUp = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 NAME=cms.string("TupleTausUp"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
@@ -465,7 +515,7 @@ process.TupleTausUp = cms.EDProducer('TupleTauProducer' ,
                                                    )
 
 process.TupleTausDown = cms.EDProducer('TupleTauProducer' ,
-                tauSrc =cms.InputTag('cleanPatTaus'),
+                tauSrc = TausToUse,
                 NAME=cms.string("TupleTausDown"),
                 triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
                 tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
