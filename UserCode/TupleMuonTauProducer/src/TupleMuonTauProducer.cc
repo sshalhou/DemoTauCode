@@ -85,6 +85,8 @@ public:
 private:
   virtual void beginJob() ;
   virtual void produce(edm::Event&, const edm::EventSetup&);
+  virtual void produceVariant(edm::Event&, const edm::EventSetup&, int);
+
   virtual void endJob() ;
 
   virtual void beginRun(edm::Run&, edm::EventSetup const&);
@@ -1020,7 +1022,7 @@ TupleMuonTauProducer::produceVariant(edm::Event& iEvent, const edm::EventSetup& 
 void
 TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-TupleMuonTauProducer::produceVariant(iEvent, iSetup, 0);
+produceVariant(iEvent, iSetup, 0);
 
 
 
