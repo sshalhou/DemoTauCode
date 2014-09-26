@@ -85,8 +85,6 @@ public:
 private:
   virtual void beginJob() ;
   virtual void produce(edm::Event&, const edm::EventSetup&);
-  virtual void produceVariant(edm::Event&, const edm::EventSetup&, int);
-
   virtual void endJob() ;
 
   virtual void beginRun(edm::Run&, edm::EventSetup const&);
@@ -189,8 +187,9 @@ TupleMuonTauProducer::~TupleMuonTauProducer()
 // member functions
 //
 
+// ------------ method called to produce the data  ------------
 void
-TupleMuonTauProducer::produceVariant(edm::Event& iEvent, const edm::EventSetup& iSetup, int variant)
+TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
 
@@ -1014,17 +1013,6 @@ TupleMuonTauProducer::produceVariant(edm::Event& iEvent, const edm::EventSetup& 
   ESHandle<SetupData> pSetup;
   iSetup.get<SetupRecord>().get(pSetup);
   */
-
-}
-
-
-// ------------ method called to produce the data  ------------
-void
-TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
-{
-produceVariant(iEvent, iSetup, 0);
-
-
 
 }
 
