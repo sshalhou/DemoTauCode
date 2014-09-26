@@ -187,9 +187,8 @@ TupleMuonTauProducer::~TupleMuonTauProducer()
 // member functions
 //
 
-// ------------ method called to produce the data  ------------
 void
-TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
+TupleMuonTauProducer::produceVariant(edm::Event& iEvent, const edm::EventSetup& iSetup, int variant)
 {
 
 
@@ -1013,6 +1012,17 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   ESHandle<SetupData> pSetup;
   iSetup.get<SetupRecord>().get(pSetup);
   */
+
+}
+
+
+// ------------ method called to produce the data  ------------
+void
+TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
+{
+produceVariant(iEvent, iSetup, 0);
+
+
 
 }
 
