@@ -1020,7 +1020,7 @@ TupleMuonTauProducer::produceVariant(edm::Event& iEvent, const edm::EventSetup& 
 void
 TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-produceVariant(iEvent, iSetup, 0);
+TupleMuonTauProducer::produceVariant(iEvent, iSetup, 0);
 
 
 
