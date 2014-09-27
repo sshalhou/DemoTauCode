@@ -53,7 +53,77 @@ public:
 		   double iGenPt, double iGenPhi, double iLepPt, double iLepPhi,double iFluc,double iScale=0,int njet=0);
   void addDataFile(std::string iNameDat);
   void addMCFile  (std::string iNameMC);
+   ~RecoilCorrector() // destructor
+    {
+	delete fRandom;
 
+for (vector<TF1*>::iterator it = fF1U1Fit.begin(); it != fF1U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U1RMSSMFit.begin(); it != fF1U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U1RMS1Fit.begin(); it != fF1U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U1RMS2Fit.begin(); it != fF1U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U2Fit.begin(); it != fF1U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U2RMSSMFit.begin(); it != fF1U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U2RMS1Fit.begin(); it != fF1U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U2RMS2Fit.begin(); it != fF1U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U1Fit.begin(); it != fF2U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U1RMSSMFit.begin(); it != fF2U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U1RMS1Fit.begin(); it != fF2U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U1RMS2Fit.begin(); it != fF2U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U2Fit.begin(); it != fF2U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U2RMSSMFit.begin(); it != fF2U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U2RMS1Fit.begin(); it != fF2U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U2RMS2Fit.begin(); it != fF2U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U1Fit.begin(); it != fD1U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U1RMSSMFit.begin(); it != fD1U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U1RMS1Fit.begin(); it != fD1U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U1RMS2Fit.begin(); it != fD1U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U2Fit.begin(); it != fD1U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U2RMSSMFit.begin(); it != fD1U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U2RMS1Fit.begin(); it != fD1U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD1U2RMS2Fit.begin(); it != fD1U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U1Fit.begin(); it != fD2U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U1RMSSMFit.begin(); it != fD2U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U1RMS1Fit.begin(); it != fD2U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U1RMS2Fit.begin(); it != fD2U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U2Fit.begin(); it != fD2U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U2RMSSMFit.begin(); it != fD2U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U2RMS1Fit.begin(); it != fD2U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fD2U2RMS2Fit.begin(); it != fD2U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U1Fit.begin(); it != fM1U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U1RMSSMFit.begin(); it != fM1U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U1RMS1Fit.begin(); it != fM1U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U1RMS2Fit.begin(); it != fM1U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U2Fit.begin(); it != fM1U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U2RMSSMFit.begin(); it != fM1U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U2RMS1Fit.begin(); it != fM1U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U2RMS2Fit.begin(); it != fM1U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U1Fit.begin(); it != fM2U1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U1RMSSMFit.begin(); it != fM2U1RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U1RMS1Fit.begin(); it != fM2U1RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U1RMS2Fit.begin(); it != fM2U1RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U2Fit.begin(); it != fM2U2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U2RMSSMFit.begin(); it != fM2U2RMSSMFit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U2RMS1Fit.begin(); it != fM2U2RMS1Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U2RMS2Fit.begin(); it != fM2U2RMS2Fit.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1U1U2Corr.begin(); it != fF1U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF2U1U2Corr.begin(); it != fF2U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1F2U1Corr.begin(); it != fF1F2U1Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1F2U2Corr.begin(); it != fF1F2U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1F2U1U2Corr.begin(); it != fF1F2U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fF1F2U2U1Corr.begin(); it != fF1F2U2U1Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1U1U2Corr.begin(); it != fM1U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM2U1U2Corr.begin(); it != fM2U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1M2U1Corr.begin(); it != fM1M2U1Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1M2U2Corr.begin(); it != fM1M2U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1M2U1U2Corr.begin(); it != fM1M2U1U2Corr.end(); ++it)    delete *it;
+for (vector<TF1*>::iterator it = fM1M2U2U1Corr.begin(); it != fM1M2U2U1Corr.end(); ++it)    delete *it;
+
+
+
+
+	std::cout<<" DESTROY \n";
+    }
+ 
 
 
 
@@ -172,6 +242,7 @@ protected:
 //-----------------------------------------------------------------------------------------------------------------------------------------
   RecoilCorrector::RecoilCorrector(string iNameZDat,std::string iPrefix, int iSeed) {
 
+std::cout<<" A "<<std::endl;
   fRandom = new TRandom1(iSeed);
 
   // get fits for Z data
@@ -183,7 +254,7 @@ protected:
 
 RecoilCorrector::RecoilCorrector(string iNameZ, int iSeed) {
 
-
+std::cout<<" B "<<std::endl;
 
   fRandom = new TRandom1(iSeed);
   // get fits for Z data
@@ -500,6 +571,8 @@ void RecoilCorrector::readRecoil(std::vector<TF1*> &iU1Fit,std::vector<TF1*> &iU
     lNJet++; lSS << iPrefix << "u1Mean_" << lNJet;
   }
   lFile->Close();
+    delete lFile;
+	
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
 void RecoilCorrector::readCorr(std::string iName,
@@ -521,6 +594,7 @@ void RecoilCorrector::readCorr(std::string iName,
     lNJet++; lSS   << "PFu1Mean_" << lNJet;
   }
   lFile->Close();
+  delete lFile;
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
 void RecoilCorrector::metDistribution(double &iMet,double &iMPhi,double iGenPt,double iGenPhi,
