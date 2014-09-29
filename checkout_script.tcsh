@@ -105,3 +105,10 @@ sed -i 's/START53_V23/FT_53_V21_AN4/g' JetCorrectionDBReader_cfg.py
 cmsRun JetCorrectionDBReader_cfg.py
 cd -
 ################################################
+
+mkdir RunTimeDataInput
+mdkir RunTimeDataInput/data
+cp UserCode/TupleMuonProducer/BuildFile.xml RunTimeDataInput/.
+cp -r UserCode/HiggsPtReweightFiles RunTimeDataInput/data/.
+cp -r UserCode/PileUpReWeightFiles RunTimeDataInput/data/.
+cp -r UserCode/RecoilCorrector/recoilfits RunTimeDataInput/data/.

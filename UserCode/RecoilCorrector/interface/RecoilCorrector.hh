@@ -123,7 +123,7 @@ for (vector<TF1*>::iterator it = fM1M2U2U1Corr.begin(); it != fM1M2U2U1Corr.end(
 
 	std::cout<<" DESTROY \n";
     }
- 
+
 
 
 
@@ -278,7 +278,7 @@ int DaughterTwoPdgId, int njet, std::string &ProcessFile, std::string &DataFile,
   njet = 999;
 
   char path[200];
-  sprintf(path,"%s","UserCode/RecoilCorrector/recoilfits/");
+  sprintf(path,"%s","RunTimeDataInput/data/recoilfits/");
 
   char DFile[350], MFile[350], PFile[350];
   sprintf(DFile,"%s","");
@@ -572,7 +572,7 @@ void RecoilCorrector::readRecoil(std::vector<TF1*> &iU1Fit,std::vector<TF1*> &iU
   }
   lFile->Close();
     delete lFile;
-	
+
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
 void RecoilCorrector::readCorr(std::string iName,

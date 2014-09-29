@@ -285,8 +285,8 @@ namespace TupleHelpers
     else
     {
 
-      std::string file1Name = "UserCode/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmax.root";
-      std::string file2Name = "UserCode/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmod_POWHEG.root";
+      std::string file1Name = "RunTimeDataInput/data/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmax.root";
+      std::string file2Name = "RunTimeDataInput/data/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmod_POWHEG.root";
       TFile* file1 = new TFile(file1Name.data());
       TFile* file2 = new TFile(file2Name.data());
 
@@ -1295,8 +1295,8 @@ namespace TupleHelpers
 
 
     edm::LumiReWeighting LumiWeights_(
-    "UserCode/PileUpReWeightFiles/MC_Summer12_PU_S10-600bins.root",
-    "UserCode/PileUpReWeightFiles/Data_Pileup_2012_ReRecoPixel-600bins.root",
+    "RunTimeDataInput/data/PileUpReWeightFiles/MC_Summer12_PU_S10-600bins.root",
+    "RunTimeDataInput/data/PileUpReWeightFiles/Data_Pileup_2012_ReRecoPixel-600bins.root",
     "pileup",
     "pileup");
 
