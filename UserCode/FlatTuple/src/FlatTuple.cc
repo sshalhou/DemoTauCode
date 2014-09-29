@@ -127,7 +127,10 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   // init values
 
   eT_correctedSVFitMass.clear();
-  eT_p4.clear();
+  eT_p4_x.clear();
+  eT_p4_y.clear();
+  eT_p4_z.clear();
+  eT_p4_t.clear();
 
   ///////////////
   // add branches
