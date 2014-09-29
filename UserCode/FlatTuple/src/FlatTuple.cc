@@ -185,8 +185,10 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TupleElectronTau eTau =   ((*eTaus)[i]);
       eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
 
+      TLorentzVector et_p4;
+      et_p4.SetXYZT(eTau.p4().X(), eTau.p4().Y(), eTau.p4().Z(), eTau.p4().T());
 
-      eT_p4.push_back(eTau.p4());
+      eT_p4.push_back(et_p4);
 
 
     }
