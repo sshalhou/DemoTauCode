@@ -36,6 +36,7 @@ Implementation:
 
 #include <string>
 #include "TTree.h"
+#include "TLorentzVector.h"
 #include "TFile.h"
 
 using namespace edm;
@@ -80,7 +81,7 @@ private:
   // variables for lepTau tree
 
   std::vector<double> eT_correctedSVFitMass;
-  std::vector<LorentzVector> eT_p4;
+  std::vector<TLorentzVector> eT_p4;
 
 
 };
@@ -181,7 +182,7 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
       eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
-      eT_p4.push_back(eTau.p4());
+      eT_p4.push_back(TLorentzVector.SetXYZT(eTau.X(),eTau.Y(),eTau.Z(),eTau.T()));
 
 
     }
