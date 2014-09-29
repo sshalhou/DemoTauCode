@@ -80,7 +80,10 @@ private:
   // variables for lepTau tree
 
   std::vector<double> eT_correctedSVFitMass;
-  std::vector<LorentzVector> eT_p4;
+  std::vector<double> eT_p4_x;
+  std::vector<double> eT_p4_y;
+  std::vector<double> eT_p4_z;
+  std::vector<double> eT_p4_t;
 
 
 };
@@ -130,7 +133,10 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   // add branches
 
   lepTauTree->Branch("eT_correctedSVFitMass",&eT_correctedSVFitMass);
-  lepTauTree->Branch("eT_p4",&eT_p4);
+  lepTauTree->Branch("eT_p4_x",&eT_p4_x);
+  lepTauTree->Branch("eT_p4_y",&eT_p4_y);
+  lepTauTree->Branch("eT_p4_z",&eT_p4_z);
+  lepTauTree->Branch("eT_p4_t",&eT_p4_t);
 
 
 
@@ -166,7 +172,10 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   // init values
 
   eT_correctedSVFitMass.clear();
-  eT_p4.clear();
+  eT_p4_x.clear();
+  eT_p4_y.clear();
+  eT_p4_z.clear();
+  eT_p4_t.clear();
 
 
   ///////////////
@@ -181,7 +190,10 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
       eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
-      eT_p4.push_back(eTau.p4());
+      eT_p4_x.push_back(eTau.p4().x());
+      eT_p4_y.push_back(eTau.p4().y());
+      eT_p4_z.push_back(eTau.p4().z());
+      eT_p4_t.push_back(eTau.p4().t());
 
 
     }
