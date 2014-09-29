@@ -47,7 +47,8 @@ typedef math::XYZTLorentzVector LorentzVector;
 // class declaration
 //
 
-class FlatTree : public edm::EDAnalyzer {
+class FlatTree : public edm::EDAnalyzer
+{
 public:
   explicit FlatTree(const edm::ParameterSet&);
   ~FlatTree();
@@ -73,10 +74,12 @@ private:
 
 
   TFile *outFile;
-  TTree *FlatTree;
+  TTree *lepTauTree;
 
+  //////////////
+  // variables for lepTau tree
 
-
+  std::vector<double> eT_correctedSVFitMass;
 
 };
 
@@ -112,7 +115,21 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 
   ///////////////////
   // create the tree
-  FlatTree = new TTree("FlatTree", "FlatTree");
+  lepTauTree = new TTree("FlatTree", "FlatTree");
+
+
+  //////////////
+  // init values
+
+  eT_correctedSVFitMass.clear();
+
+
+  ///////////////
+  // add branches
+
+  lepTauTree->Branch("eT_correctedSVFitMass",&eT_correctedSVFitMass);
+
+
 
 
 
@@ -141,6 +158,33 @@ void
 FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
+
+  //////////////
+  // init values
+
+  eT_correctedSVFitMass.clear();
+
+  ///////////////
+  // get eTaus
+
+  edm::Handle< TupleElectronTauCollection > eTaus;
+  iEvent.getByLabel(leptonTauSrc_, eTaus);
+
+
+  for (std::size_t i = 0; i < eTaus->size(); ++i)
+    {
+
+      const TupleElectronTau eTau =   ((*eTaus)[i]);
+      eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
+
+
+    }
+
+
+  ///////////
+  // fill the tree
+
+  lepTauTree->Fill();
 
 
 
@@ -185,7 +229,7 @@ FlatTree::beginJob()
 void
 FlatTree::endJob()
 {
-  FlatTree->Write();
+  lepTauTree->Write();
   outFile->Close();
 
 
