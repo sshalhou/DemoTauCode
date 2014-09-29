@@ -168,7 +168,7 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   // get eTaus
 
   edm::Handle< TupleElectronTauCollection > eTaus;
-  iEvent.getByLabel(leptonTauSrc_, eTaus);
+  iEvent.getByLabel(electronTauSrc_, eTaus);
 
 
   for (std::size_t i = 0; i < eTaus->size(); ++i)
