@@ -287,8 +287,11 @@ namespace TupleHelpers
 
       std::string file1Name = "RunTimeDataInput/data/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmax.root";
       std::string file2Name = "RunTimeDataInput/data/HiggsPtReweightFiles/mssmHiggsPtReweightGluGlu_mhmod_POWHEG.root";
-      TFile* file1 = new TFile(file1Name.data());
-      TFile* file2 = new TFile(file2Name.data());
+      edm::FileInPath fileInPath1 = edm::FileInPath(file1Name);
+      edm::FileInPath fileInPath2 = edm::FileInPath(file2Name);
+
+      TFile* file1 = new TFile(fileInPath1.fullPath().c_str());
+      TFile* file2 = new TFile(fileInPath2.fullPath().c_str());
 
       /////////////
       // load in the histograms (3 per file)
@@ -1293,10 +1296,14 @@ namespace TupleHelpers
     /////////////////
     // for non-data, return a pileup weight
 
+    edm::FileInPath mcFilePath = edm::FileInPath("RunTimeDataInput/data/PileUpReWeightFiles/MC_Summer12_PU_S10-600bins.root");
+    edm::FileInPath dataFilePath = edm::FileInPath("RunTimeDataInput/data/PileUpReWeightFiles/Data_Pileup_2012_ReRecoPixel-600bins.root");
+
+
 
     edm::LumiReWeighting LumiWeights_(
-    "RunTimeDataInput/data/PileUpReWeightFiles/MC_Summer12_PU_S10-600bins.root",
-    "RunTimeDataInput/data/PileUpReWeightFiles/Data_Pileup_2012_ReRecoPixel-600bins.root",
+    mcFilePath.fullPath().c_str(),
+    dataFilePath.fullPath().c_str(),
     "pileup",
     "pileup");
 

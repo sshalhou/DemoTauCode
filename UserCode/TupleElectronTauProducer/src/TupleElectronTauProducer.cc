@@ -682,13 +682,15 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             DaughterTwoPdgId, 100, ProcessFile, DataFile, MCFile);
 
 
+            edm::FileInPath ProcessFilePath=edm::FileInPath(ProcessFile);
+            edm::FileInPath MCFilePath=edm::FileInPath(MCFile);
+            edm::FileInPath DataFilePath=edm::FileInPath(DataFile);
 
 
 
-
-            RecoilCorrector corrector(ProcessFile);
-            corrector.addMCFile(MCFile);
-            corrector.addDataFile(DataFile);
+            RecoilCorrector corrector(ProcessFilePath.fullPath().c_str());
+            corrector.addMCFile(MCFilePath.fullPath().c_str());
+            corrector.addDataFile(DataFilePath.fullPath().c_str());
 
 
 
