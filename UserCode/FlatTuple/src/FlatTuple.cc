@@ -716,7 +716,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
 
-      if(eTau.p4().pt()<24) continue;
+      if(theElec.p4().pt()<24) continue;
 
       eT_p4_x.push_back(eTau.p4().x());
       eT_p4_y.push_back(eTau.p4().y());
@@ -999,7 +999,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TupleMuonTau muTau =   ((*muTaus)[i]);
 
 
-      if(muTau.p4().pt()<20) continue;
+//      if(theMu.p4().pt()<20) continue;
 
 
       muT_correctedSVFitMass.push_back(muTau.correctedSVFitMass());
