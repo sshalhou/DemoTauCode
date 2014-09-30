@@ -1188,6 +1188,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     if(theElec.p4().pt()<24) continue;
+    if(eTau.passesTriLeptonVeto()!=1) continue;
+
 
     eT_p4_x.push_back(eTau.p4().x());
     eT_p4_y.push_back(eTau.p4().y());
@@ -1474,6 +1476,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       if(theMuon.p4().pt()<20) continue;
+      if(muTau.passesTriLeptonVeto()!=1) continue;
 
       muT_p4_x.push_back(muTau.p4().x());
       muT_p4_y.push_back(muTau.p4().y());
@@ -1734,6 +1737,11 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
 
+
+    ///////////////
+    // Impose the Trilepton Veto
+    // since we have a Tau + l, if we get
+    // more than 1 muon or electron
 
 
 
