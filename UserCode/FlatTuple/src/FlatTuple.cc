@@ -708,11 +708,15 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
 
+
+
       const TupleElectronTau eTau =   ((*eTaus)[i]);
       const TupleElectronTauWeight eTauWt =   ((*eTauWts)[i]);
       const TupleElectron theElec =   ((*elecs)[eTau.electronIndex()]);
       const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
+
+      if(eTau.p4().et()<24) continue;
 
       eT_p4_x.push_back(eTau.p4().x());
       eT_p4_y.push_back(eTau.p4().y());
@@ -993,6 +997,11 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       const TupleMuonTau muTau =   ((*muTaus)[i]);
+
+
+      if(muTau.p4().pt()<20) continue;
+
+
       muT_correctedSVFitMass.push_back(muTau.correctedSVFitMass());
       muT_p4_x.push_back(muTau.p4().x());
       muT_p4_y.push_back(muTau.p4().y());
