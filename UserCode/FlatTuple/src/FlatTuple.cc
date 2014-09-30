@@ -80,11 +80,42 @@ private:
   //////////////
   // variables for lepTau tree
 
-  std::vector<double> eT_correctedSVFitMass;
-  std::vector<double> eT_p4_x;
-  std::vector<double> eT_p4_y;
-  std::vector<double> eT_p4_z;
-  std::vector<double> eT_p4_t;
+  std::vector< double > eT_p4_x , eT_p4_y , eT_p4_z , eT_p4_t;
+  std::vector< double > eT_genP4_x , eT_genP4_y , eT_genP4_z , eT_genP4_t;
+  std::vector< double > eT_pfP4_x , eT_pfP4_y , eT_pfP4_z , eT_pfP4_t;
+  std::vector< int > eT_charge ;
+  std::vector< int > eT_PFpdgId ;
+  std::vector< int > eT_GENpdgId ;
+  std::vector< int > eT_numberOfMissingInnerHits ;
+  std::vector< bool > eT_passConversionVeto ;
+  std::vector< double > eT_dz ;
+  std::vector< double > eT_dB ;
+  std::vector< double > eT_dxy ;
+  std::vector< double > eT_SuperClusterEta ;
+  std::vector< double > eT_mvaTrigV0 ;
+  std::vector< double > eT_mvaTrigNoIPV0 ;
+  std::vector< double > eT_mvaNonTrigV0 ;
+  std::vector< bool > eT_pass_tight_mvaNonTrigV0 ;
+  std::vector< bool > eT_passFullId ;
+  std::vector< double > eT_chargedHadronIso ;
+  std::vector< double > eT_photonIso ;
+  std::vector< double > eT_neutralHadronIso ;
+  std::vector< double > eT_puChargedHadronIso ;
+  std::vector< double > eT_relativeIso ;
+  std::vector< bool > eT_isEB ;
+  std::vector< bool > eT_isEE ;
+  std::vector< bool > eT_isEBEEGap ;
+  std::vector< bool > eT_isEBEtaGap ;
+  std::vector< bool > eT_isEBPhiGap ;
+  std::vector< bool > eT_isEEDeeGap ;
+  std::vector< bool > eT_isEERingGap ;
+  std::vector< double > eT_sigmaEtaEta ;
+  std::vector< double > eT_sigmaIetaIeta ;
+  std::vector< double > eT_sigmaIphiIphi ;
+  std::vector< bool > eT_has_HltMatchEle20 ;
+  std::vector< bool > eT_has_HltMatchEle22 ;
+  std::vector< bool > eT_has_HltMatchEle27 ;
+  std::vector< bool > eT_isTriLeptonVetoCandidate ;
 
   std::vector<double> muT_correctedSVFitMass;
   std::vector<double> muT_p4_x;
