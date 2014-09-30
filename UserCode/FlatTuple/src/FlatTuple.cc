@@ -71,7 +71,10 @@ void FlatTuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
-      setValeD("eT_correctedSVFitMass" ,eTau.correctedSVFitMass());
+
+      const TupleElectronTau eTau =   ((*eTaus)[i]);
+
+      setValueD("eT_correctedSVFitMass" ,eTau.correctedSVFitMass());
       setValue_EnPxPyPz("eT_p4", eTau.p4());
 
 
@@ -91,27 +94,27 @@ void FlatTuple::addBranchD(const std::string& name)
 {
   assert(branches_.count(name) == 0);
   std::string name_and_format = name + "/F";
-  ntuple_->Branch(name.c_str(), &branches_[name].valueD_, name_and_format.c_str());
+  lepTauTree_->Branch(name.c_str(), &branches_[name].valueD_, name_and_format.c_str());
 }
 
 void FlatTuple::addBranchI(const std::string& name)
 {
   assert(branches_.count(name) == 0);
   std::string name_and_format = name + "/I";
-  ntuple_->Branch(name.c_str(), &branches_[name].valueI_, name_and_format.c_str());
+  lepTauTree_->Branch(name.c_str(), &branches_[name].valueI_, name_and_format.c_str());
 }
 
 void FlatTuple::addBranchL(const std::string& name)
 {
   assert(branches_.count(name) == 0);
   std::string name_and_format = name + "/L";
-  ntuple_->Branch(name.c_str(), &branches_[name].valueL_, name_and_format.c_str());
+  lepTauTree_->Branch(name.c_str(), &branches_[name].valueL_, name_and_format.c_str());
 }
 
 void FlatTuple::printBranches(std::ostream& stream)
 {
   stream << "<FlatTuple::printBranches>:" << std::endl;
-  stream << " registered branches for module = " << moduleLabel_ << std::endl;
+  stream << " registered branches for module = " << NAME_ << std::endl;
   for ( branchMap::const_iterator branch = branches_.begin();
 	branch != branches_.end(); ++branch ) {
     stream << " " << branch->first << std::endl;
