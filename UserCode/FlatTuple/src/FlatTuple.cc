@@ -689,7 +689,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   ///////////////
   // get eTausWts
 
-  edm::Handle< TupleElectronTauWeightsCollection > eTauWts;
+  edm::Handle< TupleElectronTauWeightCollection > eTauWts;
   iEvent.getByLabel(electronTauWtSrc_, eTauWts);
 
   ///////////////
