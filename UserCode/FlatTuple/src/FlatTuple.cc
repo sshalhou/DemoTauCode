@@ -1,23 +1,32 @@
-#include "UserCode/FlatTuple/interface/FlatTuple.h"
+// -*- C++ -*-
+//
+// Package:    FlatTree
+// Class:      FlatTree
+//
+/**\class FlatTree FlatTree.cc TEMP/FlatTree/src/FlatTree.cc
 
-#include "FWCore/Utilities/interface/Exception.h"
-#include "FWCore/MessageLogger/interface/MessageLogger.h"
+Description: [one line class summary]
 
-#include "FWCore/ServiceRegistry/interface/Service.h"
-#include "CommonTools/UtilAlgos/interface/TFileService.h"
+Implementation:
+[Notes on implementation]
+*/
+//
+// Original Author:  shalhout shalhout
+//         Created:  Tue Jul  1 04:25:53 CDT 2014
+// $Id$
+//
+//
 
-#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
-#include "DataFormats/HepMCCandidate/interface/GenParticleFwd.h"
-#include "DataFormats/JetReco/interface/Jet.h"
-#include "DataFormats/PatCandidates/interface/Tau.h"
-#include "DataFormats/PatCandidates/interface/Electron.h"
-#include "DataFormats/MuonReco/interface/MuonSelectors.h"
-#include "DataFormats/TrackReco/interface/HitPattern.h"
-#include "DataFormats/TrackingRecHit/interface/TrackingRecHit.h"
-#include "DataFormats/VertexReco/interface/Vertex.h"
-#include "DataFormats/VertexReco/interface/VertexFwd.h"
-#include "DataFormats/Common/interface/View.h"
-#include "DataFormats/Math/interface/deltaR.h"
+
+// system include files
+#include <memory>
+
+// user include files
+#include "FWCore/Framework/interface/Frameworkfwd.h"
+#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "UserCode/TupleObjects/interface/TupleElectron.h"
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
@@ -25,42 +34,152 @@
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 
 
-#include <TMath.h>
+#include <string>
+#include "TTree.h"
+#include "TFile.h"
 
-int FlatTuple::verbosity_ = 0;
+using namespace edm;
+using namespace std;
 
-FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
+typedef math::XYZTLorentzVector LorentzVector;
+
+//
+// class declaration
+//
+
+class FlatTree : public edm::EDAnalyzer
+{
+public:
+  explicit FlatTree(const edm::ParameterSet&);
+  ~FlatTree();
+
+  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+
+
+private:
+  virtual void beginJob() ;
+  virtual void analyze(const edm::Event&, const edm::EventSetup&);
+  virtual void endJob() ;
+
+  virtual void beginRun(edm::Run const&, edm::EventSetup const&);
+  virtual void endRun(edm::Run const&, edm::EventSetup const&);
+  virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+  virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+
+  // ----------member data ---------------------------
+
+
+  edm::InputTag electronTauSrc_;
+  std:string NAME_;
+
+
+  TFile *outFile;
+  TTree *lepTauTree;
+
+  //////////////
+  // variables for lepTau tree
+
+  std::vector<double> eT_correctedSVFitMass;
+  std::vector<double> eT_p4_x;
+  std::vector<double> eT_p4_y;
+  std::vector<double> eT_p4_z;
+  std::vector<double> eT_p4_t;
+
+
+};
+
+//
+// constants, enums and typedefs
+//
+
+//
+// static data member definitions
+//
+
+//
+// constructors and destructor
+//
+FlatTree::FlatTree(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
-NAME_(iConfig.getParameter<std::string>("NAME" )),
-lepTauTree_(0)
+NAME_(iConfig.getParameter<string>("NAME" ))
 {
-}
+  //now do what ever initialization is needed
 
-FlatTuple::~FlatTuple()
-{
-}
 
-void FlatTuple::beginJob()
-{
+
+
+  //////////////////
+  // create a file based on the name and sample
+
+  char fname[1000];
+  sprintf(fname,"FlatTree_%s.root",NAME_.c_str());
+  cout<<" creating a file of name "<<fname<<endl;
+  outFile = new TFile(fname, "RECREATE");
+  outFile->cd();
+
 
   ///////////////////
-  // create TTree
-  edm::Service<TFileService> fs;
-  lepTauTree_ = fs->make<TTree>("flatTuple", "flatTuple");
+  // create the tree
+  lepTauTree = new TTree("FlatTree", "FlatTree");
 
-  ///////////////////
+
+  //////////////
+  // init values
+
+  eT_correctedSVFitMass.clear();
+  eT_p4_x.clear();
+  eT_p4_y.clear();
+  eT_p4_z.clear();
+  eT_p4_t.clear();
+
+  ///////////////
   // add branches
 
-  addBranchD("eT_correctedSVFitMass");
-  addBranch_EnPxPyPz("eT_p4");
+  lepTauTree->Branch("eT_correctedSVFitMass",&eT_correctedSVFitMass);
+  lepTauTree->Branch("eT_p4_x",&eT_p4_x);
+  lepTauTree->Branch("eT_p4_y",&eT_p4_y);
+  lepTauTree->Branch("eT_p4_z",&eT_p4_z);
+  lepTauTree->Branch("eT_p4_t",&eT_p4_t);
+
+
+
+
+
+
 
 
 
 }
 
 
-void FlatTuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
+FlatTree::~FlatTree()
 {
+
+  // do anything here that needs to be done at desctruction time
+  // (e.g. close files, deallocate resources etc.)
+
+}
+
+
+//
+// member functions
+//
+
+// ------------ method called for each event  ------------
+void
+FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+{
+
+
+  //////////////
+  // init values
+
+  eT_correctedSVFitMass.clear();
+  eT_p4_x.clear();
+  eT_p4_y.clear();
+  eT_p4_z.clear();
+  eT_p4_t.clear();
+
 
   ///////////////
   // get eTaus
@@ -73,124 +192,103 @@ void FlatTuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
-
-      setValueD("eT_correctedSVFitMass" ,eTau.correctedSVFitMass());
-      setValue_EnPxPyPz("eT_p4", eTau.p4());
-
-
-
-      //////////////////////
-      // fill all values into TTree
-
-      assert(lepTauTree_);
-      lepTauTree_->Fill();
+      eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
+      eT_p4_x.push_back(eTau.p4().x());
+      eT_p4_y.push_back(eTau.p4().y());
+      eT_p4_z.push_back(eTau.p4().z());
+      eT_p4_t.push_back(eTau.p4().t());
 
 
     }
-}
 
 
-void FlatTuple::addBranchD(const std::string& name)
-{
-  assert(branches_.count(name) == 0);
-  std::string name_and_format = name + "/F";
-  lepTauTree_->Branch(name.c_str(), &branches_[name].valueD_, name_and_format.c_str());
-}
+    ///////////
+    // fill the tree
 
-void FlatTuple::addBranchI(const std::string& name)
-{
-  assert(branches_.count(name) == 0);
-  std::string name_and_format = name + "/I";
-  lepTauTree_->Branch(name.c_str(), &branches_[name].valueI_, name_and_format.c_str());
-}
+    lepTauTree->Fill();
 
-void FlatTuple::addBranchL(const std::string& name)
-{
-  assert(branches_.count(name) == 0);
-  std::string name_and_format = name + "/L";
-  lepTauTree_->Branch(name.c_str(), &branches_[name].valueL_, name_and_format.c_str());
-}
 
-void FlatTuple::printBranches(std::ostream& stream)
-{
-  stream << "<FlatTuple::printBranches>:" << std::endl;
-  stream << " registered branches for module = " << NAME_ << std::endl;
-  for ( branchMap::const_iterator branch = branches_.begin();
-	branch != branches_.end(); ++branch ) {
-    stream << " " << branch->first << std::endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #ifdef THIS_IS_AN_EVENT_EXAMPLE
+    Handle<ExampleData> pIn;
+    iEvent.getByLabel("example",pIn);
+    #endif
+
+    #ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
+    ESHandle<SetupData> pSetup;
+    iSetup.get<SetupRecord>().get(pSetup);
+    #endif
   }
-  stream << std::endl;
-}
 
-void FlatTuple::setValueD(const std::string& name, double value)
-{
-  if ( verbosity_ ) std::cout << "branch = " << name << ": value = " << value << std::endl;
-  branchMap::iterator branch = branches_.find(name);
-  if ( branch != branches_.end() ) {
-    branch->second.valueD_ = value;
-  } else {
-    throw cms::Exception("InvalidParameter")
-      << "No branch with name = " << name << " defined !!\n";
+
+  // ------------ method called once each job just before starting event loop  ------------
+  void
+  FlatTree::beginJob()
+  {
   }
-}
 
-void FlatTuple::setValueI(const std::string& name, int value)
-{
-  if ( verbosity_ ) std::cout << "branch = " << name << ": value = " << value << std::endl;
-  branchMap::iterator branch = branches_.find(name);
-  if ( branch != branches_.end() ) {
-    branch->second.valueI_ = value;
-  } else {
-    throw cms::Exception("InvalidParameter")
-      << "No branch with name = " << name << " defined !!\n";
+  // ------------ method called once each job just after ending the event loop  ------------
+  void
+  FlatTree::endJob()
+  {
+    lepTauTree->Write();
+    outFile->Close();
+
+
   }
-}
 
-void FlatTuple::setValueL(const std::string& name, long value)
-{
-  if ( verbosity_ ) std::cout << "branch = " << name << ": value = " << value << std::endl;
-  branchMap::iterator branch = branches_.find(name);
-  if ( branch != branches_.end() ) {
-    branch->second.valueL_ = value;
-  } else {
-    throw cms::Exception("InvalidParameter")
-      << "No branch with name = " << name << " defined !!\n";
+  // ------------ method called when starting to processes a run  ------------
+  void
+  FlatTree::beginRun(edm::Run const&, edm::EventSetup const&)
+  {
   }
-}
 
-//
-//-------------------------------------------------------------------------------
-//
+  // ------------ method called when ending the processing of a run  ------------
+  void
+  FlatTree::endRun(edm::Run const&, edm::EventSetup const&)
+  {
+  }
 
-void FlatTuple::addBranch_EnPxPyPz(const std::string& name)
-{
-  addBranchD(std::string(name).append("En"));
-  addBranchD(std::string(name).append("P"));
-  addBranchD(std::string(name).append("Px"));
-  addBranchD(std::string(name).append("Py"));
-  addBranchD(std::string(name).append("Pz"));
-  addBranchD(std::string(name).append("M"));
-  addBranchD(std::string(name).append("Eta"));
-  addBranchD(std::string(name).append("Phi"));
-  addBranchD(std::string(name).append("Pt"));
-}
-//
-//-------------------------------------------------------------------------------
-//
+  // ------------ method called when starting to processes a luminosity block  ------------
+  void
+  FlatTree::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+  {
+  }
 
-void FlatTuple::setValue_EnPxPyPz(const std::string& name, const reco::Candidate::LorentzVector& p4)
-{
-  setValueD(std::string(name).append("En"), p4.E());
-  setValueD(std::string(name).append("P"), p4.P());
-  setValueD(std::string(name).append("Px"), p4.px());
-  setValueD(std::string(name).append("Py"), p4.py());
-  setValueD(std::string(name).append("Pz"), p4.pz());
-  setValueD(std::string(name).append("M"), p4.M());
-  setValueD(std::string(name).append("Eta"), p4.eta());
-  setValueD(std::string(name).append("Phi"), p4.phi());
-  setValueD(std::string(name).append("Pt"), p4.pt());
-}
+  // ------------ method called when ending the processing of a luminosity block  ------------
+  void
+  FlatTree::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+  {
+  }
 
-#include "FWCore/Framework/interface/MakerMacros.h"
+  // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
+  void
+  FlatTree::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+    //The following says we do not know what parameters are allowed so do no validation
+    // Please change this to state exactly what you do use, even if it is no parameters
+    edm::ParameterSetDescription desc;
+    desc.setUnknown();
+    descriptions.addDefault(desc);
+  }
 
-DEFINE_FWK_MODULE(FlatTuple);
+  //define this as a plug-in
+  DEFINE_FWK_MODULE(FlatTree);
