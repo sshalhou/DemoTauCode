@@ -558,11 +558,11 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   //////////////////
   // create a file based on the name and sample
 
-  char fname[1000];
-  sprintf(fname,"FlatTuple_%s.root",NAME_.c_str());
-  cout<<" creating a file of name "<<fname<<endl;
-  outFile = new TFile(fname, "RECREATE");
-  outFile->cd();
+//  char fname[1000];
+//  sprintf(fname,"FlatTuple_%s.root",NAME_.c_str());
+//  cout<<" creating a file of name "<<fname<<endl;
+//  outFile = new TFile(fname, "RECREATE");
+//  outFile->cd();
 
 
 
@@ -1798,8 +1798,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   void
   FlatTuple::endJob()
   {
-    lepTauTree->Write();
-    outFile->Close();
+    //lepTauTree->Write();
+  //  outFile->Close();
 
 
   }
