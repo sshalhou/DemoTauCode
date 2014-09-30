@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    FlatTree
-// Class:      FlatTree
+// Package:    FlatTuple
+// Class:      FlatTuple
 //
-/**\class FlatTree FlatTree.cc TEMP/FlatTree/src/FlatTree.cc
+/**\class FlatTuple FlatTuple.cc TEMP/FlatTuple/src/FlatTuple.cc
 
 Description: [one line class summary]
 
@@ -47,11 +47,11 @@ typedef math::XYZTLorentzVector LorentzVector;
 // class declaration
 //
 
-class FlatTree : public edm::EDAnalyzer
+class FlatTuple : public edm::EDAnalyzer
 {
 public:
-  explicit FlatTree(const edm::ParameterSet&);
-  ~FlatTree();
+  explicit FlatTuple(const edm::ParameterSet&);
+  ~FlatTuple();
 
   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -99,7 +99,7 @@ private:
 //
 // constructors and destructor
 //
-FlatTree::FlatTree(const edm::ParameterSet& iConfig):
+FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
@@ -112,7 +112,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   // create a file based on the name and sample
 
   char fname[1000];
-  sprintf(fname,"FlatTree_%s.root",NAME_.c_str());
+  sprintf(fname,"FlatTuple_%s.root",NAME_.c_str());
   cout<<" creating a file of name "<<fname<<endl;
   outFile = new TFile(fname, "RECREATE");
   outFile->cd();
@@ -120,7 +120,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 
   ///////////////////
   // create the tree
-  lepTauTree = new TTree("FlatTree", "FlatTree");
+  lepTauTree = new TTree("FlatTuple", "FlatTuple");
 
 
   //////////////
@@ -152,7 +152,7 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 }
 
 
-FlatTree::~FlatTree()
+FlatTuple::~FlatTuple()
 {
 
   // do anything here that needs to be done at desctruction time
@@ -167,7 +167,7 @@ FlatTree::~FlatTree()
 
 // ------------ method called for each event  ------------
 void
-FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
 
@@ -242,13 +242,13 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   // ------------ method called once each job just before starting event loop  ------------
   void
-  FlatTree::beginJob()
+  FlatTuple::beginJob()
   {
   }
 
   // ------------ method called once each job just after ending the event loop  ------------
   void
-  FlatTree::endJob()
+  FlatTuple::endJob()
   {
     lepTauTree->Write();
     outFile->Close();
@@ -258,31 +258,31 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   // ------------ method called when starting to processes a run  ------------
   void
-  FlatTree::beginRun(edm::Run const&, edm::EventSetup const&)
+  FlatTuple::beginRun(edm::Run const&, edm::EventSetup const&)
   {
   }
 
   // ------------ method called when ending the processing of a run  ------------
   void
-  FlatTree::endRun(edm::Run const&, edm::EventSetup const&)
+  FlatTuple::endRun(edm::Run const&, edm::EventSetup const&)
   {
   }
 
   // ------------ method called when starting to processes a luminosity block  ------------
   void
-  FlatTree::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+  FlatTuple::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
   {
   }
 
   // ------------ method called when ending the processing of a luminosity block  ------------
   void
-  FlatTree::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+  FlatTuple::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
   {
   }
 
   // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
   void
-  FlatTree::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+  FlatTuple::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
     //The following says we do not know what parameters are allowed so do no validation
     // Please change this to state exactly what you do use, even if it is no parameters
     edm::ParameterSetDescription desc;
@@ -291,4 +291,4 @@ FlatTree::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
   //define this as a plug-in
-  DEFINE_FWK_MODULE(FlatTree);
+  DEFINE_FWK_MODULE(FlatTuple);

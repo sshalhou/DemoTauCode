@@ -20,7 +20,7 @@ process.source = cms.Source("PoolSource",
 #NAME = cms.string("muTau") # only muTau or eTau
 #)
 
-process.demo = cms.EDAnalyzer('FlatTree',
+process.demo = cms.EDAnalyzer('FlatTuple',
 electronTauSrc = cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','Ntuple'),
 NAME = cms.string("eTau") # only muTau or eTau
 )
