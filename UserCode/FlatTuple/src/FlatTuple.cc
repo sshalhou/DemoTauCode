@@ -1,4 +1,4 @@
-#include "UserCode/interface/FlatTuple.h"
+#include "UserCode/FlatTuple/interface/FlatTuple.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
