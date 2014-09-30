@@ -19,7 +19,7 @@
 #include "DataFormats/Common/interface/View.h"
 #include "DataFormats/Math/interface/deltaR.h"
 
-#include "TauAnalysis/CandidateTools/interface/candidateAuxFunctions.h"
+
 
 #include <TMath.h>
 
