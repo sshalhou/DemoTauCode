@@ -35,6 +35,9 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTauWeight.h"
 
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+
 
 #include <string>
 #include "TTree.h"
@@ -83,7 +86,6 @@ private:
   std::string NAME_;
 
 
-  TFile *outFile;
   TTree *lepTauTree;
 
   //////////////
@@ -563,9 +565,6 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   outFile->cd();
 
 
-  ///////////////////
-  // create the tree
-  lepTauTree = new TTree("FlatTuple", "FlatTuple");
 
 
   //////////////
@@ -1787,7 +1786,13 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   void
   FlatTuple::beginJob()
   {
+
+    //--- create TTree
+  edm::Service<TFileService> fs;
+  lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
+
   }
+
 
   // ------------ method called once each job just after ending the event loop  ------------
   void
