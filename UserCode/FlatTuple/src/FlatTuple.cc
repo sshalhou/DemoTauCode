@@ -18,7 +18,11 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/Common/interface/View.h"
 #include "DataFormats/Math/interface/deltaR.h"
-
+#include "UserCode/TupleObjects/interface/TupleElectron.h"
+#include "UserCode/TupleObjects/interface/TupleMuon.h"
+#include "UserCode/TupleObjects/interface/TupleTau.h"
+#include "UserCode/TupleObjects/interface/TupleElectronTau.h"
+#include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 
 
 #include <TMath.h>
@@ -55,7 +59,7 @@ void FlatTuple::beginJob()
 }
 
 
-void FlatTuple::produce(edm::Event& evt, const edm::EventSetup& es)
+void FlatTuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
   ///////////////
