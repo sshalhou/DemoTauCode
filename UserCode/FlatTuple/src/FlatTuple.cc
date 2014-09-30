@@ -32,6 +32,7 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
+#include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
 
 
 #include <string>
@@ -73,6 +74,7 @@ private:
   edm::InputTag electronTauSrc_;
   edm::InputTag electronSrc_;
   edm::InputTag tauSrc_;
+  edm::InputTag electronTauWtSrc_;
 
   edm::InputTag muonTauSrc_;
   std::string NAME_;
@@ -261,6 +263,49 @@ private:
   std::vector< bool > eT_tau_has_HltMatchMu18 ;
   std::vector< bool > eT_tau_has_HltMatchMu24 ;
 
+  //////////////
+  // weights for eTau
+
+  std::vector< double > eT_puWeight ;
+  std::vector< double > eT_puWeightM1 ;
+  std::vector< double > eT_puWeightP1 ;
+  std::vector< float > eT_NumPileupInt ;
+  std::vector< float > eT_NumTruePileUpInt ;
+  std::vector< float > eT_NumPileupIntM1 ;
+  std::vector< float > eT_NumTruePileUpIntM1 ;
+  std::vector< float > eT_NumPileupIntP1 ;
+  std::vector< float > eT_NumTruePileUpIntP1 ;
+  std::vector< double > eT_EffDataELE20andELE22 ;
+  std::vector< double > eT_EffMcELE20andELE22 ;
+  std::vector< double > eT_HadronicTauDataTrigEffAntiEMed ;
+  std::vector< double > eT_HadronicTauMcTrigEffAntiEMed ;
+  std::vector< double > eT_HadronicTauDataTrigEffAntiETight ;
+  std::vector< double > eT_HadronicTauMcTrigEffAntiETight ;
+  std::vector< double > eT_electronDataIDweight ;
+  std::vector< double > eT_electronMcIDweight ;
+  std::vector< double > eT_electronDataISOLweight ;
+  std::vector< double > eT_electronMcISOLweight ;
+  std::vector< double > eT_EffDataHighPtTauTrigger ;
+  std::vector< double > eT_EffMcHighPtTauTrigger ;
+  std::vector< double > eT_TauFakeCorrection ;
+  std::vector< double > eT_DecayModeCorrectionFactor ;
+  std::vector< double > eT_ZeeScaleFactor ;
+  std::vector< double > eT_nominalHIGLUXHQTmhmax ;
+  std::vector< double > eT_upHIGLUXHQTmhmax ;
+  std::vector< double > eT_downHIGLUXHQTmhmax ;
+  std::vector< double > eT_nominalPOWHEGmhmod ;
+  std::vector< double > eT_upPOWHEGmhmod ;
+  std::vector< double > eT_downPOWHEGmhmod ;
+  std::vector< double > eT_etaDepQCDShapeTemplateCorrection ;
+  std::vector< double > eT_inclusiveQCDShapeTemplateCorrection ;
+  std::vector< double > eT_TTbarPtWeight ;
+  std::vector< double > eT_TauSpinnerWT ;
+  std::vector< double > eT_TauSpinnerWTFlip ;
+  std::vector< double > eT_TauSpinnerWThminus ;
+  std::vector< double > eT_TauSpinnerWThplus ;
+  std::vector< int > eT_hepNUP ;
+  std::vector< double > eT_weightHEPNUP_DYJets ;
+  std::vector< double > eT_weightHEPNUP_WJets ;
 
 
   std::vector<double> muT_correctedSVFitMass;
@@ -285,6 +330,7 @@ private:
 //
 FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
+electronTauWtSrc_(iConfig.getParameter<edm::InputTag>("electronTauWtSrc" )),
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonTauSrc_(iConfig.getParameter<edm::InputTag>("muonTauSrc" )),
@@ -550,6 +596,47 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   lepTauTree->Branch("eT_tau_has_HltMatchMu24", &eT_tau_has_HltMatchMu24);
 
 
+  lepTauTree->Branch("eT_puWeight", &eT_puWeight);
+  lepTauTree->Branch("eT_puWeightM1", &eT_puWeightM1);
+  lepTauTree->Branch("eT_puWeightP1", &eT_puWeightP1);
+  lepTauTree->Branch("eT_NumPileupInt", &eT_NumPileupInt);
+  lepTauTree->Branch("eT_NumTruePileUpInt", &eT_NumTruePileUpInt);
+  lepTauTree->Branch("eT_NumPileupIntM1", &eT_NumPileupIntM1);
+  lepTauTree->Branch("eT_NumTruePileUpIntM1", &eT_NumTruePileUpIntM1);
+  lepTauTree->Branch("eT_NumPileupIntP1", &eT_NumPileupIntP1);
+  lepTauTree->Branch("eT_NumTruePileUpIntP1", &eT_NumTruePileUpIntP1);
+  lepTauTree->Branch("eT_EffDataELE20andELE22", &eT_EffDataELE20andELE22);
+  lepTauTree->Branch("eT_EffMcELE20andELE22", &eT_EffMcELE20andELE22);
+  lepTauTree->Branch("eT_HadronicTauDataTrigEffAntiEMed", &eT_HadronicTauDataTrigEffAntiEMed);
+  lepTauTree->Branch("eT_HadronicTauMcTrigEffAntiEMed", &eT_HadronicTauMcTrigEffAntiEMed);
+  lepTauTree->Branch("eT_HadronicTauDataTrigEffAntiETight", &eT_HadronicTauDataTrigEffAntiETight);
+  lepTauTree->Branch("eT_HadronicTauMcTrigEffAntiETight", &eT_HadronicTauMcTrigEffAntiETight);
+  lepTauTree->Branch("eT_electronDataIDweight", &eT_electronDataIDweight);
+  lepTauTree->Branch("eT_electronMcIDweight", &eT_electronMcIDweight);
+  lepTauTree->Branch("eT_electronDataISOLweight", &eT_electronDataISOLweight);
+  lepTauTree->Branch("eT_electronMcISOLweight", &eT_electronMcISOLweight);
+  lepTauTree->Branch("eT_EffDataHighPtTauTrigger", &eT_EffDataHighPtTauTrigger);
+  lepTauTree->Branch("eT_EffMcHighPtTauTrigger", &eT_EffMcHighPtTauTrigger);
+  lepTauTree->Branch("eT_TauFakeCorrection", &eT_TauFakeCorrection);
+  lepTauTree->Branch("eT_DecayModeCorrectionFactor", &eT_DecayModeCorrectionFactor);
+  lepTauTree->Branch("eT_ZeeScaleFactor", &eT_ZeeScaleFactor);
+  lepTauTree->Branch("eT_nominalHIGLUXHQTmhmax", &eT_nominalHIGLUXHQTmhmax);
+  lepTauTree->Branch("eT_upHIGLUXHQTmhmax", &eT_upHIGLUXHQTmhmax);
+  lepTauTree->Branch("eT_downHIGLUXHQTmhmax", &eT_downHIGLUXHQTmhmax);
+  lepTauTree->Branch("eT_nominalPOWHEGmhmod", &eT_nominalPOWHEGmhmod);
+  lepTauTree->Branch("eT_upPOWHEGmhmod", &eT_upPOWHEGmhmod);
+  lepTauTree->Branch("eT_downPOWHEGmhmod", &eT_downPOWHEGmhmod);
+  lepTauTree->Branch("eT_etaDepQCDShapeTemplateCorrection", &eT_etaDepQCDShapeTemplateCorrection);
+  lepTauTree->Branch("eT_inclusiveQCDShapeTemplateCorrection", &eT_inclusiveQCDShapeTemplateCorrection);
+  lepTauTree->Branch("eT_TTbarPtWeight", &eT_TTbarPtWeight);
+  lepTauTree->Branch("eT_TauSpinnerWT", &eT_TauSpinnerWT);
+  lepTauTree->Branch("eT_TauSpinnerWTFlip", &eT_TauSpinnerWTFlip);
+  lepTauTree->Branch("eT_TauSpinnerWThminus", &eT_TauSpinnerWThminus);
+  lepTauTree->Branch("eT_TauSpinnerWThplus", &eT_TauSpinnerWThplus);
+  lepTauTree->Branch("eT_hepNUP", &eT_hepNUP);
+  lepTauTree->Branch("eT_weightHEPNUP_DYJets", &eT_weightHEPNUP_DYJets);
+  lepTauTree->Branch("eT_weightHEPNUP_WJets", &eT_weightHEPNUP_WJets);
+
 
   lepTauTree->Branch("muT_correctedSVFitMass",&muT_correctedSVFitMass);
   lepTauTree->Branch("muT_p4_x",&muT_p4_x);
@@ -598,6 +685,13 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< TupleElectronTauCollection > eTaus;
   iEvent.getByLabel(electronTauSrc_, eTaus);
 
+
+  ///////////////
+  // get eTausWts
+
+  edm::Handle< TupleElectronTauWeightsCollection > eTauWts;
+  iEvent.getByLabel(electronTauWtSrc_, eTauWts);
+
   ///////////////
   // get electrons
 
@@ -615,6 +709,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
+      const TupleElectronTauWeight eTauWt =   ((*eTauWts)[i]);
       const TupleElectron theElec =   ((*elecs)[eTau.electronIndex()]);
       const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
@@ -841,7 +936,46 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       eT_tau_has_HltMatchMu18.push_back(theTau.has_HltMatchMu18());
       eT_tau_has_HltMatchMu24.push_back(theTau.has_HltMatchMu24());
 
-
+      eT_puWeight.push_back(eTauWt.puWeight());
+      eT_puWeightM1.push_back(eTauWt.puWeightM1());
+      eT_puWeightP1.push_back(eTauWt.puWeightP1());
+      eT_NumPileupInt.push_back(eTauWt.NumPileupInt());
+      eT_NumTruePileUpInt.push_back(eTauWt.NumTruePileUpInt());
+      eT_NumPileupIntM1.push_back(eTauWt.NumPileupIntM1());
+      eT_NumTruePileUpIntM1.push_back(eTauWt.NumTruePileUpIntM1());
+      eT_NumPileupIntP1.push_back(eTauWt.NumPileupIntP1());
+      eT_NumTruePileUpIntP1.push_back(eTauWt.NumTruePileUpIntP1());
+      eT_EffDataELE20andELE22.push_back(eTauWt.EffDataELE20andELE22());
+      eT_EffMcELE20andELE22.push_back(eTauWt.EffMcELE20andELE22());
+      eT_HadronicTauDataTrigEffAntiEMed.push_back(eTauWt.HadronicTauDataTrigEffAntiEMed());
+      eT_HadronicTauMcTrigEffAntiEMed.push_back(eTauWt.HadronicTauMcTrigEffAntiEMed());
+      eT_HadronicTauDataTrigEffAntiETight.push_back(eTauWt.HadronicTauDataTrigEffAntiETight());
+      eT_HadronicTauMcTrigEffAntiETight.push_back(eTauWt.HadronicTauMcTrigEffAntiETight());
+      eT_electronDataIDweight.push_back(eTauWt.electronDataIDweight());
+      eT_electronMcIDweight.push_back(eTauWt.electronMcIDweight());
+      eT_electronDataISOLweight.push_back(eTauWt.electronDataISOLweight());
+      eT_electronMcISOLweight.push_back(eTauWt.electronMcISOLweight());
+      eT_EffDataHighPtTauTrigger.push_back(eTauWt.EffDataHighPtTauTrigger());
+      eT_EffMcHighPtTauTrigger.push_back(eTauWt.EffMcHighPtTauTrigger());
+      eT_TauFakeCorrection.push_back(eTauWt.TauFakeCorrection());
+      eT_DecayModeCorrectionFactor.push_back(eTauWt.DecayModeCorrectionFactor());
+      eT_ZeeScaleFactor.push_back(eTauWt.ZeeScaleFactor());
+      eT_nominalHIGLUXHQTmhmax.push_back(eTauWt.nominalHIGLUXHQTmhmax());
+      eT_upHIGLUXHQTmhmax.push_back(eTauWt.upHIGLUXHQTmhmax());
+      eT_downHIGLUXHQTmhmax.push_back(eTauWt.downHIGLUXHQTmhmax());
+      eT_nominalPOWHEGmhmod.push_back(eTauWt.nominalPOWHEGmhmod());
+      eT_upPOWHEGmhmod.push_back(eTauWt.upPOWHEGmhmod());
+      eT_downPOWHEGmhmod.push_back(eTauWt.downPOWHEGmhmod());
+      eT_etaDepQCDShapeTemplateCorrection.push_back(eTauWt.etaDepQCDShapeTemplateCorrection());
+      eT_inclusiveQCDShapeTemplateCorrection.push_back(eTauWt.inclusiveQCDShapeTemplateCorrection());
+      eT_TTbarPtWeight.push_back(eTauWt.TTbarPtWeight());
+      eT_TauSpinnerWT.push_back(eTauWt.TauSpinnerWT());
+      eT_TauSpinnerWTFlip.push_back(eTauWt.TauSpinnerWTFlip());
+      eT_TauSpinnerWThminus.push_back(eTauWt.TauSpinnerWThminus());
+      eT_TauSpinnerWThplus.push_back(eTauWt.TauSpinnerWThplus());
+      eT_hepNUP.push_back(eTauWt.hepNUP());
+      eT_weightHEPNUP_DYJets.push_back(eTauWt.weightHEPNUP_DYJets());
+      eT_weightHEPNUP_WJets.push_back(eTauWt.weightHEPNUP_WJets());
 
 
 
@@ -1173,6 +1307,51 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_tau_has_HltMatchMu17.clear();
     eT_tau_has_HltMatchMu18.clear();
     eT_tau_has_HltMatchMu24.clear();
+
+
+
+    eT_puWeight.clear();
+    eT_puWeightM1.clear();
+    eT_puWeightP1.clear();
+    eT_NumPileupInt.clear();
+    eT_NumTruePileUpInt.clear();
+    eT_NumPileupIntM1.clear();
+    eT_NumTruePileUpIntM1.clear();
+    eT_NumPileupIntP1.clear();
+    eT_NumTruePileUpIntP1.clear();
+    eT_EffDataELE20andELE22.clear();
+    eT_EffMcELE20andELE22.clear();
+    eT_HadronicTauDataTrigEffAntiEMed.clear();
+    eT_HadronicTauMcTrigEffAntiEMed.clear();
+    eT_HadronicTauDataTrigEffAntiETight.clear();
+    eT_HadronicTauMcTrigEffAntiETight.clear();
+    eT_electronDataIDweight.clear();
+    eT_electronMcIDweight.clear();
+    eT_electronDataISOLweight.clear();
+    eT_electronMcISOLweight.clear();
+    eT_EffDataHighPtTauTrigger.clear();
+    eT_EffMcHighPtTauTrigger.clear();
+    eT_TauFakeCorrection.clear();
+    eT_DecayModeCorrectionFactor.clear();
+    eT_ZeeScaleFactor.clear();
+    eT_nominalHIGLUXHQTmhmax.clear();
+    eT_upHIGLUXHQTmhmax.clear();
+    eT_downHIGLUXHQTmhmax.clear();
+    eT_nominalPOWHEGmhmod.clear();
+    eT_upPOWHEGmhmod.clear();
+    eT_downPOWHEGmhmod.clear();
+    eT_etaDepQCDShapeTemplateCorrection.clear();
+    eT_inclusiveQCDShapeTemplateCorrection.clear();
+    eT_TTbarPtWeight.clear();
+    eT_TauSpinnerWT.clear();
+    eT_TauSpinnerWTFlip.clear();
+    eT_TauSpinnerWThminus.clear();
+    eT_TauSpinnerWThplus.clear();
+    eT_hepNUP.clear();
+    eT_weightHEPNUP_DYJets.clear();
+    eT_weightHEPNUP_WJets.clear();
+
+
 
   }
 
