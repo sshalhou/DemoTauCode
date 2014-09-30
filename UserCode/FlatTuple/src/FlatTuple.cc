@@ -1361,6 +1361,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_weightHEPNUP_WJets.clear();
 
 
+  muT_correctedSVFitMass.clear();
+  muT_p4_x.clear();
+  muT_p4_y.clear();
+  muT_p4_z.clear();
+  muT_p4_t.clear();
+
 
   }
 
