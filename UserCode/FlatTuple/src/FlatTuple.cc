@@ -228,11 +228,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   //////////////
   // init values
 
-  eT_correctedSVFitMass.clear();
-  eT_p4_x.clear();
-  eT_p4_y.clear();
-  eT_p4_z.clear();
-  eT_p4_t.clear();
+  reInit();
+
 
 
   ///////////////
@@ -360,8 +357,15 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   void
   FlatTuple::reInit()
   {
-    eT_p4.clear();
-    eT_corrected_p4.clear();
+
+    eT_p4_x.clear();
+    eT_p4_y.clear();
+    eT_p4_z.clear();
+    eT_p4_t.clear();
+    eT_corrected_p4_x.clear();
+    eT_corrected_p4_y.clear();
+    eT_corrected_p4_z.clear();
+    eT_corrected_p4_t.clear();
     eT_electronIndex.clear();
     eT_tauIndex.clear();
     eT_scalarSumPt.clear();
@@ -379,12 +383,24 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_isGoodTriggerPair.clear();
     eT_njets.clear();
     eT_nbjets.clear();
-    eT_jet1P4.clear();
-    eT_jet1RawP4.clear();
+    eT_jet1P4_x.clear();
+    eT_jet1P4_y.clear();
+    eT_jet1P4_z.clear();
+    eT_jet1P4_t.clear();
+    eT_jet1RawP4_x.clear();
+    eT_jet1RawP4_y.clear();
+    eT_jet1RawP4_z.clear();
+    eT_jet1RawP4_t.clear();
     eT_jet1IDMVA.clear();
     eT_jet1BTAGMVA.clear();
-    eT_jet2P4.clear();
-    eT_jet2RawP4.clear();
+    eT_jet2P4_x.clear();
+    eT_jet2P4_y.clear();
+    eT_jet2P4_z.clear();
+    eT_jet2P4_t.clear();
+    eT_jet2RawP4_x.clear();
+    eT_jet2RawP4_y.clear();
+    eT_jet2RawP4_z.clear();
+    eT_jet2RawP4_t.clear();
     eT_jet2IDMVA.clear();
     eT_jet2BTAGMVA.clear();
     eT_cov00.clear();
@@ -394,14 +410,28 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_passesTriLeptonVeto.clear();
     eT_passNonTopEmbeddedTriggerAndMass50.clear();
     eT_passSignalGeneratorMass70to130Cut.clear();
-    eT_genBosonP4.clear();
-    eT_genTOPp4.clear();
-    eT_genTOPBARp4.clear();
+    eT_genBosonP4_x.clear();
+    eT_genBosonP4_y.clear();
+    eT_genBosonP4_z.clear();
+    eT_genBosonP4_t.clear();
+    eT_genTOPp4_x.clear();
+    eT_genTOPp4_y.clear();
+    eT_genTOPp4_z.clear();
+    eT_genTOPp4_t.clear();
+    eT_genTOPBARp4_x.clear();
+    eT_genTOPBARp4_y.clear();
+    eT_genTOPBARp4_z.clear();
+    eT_genTOPBARp4_t.clear();
     eT_numberOfGoodVertices.clear();
     eT_PVndof.clear();
     eT_PVz.clear();
     eT_PVpositionRho.clear();
-    eT_PVp4.clear();
+    eT_PVp4_x.clear();
+    eT_PVp4_y.clear();
+    eT_PVp4_z.clear();
+    eT_PVp4_t.clear();
+
+
 
   }
 
