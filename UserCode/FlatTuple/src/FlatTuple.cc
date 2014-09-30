@@ -70,6 +70,7 @@ private:
 
 
   edm::InputTag electronTauSrc_;
+  edm::InputTag muonTauSrc_;
   std::string NAME_;
 
 
@@ -84,6 +85,12 @@ private:
   std::vector<double> eT_p4_y;
   std::vector<double> eT_p4_z;
   std::vector<double> eT_p4_t;
+
+  std::vector<double> muT_correctedSVFitMass;
+  std::vector<double> muT_p4_x;
+  std::vector<double> muT_p4_y;
+  std::vector<double> muT_p4_z;
+  std::vector<double> muT_p4_t;
 
 
 };
@@ -101,6 +108,7 @@ private:
 //
 FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
+muonTauSrc_(iConfig.getParameter<edm::InputTag>("muonTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
   //now do what ever initialization is needed
@@ -132,6 +140,13 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   eT_p4_z.clear();
   eT_p4_t.clear();
 
+  muT_correctedSVFitMass.clear();
+  muT_p4_x.clear();
+  muT_p4_y.clear();
+  muT_p4_z.clear();
+  muT_p4_t.clear();
+
+
   ///////////////
   // add branches
 
@@ -141,7 +156,11 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   lepTauTree->Branch("eT_p4_z",&eT_p4_z);
   lepTauTree->Branch("eT_p4_t",&eT_p4_t);
 
-
+  lepTauTree->Branch("muT_correctedSVFitMass",&muT_correctedSVFitMass);
+  lepTauTree->Branch("muT_p4_x",&muT_p4_x);
+  lepTauTree->Branch("muT_p4_y",&muT_p4_y);
+  lepTauTree->Branch("muT_p4_z",&muT_p4_z);
+  lepTauTree->Branch("muT_p4_t",&muT_p4_t);
 
 
 
@@ -202,10 +221,33 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
 
 
+  ///////////////
+  // get muTaus
+
+  edm::Handle< TupleMuonTauCollection > muTaus;
+  iEvent.getByLabel(muonTauSrc_, muTaus);
+
+
+  for (std::size_t i = 0; i < muTaus->size(); ++i)
+    {
+
+      const TupleMuonTau muTau =   ((*muTaus)[i]);
+      muT_correctedSVFitMass.push_back(muTau.correctedSVFitMass());
+      muT_p4_x.push_back(muTau.p4().x());
+      muT_p4_y.push_back(muTau.p4().y());
+      muT_p4_z.push_back(muTau.p4().z());
+      muT_p4_t.push_back(muTau.p4().t());
+
+
+    }
+
+
+
+
     ///////////
     // fill the tree
 
-    lepTauTree->Fill();
+    if(muTaus->size()+eTaus->size() > 0) lepTauTree->Fill();
 
 
 
