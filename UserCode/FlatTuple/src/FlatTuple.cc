@@ -65,6 +65,7 @@ private:
   virtual void endRun(edm::Run const&, edm::EventSetup const&);
   virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
   virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&);
+  virtual void reInit();
 
   // ----------member data ---------------------------
 
@@ -79,6 +80,9 @@ private:
 
   //////////////
   // variables for lepTau tree
+
+  ///////
+  // corresponding to electronTau object
 
   std::vector< double > eT_p4_x , eT_p4_y , eT_p4_z , eT_p4_t ;
   std::vector< double > eT_corrected_p4_x , eT_corrected_p4_y , eT_corrected_p4_z , eT_corrected_p4_t ;
@@ -173,17 +177,9 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   //////////////
   // init values
 
-  eT_correctedSVFitMass.clear();
-  eT_p4_x.clear();
-  eT_p4_y.clear();
-  eT_p4_z.clear();
-  eT_p4_t.clear();
+  reInit();
 
-  muT_correctedSVFitMass.clear();
-  muT_p4_x.clear();
-  muT_p4_y.clear();
-  muT_p4_z.clear();
-  muT_p4_t.clear();
+
 
 
   ///////////////
@@ -360,6 +356,55 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   FlatTuple::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
   {
   }
+
+  void
+  FlatTuple::reInit()
+  {
+    eT_p4.clear();
+    eT_corrected_p4.clear();
+    eT_electronIndex.clear();
+    eT_tauIndex.clear();
+    eT_scalarSumPt.clear();
+    eT_DR.clear();
+    eT_sumCharge.clear();
+    eT_correctedSVFitMass.clear();
+    eT_rawSVFitMass.clear();
+    eT_TransverseMass.clear();
+    eT_rawTransverseMass.clear();
+    eT_mvaMETraw.clear();
+    eT_mvaMET.clear();
+    eT_mvaMETphiRaw.clear();
+    eT_mvaMETphi.clear();
+    eT_MAX.clear();
+    eT_isGoodTriggerPair.clear();
+    eT_njets.clear();
+    eT_nbjets.clear();
+    eT_jet1P4.clear();
+    eT_jet1RawP4.clear();
+    eT_jet1IDMVA.clear();
+    eT_jet1BTAGMVA.clear();
+    eT_jet2P4.clear();
+    eT_jet2RawP4.clear();
+    eT_jet2IDMVA.clear();
+    eT_jet2BTAGMVA.clear();
+    eT_cov00.clear();
+    eT_cov01.clear();
+    eT_cov10.clear();
+    eT_cov11.clear();
+    eT_passesTriLeptonVeto.clear();
+    eT_passNonTopEmbeddedTriggerAndMass50.clear();
+    eT_passSignalGeneratorMass70to130Cut.clear();
+    eT_genBosonP4.clear();
+    eT_genTOPp4.clear();
+    eT_genTOPBARp4.clear();
+    eT_numberOfGoodVertices.clear();
+    eT_PVndof.clear();
+    eT_PVz.clear();
+    eT_PVpositionRho.clear();
+    eT_PVp4.clear();
+
+  }
+
 
   // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
   void
