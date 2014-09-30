@@ -27,7 +27,7 @@ int FlatTuple::verbosity_ = 0;
 
 FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
-NAME_(iConfig.getParameter<string>("NAME" )),
+NAME_(iConfig.getParameter<std::string>("NAME" )),
 lepTauTree_(0)
 {
 }
