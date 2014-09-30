@@ -70,7 +70,7 @@ private:
 
 
   edm::InputTag electronTauSrc_;
-  std:string NAME_;
+  std::string NAME_;
 
 
   TFile *outFile;
