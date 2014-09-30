@@ -33,6 +33,7 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleElectronTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
+#include "UserCode/TupleObjects/interface/TupleMuonTauWeight.h"
 
 
 #include <string>
@@ -481,6 +482,47 @@ private:
   std::vector< bool > muT_tau_has_HltMatchMu17 ;
   std::vector< bool > muT_tau_has_HltMatchMu18 ;
   std::vector< bool > muT_tau_has_HltMatchMu24 ;
+
+  //////
+  // muon tau weight
+
+  std::vector< double > muT_puWeight ;
+  std::vector< double > muT_puWeightM1 ;
+  std::vector< double > muT_puWeightP1 ;
+  std::vector< float > muT_NumPileupInt ;
+  std::vector< float > muT_NumTruePileUpInt ;
+  std::vector< float > muT_NumPileupIntM1 ;
+  std::vector< float > muT_NumTruePileUpIntM1 ;
+  std::vector< float > muT_NumPileupIntP1 ;
+  std::vector< float > muT_NumTruePileUpIntP1 ;
+  std::vector< double > muT_EffDataISOMU17andISOMU18 ;
+  std::vector< double > muT_EffMcISOMU17andISOMU18 ;
+  std::vector< double > muT_HadronicTauDataTrigEffAntiMuMed ;
+  std::vector< double > muT_HadronicTauMcTrigEffAntiMuMed ;
+  std::vector< double > muT_muonDataIDweight ;
+  std::vector< double > muT_muonMcIDweight ;
+  std::vector< double > muT_muonDataISOLweight ;
+  std::vector< double > muT_muonMcISOLweight ;
+  std::vector< double > muT_EffDataHighPtTauTrigger ;
+  std::vector< double > muT_EffMcHighPtTauTrigger ;
+  std::vector< double > muT_TauFakeCorrection ;
+  std::vector< double > muT_DecayModeCorrectionFactor ;
+  std::vector< double > muT_nominalHIGLUXHQTmhmax ;
+  std::vector< double > muT_upHIGLUXHQTmhmax ;
+  std::vector< double > muT_downHIGLUXHQTmhmax ;
+  std::vector< double > muT_nominalPOWHEGmhmod ;
+  std::vector< double > muT_upPOWHEGmhmod ;
+  std::vector< double > muT_downPOWHEGmhmod ;
+  std::vector< double > muT_etaDepQCDShapeTemplateCorrection ;
+  std::vector< double > muT_inclusiveQCDShapeTemplateCorrection ;
+  std::vector< double > muT_TTbarPtWeight ;
+  std::vector< double > muT_TauSpinnerWT ;
+  std::vector< double > muT_TauSpinnerWTFlip ;
+  std::vector< double > muT_TauSpinnerWThminus ;
+  std::vector< double > muT_TauSpinnerWThplus ;
+  std::vector< int > muT_hepNUP ;
+  std::vector< double > muT_weightHEPNUP_DYJets ;
+  std::vector< double > muT_weightHEPNUP_WJets ;
 
 
 };
@@ -1027,6 +1069,43 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   lepTauTree->Branch("muT_tau_has_HltMatchMu18", &muT_tau_has_HltMatchMu18);
   lepTauTree->Branch("muT_tau_has_HltMatchMu24", &muT_tau_has_HltMatchMu24);
 
+  lepTauTree->Branch("muT_puWeight", &muT_puWeight);
+  lepTauTree->Branch("muT_puWeightM1", &muT_puWeightM1);
+  lepTauTree->Branch("muT_puWeightP1", &muT_puWeightP1);
+  lepTauTree->Branch("muT_NumPileupInt", &muT_NumPileupInt);
+  lepTauTree->Branch("muT_NumTruePileUpInt", &muT_NumTruePileUpInt);
+  lepTauTree->Branch("muT_NumPileupIntM1", &muT_NumPileupIntM1);
+  lepTauTree->Branch("muT_NumTruePileUpIntM1", &muT_NumTruePileUpIntM1);
+  lepTauTree->Branch("muT_NumPileupIntP1", &muT_NumPileupIntP1);
+  lepTauTree->Branch("muT_NumTruePileUpIntP1", &muT_NumTruePileUpIntP1);
+  lepTauTree->Branch("muT_EffDataISOMU17andISOMU18", &muT_EffDataISOMU17andISOMU18);
+  lepTauTree->Branch("muT_EffMcISOMU17andISOMU18", &muT_EffMcISOMU17andISOMU18);
+  lepTauTree->Branch("muT_HadronicTauDataTrigEffAntiMuMed", &muT_HadronicTauDataTrigEffAntiMuMed);
+  lepTauTree->Branch("muT_HadronicTauMcTrigEffAntiMuMed", &muT_HadronicTauMcTrigEffAntiMuMed);
+  lepTauTree->Branch("muT_muonDataIDweight", &muT_muonDataIDweight);
+  lepTauTree->Branch("muT_muonMcIDweight", &muT_muonMcIDweight);
+  lepTauTree->Branch("muT_muonDataISOLweight", &muT_muonDataISOLweight);
+  lepTauTree->Branch("muT_muonMcISOLweight", &muT_muonMcISOLweight);
+  lepTauTree->Branch("muT_EffDataHighPtTauTrigger", &muT_EffDataHighPtTauTrigger);
+  lepTauTree->Branch("muT_EffMcHighPtTauTrigger", &muT_EffMcHighPtTauTrigger);
+  lepTauTree->Branch("muT_TauFakeCorrection", &muT_TauFakeCorrection);
+  lepTauTree->Branch("muT_DecayModeCorrectionFactor", &muT_DecayModeCorrectionFactor);
+  lepTauTree->Branch("muT_nominalHIGLUXHQTmhmax", &muT_nominalHIGLUXHQTmhmax);
+  lepTauTree->Branch("muT_upHIGLUXHQTmhmax", &muT_upHIGLUXHQTmhmax);
+  lepTauTree->Branch("muT_downHIGLUXHQTmhmax", &muT_downHIGLUXHQTmhmax);
+  lepTauTree->Branch("muT_nominalPOWHEGmhmod", &muT_nominalPOWHEGmhmod);
+  lepTauTree->Branch("muT_upPOWHEGmhmod", &muT_upPOWHEGmhmod);
+  lepTauTree->Branch("muT_downPOWHEGmhmod", &muT_downPOWHEGmhmod);
+  lepTauTree->Branch("muT_etaDepQCDShapeTemplateCorrection", &muT_etaDepQCDShapeTemplateCorrection);
+  lepTauTree->Branch("muT_inclusiveQCDShapeTemplateCorrection", &muT_inclusiveQCDShapeTemplateCorrection);
+  lepTauTree->Branch("muT_TTbarPtWeight", &muT_TTbarPtWeight);
+  lepTauTree->Branch("muT_TauSpinnerWT", &muT_TauSpinnerWT);
+  lepTauTree->Branch("muT_TauSpinnerWTFlip", &muT_TauSpinnerWTFlip);
+  lepTauTree->Branch("muT_TauSpinnerWThminus", &muT_TauSpinnerWThminus);
+  lepTauTree->Branch("muT_TauSpinnerWThplus", &muT_TauSpinnerWThplus);
+  lepTauTree->Branch("muT_hepNUP", &muT_hepNUP);
+  lepTauTree->Branch("muT_weightHEPNUP_DYJets", &muT_weightHEPNUP_DYJets);
+  lepTauTree->Branch("muT_weightHEPNUP_WJets", &muT_weightHEPNUP_WJets);
 
 
 }
@@ -1070,6 +1149,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   edm::Handle< TupleElectronTauWeightCollection > eTauWts;
   iEvent.getByLabel(electronTauWtSrc_, eTauWts);
+
+  ///////////////
+  // get muTausWts
+
+  edm::Handle< TupleMuonTauWeightCollection > muTauWts;
+  iEvent.getByLabel(muonTauWtSrc_, muTauWts);
 
   ///////////////
   // get electrons
@@ -1383,7 +1468,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       const TupleMuonTau muTau =   ((*muTaus)[i]);
-      //        const TupleElectronTauWeight eTauWt =   ((*eTauWts)[i]);
+      const TupleMuonTauWeight muTauWt =   ((*muTauWts)[i]);
       const TupleMuon theMuon =   ((*muons)[muTau.muonIndex()]);
       const TupleTau theTau =   ((*taus)[muTau.tauIndex()]);
 
@@ -1607,6 +1692,44 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_tau_has_HltMatchMu17.push_back(theTau.has_HltMatchMu17());
       muT_tau_has_HltMatchMu18.push_back(theTau.has_HltMatchMu18());
       muT_tau_has_HltMatchMu24.push_back(theTau.has_HltMatchMu24());
+
+      muT_puWeight.push_back(muTauWt.puWeight());
+      muT_puWeightM1.push_back(muTauWt.puWeightM1());
+      muT_puWeightP1.push_back(muTauWt.puWeightP1());
+      muT_NumPileupInt.push_back(muTauWt.NumPileupInt());
+      muT_NumTruePileUpInt.push_back(muTauWt.NumTruePileUpInt());
+      muT_NumPileupIntM1.push_back(muTauWt.NumPileupIntM1());
+      muT_NumTruePileUpIntM1.push_back(muTauWt.NumTruePileUpIntM1());
+      muT_NumPileupIntP1.push_back(muTauWt.NumPileupIntP1());
+      muT_NumTruePileUpIntP1.push_back(muTauWt.NumTruePileUpIntP1());
+      muT_EffDataISOMU17andISOMU18.push_back(muTauWt.EffDataISOMU17andISOMU18());
+      muT_EffMcISOMU17andISOMU18.push_back(muTauWt.EffMcISOMU17andISOMU18());
+      muT_HadronicTauDataTrigEffAntiMuMed.push_back(muTauWt.HadronicTauDataTrigEffAntiMuMed());
+      muT_HadronicTauMcTrigEffAntiMuMed.push_back(muTauWt.HadronicTauMcTrigEffAntiMuMed());
+      muT_muonDataIDweight.push_back(muTauWt.muonDataIDweight());
+      muT_muonMcIDweight.push_back(muTauWt.muonMcIDweight());
+      muT_muonDataISOLweight.push_back(muTauWt.muonDataISOLweight());
+      muT_muonMcISOLweight.push_back(muTauWt.muonMcISOLweight());
+      muT_EffDataHighPtTauTrigger.push_back(muTauWt.EffDataHighPtTauTrigger());
+      muT_EffMcHighPtTauTrigger.push_back(muTauWt.EffMcHighPtTauTrigger());
+      muT_TauFakeCorrection.push_back(muTauWt.TauFakeCorrection());
+      muT_DecayModeCorrectionFactor.push_back(muTauWt.DecayModeCorrectionFactor());
+      muT_nominalHIGLUXHQTmhmax.push_back(muTauWt.nominalHIGLUXHQTmhmax());
+      muT_upHIGLUXHQTmhmax.push_back(muTauWt.upHIGLUXHQTmhmax());
+      muT_downHIGLUXHQTmhmax.push_back(muTauWt.downHIGLUXHQTmhmax());
+      muT_nominalPOWHEGmhmod.push_back(muTauWt.nominalPOWHEGmhmod());
+      muT_upPOWHEGmhmod.push_back(muTauWt.upPOWHEGmhmod());
+      muT_downPOWHEGmhmod.push_back(muTauWt.downPOWHEGmhmod());
+      muT_etaDepQCDShapeTemplateCorrection.push_back(muTauWt.etaDepQCDShapeTemplateCorrection());
+      muT_inclusiveQCDShapeTemplateCorrection.push_back(muTauWt.inclusiveQCDShapeTemplateCorrection());
+      muT_TTbarPtWeight.push_back(muTauWt.TTbarPtWeight());
+      muT_TauSpinnerWT.push_back(muTauWt.TauSpinnerWT());
+      muT_TauSpinnerWTFlip.push_back(muTauWt.TauSpinnerWTFlip());
+      muT_TauSpinnerWThminus.push_back(muTauWt.TauSpinnerWThminus());
+      muT_TauSpinnerWThplus.push_back(muTauWt.TauSpinnerWThplus());
+      muT_hepNUP.push_back(muTauWt.hepNUP());
+      muT_weightHEPNUP_DYJets.push_back(muTauWt.weightHEPNUP_DYJets());
+      muT_weightHEPNUP_WJets.push_back(muTauWt.weightHEPNUP_WJets());
 
 
     }
@@ -2177,6 +2300,45 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_tau_has_HltMatchMu17.clear();
     muT_tau_has_HltMatchMu18.clear();
     muT_tau_has_HltMatchMu24.clear();
+
+
+    muT_puWeight.clear();
+    muT_puWeightM1.clear();
+    muT_puWeightP1.clear();
+    muT_NumPileupInt.clear();
+    muT_NumTruePileUpInt.clear();
+    muT_NumPileupIntM1.clear();
+    muT_NumTruePileUpIntM1.clear();
+    muT_NumPileupIntP1.clear();
+    muT_NumTruePileUpIntP1.clear();
+    muT_EffDataISOMU17andISOMU18.clear();
+    muT_EffMcISOMU17andISOMU18.clear();
+    muT_HadronicTauDataTrigEffAntiMuMed.clear();
+    muT_HadronicTauMcTrigEffAntiMuMed.clear();
+    muT_muonDataIDweight.clear();
+    muT_muonMcIDweight.clear();
+    muT_muonDataISOLweight.clear();
+    muT_muonMcISOLweight.clear();
+    muT_EffDataHighPtTauTrigger.clear();
+    muT_EffMcHighPtTauTrigger.clear();
+    muT_TauFakeCorrection.clear();
+    muT_DecayModeCorrectionFactor.clear();
+    muT_nominalHIGLUXHQTmhmax.clear();
+    muT_upHIGLUXHQTmhmax.clear();
+    muT_downHIGLUXHQTmhmax.clear();
+    muT_nominalPOWHEGmhmod.clear();
+    muT_upPOWHEGmhmod.clear();
+    muT_downPOWHEGmhmod.clear();
+    muT_etaDepQCDShapeTemplateCorrection.clear();
+    muT_inclusiveQCDShapeTemplateCorrection.clear();
+    muT_TTbarPtWeight.clear();
+    muT_TauSpinnerWT.clear();
+    muT_TauSpinnerWTFlip.clear();
+    muT_TauSpinnerWThminus.clear();
+    muT_TauSpinnerWThplus.clear();
+    muT_hepNUP.clear();
+    muT_weightHEPNUP_DYJets.clear();
+    muT_weightHEPNUP_WJets.clear();
 
   }
 
