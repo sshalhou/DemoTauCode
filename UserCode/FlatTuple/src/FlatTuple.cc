@@ -565,6 +565,10 @@ NAME_(iConfig.getParameter<string>("NAME" ))
 //  outFile->cd();
 
 
+  //--- create TTree
+edm::Service<TFileService> fs;
+lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
+
 
 
   //////////////
@@ -1787,9 +1791,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   FlatTuple::beginJob()
   {
 
-    //--- create TTree
-  edm::Service<TFileService> fs;
-  lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
+
 
   }
 
