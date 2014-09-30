@@ -716,7 +716,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
 
-      if(eTau.p4().et()<24) continue;
+      if(eTau.p4().pt()<24) continue;
 
       eT_p4_x.push_back(eTau.p4().x());
       eT_p4_y.push_back(eTau.p4().y());
