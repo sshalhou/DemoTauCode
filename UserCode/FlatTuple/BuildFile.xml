@@ -3,4 +3,5 @@
 <use name="FWCore/ParameterSet"/>
 <use name="DataFormats/PatCandidates"/>
 <use name="UserCode/TupleObjects"/>
+<use name="CommonTools/UtilAlgos"/>
 <flags EDM_PLUGIN="1"/>
