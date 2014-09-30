@@ -185,11 +185,80 @@ NAME_(iConfig.getParameter<string>("NAME" ))
   ///////////////
   // add branches
 
-  lepTauTree->Branch("eT_correctedSVFitMass",&eT_correctedSVFitMass);
-  lepTauTree->Branch("eT_p4_x",&eT_p4_x);
-  lepTauTree->Branch("eT_p4_y",&eT_p4_y);
-  lepTauTree->Branch("eT_p4_z",&eT_p4_z);
-  lepTauTree->Branch("eT_p4_t",&eT_p4_t);
+  lepTauTree->Branch("eT_p4_x", &eT_p4_x);
+  lepTauTree->Branch("eT_p4_y", &eT_p4_y);
+  lepTauTree->Branch("eT_p4_z", &eT_p4_z);
+  lepTauTree->Branch("eT_p4_t", &eT_p4_t);
+  lepTauTree->Branch("eT_corrected_p4_x", &eT_corrected_p4_x);
+  lepTauTree->Branch("eT_corrected_p4_y", &eT_corrected_p4_y);
+  lepTauTree->Branch("eT_corrected_p4_z", &eT_corrected_p4_z);
+  lepTauTree->Branch("eT_corrected_p4_t", &eT_corrected_p4_t);
+  lepTauTree->Branch("eT_electronIndex", &eT_electronIndex);
+  lepTauTree->Branch("eT_tauIndex", &eT_tauIndex);
+  lepTauTree->Branch("eT_scalarSumPt", &eT_scalarSumPt);
+  lepTauTree->Branch("eT_DR", &eT_DR);
+  lepTauTree->Branch("eT_sumCharge", &eT_sumCharge);
+  lepTauTree->Branch("eT_correctedSVFitMass", &eT_correctedSVFitMass);
+  lepTauTree->Branch("eT_rawSVFitMass", &eT_rawSVFitMass);
+  lepTauTree->Branch("eT_TransverseMass", &eT_TransverseMass);
+  lepTauTree->Branch("eT_rawTransverseMass", &eT_rawTransverseMass);
+  lepTauTree->Branch("eT_mvaMETraw", &eT_mvaMETraw);
+  lepTauTree->Branch("eT_mvaMET", &eT_mvaMET);
+  lepTauTree->Branch("eT_mvaMETphiRaw", &eT_mvaMETphiRaw);
+  lepTauTree->Branch("eT_mvaMETphi", &eT_mvaMETphi);
+  lepTauTree->Branch("eT_MAX", &eT_MAX);
+  lepTauTree->Branch("eT_isGoodTriggerPair", &eT_isGoodTriggerPair);
+  lepTauTree->Branch("eT_njets", &eT_njets);
+  lepTauTree->Branch("eT_nbjets", &eT_nbjets);
+  lepTauTree->Branch("eT_jet1P4_x", &eT_jet1P4_x);
+  lepTauTree->Branch("eT_jet1P4_y", &eT_jet1P4_y);
+  lepTauTree->Branch("eT_jet1P4_z", &eT_jet1P4_z);
+  lepTauTree->Branch("eT_jet1P4_t", &eT_jet1P4_t);
+  lepTauTree->Branch("eT_jet1RawP4_x", &eT_jet1RawP4_x);
+  lepTauTree->Branch("eT_jet1RawP4_y", &eT_jet1RawP4_y);
+  lepTauTree->Branch("eT_jet1RawP4_z", &eT_jet1RawP4_z);
+  lepTauTree->Branch("eT_jet1RawP4_t", &eT_jet1RawP4_t);
+  lepTauTree->Branch("eT_jet1IDMVA", &eT_jet1IDMVA);
+  lepTauTree->Branch("eT_jet1BTAGMVA", &eT_jet1BTAGMVA);
+  lepTauTree->Branch("eT_jet2P4_x", &eT_jet2P4_x);
+  lepTauTree->Branch("eT_jet2P4_y", &eT_jet2P4_y);
+  lepTauTree->Branch("eT_jet2P4_z", &eT_jet2P4_z);
+  lepTauTree->Branch("eT_jet2P4_t", &eT_jet2P4_t);
+  lepTauTree->Branch("eT_jet2RawP4_x", &eT_jet2RawP4_x);
+  lepTauTree->Branch("eT_jet2RawP4_y", &eT_jet2RawP4_y);
+  lepTauTree->Branch("eT_jet2RawP4_z", &eT_jet2RawP4_z);
+  lepTauTree->Branch("eT_jet2RawP4_t", &eT_jet2RawP4_t);
+  lepTauTree->Branch("eT_jet2IDMVA", &eT_jet2IDMVA);
+  lepTauTree->Branch("eT_jet2BTAGMVA", &eT_jet2BTAGMVA);
+  lepTauTree->Branch("eT_cov00", &eT_cov00);
+  lepTauTree->Branch("eT_cov01", &eT_cov01);
+  lepTauTree->Branch("eT_cov10", &eT_cov10);
+  lepTauTree->Branch("eT_cov11", &eT_cov11);
+  lepTauTree->Branch("eT_passesTriLeptonVeto", &eT_passesTriLeptonVeto);
+  lepTauTree->Branch("eT_passNonTopEmbeddedTriggerAndMass50", &eT_passNonTopEmbeddedTriggerAndMass50);
+  lepTauTree->Branch("eT_passSignalGeneratorMass70to130Cut", &eT_passSignalGeneratorMass70to130Cut);
+  lepTauTree->Branch("eT_genBosonP4_x", &eT_genBosonP4_x);
+  lepTauTree->Branch("eT_genBosonP4_y", &eT_genBosonP4_y);
+  lepTauTree->Branch("eT_genBosonP4_z", &eT_genBosonP4_z);
+  lepTauTree->Branch("eT_genBosonP4_t", &eT_genBosonP4_t);
+  lepTauTree->Branch("eT_genTOPp4_x", &eT_genTOPp4_x);
+  lepTauTree->Branch("eT_genTOPp4_y", &eT_genTOPp4_y);
+  lepTauTree->Branch("eT_genTOPp4_z", &eT_genTOPp4_z);
+  lepTauTree->Branch("eT_genTOPp4_t", &eT_genTOPp4_t);
+  lepTauTree->Branch("eT_genTOPBARp4_x", &eT_genTOPBARp4_x);
+  lepTauTree->Branch("eT_genTOPBARp4_y", &eT_genTOPBARp4_y);
+  lepTauTree->Branch("eT_genTOPBARp4_z", &eT_genTOPBARp4_z);
+  lepTauTree->Branch("eT_genTOPBARp4_t", &eT_genTOPBARp4_t);
+  lepTauTree->Branch("eT_numberOfGoodVertices", &eT_numberOfGoodVertices);
+  lepTauTree->Branch("eT_PVndof", &eT_PVndof);
+  lepTauTree->Branch("eT_PVz", &eT_PVz);
+  lepTauTree->Branch("eT_PVpositionRho", &eT_PVpositionRho);
+  lepTauTree->Branch("eT_PVp4_x", &eT_PVp4_x);
+  lepTauTree->Branch("eT_PVp4_y", &eT_PVp4_y);
+  lepTauTree->Branch("eT_PVp4_z", &eT_PVp4_z);
+  lepTauTree->Branch("eT_PVp4_t", &eT_PVp4_t);
+
+
 
   lepTauTree->Branch("muT_correctedSVFitMass",&muT_correctedSVFitMass);
   lepTauTree->Branch("muT_p4_x",&muT_p4_x);
@@ -243,11 +312,82 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     {
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
-      eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
+
+
       eT_p4_x.push_back(eTau.p4().x());
       eT_p4_y.push_back(eTau.p4().y());
       eT_p4_z.push_back(eTau.p4().z());
       eT_p4_t.push_back(eTau.p4().t());
+      eT_corrected_p4_x.push_back(eTau.corrected_p4().x());
+      eT_corrected_p4_y.push_back(eTau.corrected_p4().y());
+      eT_corrected_p4_z.push_back(eTau.corrected_p4().z());
+      eT_corrected_p4_t.push_back(eTau.corrected_p4().t());
+      eT_electronIndex.push_back(eTau.electronIndex());
+      eT_tauIndex.push_back(eTau.tauIndex());
+      eT_scalarSumPt.push_back(eTau.scalarSumPt());
+      eT_DR.push_back(eTau.DR());
+      eT_sumCharge.push_back(eTau.sumCharge());
+      eT_correctedSVFitMass.push_back(eTau.correctedSVFitMass());
+      eT_rawSVFitMass.push_back(eTau.rawSVFitMass());
+      eT_TransverseMass.push_back(eTau.TransverseMass());
+      eT_rawTransverseMass.push_back(eTau.rawTransverseMass());
+      eT_mvaMETraw.push_back(eTau.mvaMETraw());
+      eT_mvaMET.push_back(eTau.mvaMET());
+      eT_mvaMETphiRaw.push_back(eTau.mvaMETphiRaw());
+      eT_mvaMETphi.push_back(eTau.mvaMETphi());
+      eT_MAX.push_back(eTau.MAX());
+      eT_isGoodTriggerPair.push_back(eTau.isGoodTriggerPair());
+      eT_njets.push_back(eTau.njets());
+      eT_nbjets.push_back(eTau.nbjets());
+      eT_jet1P4_x.push_back(eTau.jet1P4().x());
+      eT_jet1P4_y.push_back(eTau.jet1P4().y());
+      eT_jet1P4_z.push_back(eTau.jet1P4().z());
+      eT_jet1P4_t.push_back(eTau.jet1P4().t());
+      eT_jet1RawP4_x.push_back(eTau.jet1RawP4().x());
+      eT_jet1RawP4_y.push_back(eTau.jet1RawP4().y());
+      eT_jet1RawP4_z.push_back(eTau.jet1RawP4().z());
+      eT_jet1RawP4_t.push_back(eTau.jet1RawP4().t());
+      eT_jet1IDMVA.push_back(eTau.jet1IDMVA());
+      eT_jet1BTAGMVA.push_back(eTau.jet1BTAGMVA());
+      eT_jet2P4_x.push_back(eTau.jet2P4().x());
+      eT_jet2P4_y.push_back(eTau.jet2P4().y());
+      eT_jet2P4_z.push_back(eTau.jet2P4().z());
+      eT_jet2P4_t.push_back(eTau.jet2P4().t());
+      eT_jet2RawP4_x.push_back(eTau.jet2RawP4().x());
+      eT_jet2RawP4_y.push_back(eTau.jet2RawP4().y());
+      eT_jet2RawP4_z.push_back(eTau.jet2RawP4().z());
+      eT_jet2RawP4_t.push_back(eTau.jet2RawP4().t());
+      eT_jet2IDMVA.push_back(eTau.jet2IDMVA());
+      eT_jet2BTAGMVA.push_back(eTau.jet2BTAGMVA());
+      eT_cov00.push_back(eTau.cov00());
+      eT_cov01.push_back(eTau.cov01());
+      eT_cov10.push_back(eTau.cov10());
+      eT_cov11.push_back(eTau.cov11());
+      eT_passesTriLeptonVeto.push_back(eTau.passesTriLeptonVeto());
+      eT_passNonTopEmbeddedTriggerAndMass50.push_back(eTau.passNonTopEmbeddedTriggerAndMass50());
+      eT_passSignalGeneratorMass70to130Cut.push_back(eTau.passSignalGeneratorMass70to130Cut());
+      eT_genBosonP4_x.push_back(eTau.genBosonP4().x());
+      eT_genBosonP4_y.push_back(eTau.genBosonP4().y());
+      eT_genBosonP4_z.push_back(eTau.genBosonP4().z());
+      eT_genBosonP4_t.push_back(eTau.genBosonP4().t());
+      eT_genTOPp4_x.push_back(eTau.genTOPp4().x());
+      eT_genTOPp4_y.push_back(eTau.genTOPp4().y());
+      eT_genTOPp4_z.push_back(eTau.genTOPp4().z());
+      eT_genTOPp4_t.push_back(eTau.genTOPp4().t());
+      eT_genTOPBARp4_x.push_back(eTau.genTOPBARp4().x());
+      eT_genTOPBARp4_y.push_back(eTau.genTOPBARp4().y());
+      eT_genTOPBARp4_z.push_back(eTau.genTOPBARp4().z());
+      eT_genTOPBARp4_t.push_back(eTau.genTOPBARp4().t());
+      eT_numberOfGoodVertices.push_back(eTau.numberOfGoodVertices());
+      eT_PVndof.push_back(eTau.PVndof());
+      eT_PVz.push_back(eTau.PVz());
+      eT_PVpositionRho.push_back(eTau.PVpositionRho());
+      eT_PVp4_x.push_back(eTau.PVp4().x());
+      eT_PVp4_y.push_back(eTau.PVp4().y());
+      eT_PVp4_z.push_back(eTau.PVp4().z());
+      eT_PVp4_t.push_back(eTau.PVp4().t());
+
+
 
 
     }
