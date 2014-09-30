@@ -84,7 +84,7 @@ void FlatTuple::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     }
-
+}
 
 
 void FlatTuple::addBranchD(const std::string& name)
@@ -191,7 +191,3 @@ void FlatTuple::setValue_EnPxPyPz(const std::string& name, const reco::Candidate
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 DEFINE_FWK_MODULE(FlatTuple);
-
-
-
-}
