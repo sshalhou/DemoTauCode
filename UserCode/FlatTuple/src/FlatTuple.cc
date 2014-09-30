@@ -71,6 +71,9 @@ private:
 
 
   edm::InputTag electronTauSrc_;
+  edm::InputTag electronSrc_;
+  edm::InputTag tauSrc_;
+
   edm::InputTag muonTauSrc_;
   std::string NAME_;
 
@@ -151,6 +154,8 @@ private:
 //
 FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
+electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
+tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonTauSrc_(iConfig.getParameter<edm::InputTag>("muonTauSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" ))
 {
@@ -307,11 +312,25 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle< TupleElectronTauCollection > eTaus;
   iEvent.getByLabel(electronTauSrc_, eTaus);
 
+  ///////////////
+  // get electrons
+
+  edm::Handle< TupleElectronCollection > elecs;
+  iEvent.getByLabel(electronSrc_, elecs);
+
+  /////////////
+  // get taus
+
+  edm::Handle< TupleTauCollection > taus;
+  iEvent.getByLabel(tauSrc_, taus);
+
 
   for (std::size_t i = 0; i < eTaus->size(); ++i)
     {
 
       const TupleElectronTau eTau =   ((*eTaus)[i]);
+      const TupleElectron theElec =   ((*elecs)[eTau.electronIndex()]);
+      const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
 
       eT_p4_x.push_back(eTau.p4().x());
