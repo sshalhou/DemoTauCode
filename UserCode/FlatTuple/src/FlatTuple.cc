@@ -1190,8 +1190,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
 
-    if(theElec.p4().pt()<24) continue;
-    if(eTau.passesTriLeptonVeto()!=1) continue;
+  //  if(theElec.p4().pt()<24) continue;
+  //  if(eTau.passesTriLeptonVeto()!=1) continue;
 
 
     eT_p4_x.push_back(eTau.p4().x());
@@ -1478,8 +1478,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const TupleTau theTau =   ((*taus)[muTau.tauIndex()]);
 
 
-      if(theMuon.p4().pt()<20) continue;
-      if(muTau.passesTriLeptonVeto()!=1) continue;
+//      if(theMuon.p4().pt()<20) continue;
+//      if(muTau.passesTriLeptonVeto()!=1) continue;
 
       muT_p4_x.push_back(muTau.p4().x());
       muT_p4_y.push_back(muTau.p4().y());
