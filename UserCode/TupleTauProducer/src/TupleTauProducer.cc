@@ -640,7 +640,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
 
-    if(!(CurrentTau.p4().pt()>28))
+    if(!(CurrentTau.p4().pt()>18))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
