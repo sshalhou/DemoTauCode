@@ -22,7 +22,7 @@ for afile in listOfFiles:
 		treeName = 'demo/FlatTuple;'+str(index)
 		chain.AddFile(afile,0,treeName)
 
-theselector = "../FlatTreeSel.C+"
+theselector = "./scripts/FlatTreeSel.C+"
 selector = TSelector.GetSelector(theselector)
 
 chain.SetNotify(selector)
