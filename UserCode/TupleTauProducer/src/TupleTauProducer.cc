@@ -631,25 +631,29 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     //////////////////////////
     // set the passFullId summary boolean
+    // this is not really the 'full' ID
+    // just a way to limit the number of SVFit
+    // calculations to a reasonable amount
 
     bool passFullId_muTau = 1;
     bool passFullId_eTau = 1;
 
     ///////////////////////////
 
-    if(!(CurrentTau.p4().pt()>30))
+    if(!(CurrentTau.p4().pt()>28))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
     }
-    if(!(fabs(CurrentTau.p4().eta())<2.3))
+    if(!(fabs(CurrentTau.p4().eta())<2.4))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
     }
 
 
-    if(!(tau->tauID("decayModeFindingOldDMs") > 0.5 && tau->tauID("byTightIsolationMVA3oldDMwLT") > 0.5))
+  // note here we have omitted the requirement on the isol related disc.
+   if(!(tau->tauID("decayModeFindingOldDMs") > 0.5 && tau->tauID("byTightIsolationMVA3oldDMwLT") > -99999.9))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;

@@ -573,21 +573,20 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentMuon.set_relativeIso_DR4(relativeIsolation_DR4);
     */
 
-    //////////////////////////
-    // set the passFullId summary boolean
-    // eventually the cuts should be passed
-    // to the producer using the cutParser
-    // this is temporary since muTau, eTau, TauTau
-    // have different cut sets
+    ////////////////
+    //set_passFullId
+    // this is not really the 'full' ID
+    // just a way to limit the number of SVFit
+    // calculations to a reasonable amount
 
     bool passFullId = 1;
 
     ///////////////////////////
     if(!(muon->isGlobalMuon())) passFullId = 0;
-    //  if(!(muon->isTightMuon(primary_vertex))) passFullId = 0;
     if(!(isTightMuon)) passFullId = 0;
     if(!(isPFMuon)) passFullId = 0;
-    //if(!(fabs(muon->dB()) < 0.045)) passFullId = 0;
+    if(!(muon->p4().pt()>18)) passFullId = 0;
+    if(!(fabs(muon->p4().eta())<2.2)) passFullId = 0;
     if(!muon->innerTrack().isNull())
     {
       if(!(fabs(muon->innerTrack()->dz(first_vertex.position())) < 0.2)) passFullId = 0;
@@ -595,9 +594,8 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
     else passFullId = 0;
-    if(!(relativeIsolation_DR4 < 0.1)) passFullId = 0;
-    if(!(muon->p4().pt()>20)) passFullId = 0;
-    if(!(fabs(muon->p4().eta())<2.1)) passFullId = 0;
+    if(!(relativeIsolation_DR4 < 999.9)) passFullId = 0;
+
     ///////////////////////////
 
     CurrentMuon.set_passFullId(passFullId);

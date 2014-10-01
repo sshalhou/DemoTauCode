@@ -630,15 +630,18 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
     ////////////////
     //set_passFullId
+    // this is not really the 'full' ID
+    // just a way to limit the number of SVFit
+    // calculations to a reasonable amount
     ////////////////
 
     bool passFullId = 1;
 
 
-    if(  !(electron->pt() > 24)           ) passFullId = 0;
-    if(  !( fabs(electron->eta()) < 2.1)  ) passFullId = 0;
+    if(  !(electron->pt() > 18)           ) passFullId = 0;
+    if(  !( fabs(electron->eta()) < 2.2)  ) passFullId = 0;
     if(  !(pass_fail)                     ) passFullId = 0;
-    if(  !(relativeIsolation < 0.1)       ) passFullId = 0;
+    if(  !(relativeIsolation < 999.)       ) passFullId = 0;
     if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
     if(  !(conversionVetoPass)            ) passFullId = 0;
     if(  !( fabs(dxy) < 0.045)  ) passFullId = 0;
