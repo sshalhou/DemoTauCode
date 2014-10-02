@@ -101,7 +101,6 @@ private:
   std::vector< bool > isRealData ;
   std::vector< int > bunchCrossing ;
   std::vector< int > orbitNumber ;
-  std::vector< int > storeNumber ;
 
 
 
@@ -606,7 +605,6 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("isRealData", &isRealData);
   lepTauTree->Branch("bunchCrossing", &bunchCrossing);
   lepTauTree->Branch("orbitNumber", &orbitNumber);
-  lepTauTree->Branch("storeNumber", &storeNumber);
 
   // eTau
 
@@ -1224,7 +1222,6 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     isRealData.push_back(iEvent.isRealData());
     bunchCrossing.push_back(iEvent.bunchCrossing());
     orbitNumber.push_back(iEvent.orbitNumber());
-    storeNumber.push_back(iEvent.storeNumber());
 
 
     eT_p4_x.push_back(eTau.p4().x());
@@ -1520,7 +1517,6 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       isRealData.push_back(iEvent.isRealData());
       bunchCrossing.push_back(iEvent.bunchCrossing());
       orbitNumber.push_back(iEvent.orbitNumber());
-      storeNumber.push_back(iEvent.storeNumber());
 
 
       muT_p4_x.push_back(muTau.p4().x());
@@ -2403,7 +2399,6 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     isRealData.clear();
     bunchCrossing.clear();
     orbitNumber.clear();
-    storeNumber.clear();
 
   }
 
