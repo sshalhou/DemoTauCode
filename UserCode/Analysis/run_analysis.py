@@ -87,3 +87,7 @@ for entry in range(0,chain.GetEntries()):
 			if (len(passingETauIndices) + len(passingMuTauIndices)) > 1:
 					getMaxPtPairIndex(chain, maxPairTypeAndIndex, passingMuTauIndices, passingETauIndices)
 			print 'PASS', maxPairTypeAndIndex
+
+#########################################################
+# now classify the event based on tauPt and nbtags
+# add run, event, lumi to FlatTree

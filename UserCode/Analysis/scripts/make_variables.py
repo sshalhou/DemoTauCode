@@ -4,7 +4,15 @@ my_file = open(sys.argv[1], 'r')
 Htype = sys.argv[2]
 
 print "will make C++ code for ", Htype, "using file ", sys.argv[1]
-# python make_variables.py electron.vars (one of the Htypes)
+print "list of variables should look like this :"
+print "double someDouble"
+print "LorentzVector someLorentzVector"
+print "note: extra whitespaces or trailing ; will mess things up (to be fixed later)"
+print "note all variables in the text file need m_ prefix"
+print "example of custum option : python make_variables.py id.vars \'iEvent.id()\'"
+
+# python make_variables.py fileName.variables Htype
+
 
 prefix = 'x'
 theThing = 'x'
@@ -19,7 +27,7 @@ if Htype=='eTau':
 # the 2nd argument for muTau variable list
 
 
-if Htype=='muTau':
+elif Htype=='muTau':
   prefix = 'muT_'
   theThing = Htype
 
@@ -27,13 +35,13 @@ if Htype=='muTau':
 
 
 
-if Htype=='eTauElec':
+elif Htype=='eTauElec':
   prefix = 'eT_ele_'
   theThing = 'theElec'
 
 # the 2nd argument for muon leg in eTau variable list
 
-if Htype=='muTauMuon':
+elif Htype=='muTauMuon':
   prefix = 'muT_muon_'
   theThing = 'theMuon'
 
@@ -42,28 +50,34 @@ if Htype=='muTauMuon':
 # the 2nd argument for tau leg in eTau variable list
 
 
-if Htype=='eTauTau':
+elif Htype=='eTauTau':
   prefix = 'eT_tau_'
   theThing = 'theTau'
 
 # the 2nd argument for tau leg in muTau variable list
 
 
-if Htype=='muTauTau':
+elif Htype=='muTauTau':
   prefix = 'muT_tau_'
   theThing = 'theTau'
 
 
 # the 2nd argument for eTau Weights variable list
 
-if Htype=='eTauWt':
+elif Htype=='eTauWt':
   prefix = 'eT_'
   theThing = Htype
 
 # the 2nd argument for muTau Weights variable list
 
-if Htype=='muTauWt':
+elif Htype=='muTauWt':
   prefix = 'muT_'
+  theThing = Htype
+
+# the 2nd argument for null variable list
+
+elif Htype==sys.argv[2]:
+  prefix = ''
   theThing = Htype
 
 
