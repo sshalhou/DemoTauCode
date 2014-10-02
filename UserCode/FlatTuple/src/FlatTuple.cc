@@ -1221,10 +1221,10 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     run.push_back(iEvent.id().run());
     luminosityBlock.push_back(iEvent.id().luminosityBlock());
     event.push_back(iEvent.id().event());
-    isRealData.push_back(iEvent.id().isRealData());
-    bunchCrossing.push_back(iEvent.id().bunchCrossing());
-    orbitNumber.push_back(iEvent.id().orbitNumber());
-    storeNumber.push_back(iEvent.id().storeNumber());
+    isRealData.push_back(iEvent.isRealData());
+    bunchCrossing.push_back(iEvent.bunchCrossing());
+    orbitNumber.push_back(iEvent.orbitNumber());
+    storeNumber.push_back(iEvent.storeNumber());
 
 
     eT_p4_x.push_back(eTau.p4().x());
@@ -1517,10 +1517,10 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       run.push_back(iEvent.id().run());
       luminosityBlock.push_back(iEvent.id().luminosityBlock());
       event.push_back(iEvent.id().event());
-      isRealData.push_back(iEvent.id().isRealData());
-      bunchCrossing.push_back(iEvent.id().bunchCrossing());
-      orbitNumber.push_back(iEvent.id().orbitNumber());
-      storeNumber.push_back(iEvent.id().storeNumber());
+      isRealData.push_back(iEvent.isRealData());
+      bunchCrossing.push_back(iEvent.bunchCrossing());
+      orbitNumber.push_back(iEvent.orbitNumber());
+      storeNumber.push_back(iEvent.storeNumber());
 
 
       muT_p4_x.push_back(muTau.p4().x());
