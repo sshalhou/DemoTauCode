@@ -5,31 +5,62 @@ from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCan
 
 
 
-def pairCutsMuTau(chain, index):
+def pairCutsMuTau(chain, index, verbose):
   returnVal = True
+  failChain = {}
+  passChain = {}
   if chain.muT_sumCharge[index] != 0:
     returnVal = False
-    return returnVal
+    failChain['sumCharge'] = False
+  else:
+    passChain['sumCharge'] = True
+
   if chain.muT_DR[index] <= 0.5:
     returnVal = False
-    return returnVal
+    failChain['DR'] = False
+  else:
+    passChain['DR'] = True
+
   if chain.muT_passesTriLeptonVeto[index] is not True:
     returnVal = False
-    return returnVal
+    failChain['passesTriLeptonVeto'] = False
+  else:
+    passChain['passesTriLeptonVeto'] = True
+  if verbose:
+    if len(passChain) > 0:
+      print "passed cuts = ",passChain
+    if len(failChain) > 0:
+      print "failed cuts = ",failChain
   return returnVal;
 
-def pairCutsETau(chain, index):
+def pairCutsETau(chain, index, verbose):
   returnVal = True
+  failChain = {}
+  passChain = {}
   if chain.eT_sumCharge[index] != 0:
     returnVal = False
-    return returnVal
+    failChain['sumCharge'] = False
+  else:
+    passChain['sumCharge'] = True
+
   if chain.eT_DR[index] <= 0.5:
     returnVal = False
-    return returnVal
+    failChain['DR'] = False
+  else:
+    passChain['DR'] = True
+
   if chain.eT_passesTriLeptonVeto[index] is not True:
     returnVal = False
-    return returnVal
+    failChain['passesTriLeptonVeto'] = False
+  else:
+    passChain['passesTriLeptonVeto'] = True
+  if verbose:
+    if len(passChain) > 0:
+      print "passed cuts = ",passChain
+    if len(failChain) > 0:
+      print "failed cuts = ",failChain
   return returnVal;
+
 
 ##############
 # in cases with

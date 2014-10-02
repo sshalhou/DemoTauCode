@@ -4,6 +4,21 @@ import os
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
 
 
+def embeddedZTauTauTrigForETau(chain, index, Verbose):
+  returnVal = False
+  if Verbose:
+    print 'checking passNonTopEmbeddedTriggerAndMass50 returns ', chain.eT_passNonTopEmbeddedTriggerAndMass50[index]
+  if chain.eT_passNonTopEmbeddedTriggerAndMass50[index] is True:
+    returnVal = True
+  return returnVal;
+
+def embeddedZTauTauTrigForMuTau(chain, index, Verbose):
+  returnVal = False
+  if Verbose:
+    print 'checking passNonTopEmbeddedTriggerAndMass50 returns ', chain.muT_passNonTopEmbeddedTriggerAndMass50[index]
+  if chain.muT_passNonTopEmbeddedTriggerAndMass50[index] is True:
+    returnVal = True
+  return returnVal;
 
 def muonTrigger(chain, index, useNewTriggers):
   returnVal = False
