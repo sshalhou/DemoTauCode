@@ -432,7 +432,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
       NSVfitStandalone::Vector NSVrawMET = mvaMETpf.momentum();
       math::PtEtaPhiMLorentzVector rawMET(mvaMETpf.pt(),0.0,mvaMETpf.phi(),0.0);
 
-      if((tau.passFullId_muTau() && electron.passFullId()) || doNotRequireFullIdForLeptons_)
+      if((tau.passFullId_eTau() && electron.passFullId()) || doNotRequireFullIdForLeptons_)
       {
 
 
