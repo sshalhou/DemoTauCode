@@ -356,7 +356,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
       const TupleTau tau =   ((*taus)[j]);
 
-      if((tau.passFullId_muTau() && electron.passFullId()) || doNotRequireFullIdForLeptons_)
+      if((tau.passFullId_eTau() && electron.passFullId()) || doNotRequireFullIdForLeptons_)
       {
 
         if(tau.p4().pt()+electron.p4().pt() >= max_pt)
@@ -849,11 +849,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
           // calculate SVFit mass without recoil met corr.
-          NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
-          algoRaw.addLogM(false);
+          //NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
+          //algoRaw.addLogM(false);
           //algoRaw.integrateMarkovChain();
-          algoRaw.integrateVEGAS();
-          CurrentElectronTau.set_rawSVFitMass(algoRaw.getMass());
+          //algoRaw.integrateVEGAS();
+          //CurrentElectronTau.set_rawSVFitMass(algoRaw.getMass());
 
 
 
