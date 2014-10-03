@@ -16,7 +16,7 @@
 // with a dielectron pair
 
 using namespace pat;
-
+using namespace reco::isodeposit;
 
 DiElectronFilter::DiElectronFilter(const edm::ParameterSet & iConfig) {
   electronSource_     = iConfig.getParameter<edm::InputTag>( "electronSource" );
