@@ -64,7 +64,7 @@ def tauID_eTau(chain, index, printCutValues):
     if len(failChain) > 0:
       print "failed cuts = ",failChain
 
-  return returnVal;
+  return returnVal
 
 
 
@@ -128,4 +128,4 @@ def tauID_muTau(chain, index, printCutValues):
     if len(failChain) > 0:
       print "failed cuts = ",failChain
 
-  return returnVal;
+  return returnVal

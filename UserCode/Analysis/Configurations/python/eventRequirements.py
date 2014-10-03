@@ -31,7 +31,7 @@ def pairCutsMuTau(chain, index, verbose):
       print "passed cuts = ",passChain
     if len(failChain) > 0:
       print "failed cuts = ",failChain
-  return returnVal;
+  return returnVal
 
 def pairCutsETau(chain, index, verbose):
   returnVal = True
@@ -59,7 +59,7 @@ def pairCutsETau(chain, index, verbose):
       print "passed cuts = ",passChain
     if len(failChain) > 0:
       print "failed cuts = ",failChain
-  return returnVal;
+  return returnVal
 
 
 ##############

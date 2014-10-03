@@ -10,7 +10,7 @@ def embeddedZTauTauTrigForETau(chain, index, Verbose):
     print 'checking passNonTopEmbeddedTriggerAndMass50 returns ', chain.eT_passNonTopEmbeddedTriggerAndMass50[index]
   if chain.eT_passNonTopEmbeddedTriggerAndMass50[index] is True:
     returnVal = True
-  return returnVal;
+  return returnVal
 
 def embeddedZTauTauTrigForMuTau(chain, index, Verbose):
   returnVal = False
@@ -18,7 +18,7 @@ def embeddedZTauTauTrigForMuTau(chain, index, Verbose):
     print 'checking passNonTopEmbeddedTriggerAndMass50 returns ', chain.muT_passNonTopEmbeddedTriggerAndMass50[index]
   if chain.muT_passNonTopEmbeddedTriggerAndMass50[index] is True:
     returnVal = True
-  return returnVal;
+  return returnVal
 
 def muonTrigger(chain, index, useNewTriggers):
   returnVal = False
@@ -28,7 +28,7 @@ def muonTrigger(chain, index, useNewTriggers):
     returnVal = True
   if chain.muT_muon_has_HltMatchMu24[index] is True and useNewTriggers is True:
     returnVal = True
-  return returnVal;
+  return returnVal
 
 def tauTriggerForMuTau(chain, index, useNewTriggers):
   returnVal = False
@@ -38,7 +38,7 @@ def tauTriggerForMuTau(chain, index, useNewTriggers):
     returnVal = True
   if chain.muT_tau_has_HltMatchMu24[index] is True and useNewTriggers is True:
     returnVal = True
-  return returnVal;
+  return returnVal
 
 def electronTrigger(chain, index, useNewTriggers):
   returnVal = False
@@ -48,7 +48,7 @@ def electronTrigger(chain, index, useNewTriggers):
     returnVal = True
   if chain.eT_ele_has_HltMatchEle27[index] is True and useNewTriggers is True:
     returnVal = True
-  return returnVal;
+  return returnVal
 
 def tauTriggerForETau(chain, index, useNewTriggers):
   returnVal = False
@@ -58,4 +58,4 @@ def tauTriggerForETau(chain, index, useNewTriggers):
     returnVal = True
   if chain.eT_tau_has_HltMatchEle27[index] is True and useNewTriggers is True:
     returnVal = True
-  return returnVal;
+  return returnVal

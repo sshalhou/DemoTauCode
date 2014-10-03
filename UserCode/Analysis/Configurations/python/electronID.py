@@ -78,4 +78,4 @@ def electronID(chain, index, printCutValues):
     if len(failChain) > 0:
       print "failed cuts = ",failChain
 
-  return returnVal;
+  return returnVal
