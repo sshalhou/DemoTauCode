@@ -62,7 +62,9 @@ Implementation:
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
-
+#include "CondFormats/JetMETObjects/interface/JetCorrectionUncertainty.h"
+#include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
 
 
 
@@ -885,6 +887,26 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           const pat::Jet & patjet = jets->at(i);
           float mva   = (*puJetIdMVA)[jets->refAt(i)];
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
+
+
+        //////////////////////////////
+        // want to obtain the JEC shift
+        ///////////////////////////////
+
+        edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
+        iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
+        JetCorrectorParameters const & JetCorPar = (*JetCorParColl)["Uncertainty"];
+        JetCorrectionUncertainty *jecUnc = new JetCorrectionUncertainty(JetCorPar);
+
+        JetCorrectionUncertainty* jecUnc = new JetCorrectionUncertainty(param);
+        jecUnc->setJetEta(patjet.eta());
+        jecUnc->setJetPt(patjet.pt());
+        float shift  = deltaJEC->getUncertainty( true );
+        std::cout<<" the JEC shift is "<<shift<<std::endl;
+        delete jecUnc;
+
+        ////////////////////////////////
+
 
           bool passes_id = 1;
 
