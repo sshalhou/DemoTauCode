@@ -884,6 +884,22 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
+        /////////////
+        // setup JEC
+
+        int number_of_passingJetsUP = 0;
+        int number_of_btagged_passingJetsUP = 0;
+        int number_of_passingJetsDOWN = 0;
+        int number_of_btagged_passingJetsDOWN = 0;
+
+        edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
+        iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
+        JetCorrectorParameters const & JetCorPar = (*JetCorParColl)["Uncertainty"];
+        JetCorrectionUncertainty jecUnc(JetCorPar);
+
+        //////
+        // loop over jets
+
         for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
         //for ( unsigned int i=0; i<jets->size(); ++i )
         {
@@ -897,15 +913,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         // want to obtain the JEC shift
         ///////////////////////////////
 
-        edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
-        iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
-        JetCorrectorParameters const & JetCorPar = (*JetCorParColl)["Uncertainty"];
-        JetCorrectionUncertainty *jecUnc = new JetCorrectionUncertainty(JetCorPar);
-        jecUnc->setJetEta(patjet.eta());
-        jecUnc->setJetPt(patjet.pt());
-        float shift  = jecUnc->getUncertainty( true );
+
+        jecUnc.setJetEta(patjet.eta());
+        jecUnc.setJetPt(patjet.pt());
+        float shift  = jecUnc.getUncertainty( true );
         std::cout<<" the JEC shift is "<<shift<<std::endl;
-        delete jecUnc;
 
         ////////////////////////////////
 
