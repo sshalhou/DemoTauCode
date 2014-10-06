@@ -12,7 +12,6 @@ def tauID_eTau(chain, index, printCutValues):
   tau = {}
   Lvec = TLorentzVector(0,0,0,0)
   Lvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
-  Lvec = Lvec
   tau['pt'] = Lvec.Pt()
   if (Lvec.Pt()>30) is False:
     returnVal = False

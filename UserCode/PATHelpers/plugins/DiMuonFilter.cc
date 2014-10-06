@@ -74,6 +74,7 @@ bool DiMuonFilter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup) {
   /////////////////////////
 
   const reco::Vertex & primary_vertex = vertices->at(primary_vertex_indx);
+  const reco::Vertex & first_vertex = vertices->at(0);
 
 
 
@@ -171,7 +172,20 @@ for(unsigned int i = 0; i <vetos2012PFIdPUCharged.size(); i++) delete vetos2012P
     if(!(muon->isTrackerMuon())) passAllCuts = 0;
     if(!(muon->p4().pt()>15)) passAllCuts = 0;
     if(!(fabs(muon->p4().eta())<2.4)) passAllCuts = 0;
-    if(!(fabs(muon->muonBestTrack()->dz(primary_vertex.position())) < 0.2)) passAllCuts = 0;
+
+    double dz = 1000.0;
+    double dxy = 1000.0;
+
+    if(!muon->innerTrack().isNull())
+    {
+      dz = muon->innerTrack()->dz(first_vertex.position());
+      dxy = muon->innerTrack()->dxy(first_vertex.position());
+
+    }
+
+    if(!(fabs(dz) < 0.2)) passAllCuts = 0;
+
+
     if(!(relativeIsolation_DR4 < 0.3)) passAllCuts = 0;
 
 

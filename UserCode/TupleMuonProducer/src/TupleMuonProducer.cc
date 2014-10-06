@@ -408,7 +408,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // store the pdgId (from PF)
 
-    CurrentMuon.set_PFpdgId(muon->PFpdgId());
+    CurrentMuon.set_PFpdgId(muon->pdgId());
 
     // store additional parameters related to track/vertex & tight ID
     // must check for these tracks before calling
