@@ -917,23 +917,57 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         jecUnc.setJetEta(patjet.eta());
         jecUnc.setJetPt(patjet.pt());
         float shift  = jecUnc.getUncertainty( true );
-        std::cout<<" the JEC shift is "<<shift<<std::endl;
+        float shift_up = 1+shift;
+        float shift_down = 1-shift;
+        std::cout<<" the JEC shift is "<<shift_down<<" "<<shift_up<<std::endl;
+
+
+        //////////////////////////
+        // check JEC indep stuff 1st
+
+        bool passes_id = 1;
+
+        if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+        if(passes_id==1)
+        {
+          retpf.set(false);
+          if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
+        }
+
+        ////////////////////////
+        // now check the JEC dep stuff
+
+        bool passes_id_NOM = 1;
+        LorentzVector jetNOM = patjet.p4();
+
+        if( !(jetNOM.pt()>20) ) passes_id_NOM = 0;
+        if( !( fabs(jetNOM.eta())<4.7) ) passes_id_NOM = 0;
+        if( !(deltaR(electron.p4(), jetNOM.p4()) > 0.3)) passes_id_NOM = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetNOM.p4()) > 0.3)) passes_id_NOM = 0;
+
+        bool passes_id_UP = 1;
+        LorentzVector jetUP = patjet.p4()*shift_up;
+
+        if( !(jetUP.pt()>20) ) passes_id_UP = 0;
+        if( !( fabs(jetUP.eta())<4.7) ) passes_id_UP = 0;
+        if( !(deltaR(electron.p4(), jetUP.p4()) > 0.3)) passes_id_UP = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetUP.p4()) > 0.3)) passes_id_UP = 0;
+
+
+        bool passes_id_DOWN = 1;
+        LorentzVector jetDOWN = patjet.p4()*shift_down;
+
+        if( !(jetDOWN.pt()>20) ) passes_id_DOWN = 0;
+        if( !( fabs(jetDOWN.eta())<4.7) ) passes_id_DOWN = 0;
+        if( !(deltaR(electron.p4(), jetDOWN.p4()) > 0.3)) passes_id_DOWN = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetDOWN.p4()) > 0.3)) passes_id_DOWN = 0;
 
         ////////////////////////////////
 
+        std::cout<<" passes nom, up, dn "<<passes_id_NOM<<" "<<passes_id_UP<<" "<<passes_id_DOWN<<"\n";
 
-          bool passes_id = 1;
 
-          if( !(patjet.pt()>20) ) passes_id = 0;
-          if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
-          if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
-          if( !(deltaR(electron.p4(), patjet.p4()) > 0.3)) passes_id = 0;
-          if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
-          if(passes_id==1)
-          {
-            retpf.set(false);
-            if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
-          }
+
 
           if(passes_id == 1)
           {
