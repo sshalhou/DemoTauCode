@@ -924,6 +924,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         //////////////////////////
         // check JEC indep stuff 1st
+        // if these fail, continue on to the
+        // next jet
 
         bool passes_id = 1;
 
@@ -933,6 +935,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           retpf.set(false);
           if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
         }
+
+        if(!passes_id) continue;
 
         ////////////////////////
         // now check the JEC dep stuff
@@ -968,8 +972,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
 
+        ////////////////////////////////////////////
+        // count jets and btags under nominal JEC
+        ////////////////////////////////////////////
 
-          if(passes_id == 1)
+          if(passes_id == 1 && passes_id_NOM)
           {
 
             if(patjet.pt()>30)
@@ -1013,10 +1020,80 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
           }
+          ///////////////////////////////////////
 
+        ////////////////////////////////////////////
+        // count jets and btags under UP JEC
+        ////////////////////////////////////////////
+
+          if(passes_id == 1 && passes_id_UP)
+          {
+
+            if(jetUP.pt()>30)
+            {
+              number_of_passingJetsUP++;
+
+            }
+
+
+            bool isbtagged = btagSFtool.isbtagged(
+            jetUP.pt(), jetUP.eta(),
+            patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
+            patjet.partonFlavour(),
+            iEvent.isRealData(),
+            0,0,1);
+
+
+
+
+            if(fabs(jetUP.eta())<2.4 && isbtagged)
+            {
+              number_of_btagged_passingJetsUP++;
+            }
+
+
+          }
+          ///////////////////////////////////////
+
+
+      ////////////////////////////////////////////
+      // count jets and btags under DOWN JEC
+      ////////////////////////////////////////////
+
+        if(passes_id == 1 && passes_id_DOWN)
+        {
+
+          if(jetDOWN.pt()>30)
+          {
+            number_of_passingJetsDOWN++;
+
+          }
+
+
+          bool isbtagged = btagSFtool.isbtagged(
+          jetDOWN.pt(), jetDOWN.eta(),
+          patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
+          patjet.partonFlavour(),
+          iEvent.isRealData(),
+          0,0,1);
+
+
+
+
+          if(fabs(jetDOWN.eta())<2.4 && isbtagged)
+          {
+            number_of_btagged_passingJetsDOWN++;
+          }
 
 
         }
+        ///////////////////////////////////////
+
+
+        }
+
+        std::cout<<" PASS "<<number_of_passingJetsDOWN<<" "<<number_of_passingJets<<" "<<number_of_passingJetsUP<<std::endl;
+        std::cout<<" BTAGS "<<number_of_btagged_passingJetsDOWN<<" "<<number_of_btagged_passingJets<<" "<<number_of_btagged_passingJetsUP<<std::endl;
 
 
 
