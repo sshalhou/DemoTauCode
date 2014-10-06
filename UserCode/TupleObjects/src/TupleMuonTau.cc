@@ -116,11 +116,11 @@ int TupleMuonTau::njetsUP() const {return m_njetsUP;}
 void TupleMuonTau::set_nbjetsUP(int nbjetsUP_) {m_nbjetsUP = nbjetsUP_;}
 int TupleMuonTau::nbjetsUP() const {return m_nbjetsUP;}
 
-void TDOWNleMuonTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
-int TDOWNleMuonTau::njetsDOWN() const {return m_njetsDOWN;}
+void TupleMuonTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
+int TupleMuonTau::njetsDOWN() const {return m_njetsDOWN;}
 
-void TDOWNleMuonTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
-int TDOWNleMuonTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
+void TupleMuonTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
+int TupleMuonTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
 
 
 void TupleMuonTau::set_jet1P4(LorentzVector jet1P4_) {m_jet1P4 = jet1P4_;}

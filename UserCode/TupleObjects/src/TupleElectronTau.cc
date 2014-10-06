@@ -114,11 +114,11 @@ int TupleElectronTau::njetsUP() const {return m_njetsUP;}
 void TupleElectronTau::set_nbjetsUP(int nbjetsUP_) {m_nbjetsUP = nbjetsUP_;}
 int TupleElectronTau::nbjetsUP() const {return m_nbjetsUP;}
 
-void TDOWNleElectronTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
-int TDOWNleElectronTau::njetsDOWN() const {return m_njetsDOWN;}
+void TupleElectronTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
+int TupleElectronTau::njetsDOWN() const {return m_njetsDOWN;}
 
-void TDOWNleElectronTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
-int TDOWNleElectronTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
+void TupleElectronTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
+int TupleElectronTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
 
 
 
