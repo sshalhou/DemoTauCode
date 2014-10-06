@@ -898,8 +898,6 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
         JetCorrectorParameters const & JetCorPar = (*JetCorParColl)["Uncertainty"];
         JetCorrectionUncertainty *jecUnc = new JetCorrectionUncertainty(JetCorPar);
-
-        JetCorrectionUncertainty* jecUnc = new JetCorrectionUncertainty(param);
         jecUnc->setJetEta(patjet.eta());
         jecUnc->setJetPt(patjet.pt());
         float shift  = deltaJEC->getUncertainty( true );
