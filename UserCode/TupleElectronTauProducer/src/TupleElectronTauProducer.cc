@@ -68,6 +68,7 @@ Implementation:
 #include "JetMETCorrections/Objects/interface/JetCorrectionsRecord.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "JetMETCorrections/Objects/interface/JetCorrector.h"
+#include "FWCore/Framework/interface/ESHandle.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
