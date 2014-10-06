@@ -900,7 +900,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         JetCorrectionUncertainty *jecUnc = new JetCorrectionUncertainty(JetCorPar);
         jecUnc->setJetEta(patjet.eta());
         jecUnc->setJetPt(patjet.pt());
-        float shift  = deltaJEC->getUncertainty( true );
+        float shift  = jecUnc->getUncertainty( true );
         std::cout<<" the JEC shift is "<<shift<<std::endl;
         delete jecUnc;
 
