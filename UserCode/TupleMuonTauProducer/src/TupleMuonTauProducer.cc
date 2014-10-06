@@ -64,6 +64,15 @@ Implementation:
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 
+#include "CondFormats/JetMETObjects/interface/JetCorrectionUncertainty.h"
+#include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
+#include "JetMETCorrections/Objects/interface/JetCorrectionsRecord.h"
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "JetMETCorrections/Objects/interface/JetCorrector.h"
+#include "FWCore/Framework/interface/ESHandle.h"
+#include "PhysicsTools/PatAlgos/plugins/JetCorrFactorsProducer.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
