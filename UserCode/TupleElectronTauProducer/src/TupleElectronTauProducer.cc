@@ -67,7 +67,7 @@ Implementation:
 #include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
 #include "JetMETCorrections/Objects/interface/JetCorrectionsRecord.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
-
+#include "JetMETCorrections/Objects/interface/JetCorrector.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
