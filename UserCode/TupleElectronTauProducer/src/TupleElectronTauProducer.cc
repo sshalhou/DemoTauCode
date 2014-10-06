@@ -66,7 +66,7 @@ Implementation:
 #include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
 #include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
 #include "JetMETCorrections/Objects/interface/JetCorrectionsRecord.h"
-
+#include "FWCore/ServiceRegistry/interface/Service.h"
 
 
 
