@@ -942,16 +942,16 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         if( !(jetNOM.pt()>20) ) passes_id_NOM = 0;
         if( !( fabs(jetNOM.eta())<4.7) ) passes_id_NOM = 0;
-        if( !(deltaR(electron.p4(), jetNOM.p4()) > 0.3)) passes_id_NOM = 0;
-        if( !(deltaR(tau.pfJetRefP4(), jetNOM.p4()) > 0.3)) passes_id_NOM = 0;
+        if( !(deltaR(electron.p4(), jetNOM > 0.3)) passes_id_NOM = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetNOM > 0.3)) passes_id_NOM = 0;
 
         bool passes_id_UP = 1;
         LorentzVector jetUP = patjet.p4()*shift_up;
 
         if( !(jetUP.pt()>20) ) passes_id_UP = 0;
         if( !( fabs(jetUP.eta())<4.7) ) passes_id_UP = 0;
-        if( !(deltaR(electron.p4(), jetUP.p4()) > 0.3)) passes_id_UP = 0;
-        if( !(deltaR(tau.pfJetRefP4(), jetUP.p4()) > 0.3)) passes_id_UP = 0;
+        if( !(deltaR(electron.p4(), jetUP > 0.3)) passes_id_UP = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetUP > 0.3)) passes_id_UP = 0;
 
 
         bool passes_id_DOWN = 1;
@@ -959,8 +959,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         if( !(jetDOWN.pt()>20) ) passes_id_DOWN = 0;
         if( !( fabs(jetDOWN.eta())<4.7) ) passes_id_DOWN = 0;
-        if( !(deltaR(electron.p4(), jetDOWN.p4()) > 0.3)) passes_id_DOWN = 0;
-        if( !(deltaR(tau.pfJetRefP4(), jetDOWN.p4()) > 0.3)) passes_id_DOWN = 0;
+        if( !(deltaR(electron.p4(), jetDOWN) > 0.3)) passes_id_DOWN = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetDOWN) > 0.3)) passes_id_DOWN = 0;
 
         ////////////////////////////////
 
