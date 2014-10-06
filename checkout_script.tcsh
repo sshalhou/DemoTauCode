@@ -27,12 +27,7 @@ rm -rf TauAnalysis-CandidateTools-V00-02-03s
 
 echo "copying MVA PF MET code from Phil Harris : "
 ################################################
-cp -r /uscms/home/shalhout/public/RecoMET .
-#mkdir $CMSSW_BASE/src/RecoMET
-#cp -r  /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET .
-#cp /afs/cern.ch/work/p/pharris/public/tmp/CMSSW_5_3_13/src/RecoMET/METPUSubtraction/python/mvaPFMET_leptons_cff.py
-#$CMSSW_BASE/src/RecoMET/METPUSubtraction/python/.
-#cp /afs/cern.ch/user/p/pharris/public/MVAMetUpdate/*Sep*.root $CMSSW_BASE/src/RecoMET/METPUSubtraction/data/
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/RecoMET .
 ################################################
 
 
@@ -43,8 +38,8 @@ wget http://web.mit.edu/~pcharris/www/RecoilCorrector_v7.tgz RecoilCorrector_v7.
 tar -xzvf RecoilCorrector_v7.tgz
 rm -rf UserCode/RecoilCorrector/recoilfits
 mv RecoilCorrector_v7/recoilfits UserCode/RecoilCorrector/recoilfits
-cp /uscms/home/shalhout/public/LLR_recoilfits/*RR*.root UserCode/RecoilCorrector/recoilfits/.
-cp /uscms/home/shalhout/public/53_Dec2012/*root ./RecoMET/METPUSubtraction/data/.
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/LLR_recoilfits/*RR*.root UserCode/RecoilCorrector/recoilfits/.
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/53_Dec2012/*root ./RecoMET/METPUSubtraction/data/.
 rm -rf RecoilCorrector_v7
 rm -rf RecoilCorrector_v7.tgz
 ################################################
@@ -69,24 +64,24 @@ cd -
 echo " copy pile up jet ID configs "
 ################################################
 rm -rf RecoJets
-cp -r /uscms/home/shalhout/public/RecoJets .
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/RecoJets .
 rm -rf DataFormats/JetReco
-cp -r /uscms/home/shalhout/public/JetReco_v2 DataFormats/JetReco
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/JetReco_v2 DataFormats/JetReco
 rm -rf DataFormats/METReco
-cp -r /uscms/home/shalhout/public/METReco_v2 DataFormats/METReco
-cp -r /uscms/home/shalhout/public/SelectorUtils PhysicsTools/.
-cp -r /uscms/home/shalhout/public/PhysicsTools_Utilities PhysicsTools/Utilities
-cp -r /uscms/home/shalhout/public/TauSpinnerInterface TauSpinnerInterface
-cp /uscms/home/shalhout/public/mvaPFMEt_53_Dec2012.db RecoMET/METPUSubtraction/data/.
-cp -r /uscms/home/shalhout/public/HiggsPtReweightFiles UserCode/.
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/METReco_v2 DataFormats/METReco
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/SelectorUtils PhysicsTools/.
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/PhysicsTools_Utilities PhysicsTools/Utilities
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/TauSpinnerInterface TauSpinnerInterface
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/mvaPFMEt_53_Dec2012.db RecoMET/METPUSubtraction/data/.
+cp -r /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/HiggsPtReweightFiles UserCode/.
 ################################################
 
 ehco "getting pile-up correction root files "
 ####################################################
 
 mkdir UserCode/PileUpReWeightFiles
-cp /afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/MC_Summer12_PU_S10-600bins.root UserCode/PileUpReWeightFiles/.
-cp /afs/cern.ch/user/a/agilbert/public/HTT_Pileup/13-09-13/Data_Pileup_2012_ReRecoPixel-600bins.root UserCode/PileUpReWeightFiles/.
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/MC_Summer12_PU_S10-600bins.root UserCode/PileUpReWeightFiles/.
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/Data_Pileup_2012_ReRecoPixel-600bins.root UserCode/PileUpReWeightFiles/.
 ####################################################
 
 echo "setting up JEC and uncertainty "
@@ -112,3 +107,6 @@ cp UserCode/TupleMuonProducer/BuildFile.xml RunTimeDataInput/.
 cp -r UserCode/HiggsPtReweightFiles RunTimeDataInput/data/.
 cp -r UserCode/PileUpReWeightFiles RunTimeDataInput/data/.
 cp -r UserCode/RecoilCorrector/recoilfits RunTimeDataInput/data/.
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/CustomVersions/PFMETProducerMVA.h ./RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h
+
+
