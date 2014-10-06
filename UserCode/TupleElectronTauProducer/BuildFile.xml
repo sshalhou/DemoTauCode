@@ -5,5 +5,9 @@
 <use name="UserCode/TupleObjects"/>
 <use name="TauAnalysis/CandidateTools"/>
 <use name="JetMETCorrections/Objects"/>
+<use   name="CommonTools/UtilAlgos"/>
+<use   name="CondFormats/JetMETObjects"/>
+<use   name="JetMETCorrections/Objects"/>
+<use   name="fastjet"/>
 <use name="rootrflx"/>
 <flags EDM_PLUGIN="1"/>
