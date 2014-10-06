@@ -870,43 +870,106 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
 
+        /////////////
+        // setup JEC
+
+        int number_of_passingJetsUP = 0;
+        int number_of_btagged_passingJetsUP = 0;
+        int number_of_passingJetsDOWN = 0;
+        int number_of_btagged_passingJetsDOWN = 0;
+
+        edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
+        iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
+        JetCorrectorParameters const & JetCorPar = (*JetCorParColl)["Uncertainty"];
+        JetCorrectionUncertainty jecUnc(JetCorPar);
+
+        //////
+        // loop over jets
+
         for ( unsigned int ii = 0; ii<goodIndices.size(); ++ii)
-        //        for ( unsigned int i=0; i<jets->size(); ++i )
+        //for ( unsigned int i=0; i<jets->size(); ++i )
         {
-
           unsigned int i = goodIndices[ii];
-
           const pat::Jet & patjet = jets->at(i);
           float mva   = (*puJetIdMVA)[jets->refAt(i)];
           int    idflag = (*puJetIdFlag)[jets->refAt(i)];
 
-          bool passes_id = 1;
+
+        //////////////////////////////
+        // want to obtain the JEC shift
+        ///////////////////////////////
+
+
+        jecUnc.setJetEta(patjet.eta());
+        jecUnc.setJetPt(patjet.pt());
+        float shift  = jecUnc.getUncertainty( true );
+        float shift_up = 1+shift;
+        float shift_down = 1-shift;
+        //std::cout<<" the JEC shift is "<<shift_down<<" "<<shift_up<<std::endl;
+
+
+        //////////////////////////
+        // check JEC indep stuff 1st
+        // if these fail, continue on to the
+        // next jet
+
+        bool passes_id = 1;
+
+        if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
+        if(passes_id==1)
+        {
+          retpf.set(false);
+          if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
+        }
+
+        if(!passes_id) continue;
+
+        ////////////////////////
+        // now check the JEC dep stuff
+
+        bool passes_id_NOM = 1;
+        LorentzVector jetNOM = patjet.p4();
+
+        if( !(jetNOM.pt()>20) ) passes_id_NOM = 0;
+        if( !( fabs(jetNOM.eta())<4.7) ) passes_id_NOM = 0;
+        if( !(deltaR(muon.p4(), jetNOM) > 0.3)) passes_id_NOM = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetNOM) > 0.3)) passes_id_NOM = 0;
+
+        bool passes_id_UP = 1;
+        LorentzVector jetUP = patjet.p4()*shift_up;
+
+        if( !(jetUP.pt()>20) ) passes_id_UP = 0;
+        if( !( fabs(jetUP.eta())<4.7) ) passes_id_UP = 0;
+        if( !(deltaR(muon.p4(), jetUP) > 0.3)) passes_id_UP = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetUP) > 0.3)) passes_id_UP = 0;
+
+
+        bool passes_id_DOWN = 1;
+        LorentzVector jetDOWN = patjet.p4()*shift_down;
+
+        if( !(jetDOWN.pt()>20) ) passes_id_DOWN = 0;
+        if( !( fabs(jetDOWN.eta())<4.7) ) passes_id_DOWN = 0;
+        if( !(deltaR(muon.p4(), jetDOWN) > 0.3)) passes_id_DOWN = 0;
+        if( !(deltaR(tau.pfJetRefP4(), jetDOWN) > 0.3)) passes_id_DOWN = 0;
+
+        ////////////////////////////////
+
+        //std::cout<<" passes nom, up, dn "<<passes_id_NOM<<" "<<passes_id_UP<<" "<<passes_id_DOWN<<"\n";
 
 
 
+        ////////////////////////////////////////////
+        // count jets and btags under nominal JEC
+        ////////////////////////////////////////////
 
-          if( !(patjet.pt()>20) ) passes_id = 0;
-          if( !( fabs(patjet.eta())<4.7) ) passes_id = 0;
-          if( !(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ))) passes_id = 0;
-          if( !(deltaR(muon.p4(), patjet.p4()) > 0.3)) passes_id = 0;
-          if( !(deltaR(tau.pfJetRefP4(), patjet.p4()) > 0.3)) passes_id = 0;
-          if(passes_id==1)
-          {
-
-            retpf.set(false);
-            if( !pfjetIDLoose( patjet, retpf ) ) passes_id = 0;
-
-          }
-
-
-          if(passes_id == 1)
+          if(passes_id == 1 && passes_id_NOM)
           {
 
             if(patjet.pt()>30)
             {
               number_of_passingJets++;
-            }
 
+            }
             /////////////
             // figure out the 1st and 2nd ranked jets
             // by pt
@@ -925,12 +988,15 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
             }
 
+
             bool isbtagged = btagSFtool.isbtagged(
             patjet.pt(), patjet.eta(),
             patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
             patjet.partonFlavour(),
             iEvent.isRealData(),
             0,0,1);
+
+
 
 
             if(fabs(patjet.eta())<2.4 && isbtagged)
@@ -940,10 +1006,80 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
           }
+          ///////////////////////////////////////
 
+        ////////////////////////////////////////////
+        // count jets and btags under UP JEC
+        ////////////////////////////////////////////
+
+          if(passes_id == 1 && passes_id_UP)
+          {
+
+            if(jetUP.pt()>30)
+            {
+              number_of_passingJetsUP++;
+
+            }
+
+
+            bool isbtagged = btagSFtool.isbtagged(
+            jetUP.pt(), jetUP.eta(),
+            patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
+            patjet.partonFlavour(),
+            iEvent.isRealData(),
+            0,0,1);
+
+
+
+
+            if(fabs(jetUP.eta())<2.4 && isbtagged)
+            {
+              number_of_btagged_passingJetsUP++;
+            }
+
+
+          }
+          ///////////////////////////////////////
+
+
+        ////////////////////////////////////////////
+        // count jets and btags under DOWN JEC
+        ////////////////////////////////////////////
+
+        if(passes_id == 1 && passes_id_DOWN)
+        {
+
+          if(jetDOWN.pt()>30)
+          {
+            number_of_passingJetsDOWN++;
+
+          }
+
+
+          bool isbtagged = btagSFtool.isbtagged(
+          jetDOWN.pt(), jetDOWN.eta(),
+          patjet.bDiscriminator("combinedSecondaryVertexBJetTags"),
+          patjet.partonFlavour(),
+          iEvent.isRealData(),
+          0,0,1);
+
+
+
+
+          if(fabs(jetDOWN.eta())<2.4 && isbtagged)
+          {
+            number_of_btagged_passingJetsDOWN++;
+          }
 
 
         }
+        ///////////////////////////////////////
+
+
+        }
+
+      //  std::cout<<" PASS "<<number_of_passingJetsDOWN<<" "<<number_of_passingJets<<" "<<number_of_passingJetsUP<<std::endl;
+      //  std::cout<<" BTAGS "<<number_of_btagged_passingJetsDOWN<<" "<<number_of_btagged_passingJets<<" "<<number_of_btagged_passingJetsUP<<std::endl;
 
 
 
@@ -953,6 +1089,10 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         CurrentMuonTau.set_njets(number_of_passingJets);
         CurrentMuonTau.set_nbjets(number_of_btagged_passingJets);
+        CurrentMuonTau.set_njetsUP(number_of_passingJetsUP);
+        CurrentMuonTau.set_nbjetsUP(number_of_btagged_passingJetsUP);
+        CurrentMuonTau.set_njetsDOWN(number_of_passingJetsDOWN);
+        CurrentMuonTau.set_nbjetsDOWN(number_of_btagged_passingJetsDOWN);
 
 
         //if(jets->size()>0)

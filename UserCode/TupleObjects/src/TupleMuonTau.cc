@@ -23,6 +23,10 @@ TupleMuonTau::TupleMuonTau()
   m_isGoodTriggerPair = 0;
   m_njets = -999;
   m_nbjets = -999;
+  m_njetsUP = -999;
+  m_nbjetsUP = -999;
+  m_njetsDOWN = -999;
+  m_nbjetsDOWN = -999;
   m_jet1P4.SetXYZT(NAN,NAN,NAN,NAN);
   m_jet1RawP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_jet1IDMVA = NAN;
@@ -105,6 +109,18 @@ int TupleMuonTau::njets() const {return m_njets;}
 
 void TupleMuonTau::set_nbjets(int nbjets_) {m_nbjets = nbjets_;}
 int TupleMuonTau::nbjets() const {return m_nbjets;}
+
+void TupleMuonTau::set_njetsUP(int njetsUP_) {m_njetsUP = njetsUP_;}
+int TupleMuonTau::njetsUP() const {return m_njetsUP;}
+
+void TupleMuonTau::set_nbjetsUP(int nbjetsUP_) {m_nbjetsUP = nbjetsUP_;}
+int TupleMuonTau::nbjetsUP() const {return m_nbjetsUP;}
+
+void TDOWNleMuonTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
+int TDOWNleMuonTau::njetsDOWN() const {return m_njetsDOWN;}
+
+void TDOWNleMuonTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
+int TDOWNleMuonTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
 
 
 void TupleMuonTau::set_jet1P4(LorentzVector jet1P4_) {m_jet1P4 = jet1P4_;}

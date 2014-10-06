@@ -919,7 +919,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         float shift  = jecUnc.getUncertainty( true );
         float shift_up = 1+shift;
         float shift_down = 1-shift;
-        std::cout<<" the JEC shift is "<<shift_down<<" "<<shift_up<<std::endl;
+        //std::cout<<" the JEC shift is "<<shift_down<<" "<<shift_up<<std::endl;
 
 
         //////////////////////////
@@ -968,7 +968,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         ////////////////////////////////
 
-        std::cout<<" passes nom, up, dn "<<passes_id_NOM<<" "<<passes_id_UP<<" "<<passes_id_DOWN<<"\n";
+        //std::cout<<" passes nom, up, dn "<<passes_id_NOM<<" "<<passes_id_UP<<" "<<passes_id_DOWN<<"\n";
 
 
 
@@ -1092,8 +1092,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         }
 
-        std::cout<<" PASS "<<number_of_passingJetsDOWN<<" "<<number_of_passingJets<<" "<<number_of_passingJetsUP<<std::endl;
-        std::cout<<" BTAGS "<<number_of_btagged_passingJetsDOWN<<" "<<number_of_btagged_passingJets<<" "<<number_of_btagged_passingJetsUP<<std::endl;
+        //std::cout<<" PASS "<<number_of_passingJetsDOWN<<" "<<number_of_passingJets<<" "<<number_of_passingJetsUP<<std::endl;
+        //std::cout<<" BTAGS "<<number_of_btagged_passingJetsDOWN<<" "<<number_of_btagged_passingJets<<" "<<number_of_btagged_passingJetsUP<<std::endl;
 
 
 
@@ -1103,8 +1103,10 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         CurrentElectronTau.set_njets(number_of_passingJets);
         CurrentElectronTau.set_nbjets(number_of_btagged_passingJets);
-
-
+        CurrentElectronTau.set_njetsUP(number_of_passingJetsUP);
+        CurrentElectronTau.set_nbjetsUP(number_of_btagged_passingJetsUP);
+        CurrentElectronTau.set_njetsDOWN(number_of_passingJetsDOWN);
+        CurrentElectronTau.set_nbjetsDOWN(number_of_btagged_passingJetsDOWN);
 
         if(jet1_index!=-999)
         //if(jets->size()>0)

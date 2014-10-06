@@ -47,6 +47,10 @@ public:
   void set_isGoodTriggerPair(bool);
   void set_njets(int);
   void set_nbjets(int);
+  void set_njetsUP(int);
+  void set_nbjetsUP(int);
+  void set_njetsDOWN(int);
+  void set_nbjetsDOWN(int);
   void set_jet1P4(LorentzVector);
   void set_jet1RawP4(LorentzVector);
   void set_jet1IDMVA(double);
@@ -95,6 +99,10 @@ public:
   bool isGoodTriggerPair() const;
   int njets() const;
   int nbjets() const;
+  int njetsUP() const;
+  int nbjetsUP() const;
+  int njetsDOWN() const;
+  int nbjetsDOWN() const;
   LorentzVector jet1P4() const;
   LorentzVector jet1RawP4() const;
   double jet1IDMVA() const;
@@ -141,6 +149,10 @@ private:
   bool m_isGoodTriggerPair;
   int m_njets;
   int m_nbjets;
+  int m_njetsUP;
+  int m_nbjetsUP;
+  int m_njetsDOWN;
+  int m_nbjetsDOWN;
   LorentzVector m_jet1P4;
   LorentzVector m_jet1RawP4;
   double m_jet1IDMVA;

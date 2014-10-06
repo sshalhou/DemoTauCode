@@ -23,6 +23,10 @@ TupleElectronTau::TupleElectronTau()
   m_isGoodTriggerPair = 0;
   m_njets = -999;
   m_nbjets = -999;
+  m_njetsUP = -999;
+  m_nbjetsUP = -999;
+  m_njetsDOWN = -999;
+  m_nbjetsDOWN = -999;
   m_jet1P4.SetXYZT(NAN,NAN,NAN,NAN);
   m_jet1RawP4.SetXYZT(NAN,NAN,NAN,NAN);
   m_jet1IDMVA = NAN;
@@ -103,6 +107,19 @@ int TupleElectronTau::njets() const {return m_njets;}
 
 void TupleElectronTau::set_nbjets(int nbjets_) {m_nbjets = nbjets_;}
 int TupleElectronTau::nbjets() const {return m_nbjets;}
+
+void TupleElectronTau::set_njetsUP(int njetsUP_) {m_njetsUP = njetsUP_;}
+int TupleElectronTau::njetsUP() const {return m_njetsUP;}
+
+void TupleElectronTau::set_nbjetsUP(int nbjetsUP_) {m_nbjetsUP = nbjetsUP_;}
+int TupleElectronTau::nbjetsUP() const {return m_nbjetsUP;}
+
+void TDOWNleElectronTau::set_njetsDOWN(int njetsDOWN_) {m_njetsDOWN = njetsDOWN_;}
+int TDOWNleElectronTau::njetsDOWN() const {return m_njetsDOWN;}
+
+void TDOWNleElectronTau::set_nbjetsDOWN(int nbjetsDOWN_) {m_nbjetsDOWN = nbjetsDOWN_;}
+int TDOWNleElectronTau::nbjetsDOWN() const {return m_nbjetsDOWN;}
+
 
 
 void TupleElectronTau::set_jet1P4(LorentzVector jet1P4_) {m_jet1P4 = jet1P4_;}
