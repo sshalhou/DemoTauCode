@@ -22,7 +22,8 @@ TupleMuon::TupleMuon()
   m_relativeIso_DR3 = NAN;
   m_isPFIsolationValid = 0;
   m_charge = -999;
-  m_pdgId = -999;
+  m_PFpdgId = -999;
+  m_GENpdgId = -999;
   m_normalizedChi2 = NAN;
   m_numberOfValidMuonHits = -999;
   m_numberOfMatchedStations = -999;
@@ -214,11 +215,15 @@ void TupleMuon::set_charge (int charge_)
   m_charge = charge_;
 }
 
-void TupleMuon::set_pdgId (int pdgId_)
+void TupleMuon::set_PFpdgId (int PFpdgId_)
 {
-  m_pdgId = pdgId_;
+  m_PFpdgId = PFpdgId_;
 }
 
+void TupleMuon::set_GENpdgId (int GENpdgId_)
+{
+  m_GENpdgId = GENpdgId_;
+}
 
 
 //////////////////
@@ -337,10 +342,16 @@ int TupleMuon::charge() const
   return m_charge;
 }
 
-int TupleMuon::pdgId() const
+int TupleMuon::PFpdgId() const
 {
-  return m_pdgId;
+  return m_PFpdgId;
 }
+
+int TupleMuon::GENpdgId() const
+{
+  return m_GENpdgId;
+}
+
 
 double TupleMuon::normalizedChi2() const { return m_normalizedChi2; }
 int TupleMuon::numberOfValidMuonHits() const { return m_numberOfValidMuonHits; }

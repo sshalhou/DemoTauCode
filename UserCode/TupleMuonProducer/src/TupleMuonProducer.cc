@@ -334,6 +334,12 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     if(muon->genLepton())
     {
       CurrentMuon.set_genP4(muon->genLepton()->p4());
+
+      ////////////////
+      //set_GENpdgId
+      ////////////////
+      CurrentMuon.set_GENpdgId(muon->genLepton()->pdgId());
+
     }
 
     // store selection summary booleans
@@ -400,9 +406,9 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     CurrentMuon.set_charge(muon->charge());
 
-    // store the pdgId (if !MC stores NAN)
+    // store the pdgId (from PF)
 
-    if(!iEvent.isRealData()) CurrentMuon.set_pdgId(muon->pdgId());
+    CurrentMuon.set_PFpdgId(muon->PFpdgId());
 
     // store additional parameters related to track/vertex & tight ID
     // must check for these tracks before calling

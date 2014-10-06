@@ -40,7 +40,8 @@ public:
   void set_isLooseMuon(bool);
   void set_isPFIsolationValid(bool);
   void set_charge(int);
-  void set_pdgId(int);
+  void set_PFpdgId(int);
+  void set_GENpdgId(int);
 
   void set_normalizedChi2(double);
   void set_numberOfValidMuonHits(int);
@@ -99,7 +100,8 @@ public:
   double relativeIso_DR3() const;
   bool   isPFIsolationValid() const;
   int    charge() const;
-  int    pdgId() const;
+  int PFpdgId() const;
+  int GENpdgId() const;
   double normalizedChi2() const;
   int    numberOfValidMuonHits() const;
   int    numberOfMatchedStations() const;
@@ -138,7 +140,8 @@ private:
   double m_relativeIso_DR3;
   bool   m_isPFIsolationValid;
   int    m_charge;
-  int    m_pdgId;
+  int m_PFpdgId;
+  int m_GENpdgId;
   double m_normalizedChi2;
   int    m_numberOfValidMuonHits;
   int    m_numberOfMatchedStations;
