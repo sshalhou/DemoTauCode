@@ -69,6 +69,12 @@ Implementation:
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "JetMETCorrections/Objects/interface/JetCorrector.h"
 #include "FWCore/Framework/interface/ESHandle.h"
+#include "PhysicsTools/PatAlgos/plugins/JetCorrFactorsProducer.h"
+
+
+
+#include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
