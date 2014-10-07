@@ -102,7 +102,7 @@ cd -
 ################################################
 
 mkdir RunTimeDataInput
-mdkir RunTimeDataInput/data
+mkdir RunTimeDataInput/data
 cp UserCode/TupleMuonProducer/BuildFile.xml RunTimeDataInput/.
 cp -r UserCode/HiggsPtReweightFiles RunTimeDataInput/data/.
 cp -r UserCode/PileUpReWeightFiles RunTimeDataInput/data/.
