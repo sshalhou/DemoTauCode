@@ -41,7 +41,7 @@ if os.path.isdir(crabJobLocation) is False:
 print "generated crab files will reside in ", crabJobLocation
 
 
-fileNameXML=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/test.xml"
+fileNameXML=os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/testSig.xml"
 print fileNameXML
 
 
@@ -124,14 +124,26 @@ for element in root.findall('Sample'):
     dateSuffix = dateSuffix.rstrip('\n')
 
     patTupleConfigName = crabJobLocation+"/PAT_"+OneWordName+"_"+dateSuffix+".py"
+    crabConfigName = crabJobLocation+"/crab_"+OneWordName+"_"+dateSuffix+".cfg"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
-    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v1/PAT_template.py"
+    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v2/PAT_template.py"
     CatCommand += ">> "+ patTupleConfigName
     os.system(CatCommand)
 
+    print "creating a crab cfg called = ", crabConfigName
+
+    crabCatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v2/crab_template.cfg"
+    crabCatCommand += ">> "+ crabConfigName
+    os.system(crabCatCommand)
+	
+
+
     # set parameters specific to the requested dataset
     # in the patTuple job config file
+
+    writeBR = "sed -i \'s/DUMMY_branchingFraction/"+"999.0"+"/g\'"+" "+patTupleConfigName
+    os.system(writeBR)
 
     writeSampleName = "sed -i \'s/DUMMY_SampleName/"+interested_in.replace("/","\/")+"/g\'"+" "+patTupleConfigName
     os.system(writeSampleName)
@@ -157,7 +169,45 @@ for element in root.findall('Sample'):
     writenevents = "sed -i \'s/DUMMY_numberEvents/"+nevents+"/g\'"+" "+patTupleConfigName
     os.system(writenevents)
 
+    CRABtotal_number_of_events = "sed -i \'s/DUMMY_total_number_of_events/"+nevents+"/g\'"+" "+crabConfigName
+    os.system(CRABtotal_number_of_events)
 
+    CRABnumber_of_jobs = "sed -i \'s/DUMMY_number_of_jobs/"+"450"+"/g\'"+" "+crabConfigName
+    os.system(CRABnumber_of_jobs)
+
+#    PSET = patTupleConfigName
+#    PSET = PSET[len(os.environ['CMSSW_BASE']+"/src"):]
+#    PSET = "	
+
+    CRABpset = "sed -i \'s/DUMMY_pset/"+patTupleConfigName.replace("/","\/")+"/g\'"+" "+crabConfigName
+    os.system(CRABpset)
+
+    directoryName = OneWordName+"_v3"	
+    pubName = "SZS_"+directoryName	
+
+    CRABdatasetpath = "sed -i \'s/DUMMY_datasetpath/"+str(sys.argv[1]).replace("/","\/")+"/g\'"+" "+crabConfigName
+    os.system(CRABdatasetpath)	
+
+    CRABui_working_dir = "sed -i \'s/DUMMY_ui_working_dir/"+directoryName+"/g\'"+" "+crabConfigName
+    os.system(CRABui_working_dir)	
+
+    CRABuser_remote_dir = "sed -i \'s/DUMMY_user_remote_dir/"+directoryName+"/g\'"+" "+crabConfigName
+    os.system(CRABuser_remote_dir)	
+
+    CRABpublish_data_name = "sed -i \'s/DUMMY_publish_data_name/"+pubName+"/g\'"+" "+crabConfigName
+    os.system(CRABpublish_data_name)	
+
+    SE_WHITE_LIST = re.split(' ',whiteList)
+    SE_WHITE_LIST.pop() 	
+    print SE_WHITE_LIST
+    whiteListVar = ''
+    for z in range(0, len(SE_WHITE_LIST)):
+	whiteListVar += SE_WHITE_LIST[z]+' , '	
+    whiteListVar = whiteListVar[:-3]	
+
+    CRABse_white_list = "sed -i \'s/DUMMY_se_white_list/"+whiteListVar+"/g\'"+" "+crabConfigName
+    os.system(CRABse_white_list)	
+	
 
     # need to do the following :
     #- sed the configurable parameters
