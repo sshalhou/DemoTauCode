@@ -9,24 +9,33 @@ def pairCutsMuTau(chain, index, verbose):
   returnVal = True
   failChain = {}
   passChain = {}
+  eventPar = {}
+  eventPar['sumCharge'] = chain.muT_sumCharge[index]
   if chain.muT_sumCharge[index] != 0:
     returnVal = False
     failChain['sumCharge'] = False
   else:
     passChain['sumCharge'] = True
-
+  eventPar['DR'] = chain.muT_DR[index]
   if chain.muT_DR[index] <= 0.5:
     returnVal = False
     failChain['DR'] = False
   else:
     passChain['DR'] = True
-
+  eventPar['TransverseMass'] = chain.muT_TransverseMass[index]
+  if chain.muT_TransverseMass[index] > 30.00:
+    returnVal = False
+    failChain['TransverseMass'] = False
+  else:
+    passChain['TransverseMass'] = True
+  eventPar['passesTriLeptonVeto'] = chain.muT_passesTriLeptonVeto[index]
   if chain.muT_passesTriLeptonVeto[index] is not True:
     returnVal = False
     failChain['passesTriLeptonVeto'] = False
   else:
     passChain['passesTriLeptonVeto'] = True
   if verbose:
+    print 'eventCuts', eventPar
     if len(passChain) > 0:
       print "passed cuts = ",passChain
     if len(failChain) > 0:
@@ -37,18 +46,26 @@ def pairCutsETau(chain, index, verbose):
   returnVal = True
   failChain = {}
   passChain = {}
+  eventPar = {}
+  eventPar['sumCharge'] = chain.eT_sumCharge[index]
   if chain.eT_sumCharge[index] != 0:
     returnVal = False
     failChain['sumCharge'] = False
   else:
     passChain['sumCharge'] = True
-
+  eventPar['DR'] = chain.eT_DR[index]
   if chain.eT_DR[index] <= 0.5:
     returnVal = False
     failChain['DR'] = False
   else:
     passChain['DR'] = True
-
+  eventPar['TransverseMass'] = chain.eT_TransverseMass[index]
+  if chain.eT_TransverseMass[index] > 30.00:
+    returnVal = False
+    failChain['TransverseMass'] = False
+  else:
+    passChain['TransverseMass'] = True
+  eventPar['passesTriLeptonVeto'] = chain.eT_passesTriLeptonVeto[index]
   if chain.eT_passesTriLeptonVeto[index] is not True:
     returnVal = False
     failChain['passesTriLeptonVeto'] = False
@@ -74,11 +91,11 @@ def getMaxPtPairIndex(chain, maxPairTypeAndIndex, passingMuTauIndices, passingET
       currentMaxPt = chain.muT_scalarSumPt[index]
       del maxPairTypeAndIndex[:]
       maxPairTypeAndIndex.append(index)
-      maxPairTypeAndIndex.append('muonTau')
+      maxPairTypeAndIndex.append('muTau')
   for index in passingETauIndices:
     if chain.eT_scalarSumPt[index] > currentMaxPt:
       del maxPairTypeAndIndex[:]
       currentMaxPt = chain.eT_scalarSumPt[index]
       maxPairTypeAndIndex.append(index)
-      maxPairTypeAndIndex.append('electronTau')
+      maxPairTypeAndIndex.append('eleTau')
   return

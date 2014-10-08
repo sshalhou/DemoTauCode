@@ -24,9 +24,9 @@ def resetVariables(eventVar):
 def fillVariables(chain,eventVar,maxPairTypeAndIndex,Verbose):
   resetVariables(eventVar)
   pairType = maxPairTypeAndIndex[1].split('-')
-  if pairType[0] == 'muonTau':
+  if pairType[0] == 'muTau':
     fillVariablesMuTau(chain,eventVar,maxPairTypeAndIndex,Verbose)
-  elif pairType[0] == 'electronTau':
+  elif pairType[0] == 'eleTau':
     fillVariablesETau(chain,eventVar,maxPairTypeAndIndex,Verbose)
   return
 

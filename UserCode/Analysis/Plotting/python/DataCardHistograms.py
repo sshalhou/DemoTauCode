@@ -3,6 +3,7 @@ import sys
 import os
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
 from ROOT import TDirectoryFile
+from array import array
 
 ###########################
 # create the File dict
@@ -21,7 +22,7 @@ sampleTitle = []
 ##############################
 # fill the lists
 
-eventType.append("muonTau")
+eventType.append("muTau")
 eventType.append("eleTau")
 
 dataCardCategories.append("inclusive")
@@ -1059,28 +1060,9 @@ sampleTitle.append('VBFH125')
 
 
 #############################
-# declare histogram dictionaries, and a list containing them
-# follow same order as dataCardCategories
+# declare histogram dictionary
 
-inclusive_Hists = {}
-btag_Hists = {}
-btag_high_Hists = {}
-btag_low_Hists = {}
-nobtag_Hists = {}
-nobtag_high_Hists = {}
-nobtag_medium_Hists = {}
-nobtag_low_Hists = {}
-
-histogram_dict_list = []
-histogram_dict_list.append(inclusive_Hists)
-histogram_dict_list.append(btag_Hists)
-histogram_dict_list.append(btag_high_Hists)
-histogram_dict_list.append(btag_low_Hists)
-histogram_dict_list.append(nobtag_Hists)
-histogram_dict_list.append(nobtag_high_Hists)
-histogram_dict_list.append(nobtag_medium_Hists)
-histogram_dict_list.append(nobtag_low_Hists)
-
+histogram_dict = {}
 
 
 #######################
@@ -1103,44 +1085,45 @@ for evT in range(0, len(eventType)):
 #############################
 # add histograms to dictionaries
 
-for dictIndx in range(0, len(histogram_dict_list)):
-  for sampleIndx in range(0, len(sampleType)):
-    histName = sampleType[sampleIndx]+"_"+dataCardCategories[dictIndx]
-    histogram_dict_list[dictIndx][sampleIndx] = TH1F(histName,sampleTitle[sampleIndx],100,0,1400)
-    histogram_dict_list[dictIndx][sampleIndx].Sumw2()
-    #histogram_dict_list[dictIndx][sampleIndx].SetDirectory(0)
+binning_nominal_btag = [0 , 20 , 40 , 60 , 80 , 100 , 120 , 140 , 160 , 180 ,
+200 , 250 , 300 , 350 , 400 , 500 , 700 , 1000, 1500]
+
+
+
+binning_nominal_nobtag = [0 , 10 , 20 , 30 , 40 , 50 , 60 , 70 , 80 , 90 ,
+100 , 110 , 120 , 130 , 140 , 150 , 160 , 170 , 180 , 190 ,
+200 , 225 , 250 , 275 , 300 , 325 , 350 , 400 , 500 , 700 ,
+1000, 1500]
+
+
+for evT in range(0, len(eventType)):
+  for dictIndx in range(0, len(dataCardCategories)):
+    for sampleIndx in range(0, len(sampleType)):
+      histName = eventType[evT]+"_"+sampleType[sampleIndx]+"_"+dataCardCategories[dictIndx]
+      if 'fine_binning' in sampleType[sampleIndx]:
+        histogram_dict[histName] = TH1F(histName,sampleTitle[sampleIndx],400,0,2000)
+      else:
+        if 'nobtag' in dataCardCategories[dictIndx] or 'inclusive' in dataCardCategories[dictIndx]:
+          histogram_dict[histName] = TH1F(histName,sampleTitle[sampleIndx],len(binning_nominal_nobtag)-1,array('d',binning_nominal_nobtag))
+        else:
+          histogram_dict[histName] = TH1F(histName,sampleTitle[sampleIndx],len(binning_nominal_btag)-1,array('d',binning_nominal_btag))
+      histogram_dict[histName].Sumw2()
+      #histogram_dict[histName].SetDirectory(0)
 
 
 def WriteEverything():
   for evT in range(0, len(eventType)):
     fileName = "davis_htt_mssm_"+eventType[evT]+".root"
     dataCardFiles[fileName].cd()
-    for index in range(0, len(dataCardCategories)):
-      directoryName = eventType[evT]+"_"+dataCardCategories[index]
+    for dictIndx in range(0, len(dataCardCategories)):
+      directoryName = eventType[evT]+"_"+dataCardCategories[dictIndx]
       dataCardFiles[fileName].cd(directoryName)
       for sampleIndx in range(0, len(sampleType)):
-        histName = sampleType[sampleIndx]+"_"+dataCardCategories[index]
-        suffix = "_"+dataCardCategories[index]
+        histName = eventType[evT]+"_"+sampleType[sampleIndx]+"_"+dataCardCategories[dictIndx]
+        suffix = "_"+dataCardCategories[dictIndx]
+        prefix = eventType[evT]+"_"
         writeAs = histName[:-len(suffix)]
-        histogram_dict_list[index][sampleIndx].Write(writeAs)
+        writeAs = writeAs[len(prefix):]
+        histogram_dict[histName].Write(writeAs)
     dataCardFiles[fileName].Close()
   return
-
-
-##########
-# for testing
-
-# def WriteEverything():
-#   for evT in range(0, len(eventType)):
-#     fileName = "davis_htt_mssm_"+eventType[evT]+".root"
-#     dataCardFiles[fileName].cd()
-#     for index in range(0, len(dataCardCategories)):
-#       directoryName = eventType[evT]+"_"+dataCardCategories[index]
-#       dataCardFiles[fileName].cd(directoryName)
-#       for sampleIndx in range(0, len(sampleType)):
-#         histName = sampleType[sampleIndx]+"_"+dataCardCategories[index]
-#         suffix = "_"+dataCardCategories[index]
-#         writeAs = histName[:-len(suffix)]
-#         histogram_dict_list[index][sampleIndx].Write(writeAs)
-#     dataCardFiles[fileName].Close()
-#   return
