@@ -21,216 +21,26 @@
 
 	<Sample BranchingFraction="1.0" CrossSection="1.0" Events="999408" Files="93" Mass="200.0" Nblocks="1" Nlumis="1772" OneWordName="SUSYBBHToTauTauM200" PhysicsProcess="SUSYBBHToTauTauM200" SampleName="/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="341886225550" Type="mc" WhiteList="T2_IT_Rome T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM250"
-PhysicsProcess="SUSYBBHToTauTauM250"
-Mass="250.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="988200" Files="96" Mass="250.0" Nblocks="1" Nlumis="2025" OneWordName="SUSYBBHToTauTauM250" PhysicsProcess="SUSYBBHToTauTauM250" SampleName="/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="339455530468" Type="mc" WhiteList="T2_UK_London_IC T2_US_Wisconsin T2_DE_DESY " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
 
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM350"
-PhysicsProcess="SUSYBBHToTauTauM350"
-Mass="350.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="982080" Files="93" Mass="350.0" Nblocks="1" Nlumis="1980" OneWordName="SUSYBBHToTauTauM350" PhysicsProcess="SUSYBBHToTauTauM350" SampleName="/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="340331469931" Type="mc" WhiteList="T2_DE_DESY T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM400"
-PhysicsProcess="SUSYBBHToTauTauM400"
-Mass="400.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="998702" Files="93" Mass="400.0" Nblocks="2" Nlumis="1943" OneWordName="SUSYBBHToTauTauM400" PhysicsProcess="SUSYBBHToTauTauM400" SampleName="/SUSYBBHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="347723224847" Type="mc" WhiteList="T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM450"
-PhysicsProcess="SUSYBBHToTauTauM450"
-Mass="450.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="973830" Files="90" Mass="450.0" Nblocks="3" Nlumis="2270" OneWordName="SUSYBBHToTauTauM450" PhysicsProcess="SUSYBBHToTauTauM450" SampleName="/SUSYBBHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="339474768439" Type="mc" WhiteList="T2_DE_DESY T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM500"
-PhysicsProcess="SUSYBBHToTauTauM500"
-Mass="500.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="999976" Files="98" Mass="500.0" Nblocks="1" Nlumis="1912" OneWordName="SUSYBBHToTauTauM500" PhysicsProcess="SUSYBBHToTauTauM500" SampleName="/SUSYBBHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="349824300325" Type="mc" WhiteList="T2_DE_DESY T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM600"
-PhysicsProcess="SUSYBBHToTauTauM600"
-Mass="600.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="993061" Files="99" Mass="600.0" Nblocks="1" Nlumis="2173" OneWordName="SUSYBBHToTauTauM600" PhysicsProcess="SUSYBBHToTauTauM600" SampleName="/SUSYBBHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="347628109330" Type="mc" WhiteList="T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM700"
-PhysicsProcess="SUSYBBHToTauTauM700"
-Mass="700.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="996960" Files="99" Mass="700.0" Nblocks="2" Nlumis="2077" OneWordName="SUSYBBHToTauTauM700" PhysicsProcess="SUSYBBHToTauTauM700" SampleName="/SUSYBBHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="349863449210" Type="mc" WhiteList="T2_DE_DESY T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM800"
-PhysicsProcess="SUSYBBHToTauTauM800"
-Mass="800.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="1000432" Files="100" Mass="800.0" Nblocks="2" Nlumis="2017" OneWordName="SUSYBBHToTauTauM800" PhysicsProcess="SUSYBBHToTauTauM800" SampleName="/SUSYBBHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="351474885342" Type="mc" WhiteList="T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM900"
-PhysicsProcess="SUSYBBHToTauTauM900"
-Mass="900.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="997674" Files="100" Mass="900.0" Nblocks="1" Nlumis="1941" OneWordName="SUSYBBHToTauTauM900" PhysicsProcess="SUSYBBHToTauTauM900" SampleName="/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="351432302541" Type="mc" WhiteList="T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-<Sample
-SampleName="/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
-OneWordName="SUSYBBHToTauTauM1000"
-PhysicsProcess="SUSYBBHToTauTauM1000"
-Mass="1000.0"
-CrossSection="1.0"
-BranchingFraction="1.0"
-Mass="-1.0"
-isNonTopEmbeddedSample="False"
-isTopEmbeddedSample="False"
-runOnMC="True"
-Files="-1"
-Events="-1"
-Nblocks = "-1"
-Nlumis = "-1"
-Size="-1"
-Type="-1"
-WhiteList="-1"
-lumi_mask="NULL"
-/>
+<Sample BranchingFraction="1.0" CrossSection="1.0" Events="987947" Files="97" Mass="1000.0" Nblocks="2" Nlumis="1889" OneWordName="SUSYBBHToTauTauM1000" PhysicsProcess="SUSYBBHToTauTauM1000" SampleName="/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="348057175028" Type="mc" WhiteList="T2_DE_DESY T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
 </SampleList>
