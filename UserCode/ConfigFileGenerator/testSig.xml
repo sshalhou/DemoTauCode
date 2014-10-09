@@ -21,7 +21,26 @@
 
 	<Sample BranchingFraction="1.0" CrossSection="1.0" Events="999408" Files="93" Mass="200.0" Nblocks="1" Nlumis="1772" OneWordName="SUSYBBHToTauTauM200" PhysicsProcess="SUSYBBHToTauTauM200" SampleName="/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM" Size="341886225550" Type="mc" WhiteList="T2_IT_Rome T2_UK_London_IC T2_US_Wisconsin " isNonTopEmbeddedSample="False" isTopEmbeddedSample="False" lumi_mask="NULL" runOnMC="True" />
 
-
+<Sample
+SampleName="/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM"
+OneWordName="SUSYBBHToTauTauM200"
+PhysicsProcess="SUSYBBHToTauTauM200"
+Mass="350.0"
+CrossSection="1.0"
+BranchingFraction="1.0"
+Mass="-1.0"
+isNonTopEmbeddedSample="False"
+isTopEmbeddedSample="False"
+runOnMC="True"
+Files="-1"
+Events="-1"
+Nblocks = "-1"
+Nlumis = "-1"
+Size="-1"
+Type="-1"
+WhiteList="-1"
+lumi_mask="NULL"
+/>
 
 
 
