@@ -266,7 +266,7 @@ TupleJetProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // passes PF jet ID loose?
     retpf.set(false);
-    CurrentJet.set_passesPFjetIDLoose(pfjetIDLoose( patjet, retpf ) )
+    CurrentJet.set_passesPFjetIDLoose(pfjetIDLoose( patjet, retpf ) );
 
     // check the sf-corrected b-tag
 
