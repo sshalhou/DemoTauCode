@@ -8,6 +8,9 @@ from PhysicsTools.PatAlgos.tools.helpers import *
 runOnMC = True
 isNonTopEmbeddedSample = False
 isTopEmbeddedSample = False
+WillRunSVFit = False
+
+
 printListOfModules = False
 KeepAll = False
 CheckMemoryUsage = False
@@ -19,9 +22,9 @@ CheckMemoryUsage = False
 # leptons will be ignored by the eTau and muTau producers
 # all leptons are still considered for the vetos
 
-MAX_ELECTRONS = 3
-MAX_MUONS = 3
-MAX_TAUS = 3
+MAX_ELECTRONS = 7
+MAX_MUONS = 7
+MAX_TAUS = 7
 
 
 ###########################################
@@ -555,7 +558,7 @@ process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausNominal"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxMuons=cms.uint32(MAX_MUONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -612,7 +615,7 @@ process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleElectronTausNominal"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxElectrons=cms.uint32(MAX_ELECTRONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -667,7 +670,7 @@ process.TupleMuonTausUp = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausUp"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxMuons=cms.uint32(MAX_MUONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -724,7 +727,7 @@ process.TupleElectronTausUp = cms.EDProducer('TupleElectronTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleElectronTausUp"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxElectrons=cms.uint32(MAX_ELECTRONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -781,7 +784,7 @@ process.TupleMuonTausDown = cms.EDProducer('TupleMuonTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleMuonTausDown"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxMuons=cms.uint32(MAX_MUONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -838,7 +841,7 @@ process.TupleElectronTausDown = cms.EDProducer('TupleElectronTauProducer' ,
                 puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
                 puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
                 NAME=cms.string("TupleElectronTausDown"),
-                doSVFit=cms.bool(False),
+                doSVFit=cms.bool(WillRunSVFit),
                 maxElectrons=cms.uint32(MAX_ELECTRONS),
                 maxTaus=cms.uint32(MAX_TAUS),
                 doNotRequireFullIdForLeptons = cms.bool(True),
@@ -876,6 +879,17 @@ process.TupleGen = cms.EDProducer('TupleGenProducer' ,
                 genTTembeddedSrc = genTTembeddedSrcInputTag,
                 NAME=cms.string("TupleGen")
                                   )
+
+#############
+#############
+
+
+process.TupleJet = cms.EDProducer('TupleJetProducer' ,
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleJets"),
+                                     )
 
 
 #################################
@@ -921,7 +935,8 @@ process.p = cms.Path(
   process.TupleMuonTausNominal*
   process.TupleElectronTausNominal*
   process.TupleMuonTausNominalWeights*
-  process.TupleElectronTausNominalWeights
+  process.TupleElectronTausNominalWeights*
+  process.TupleJet
   )
 
 
