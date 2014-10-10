@@ -23,6 +23,9 @@ TupleElectronTau::TupleElectronTau()
   m_isGoodTriggerPair = 0;
   m_njets = -999;
   m_nbjets = -999;
+  m_nbjetsLOOSE = -999;
+  m_nbjetsLOOSEUP = -999;
+  m_nbjetsLOOSEDOWN = -999;
   m_njetsUP = -999;
   m_nbjetsUP = -999;
   m_njetsDOWN = -999;
@@ -107,6 +110,16 @@ int TupleElectronTau::njets() const {return m_njets;}
 
 void TupleElectronTau::set_nbjets(int nbjets_) {m_nbjets = nbjets_;}
 int TupleElectronTau::nbjets() const {return m_nbjets;}
+
+void TupleElectronTau::set_nbjetsLOOSE(int nbjetsLOOSE_) {m_nbjetsLOOSE = nbjetsLOOSE_;}
+int TupleElectronTau::nbjetsLOOSE() const {return m_nbjetsLOOSE;}
+
+void TupleElectronTau::set_nbjetsLOOSEUP(int nbjetsLOOSEUP_) {m_nbjetsLOOSEUP = nbjetsLOOSEUP_;}
+int TupleElectronTau::nbjetsLOOSEUP() const {return m_nbjetsLOOSEUP;}
+
+void TupleElectronTau::set_nbjetsLOOSEDOWN(int nbjetsLOOSEDOWN_) {m_nbjetsLOOSEDOWN = nbjetsLOOSEDOWN_;}
+int TupleElectronTau::nbjetsLOOSEDOWN() const {return m_nbjetsLOOSEDOWN;}
+
 
 void TupleElectronTau::set_njetsUP(int njetsUP_) {m_njetsUP = njetsUP_;}
 int TupleElectronTau::njetsUP() const {return m_njetsUP;}

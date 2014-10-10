@@ -47,6 +47,9 @@ public:
   void set_isGoodTriggerPair(bool);
   void set_njets(int);
   void set_nbjets(int);
+  void set_nbjetsLOOSE(int);
+  void set_nbjetsLOOSEUP(int);
+  void set_nbjetsLOOSEDOWN(int);
   void set_njetsUP(int);
   void set_nbjetsUP(int);
   void set_njetsDOWN(int);
@@ -99,6 +102,9 @@ public:
   bool isGoodTriggerPair() const;
   int njets() const;
   int nbjets() const;
+  int nbjetsLOOSE() const;
+  int nbjetsLOOSEUP() const;
+  int nbjetsLOOSEDOWN() const;
   int njetsUP() const;
   int nbjetsUP() const;
   int njetsDOWN() const;
@@ -149,6 +155,9 @@ private:
   bool m_isGoodTriggerPair;
   int m_njets;
   int m_nbjets;
+  int m_nbjetsLOOSE;
+  int m_nbjetsLOOSEUP;
+  int m_nbjetsLOOSEDOWN;
   int m_njetsUP;
   int m_nbjetsUP;
   int m_njetsDOWN;

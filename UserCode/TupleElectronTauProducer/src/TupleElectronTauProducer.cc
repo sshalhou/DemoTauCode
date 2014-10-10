@@ -883,14 +883,16 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
-
+        int number_of_btagged_passingJetsLOOSE = 0;
         /////////////
         // setup JEC
 
         int number_of_passingJetsUP = 0;
         int number_of_btagged_passingJetsUP = 0;
+        int number_of_btagged_passingJetsLOOSEUP = 0;
         int number_of_passingJetsDOWN = 0;
         int number_of_btagged_passingJetsDOWN = 0;
+        int number_of_btagged_passingJetsLOOSEDOWN = 0;
 
         edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
         iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
@@ -1010,7 +1012,8 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             iEvent.isRealData(),
             0,0,1);
 
-
+          bool LOOSE_TAG = (fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+          if(LOOSE_TAG) number_of_btagged_passingJetsLOOSE++;
 
 
             if(fabs(patjet.eta())<2.4 && isbtagged)
@@ -1042,6 +1045,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
             patjet.partonFlavour(),
             iEvent.isRealData(),
             0,0,1);
+
+        bool LOOSE_TAG = (fabs(jetUP.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+        if(LOOSE_TAG) number_of_btagged_passingJetsLOOSEUP++;
 
 
 
@@ -1078,6 +1084,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           0,0,1);
 
 
+          bool LOOSE_TAG = (fabs(jetDOWN.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+          if(LOOSE_TAG) number_of_btagged_passingJetsLOOSEDOWN++;
+
 
 
           if(fabs(jetDOWN.eta())<2.4 && isbtagged)
@@ -1103,6 +1112,9 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
         CurrentElectronTau.set_njets(number_of_passingJets);
         CurrentElectronTau.set_nbjets(number_of_btagged_passingJets);
+        CurrentElectronTau.set_nbjetsLOOSE(number_of_btagged_passingJetsLOOSE);
+        CurrentElectronTau.set_nbjetsLOOSEUP(number_of_btagged_passingJetsLOOSEUP);
+        CurrentElectronTau.set_nbjetsLOOSEDOWN(number_of_btagged_passingJetsLOOSEDOWN);
         CurrentElectronTau.set_njetsUP(number_of_passingJetsUP);
         CurrentElectronTau.set_nbjetsUP(number_of_btagged_passingJetsUP);
         CurrentElectronTau.set_njetsDOWN(number_of_passingJetsDOWN);

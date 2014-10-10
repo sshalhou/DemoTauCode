@@ -878,14 +878,20 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         int number_of_passingJets = 0;
         int number_of_btagged_passingJets = 0;
+        int number_of_btagged_passingJetsLOOSE = 0;
+
 
         /////////////
         // setup JEC
 
         int number_of_passingJetsUP = 0;
         int number_of_btagged_passingJetsUP = 0;
+        int number_of_btagged_passingJetsLOOSEUP = 0;
+
         int number_of_passingJetsDOWN = 0;
         int number_of_btagged_passingJetsDOWN = 0;
+        int number_of_btagged_passingJetsLOOSEDOWN = 0;
+
 
         edm::ESHandle<JetCorrectorParametersCollection> JetCorParColl;
         iSetup.get<JetCorrectionsRecord>().get("AK5PF",JetCorParColl);
@@ -1008,10 +1014,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
 
+            bool LOOSE_TAG = (fabs(patjet.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+            if(LOOSE_TAG) number_of_btagged_passingJetsLOOSE++;
+
             if(fabs(patjet.eta())<2.4 && isbtagged)
             {
               number_of_btagged_passingJets++;
             }
+
 
 
           }
@@ -1038,7 +1048,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             iEvent.isRealData(),
             0,0,1);
 
-
+            bool LOOSE_TAG = (fabs(jetUP.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+            if(LOOSE_TAG) number_of_btagged_passingJetsLOOSEUP++;
 
 
             if(fabs(jetUP.eta())<2.4 && isbtagged)
@@ -1072,7 +1083,8 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
           iEvent.isRealData(),
           0,0,1);
 
-
+          bool LOOSE_TAG = (fabs(jetDOWN.eta())<2.4 && patjet.bDiscriminator("combinedSecondaryVertexBJetTags")>0.244);
+          if(LOOSE_TAG) number_of_btagged_passingJetsLOOSEDOWN++;
 
 
           if(fabs(jetDOWN.eta())<2.4 && isbtagged)
@@ -1098,6 +1110,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         CurrentMuonTau.set_njets(number_of_passingJets);
         CurrentMuonTau.set_nbjets(number_of_btagged_passingJets);
+        CurrentMuonTau.set_nbjetsLOOSE(number_of_btagged_passingJetsLOOSE);
+        CurrentMuonTau.set_nbjetsLOOSEUP(number_of_btagged_passingJetsLOOSEUP);
+        CurrentMuonTau.set_nbjetsLOOSEDOWN(number_of_btagged_passingJetsLOOSEDOWN);
         CurrentMuonTau.set_njetsUP(number_of_passingJetsUP);
         CurrentMuonTau.set_nbjetsUP(number_of_btagged_passingJetsUP);
         CurrentMuonTau.set_njetsDOWN(number_of_passingJetsDOWN);

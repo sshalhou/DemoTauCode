@@ -23,6 +23,9 @@ TupleMuonTau::TupleMuonTau()
   m_isGoodTriggerPair = 0;
   m_njets = -999;
   m_nbjets = -999;
+  m_nbjetsLOOSE = -999;
+  m_nbjetsLOOSEUP = -999;
+  m_nbjetsLOOSEDOWN = -999;
   m_njetsUP = -999;
   m_nbjetsUP = -999;
   m_njetsDOWN = -999;
@@ -109,6 +112,15 @@ int TupleMuonTau::njets() const {return m_njets;}
 
 void TupleMuonTau::set_nbjets(int nbjets_) {m_nbjets = nbjets_;}
 int TupleMuonTau::nbjets() const {return m_nbjets;}
+
+void TupleMuonTau::set_nbjetsLOOSE(int nbjetsLOOSE_) {m_nbjetsLOOSE = nbjetsLOOSE_;}
+int TupleMuonTau::nbjetsLOOSE() const {return m_nbjetsLOOSE;}
+
+void TupleMuonTau::set_nbjetsLOOSEUP(int nbjetsLOOSEUP_) {m_nbjetsLOOSEUP = nbjetsLOOSEUP_;}
+int TupleMuonTau::nbjetsLOOSEUP() const {return m_nbjetsLOOSEUP;}
+
+void TupleMuonTau::set_nbjetsLOOSEDOWN(int nbjetsLOOSEDOWN_) {m_nbjetsLOOSEDOWN = nbjetsLOOSEDOWN_;}
+int TupleMuonTau::nbjetsLOOSEDOWN() const {return m_nbjetsLOOSEDOWN;}
 
 void TupleMuonTau::set_njetsUP(int njetsUP_) {m_njetsUP = njetsUP_;}
 int TupleMuonTau::njetsUP() const {return m_njetsUP;}
