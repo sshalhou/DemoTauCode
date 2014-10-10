@@ -50,8 +50,7 @@ public:
 
 private:
 
-  LorentzVector m_p4;
-  double m_JecShift;
+
   LorentzVector m_p4;
   double m_JecShift;
   bool m_passesPUjetIDLoose;
