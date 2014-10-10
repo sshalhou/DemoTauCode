@@ -14,14 +14,17 @@ TupleJet::TupleJet()
 
 }
 
+void TupleJet::set_p4(LorentzVector v4_) { m_p4 = v4_;}
+LorentzVector TupleJet::p4() const  { return m_p4; }
 
+void TupleJet::set_passesPUjetIDLoose(bool passesPUjetIDLoose_) { m_passesPUjetIDLoose = passesPUjetIDLoose_;}
+bool TupleJet::passesPUjetIDLoose() const  { return m_passesPUjetIDLoose; }
 
 void TupleJet::set_isBtagged(bool isBtagged_) { m_isBtagged = isBtagged_;}
 bool TupleJet::isBtagged() const  { return m_isBtagged; }
 
 
-void TupleJet::set_p4(LorentzVector v4_) { m_p4 = v4_;}
-LorentzVector TupleJet::p4() const  { return m_p4; }
+
 
 
 void TupleJet::set_partonFlavour(int partonFlavour_) { m_partonFlavour = partonFlavour_;}
@@ -33,8 +36,7 @@ double TupleJet::combinedSecondaryVertexBJetTags() const  { return m_combinedSec
 
 
 
-void TupleJet::set_passesPUjetIDLoose(bool passesPUjetIDLoose_) { m_passesPUjetIDLoose = passesPUjetIDLoose_;}
-bool TupleJet::passesPUjetIDLoose() const  { return m_passesPUjetIDLoose; }
+
 
 void TupleJet::set_passesPFjetIDLoose(bool passesPFjetIDLoose_) { m_passesPFjetIDLoose = passesPFjetIDLoose_;}
 bool TupleJet::passesPFjetIDLoose() const  { return m_passesPFjetIDLoose; }
