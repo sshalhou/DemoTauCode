@@ -241,7 +241,7 @@ TupleJetProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     double lowPt = patjet.pt() * (1.0-shift);
 
-    std::cout<<" jet pt "<<patjet.pt()<<" low pt "<< lowPt <<" eta: "<<patjet.eta()<<endl;
+    //std::cout<<" jet pt "<<patjet.pt()<<" low pt "<< lowPt <<" eta: "<<patjet.eta()<<endl;
 
     if(lowPt<20.0 || fabs(patjet.eta())>5.0) continue;
 
