@@ -173,20 +173,21 @@ process.EsCorrectedTausDown = cms.EDProducer('EsCorrectedTauProducer' ,
 
 ##########################
 # diMuon & diElectron Vetoes
+# too risky to do this here
 ##########################
 
-process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
-  muonSource     = cms.InputTag("cleanPatMuons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
-  filter = cms.bool(True)
-)
+#process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
+#  muonSource     = cms.InputTag("cleanPatMuons"),
+#  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
+#  filter = cms.bool(True)
+#)
 
 
-process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
-  electronSource     = cms.InputTag("cleanPatElectrons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
-  filter = cms.bool(True)
-)
+#process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
+#  electronSource     = cms.InputTag("cleanPatElectrons"),
+#  vertexSource      = cms.InputTag("selectedPrimaryVertices::Ntuple"),
+#  filter = cms.bool(True)
+#)
 
 
 ####################################
@@ -910,8 +911,8 @@ process.p = cms.Path(
   process.EsCorrectedTausNominal*
   process.EsCorrectedTausUp* # needed here even for data
   process.EsCorrectedTausDown* # needed here even for data
-  process.isDiMuonEvent*
-  process.isDiElectronEvent*
+#  process.isDiMuonEvent*
+#  process.isDiElectronEvent*
   singlePatLeptons*
   pairWiseMvaMETsNominal*
   process.TupleElectronsNominal*
