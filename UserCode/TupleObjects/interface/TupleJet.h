@@ -29,11 +29,11 @@ public:
 
   void set_p4(LorentzVector);
   void set_JecShift(double);
-  void passesPUjetIDLoose(bool);
-  void passesPFjetIDLoose(bool);
-  void combinedSecondaryVertexBJetTags(double);
-  void partonFlavour(int);
-  void isBtagged(bool);
+  void set_passesPUjetIDLoose(bool);
+  void set_passesPFjetIDLoose(bool);
+  void set_combinedSecondaryVertexBJetTags(double);
+  void set_partonFlavour(int);
+  void set_isBtagged(bool);
 
 
   // getters
