@@ -1,8 +1,11 @@
 ########################################################################################################
 import FWCore.ParameterSet.Config as cms
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
+from PhysicsTools.PatAlgos.tools.helpers import *
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = 1
 ########################################################################################################
 
 
@@ -15,11 +18,66 @@ runOnMC_ = True # true for MC, and all topTopBar and Ztautau embedded samples
 branchingFraction_ = 999.99
 crossSection_ = 999.99
 numberEvents_ = 999
+WillRunSVFit_ = False
+
+
+doNotRequireFullIdForLeptons_ = False # setting to true means more SVFIt calls
+printListOfModules_ = False
+CheckMemoryUsage_ = False
+
 
 FilterEvents_ = True
 DropSelectedPatObjects_ = True
 KeepAll_ = False
 PrintProductIDs_ = False
+
+
+##########################################
+# the following 3 parameters set the first X  leptons in the
+# lepton collections
+# to consider for building the final states, any additional
+# leptons will be ignored by the eTau and muTau producers
+# all leptons are still considered for the vetos
+
+MAX_ELECTRONS = 7
+MAX_MUONS = 7
+MAX_TAUS = 7
+
+
+###########################################
+# gen particle sources depend on isNonTopEmbeddedSample
+# and isTopEmbeddedSample
+# also use alternate pileUp source for tt embedded samples
+
+genSrcInputTag = cms.InputTag('genParticles::SIM')
+genTTembeddedSrcInputTag = cms.InputTag('')
+pileupSrcInputTag = cms.InputTag('addPileupInfo')
+
+
+if isNonTopEmbeddedSample:
+  genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
+  genTTembeddedSrcInputTag = cms.InputTag('')
+
+elif isTopEmbeddedSample:
+  genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
+  genTTembeddedSrcInputTag = cms.InputTag('genParticles::SIM')
+  pileupSrcInputTag = cms.InputTag('addPileupInfo::HLT')
+
+
+
+
+###################################
+# create a new primary vertex collection
+###################################
+
+process.selectedPrimaryVerticesNtuple = cms.EDFilter(
+    "VertexSelector",
+    src = cms.InputTag('offlinePrimaryVertices'),
+    cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
+    filter = cms.bool(False)
+)
+
+
 
 ###################################################
 # Store SampleName and PhysicsProcess
@@ -340,6 +398,10 @@ if PrintProductIDs_:
 if runOnMC_:
   process.p *= process.TauSpinnerReco
 
+#####################################
+# things formerly in the Ntuple
+
+process.p *= process.selectedPrimaryVerticesNtuple
 
 
 ###################################################
