@@ -29,4 +29,10 @@
   <class name="TupleJet"/>
   <class name="std::vector<TupleJet>"/>
   <class name="edm::Wrapper<std::vector<TupleJet> >"/>
+  <class name="TupleElectronTauVetoes"/>
+  <class name="std::vector<TupleElectronTauVetoes>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectronTauVetoes> >"/>
+  <class name="TupleMuonTauVetoes"/>
+  <class name="std::vector<TupleMuonTauVetoes>"/>
+  <class name="edm::Wrapper<std::vector<TupleMuonTauVetoes> >"/>
 </lcgdict>
