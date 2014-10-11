@@ -1104,6 +1104,29 @@ process.TupleElectronTausDownWeights = cms.EDProducer('TupleElectronTauWeightPro
 
 
 
+################
+################
+
+
+process.TupleGen = cms.EDProducer('TupleGenProducer' ,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                NAME=cms.string("TupleGen")
+                                  )
+
+#############
+#############
+
+
+process.TupleJet = cms.EDProducer('TupleJetProducer' ,
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleJets"),
+                                     )
+
+
+
 ##################################################
 # Let it run
 ###################################################
@@ -1361,14 +1384,40 @@ process.p *= process.TupleMuonTausNominal
 process.p *= process.TupleElectronTausNominal
 process.p *= process.TupleMuonTausNominalWeights
 process.p *= process.TupleElectronTausNominalWeights
+process.p *= process.TupleJet
 
+if runOnMC_:
+  process.p *= process.TupleGen
+  process.p *= pairWiseMvaMETsUp
+  process.p *= pairWiseMvaMETsDown
+  process.p *= process.TupleTausUp
+  process.p *= process.TupleTausDown
+  process.p *= process.TupleMuonTausUp
+  process.p *= process.TupleElectronTausUp
+  process.p *= process.TupleMuonTausUpWeights
+  process.p *= process.TupleElectronTausUpWeights
+  process.p *= process.TupleMuonTausDown
+  process.p *= process.TupleElectronTausDown
+  process.p *= process.TupleMuonTausDownWeights
+  process.p *= process.TupleElectronTausDownWeights
+
+
+
+if printListOfModules_:
+  print listModules(process.p)
+
+if CheckMemoryUsage_:
+  process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck",ignoreTotal = cms.untracked.int32(1) )
 
 ########################################################################################################
 
 #################################
-# keep everything produced by Tuepl-Code
+# keep everything produced by Tuple-Code
 #################################
+process.out.outputCommands +=['drop *_*_*_*']
+process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
 process.out.outputCommands +=['keep Tuple*_*_*_*']
+
 
 if KeepAll_:
   process.out.outputCommands +=['keep *_*_*_*']
@@ -1389,6 +1438,15 @@ process.source = cms.Source ("PoolSource",
                       skipEvents=cms.untracked.uint32(0)
                              )
 ########################################################################################################
+
+
+
+###################################################
+# require all paths to pass
+###################################################
+
+process.out.SelectEvents.SelectEvents = ['p']
+
 
 
 process.maxEvents.input = 20
