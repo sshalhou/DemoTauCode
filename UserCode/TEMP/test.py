@@ -11,15 +11,15 @@ PhysicsProcess_='ggA0tautau[SUSY_120_8TeV]'
 MASS_=120.0
 isNonTopEmbeddedSample_ = False
 isTopEmbeddedSample_ = False
-runOnMC = True # true for MC, and all topTopBar and Ztautau embedded samples
+runOnMC_ = True # true for MC, and all topTopBar and Ztautau embedded samples
 branchingFraction_ = 999.99
 crossSection_ = 999.99
 numberEvents_ = 999
 
-FilterEvents = True
-DropSelectedPatObjects = True
-KeepAll = False
-PrintProductIDs = False
+FilterEvents_ = True
+DropSelectedPatObjects_ = True
+KeepAll_ = False
+PrintProductIDs_ = False
 
 ###################################################
 # Store SampleName and PhysicsProcess
@@ -39,6 +39,38 @@ process.UserSpecifiedData = cms.EDProducer('TupleUserSpecifiedDataProducer',
                                             )
 
 
+
+##################################################
+# Jet Energy Corrections and Global Tags
+###################################################
+
+from PhysicsTools.PatAlgos.tools.coreTools import *
+
+
+if runOnMC_:
+  process.GlobalTag.globaltag = 'START53_V23::All'
+else:
+  process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
+  removeMCMatching(process, ['All'])
+  runOnData(process)
+
+if isNonTopEmbeddedSample_:
+  process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
+
+
+#################################
+# set the correct jet en. corr
+#################################
+jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
+corrector_ = cms.string('ak5PFL1FastL2L3')
+
+if runOnMC_ and not isNonTopEmbeddedSample_:
+  corrector_ = cms.string('ak5PFL1FastL2L3')
+  jetEnCorr.extend(['L2L3Residual'])
+
+else:
+  corrector_ = cms.string('ak5PFL1FastL2L3Residual')
+  jetEnCorr.extend(['L2L3Residual'])
 
 
 
