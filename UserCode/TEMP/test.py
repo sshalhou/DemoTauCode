@@ -307,6 +307,7 @@ process.VertexPresent = cms.EDFilter("VertexSelector",
 ###################################################
 process.p = cms.Path(process.UserSpecifiedData)
 process.p *= process.VertexPresent
+process.p *= process.mvaID
 process.p *= process.PFTau
 process.p *= process.pfNoPileUpSequence
 process.p *= process.pfAllMuons
