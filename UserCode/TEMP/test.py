@@ -945,6 +945,7 @@ process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
 process.p *= process.EsCorrectedTausDown # needed here even for data
 process.p *= singlePatLeptons
+process.p *= process.calibratedAK5PFJetsForPFMEtMVA
 process.p *= pairWiseMvaMETsNominal
 
 
