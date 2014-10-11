@@ -340,6 +340,210 @@ if PrintProductIDs_:
 if runOnMC_:
   process.p *= process.TauSpinnerReco
 
+
+
+###################################################
+# add in Trigger Info
+###################################################
+
+# Trigger Object Matching
+
+process.load( "PhysicsTools.PatAlgos.triggerLayer1.triggerProducer_cff" )
+
+###################################################
+
+process.eTrigMatchEle27 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+process.eTrigMatchEle20 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+###################################################
+
+process.eTrigMatchEle22 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatElectrons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.muTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+process.muTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.muTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatMuons' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu24*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+####################################################
+
+###################################################
+
+process.tauTrigMatchEle20 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+###################################################
+
+process.tauTrigMatchEle22 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.tauTrigMatchMu17 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+process.tauTrigMatchMu18 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.tauTrigMatchJet320 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+            matchedCuts = cms.string( 'path( "HLT_PFJet320*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+###################################################
+
+
+process.tauTrigMatchEle27 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_Ele27*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+###################################################
+
+
+process.tauTrigMatchMu24 = cms.EDProducer( "PATTriggerMatcherDRLessByR",
+                                                       src = cms.InputTag( 'cleanPatTaus' ),
+                                                       matched = cms.InputTag( 'patTrigger' ),
+                                                       andOr          = cms.bool( False ),
+                                                       matchedCuts = cms.string( 'path( "HLT_IsoMu24*" )' ),
+                                                       maxDeltaR = cms.double( 0.5 ),
+                                                       resolveAmbiguities = cms.bool( True ),
+                                                       resolveByMatchQuality = cms.bool( True )
+                                                       )
+
+
+triggerMatchers = cms.vstring()
+triggerMatchers.extend(['eTrigMatchEle20'])
+triggerMatchers.extend(['eTrigMatchEle22'])
+triggerMatchers.extend(['eTrigMatchEle27'])
+triggerMatchers.extend(['muTrigMatchMu17'])
+triggerMatchers.extend(['muTrigMatchMu18'])
+triggerMatchers.extend(['muTrigMatchMu24'])
+triggerMatchers.extend(['tauTrigMatchEle20'])
+triggerMatchers.extend(['tauTrigMatchEle22'])
+triggerMatchers.extend(['tauTrigMatchEle27'])
+triggerMatchers.extend(['tauTrigMatchMu17'])
+triggerMatchers.extend(['tauTrigMatchMu18'])
+triggerMatchers.extend(['tauTrigMatchMu24'])
+triggerMatchers.extend(['tauTrigMatchJet320'])
+
+
+
+switchOnTriggerMatching( process, triggerMatchers )
+process.out.outputCommands +=['keep *_*patTrigger*_*_*']
+process.out.outputCommands +=['keep *_*TriggerResults*_*_*']
+process.out.outputCommands +=['keep *_*patTriggerEvent*_*_*']
+process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
+
+
+
 ########################################################################################################
 
 #################################
