@@ -462,6 +462,62 @@ else:
 
 
 
+##############################
+# produce the single electron,
+# muon, and tau collections
+# that will be used for pair-wise
+# mvaMet calculation
+
+singlePatLeptons = cms.Sequence()
+
+for eINDEX in range(MAX_ELECTRONS):
+  eModuleName = "cleanPatElectrons%i" % (eINDEX)
+  eModule = cms.EDProducer('SinglePatElectronProducer' ,
+    electronSrc =cms.InputTag('cleanPatElectrons'),
+    INDEX = cms.uint32(eINDEX),
+    NAME=cms.string(eModuleName))
+  setattr(process, eModuleName, eModule)
+  singlePatLeptons += eModule
+
+for mINDEX in range(MAX_MUONS):
+  mModuleName = "cleanPatMuons%i" % (mINDEX)
+  mModule = cms.EDProducer('SinglePatMuonProducer' ,
+    muonSrc =cms.InputTag('cleanPatMuons'),
+    INDEX = cms.uint32(mINDEX),
+    NAME=cms.string(mModuleName))
+  setattr(process, mModuleName, mModule)
+  singlePatLeptons += mModule
+
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTausNominal%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('EsCorrectedTausNominal'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
+
+
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTausUp%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('EsCorrectedTausUp'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
+
+for tINDEX in range(MAX_TAUS):
+  tModuleName = "cleanPatTausDown%i" % (tINDEX)
+  tModule = cms.EDProducer('SinglePatTauProducer' ,
+    tauSrc =cms.InputTag('EsCorrectedTausDown'),
+    INDEX = cms.uint32(tINDEX),
+    NAME=cms.string(tModuleName))
+  setattr(process, tModuleName, tModule)
+  singlePatLeptons += tModule
+
+
+
 
 ##################################################
 # Let it run
@@ -509,6 +565,7 @@ process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
 process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
 process.p *= process.EsCorrectedTausDown # needed here even for data
+process.p *= singlePatLeptons
 
 ###################################################
 # add in Trigger Info
