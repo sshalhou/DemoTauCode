@@ -73,13 +73,31 @@ else:
   jetEnCorr.extend(['L2L3Residual'])
 
 
+#####################################
+# compute the tau spinner weights
+#####################################
+
+process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
+
+
+###################################################
+# debug info including productId will be printed
+###################################################
+
+process.printEventContent = cms.EDAnalyzer("EventContentAnalyzer")
+
+
 
 ##################################################
 # Let it run
 ###################################################
 process.p = cms.Path(process.UserSpecifiedData)
 
+if PrintProductIDs_:
+  process.p *= process.printEventContent
 
+if runOnMC_:
+  process.p *= process.TauSpinnerReco
 
 ########################################################################################################
 
