@@ -53,7 +53,7 @@ process.p = cms.Path(process.UserSpecifiedData)
 if KeepAll:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/patTuple_testing.root'
+process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
 
 ########################################################################################################
 myfilelist = cms.untracked.vstring()
