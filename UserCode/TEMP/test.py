@@ -286,7 +286,19 @@ if runOnMC_ and not isNonTopEmbeddedSample_:
     process.patDefaultSequence.replace(process.patJetGenJetMatch, process.genJetsNoNu* process.patJetGenJetMatch)
     process.patJetGenJetMatch.matched = cms.InputTag("ak5GenJetsNoNu")
 
+###################################################
+# Store the Vertex Collection
+# filtering is possible at this
+# stage (currently requiring at least one)
+###################################################
 
+from PhysicsTools.PatAlgos.tools.trackTools import *
+
+process.VertexPresent = cms.EDFilter("VertexSelector",
+                             src = cms.InputTag("offlinePrimaryVertices"),
+                             cut = cms.string("!isFake && ndof > 4 && abs(z) < 24 && position.Rho < 2"),
+                             filter = cms.bool(True)
+                             )
 
 
 
