@@ -1393,7 +1393,7 @@ if runOnMC_:
 
 process.p *= process.selectedPrimaryVerticesNtuple
 process.p *= process.isDiMuonEvent
-process.p *= process.isDiElectron
+process.p *= process.isDiElectronEvent
 process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
 process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
