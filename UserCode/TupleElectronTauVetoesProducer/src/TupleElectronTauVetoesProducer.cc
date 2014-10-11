@@ -220,7 +220,6 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
       if(!muonIter->innerTrack().isNull())
       {
-        CurrentMuon.set_numberOfValidPixelHits(muonIter->innerTrack()->hitPattern().numberOfValidPixelHits());
         dz = muonIter->innerTrack()->dz(first_vertex.position());
         dxy = muonIter->innerTrack()->dxy(first_vertex.position());
 
@@ -454,9 +453,8 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
 
         // no pairing the candidate e (electron) with itself!
-        // also checked with DR(electronIter,electron)
-        unsigned int currentIndx = electronIter - PATelectrons.begin()
-        if(currentIndx==electronTau.electronIndex()) continue;
+        //  checked with DR(electronIter,electron)
+
         if(deltaR(electronIter->p4(), electron->p4()) <= 0.3) continue;
 
         //////////////////////////////////////////////////////
