@@ -28,7 +28,7 @@ CheckMemoryUsage_ = False
 
 FilterEvents_ = True
 DropSelectedPatObjects_ = True
-KeepAll_ = False
+KeepAll_ = True
 PrintProductIDs_ = False
 
 
@@ -546,27 +546,6 @@ process.p *= process.countMyPatElectrons
 process.p *= process.myCleanPatMuons
 
 
-
-if FilterEvents_:
-  process.p *= process.countGoodPairs
-
-
-if PrintProductIDs_:
-  process.p *= process.printEventContent
-
-if runOnMC_:
-  process.p *= process.TauSpinnerReco
-
-#####################################
-# things formerly in the Ntuple
-
-process.p *= process.selectedPrimaryVerticesNtuple
-process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
-process.p *= process.EsCorrectedTausNominal
-process.p *= process.EsCorrectedTausUp # needed here even for data
-process.p *= process.EsCorrectedTausDown # needed here even for data
-process.p *= singlePatLeptons
-
 ###################################################
 # add in Trigger Info
 ###################################################
@@ -766,6 +745,29 @@ process.out.outputCommands +=['keep *_*patTrigger*_*_*']
 process.out.outputCommands +=['keep *_*TriggerResults*_*_*']
 process.out.outputCommands +=['keep *_*patTriggerEvent*_*_*']
 process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
+##########################
+
+
+if FilterEvents_:
+  process.p *= process.countGoodPairs
+
+
+if PrintProductIDs_:
+  process.p *= process.printEventContent
+
+if runOnMC_:
+  process.p *= process.TauSpinnerReco
+
+#####################################
+# things formerly in the Ntuple
+
+process.p *= process.selectedPrimaryVerticesNtuple
+process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
+process.p *= process.EsCorrectedTausNominal
+process.p *= process.EsCorrectedTausUp # needed here even for data
+process.p *= process.EsCorrectedTausDown # needed here even for data
+process.p *= singlePatLeptons
+
 
 
 
