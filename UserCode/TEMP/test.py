@@ -18,7 +18,7 @@ runOnMC_ = True # true for MC, and all topTopBar and Ztautau embedded samples
 branchingFraction_ = 999.99
 crossSection_ = 999.99
 numberEvents_ = 999
-WillRunSVFit_ = False
+WillRunSVFit_ = True
 
 
 doNotRequireFullIdForLeptons_ = False # setting to true means more SVFIt calls
@@ -1130,6 +1130,23 @@ process.TupleJet = cms.EDProducer('TupleJetProducer' ,
                                      )
 
 
+##########################
+# diMuon & diElectron Vetoes
+# too risky to do this here
+##########################
+
+process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
+  muonSource     = cms.InputTag("cleanPatMuons"),
+  vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
+  filter = cms.bool(True)
+)
+
+
+process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
+  electronSource     = cms.InputTag("cleanPatElectrons"),
+  vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
+  filter = cms.bool(True)
+)
 
 ##################################################
 # Let it run
@@ -1375,6 +1392,8 @@ if runOnMC_:
 # things formerly in the Ntuple
 
 process.p *= process.selectedPrimaryVerticesNtuple
+process.p *= process.isDiMuonEvent
+process.p *= process.isDiElectron
 process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
 process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
