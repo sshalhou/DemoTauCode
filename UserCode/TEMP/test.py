@@ -196,15 +196,18 @@ if isNonTopEmbeddedSample_:
 #################################
 # set the correct jet en. corr
 #################################
+
+
+
 jetEnCorr = ['L1FastJet', 'L2Relative', 'L3Absolute']
 corrector_ = cms.string('ak5PFL1FastL2L3')
 
 if runOnMC_ and not isNonTopEmbeddedSample_:
   corrector_ = cms.string('ak5PFL1FastL2L3')
-  jetEnCorr.extend(['L2L3Residual'])
 
 else:
   corrector_ = cms.string('ak5PFL1FastL2L3Residual')
+  jetEnCorr.extend(['L2L3Residual'])
   jetEnCorr.extend(['L2L3Residual'])
 
 
@@ -256,45 +259,6 @@ switchJetCollection(process,cms.InputTag('ak5PFJets'),
 
 process.load("RecoJets.JetProducers.pujetidsequence_cff")
 
-
-### TEST
-
-
-##################################################
-# MVA MET - run once to get everything setup
-# for the later pairwise computations
-###################################################
-from RecoMET.METPUSubtraction.mvaPFMET_leptons_PAT_cfi import *
-process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
-process.load('RecoMET.METPUSubtraction.mvaPFMET_leptons_cff')
-
-
-
-
-
-process.pfMEtMVA = process.pfMEtMVA.clone(
-    #srcLeptons = cms.VInputTag("isomuons","isoelectrons","isotaus"),
-    useType1 = cms.bool(False))
-process.patPFMetByMVA = process.patMETs.clone(
-    metSource = cms.InputTag('pfMEtMVA'),
-    addMuonCorrections = cms.bool(False),
-    genMETSource = cms.InputTag('genMetTrue')
-                                                )
-
-process.load("JetMETCorrections.Type1MET.pfMETCorrectionType0_cfi")
-process.load("PhysicsTools.PatUtils.patPFMETCorrections_cff")
-
-process.mvametPF2PATsequence = cms.Sequence(
-                process.pfMEtMVAsequence*
-                # next 2 lines are from
-                # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuidePATTools#METSysTools
-                process.type0PFMEtCorrection*
-                process.patPFMETtype0Corr
-                                )
-
-
-
-### TEST
 
 
 #####################################
@@ -1181,7 +1145,6 @@ process.p *= process.pfParticleSelectionSequence
 process.p *= process.eleIsoSequence
 process.p *= process.muIsoSequence
 process.p *= process.recoTauClassicHPSSequence
-process.p *= process.mvametPF2PATsequence # test
 
 
 # always rerun b-tagging before the pat default seq.
@@ -1189,7 +1152,6 @@ process.p *= process.ak5JetTracksAssociatorAtVertex
 process.p *= process.btagging
 
 process.p *= process.patDefaultSequence
-process.p *= process.patPFMetByMVA
 
 process.p *= process.patConversions
 process.p *= process.puJetIdSqeuence
