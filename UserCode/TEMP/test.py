@@ -697,6 +697,413 @@ for mINDEX in range(MAX_MUONS):
 
 
 
+##########################
+# Nominal Systematics    #
+##########################
+
+process.TupleElectronsNominal = cms.EDProducer('TupleElectronProducer' ,
+                electronSrc =cms.InputTag('cleanPatElectrons'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                NAME=cms.string("TupleElectronsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                eTrigMatchEle20Src = cms.untracked.string("eTrigMatchEle20"),
+                eTrigMatchEle22Src = cms.untracked.string("eTrigMatchEle22"),
+                eTrigMatchEle27Src = cms.untracked.string("eTrigMatchEle27")
+                                     )
+
+process.TupleMuonsNominal = cms.EDProducer('TupleMuonProducer' ,
+                muonSrc =cms.InputTag('cleanPatMuons'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                NAME=cms.string("TupleMuonsNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                muTrigMatchMu17Src = cms.untracked.string("muTrigMatchMu17"),
+                muTrigMatchMu18Src = cms.untracked.string("muTrigMatchMu18"),
+                muTrigMatchMu24Src = cms.untracked.string("muTrigMatchMu24"),
+                pfSrc = cms.InputTag('particleFlow')
+
+                                     )
+
+process.TupleTausNominal = cms.EDProducer('TupleTauProducer' ,
+                tauSrc = TausToUse,
+                NAME=cms.string("TupleTausNominal"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(1.0)
+                                                   )
+
+
+process.TupleTausUp = cms.EDProducer('TupleTauProducer' ,
+                tauSrc = TausToUse,
+                NAME=cms.string("TupleTausUp"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(1.03)
+                                                   )
+
+process.TupleTausDown = cms.EDProducer('TupleTauProducer' ,
+                tauSrc = TausToUse,
+                NAME=cms.string("TupleTausDown"),
+                triggerEventSrc = cms.untracked.InputTag("patTriggerEvent"),
+                tauTrigMatchMu17Src = cms.untracked.string("tauTrigMatchMu17"),
+                tauTrigMatchMu18Src = cms.untracked.string("tauTrigMatchMu18"),
+                tauTrigMatchMu24Src = cms.untracked.string("tauTrigMatchMu24"),
+                tauTrigMatchEle20Src = cms.untracked.string("tauTrigMatchEle20"),
+                tauTrigMatchEle22Src = cms.untracked.string("tauTrigMatchEle22"),
+                tauTrigMatchEle27Src = cms.untracked.string("tauTrigMatchEle27"),
+                TauESshift = cms.double(0.97)
+                                                   )
+
+
+##################
+# muTau Final Pairs
+
+allMuTauMETsNominal = cms.VInputTag()
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetNominal%ix%i::PAT" % (mINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allMuTauMETsNominal.append(metModuleNameTag)
+
+
+print allMuTauMETsNominal
+
+process.TupleMuonTausNominal = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                mvametSrc = allMuTauMETsNominal,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausNominal"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxMuons=cms.uint32(MAX_MUONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+
+process.TupleMuonTausNominalWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
+                NAME=cms.string("TupleMuonTausNominalWeights"),
+                pileupSrc = pileupSrcInputTag,
+                muontauSrc=cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+
+                                     )
+
+##################
+# eTau Final Pairs
+
+allElecTauMETsNominal = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetNominal%ix%i::PAT" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETsNominal.append(metModuleNameTag)
+
+
+print allElecTauMETsNominal
+
+
+process.TupleElectronTausNominal = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                mvametSrc = allElecTauMETsNominal,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausNominal"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+process.TupleElectronTausNominalWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
+                NAME=cms.string("TupleElectronTausNominalWeights"),
+                pileupSrc = pileupSrcInputTag,
+                electrontauSrc=cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausNominal','TupleTausNominal','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+                                     )
+
+
+##################
+# muTau Final Pairs Up
+
+allMuTauMETsUp = cms.VInputTag()
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetUp%ix%i::PAT" % (mINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allMuTauMETsUp.append(metModuleNameTag)
+
+
+print allMuTauMETsUp
+
+process.TupleMuonTausUp = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                mvametSrc = allMuTauMETsUp,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausUp"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxMuons=cms.uint32(MAX_MUONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+
+process.TupleMuonTausUpWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
+                NAME=cms.string("TupleMuonTausUpWeights"),
+                pileupSrc = pileupSrcInputTag,
+                muontauSrc=cms.InputTag('TupleMuonTausUp','TupleMuonTausUp','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+
+                                     )
+
+##################
+# eTau Final Pairs Up
+
+allElecTauMETsUp = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetUp%ix%i::PAT" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETsUp.append(metModuleNameTag)
+
+
+print allElecTauMETsUp
+
+
+process.TupleElectronTausUp = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                mvametSrc = allElecTauMETsUp,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausUp"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+process.TupleElectronTausUpWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
+                NAME=cms.string("TupleElectronTausUpWeights"),
+                pileupSrc = pileupSrcInputTag,
+                electrontauSrc=cms.InputTag('TupleElectronTausUp','TupleElectronTausUp','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausUp','TupleTausUp','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+                                     )
+
+
+
+
+##################
+# muTau Final Pairs Down
+
+allMuTauMETsDown = cms.VInputTag()
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetDown%ix%i::PAT" % (mINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allMuTauMETsDown.append(metModuleNameTag)
+
+
+print allMuTauMETsDown
+
+process.TupleMuonTausDown = cms.EDProducer('TupleMuonTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                mvametSrc = allMuTauMETsDown,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleMuonTausDown"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxMuons=cms.uint32(MAX_MUONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+
+process.TupleMuonTausDownWeights = cms.EDProducer('TupleMuonTauWeightProducer' ,
+                NAME=cms.string("TupleMuonTausDownWeights"),
+                pileupSrc = pileupSrcInputTag,
+                muontauSrc=cms.InputTag('TupleMuonTausDown','TupleMuonTausDown','PAT'),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+
+                                     )
+
+##################
+# eTau Final Pairs Down
+
+allElecTauMETsDown = cms.VInputTag()
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetDown%ix%i::PAT" % (eINDEX,tINDEX)
+    metModuleNameTag = cms.InputTag(metModuleName)
+    allElecTauMETsDown.append(metModuleNameTag)
+
+
+print allElecTauMETsDown
+
+
+process.TupleElectronTausDown = cms.EDProducer('TupleElectronTauProducer' ,
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                mvametSrc = allElecTauMETsDown,
+                genSrc = genSrcInputTag,
+                genTTembeddedSrc = genTTembeddedSrcInputTag,
+                iFluc=cms.double(0.0),
+                iScale=cms.double(0.0),
+                jetSrc = cms.InputTag("cleanPatJets"),
+                puJetIdMVASrc = cms.InputTag('puJetMva','full53xDiscriminant','PAT'),
+                puJetIdFlagSrc = cms.InputTag('puJetMva','full53xId','PAT'),
+                NAME=cms.string("TupleElectronTausDown"),
+                doSVFit=cms.bool(WillRunSVFit),
+                maxElectrons=cms.uint32(MAX_ELECTRONS),
+                maxTaus=cms.uint32(MAX_TAUS),
+                doNotRequireFullIdForLeptons = cms.bool(doNotRequireFullIdForLeptons_),
+                muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                triggerEventSrc = cms.InputTag("patTriggerEvent"),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT')
+
+
+
+                                     )
+
+process.TupleElectronTausDownWeights = cms.EDProducer('TupleElectronTauWeightProducer' ,
+                NAME=cms.string("TupleElectronTausDownWeights"),
+                pileupSrc = pileupSrcInputTag,
+                electrontauSrc=cms.InputTag('TupleElectronTausDown','TupleElectronTausDown','PAT'),
+                electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+                tauSrc=cms.InputTag('TupleTausDown','TupleTausDown','PAT'),
+                userDataSrc=cms.InputTag('UserSpecifiedData','TupleUserSpecifiedData','PAT'),
+                TauSpinnerWTisValidSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTisValid','PAT'),
+                TauSpinnerWTSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWT','PAT'),
+                TauSpinnerWTFlipSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWTFlip','PAT'),
+                TauSpinnerWThminusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThminus','PAT'),
+                TauSpinnerWThplusSrc=cms.InputTag('TauSpinnerReco','TauSpinnerWThplus','PAT'),
+                LHEEventProductSrc=cms.InputTag('source','','LHE')
+                                     )
+
+
+
+
 ##################################################
 # Let it run
 ###################################################
@@ -947,7 +1354,13 @@ process.p *= process.EsCorrectedTausDown # needed here even for data
 process.p *= singlePatLeptons
 process.p *= process.calibratedAK5PFJetsForPFMEtMVA
 process.p *= pairWiseMvaMETsNominal
-
+process.p *= process.TupleElectronsNominal
+process.p *= process.TupleMuonsNominal
+process.p *= process.TupleTausNominal
+process.p *= process.TupleMuonTausNominal
+process.p *= process.TupleElectronTausNominal
+process.p *= process.TupleMuonTausNominalWeights
+process.p *= process.TupleElectronTausNominalWeights
 
 
 ########################################################################################################
