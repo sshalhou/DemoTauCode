@@ -455,7 +455,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
         // no pairing the candidate e (electron) with itself!
         //  checked with DR(electronIter,electron)
 
-        if(deltaR(electronIter->p4(), electron->p4()) <= 0.3) continue;
+        if(deltaR(electronIter->p4(), electron.p4()) <= 0.3) continue;
 
         //////////////////////////////////////////////////////
         // if the patElectron and our H candidate electron
