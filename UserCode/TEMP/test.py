@@ -76,6 +76,51 @@ else:
 process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
 
 
+
+
+###################################################
+# pu jet id requires PF jets as input
+###################################################
+
+from PhysicsTools.PatAlgos.tools.jetTools import *
+
+
+
+
+###################################################
+# must rerun b-tagging at PAT creation
+# in order to get embedded sample b-tags correct
+###################################################
+
+process.patJets.addTagInfos = True
+process.load('RecoBTag.Configuration.RecoBTag_cff')
+process.load('RecoJets.JetAssociationProducers.ak5JTA_cff')
+
+###################################################
+# special case stuff for embedded samples
+###################################################
+
+if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
+        print "EMBEDDED SETTING "
+        process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+        process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
+
+
+switchJetCollection(process,cms.InputTag('ak5PFJets'),
+                 doJTA        = True,
+                 doBTagging   = True,
+                 jetCorrLabel = ('AK5PF', jetEnCorr),
+                 doType1MET   = False,
+                 genJetCollection=cms.InputTag("ak5GenJets"),
+                 doJetID      = True
+                 )
+
+###################################################
+# load the PU JetID sequence
+###################################################
+
+process.load("RecoJets.JetProducers.pujetidsequence_cff")
+
 #####################################
 # compute the tau spinner weights
 #####################################
