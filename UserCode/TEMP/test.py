@@ -510,7 +510,7 @@ for tINDEX in range(MAX_TAUS):
 for tINDEX in range(MAX_TAUS):
   tModuleName = "cleanPatTausDown%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('EsCorrectedTausDown:EsCorrectedTausUp:PAT'),
+    tauSrc =cms.InputTag('EsCorrectedTausDown:EsCorrectedTausDown:PAT'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
