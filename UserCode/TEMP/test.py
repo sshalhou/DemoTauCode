@@ -81,7 +81,7 @@ process.selectedPrimaryVerticesNtuple = cms.EDFilter(
 
 ##################################################
 # will use cleanPatTaus, except for embedded
-# where we will set to patTausGenMatched::Ntuple
+# where we will set to patTausGenMatched::PAT
 # below
 ###################################################
 
@@ -517,6 +517,184 @@ for tINDEX in range(MAX_TAUS):
   singlePatLeptons += tModule
 
 
+################################
+# create the pair-wise mva mets
+################################
+
+pairWiseMvaMETsNominal = cms.Sequence()
+pairWiseMvaMETsUp = cms.Sequence()
+pairWiseMvaMETsDown = cms.Sequence()
+
+
+
+###########
+# eTau METs
+###########
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetNominal%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:PAT" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTausNominal%i:cleanPatTausNominal%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsNominal += metModule
+
+
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetUp%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:PAT" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTausUp%i:cleanPatTausUp%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsUp += metModule
+
+
+for eINDEX in range(MAX_ELECTRONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "eTauMetDown%ix%i" % (eINDEX,tINDEX)
+    eModuleName = "cleanPatElectrons%i:cleanPatElectrons%i:PAT" % (eINDEX,eINDEX)
+    tModuleName = "cleanPatTausDown%i:cleanPatTausDown%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(eModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsDown += metModule
+
+###########
+# muTau METs
+###########
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetNominal%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:PAT" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTausNominal%i:cleanPatTausNominal%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsNominal += metModule
+
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetUp%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:PAT" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTausUp%i:cleanPatTausUp%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsUp += metModule
+
+for mINDEX in range(MAX_MUONS):
+  for tINDEX in range(MAX_TAUS):
+    metModuleName = "muTauMetDown%ix%i" % (mINDEX,tINDEX)
+    mModuleName = "cleanPatMuons%i:cleanPatMuons%i:PAT" % (mINDEX,mINDEX)
+    tModuleName = "cleanPatTausDown%i:cleanPatTausDown%i:PAT" % (tINDEX,tINDEX)
+    metModule = process.pfMEtMVA.clone(
+      corrector = corrector_,
+      srcLeptons = cms.VInputTag(cms.InputTag(mModuleName),cms.InputTag(tModuleName)),
+      useType1 = cms.bool(False),
+      loadMVAfromDB = cms.bool(True),
+      minCorrJetPt = cms.double(-1),
+      inputRecords = cms.PSet(
+        U     = cms.string('mvaPFMET_53_Dec2012_U'),
+        DPhi  = cms.string('mvaPFMET_53_Dec2012_DPhi'),
+        CovU1 = cms.string('mvaPFMET_53_Dec2012_CovU1'),
+        CovU2 = cms.string('mvaPFMET_53_Dec2012_CovU2')))
+      #inputFileNames = cms.PSet(
+      #  U     = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmet_53_Dec2012.root'),
+      #  DPhi  = cms.FileInPath('RecoMET/METPUSubtraction/data/gbrmetphi_53_Dec2012.root'),
+      #  CovU1 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru1cov_53_Dec2012.root'),
+      #  CovU2 = cms.FileInPath('RecoMET/METPUSubtraction/data/gbru2cov_53_Dec2012.root')
+      #))
+    setattr(process, metModuleName, metModule)
+    metModule.minNumLeptons = cms.int32(2)
+    pairWiseMvaMETsDown += metModule
+
 
 
 ##################################################
@@ -767,7 +945,7 @@ process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
 process.p *= process.EsCorrectedTausDown # needed here even for data
 process.p *= singlePatLeptons
-
+process.p *= pairWiseMvaMETsNominal
 
 
 
