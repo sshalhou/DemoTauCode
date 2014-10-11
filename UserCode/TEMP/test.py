@@ -23,11 +23,10 @@ WillRunSVFit_ = False
 
 doNotRequireFullIdForLeptons_ = False # setting to true means more SVFIt calls
 printListOfModules_ = False
-CheckMemoryUsage_ = True
+CheckMemoryUsage_ = False
 
 
 FilterEvents_ = True
-DropSelectedPatObjects_ = True
 KeepAll_ = False
 PrintProductIDs_ = False
 
