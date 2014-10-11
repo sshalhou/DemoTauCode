@@ -212,8 +212,8 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
     for(muonIter=PATmuons->begin(); muonIter!=PATmuons->end(); ++muonIter)
     {
 
-      if(muonIter->p4()->pt() <= 10.0) continue;
-      if( fabs(muonIter->p4()->eta()) >= 2.4) continue;
+      if(muonIter->pt() <= 10.0) continue;
+      if( fabs(muonIter->eta()) >= 2.4) continue;
 
       double dz = 1000.0;
       double dxy = 1000.0;
@@ -231,7 +231,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
       if(!muonIter->isGlobalMuon()) continue;
 
       //////////////////////////////
-      booll isTightMuon = 1;
+      bool isTightMuon = 1;
       if(   !(muonIter->isGlobalMuon())                 ) isTightMuon = 0;
       if(   !(muonIter->numberOfMatchedStations()>1)    ) isTightMuon = 0;
       if(    muonIter->innerTrack().isNonnull() && muonIter->track().isNonnull() && muonIter->globalTrack().isNonnull() )
@@ -357,8 +357,8 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
         ////////////////////////////////////
         // basic cuts on the veto electron
 
-        if(electronIter->p4()->pt()< 12) continue;
-        if( fabs(electronIter->p4()->eta()) > 2.5) continue;
+        if(electronIter->pt()< 12) continue;
+        if( fabs(electronIter->eta()) > 2.5) continue;
 
         ////////////////////////////
         double dz = 999.;
