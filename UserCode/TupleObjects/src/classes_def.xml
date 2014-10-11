@@ -1,0 +1,32 @@
+<lcgdict>
+  <class name="TupleMuon"/>
+  <class name="std::vector<TupleMuon>"/>
+  <class name="edm::Wrapper<std::vector<TupleMuon> >"/>
+  <class name="TupleTau"/>
+  <class name="std::vector<TupleTau>"/>
+  <class name="edm::Wrapper<std::vector<TupleTau> >"/>
+  <class name="TupleMuonTau"/>
+  <class name="std::vector<TupleMuonTau>"/>
+  <class name="edm::Wrapper<std::vector<TupleMuonTau> >"/>
+  <class name="TupleUserSpecifiedData"/>
+  <class name="std::vector<TupleUserSpecifiedData>"/>
+  <class name="edm::Wrapper<std::vector<TupleUserSpecifiedData> >"/>
+  <class name="TupleElectron"/>
+  <class name="std::vector<TupleElectron>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectron> >"/>
+  <class name="TupleElectronTau"/>
+  <class name="std::vector<TupleElectronTau>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectronTau> >"/>
+  <class name="TupleMuonTauWeight"/>
+  <class name="std::vector<TupleMuonTauWeight>"/>
+  <class name="edm::Wrapper<std::vector<TupleMuonTauWeight> >"/>
+  <class name="TupleElectronTauWeight"/>
+  <class name="std::vector<TupleElectronTauWeight>"/>
+  <class name="edm::Wrapper<std::vector<TupleElectronTauWeight> >"/>
+  <class name="TupleGen"/>
+  <class name="std::vector<TupleGen>"/>
+  <class name="edm::Wrapper<std::vector<TupleGen> >"/>
+  <class name="TupleJet"/>
+  <class name="std::vector<TupleJet>"/>
+  <class name="edm::Wrapper<std::vector<TupleJet> >"/>
+</lcgdict>

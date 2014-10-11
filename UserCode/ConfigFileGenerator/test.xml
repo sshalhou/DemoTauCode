@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<SampleList>
+
+	<Sample
+		SampleName="/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+		OneWordName="WjetsLNuV2"
+		PhysicsProcess="W+jets to lepton + neutrino (v2)"
+		CrossSection="36257.0"
+		Mass="-1.0"
+		isNonTopEmbeddedSample="False"
+		isTopEmbeddedSample="False"
+		runOnMC="True"
+		Files="-1"
+		Events="-1"
+		Nblocks = "-1"
+		Nlumis = "-1"
+		Size="-1"
+		Type="-1"
+		WhiteList="-1"
+		lumi_mask="NULL"
+		/>
+
+<Sample
+	SampleName="/xWJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+	OneWordName="WjetsLNuV2"
+	PhysicsProcess="W+jets to lepton + neutrino (v2)"
+	CrossSection="36257.0"
+	Mass="-1.0"
+	isNonTopEmbeddedSample="False"
+	isTopEmbeddedSample="False"
+	runOnMC="True"
+	Files="-1"
+	Events="-1"
+	Nblocks = "-1"
+	Nlumis = "-1"
+	Size="-1"
+	Type="-1"
+	WhiteList="-1"
+	lumi_mask="NULL"
+	/>
+
+
+<Sample
+	SampleName="/zWJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM"
+	OneWordName="WjetsLNuV2"
+	PhysicsProcess="W+jets to lepton + neutrino (v2)"
+	CrossSection="36257.0"
+	Mass="-1.0"
+	isNonTopEmbeddedSample="False"
+	isTopEmbeddedSample="False"
+	runOnMC="True"
+	Files="-1"
+	Events="-1"
+	Nblocks = "-1"
+	Nlumis = "-1"
+	Size="-1"
+	Type="-1"
+	WhiteList="-1"
+	lumi_mask="NULL"
+	/>
+
+
+
+	</SampleList>

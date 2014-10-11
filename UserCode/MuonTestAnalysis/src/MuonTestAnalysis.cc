@@ -116,10 +116,10 @@ iEvent.getByLabel(muonSrc_,muons);
 
 
 
-  int nmuon = 0;
-  int loosemuons = 0;
-  int tightmuons = 0;
-  int selectedtightmuons = 0;
+
+
+
+
 
 
 //  if( primaryvertex->size() )  pvPtr = pv->ptrAt(0);
@@ -128,15 +128,16 @@ iEvent.getByLabel(muonSrc_,muons);
 
   for(edm::View<pat::Muon>::const_iterator muon=muons->begin(); muon!=muons->end(); ++muon) {
 
-              nmuon++;
 
-        if(muon->isLooseMuon()) loosemuons++;
-        if(muon->isGood("GlobalMuonPromptTight")){
 
-          tightmuons++;
-          // units of dz are cm I think
-          if(fabs(muon->muonBestTrack()->dz())<0.2) selectedtightmuons++;
-                                                  }
+
+
+std::cout<<" is loose "<<muon->isLooseMuon()<<std::endl;
+std::cout<<" is global prompt tight muon "<<muon->isGood("GlobalMuonPromptTight")<<std::endl;
+std::cout<<" fabs(dz) = "<<fabs(muon->muonBestTrack()->dz())<<std::endl;
+
+std::cout<<" dxy = "<<(muon->muonBestTrack()->dxy())<<std::endl;
+
 
 /////// isolation info
 
@@ -159,9 +160,6 @@ std::cout<<" isolation = "<<irel<<std::endl;
 
 
 
-std::cout<<" event had "<<nmuon<<" cleanPatMuons ";
-std::cout<<loosemuons<<" loose muons "<<" and "<<tightmuons<<" tight muons and "<<selectedtightmuons;
-std::cout<<" with d0 and dz cuts "<<std::endl;
 
 
 

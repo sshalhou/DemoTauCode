@@ -30,6 +30,26 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/PatCandidates/interface/Tau.h"
+
+
+bool passAntiEMVA(int iCat, float raw, int WP=1) {
+
+  if(iCat<0) return false;
+  if(iCat>15) return true;
+
+  float cutsLoose[16]={0.835,0.831,0.849,0.859,0.873,0.823,0.85,0.855,0.816,0.861,0.862,0.847,0.893,0.82,0.845,0.851};
+  float cutsMedium[16]={0.933,0.921,0.944,0.945,0.918,0.941,0.981,0.943,0.956,0.947,0.951,0.95,0.897,0.958,0.955,0.942};
+  float cutsTight[16]={ 0.96,0.968,0.971,0.972,0.969,0.959,0.981,0.965,0.975,0.972,0.974,0.971,0.897,0.971,0.961,0.97};
+  float cutsVeryTight[16]={0.978,0.98,0.982,0.985,0.977,0.974,0.989,0.977,0.986,0.983,0.984,0.983,0.971,0.987,0.977,0.981};
+  float cut=0;
+  if(WP==0) cut = cutsLoose[iCat];
+  if(WP==1) cut = cutsMedium[iCat];
+  if(WP==2) cut = cutsTight[iCat];
+  if(WP==3) cut = cutsVeryTight[iCat];
+  return (raw>cut);
+}
+
+
 //
 // class declaration
 //
@@ -108,16 +128,15 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 
 
 
-
-
+/*
           std::cout<<" isTauIDAvailable againstMuonLoose "<<tau->isTauIDAvailable("againstMuonLoose")<<std::endl;
           std::cout<<"  againstMuonLoose = "<<tau->tauID("againstMuonLoose")<<std::endl;
 
-          std::cout<<"againstElectronMVA3raw = "<<tau->tauID("againstElectronMVA3raw")<<std::endl;
+          std::cout<<"againstElectronMVA5raw = "<<tau->tauID("againstElectronMVA5raw")<<std::endl;
 
           std::cout<<" againstElectronLoose = "<<tau->tauID("againstElectronLoose")<<std::endl;
           std::cout<<" againstMuonTight = "<<tau->tauID("againstMuonTight")<<std::endl;
-          std::cout<<" againstElectronLooseMVA3 = "<<tau->tauID("againstElectronLooseMVA3")<<std::endl;
+          std::cout<<" againstElectronLooseMVA5 = "<<tau->tauID("againstElectronLooseMVA5")<<std::endl;
 
           std::cout<<" byMediumCombinedIsolationDeltaBetaCorr3Hits = ";
           std::cout<<tau->tauID("byMediumCombinedIsolationDeltaBetaCorr3Hits")<<std::endl;
@@ -126,9 +145,27 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
           std::cout<<" byCombinedIsolationDeltaBetaCorrRaw = ";
           std::cout<<tau->tauID("byCombinedIsolationDeltaBetaCorrRaw")<<std::endl;
           std::cout<<" decay mode "<<tau->decayMode()<<std::endl;
+*/
+
+
+//std::cout<<" iEvent.id() "<<iEvent.id();
+//std::cout<<" againstElectronLoose "<<tau->tauID("againstElectronLoose");
+//std::cout<<" againstElectronLooseMVA5 "<<tau->tauID("againstElectronLooseMVA5");
+//std::cout<<" againstElectronMVA5raw  "<<tau->tauID("againstElectronMVA5raw");
+//std::cout<<" againstElectronMVA5category "<<tau->tauID("againstElectronMVA5category");
+//std::cout<<" newLOOSEWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3"), 0);
+//std::cout<<" decay mode "<<tau->decayMode();
+//std::cout<<" newMEDWP "<<passAntiEMVA(tau->tauID("againstElectronMVA3category"), tau->tauID("againstElectronLooseMVA3raw"), 1)<<std::endl;
+
+
+std::cout<<"xyz iEvent.id() "<<iEvent.id();
+std::cout<<" tau pt "<<tau->p4().pt();
+std::cout<<" tau eta "<<tau->p4().eta();
+std::cout<<" byTightIsolationMVA3oldDMwLT "<<tau->tauID("byTightIsolationMVA3oldDMwLT");
+std::cout<<std::endl;
 
                     } // tau loop
-  std::cout<<" ntau = "<<ntau<<std::endl;
+  //std::cout<<" ntau = "<<ntau<<std::endl;
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
@@ -142,6 +179,12 @@ for(edm::View<pat::Tau>::const_iterator tau=taus->begin(); tau!=taus->end(); ++t
 #endif
 }
 
+
+/* WANT TO KEEP ALL THIS IN NTUPLE
+
+The available IDs are: 'againstElectronDeadECAL' 'againstElectronLoose' 'againstElectronLooseMVA5' 'againstElectronMVA5category' 'againstElectronMVA5raw' 'againstElectronMedium' 'againstElectronMediumMVA5' 'againstElectronTight' 'againstElectronTightMVA5' 'againstElectronVLooseMVA5' 'againstElectronVTightMVA5' 'againstMuonLoose' 'againstMuonLoose2' 'againstMuonLoose3' 'againstMuonLooseMVA' 'againstMuonMVAraw' 'againstMuonMedium' 'againstMuonMedium2' 'againstMuonMediumMVA' 'againstMuonTight' 'againstMuonTight2' 'againstMuonTight3' 'againstMuonTightMVA' 'byCombinedIsolationDeltaBetaCorrRaw' 'byCombinedIsolationDeltaBetaCorrRaw3Hits' 'byIsolationMVA3newDMwLTraw' 'byIsolationMVA3newDMwoLTraw' 'byIsolationMVA3oldDMwLTraw' 'byIsolationMVA3oldDMwoLTraw' 'byLooseCombinedIsolationDeltaBetaCorr' 'byLooseCombinedIsolationDeltaBetaCorr3Hits' 'byLooseIsolation' 'byLooseIsolationMVA3newDMwLT' 'byLooseIsolationMVA3newDMwoLT' 'byLooseIsolationMVA3oldDMwLT' 'byLooseIsolationMVA3oldDMwoLT' 'byMediumCombinedIsolationDeltaBetaCorr' 'byMediumCombinedIsolationDeltaBetaCorr3Hits' 'byMediumIsolationMVA3newDMwLT' 'byMediumIsolationMVA3newDMwoLT' 'byMediumIsolationMVA3oldDMwLT' 'byMediumIsolationMVA3oldDMwoLT' 'byTightCombinedIsolationDeltaBetaCorr' 'byTightCombinedIsolationDeltaBetaCorr3Hits' 'byTightIsolationMVA3newDMwLT' 'byTightIsolationMVA3newDMwoLT' 'byTightIsolationMVA3oldDMwLT' 'byTightIsolationMVA3oldDMwoLT' 'byVLooseCombinedIsolationDeltaBetaCorr' 'byVLooseIsolationMVA3newDMwLT' 'byVLooseIsolationMVA3newDMwoLT' 'byVLooseIsolationMVA3oldDMwLT' 'byVLooseIsolationMVA3oldDMwoLT' 'byVTightIsolationMVA3newDMwLT' 'byVTightIsolationMVA3newDMwoLT' 'byVTightIsolationMVA3oldDMwLT' 'byVTightIsolationMVA3oldDMwoLT' 'byVVTightIsolationMVA3newDMwLT' 'byVVTightIsolationMVA3newDMwoLT' 'byVVTightIsolationMVA3oldDMwLT' 'byVVTightIsolationMVA3oldDMwoLT' 'chargedIsoPtSum' 'decayModeFinding' 'decayModeFindingNewDMs' 'decayModeFindingOldDMs' 'neutralIsoPtSum' 'puCorrPtSum' .
+
+*/
 
 // ------------ method called once each job just before starting event loop  ------------
 void

@@ -1,0 +1,12 @@
+<use name="FWCore/Framework"/>
+<use name="FWCore/PluginManager"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="UserCode/TupleObjects"/>
+<use name="TauAnalysis/CandidateTools"/>
+<use   name="CommonTools/UtilAlgos"/>
+<use   name="CondFormats/JetMETObjects"/>
+<use   name="JetMETCorrections/Objects"/>
+<use   name="fastjet"/>
+<use name="rootrflx"/>
+<flags EDM_PLUGIN="1"/>

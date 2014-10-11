@@ -33,7 +33,7 @@ process.Step2GlobalPFMuons = cleanPatMuons.clone(preselection =
 
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonCountFilter_cfi import *
-process.Step3GlobalPFMuonsCount = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 1, maxNumber = 1000)
+process.Step3GlobalPFMuonsCount = countPatMuons.clone(src = 'Step2GlobalPFMuons', minNumber = 2, maxNumber = 1000)
 
 
 #-------------------------------------------------
