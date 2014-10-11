@@ -54,11 +54,11 @@ genTTembeddedSrcInputTag = cms.InputTag('')
 pileupSrcInputTag = cms.InputTag('addPileupInfo')
 
 
-if isNonTopEmbeddedSample:
+if isNonTopEmbeddedSample_:
   genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
   genTTembeddedSrcInputTag = cms.InputTag('')
 
-elif isTopEmbeddedSample:
+elif isTopEmbeddedSample_:
   genSrcInputTag = cms.InputTag('genParticles::EmbeddedRECO')
   genTTembeddedSrcInputTag = cms.InputTag('genParticles::SIM')
   pileupSrcInputTag = cms.InputTag('addPileupInfo::HLT')
