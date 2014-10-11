@@ -23,12 +23,12 @@ WillRunSVFit_ = False
 
 doNotRequireFullIdForLeptons_ = False # setting to true means more SVFIt calls
 printListOfModules_ = False
-CheckMemoryUsage_ = False
+CheckMemoryUsage_ = True
 
 
 FilterEvents_ = True
 DropSelectedPatObjects_ = True
-KeepAll_ = True
+KeepAll_ = False
 PrintProductIDs_ = False
 
 
@@ -1449,5 +1449,5 @@ process.out.SelectEvents.SelectEvents = ['p']
 
 
 
-process.maxEvents.input = 20
+process.maxEvents.input = -1
 ########################################################################################################
