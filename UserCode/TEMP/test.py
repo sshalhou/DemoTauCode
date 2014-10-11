@@ -491,7 +491,7 @@ for mINDEX in range(MAX_MUONS):
 for tINDEX in range(MAX_TAUS):
   tModuleName = "cleanPatTausNominal%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('EsCorrectedTausNominal'),
+    tauSrc =cms.InputTag('EsCorrectedTausNominal:EsCorrectedTausNominal:PAT'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
@@ -501,7 +501,7 @@ for tINDEX in range(MAX_TAUS):
 for tINDEX in range(MAX_TAUS):
   tModuleName = "cleanPatTausUp%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('EsCorrectedTausUp'),
+    tauSrc =cms.InputTag('EsCorrectedTausUp:EsCorrectedTausUp:PAT'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
@@ -510,7 +510,7 @@ for tINDEX in range(MAX_TAUS):
 for tINDEX in range(MAX_TAUS):
   tModuleName = "cleanPatTausDown%i" % (tINDEX)
   tModule = cms.EDProducer('SinglePatTauProducer' ,
-    tauSrc =cms.InputTag('EsCorrectedTausDown'),
+    tauSrc =cms.InputTag('EsCorrectedTausDown:EsCorrectedTausUp:PAT'),
     INDEX = cms.uint32(tINDEX),
     NAME=cms.string(tModuleName))
   setattr(process, tModuleName, tModule)
