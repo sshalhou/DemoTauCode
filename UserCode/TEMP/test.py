@@ -437,6 +437,32 @@ process.VertexPresent = cms.EDFilter("VertexSelector",
 
 
 
+
+####################################
+# setup the MVA MET calculation
+#####################################
+
+process.load("JetMETCorrections.Configuration.JetCorrectionServicesAllAlgos_cff")
+from JetMETCorrections.Configuration.DefaultJEC_cff import *
+if runOnMC_ and not isNonTopEmbeddedSample_:
+  process.prefer("ak5PFL1FastL2L3")
+else:
+  process.prefer("ak5PFL1FastL2L3Residual")
+
+process.load('JetMETCorrections.Configuration.JetCorrectionProducers_cff')
+#from RecoMET.METPUSubtraction.mvaPFMET_leptons_cff import pfMEtMVA
+from RecoMET.METPUSubtraction.mvaPFMET_cff import calibratedAK5PFJetsForPFMEtMVA
+process.load("RecoMET.METPUSubtraction.mvaPFMET_cff")
+process.calibratedAK5PFJetsForPFMEtMVA = calibratedAK5PFJetsForPFMEtMVA.clone()
+
+if runOnMC_ and not isNonTopEmbeddedSample_:
+  process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3")
+else:
+  process.calibratedAK5PFJetsForPFMEtMVA.correctors = cms.vstring("ak5PFL1FastL2L3Residual")
+
+
+
+
 ##################################################
 # Let it run
 ###################################################
