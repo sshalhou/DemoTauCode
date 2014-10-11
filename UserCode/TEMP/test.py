@@ -73,6 +73,9 @@ else:
   jetEnCorr.extend(['L2L3Residual'])
 
 
+process.load('JetMETCorrections.Configuration.DefaultJEC_cff')
+
+
 #####################################
 # compute the tau spinner weights
 #####################################
