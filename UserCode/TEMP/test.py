@@ -88,7 +88,7 @@ process.p = cms.Path(process.UserSpecifiedData)
 #################################
 process.out.outputCommands +=['keep Tuple*_*_*_*']
 
-if KeepAll:
+if KeepAll_:
   process.out.outputCommands +=['keep *_*_*_*']
 ########################################################################################################
 process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
