@@ -356,7 +356,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
         ////////////////////////////////////
         // basic cuts on the veto electron
 
-        if(electronIter->pt()< 12) continue;
+        if(electronIter->pt()< 15) continue;
         if( fabs(electronIter->eta()) > 2.5) continue;
 
         ////////////////////////////
@@ -467,7 +467,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
         ///////////////
         // if made it here the veto is set
-        KEEP_THIRD = 0;
+        KEEP_SECOND = 0;
 
         ////////////////
         // exit the patElectron Loop
@@ -484,6 +484,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
     ///////////////////////////
     // add the current veto
+    std::cout<<" Electron Vetoes 2nd and 3rd "<<KEEP_SECOND<<" "<<KEEP_THIRD<<std::endl;
     TupleElectronTauVetoesVec->push_back(CurrentElectronTauVeto);
 
    }

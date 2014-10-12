@@ -45,6 +45,49 @@ namespace TupleHelpers
 {
 
 
+  /////////////////
+  // electron veto mva MVALoose
+
+
+  bool passesMVALoose(double PT, double superClusterEta, double mvaPOGNonTrig)
+  {
+    bool MVALoose = 0;
+    double ETA = fabs(superClusterEta);
+    double MVA = mvaPOGNonTrig;
+
+    if(PT<=20 && ETA>=0.0 && ETA<=0.8 && MVA>0.925) MVALoose = 1;
+    else if(PT<=20 && ETA>=0.8 && ETA<1.479 && MVA>0.915) MVALoose = 1;
+    else if(PT<=20 && ETA>=1.479 && ETA<2.5 && MVA>0.965) MVALoose = 1;
+    else if(PT>20 && ETA>=0.0 && ETA<=0.8 && MVA>0.905) MVALoose = 1;
+    else if(PT>20 && ETA>=0.8 && ETA<1.479 && MVA>0.955) MVALoose = 1;
+    else if(PT>20 && ETA>=1.479 && ETA<2.5 && MVA>0.975) MVALoose = 1;
+
+    return MVALoose;
+
+  }
+
+
+  bool passesMVALooseNEW(double PT, double superClusterEta, double mvaPOGTrigNoIP)
+  {
+    bool MVALooseNEW = 0;
+    double ETA = fabs(superClusterEta);
+    double MVA = mvaPOGTrigNoIP;
+
+    if(PT<=20 && ETA>=0.0 && ETA<=0.8 && MVA>-0.5375) MVALoose = 1;
+    else if(PT<=20 && ETA>=0.8 && ETA<1.479 && MVA>-0.375) MVALoose = 1;
+    else if(PT<=20 && ETA>=1.479 && ETA<2.5 && MVA>-0.025) MVALoose = 1;
+    else if(PT>20 && ETA>=0.0 && ETA<=0.8 && MVA>0.325) MVALoose = 1;
+    else if(PT>20 && ETA>=0.8 && ETA<1.479 && MVA>0.775) MVALoose = 1;
+    else if(PT>20 && ETA>=1.479 && ETA<2.5 && MVA>0.775) MVALoose = 1;
+
+    return MVALooseNEW;
+
+  }
+
+
+
+
+
   ///////////////////
   // helper function for
   // finding PV and storing related
