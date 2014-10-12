@@ -73,12 +73,12 @@ namespace TupleHelpers
     double ETA = fabs(superClusterEta);
     double MVA = mvaPOGTrigNoIP;
 
-    if(PT<=20 && ETA>=0.0 && ETA<=0.8 && MVA>-0.5375) MVALoose = 1;
-    else if(PT<=20 && ETA>=0.8 && ETA<1.479 && MVA>-0.375) MVALoose = 1;
-    else if(PT<=20 && ETA>=1.479 && ETA<2.5 && MVA>-0.025) MVALoose = 1;
-    else if(PT>20 && ETA>=0.0 && ETA<=0.8 && MVA>0.325) MVALoose = 1;
-    else if(PT>20 && ETA>=0.8 && ETA<1.479 && MVA>0.775) MVALoose = 1;
-    else if(PT>20 && ETA>=1.479 && ETA<2.5 && MVA>0.775) MVALoose = 1;
+    if(PT<=20 && ETA>=0.0 && ETA<=0.8 && MVA>-0.5375) MVALooseNEW = 1;
+    else if(PT<=20 && ETA>=0.8 && ETA<1.479 && MVA>-0.375) MVALooseNEW = 1;
+    else if(PT<=20 && ETA>=1.479 && ETA<2.5 && MVA>-0.025) MVALooseNEW = 1;
+    else if(PT>20 && ETA>=0.0 && ETA<=0.8 && MVA>0.325) MVALooseNEW = 1;
+    else if(PT>20 && ETA>=0.8 && ETA<1.479 && MVA>0.775) MVALooseNEW = 1;
+    else if(PT>20 && ETA>=1.479 && ETA<2.5 && MVA>0.775) MVALooseNEW = 1;
 
     return MVALooseNEW;
 
