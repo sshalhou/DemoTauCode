@@ -504,25 +504,25 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
       bool KEEP_SECOND = 1;
 
 
-      edm::View<pat::Muon>::const_iterator muonIter;
-      for(muonIter=PATmuons->begin(); muonIter!=PATmuons->end(); ++muonIter)
+      edm::View<pat::Muon>::const_iterator muonIter2;
+      for(muonIter2=PATmuons->begin(); muonIter2!=PATmuons->end(); ++muonIter2)
       {
 
-        if(muonIter->pt() <= 15.0) continue;
-        if( fabs(muonIter->eta()) >= 2.4) continue;
+        if(muonIter2->pt() <= 15.0) continue;
+        if( fabs(muonIter2->eta()) >= 2.4) continue;
         double dz = 1000.0;
         double dxy = 1000.0;
 
-        if(!muonIter->innerTrack().isNull())
+        if(!muonIter2->innerTrack().isNull())
         {
-          dz = muonIter->innerTrack()->dz(first_vertex.position());
-          dxy = muonIter->innerTrack()->dxy(first_vertex.position());
+          dz = muonIter2->innerTrack()->dz(first_vertex.position());
+          dxy = muonIter2->innerTrack()->dxy(first_vertex.position());
 
         }
 
         if(fabs(dxy) >= 0.045) continue;
         if(fabs(dz) >= 0.2) continue;
-        if(!muonIter->isGlobalMuon()) continue;
+        if(!muonIter2->isGlobalMuon()) continue;
 
         /////////////////////////////
 
@@ -539,7 +539,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
                 if( muonRefToPFMuon.isNonnull() )
                 {
-                  if(deltaR( muonRefToPFMuon->p4() , muonIter->p4()) < 1e-04)
+                  if(deltaR( muonRefToPFMuon->p4() , muonIter2->p4()) < 1e-04)
                   {
                     if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() )
                     {
@@ -575,25 +575,25 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
 
 
-        vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.00010));
+        vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.00010));
         vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
 
-        vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+        vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
         vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
 
-        vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+        vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
         vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
 
-        vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+        vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
         vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
 
-        allChIso04PFId = muonIter->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
-        nhIso04PFId = muonIter->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
-        phIso04PFId = muonIter->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
-        nhIsoPU04PFId = muonIter->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
+        allChIso04PFId = muonIter2->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
+        nhIso04PFId = muonIter2->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
+        phIso04PFId = muonIter2->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
+        nhIsoPU04PFId = muonIter2->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
 
         relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
-        if(muonIter->pt()!=0) relativeIsolation_DR4/=muonIter->pt();
+        if(muonIter2->pt()!=0) relativeIsolation_DR4/=muonIter2->pt();
 
         for(unsigned int i = 0; i <vetos2012PFIdCharged.size(); i++) delete vetos2012PFIdCharged[i];
         for(unsigned int i = 0; i <vetos2012PFIdNeutral.size(); i++) delete vetos2012PFIdNeutral[i];
@@ -606,14 +606,14 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         // no pairing the candidate with itself!
         //  checked with DR
 
-        if(deltaR(muonIter->p4(), muon.p4()) <= 0.3) continue;
+        if(deltaR(muonIter2->p4(), muon.p4()) <= 0.3) continue;
 
         //////////////////////////////////////////////////////
         // if the patMuon and our H candidate muon
         //  do not have opp sign, do not veto the event
 
 
-        if(muon.charge() == MuonIter->charge()) continue;
+        if(muon.charge() == MuonIter2->charge()) continue;
 
         ///////////////
         // if made it here the veto is set
@@ -638,7 +638,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
   }
 
 
-  iEvent.put( TupleMuonTauVetoess, NAME_ );
+  iEvent.put( TupleMuonTauVetoesVec, NAME_ );
 
 
   /* This is an event example
