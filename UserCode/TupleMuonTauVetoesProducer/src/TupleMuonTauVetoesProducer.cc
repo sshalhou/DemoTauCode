@@ -613,7 +613,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         //  do not have opp sign, do not veto the event
 
 
-        if(muon.charge() == MuonIter2->charge()) continue;
+        if(muon.charge() == muonIter2->charge()) continue;
 
         ///////////////
         // if made it here the veto is set
