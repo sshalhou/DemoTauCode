@@ -30,6 +30,10 @@ public:
   void set_p4(LorentzVector);
   void set_JecShift(double);
   void set_passesPUjetIDLoose(bool);
+  void set_passesPUjetIDMedium(bool);
+  void set_passesPUjetIDTight(bool);
+  void set_PUjetIDScore(double);
+  void set_PUjetIDFlag(int);
   void set_passesPFjetIDLoose(bool);
   void set_combinedSecondaryVertexBJetTags(double);
   void set_partonFlavour(int);
@@ -41,6 +45,10 @@ public:
   LorentzVector p4() const;
   double JecShift() const;
   bool passesPUjetIDLoose() const;
+  bool passesPUjetIDMedium() const;
+  bool passesPUjetIDTight() const;
+  double PUjetIDScore() const;
+  int PUjetIDFlag() const;
   bool passesPFjetIDLoose() const;
   double combinedSecondaryVertexBJetTags() const;
   int partonFlavour() const;
@@ -54,6 +62,10 @@ private:
   LorentzVector m_p4;
   double m_JecShift;
   bool m_passesPUjetIDLoose;
+  bool m_passesPUjetIDMedium;
+  bool m_passesPUjetIDTight;
+  double m_PUjetIDScore;
+  int m_PUjetIDFlag;
   bool m_passesPFjetIDLoose;
   double m_combinedSecondaryVertexBJetTags;
   int m_partonFlavour;

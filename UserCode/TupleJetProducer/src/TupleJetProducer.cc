@@ -261,8 +261,13 @@ TupleJetProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // JEC shift
     CurrentJet.set_JecShift(shift);
 
-    // passes PU jet ID Loose?
+    // passes PU jet ID Loose, Medium, Tight, and Score
     CurrentJet.set_passesPUjetIDLoose(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ));
+    CurrentJet.set_passesPUjetIDMedium(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kMedium ));
+    CurrentJet.set_passesPUjetIDTight(PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kTight ));
+    CurrentJet.set_PUjetIDScore(mva);
+    CurrentJet.set_PUjetIDFlag(idflag);
+
 
     // passes PF jet ID loose?
     retpf.set(false);
