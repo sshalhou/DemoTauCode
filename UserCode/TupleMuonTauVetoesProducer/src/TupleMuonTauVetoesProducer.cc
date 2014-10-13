@@ -290,7 +290,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
           double relativeIsolation = 999.9;
 
 
-          TupleHelper::setElectron_dz_dxy_NumLostHits_RelIsol(
+          TupleHelpers::setElectron_dz_dxy_NumLostHits_RelIsol(
                                         dz, dxy, NumMissingHits,
                                         relativeIsolation,
                                         first_vertex,
