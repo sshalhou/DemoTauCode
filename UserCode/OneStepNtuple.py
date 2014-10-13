@@ -1471,7 +1471,7 @@ process.p *= process.TupleElectronTausNominal
 process.p *= process.TupleMuonTausNominalWeights
 process.p *= process.TupleElectronTausNominalWeights
 process.p *= process.TupleElectronTauNominalVetoes
-process.p *= process.MuonElectronTauNominalVetoes
+process.p *= process.TupleMuonTauNominalVetoes
 process.p *= process.TupleJet
 
 
@@ -1490,9 +1490,9 @@ if runOnMC_:
   process.p *= process.TupleMuonTausDownWeights
   process.p *= process.TupleElectronTausDownWeights
   process.p *= process.TupleElectronTauUpVetoes
-  process.p *= process.MuonElectronTauUpVetoes
+  process.p *= process.TupleMuonTauUpVetoes
   process.p *= process.TupleElectronTauDownVetoes
-  process.p *= process.MuonElectronTauDownVetoes
+  process.p *= process.TupleMuonTauDownVetoes
 
 
 if printListOfModules_:
