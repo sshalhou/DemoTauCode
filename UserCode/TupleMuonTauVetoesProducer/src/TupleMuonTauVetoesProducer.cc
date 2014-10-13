@@ -110,10 +110,10 @@ edm::InputTag pfSrc_;
 TupleMuonTauVetoesProducer::TupleMuonTauVetoesProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 patElectronSrc_(iConfig.getParameter<edm::InputTag>("patElectronSrc" )),
-patMuonSrc_(iConfig.getParameter<edm::InputTag>("patMuonSrc_" )),
-tupleMuonTauSrc_(iConfig.getParameter<edm::InputTag>("tupleMuonTauSrc_" )),
-tupleMuonSrc_(iConfig.getParameter<edm::InputTag>("tupleMuonSrc_" )),
-vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc_" )),
+patMuonSrc_(iConfig.getParameter<edm::InputTag>("patMuonSrc" )),
+tupleMuonTauSrc_(iConfig.getParameter<edm::InputTag>("tupleMuonTauSrc" )),
+tupleMuonSrc_(iConfig.getParameter<edm::InputTag>("tupleMuonSrc" )),
+vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" )),
 pfSrc_(iConfig.getParameter<edm::InputTag>("pfSrc" ))
 {
 
@@ -229,8 +229,8 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     for(muonIter=PATmuons->begin(); muonIter!=PATmuons->end(); ++muonIter)
     {
 
-      if(muonIter->pt() <= 10.0) continue;
-      if( fabs(muonIter->eta()) >= 2.4) continue;
+      //if(muonIter->pt() <= 10.0) continue;
+      //if( fabs(muonIter->eta()) >= 2.4) continue;
       double dz = 1000.0;
       double dxy = 1000.0;
 
@@ -241,9 +241,9 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
       }
 
-      if(fabs(dxy) >= 0.045) continue;
-      if(fabs(dz) >= 0.2) continue;
-      if(!muonIter->isGlobalMuon()) continue;
+    //  if(fabs(dxy) >= 0.045) continue;
+    //  if(fabs(dz) >= 0.2) continue;
+    //  if(!muonIter->isGlobalMuon()) continue;
 
       //////////////////////////////
       bool isTightMuon = 1;
@@ -260,7 +260,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
       } else isTightMuon = 0;
       /////////////////////////////////
 
-      if(!isTightMuon) continue;
+    //  if(!isTightMuon) continue;
 
 
       /////////////////////////////
@@ -292,7 +292,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
           }
 
       /////////////////////////////
-        if(!isPFMuon) continue;
+      //  if(!isPFMuon) continue;
 
 
       /////////////
@@ -342,12 +342,26 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
       for(unsigned int i = 0; i <vetos2012PFIdPUCharged.size(); i++) delete vetos2012PFIdPUCharged[i];
 
       ////////////
-      if (relativeIsolation_DR4>=0.3) continue;
+    //  if (relativeIsolation_DR4>=0.3) continue;
 
       // in the muon leg of the muonTau 3rd Lep veto
       // there is a DR cut too
 
-      if(deltaR(muonIter->p4(), muon.p4()) <= 0.3) continue;
+//      if(deltaR(muonIter->p4(), muon.p4()) <= 0.3) continue;
+
+        double DZ = 999.9;
+        double DXY = 999.9;
+        bool ISTIGHT = 0;
+        bool ISPF = 0;
+        bool ISTRACKER = 0;
+
+        TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,
+        first_vertex,pfCandidates,&*muonIter);
+
+        std::cout<<" ------------new muon -------------- "<<std::endl;
+        std::cout<<DZ<<" "<<DXY<<" "<<ISTIGHT<<" "<<ISPF<<" "<<ISTRACKER<<std::endl;
+        std::cout<<dz<<" "<<dxy<<" "<<isTightMuon<<" "<<isPFMuon<<std::endl;
+        if(DXY!=dxy || DZ!=dz || ISTIGHT!=isTightMuon || ISPF!=isPFMuon)  std::cout<<" ERROR MISMATCH \n";
 
 
       ///////////////
@@ -356,7 +370,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
       ////////////////
       // exit the patMuon Loop
-      break;
+      //break;
 
     }
 
