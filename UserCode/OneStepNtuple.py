@@ -1184,7 +1184,7 @@ process.TupleElectronTauNominalVetoes = cms.EDProducer("TupleElectronTauVetoesPr
                 patElectronSrc =cms.InputTag('cleanPatElectrons'),
                 patMuonSrc =cms.InputTag('cleanPatMuons'),
                 tupleElectronTauSrc = cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','PAT'),
-                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tupleElectronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
                 vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
                 pfSrc = cms.InputTag('particleFlow')
                 )
@@ -1194,7 +1194,7 @@ process.TupleElectronTauUpVetoes = cms.EDProducer("TupleElectronTauVetoesProduce
                 patElectronSrc =cms.InputTag('cleanPatElectrons'),
                 patMuonSrc =cms.InputTag('cleanPatMuons'),
                 tupleElectronTauSrc = cms.InputTag('TupleElectronTausUp','TupleElectronTausUp','PAT'),
-                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tupleElectronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
                 vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
                 pfSrc = cms.InputTag('particleFlow')
                 )
@@ -1204,7 +1204,7 @@ process.TupleElectronTauDownVetoes = cms.EDProducer("TupleElectronTauVetoesProdu
                 patElectronSrc =cms.InputTag('cleanPatElectrons'),
                 patMuonSrc =cms.InputTag('cleanPatMuons'),
                 tupleElectronTauSrc = cms.InputTag('TupleElectronTausDown','TupleElectronTausDown','PAT'),
-                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                tupleElectronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
                 vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
                 pfSrc = cms.InputTag('particleFlow')
                 )
