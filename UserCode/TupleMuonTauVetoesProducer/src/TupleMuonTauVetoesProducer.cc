@@ -354,14 +354,15 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         bool ISTIGHT = 0;
         bool ISPF = 0;
         bool ISTRACKER = 0;
+        double RELISOL,
 
-        TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,
+        TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,RELISOL,
         first_vertex,pfCandidates,&*muonIter);
 
         std::cout<<" ------------new muon -------------- "<<std::endl;
-        std::cout<<DZ<<" "<<DXY<<" "<<ISTIGHT<<" "<<ISPF<<" "<<ISTRACKER<<std::endl;
-        std::cout<<dz<<" "<<dxy<<" "<<isTightMuon<<" "<<isPFMuon<<std::endl;
-        if(DXY!=dxy || DZ!=dz || ISTIGHT!=isTightMuon || ISPF!=isPFMuon)  std::cout<<" ERROR MISMATCH \n";
+        std::cout<<DZ<<" "<<DXY<<" "<<ISTIGHT<<" "<<ISPF<<" "<<relativeIsolation_DR4<<std::endl;
+        std::cout<<dz<<" "<<dxy<<" "<<isTightMuon<<" "<<isPFMuon<<" "<<RELISOL<<" "<<std::endl;
+        if(DXY!=dxy || DZ!=dz || ISTIGHT!=isTightMuon || ISPF!=isPFMuon|| RELISOL!=relativeIsolation_DR4)  std::cout<<" ERROR MISMATCH \n";
 
 
       ///////////////
