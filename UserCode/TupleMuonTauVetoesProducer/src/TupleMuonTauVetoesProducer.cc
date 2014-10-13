@@ -294,12 +294,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
                                         dz, dxy, NumMissingHits,
                                         relativeIsolation,
                                         first_vertex,
-                                        &*electronIter)
-
-
-          TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(dz,dxy,isTightMuon,isPFMuon,isTracker,
-          relativeIsolation_DR4,
-          first_vertex,pfCandidates,&*muonIter);
+                                        &*electronIter);
 
 
           //////////////////
