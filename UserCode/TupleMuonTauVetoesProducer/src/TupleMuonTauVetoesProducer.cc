@@ -361,7 +361,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
         TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(dz,dxy,isTightMuon,isPFMuon,isTracker,
         relativeIsolation_DR4,
-        first_vertex,pfCandidates,&*muonIter);
+        first_vertex,pfCandidates,&*muonIter2);
 
         if(fabs(dxy) >= 0.045) continue;
         if(fabs(dz) >= 0.2) continue;
