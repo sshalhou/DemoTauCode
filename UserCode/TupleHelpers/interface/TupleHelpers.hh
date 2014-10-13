@@ -137,25 +137,25 @@ namespace TupleHelpers
 
 
 
-      vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.00010));
+      vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.00010));
       vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
 
-      vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+      vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
       vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
 
-      vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+      vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
       vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
 
-      vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
+      vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muon->eta(),muon->phi()),0.010));
       vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
 
-      allChIso04PFId = muonIter->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
-      nhIso04PFId = muonIter->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
-      phIso04PFId = muonIter->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
-      nhIsoPU04PFId = muonIter->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
+      allChIso04PFId = muon->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
+      nhIso04PFId = muon->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
+      phIso04PFId = muon->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
+      nhIsoPU04PFId = muon->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
 
       relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
-      if(muonIter->pt()!=0) relativeIsolation_DR4/=muonIter->pt();
+      if(muon->pt()!=0) relativeIsolation_DR4/=muon->pt();
 
       for(unsigned int i = 0; i <vetos2012PFIdCharged.size(); i++) delete vetos2012PFIdCharged[i];
       for(unsigned int i = 0; i <vetos2012PFIdNeutral.size(); i++) delete vetos2012PFIdNeutral[i];
