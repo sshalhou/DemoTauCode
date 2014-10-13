@@ -89,7 +89,7 @@ namespace TupleHelpers
     } else isTight = 0;
     /////////////////////////////////
 
-    bool isPF = 0;
+     isPF = 0;
 
       for(size_t pf = 0; pf < pfCandidates->size(); pf++)
       {
