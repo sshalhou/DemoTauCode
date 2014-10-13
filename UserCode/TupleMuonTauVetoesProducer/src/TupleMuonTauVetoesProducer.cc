@@ -366,6 +366,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         if(fabs(dxy) >= 0.045) continue;
         if(fabs(dz) >= 0.2) continue;
         if(!muonIter2->isGlobalMuon()) continue;
+        if(!isTightMuon) continue;
         if(!isPFMuon) continue;
         if (relativeIsolation_DR4>=0.3) continue;
 

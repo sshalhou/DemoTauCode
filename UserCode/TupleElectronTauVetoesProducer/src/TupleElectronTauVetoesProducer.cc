@@ -245,7 +245,7 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
     }
 
     ///////////////////////////
-    // in muon+Tau, the 3rd lepton
+    // in electron+Tau, the 3rd lepton
     // veto also includes an electron
     // check -- we will only do it if
     // the muons side has not yet set the veto

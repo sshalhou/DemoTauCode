@@ -1135,18 +1135,80 @@ process.TupleJet = cms.EDProducer('TupleJetProducer' ,
 # too risky to do this here
 ##########################
 
-process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
-  muonSource     = cms.InputTag("cleanPatMuons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
-  filter = cms.bool(True)
-)
+# process.isDiMuonEvent = cms.EDFilter("DiMuonFilter",
+#   muonSource     = cms.InputTag("cleanPatMuons"),
+#   vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
+#   filter = cms.bool(True)
+# )
+#
+#
+# process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
+#   electronSource     = cms.InputTag("cleanPatElectrons"),
+#   vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
+#   filter = cms.bool(True)
+# )
 
 
-process.isDiElectronEvent = cms.EDFilter("DiElectronFilter",
-  electronSource     = cms.InputTag("cleanPatElectrons"),
-  vertexSource      = cms.InputTag("selectedPrimaryVerticesNtuple::PAT"),
-  filter = cms.bool(True)
-)
+process.TupleMuonTauNominalVetoes = cms.EDProducer("TupleMuonTauVetoesProducer",
+                NAME=cms.string("TupleMuonTausNominalVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleMuonTauSrc = cms.InputTag('TupleMuonTausNominal','TupleMuonTausNominal','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
+process.TupleMuonTauUpVetoes = cms.EDProducer("TupleMuonTauVetoesProducer",
+                NAME=cms.string("TupleMuonTausUpVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleMuonTauSrc = cms.InputTag('TupleMuonTausUp','TupleMuonTausUp','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
+process.TupleMuonTauDownVetoes = cms.EDProducer("TupleMuonTauVetoesProducer",
+                NAME=cms.string("TupleMuonTausDownVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleMuonTauSrc = cms.InputTag('TupleMuonTausDown','TupleMuonTausDown','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
+process.TupleElectronTauNominalVetoes = cms.EDProducer("TupleElectronTauVetoesProducer",
+                NAME=cms.string("TupleElectronTausNominalVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleElectronTauSrc = cms.InputTag('TupleElectronTausNominal','TupleElectronTausNominal','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
+process.TupleElectronTauUpVetoes = cms.EDProducer("TupleElectronTauVetoesProducer",
+                NAME=cms.string("TupleElectronTausUpVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleElectronTauSrc = cms.InputTag('TupleElectronTausUp','TupleElectronTausUp','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
+process.TupleElectronTauDownVetoes = cms.EDProducer("TupleElectronTauVetoesProducer",
+                NAME=cms.string("TupleElectronTausDownVetoes"),
+                patElectronSrc =cms.InputTag('cleanPatElectrons'),
+                patMuonSrc =cms.InputTag('cleanPatMuons'),
+                tupleElectronTauSrc = cms.InputTag('TupleElectronTausDown','TupleElectronTausDown','PAT'),
+                tupleMuonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+                vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
+                pfSrc = cms.InputTag('particleFlow')
+                )
+
 
 ##################################################
 # Let it run
@@ -1392,8 +1454,8 @@ if runOnMC_:
 # things formerly in the Ntuple
 
 process.p *= process.selectedPrimaryVerticesNtuple
-process.p *= process.isDiMuonEvent
-process.p *= process.isDiElectronEvent
+#process.p *= process.isDiMuonEvent
+#process.p *= process.isDiElectronEvent
 process.p *= process.TauGenMatchesForEmbedded # will do nothing unless embedded
 process.p *= process.EsCorrectedTausNominal
 process.p *= process.EsCorrectedTausUp # needed here even for data
@@ -1408,7 +1470,10 @@ process.p *= process.TupleMuonTausNominal
 process.p *= process.TupleElectronTausNominal
 process.p *= process.TupleMuonTausNominalWeights
 process.p *= process.TupleElectronTausNominalWeights
+process.p *= process.TupleElectronTauNominalVetoes
+process.p *= process.MuonElectronTauNominalVetoes
 process.p *= process.TupleJet
+
 
 if runOnMC_:
   process.p *= process.TupleGen
@@ -1424,7 +1489,10 @@ if runOnMC_:
   process.p *= process.TupleElectronTausDown
   process.p *= process.TupleMuonTausDownWeights
   process.p *= process.TupleElectronTausDownWeights
-
+  process.p *= process.TupleElectronTauUpVetoes
+  process.p *= process.MuonElectronTauUpVetoes
+  process.p *= process.TupleElectronTauDownVetoes
+  process.p *= process.MuonElectronTauDownVetoes
 
 
 if printListOfModules_:
