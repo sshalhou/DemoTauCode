@@ -62,7 +62,7 @@ namespace TupleHelpers
                                 bool & isTight, bool & isPF, bool & isTracker,
                                 const reco::Vertex first_vertex,
                                 edm::Handle<reco::PFCandidateCollection > pfCandidates,
-                                pat::Muon & muon)
+                                pat::Muon * muon)
   {
 
     dz = 999.9;
