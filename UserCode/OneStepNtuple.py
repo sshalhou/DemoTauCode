@@ -28,6 +28,7 @@ CheckMemoryUsage_ = False
 
 FilterEvents_ = True
 KeepAll_ = False
+KeepPat_ = False
 PrintProductIDs_ = False
 
 
@@ -1198,7 +1199,7 @@ process.TupleElectronTauUpVetoes = cms.EDProducer("TupleElectronTauVetoesProduce
                 vertexSrc =cms.InputTag('selectedPrimaryVerticesNtuple::PAT'),
                 pfSrc = cms.InputTag('particleFlow')
                 )
-                
+
 
 process.TupleElectronTauDownVetoes = cms.EDProducer("TupleElectronTauVetoesProducer",
                 NAME=cms.string("TupleElectronTausDownVetoes"),
@@ -1514,6 +1515,59 @@ process.out.outputCommands +=['keep Tuple*_*_*_*']
 
 if KeepAll_:
   process.out.outputCommands +=['keep *_*_*_*']
+
+if KeepPat_:
+  process.out.outputCommands +=['keep *_selectedPatJets*_*_*']
+  process.out.outputCommands +=['keep *_puJetId*_*_*']
+  process.out.outputCommands +=['keep *_puJetMva*_*_*']
+  process.out.outputCommands +=['keep *_pfMEtMVA*_*_*']
+  process.out.outputCommands +=['keep *_patPFMetByMVA*_*_*']
+  process.out.outputCommands +=['keep double_kt6PFJets_rho_RECO']
+  process.out.outputCommands +=['keep *_offlinePrimaryVertices*_*_*']
+  process.out.outputCommands +=['keep *_offlinePrimaryVerticesWithBS*_*_*']
+  process.out.outputCommands +=['keep *_generalTracks_*_*']
+  process.out.outputCommands +=['keep TupleUserSpecifiedDatas_UserSpecifiedData_TupleUserSpecifiedData_PAT']
+  process.out.outputCommands +=['keep *_addPileupInfo*_*_*']
+  process.out.outputCommands +=['keep *_offlineBeamSpot*_*_*']
+  process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
+  process.out.outputCommands +=['keep *_patConversions*_*_*']
+  process.out.outputCommands +=['keep *_conversions*_*_*']
+  process.out.outputCommands +=['keep *_gsfElectrons*_*_*']
+  process.out.outputCommands +=['keep *_selectedPat*_*_*']
+  process.out.outputCommands +=['keep *_cleanPat*_*_*']
+  process.out.outputCommands +=['keep recoPFCandidates_particleFlow__RECO']
+  process.out.outputCommands +=['keep recoPFJets_calibratedAK5PFJetsForPFMEtMVA__PAT']
+  process.out.outputCommands +=['keep recoPFJets_ak5PFJets__RECO']
+  process.out.outputCommands +=['keep recoPFMETs_pfMet__RECO']
+  process.out.outputCommands +=['keep recoGenMETs_genMetTrue__SIM']
+  process.out.outputCommands +=['keep recoPFCandidates_selectedPatJets_pfCandidates_PAT']
+  process.out.outputCommands +=['keep recoMuons_muons__RECO']
+  process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__RECO']
+  process.out.outputCommands +=['keep *_ak5GenJetsNoNu_*_PAT']
+  process.out.outputCommands +=['keep *_*genParticlesForJetsNoNu*_*_PAT']
+  process.out.outputCommands +=['keep *_*iterativeCone5GenJetsNoNu*_*_PAT']
+  process.out.outputCommands +=['keep recoGenParticles*_*_*_*']
+  process.out.outputCommands +=['keep *_*TauSpinnerReco*_*_*']
+  process.out.outputCommands +=['keep *_*_*_LHE']
+  process.out.outputCommands +=['keep GenEventInfoProduct_generator__SIM']
+  process.out.outputCommands +=['keep *_cleanPatElectrons*_*_*']
+  process.out.outputCommands +=['keep *_cleanPatMuons*_*_*']
+  process.out.outputCommands +=['keep *_myCleanPatMuons*_*_*']
+  process.out.outputCommands +=['keep *_cleanPatTaus*_*_*']
+  process.out.outputCommands +=['keep *_cleanPatJets*_*_*']
+  process.out.outputCommands +=['keep *_tmfTracks_*_*']
+  process.out.outputCommands +=['keep *_generator_minVisPtFilter_*']
+  process.out.outputCommands +=['keep *_generator_*_*']
+  process.out.outputCommands +=['keep *_particleFlow__*']
+  process.out.outputCommands +=['keep *_particleFlowDisplacedVertex_*_*']
+  process.out.outputCommands +=['keep recoMuons_muons__EmbeddedRECO']
+  process.out.outputCommands +=['keep recoPFJets_ak5PFJets__EmbeddedRECO']
+  process.out.outputCommands +=['keep recoGsfTracks_electronGsfTracks__EmbeddedRECO']
+  process.out.outputCommands +=['keep *_*patTrigger*_*_*']
+  process.out.outputCommands +=['keep *_*TriggerResults*_*_*']
+  process.out.outputCommands +=['keep *_*patTriggerEvent*_*_*']
+  process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
+
 ########################################################################################################
 process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
 

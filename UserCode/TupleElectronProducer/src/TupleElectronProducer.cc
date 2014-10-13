@@ -604,7 +604,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
   CurrentElectron.set_deltaPhiSuperClusterTrackAtVtx(electron->deltaPhiSuperClusterTrackAtVtx());
   CurrentElectron.set_deltaEtaSuperClusterTrackAtVtx(electron->deltaEtaSuperClusterTrackAtVtx());
-  CurrentElectron.set_hadronicOverEm(electron->superCluster()->hadronicOverEm());
+  CurrentElectron.set_hadronicOverEm(electron->hadronicOverEm());
 
 
 
