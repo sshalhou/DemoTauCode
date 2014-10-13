@@ -39,10 +39,78 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 
 
+#include "DataFormats/RecoCandidate/interface/IsoDeposit.h"
+#include "DataFormats/RecoCandidate/interface/IsoDepositVetos.h"
+#include "DataFormats/PatCandidates/interface/Isolation.h"
+#include "EgammaAnalysis/ElectronTools/interface/ElectronEffectiveArea.h"
+#include "DataFormats/PatCandidates/interface/Electron.h"
+#include "DataFormats/PatCandidates/interface/Lepton.h"
+#include "DataFormats/PatCandidates/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
+#include "DataFormats/Math/interface/deltaR.h"
+
+
 typedef math::XYZTLorentzVector LorentzVector;
+using namespace reco::isodeposit;
 
 namespace TupleHelpers
 {
+
+  void setMuon_dz_dxy_isTight_isPF_isTracker(
+                                double & dz, double & dxy,
+                                bool & isTight, bool & isPF, bool & isTracker,
+                                const reco::Vertex first_vertex,
+                                edm::Handle<reco::PFCandidateCollection > pfCandidates,
+                                pat::Muon & muon)
+  {
+
+    dz = 999.9;
+    dxy = 999.9;
+
+    if(!muon->innerTrack().isNull())
+    {
+      dz = muon->innerTrack()->dz(first_vertex.position());
+      dxy = muon->innerTrack()->dxy(first_vertex.position());
+    }
+
+    //////////////////////////////
+    isTight = 1;
+    if(   !(muon->isGlobalMuon())                 ) isTight = 0;
+    if(   !(muon->numberOfMatchedStations()>1)    ) isTight = 0;
+    if(    muon->innerTrack().isNonnull() && muon->track().isNonnull() && muon->globalTrack().isNonnull() )
+    {
+
+      if(   !(muon->globalTrack()->normalizedChi2()<10) ) isTight = 0;
+      if(   !((muon->globalTrack()->hitPattern()).numberOfValidMuonHits()>0) ) isTight = 0;
+      if(   !((muon->innerTrack()->hitPattern()).numberOfValidPixelHits()>0) ) isTight = 0;
+      if(   !((muon->track()->hitPattern()).trackerLayersWithMeasurement()>5) ) isTight = 0;
+
+    } else isTight = 0;
+    /////////////////////////////////
+
+    bool isPF = 0;
+
+      for(size_t pf = 0; pf < pfCandidates->size(); pf++)
+      {
+        if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
+        {
+          reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
+
+          if( muonRefToPFMuon.isNonnull() )
+          {
+            if(deltaR( muonRefToPFMuon->p4() , muon->p4()) < 1e-04)
+            {
+              if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() ) isPF = 1;
+              if (muonRefToPFMuon->isTrackerMuon()) isTracker = 1;
+            }
+          }
+        }
+      }
+
+
+//////////////////
+  }
 
 
   /////////////////
