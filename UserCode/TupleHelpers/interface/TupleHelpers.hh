@@ -190,6 +190,8 @@ namespace TupleHelpers
     /////////////////////////////////
     // is PF and is Tracker
 
+    isTracker = muon->isTrackerMuon();
+
      isPF = 0;
 
       for(size_t pf = 0; pf < pfCandidates->size(); pf++)
@@ -203,7 +205,6 @@ namespace TupleHelpers
             if(deltaR( muonRefToPFMuon->p4() , muon->p4()) < 1e-04)
             {
               if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() ) isPF = 1;
-              if (muonRefToPFMuon->isTrackerMuon()) isTracker = 1;
             }
           }
         }

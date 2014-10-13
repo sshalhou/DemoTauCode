@@ -299,9 +299,18 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
                if(TupleHelpers::passesMVALooseNEW(ePT,eSCETA,mvaTrigNoIPV0)) MVAOR = 1;
                if(TupleHelpers::passesMVALoose(ePT,eSCETA,mvaNonTrigV0)) MVAOR = 1;
 
+              ////////////////////////////////
+              // while the above OR is applied
+              // still always force passesMVALoose
+
+              if( !TupleHelpers::passesMVALoose(ePT,eSCETA,mvaNonTrigV0) ) MVAOR = 0;
+
+
           }
           /////////////////////////////
           if(!MVAOR) continue;
+
+
 
 
           ///////////////

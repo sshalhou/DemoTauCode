@@ -384,7 +384,6 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
               isPFMuon = 1;
             }
 
-            CurrentMuon.set_isTrackerMuon(muonRefToPFMuon->isTrackerMuon() );
 
           }
         }
@@ -396,6 +395,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
     CurrentMuon.set_isPFMuon(isPFMuon);
+    CurrentMuon.set_isTrackerMuon(muon->isTrackerMuon() );
 
 
 

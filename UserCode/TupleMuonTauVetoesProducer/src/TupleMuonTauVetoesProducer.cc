@@ -354,7 +354,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         if( fabs(muonIter2->eta()) >= 2.4) continue;
         double dz = 1000.0;
         double dxy = 1000.0;
-        bool isTightMuon = 0;
+        bool isTightMuon = 0; // not used
         bool isPFMuon = 0;
         double relativeIsolation_DR4 = 999.;
         bool isTracker = 0; // not used
@@ -366,7 +366,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         if(fabs(dxy) >= 0.045) continue;
         if(fabs(dz) >= 0.2) continue;
         if(!muonIter2->isGlobalMuon()) continue;
-        if(!isTightMuon) continue;
+        if(!isTracker) continue;
         if(!isPFMuon) continue;
         if (relativeIsolation_DR4>=0.3) continue;
 
