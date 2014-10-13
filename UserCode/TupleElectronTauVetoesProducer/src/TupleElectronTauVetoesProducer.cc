@@ -110,10 +110,10 @@ private:
 TupleElectronTauVetoesProducer::TupleElectronTauVetoesProducer(const edm::ParameterSet& iConfig):
 NAME_(iConfig.getParameter<std::string>("NAME" )),
 patElectronSrc_(iConfig.getParameter<edm::InputTag>("patElectronSrc" )),
-patMuonSrc_(iConfig.getParameter<edm::InputTag>("patMuonSrc_" )),
-tupleElectronTauSrc_(iConfig.getParameter<edm::InputTag>("tupleElectronTauSrc_" )),
-tupleElectronSrc_(iConfig.getParameter<edm::InputTag>("tupleElectronSrc_" )),
-vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc_" )),
+patMuonSrc_(iConfig.getParameter<edm::InputTag>("patMuonSrc" )),
+tupleElectronTauSrc_(iConfig.getParameter<edm::InputTag>("tupleElectronTauSrc" )),
+tupleElectronSrc_(iConfig.getParameter<edm::InputTag>("tupleElectronSrc" )),
+vertexSrc_(iConfig.getParameter<edm::InputTag>("vertexSrc" )),
 pfSrc_(iConfig.getParameter<edm::InputTag>("pfSrc" ))
 {
 
