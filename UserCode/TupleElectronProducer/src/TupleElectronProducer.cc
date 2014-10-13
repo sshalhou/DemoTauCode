@@ -598,6 +598,17 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   ////////////////
   CurrentElectron.set_mvaNonTrigV0(electron->electronID("mvaNonTrigV0"));
 
+  // deltaPhiSuperClusterTrackAtVtx
+  // deltaEtaSuperClusterTrackAtVtx
+  // hadronicOverEm
+
+  CurrentElectron.set_deltaPhiSuperClusterTrackAtVtx(electron->deltaPhiSuperClusterTrackAtVtx());
+  CurrentElectron.set_deltaEtaSuperClusterTrackAtVtx(electron->deltaEtaSuperClusterTrackAtVtx());
+  CurrentElectron.set_hadronicOverEm(electron->superCluster()->hadronicOverEm());
+
+
+
+
 
   if(electron->superCluster().isNonnull())
   {

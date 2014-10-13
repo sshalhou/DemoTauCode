@@ -55,6 +55,9 @@ public:
   void set_sigmaEtaEta(double);
   void set_sigmaIetaIeta(double);
   void set_sigmaIphiIphi(double);
+  void set_deltaPhiSuperClusterTrackAtVtx(double);
+  void set_deltaEtaSuperClusterTrackAtVtx(double);
+  void set_hadronicOverEm(double);
 
 // set true if the lepton should cause event rejection, when it is
 // not used in the H pair
@@ -108,6 +111,9 @@ public:
   double sigmaEtaEta() const;
   double sigmaIetaIeta() const;
   double sigmaIphiIphi() const;
+  double deltaPhiSuperClusterTrackAtVtx() const;
+  double deltaEtaSuperClusterTrackAtVtx() const;
+  double hadronicOverEm() const;
 
   bool has_HltMatchEle20() const;
   bool has_HltMatchEle22() const;
@@ -151,6 +157,9 @@ private:
   bool m_has_HltMatchEle22;
   bool m_has_HltMatchEle27;
   bool m_isTriLeptonVetoCandidate;
+  double m_deltaPhiSuperClusterTrackAtVtx;
+  double m_deltaEtaSuperClusterTrackAtVtx;
+  double m_hadronicOverEm;
 
 
 

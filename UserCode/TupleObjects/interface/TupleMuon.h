@@ -77,7 +77,7 @@ public:
 // not used in the H pair
 
   void set_isTriLeptonVetoCandidate(bool);
-
+  void set_isTrackerMuon(bool);
 
   // getters
 
@@ -111,7 +111,7 @@ public:
   double dz() const;
   double dxy() const;
   bool   passFullId() const;
-
+  bool   isTrackerMuon() const;
 
   bool has_HltMatchMu17() const;
   bool has_HltMatchMu18() const;
@@ -155,7 +155,7 @@ private:
   bool m_has_HltMatchMu18;
   bool m_has_HltMatchMu24;
   bool m_isTriLeptonVetoCandidate;
-
+  bool m_isTrackerMuon;
 
 };
 

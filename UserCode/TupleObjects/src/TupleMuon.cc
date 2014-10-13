@@ -38,8 +38,16 @@ TupleMuon::TupleMuon()
   m_has_HltMatchMu18 =  0;
   m_has_HltMatchMu24 =  0;
   m_isTriLeptonVetoCandidate = 0;
-
+  m_isTrackerMuon = 0;
 }
+
+/////////////////
+// isTrackerMuon
+///////////////////
+
+void TupleMuon::set_isTrackerMuon(bool isTrackerMuon_) { m_isTrackerMuon = isTrackerMuon_;}
+bool TupleMuon::isTrackerMuon() const { return m_isTrackerMuon; }
+
 
 
 ///////////////////

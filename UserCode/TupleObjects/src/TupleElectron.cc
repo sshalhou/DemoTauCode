@@ -39,7 +39,9 @@ TupleElectron::TupleElectron()
   m_has_HltMatchEle22 =  0;
   m_has_HltMatchEle27 =  0;
   m_isTriLeptonVetoCandidate = 0;
-
+  m_deltaPhiSuperClusterTrackAtVtx = NAN;
+  m_deltaEtaSuperClusterTrackAtVtx = NAN;
+  m_hadronicOverEm = NAN;
 
 }
 
@@ -152,6 +154,24 @@ double TupleElectron::dxy() const { return m_dxy; }
 //////////////////
 void TupleElectron::set_SuperClusterEta(double SuperClusterEta_) { m_SuperClusterEta = SuperClusterEta_;}
 double TupleElectron::SuperClusterEta() const { return m_SuperClusterEta; }
+
+/////////////
+// deltaPhiSuperClusterTrackAtVtx
+// deltaEtaSuperClusterTrackAtVtx
+// hadronicOverEm
+///////////
+
+void TupleElectron::set_deltaPhiSuperClusterTrackAtVtx(double deltaPhiSuperClusterTrackAtVtx_) { m_deltaPhiSuperClusterTrackAtVtx = deltaPhiSuperClusterTrackAtVtx_;}
+double TupleElectron::deltaPhiSuperClusterTrackAtVtx() const { return m_deltaPhiSuperClusterTrackAtVtx; }
+
+
+void TupleElectron::set_deltaEtaSuperClusterTrackAtVtx(double deltaEtaSuperClusterTrackAtVtx_) { m_deltaEtaSuperClusterTrackAtVtx = deltaEtaSuperClusterTrackAtVtx_;}
+double TupleElectron::deltaEtaSuperClusterTrackAtVtx() const { return m_deltaEtaSuperClusterTrackAtVtx; }
+
+
+
+void TupleElectron::set_hadronicOverEm(double hadronicOverEm_) { m_hadronicOverEm = hadronicOverEm_;}
+double TupleElectron::hadronicOverEm() const { return m_hadronicOverEm; }
 
 
 //////////////////

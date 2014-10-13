@@ -158,6 +158,8 @@ private:
   std::vector< double > eT_PVp4_x , eT_PVp4_y , eT_PVp4_z , eT_PVp4_t ;
 
 
+
+
   ////////////////
   // corresponding to electrons in eTau pairs
 
@@ -197,6 +199,10 @@ private:
   std::vector< bool > eT_ele_has_HltMatchEle22 ;
   std::vector< bool > eT_ele_has_HltMatchEle27 ;
   std::vector< bool > eT_ele_isTriLeptonVetoCandidate ;
+  std::vector< double > eT_ele_deltaPhiSuperClusterTrackAtVtx;
+  std::vector< double > eT_ele_deltaEtaSuperClusterTrackAtVtx;
+  std::vector< double > eT_ele_hadronicOverEm;
+
 
   //////////////////
   // the tau leg in eTau
@@ -422,6 +428,7 @@ private:
   std::vector< bool > muT_muon_has_HltMatchMu18 ;
   std::vector< bool > muT_muon_has_HltMatchMu24 ;
   std::vector< bool > muT_muon_isTriLeptonVetoCandidate ;
+  std::vector< bool > muT_muon_isTrackerMuon ;
 
   ///////
   // taus in muTau pairs
@@ -750,6 +757,11 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_ele_has_HltMatchEle22", &eT_ele_has_HltMatchEle22);
   lepTauTree->Branch("eT_ele_has_HltMatchEle27", &eT_ele_has_HltMatchEle27);
   lepTauTree->Branch("eT_ele_isTriLeptonVetoCandidate", &eT_ele_isTriLeptonVetoCandidate);
+  lepTauTree->Branch("eT_ele_deltaPhiSuperClusterTrackAtVtx", &eT_ele_deltaPhiSuperClusterTrackAtVtx);
+  lepTauTree->Branch("eT_ele_deltaEtaSuperClusterTrackAtVtx", &eT_ele_deltaEtaSuperClusterTrackAtVtx);
+  lepTauTree->Branch("eT_ele_hadronicOverEm", &eT_ele_hadronicOverEm);
+
+
 
   // tau leg in eTau
 
@@ -1021,6 +1033,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_muon_has_HltMatchMu18", &muT_muon_has_HltMatchMu18);
   lepTauTree->Branch("muT_muon_has_HltMatchMu24", &muT_muon_has_HltMatchMu24);
   lepTauTree->Branch("muT_muon_isTriLeptonVetoCandidate", &muT_muon_isTriLeptonVetoCandidate);
+  lepTauTree->Branch("muT_muon_isTrackerMuon", &muT_muon_isTrackerMuon);
+
 
 
   lepTauTree->Branch("muT_tau_pfJetRefP4_x", &muT_tau_pfJetRefP4_x);
@@ -1385,6 +1399,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_ele_has_HltMatchEle22.push_back(theElec.has_HltMatchEle22());
     eT_ele_has_HltMatchEle27.push_back(theElec.has_HltMatchEle27());
     eT_ele_isTriLeptonVetoCandidate.push_back(theElec.isTriLeptonVetoCandidate());
+    eT_ele_deltaPhiSuperClusterTrackAtVtx.push_back(theElec.deltaPhiSuperClusterTrackAtVtx());
+    eT_ele_deltaEtaSuperClusterTrackAtVtx.push_back(theElec.deltaEtaSuperClusterTrackAtVtx());
+    eT_ele_hadronicOverEm.push_back(theElec.hadronicOverEm());
+
+
+
 
     eT_tau_pfJetRefP4_x.push_back(theTau.pfJetRefP4().x());
     eT_tau_pfJetRefP4_y.push_back(theTau.pfJetRefP4().y());
@@ -1676,6 +1696,10 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_muon_has_HltMatchMu18.push_back(theMuon.has_HltMatchMu18());
       muT_muon_has_HltMatchMu24.push_back(theMuon.has_HltMatchMu24());
       muT_muon_isTriLeptonVetoCandidate.push_back(theMuon.isTriLeptonVetoCandidate());
+      muT_muon_isTrackerMuon.push_back(theMuon.isTrackerMuon());
+
+
+
 
       muT_tau_pfJetRefP4_x.push_back(theTau.pfJetRefP4().x());
       muT_tau_pfJetRefP4_y.push_back(theTau.pfJetRefP4().y());
@@ -2039,6 +2063,11 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_ele_has_HltMatchEle22.clear();
     eT_ele_has_HltMatchEle27.clear();
     eT_ele_isTriLeptonVetoCandidate.clear();
+    eT_ele_deltaPhiSuperClusterTrackAtVtx.clear();
+    eT_ele_deltaEtaSuperClusterTrackAtVtx.clear();
+    eT_ele_hadronicOverEm.clear();
+
+
 
     eT_tau_pfJetRefP4_x.clear();
     eT_tau_pfJetRefP4_y.clear();
@@ -2308,6 +2337,9 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_muon_has_HltMatchMu18.clear();
     muT_muon_has_HltMatchMu24.clear();
     muT_muon_isTriLeptonVetoCandidate.clear();
+    muT_muon_isTrackerMuon.clear();
+
+
 
     muT_tau_pfJetRefP4_x.clear();
     muT_tau_pfJetRefP4_y.clear();
