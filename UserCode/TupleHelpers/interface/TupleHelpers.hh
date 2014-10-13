@@ -57,12 +57,15 @@ using namespace reco::isodeposit;
 namespace TupleHelpers
 {
 
+
+
+
   void setMuon_dz_dxy_isTight_isPF_isTracker(
                                 double & dz, double & dxy,
                                 bool & isTight, bool & isPF, bool & isTracker,
                                 const reco::Vertex first_vertex,
                                 edm::Handle<reco::PFCandidateCollection > pfCandidates,
-                                pat::Muon * muon)
+                                const pat::Muon * muon)
   {
 
     dz = 999.9;
