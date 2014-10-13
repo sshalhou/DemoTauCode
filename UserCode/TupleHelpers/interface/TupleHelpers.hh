@@ -58,6 +58,96 @@ namespace TupleHelpers
 {
 
 
+  void setElectron_dz_dxy_NumLostHits_RelIsol(
+                                double & dz, double & dxy, int & NumLostHits,
+                                double & relativeIsolation,
+                                const reco::Vertex first_vertex,
+                                const pat::Electron * electron)
+  {
+
+    ////////////////////////////
+    // set electron dz and dxy
+     dz = 999.;
+     dxy = 999.;
+
+    if(electron->gsfTrack().isNonnull())
+      {
+        dz = electron->gsfTrack()->dz(first_vertex.position());
+        dxy = electron->gsfTrack()->dxy(first_vertex.position());
+      }
+    else if(electron->track().isNonnull())
+    {
+
+      dz = electron->track()->dz(first_vertex.position());
+      dxy = electron->gsfTrack()->dxy(first_vertex.position());
+    }
+
+    ////////////////////////////
+    // set # of missing inner hits
+
+    NumLostHits = 9999;
+    if(electron->gsfTrack().isNonnull())
+    {
+      NumLostHits = electron->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits();
+    }
+
+    /////////////////////////
+    // now compute the isolation
+
+    relativeIsolation = 999.;
+
+    AbsVetos  vetos2012EBPFIdCharged;
+    AbsVetos  vetos2012EBPFIdPhotons;
+    AbsVetos  vetos2012EBPFIdNeutral;
+
+    AbsVetos  vetos2012EEPFIdCharged;
+    AbsVetos  vetos2012EEPFIdPhotons;
+    AbsVetos  vetos2012EEPFIdNeutral;
+
+    float nhIso04PFId  = 0.0;
+    float allChIso04PFId = 0.0;
+    float phIso04PFId  = 0.0;
+    float nhIsoPU04PFId = 0.0;
+
+    vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.010));
+    vetos2012EBPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.08));
+    vetos2012EEPFIdCharged.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.015));
+    vetos2012EEPFIdPhotons.push_back(new ConeVeto(Direction(electron->eta(),electron->phi()),0.08));
+
+    float allChIso04EBPFId =    electron->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
+    float allChIso04EEPFId =  electron->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
+    allChIso04PFId =  (electron->isEB())*allChIso04EBPFId + (electron->isEE())*allChIso04EEPFId ;
+
+    float nhIso04EBPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+    float nhIso04EEPFId = electron->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
+    nhIso04PFId =  (electron->isEB())*nhIso04EBPFId + (electron->isEE())*nhIso04EEPFId ;
+
+    float phIso04EBPFId =   electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EBPFIdPhotons).first;
+    float phIso04EEPFId = electron->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EEPFIdPhotons).first;
+    phIso04PFId =  (electron->isEB())*phIso04EBPFId + (electron->isEE())*phIso04EEPFId ;
+
+    float nhIsoPU04EBPFId =   electron->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
+    float nhIsoPU04EEPFId =   electron->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
+    nhIsoPU04PFId =     (electron->isEB())*nhIsoPU04EBPFId + (electron->isEE())*nhIsoPU04EEPFId ;
+
+    relativeIsolation = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
+    if(electron->pt()!=0) relativeIsolation/=electron->pt();
+
+    for(unsigned int i = 0; i <vetos2012EBPFIdCharged.size(); i++) delete vetos2012EBPFIdCharged[i];
+    for(unsigned int i = 0; i <vetos2012EBPFIdPhotons.size(); i++) delete vetos2012EBPFIdPhotons[i];
+    for(unsigned int i = 0; i <vetos2012EBPFIdNeutral.size(); i++) delete vetos2012EBPFIdNeutral[i];
+    for(unsigned int i = 0; i <vetos2012EEPFIdCharged.size(); i++) delete vetos2012EEPFIdCharged[i];
+    for(unsigned int i = 0; i <vetos2012EEPFIdPhotons.size(); i++) delete vetos2012EEPFIdPhotons[i];
+    for(unsigned int i = 0; i <vetos2012EEPFIdNeutral.size(); i++) delete vetos2012EEPFIdNeutral[i];
+    //////////////////////////
+
+
+
+
+////////////////
+  return;
+  }
+
 
 
   void setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(
@@ -164,6 +254,7 @@ namespace TupleHelpers
 
 
 //////////////////
+  return;
   }
 
 

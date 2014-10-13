@@ -229,141 +229,30 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
     for(muonIter=PATmuons->begin(); muonIter!=PATmuons->end(); ++muonIter)
     {
 
-      //if(muonIter->pt() <= 10.0) continue;
-      //if( fabs(muonIter->eta()) >= 2.4) continue;
+      if(muonIter->pt() <= 10.0) continue;
+      if( fabs(muonIter->eta()) >= 2.4) continue;
       double dz = 1000.0;
       double dxy = 1000.0;
-
-      if(!muonIter->innerTrack().isNull())
-      {
-        dz = muonIter->innerTrack()->dz(first_vertex.position());
-        dxy = muonIter->innerTrack()->dxy(first_vertex.position());
-
-      }
-
-    //  if(fabs(dxy) >= 0.045) continue;
-    //  if(fabs(dz) >= 0.2) continue;
-    //  if(!muonIter->isGlobalMuon()) continue;
-
-      //////////////////////////////
-      bool isTightMuon = 1;
-      if(   !(muonIter->isGlobalMuon())                 ) isTightMuon = 0;
-      if(   !(muonIter->numberOfMatchedStations()>1)    ) isTightMuon = 0;
-      if(    muonIter->innerTrack().isNonnull() && muonIter->track().isNonnull() && muonIter->globalTrack().isNonnull() )
-      {
-
-        if(   !(muonIter->globalTrack()->normalizedChi2()<10) ) isTightMuon = 0;
-        if(   !((muonIter->globalTrack()->hitPattern()).numberOfValidMuonHits()>0) ) isTightMuon = 0;
-        if(   !((muonIter->innerTrack()->hitPattern()).numberOfValidPixelHits()>0) ) isTightMuon = 0;
-        if(   !((muonIter->track()->hitPattern()).trackerLayersWithMeasurement()>5) ) isTightMuon = 0;
-
-      } else isTightMuon = 0;
-      /////////////////////////////////
-
-    //  if(!isTightMuon) continue;
-
-
-      /////////////////////////////
-
-        bool isPFMuon = 0;
-
-          for(size_t pf = 0; pf < pfCandidates->size(); pf++)
-          {
-
-
-            if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
-            {
-              reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
-
-
-              if( muonRefToPFMuon.isNonnull() )
-              {
-                if(deltaR( muonRefToPFMuon->p4() , muonIter->p4()) < 1e-04)
-                {
-                  if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() )
-                  {
-                    isPFMuon = 1;
-                  }
-                }
-              }
-
-
-            }
-          }
-
-      /////////////////////////////
-      //  if(!isPFMuon) continue;
-
-
-      /////////////
-      // compute
-      // isol
-      // @ DR 4
-      /////////////
-
+      bool isTightMuon = 0;
+      bool isPFMuon = 0;
       double relativeIsolation_DR4 = 999.;
+      bool isTracker = 0; // not used
 
-      AbsVetos  vetos2012PFIdCharged;
-      AbsVetos  vetos2012PFIdPhotons;
-      AbsVetos  vetos2012PFIdNeutral;
-      AbsVetos  vetos2012PFIdPUCharged;
+      TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(dz,dxy,isTightMuon,isPFMuon,isTracker,
+      relativeIsolation_DR4,
+      first_vertex,pfCandidates,&*muonIter);
 
+      if(fabs(dxy) >= 0.045) continue;
+      if(fabs(dz) >= 0.2) continue;
+      if(!muonIter->isGlobalMuon()) continue;
+      if(!isTightMuon) continue;
+      if(!isPFMuon) continue;
+      if (relativeIsolation_DR4>=0.3) continue;
 
-      float nhIso04PFId  = 0.0;
-      float allChIso04PFId = 0.0;
-      float phIso04PFId  = 0.0;
-      float nhIsoPU04PFId = 0.0;
-
-
-
-      vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.00010));
-      vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
-
-      vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
-      vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
-
-      vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
-      vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
-
-      vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muonIter->eta(),muonIter->phi()),0.010));
-      vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
-
-      allChIso04PFId = muonIter->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
-      nhIso04PFId = muonIter->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
-      phIso04PFId = muonIter->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
-      nhIsoPU04PFId = muonIter->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
-
-      relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
-      if(muonIter->pt()!=0) relativeIsolation_DR4/=muonIter->pt();
-
-      for(unsigned int i = 0; i <vetos2012PFIdCharged.size(); i++) delete vetos2012PFIdCharged[i];
-      for(unsigned int i = 0; i <vetos2012PFIdNeutral.size(); i++) delete vetos2012PFIdNeutral[i];
-      for(unsigned int i = 0; i <vetos2012PFIdPhotons.size(); i++) delete vetos2012PFIdPhotons[i];
-      for(unsigned int i = 0; i <vetos2012PFIdPUCharged.size(); i++) delete vetos2012PFIdPUCharged[i];
-
-      ////////////
-    //  if (relativeIsolation_DR4>=0.3) continue;
-
+      ///////////////////////////////////
       // in the muon leg of the muonTau 3rd Lep veto
       // there is a DR cut too
-
-//      if(deltaR(muonIter->p4(), muon.p4()) <= 0.3) continue;
-
-        double DZ = 999.9;
-        double DXY = 999.9;
-        bool ISTIGHT = 0;
-        bool ISPF = 0;
-        bool ISTRACKER = 0;
-        double RELISOL = 999.9;
-
-       TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,RELISOL,
-       first_vertex,pfCandidates,&*muonIter);
-
-        std::cout<<" ------------new muon -------------- "<<std::endl;
-        std::cout<<DZ<<" "<<DXY<<" "<<ISTIGHT<<" "<<ISPF<<" "<<relativeIsolation_DR4<<std::endl;
-        std::cout<<dz<<" "<<dxy<<" "<<isTightMuon<<" "<<isPFMuon<<" "<<RELISOL<<" "<<std::endl;
-        if(DXY!=dxy || DZ!=dz || ISTIGHT!=isTightMuon || ISPF!=isPFMuon|| RELISOL!=relativeIsolation_DR4)  std::cout<<" ERROR MISMATCH \n";
-
+      if(deltaR(muonIter->p4(), muon.p4()) <= 0.3) continue;
 
       ///////////////
       // if made it here the veto is set
@@ -371,7 +260,7 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
       ////////////////
       // exit the patMuon Loop
-      //break;
+      break;
 
     }
 
@@ -394,87 +283,30 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
           if(electronIter->pt()< 10) continue;
           if( fabs(electronIter->eta()) > 2.5) continue;
 
-          ////////////////////////////
+
           double dz = 999.;
           double dxy = 999.;
+          int NumMissingHits = 9999;
+          double relativeIsolation = 999.9;
 
-          if(electronIter->gsfTrack().isNonnull())
-            {
-              dz = electronIter->gsfTrack()->dz(first_vertex.position());
-              dxy = electronIter->gsfTrack()->dxy(first_vertex.position());
-            }
-          else if(electronIter->track().isNonnull())
-          {
 
-            dz = electronIter->track()->dz(first_vertex.position());
-            dxy = electronIter->gsfTrack()->dxy(first_vertex.position());
-          }
-          ////////////////////////////
+          TupleHelper::setElectron_dz_dxy_NumLostHits_RelIsol(
+                                        dz, dxy, NumMissingHits,
+                                        relativeIsolation,
+                                        first_vertex,
+                                        &*electronIter)
 
+
+          TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(dz,dxy,isTightMuon,isPFMuon,isTracker,
+          relativeIsolation_DR4,
+          first_vertex,pfCandidates,&*muonIter);
+
+
+          //////////////////
           if( fabs(dxy) >= 0.045) continue;
           if( fabs(dz) >= 0.2) continue;
-
-          //////////////////////////
-          bool nHitsZero = 1;
-          if(electronIter->gsfTrack().isNonnull())
-          {
-            if(electronIter->gsfTrack()->trackerExpectedHitsInner().numberOfLostHits()!=0) nHitsZero = 0;
-          }
-          else nHitsZero = 0;
-          //////////////////////////
-          if(!nHitsZero) continue;
-
+          if(NumMissingHits!=0) continue;
           if(!electronIter->passConversionVeto()) continue;
-
-          /////////////////////////
-          // now compute the isolation
-
-          double relativeIsolation = 999.;
-
-          AbsVetos  vetos2012EBPFIdCharged;
-          AbsVetos  vetos2012EBPFIdPhotons;
-          AbsVetos  vetos2012EBPFIdNeutral;
-
-          AbsVetos  vetos2012EEPFIdCharged;
-          AbsVetos  vetos2012EEPFIdPhotons;
-          AbsVetos  vetos2012EEPFIdNeutral;
-
-          float nhIso04PFId  = 0.0;
-          float allChIso04PFId = 0.0;
-          float phIso04PFId  = 0.0;
-          float nhIsoPU04PFId = 0.0;
-
-          vetos2012EBPFIdCharged.push_back(new ConeVeto(Direction(electronIter->eta(),electronIter->phi()),0.010));
-          vetos2012EBPFIdPhotons.push_back(new ConeVeto(Direction(electronIter->eta(),electronIter->phi()),0.08));
-          vetos2012EEPFIdCharged.push_back(new ConeVeto(Direction(electronIter->eta(),electronIter->phi()),0.015));
-          vetos2012EEPFIdPhotons.push_back(new ConeVeto(Direction(electronIter->eta(),electronIter->phi()),0.08));
-
-          float allChIso04EBPFId =    electronIter->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EBPFIdCharged).first;
-          float allChIso04EEPFId =  electronIter->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012EEPFIdCharged).first;
-          allChIso04PFId =  (electronIter->isEB())*allChIso04EBPFId + (electronIter->isEE())*allChIso04EEPFId ;
-
-          float nhIso04EBPFId = electronIter->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
-          float nhIso04EEPFId = electronIter->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
-          nhIso04PFId =  (electronIter->isEB())*nhIso04EBPFId + (electronIter->isEE())*nhIso04EEPFId ;
-
-          float phIso04EBPFId =   electronIter->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EBPFIdPhotons).first;
-          float phIso04EEPFId = electronIter->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012EEPFIdPhotons).first;
-          phIso04PFId =  (electronIter->isEB())*phIso04EBPFId + (electronIter->isEE())*phIso04EEPFId ;
-
-          float nhIsoPU04EBPFId =   electronIter->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EBPFIdNeutral).first;
-          float nhIsoPU04EEPFId =   electronIter->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012EEPFIdNeutral).first;
-          nhIsoPU04PFId =     (electronIter->isEB())*nhIsoPU04EBPFId + (electronIter->isEE())*nhIsoPU04EEPFId ;
-
-          relativeIsolation = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
-          if(electronIter->pt()!=0) relativeIsolation/=electronIter->pt();
-
-          for(unsigned int i = 0; i <vetos2012EBPFIdCharged.size(); i++) delete vetos2012EBPFIdCharged[i];
-          for(unsigned int i = 0; i <vetos2012EBPFIdPhotons.size(); i++) delete vetos2012EBPFIdPhotons[i];
-          for(unsigned int i = 0; i <vetos2012EBPFIdNeutral.size(); i++) delete vetos2012EBPFIdNeutral[i];
-          for(unsigned int i = 0; i <vetos2012EEPFIdCharged.size(); i++) delete vetos2012EEPFIdCharged[i];
-          for(unsigned int i = 0; i <vetos2012EEPFIdPhotons.size(); i++) delete vetos2012EEPFIdPhotons[i];
-          for(unsigned int i = 0; i <vetos2012EEPFIdNeutral.size(); i++) delete vetos2012EEPFIdNeutral[i];
-          //////////////////////////
           if(relativeIsolation>=0.3) continue;
 
 
@@ -527,95 +359,19 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         if( fabs(muonIter2->eta()) >= 2.4) continue;
         double dz = 1000.0;
         double dxy = 1000.0;
+        bool isTightMuon = 0;
+        bool isPFMuon = 0;
+        double relativeIsolation_DR4 = 999.;
+        bool isTracker = 0; // not used
 
-        if(!muonIter2->innerTrack().isNull())
-        {
-          dz = muonIter2->innerTrack()->dz(first_vertex.position());
-          dxy = muonIter2->innerTrack()->dxy(first_vertex.position());
-
-        }
+        TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(dz,dxy,isTightMuon,isPFMuon,isTracker,
+        relativeIsolation_DR4,
+        first_vertex,pfCandidates,&*muonIter);
 
         if(fabs(dxy) >= 0.045) continue;
         if(fabs(dz) >= 0.2) continue;
         if(!muonIter2->isGlobalMuon()) continue;
-
-        /////////////////////////////
-
-          bool isPFMuon = 0;
-
-            for(size_t pf = 0; pf < pfCandidates->size(); pf++)
-            {
-
-
-              if( (*pfCandidates)[pf].particleId() == reco::PFCandidate::mu )
-              {
-                reco::MuonRef muonRefToPFMuon = (*pfCandidates)[pf].muonRef();
-
-
-                if( muonRefToPFMuon.isNonnull() )
-                {
-                  if(deltaR( muonRefToPFMuon->p4() , muonIter2->p4()) < 1e-04)
-                  {
-                    if(muonRefToPFMuon->isGlobalMuon() || muonRefToPFMuon->isTrackerMuon() )
-                    {
-                      isPFMuon = 1;
-                    }
-                  }
-                }
-
-
-              }
-            }
-
-        /////////////////////////////
-          if(!isPFMuon) continue;
-        /////////////
-        // compute
-        // isol
-        // @ DR 4
-        /////////////
-
-        double relativeIsolation_DR4 = 999.;
-
-        AbsVetos  vetos2012PFIdCharged;
-        AbsVetos  vetos2012PFIdPhotons;
-        AbsVetos  vetos2012PFIdNeutral;
-        AbsVetos  vetos2012PFIdPUCharged;
-
-
-        float nhIso04PFId  = 0.0;
-        float allChIso04PFId = 0.0;
-        float phIso04PFId  = 0.0;
-        float nhIsoPU04PFId = 0.0;
-
-
-
-        vetos2012PFIdCharged.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.00010));
-        vetos2012PFIdCharged.push_back(new ThresholdVeto(0.00));
-
-        vetos2012PFIdPhotons.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
-        vetos2012PFIdPhotons.push_back(new ThresholdVeto(0.50));
-
-        vetos2012PFIdNeutral.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
-        vetos2012PFIdNeutral.push_back(new ThresholdVeto(0.50));
-
-        vetos2012PFIdPUCharged.push_back(new ConeVeto(Direction(muonIter2->eta(),muonIter2->phi()),0.010));
-        vetos2012PFIdPUCharged.push_back(new ThresholdVeto(0.50));
-
-        allChIso04PFId = muonIter2->isoDeposit(pat::PfChargedAllIso)->depositAndCountWithin(0.4, vetos2012PFIdCharged).first;
-        nhIso04PFId = muonIter2->isoDeposit(pat::PfNeutralHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdNeutral).first;
-        phIso04PFId = muonIter2->isoDeposit(pat::PfGammaIso)->depositAndCountWithin(0.4, vetos2012PFIdPhotons).first;
-        nhIsoPU04PFId = muonIter2->isoDeposit(pat::PfPUChargedHadronIso)->depositAndCountWithin(0.4, vetos2012PFIdPUCharged).first;
-
-        relativeIsolation_DR4 = allChIso04PFId + std::max(nhIso04PFId+phIso04PFId-0.5*nhIsoPU04PFId,0.0);
-        if(muonIter2->pt()!=0) relativeIsolation_DR4/=muonIter2->pt();
-
-        for(unsigned int i = 0; i <vetos2012PFIdCharged.size(); i++) delete vetos2012PFIdCharged[i];
-        for(unsigned int i = 0; i <vetos2012PFIdNeutral.size(); i++) delete vetos2012PFIdNeutral[i];
-        for(unsigned int i = 0; i <vetos2012PFIdPhotons.size(); i++) delete vetos2012PFIdPhotons[i];
-        for(unsigned int i = 0; i <vetos2012PFIdPUCharged.size(); i++) delete vetos2012PFIdPUCharged[i];
-
-        ////////////
+        if(!isPFMuon) continue;
         if (relativeIsolation_DR4>=0.3) continue;
 
         // no pairing the candidate with itself!
