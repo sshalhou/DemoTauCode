@@ -354,10 +354,10 @@ TupleMuonTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
         bool ISTIGHT = 0;
         bool ISPF = 0;
         bool ISTRACKER = 0;
-        double RELISOL,
+        double RELISOL = 999.9;
 
-      //  TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,RELISOL,
-        //first_vertex,pfCandidates,&*muonIter);
+       TupleHelpers::setMuon_dz_dxy_isTight_isPF_isTracker_RelIsol(DZ,DXY,ISTIGHT,ISPF,ISTRACKER,RELISOL,
+       first_vertex,pfCandidates,&*muonIter);
 
         std::cout<<" ------------new muon -------------- "<<std::endl;
         std::cout<<DZ<<" "<<DXY<<" "<<ISTIGHT<<" "<<ISPF<<" "<<relativeIsolation_DR4<<std::endl;
