@@ -1243,17 +1243,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   bunchCrossing = iEvent.bunchCrossing();
   orbitNumber = iEvent.orbitNumber();
 
-  //////////////////
-  // UserData
 
-  SampleName = UserData0.SampleName();
-  PhysicsProcess = UserData0.PhysicsProcess();
-  isNonTopEmbeddedSample = UserData0.isNonTopEmbeddedSample();
-  isTopEmbeddedSample = UserData0.isTopEmbeddedSample();
-  MASS= UserData0.MASS();
-  crossSection= UserData0.crossSection();
-  branchingFraction= UserData0.branchingFraction();
-  numberEvents= UserData0.numberEvents();
 
 
 
@@ -1265,8 +1255,19 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle <TupleUserSpecifiedDataCollection> userData;
   iEvent.getByLabel(userDataSrc_,userData);
 
-  const TupleUserSpecifiedData userData0 =   ((*userData)[0]);
+  const TupleUserSpecifiedData UserData0 =   ((*userData)[0]);
 
+  //////////////////
+  // UserData
+
+  SampleName = UserData0.SampleName();
+  PhysicsProcess = UserData0.PhysicsProcess();
+  isNonTopEmbeddedSample = UserData0.isNonTopEmbeddedSample();
+  isTopEmbeddedSample = UserData0.isTopEmbeddedSample();
+  MASS= UserData0.MASS();
+  crossSection= UserData0.crossSection();
+  branchingFraction= UserData0.branchingFraction();
+  numberEvents= UserData0.numberEvents();
 
 
   ///////////////
@@ -2544,8 +2545,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     ///////////
     // userData
 
-    SampleName = 'NULL';
-    PhysicsProcess ='NULL';
+    SampleName = 'X';
+    PhysicsProcess ='X';
     isNonTopEmbeddedSample = 0;
     isTopEmbeddedSample = 0;
     MASS = 0.0;
