@@ -442,7 +442,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     //set_dxy
     ////////////////
     CurrentElectron.set_dxy(electron->track()->dxy(first_vertex.position()));
-    dxy = electron->gsfTrack()->dxy(first_vertex.position());
+    dxy = electron->track()->dxy(first_vertex.position());
 
 
   }
@@ -602,8 +602,8 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
   // deltaEtaSuperClusterTrackAtVtx
   // hadronicOverEm
 
-  CurrentElectron.set_deltaPhiSuperClusterTrackAtVtx(electron->deltaPhiSuperClusterTrackAtVtx());
-  CurrentElectron.set_deltaEtaSuperClusterTrackAtVtx(electron->deltaEtaSuperClusterTrackAtVtx());
+  CurrentElectron.set_deltaPhiSuperClusterTrackAtVtx(fabs(electron->deltaPhiSuperClusterTrackAtVtx()));
+  CurrentElectron.set_deltaEtaSuperClusterTrackAtVtx(fabs(electron->deltaEtaSuperClusterTrackAtVtx()));
   CurrentElectron.set_hadronicOverEm(electron->hadronicOverEm());
 
 

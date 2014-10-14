@@ -79,7 +79,7 @@ namespace TupleHelpers
     {
 
       dz = electron->track()->dz(first_vertex.position());
-      dxy = electron->gsfTrack()->dxy(first_vertex.position());
+      dxy = electron->track()->dxy(first_vertex.position());
     }
 
     ////////////////////////////

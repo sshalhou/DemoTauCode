@@ -373,15 +373,15 @@ TupleElectronTauVetoesProducer::produce(edm::Event& iEvent, const edm::EventSetu
         if(electronIter->isEB())
           {
             if( electronIter->sigmaIetaIeta() >= 0.010) TheEBOrEECondition = 0;
-            if( electronIter->deltaPhiSuperClusterTrackAtVtx() >= 0.80) TheEBOrEECondition = 0;
-            if( electronIter->deltaEtaSuperClusterTrackAtVtx() >= 0.007) TheEBOrEECondition = 0;
+            if( fabs(electronIter->deltaPhiSuperClusterTrackAtVtx()) >= 0.80) TheEBOrEECondition = 0;
+            if( fabs(electronIter->deltaEtaSuperClusterTrackAtVtx()) >= 0.007) TheEBOrEECondition = 0;
             if( electronIter->hadronicOverEm() >= 0.15) TheEBOrEECondition = 0;
           }
         else if(electronIter->isEE())
           {
             if( electronIter->sigmaIetaIeta() >= 0.030) TheEBOrEECondition = 0;
-            if( electronIter->deltaPhiSuperClusterTrackAtVtx() >= 0.70) TheEBOrEECondition = 0;
-            if( electronIter->deltaEtaSuperClusterTrackAtVtx() >= 0.010) TheEBOrEECondition = 0;
+            if( fabs(electronIter->deltaPhiSuperClusterTrackAtVtx()) >= 0.70) TheEBOrEECondition = 0;
+            if( fabs(electronIter->deltaEtaSuperClusterTrackAtVtx()) >= 0.010) TheEBOrEECondition = 0;
           }
         else TheEBOrEECondition = 0;
         //////////////////////////////////
