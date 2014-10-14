@@ -34,6 +34,7 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTauWeight.h"
+#include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
@@ -84,6 +85,7 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag muonTauWtSrc_;
   std::string NAME_;
+  edm::InputTag userDataSrc_;
 
 
   TTree *lepTauTree;
@@ -101,6 +103,18 @@ private:
    bool  isRealData ;
    int  bunchCrossing ;
    int  orbitNumber ;
+
+  //////////////////
+  // from UserSpecifiedData
+
+  std::string SampleName;
+  std::string PhysicsProcess;
+  bool isNonTopEmbeddedSample;
+  bool isTopEmbeddedSample;
+  double MASS;
+  double crossSection;
+  double branchingFraction;
+  int numberEvents;
 
 
 
@@ -583,7 +597,8 @@ tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonTauSrc_(iConfig.getParameter<edm::InputTag>("muonTauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 muonTauWtSrc_(iConfig.getParameter<edm::InputTag>("muonTauWtSrc" )),
-NAME_(iConfig.getParameter<string>("NAME" ))
+NAME_(iConfig.getParameter<string>("NAME" )),
+userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc" ))
 {
   //now do what ever initialization is needed
 
@@ -627,6 +642,18 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("isRealData", &isRealData);
   lepTauTree->Branch("bunchCrossing", &bunchCrossing);
   lepTauTree->Branch("orbitNumber", &orbitNumber);
+
+  ////////////
+  // UserSpecifiedData
+
+  lepTauTree->Branch("SampleName",&SampleName);
+  lepTauTree->Branch("PhysicsProcess",&PhysicsProcess);
+  lepTauTree->Branch("isNonTopEmbeddedSample",&isNonTopEmbeddedSample);
+  lepTauTree->Branch("isTopEmbeddedSample",&isTopEmbeddedSample);
+  lepTauTree->Branch("MASS",&MASS);
+  lepTauTree->Branch("crossSection",&crossSection);
+  lepTauTree->Branch("branchingFraction",&branchingFraction);
+  lepTauTree->Branch("numberEvents",&numberEvents);
 
   // eTau
 
@@ -1215,6 +1242,31 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   isRealData = iEvent.isRealData();
   bunchCrossing = iEvent.bunchCrossing();
   orbitNumber = iEvent.orbitNumber();
+
+  //////////////////
+  // UserData
+
+  SampleName = UserData0.SampleName();
+  PhysicsProcess = UserData0.PhysicsProcess();
+  isNonTopEmbeddedSample = UserData0.isNonTopEmbeddedSample();
+  isTopEmbeddedSample = UserData0.isTopEmbeddedSample();
+  MASS= UserData0.MASS();
+  crossSection= UserData0.crossSection();
+  branchingFraction= UserData0.branchingFraction();
+  numberEvents= UserData0.numberEvents();
+
+
+
+
+
+  /////////////////
+  // user data
+
+  edm::Handle <TupleUserSpecifiedDataCollection> userData;
+  iEvent.getByLabel(userDataSrc_,userData);
+
+  const TupleUserSpecifiedData userData0 =   ((*userData)[0]);
+
 
 
   ///////////////
@@ -2488,6 +2540,19 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     isRealData = 0;
     bunchCrossing = 0;
     orbitNumber = 0;
+
+    ///////////
+    // userData
+
+    SampleName = '';
+    PhysicsProcess ='';
+    isNonTopEmbeddedSample = 0;
+    isTopEmbeddedSample = 0;
+    MASS = 0.0;
+    crossSection = 0.0;
+    branchingFraction = 0.0;
+    numberEvents = 0;
+
 
   }
 
