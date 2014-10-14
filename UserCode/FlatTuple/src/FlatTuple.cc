@@ -2544,8 +2544,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     ///////////
     // userData
 
-    SampleName = '';
-    PhysicsProcess ='';
+    SampleName = 'NULL';
+    PhysicsProcess ='NULL';
     isNonTopEmbeddedSample = 0;
     isTopEmbeddedSample = 0;
     MASS = 0.0;
