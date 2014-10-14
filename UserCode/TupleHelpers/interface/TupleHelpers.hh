@@ -1850,8 +1850,8 @@ namespace TupleHelpers
     {
 
       if(! (sigIetaIeta<0.01) ) passesAllCuts = 0;
-      if(! (deltaEta<0.007) ) passesAllCuts = 0;
-      if(! (deltaPhi<0.8) ) passesAllCuts = 0;
+      if(! (fabs(deltaEta)<0.007) ) passesAllCuts = 0;
+      if(! (fabs(deltaPhi)<0.8) ) passesAllCuts = 0;
       if(! (HE<0.15) ) passesAllCuts = 0;
       if(! (dZ_vtx<0.2) ) passesAllCuts = 0;
       if(passesAllCuts) return 1;
