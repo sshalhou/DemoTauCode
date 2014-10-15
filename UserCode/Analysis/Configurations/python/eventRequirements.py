@@ -28,12 +28,18 @@ def pairCutsMuTau(chain, index, verbose):
     failChain['TransverseMass'] = False
   else:
     passChain['TransverseMass'] = True
-  eventPar['passesTriLeptonVeto'] = chain.muT_passesTriLeptonVeto[index]
-  if chain.muT_passesTriLeptonVeto[index] is not True:
+  eventPar['passesThirdLeptonVeto'] = chain.muT_passesThirdLeptonVeto[index]
+  if chain.muT_passesThirdLeptonVeto[index] is not True:
     returnVal = False
-    failChain['passesTriLeptonVeto'] = False
+    failChain['passesThirdLeptonVeto'] = False
   else:
-    passChain['passesTriLeptonVeto'] = True
+    passChain['passesThirdLeptonVeto'] = True
+  eventPar['passesSecondLeptonVeto'] = chain.muT_passesSecondLeptonVeto[index]
+  if chain.muT_passesSecondLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesSecondLeptonVeto'] = False
+  else:
+    passChain['passesSecondLeptonVeto'] = True
   if verbose:
     print 'eventCuts', eventPar
     if len(passChain) > 0:
@@ -65,12 +71,18 @@ def pairCutsETau(chain, index, verbose):
     failChain['TransverseMass'] = False
   else:
     passChain['TransverseMass'] = True
-  eventPar['passesTriLeptonVeto'] = chain.eT_passesTriLeptonVeto[index]
-  if chain.eT_passesTriLeptonVeto[index] is not True:
+  eventPar['passesThirdLeptonVeto'] = chain.eT_passesThirdLeptonVeto[index]
+  if chain.eT_passesThirdLeptonVeto[index] is not True:
     returnVal = False
-    failChain['passesTriLeptonVeto'] = False
+    failChain['passesThirdLeptonVeto'] = False
   else:
-    passChain['passesTriLeptonVeto'] = True
+    passChain['passesThirdLeptonVeto'] = True
+  eventPar['passesSecondLeptonVeto'] = chain.eT_passesSecondLeptonVeto[index]
+  if chain.eT_passesSecondLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesSecondLeptonVeto'] = False
+  else:
+    passChain['passesSecondLeptonVeto'] = True
   if verbose:
     if len(passChain) > 0:
       print "passed cuts = ",passChain

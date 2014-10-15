@@ -28,7 +28,10 @@ chain = TChain('demo/FlatTuple')
 listOfFiles = []
 #listOfFiles.append('./FlatTuple_eTau.root')
 #listOfFiles.append('FlatTupleHold/FlatTuple_ggHUP.root') # tau ES up
-listOfFiles.append('FlatTupleHold/FlatTuple_ggH.root')
+#listOfFiles.append('FlatTupleHold/FlatTuple_ggH.root')
+#listOfFiles.append('./FlatTuple_newVersion.root')
+listOfFiles.append('./FlatTuple_bbH90.root')
+listOfFiles.append('./FlatTuple_bbH80.root')
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'demo/FlatTuple')
@@ -60,7 +63,7 @@ from Plotting.python.ComparisonPlots import *
 maxEntries = chain.GetEntries()
 
 if SmallRun is True:
-	maxEntries = 1300
+	maxEntries = 300
 
 for entry in range(0,maxEntries):
 		entryNumber = chain.GetEntryNumber(entry);
@@ -78,6 +81,7 @@ for entry in range(0,maxEntries):
 
 			eventID = [str(chain.run), str(chain.luminosityBlock), str(chain.event)]
 			eventString = str(chain.run)+"-"+str(chain.luminosityBlock)+"-"+str(chain.event)
+			sampleName =  str(chain.SampleName)
 			#if eventString in check_events:
 			#	Verbose = True
 			#	print "**********************************************"
@@ -175,25 +179,38 @@ for entry in range(0,maxEntries):
 				fillVariables(chain,eventVariables,maxPairTypeAndIndex,Verbose)
 				#print maxPairTypeAndIndex, eventVariables['SVFitMass'], eventVariables['numberOfBTaggedJets'],eventVariables['tauPt']
 				finalWt = signalSUSYweight(chain, maxPairTypeAndIndex, Verbose)
-				thingToFill = maxPairTypeAndIndex[1]+'_ggH120_'+maxPairTypeAndIndex[2]
-				thingToFillinc = maxPairTypeAndIndex[1]+'_ggH120_'+'inclusive'
-				#print thingToFill, maxPairTypeAndIndex, finalWt, thingToFillinc
-				#print finalWt
+				SAMPLE_ADD = '_ggH120_'
+				if(sampleName=='/SUSYBBHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+					SAMPLE_ADD = '_bbH80_'
+				if(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+					SAMPLE_ADD = '_bbH90_'
+#				print 'Filling'
+				thingToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+maxPairTypeAndIndex[2]
+				thingToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+'inclusive'
+#				print thingToFill, maxPairTypeAndIndex, finalWt, thingToFillinc
+#				print finalWt
 				histogram_dict[thingToFillinc].Fill(eventVariables['SVFitMass'],finalWt)
 				if maxPairTypeAndIndex[2] != 'Reject':
 					histogram_dict[thingToFill].Fill(eventVariables['SVFitMass'],finalWt)
 				if maxPairTypeAndIndex[1] == 'eleTau':
 					#print 'xxx', eventID[0]+"-"+eventID[1]+"-"+eventID[2]+"-"+str(eventVariables['numberOfBTaggedJets'])
-					njet_eleTau.Fill(eventVariables['numberOfJets'])
-					nbjet_eleTau.Fill(eventVariables['numberOfBTaggedJets'])
-					svMass_eleTau.Fill(eventVariables['SVFitMass'])
-					mvaMET_eleTau.Fill(eventVariables['MVAmet'])
+					njet_eleTau.Fill(eventVariables['numberOfJets'],finalWt)
+					nbjet_eleTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
+					svMass_eleTau.Fill(eventVariables['SVFitMass'],finalWt)
+					mvaMET_eleTau.Fill(eventVariables['MVAmet'],finalWt)
+					if math.isnan(eventVariables['jet1Pt']) is False:
+						j1Pt_eleTau.Fill(eventVariables['jet1Pt'],finalWt)
+					if eventVariables['SVFitMass'] < 50:
+						print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
 				elif maxPairTypeAndIndex[1] == 'muTau':
-					njet_muTau.Fill(eventVariables['numberOfJets'])
-					nbjet_muTau.Fill(eventVariables['numberOfBTaggedJets'])
-					svMass_muTau.Fill(eventVariables['SVFitMass'])
-					mvaMET_muTau.Fill(eventVariables['MVAmet'])
-
+					njet_muTau.Fill(eventVariables['numberOfJets'],finalWt)
+					nbjet_muTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
+					svMass_muTau.Fill(eventVariables['SVFitMass'],finalWt)
+					mvaMET_muTau.Fill(eventVariables['MVAmet'],finalWt)
+					if math.isnan(eventVariables['jet1Pt']) is False:
+						j1Pt_muTau.Fill(eventVariables['jet1Pt'],finalWt)
+					if eventVariables['SVFitMass'] < 50:
+						print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
 
 ######################
 # save filled histograms
