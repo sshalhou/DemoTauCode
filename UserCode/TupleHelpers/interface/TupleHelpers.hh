@@ -628,7 +628,7 @@ namespace TupleHelpers
       TH1 * file2HistScaleDown = dynamic_cast<TH1*>(file2->Get(histName));
       bin = file2HistScaleDown->FindBin(PT);
       BoundaryCheckBin(bin, file2HistScaleDown->GetNbinsX());
-      upPOWHEGscale = file2HistScaleDown->GetBinContent(bin);
+      downPOWHEGscale = file2HistScaleDown->GetBinContent(bin);
 
 
       delete file1;
