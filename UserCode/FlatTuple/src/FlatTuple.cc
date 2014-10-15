@@ -33,6 +33,8 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleElectronTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
+#include "UserCode/TupleObjects/interface/TupleElectronTauVetoes.h"
+#include "UserCode/TupleObjects/interface/TupleMuonTauVetoes.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTauWeight.h"
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 
@@ -80,10 +82,13 @@ private:
   edm::InputTag electronSrc_;
   edm::InputTag tauSrc_;
   edm::InputTag electronTauWtSrc_;
+  edm::InputTag electronTauVetoSrc_;
+
 
   edm::InputTag muonTauSrc_;
   edm::InputTag muonSrc_;
   edm::InputTag muonTauWtSrc_;
+  edm::InputTag muonTauVetoSrc_;
   std::string NAME_;
   edm::InputTag userDataSrc_;
 
@@ -351,7 +356,8 @@ private:
   std::vector< int > eT_hepNUP ;
   std::vector< double > eT_weightHEPNUP_DYJets ;
   std::vector< double > eT_weightHEPNUP_WJets ;
-
+  std::vector< bool > eT_passesThirdLeptonVeto;
+  std::vector< bool > eT_passesSecondLeptonVeto;
   //////////
   // for muTau object
 
@@ -574,7 +580,8 @@ private:
   std::vector< int > muT_hepNUP ;
   std::vector< double > muT_weightHEPNUP_DYJets ;
   std::vector< double > muT_weightHEPNUP_WJets ;
-
+  std::vector< bool > muT_passesThirdLeptonVeto;
+  std::vector< bool > muT_passesSecondLeptonVeto;
 
 };
 
@@ -592,11 +599,13 @@ private:
 FlatTuple::FlatTuple(const edm::ParameterSet& iConfig):
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
 electronTauWtSrc_(iConfig.getParameter<edm::InputTag>("electronTauWtSrc" )),
+electronTauVetoSrc_(iConfig.getParameter<edm::InputTag>("electronTauVetoSrc" )),
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
 tauSrc_(iConfig.getParameter<edm::InputTag>("tauSrc" )),
 muonTauSrc_(iConfig.getParameter<edm::InputTag>("muonTauSrc" )),
 muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
 muonTauWtSrc_(iConfig.getParameter<edm::InputTag>("muonTauWtSrc" )),
+muonTauVetoSrc_(iConfig.getParameter<edm::InputTag>("muonTauVetoSrc" )),
 NAME_(iConfig.getParameter<string>("NAME" )),
 userDataSrc_(iConfig.getParameter<edm::InputTag>("userDataSrc" ))
 {
@@ -935,6 +944,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_hepNUP", &eT_hepNUP);
   lepTauTree->Branch("eT_weightHEPNUP_DYJets", &eT_weightHEPNUP_DYJets);
   lepTauTree->Branch("eT_weightHEPNUP_WJets", &eT_weightHEPNUP_WJets);
+  lepTauTree->Branch("eT_passesSecondLeptonVeto", &eT_passesSecondLeptonVeto);
+  lepTauTree->Branch("eT_passesThirdLeptonVeto", &eT_passesThirdLeptonVeto);
 
 
   lepTauTree->Branch("muT_p4_x", &muT_p4_x);
@@ -1203,7 +1214,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_hepNUP", &muT_hepNUP);
   lepTauTree->Branch("muT_weightHEPNUP_DYJets", &muT_weightHEPNUP_DYJets);
   lepTauTree->Branch("muT_weightHEPNUP_WJets", &muT_weightHEPNUP_WJets);
-
+  lepTauTree->Branch("muT_passesSecondLeptonVeto", &muT_passesSecondLeptonVeto);
+  lepTauTree->Branch("muT_passesThirdLeptonVeto", &muT_passesThirdLeptonVeto);
 
 }
 
@@ -1278,16 +1290,22 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   ///////////////
-  // get eTausWts
+  // get eTausWts and vetoes
 
   edm::Handle< TupleElectronTauWeightCollection > eTauWts;
   iEvent.getByLabel(electronTauWtSrc_, eTauWts);
 
+  edm::Handle< TupleElectronTauVetoesCollection > eTauVetoes;
+  iEvent.getByLabel(electronTauVetoSrc_, eTauVetoes);
+
   ///////////////
-  // get muTausWts
+  // get muTausWts and vetoes
 
   edm::Handle< TupleMuonTauWeightCollection > muTauWts;
   iEvent.getByLabel(muonTauWtSrc_, muTauWts);
+
+  edm::Handle< TupleMuonTauVetoesCollection > muTauVetoes;
+  iEvent.getByLabel(muonTauVetoSrc_, muTauVetoes);
 
   ///////////////
   // get electrons
@@ -1316,6 +1334,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     const TupleElectronTau eTau =   ((*eTaus)[i]);
     const TupleElectronTauWeight eTauWt =   ((*eTauWts)[i]);
+    const TupleElectronTauVetoes eVetoes = ((*eTauVetoes)[i]);
     const TupleElectron theElec =   ((*elecs)[eTau.electronIndex()]);
     const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
@@ -1601,8 +1620,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_hepNUP.push_back(eTauWt.hepNUP());
     eT_weightHEPNUP_DYJets.push_back(eTauWt.weightHEPNUP_DYJets());
     eT_weightHEPNUP_WJets.push_back(eTauWt.weightHEPNUP_WJets());
-
-
+    eT_passesSecondLeptonVeto.push_back(eVetoes.passesSecondLeptonVeto());
+    eT_passesThirdLeptonVeto.push_back(eVetoes.passesThirdLeptonVeto());
 
   }
 
@@ -1619,6 +1638,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       const TupleMuonTau muTau =   ((*muTaus)[i]);
       const TupleMuonTauWeight muTauWt =   ((*muTauWts)[i]);
+      const TupleMuonTauVetoes muVetoes = ((*muTauVetoes)[i]);
       const TupleMuon theMuon =   ((*muons)[muTau.muonIndex()]);
       const TupleTau theTau =   ((*taus)[muTau.tauIndex()]);
 
@@ -1893,7 +1913,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_hepNUP.push_back(muTauWt.hepNUP());
       muT_weightHEPNUP_DYJets.push_back(muTauWt.weightHEPNUP_DYJets());
       muT_weightHEPNUP_WJets.push_back(muTauWt.weightHEPNUP_WJets());
-
+      muT_passesSecondLeptonVeto.push_back(muVetoes.passesSecondLeptonVeto());
+      muT_passesThirdLeptonVeto.push_back(muVetoes.passesThirdLeptonVeto());
 
     }
 
@@ -2266,6 +2287,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_hepNUP.clear();
     eT_weightHEPNUP_DYJets.clear();
     eT_weightHEPNUP_WJets.clear();
+    eT_passesSecondLeptonVeto.clear();
+    eT_passesThirdLeptonVeto.clear();
 
     muT_p4_x.clear();
     muT_p4_y.clear();
@@ -2534,6 +2557,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_hepNUP.clear();
     muT_weightHEPNUP_DYJets.clear();
     muT_weightHEPNUP_WJets.clear();
+    muT_passesSecondLeptonVeto.clear();
+    muT_passesThirdLeptonVeto.clear();
 
     run = 0;
     luminosityBlock = 0;
