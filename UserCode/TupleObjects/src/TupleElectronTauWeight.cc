@@ -33,6 +33,8 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_nominalPOWHEGmhmod = NAN;
   m_upPOWHEGmhmod = NAN;
   m_downPOWHEGmhmod = NAN;
+  m_upPOWHEGscale = NAN;
+  m_downPOWHEGscale = NAN;
   m_etaDepQCDShapeTemplateCorrection = NAN;
   m_inclusiveQCDShapeTemplateCorrection = NAN;
   m_TTbarPtWeight = NAN;
@@ -117,6 +119,14 @@ double TupleElectronTauWeight::upPOWHEGmhmod() const { return m_upPOWHEGmhmod; }
 
 void TupleElectronTauWeight::set_downPOWHEGmhmod(double downPOWHEGmhmod_) { m_downPOWHEGmhmod  =  downPOWHEGmhmod_;}
 double TupleElectronTauWeight::downPOWHEGmhmod() const { return m_downPOWHEGmhmod; }
+
+
+
+void TupleElectronTauWeight::set_upPOWHEGscale(double upPOWHEGscale_) { m_upPOWHEGscale  =  upPOWHEGscale_;}
+double TupleElectronTauWeight::upPOWHEGscale() const { return m_upPOWHEGscale; }
+
+void TupleElectronTauWeight::set_downPOWHEGscale(double downPOWHEGscale_) { m_downPOWHEGscale  =  downPOWHEGscale_;}
+double TupleElectronTauWeight::downPOWHEGscale() const { return m_downPOWHEGscale; }
 
 
 

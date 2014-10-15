@@ -52,6 +52,8 @@ public:
   void set_nominalPOWHEGmhmod(double);
   void set_upPOWHEGmhmod(double);
   void set_downPOWHEGmhmod(double);
+  void set_upPOWHEGscale(double);
+  void set_downPOWHEGscale(double);
   void set_etaDepQCDShapeTemplateCorrection(double);
   void set_inclusiveQCDShapeTemplateCorrection(double);
   void set_TTbarPtWeight(double);
@@ -95,6 +97,8 @@ public:
   double nominalPOWHEGmhmod() const;
   double upPOWHEGmhmod() const;
   double downPOWHEGmhmod() const;
+  double upPOWHEGscale() const;
+  double downPOWHEGscale() const;
   double etaDepQCDShapeTemplateCorrection() const;
   double inclusiveQCDShapeTemplateCorrection() const;
   double TTbarPtWeight() const;
@@ -139,6 +143,8 @@ private:
   double m_nominalPOWHEGmhmod;
   double m_upPOWHEGmhmod;
   double m_downPOWHEGmhmod;
+  double m_upPOWHEGscale;
+  double m_downPOWHEGscale;
   double m_etaDepQCDShapeTemplateCorrection;
   double m_inclusiveQCDShapeTemplateCorrection;
   double m_TTbarPtWeight;

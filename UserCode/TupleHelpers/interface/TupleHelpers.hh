@@ -504,7 +504,9 @@ namespace TupleHelpers
   double & downHIGLUXHQTmhmax,
   double & nominalPOWHEGmhmod,
   double & upPOWHEGmhmod,
-  double & downPOWHEGmhmod)
+  double & downPOWHEGmhmod,
+  double & upPOWHEGscale,
+  double & downPOWHEGscale)
   {
 
     ///////////
@@ -532,6 +534,8 @@ namespace TupleHelpers
       nominalPOWHEGmhmod  = 1.0;
       upPOWHEGmhmod  = 1.0;
       downPOWHEGmhmod  = 1.0;
+      upPOWHEGscale = 1.0;
+      downPOWHEGscale = 1.0;
       return;
 
     }
@@ -589,6 +593,18 @@ namespace TupleHelpers
       upPOWHEGmhmod = file2HistUp->GetBinContent(bin);
 
       ////////
+      // high scale
+
+      sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_scaleUp", MASS, MASS);
+
+
+      TH1 * file2HistScaleUp = dynamic_cast<TH1*>(file2->Get(histName));
+      bin = file2HistScaleUp->FindBin(PT);
+      BoundaryCheckBin(bin, file2HistScaleUp->GetNbinsX());
+      upPOWHEGscale = file2HistScaleUp->GetBinContent(bin);
+
+
+      ////////
       // low
 
       sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_tanBetaLow", MASS, MASS);
@@ -603,6 +619,18 @@ namespace TupleHelpers
       BoundaryCheckBin(bin, file2HistDown->GetNbinsX());
       downPOWHEGmhmod = file2HistDown->GetBinContent(bin);
 
+      ////////
+      // low scale
+
+      sprintf(histName,"A_mA%1.0f_mu200/mssmHiggsPtReweight_A_mA%1.0f_mu200_scaleDown", MASS, MASS);
+
+
+      TH1 * file2HistScaleDown = dynamic_cast<TH1*>(file2->Get(histName));
+      bin = file2HistScaleDown->FindBin(PT);
+      BoundaryCheckBin(bin, file2HistScaleDown->GetNbinsX());
+      upPOWHEGscale = file2HistScaleDown->GetBinContent(bin);
+
+
       delete file1;
       delete file2;
       delete file1HistNom;
@@ -611,6 +639,8 @@ namespace TupleHelpers
       delete file2HistNom;
       delete file2HistUp;
       delete file2HistDown;
+      delete file2HistScaleUp;
+      delete file2HistScaleDown;
 
 
     }

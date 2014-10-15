@@ -429,6 +429,8 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     double nominalPOWHEGmhmod = 1.0;
     double upPOWHEGmhmod = 1.0;
     double downPOWHEGmhmod = 1.0;
+    double upPOWHEGscale = 1.0;
+    double downPOWHEGscale = 1.0;
 
     TupleHelpers::getHiggsPtWeights(userData0, electronTau.genBosonP4(),
     nominalHIGLUXHQTmhmax,
@@ -436,7 +438,9 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     downHIGLUXHQTmhmax,
     nominalPOWHEGmhmod,
     upPOWHEGmhmod,
-    downPOWHEGmhmod);
+    downPOWHEGmhmod,
+    upPOWHEGscale,
+    downPOWHEGscale);
 
     CurrentElectronTauWeight.set_nominalHIGLUXHQTmhmax(nominalHIGLUXHQTmhmax);
     CurrentElectronTauWeight.set_upHIGLUXHQTmhmax(upHIGLUXHQTmhmax);
@@ -444,6 +448,8 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
     CurrentElectronTauWeight.set_nominalPOWHEGmhmod(nominalPOWHEGmhmod);
     CurrentElectronTauWeight.set_upPOWHEGmhmod(upPOWHEGmhmod);
     CurrentElectronTauWeight.set_downPOWHEGmhmod(downPOWHEGmhmod);
+    CurrentElectronTauWeight.set_upPOWHEGscale(upPOWHEGscale);
+    CurrentElectronTauWeight.set_downPOWHEGscale(downPOWHEGscale);
 
     ////////////////
     // QCD template

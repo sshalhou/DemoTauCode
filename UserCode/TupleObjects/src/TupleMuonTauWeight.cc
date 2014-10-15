@@ -30,6 +30,8 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_nominalPOWHEGmhmod = NAN;
   m_upPOWHEGmhmod = NAN;
   m_downPOWHEGmhmod = NAN;
+  m_upPOWHEGscale = NAN;
+  m_downPOWHEGscale = NAN;
   m_etaDepQCDShapeTemplateCorrection = NAN;
   m_inclusiveQCDShapeTemplateCorrection = NAN;
   m_TTbarPtWeight = NAN;
@@ -112,6 +114,12 @@ double TupleMuonTauWeight::upPOWHEGmhmod() const { return m_upPOWHEGmhmod; }
 
 void TupleMuonTauWeight::set_downPOWHEGmhmod(double downPOWHEGmhmod_) { m_downPOWHEGmhmod  =  downPOWHEGmhmod_;}
 double TupleMuonTauWeight::downPOWHEGmhmod() const { return m_downPOWHEGmhmod; }
+
+void TupleMuonTauWeight::set_upPOWHEGscale(double upPOWHEGscale_) { m_upPOWHEGscale  =  upPOWHEGscale_;}
+double TupleMuonTauWeight::upPOWHEGscale() const { return m_upPOWHEGscale; }
+
+void TupleMuonTauWeight::set_downPOWHEGscale(double downPOWHEGscale_) { m_downPOWHEGscale  =  downPOWHEGscale_;}
+double TupleMuonTauWeight::downPOWHEGscale() const { return m_downPOWHEGscale; }
 
 
 
