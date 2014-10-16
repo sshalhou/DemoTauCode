@@ -172,7 +172,10 @@ for element in root.findall('Sample'):
     CRABtotal_number_of_events = "sed -i \'s/DUMMY_total_number_of_events/"+nevents+"/g\'"+" "+crabConfigName
     os.system(CRABtotal_number_of_events)
 
-    CRABnumber_of_jobs = "sed -i \'s/DUMMY_number_of_jobs/"+"450"+"/g\'"+" "+crabConfigName
+    NUM_JOBS = int(nevents/4500.0)
+
+
+    CRABnumber_of_jobs = "sed -i \'s/DUMMY_number_of_jobs/"+str(NUM_JOBS)+"/g\'"+" "+crabConfigName
     os.system(CRABnumber_of_jobs)
 
 #    PSET = patTupleConfigName
