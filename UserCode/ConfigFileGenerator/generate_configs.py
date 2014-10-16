@@ -173,6 +173,8 @@ for element in root.findall('Sample'):
     os.system(CRABtotal_number_of_events)
 
     NUM_JOBS = int(float(nevents)/4500.0)
+    if(NUM_JOBS>4900):
+      NUM_JOBS = 4900
     print "will aim to generate ",str(NUM_JOBS), "crab jobs"
 
     CRABnumber_of_jobs = "sed -i \'s/DUMMY_number_of_jobs/"+str(NUM_JOBS)+"/g\'"+" "+crabConfigName
