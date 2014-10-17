@@ -235,9 +235,14 @@ TupleJetProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     // want to obtain the JEC shift
     ///////////////////////////////
 
-    jecUnc.setJetEta(patjet.eta());
-    jecUnc.setJetPt(patjet.pt());
-    double shift  = jecUnc.getUncertainty( true );
+
+    double shift = 0.0;
+    if( fabs(patjet.eta()) < 5.4 )
+     {
+       jecUnc.setJetEta(patjet.eta());
+       jecUnc.setJetPt(patjet.pt());
+       shift  = jecUnc.getUncertainty( true );
+     }
 
     double lowPt = patjet.pt() * (1.0-shift);
 

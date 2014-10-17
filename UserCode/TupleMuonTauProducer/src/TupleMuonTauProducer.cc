@@ -913,11 +913,14 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         //////////////////////////////
         // want to obtain the JEC shift
         ///////////////////////////////
+        float shift = 0.0;
+        if( fabs(patjet.eta()) < 5.4 )
+         {
+           jecUnc.setJetEta(patjet.eta());
+           jecUnc.setJetPt(patjet.pt());
+           shift  = jecUnc.getUncertainty( true );
+         }
 
-
-        jecUnc.setJetEta(patjet.eta());
-        jecUnc.setJetPt(patjet.pt());
-        float shift  = jecUnc.getUncertainty( true );
         float shift_up = 1+shift;
         float shift_down = 1-shift;
         //std::cout<<" the JEC shift is "<<shift_down<<" "<<shift_up<<std::endl;
