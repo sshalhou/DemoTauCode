@@ -263,8 +263,9 @@ process.load("RecoJets.JetProducers.pujetidsequence_cff")
 #####################################
 # compute the tau spinner weights
 #####################################
+if SampleName_='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM':
+  process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
 
-process.load("TauSpinnerInterface.TauSpinnerInterface.TauSpinner_cfi")
 
 
 ###################################################
@@ -1448,8 +1449,11 @@ if FilterEvents_:
 if PrintProductIDs_:
   process.p *= process.printEventContent
 
-if runOnMC_:
+#if runOnMC_:
+if SampleName_='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM':
   process.p *= process.TauSpinnerReco
+
+
 
 #####################################
 # things formerly in the Ntuple
