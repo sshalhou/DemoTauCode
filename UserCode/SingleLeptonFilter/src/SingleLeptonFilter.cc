@@ -129,7 +129,7 @@ SingleLeptonFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   bool RETURN_VALUE = 0;
 
-  if(mouns->size()+electrons->size()>0) RETURN_VALUE  = 1;
+  if(muons->size()+electrons->size()>0) RETURN_VALUE  = 1;
 
 
 
