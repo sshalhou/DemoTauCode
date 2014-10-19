@@ -31,6 +31,12 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "PhysicsTools/PatUtils/interface/TriggerHelper.h"
 #include "DataFormats/PatCandidates/interface/TriggerEvent.h"
+#include "DataFormats/EgammaCandidates/interface/GsfElectron.h"
+
+#include "DataFormats/MuonReco/interface/Muon.h"
+#include "DataFormats/MuonReco/interface/MuonFwd.h"
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
+
 //
 // class declaration
 //
@@ -78,9 +84,8 @@ class SingleLeptonFilter : public edm::EDFilter {
 //
 SingleLeptonFilter::SingleLeptonFilter(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
 //triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
-
 {
 
   // eTauPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
@@ -114,12 +119,12 @@ SingleLeptonFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
   // get electron collection
-  edm::Handle<edm::View<pat::Electron> > electrons;
+  edm::Handle<edm::View<reco::GsfElectron> > electrons;
   iEvent.getByLabel(electronSrc_,electrons);
 
 
   // get muon collection
-  edm::Handle<edm::View<pat::Muon> > muons;
+  edm::Handle<edm::View<reco::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
 
   bool RETURN_VALUE = 0;
