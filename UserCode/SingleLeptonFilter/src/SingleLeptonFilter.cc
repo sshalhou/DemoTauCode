@@ -56,7 +56,9 @@ class SingleLeptonFilter : public edm::EDFilter {
       edm::InputTag electronSrc_;
       edm::InputTag muonSrc_;
       edm::InputTag triggerEventSrc_;
-      vector<string> eTauAndMuTauPaths;
+      std::vector<string> eTauPaths;
+      std::vector<string> muTauPaths;
+
 
 
 
