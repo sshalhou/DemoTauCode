@@ -8,16 +8,15 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
 ########################################################################################################
 
-
-SampleName_='SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/AODSIM'
-PhysicsProcess_='ggA0tautau[SUSY_120_8TeV]'
-MASS_=120.0
-isNonTopEmbeddedSample_ = False
-isTopEmbeddedSample_ = False
-runOnMC_ = True # true for MC, and all topTopBar and Ztautau embedded samples
-branchingFraction_ = 999.99
-crossSection_ = 999.99
-numberEvents_ = 999
+SampleName_='DUMMY_SampleName'
+PhysicsProcess_='DUMMY_PhysicsProcess'
+MASS_= DUMMY_MASS
+isNonTopEmbeddedSample_ = DUMMY_isNonTopEmbeddedSample
+isTopEmbeddedSample_ = DUMMY_isTopEmbeddedSample
+runOnMC_ =  DUMMY_runOnMC # true for MC, and all topTopBar and Ztautau embedded samples
+crossSection_ = DUMMY_crossSection
+numberEvents_ = DUMMY_numberEvents
+branchingFraction_ = DUMMY_branchingFraction
 WillRunSVFit_ = True
 
 
@@ -78,6 +77,8 @@ process.selectedPrimaryVerticesNtuple = cms.EDFilter(
 )
 
 
+
+
 ########################
 # new Filters to speed up crab jobs
 
@@ -113,8 +114,6 @@ process.AtLeastOneRecoMuonOrElectron = cms.EDFilter("SingleLeptonFilter",
                                 minPt=cms.double(8.0),
                                 filter = cms.bool(True)
 )
-
-
 
 
 ##################################################
@@ -1495,6 +1494,8 @@ if PrintProductIDs_:
 if SampleName_=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM':
   process.p *= process.TauSpinnerReco
 
+
+
 #####################################
 # things formerly in the Ntuple
 
@@ -1612,14 +1613,12 @@ if KeepPat_:
   process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
 
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
+process.out.fileName = 'NTUPLE.root'
+
 
 ########################################################################################################
-myfilelist = cms.untracked.vstring()
-myfilelist.extend(['file:/uscms/home/shalhout/no_backup/oneThousand_selectedEventsRaw.root'])
 
 process.source = cms.Source ("PoolSource",
-                      fileNames=myfilelist,
                         dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
                         inputCommands = cms.untracked.vstring(
                         'keep *',

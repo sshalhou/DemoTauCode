@@ -127,13 +127,13 @@ for element in root.findall('Sample'):
     crabConfigName = crabJobLocation+"/crab_"+OneWordName+"_"+dateSuffix+".cfg"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
-    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v3/PAT_template.py"
+    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v4/PAT_template.py"
     CatCommand += ">> "+ patTupleConfigName
     os.system(CatCommand)
 
     print "creating a crab cfg called = ", crabConfigName
 
-    crabCatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v3/crab_template.cfg"
+    crabCatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v4/crab_template.cfg"
     crabCatCommand += ">> "+ crabConfigName
     os.system(crabCatCommand)
 
@@ -187,7 +187,7 @@ for element in root.findall('Sample'):
     CRABpset = "sed -i \'s/DUMMY_pset/"+patTupleConfigName.replace("/","\/")+"/g\'"+" "+crabConfigName
     os.system(CRABpset)
 
-    directoryName = OneWordName+"_v5ntup"
+    directoryName = OneWordName+"_v6ntup"
     pubName = "SZS_"+directoryName
 
     CRABdatasetpath = "sed -i \'s/DUMMY_datasetpath/"+str(sys.argv[1]).replace("/","\/")+"/g\'"+" "+crabConfigName
