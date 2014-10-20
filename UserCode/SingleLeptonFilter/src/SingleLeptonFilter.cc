@@ -130,7 +130,7 @@ SingleLeptonFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
       }
   }
 
-  edm::View<reco::muon>::const_iterator muon;
+  edm::View<reco::Muon>::const_iterator muon;
   for(muon=muons->begin(); muon!=muons->end(); ++muon)
   {
     if(muon->p4().pt()>minPt_)
