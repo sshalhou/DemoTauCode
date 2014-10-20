@@ -110,4 +110,6 @@ cp -r UserCode/RecoilCorrector/recoilfits RunTimeDataInput/data/.
 cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/CustomVersions/PFMETProducerMVA.h ./RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.h
 cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/CustomVersions/PFMETProducerMVA.cc ./RecoMET/METPUSubtraction/plugins/PFMETProducerMVA.cc
 
-
+############################
+echo "adding trigger filter package :"
+git cms-addpkg HLTrigger/HLTfilters

@@ -68,6 +68,7 @@ elif isTopEmbeddedSample_:
 
 ###################################
 # create a new primary vertex collection
+# and filter on it
 ###################################
 
 process.selectedPrimaryVerticesNtuple = cms.EDFilter(
@@ -76,6 +77,44 @@ process.selectedPrimaryVerticesNtuple = cms.EDFilter(
     cut = cms.string("isValid & ndof >= 4 & z > -24 & z < +24 & position.Rho < 2."),
     filter = cms.bool(False)
 )
+
+
+########################
+# new Filters to speed up crab jobs
+
+
+#############################################
+# HLT filter
+
+
+import HLTrigger.HLTfilters.triggerResultsFilter_cfi as hlt
+
+# accept if any path succeeds (explicit OR)
+process.triggerFilter = hlt.triggerResultsFilter.clone(
+      triggerConditions = (
+      'HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v*',
+      'HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v*',
+      'HLT_Ele27_WP80*',
+      'HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v*',
+      'HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v*',
+      'HLT_IsoMu24*',
+      'HLT_PFJet320*'),
+      l1tResults = '',
+      throw = False
+    )
+
+process.triggerFilter.hltResults = cms.InputTag( "TriggerResults", "", "HLT" )
+
+#############################################
+# Muon or Electron present at Reco level
+
+process.AtLeastOneRecoMuonOrElectron = cms.EDFilter("SingleLeptonFilter",
+                                electronSrc =cms.InputTag('gsfElectrons'),
+                                muonSrc =cms.InputTag('muons'),
+                                minPt=cms.double(8.0),
+                                filter = cms.bool(True)
+)
+
 
 
 
@@ -1216,8 +1255,11 @@ process.TupleElectronTauDownVetoes = cms.EDProducer("TupleElectronTauVetoesProdu
 ##################################################
 # Let it run
 ###################################################
-process.p = cms.Path(process.UserSpecifiedData)
-process.p *= process.VertexPresent
+process.p = cms.Path(process.VertexPresent)
+if FilterEvents_:
+  process.p *= process.triggerFilter
+  process.p *= process.AtLeastOneRecoMuonOrElectron
+process.p *= process.UserSpecifiedData
 process.p *= process.mvaID
 process.p *= process.PFTau
 process.p *= process.pfNoPileUpSequence

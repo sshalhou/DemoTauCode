@@ -61,12 +61,7 @@ class SingleLeptonFilter : public edm::EDFilter {
       // ----------member data ---------------------------
       edm::InputTag electronSrc_;
       edm::InputTag muonSrc_;
-      //edm::InputTag triggerEventSrc_;
-    //  std::vector<std::string> eTauPaths;
-      //std::vector<std::string> muTauPaths;
-
-
-
+      double minPt_;
 
 
 };
@@ -84,18 +79,10 @@ class SingleLeptonFilter : public edm::EDFilter {
 //
 SingleLeptonFilter::SingleLeptonFilter(const edm::ParameterSet& iConfig):
 electronSrc_(iConfig.getParameter<edm::InputTag>("electronSrc" )),
-muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" ))
-//triggerEventSrc_(iConfig.getUntrackedParameter<edm::InputTag>("triggerEventSrc" )),
+muonSrc_(iConfig.getParameter<edm::InputTag>("muonSrc" )),
+minPt_(iConfig.getParameter<double>("minPt" ))
 {
 
-  // eTauPaths.push_back("HLT_Ele20_CaloIdVT_CaloIsoRhoT_TrkIdT_TrkIsoT_LooseIsoPFTau20_v");
-  // eTauPaths.push_back("HLT_Ele22_eta2p1_WP90Rho_LooseIsoPFTau20_v");
-  // eTauPaths.push_back("HLT_Ele27_WP80");
-  // muTauPaths.push_back("HLT_IsoMu18_eta2p1_LooseIsoPFTau20_v");
-  // muTauPaths.push_back("HLT_IsoMu17_eta2p1_LooseIsoPFTau20_v");
-  // muTauPaths.push_back("HLT_IsoMu24");
-
-   //now do what ever initialization is needed
 
 }
 
@@ -127,82 +114,34 @@ SingleLeptonFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
   edm::Handle<edm::View<reco::Muon> > muons;
   iEvent.getByLabel(muonSrc_,muons);
 
-  bool RETURN_VALUE = 0;
-
-  if(muons->size()+electrons->size()>0) RETURN_VALUE  = 1;
-
+  bool MUON_PASS = 0;
+  bool ELECTRON_PASS = 0;
 
 
+//  if(muons->size()+electrons->size()>0) RETURN_VALUE  = 1;
 
-    // get the trigger info
+  edm::View<reco::GsfElectron>::const_iterator electron;
+  for(electron=electrons->begin(); electron!=electrons->end(); ++electron)
+  {
+    if(electron->p4().pt()>minPt_)
+      {
+        ELECTRON_PASS = 1;
+        break;
+      }
+  }
 
-  //  edm::Handle< TriggerEvent > triggerEvent;
-  //  iEvent.getByLabel( triggerEventSrc_, triggerEvent );
-
-    // trigger helper
-  //  const pat::helper::TriggerMatchHelper matchHelper;
-
-
-  //
-  //   /////////////////////
-  //   // eTau  path booleans
-  //   bool eTauPath = 0;
-  //
-  //
-  //   const pat::TriggerPathCollection* paths = triggerEvent->paths();
-  //
-  //
-  //   for(size_t i = 0; i<eTauPaths.size(); ++i)
-  //   {
-  //     for (size_t ii = 0; ii < paths->size(); ++ii)
-  //     {
-  //
-  //       const pat::TriggerPath& path = paths->at(ii);
-  //       if(path.name().find(eTauPaths[i])!= std::string::npos)
-  //       {
-  //
-  //         if(path.wasAccept() && path.wasRun())
-  //         {
-  //           //std::cout<<" path "<<eTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
-  //           //std::cout<<" in form "<<path.name()<<"\n";
-  //           eTauPath = 1;
-  //         }
-  //       }
-  //     }
-  //   }
-  //
-  // /////////////////////
-  // // muTau path booleans
-  // bool muTauPath = 0;
-  //
-  //
-  // const pat::TriggerPathCollection* paths = triggerEvent->paths();
-  //
-  //
-  //
-  // for(size_t i = 0; i<muTauPaths.size(); ++i)
-  // {
-  //   for (size_t ii = 0; ii < paths->size(); ++ii)
-  //   {
-  //
-  //     const pat::TriggerPath& path = paths->at(ii);
-  //     if(path.name().find(muTauPaths[i])!= std::string::npos)
-  //     {
-  //
-  //       if(path.wasAccept() && path.wasRun())
-  //       {
-  //         //std::cout<<" path "<<muTauPaths[i]<<" found and wasAccept = "<<path.wasAccept();
-  //         //std::cout<<" in form "<<path.name()<<"\n";
-  //         muTauPath = 1;
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // if(muTauPath||eTauPath) RETURN_VALUE = 1;
+  edm::View<reco::muon>::const_iterator muon;
+  for(muon=muons->begin(); muon!=muons->end(); ++muon)
+  {
+    if(muon->p4().pt()>minPt_)
+      {
+        MUON_PASS = 1;
+        break;
+      }
+  }
 
 
-   return RETURN_VALUE;
+   return (MUON_PASS||ELECTRON_PASS);
 }
 
 // ------------ method called once each job just before starting event loop  ------------
