@@ -9,7 +9,7 @@ header = header + "\n" +"myfilelist = cms.untracked.vstring()" + "\n"
 
 for line in my_file:
 	line = line.rstrip('\n')
-	#DirNameCommand = "ls "+line+"/"
+	DirNameCommand = "ls "+line+"/"
 	#getDirName = os.popen(DirNameCommand)
 	#DirName = getDirName.read()
 	#print "DirName = ", DirName, os.path.basename(line.rstrip('\n'))
@@ -23,7 +23,7 @@ for line in my_file:
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
 	print >> f, header
-	NTUPLISTCOMMAND = DirNameCommand+"*/*/*root"
+	NTUPLISTCOMMAND = DirNameCommand+"*/*root"
 	getNtupleListCommand = os.popen(NTUPLISTCOMMAND)
 	Files = getNtupleListCommand.read()
 	AllFiles = Files.split('\n')
