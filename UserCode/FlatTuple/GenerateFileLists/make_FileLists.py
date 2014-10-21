@@ -32,7 +32,7 @@ for line in my_file:
 
 	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27" + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
 	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
-	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('py')+"/g\x27"
+	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
 
 	CatCommandNominal = CatCommandNominal + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
 	CatCommandUp = CatCommandUp + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
