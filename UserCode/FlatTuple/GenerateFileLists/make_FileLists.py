@@ -29,9 +29,30 @@ for line in my_file:
 		currentFile = "myfilelist.extend([\x27file:"+AllFiles[x]+"\x27])"
 		print >> f, currentFile
 	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/flattree_GENERAL.py"
+
 	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27" + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
 	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
 	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
+
+	CatCommandNominal = CatCommandNominal + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
+	CatCommandUp = CatCommandUp + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
+	CatCommandDown = CatCommandDown + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
+
+	configNameNominal = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsNominal.root"
+	rmCommand = "rm -rf "+configNameNominal
+	os.system(rmCommand)
+	CatCommandNominal = CatCommandNominal + " >> " + configNameNominal
+
+	configNameUp = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsUp.root"
+	rmCommand = "rm -rf "+configNameUp
+	os.system(rmCommand)
+	CatCommandUp = CatCommandUp + " >> " + configUp
+
+	configNameDown = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsDown.root"
+	rmCommand = "rm -rf "+configNameDown
+	os.system(rmCommand)
+	CatCommandDown = CatCommandDown + " >> " + configNameDown
+
 	os.system(CatCommandNominal)
 	os.system(CatCommandUp)
 	os.system(CatCommandDown)
