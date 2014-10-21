@@ -17,7 +17,7 @@ for line in my_file:
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configUpName = "upTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	print "will create : ", configDownName, configNominalName, configUpName
-	rmCommand = "rm -rf "+FileListName
+	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/FileLists/"+FileListName
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
 	print >> f, header
@@ -38,17 +38,17 @@ for line in my_file:
 	CatCommandUp = CatCommandUp + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
 	CatCommandDown = CatCommandDown + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
 
-	configNameNominal = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsNominal.root"
+	configNameNominal = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsNominal.py"
 	rmCommand = "rm -rf "+configNameNominal
 	os.system(rmCommand)
 	CatCommandNominal = CatCommandNominal + " >> " + configNameNominal
 
-	configNameUp = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsUp.root"
+	configNameUp = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsUp.py"
 	rmCommand = "rm -rf "+configNameUp
 	os.system(rmCommand)
 	CatCommandUp = CatCommandUp + " >> " + configNameUp
 
-	configNameDown = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsDown.root"
+	configNameDown = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsDown.py"
 	rmCommand = "rm -rf "+configNameDown
 	os.system(rmCommand)
 	CatCommandDown = CatCommandDown + " >> " + configNameDown
@@ -56,4 +56,7 @@ for line in my_file:
 	os.system(CatCommandNominal)
 	os.system(CatCommandUp)
 	os.system(CatCommandDown)
+
+	mvCommand = "mv "+"FileListName"+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/FileLists/."
+
 	f.close()
