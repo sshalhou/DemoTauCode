@@ -4,9 +4,9 @@ process = cms.Process("FlatTuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 
-from FlatTuple.GenerateFileLists.python.FILELISTNAME import myfilelist
+from FlatTuple.GenerateFileLists.FileLists.FILELISTNAME import myfilelist
 
 
 
