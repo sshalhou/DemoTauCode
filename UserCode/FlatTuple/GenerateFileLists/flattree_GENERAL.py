@@ -6,7 +6,7 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 
-from FlatTuple.GenerateFileLists.FileLists.FILELISTNAME import myfilelist
+from UserCode.FlatTuple.GenerateFileLists.FileLists.FILELISTNAME import myfilelist
 
 
 
