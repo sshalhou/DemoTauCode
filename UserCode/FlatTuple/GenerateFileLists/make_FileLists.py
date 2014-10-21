@@ -58,5 +58,6 @@ for line in my_file:
 	os.system(CatCommandDown)
 
 	mvCommand = "mv "+"FileListName"+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/FileLists/."
+	os.system(mvCommand)
 
 	f.close()
