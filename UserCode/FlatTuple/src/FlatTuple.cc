@@ -89,7 +89,7 @@ private:
   edm::InputTag muonSrc_;
   edm::InputTag muonTauWtSrc_;
   edm::InputTag muonTauVetoSrc_;
-  std::string NAME_;
+  std::string NAME_;  // use TauESNom, TauESUp, TauESDown
   edm::InputTag userDataSrc_;
 
 
@@ -108,6 +108,7 @@ private:
    bool  isRealData ;
    int  bunchCrossing ;
    int  orbitNumber ;
+   std::string NAMEVAR;
 
   //////////////////
   // from UserSpecifiedData
@@ -655,6 +656,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("isRealData", &isRealData);
   lepTauTree->Branch("bunchCrossing", &bunchCrossing);
   lepTauTree->Branch("orbitNumber", &orbitNumber);
+  lepTauTree->Branch("NAMEVAR",&NAMEVAR);
+
 
   ////////////
   // UserSpecifiedData
@@ -1262,7 +1265,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   isRealData = iEvent.isRealData();
   bunchCrossing = iEvent.bunchCrossing();
   orbitNumber = iEvent.orbitNumber();
-
+  NAMEVAR = NAME_;
 
 
 
@@ -2582,6 +2585,7 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     isRealData = 0;
     bunchCrossing = 0;
     orbitNumber = 0;
+    NAMEVAR  = 'X';
 
     ///////////
     // userData
