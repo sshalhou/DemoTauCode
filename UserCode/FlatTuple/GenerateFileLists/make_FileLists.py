@@ -62,7 +62,7 @@ for line in my_file:
 	f.close()
 
 
-rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"
+rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/FileLists"
 os.system(rmCommand)
 cpCommand = "cp -r "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"+" "+os.environ['CMSSW_BASE']+"/src/FileLists"
 os.system(cpCommand)
