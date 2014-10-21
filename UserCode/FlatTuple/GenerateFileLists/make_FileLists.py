@@ -17,7 +17,7 @@ for line in my_file:
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configUpName = "upTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	print "will create : ", configDownName, configNominalName, configUpName
-	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/FileLists/"+FileListName
+	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/"+FileListName
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
 	print >> f, header
@@ -57,7 +57,7 @@ for line in my_file:
 	os.system(CatCommandUp)
 	os.system(CatCommandDown)
 
-	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/FileLists/."
+	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/."
 	os.system(mvCommand)
 
 	f.close()
