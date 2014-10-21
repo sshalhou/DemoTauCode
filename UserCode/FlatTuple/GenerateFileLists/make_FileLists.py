@@ -9,10 +9,11 @@ header = header + "\n" +"myfilelist = cms.untracked.vstring()" + "\n"
 
 for line in my_file:
 	line = line.rstrip('\n')
-	DirNameCommand = "ls "+line+"/"
-	getDirName = os.popen(DirNameCommand)
-	DirName = getDirName.read()
-	print "DirName = ", DirName, os.path.basename(line.rstrip('\n'))
+	#DirNameCommand = "ls "+line+"/"
+	#getDirName = os.popen(DirNameCommand)
+	#DirName = getDirName.read()
+	#print "DirName = ", DirName, os.path.basename(line.rstrip('\n'))
+	DirName = os.path.basename(line.rstrip('\n'))
 	FileListName = DirName.rstrip('\n') + "LIST.py"
 	configNominalName = "nominalTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
