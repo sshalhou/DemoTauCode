@@ -46,7 +46,7 @@ for line in my_file:
 	configNameUp = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsUp.root"
 	rmCommand = "rm -rf "+configNameUp
 	os.system(rmCommand)
-	CatCommandUp = CatCommandUp + " >> " + configUp
+	CatCommandUp = CatCommandUp + " >> " + configNameUp
 
 	configNameDown = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsDown.root"
 	rmCommand = "rm -rf "+configNameDown
