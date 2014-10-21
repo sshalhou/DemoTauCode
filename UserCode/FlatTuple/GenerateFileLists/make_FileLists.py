@@ -64,7 +64,7 @@ for line in my_file:
 	os.system(mvCommand)
 
 	cpCommand = "cp -r "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"+" "+os.environ['CMSSW_BASE']+"/src/FileLists"
-	op.system(cpCommand)
+	os.system(cpCommand)
 
 
 	f.close()
