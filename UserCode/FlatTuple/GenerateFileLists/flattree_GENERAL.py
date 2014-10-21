@@ -45,5 +45,5 @@ SkipEvent = cms.untracked.vstring('ProductNotFound')
 process.p = cms.Path(process.demo)
 
 process.TFileService = cms.Service("TFileService",
-    fileName = cms.string("FlatTuple_FILEOUTNAME_TauEsSHIFT.root")
+    fileName = cms.string("/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_FILEOUTNAME_TauEsSHIFT.root")
 )
