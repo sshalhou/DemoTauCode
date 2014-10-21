@@ -29,9 +29,9 @@ for line in my_file:
 		currentFile = "myfilelist.extend([\x27file:"+AllFiles[x]+"\x27])"
 		print >> f, currentFile
 	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/flattree_GENERAL.py"
-	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27"
-	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"
-	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"
+	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27" + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
+	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
+	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
 	os.system(CatCommandNominal)
 	os.system(CatCommandUp)
 	os.system(CatCommandDown)
