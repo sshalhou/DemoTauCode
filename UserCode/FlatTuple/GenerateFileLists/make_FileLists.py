@@ -17,7 +17,7 @@ for line in my_file:
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configUpName = "upTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	print "will create : ", configDownName, configNominalName, configUpName
-	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/"+FileListName
+	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/"+FileListName
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
 	print >> f, header
@@ -28,7 +28,7 @@ for line in my_file:
 	for x in range(0,len(AllFiles)-1):
 		currentFile = "myfilelist.extend([\x27file:"+AllFiles[x]+"\x27])"
 		print >> f, currentFile
-	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/flattree_GENERAL.py"
+	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/python/flattree_GENERAL.py"
 
 	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27" + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
 	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName+"/g\x27"
@@ -57,7 +57,7 @@ for line in my_file:
 	os.system(CatCommandUp)
 	os.system(CatCommandDown)
 
-	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/."
+	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/."
 	os.system(mvCommand)
 
 	f.close()
