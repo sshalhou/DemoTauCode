@@ -60,4 +60,11 @@ for line in my_file:
 	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/."
 	os.system(mvCommand)
 
+	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"
+	os.system(mvCommand)
+
+	cpCommand = "cp -r "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"+" "+os.environ['CMSSW_BASE']+"/src/FileLists"
+	op.system(cpCommand)
+
+
 	f.close()
