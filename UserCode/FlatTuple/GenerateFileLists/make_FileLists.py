@@ -28,5 +28,7 @@ for line in my_file:
 	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27"
 	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"
 	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"
-	os.system(CatCommand)
+	os.system(CatCommandNominal)
+	os.system(CatCommandUp)
+	os.system(CatCommandDown)
 	f.close()
