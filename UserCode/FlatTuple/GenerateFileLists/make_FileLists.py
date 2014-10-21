@@ -24,4 +24,6 @@ for line in my_file:
 	for x in range(0,len(AllFiles)-1):
 		currentFile = "myfilelist.extend([\x27file:"+AllFiles[x]+"\x27])"
 		print >> f, currentFile
+	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/flattree_GENERAL.py"
+	os.system(CatCommand)
 	f.close()
