@@ -12,7 +12,7 @@ for line in my_file:
 	DirNameCommand = "ls "+line+"/"
 	getDirName = os.popen(DirNameCommand)
 	DirName = getDirName.read()
-	print "DirName = ", DirName
+	print "DirName = ", DirName, os.path.basename(line.rstrip('\n'))
 	FileListName = DirName.rstrip('\n') + "LIST.py"
 	configNominalName = "nominalTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
