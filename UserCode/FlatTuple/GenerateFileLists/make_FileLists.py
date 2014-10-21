@@ -58,18 +58,11 @@ for line in my_file:
 	os.system(CatCommandDown)
 
 	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/."
-	print mvCommand
-	#os.system(mvCommand)
-
-	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"
-	print rmCommand
-
-	#os.system(mvCommand)
-
-	cpCommand = "cp -r "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"+" "+os.environ['CMSSW_BASE']+"/src/FileLists"
-	print cpCommand
-
-	#os.system(cpCommand)
-
-
+	os.system(mvCommand)
 	f.close()
+
+
+rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"
+os.system(rmCommand)
+cpCommand = "cp -r "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists"+" "+os.environ['CMSSW_BASE']+"/src/FileLists"
+os.system(cpCommand)
