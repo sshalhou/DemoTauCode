@@ -16,7 +16,7 @@ for line in my_file:
 	configNominalName = "nominalTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
 	configUpName = "upTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
-	print "will create : " configDownName, configNominalName, configUpName
+	print "will create : ", configDownName, configNominalName, configUpName
 	rmCommand = "rm -rf "+FileListName
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
