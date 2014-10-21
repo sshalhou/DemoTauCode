@@ -4,7 +4,7 @@ process = cms.Process("FlatTuple")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 from FileLists.python.FILELISTNAME import myfilelist
 
