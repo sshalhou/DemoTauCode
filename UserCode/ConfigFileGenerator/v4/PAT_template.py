@@ -30,6 +30,15 @@ KeepAll_ = False
 KeepPat_ = False
 PrintProductIDs_ = False
 
+##################
+# never filter on triggers for the
+# embedded samples
+
+if isNonTopEmbeddedSample_:
+    FilterEvents_ = False
+
+if isTopEmbeddedSample_:
+    FilterEvents_ = False
 
 ##########################################
 # the following 3 parameters set the first X  leptons in the
