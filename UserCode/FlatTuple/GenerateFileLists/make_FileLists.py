@@ -15,10 +15,8 @@ for line in my_file:
 	#print "DirName = ", DirName, os.path.basename(line.rstrip('\n'))
 	DirName = os.path.basename(line.rstrip('\n'))
 	FileListName = DirName.rstrip('\n') + "LIST.py"
-	configNominalName = "nominalTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
-	configDownName = "downTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
-	configUpName = "upTauEsFlatTuple_"+DirName.rstrip('\n')+".py"
-	print "will create : ", configDownName, configNominalName, configUpName
+	configName = "FlatTuple_"+DirName.rstrip('\n')+".py"
+	print "will create : ", configName, " using list of files called ", FileListName
 	rmCommand = "rm -rf "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/"+FileListName
 	os.system(rmCommand)
 	f = open(FileListName, 'w')
@@ -32,32 +30,15 @@ for line in my_file:
 		print >> f, currentFile
 	CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/FlatTuple/GenerateFileLists/flattree_GENERAL.py"
 
-	CatCommandNominal = CatCommand + "| sed \x27s/SHIFT/Nominal/g\x27" + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
-	CatCommandUp = CatCommand + "| sed \x27s/SHIFT/Up/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
-	CatCommandDown = CatCommand + "| sed \x27s/SHIFT/Down/g\x27"  + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
-
+	CatCommandNominal = CatCommand + "| sed \x27s/FILELISTNAME/"+FileListName.rstrip('.py')+"/g\x27"
 	CatCommandNominal = CatCommandNominal + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
-	CatCommandUp = CatCommandUp + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
-	CatCommandDown = CatCommandDown + "| sed \x27s/FILEOUTNAME/"+DirName.rstrip('\n')+"/g\x27"
 
-	configNameNominal = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsNominal.py"
-	rmCommand = "rm -rf "+configNameNominal
+
+	rmCommand = "rm -rf "+configName
 	os.system(rmCommand)
 	CatCommandNominal = CatCommandNominal + " >> " + configNameNominal
-
-	configNameUp = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsUp.py"
-	rmCommand = "rm -rf "+configNameUp
-	os.system(rmCommand)
-	CatCommandUp = CatCommandUp + " >> " + configNameUp
-
-	configNameDown = "FlatTuple_"+DirName.rstrip('\n')+"_TauEsDown.py"
-	rmCommand = "rm -rf "+configNameDown
-	os.system(rmCommand)
-	CatCommandDown = CatCommandDown + " >> " + configNameDown
-
 	os.system(CatCommandNominal)
-	os.system(CatCommandUp)
-	os.system(CatCommandDown)
+
 
 	mvCommand = "mv "+FileListName+" "+os.environ['CMSSW_BASE']+"/src/UserCode/FileLists/python/."
 	os.system(mvCommand)

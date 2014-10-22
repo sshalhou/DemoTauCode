@@ -2,6 +2,12 @@ import time
 import sys
 import os
 
+############
+# due to 3 crashing events
+# impose the following SF
+# bbSUSY900 GEV (997674-2217)/997674.0 = 9.97777831235453716e-01
+# ggHSUSY 250 GeV (1000441-2223)/1000441.0 = 9.97777979910859258e-01
+# ggHSUSY 900 GeV (975744-2168.)/975744 = 9.97778105732651133e-01
 
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
 
@@ -23,18 +29,20 @@ check_events = []
 
 
 
-chain = TChain('demo/FlatTuple')
+chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 #listOfFiles.append('./FlatTuple_eTau.root')
 #listOfFiles.append('FlatTupleHold/FlatTuple_ggHUP.root') # tau ES up
 #listOfFiles.append('FlatTupleHold/FlatTuple_ggH.root')
-#listOfFiles.append('./FlatTuple_newVersion.root')
-listOfFiles.append('./FlatTuple_bbH90.root')
-listOfFiles.append('./FlatTuple_bbH80.root')
+listOfFiles.append('./testCombined.root')
+#listOfFiles.append('./FlatTuple_bbH90.root')
+#listOfFiles.append('./FlatTuple_bbH80.root')
 
 for afile in listOfFiles:
-	chain.AddFile(afile,0,'demo/FlatTuple')
+	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')
+	chain.AddFile(afile,0,'TauEsUp/FlatTuple')
+	chain.AddFile(afile,0,'TauEsDown/FlatTuple')
 
 
 
@@ -69,6 +77,7 @@ for entry in range(0,maxEntries):
 		entryNumber = chain.GetEntryNumber(entry);
 		localEntry = chain.LoadTree(entryNumber);
 		if (localEntry >= 0):
+			print "NAMEVAR = ", chain.NAMEVAR
 			if(entryNumber%500==0):
 				print 'processing entry ',entryNumber, 'of', maxEntries
 			selector.Process(localEntry)
