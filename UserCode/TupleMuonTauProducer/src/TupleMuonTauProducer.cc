@@ -677,6 +677,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             whichRecoilCorrectionFiles(BosonPdgId, DaughterOnePdgId,
             DaughterTwoPdgId, 100, ProcessFile, DataFile, MCFile);
 
+            ///////////////
+            // check for empty files
+            // returned in some ZZto4L events
+            // due to a radiated Z (status 2)
+
+            if(!ProcessFile.empty() && !DataFile.empty() && !MCFile.empty())
+            {
 
             edm::FileInPath ProcessFilePath=edm::FileInPath(ProcessFile);
             edm::FileInPath MCFilePath=edm::FileInPath(MCFile);
@@ -784,7 +791,7 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             correctedMET.SetM(0.0);
             NSVcorrectedMET.SetXYZ(correctedMET.x(),correctedMET.y(),correctedMET.z());
 
-
+          }
           }
 
 
