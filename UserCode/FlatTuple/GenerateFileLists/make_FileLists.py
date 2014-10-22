@@ -36,7 +36,7 @@ for line in my_file:
 
 	rmCommand = "rm -rf "+configName
 	os.system(rmCommand)
-	CatCommandNominal = CatCommandNominal + " >> " + configNameNominal
+	CatCommandNominal = CatCommandNominal + " >> " + configName
 	os.system(CatCommandNominal)
 
 
