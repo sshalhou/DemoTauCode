@@ -20,7 +20,7 @@ UseNewTriggers = False
 OnlyCheckEmbeddedTriggers = False
 
 Verbose = False
-SmallRun = False
+SmallRun = True
 
 PrintEvents = False
 check_events = []
@@ -128,7 +128,6 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.eT_correctedSVFitMass.size()):
 				passesCuts = True
-
 				if electronID(chain,index,Verbose) is False:
 					passesCuts = False
 				if tauID_eTau(chain, index, Verbose) is False:
@@ -143,6 +142,8 @@ for entry in range(0,maxEntries):
 					passesCuts = False
 				#if chain.eT_passSignalGeneratorMass70to130Cut[index] is False:
 				#	passesCuts = False
+				if chain.eT_correctedSVFitMass[index] < 50:
+					passesCuts = False
 				if passesCuts is True:
 					passingETauIndices.append(index)
 
@@ -152,7 +153,6 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.muT_correctedSVFitMass.size()):
 				passesCuts = True
-
 				if muonID(chain,index,Verbose) is False:
 					passesCuts = False
 				if tauID_muTau(chain, index, Verbose) is False:
@@ -167,6 +167,8 @@ for entry in range(0,maxEntries):
 					passesCuts = False
 				#if chain.muT_passSignalGeneratorMass70to130Cut[index] is False:
 				#	passesCuts = False
+				if chain.muT_correctedSVFitMass[index] < 50:
+					passesCuts = False
 				if passesCuts is True:
 					passingMuTauIndices.append(index)
 
@@ -225,35 +227,31 @@ for entry in range(0,maxEntries):
 				elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
 					SAMPLE_ADD ='_data_obs_'
 					finalWt = 1.0
-
-
-#				print 'Filling'
 				thingToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+maxPairTypeAndIndex[2]
 				thingToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+'inclusive'
-#				print thingToFill, maxPairTypeAndIndex, finalWt, thingToFillinc
-#				print finalWt
+				# fill inclusive
 				histogram_dict[thingToFillinc].Fill(eventVariables['SVFitMass'],finalWt)
-				if maxPairTypeAndIndex[2] != 'Reject':
-					histogram_dict[thingToFill].Fill(eventVariables['SVFitMass'],finalWt)
-				if maxPairTypeAndIndex[1] == 'eleTau':
-					#print 'xxx', eventID[0]+"-"+eventID[1]+"-"+eventID[2]+"-"+str(eventVariables['numberOfBTaggedJets'])
-					njet_eleTau.Fill(eventVariables['numberOfJets'],finalWt)
-					nbjet_eleTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
-					svMass_eleTau.Fill(eventVariables['SVFitMass'],finalWt)
-					mvaMET_eleTau.Fill(eventVariables['MVAmet'],finalWt)
-					if math.isnan(eventVariables['jet1Pt']) is False:
-						j1Pt_eleTau.Fill(eventVariables['jet1Pt'],finalWt)
-					if eventVariables['SVFitMass'] < 50:
-						print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
-				elif maxPairTypeAndIndex[1] == 'muTau':
-					njet_muTau.Fill(eventVariables['numberOfJets'],finalWt)
-					nbjet_muTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
-					svMass_muTau.Fill(eventVariables['SVFitMass'],finalWt)
-					mvaMET_muTau.Fill(eventVariables['MVAmet'],finalWt)
-					if math.isnan(eventVariables['jet1Pt']) is False:
-						j1Pt_muTau.Fill(eventVariables['jet1Pt'],finalWt)
-					if eventVariables['SVFitMass'] < 50:
-						print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
+				# categorized
+				histogram_dict[thingToFill].Fill(eventVariables['SVFitMass'],finalWt)
+				# if maxPairTypeAndIndex[1] == 'eleTau':
+				# 	#print 'xxx', eventID[0]+"-"+eventID[1]+"-"+eventID[2]+"-"+str(eventVariables['numberOfBTaggedJets'])
+				# 	njet_eleTau.Fill(eventVariables['numberOfJets'],finalWt)
+				# 	nbjet_eleTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
+				# 	svMass_eleTau.Fill(eventVariables['SVFitMass'],finalWt)
+				# 	mvaMET_eleTau.Fill(eventVariables['MVAmet'],finalWt)
+				# 	if math.isnan(eventVariables['jet1Pt']) is False:
+				# 		j1Pt_eleTau.Fill(eventVariables['jet1Pt'],finalWt)
+				# 	if eventVariables['SVFitMass'] < 50:
+				# 		print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
+				# elif maxPairTypeAndIndex[1] == 'muTau':
+				# 	njet_muTau.Fill(eventVariables['numberOfJets'],finalWt)
+				# 	nbjet_muTau.Fill(eventVariables['numberOfBTaggedJets'],finalWt)
+				# 	svMass_muTau.Fill(eventVariables['SVFitMass'],finalWt)
+				# 	mvaMET_muTau.Fill(eventVariables['MVAmet'],finalWt)
+				# 	if math.isnan(eventVariables['jet1Pt']) is False:
+				# 		j1Pt_muTau.Fill(eventVariables['jet1Pt'],finalWt)
+				# 	if eventVariables['SVFitMass'] < 50:
+				# 		print maxPairTypeAndIndex, eventID, eventVariables['SVFitMass']
 
 ######################
 # save filled histograms
