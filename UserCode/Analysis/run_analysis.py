@@ -10,8 +10,8 @@ import os
 # ggHSUSY 900 GeV (975744-2168.)/975744 = 9.97778105732651133e-01
 
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
+from ROOT import TApplication
 
-gROOT.Reset()
 
 ################
 # some global settings
@@ -32,32 +32,33 @@ check_events = []
 chain = TChain('*/FlatTuple')
 
 listOfFiles = []
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_1_1_yol.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_2_1_ZFT.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_1_1_QUV.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_2_1_o9e.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_3_1_m5G.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_4_1_MYD.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_5_1_50n.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_6_1_LBA.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_1_1_NvJ.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_2_1_Ht3.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_3_1_HcU.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_4_1_jsl.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_5_1_Bib.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_6_1_Es4.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_7_1_KO3.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_8_1_fI6.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_9_1_hdX.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_1_1_EdN.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_2_1_vsX.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_3_1_Ocs.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_4_1_bjt.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_5_1_Grc.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_6_1_V69.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_7_1_tVQ.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_8_1_FtS.root')
-listOfFiles.append('/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_SZS_RECOVEREDDATA_ABCD_v5ntup.root')
+listOfFiles.append('./FlatTuple_1_1_yol.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_1_1_yol.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_2_1_ZFT.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_1_1_QUV.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_2_1_o9e.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_3_1_m5G.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_4_1_MYD.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_5_1_50n.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_6_1_LBA.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_1_1_NvJ.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_2_1_Ht3.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_3_1_HcU.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_4_1_jsl.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_5_1_Bib.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_6_1_Es4.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_7_1_KO3.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_8_1_fI6.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_9_1_hdX.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_1_1_EdN.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_2_1_vsX.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_3_1_Ocs.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_4_1_bjt.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_5_1_Grc.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_6_1_V69.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_7_1_tVQ.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_8_1_FtS.root')
+# listOfFiles.append('/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_SZS_RECOVEREDDATA_ABCD_v5ntup.root')
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')

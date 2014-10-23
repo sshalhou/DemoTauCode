@@ -1681,7 +1681,8 @@ for evT in range(0, len(eventType)):
   dataCardFiles[fileName].cd()
   for index in range(0, len(dataCardCategories)):
     directoryName = eventType[evT]+"_"+dataCardCategories[index]
-    TDirectoryFile(directoryName,directoryName)
+    dataCardFiles[fileName].mkdir(directoryName)
+    #TDirectoryFile(directoryName,directoryName)
 
 #############################
 # add histograms to dictionaries
@@ -1811,6 +1812,7 @@ def WriteEverything():
     dataCardFiles[fileName].cd()
     for dictIndx in range(0, len(dataCardCategories)):
       directoryName = eventType[evT]+"_"+dataCardCategories[dictIndx]
+      print 'changing dir to ',directoryName
       dataCardFiles[fileName].cd(directoryName)
       for sampleIndx in range(0, len(sampleType)):
         histName = eventType[evT]+"_"+sampleType[sampleIndx]+"_"+dataCardCategories[dictIndx]
