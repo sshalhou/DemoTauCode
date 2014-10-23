@@ -1670,7 +1670,10 @@ histogram_dict = {}
 # declare files
 
 for evT in range(0, len(eventType)):
-  fileName = "davis_htt_mssm_"+eventType[evT]+".root"
+  shortDate = "date | awk \'{printf $2$3$6"_"$4}\'"
+  getShortDate = os.popen(shortDate)
+  shortDate = getShortDate.read()
+  fileName = "davis_htt_mssm_"+eventType[evT]+"_"+getShortDate+".root"
   dataCardFiles[fileName] = TFile( fileName, 'RECREATE', 'test' )
 
 ################################
