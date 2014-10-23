@@ -97,8 +97,8 @@ for entry in range(0,maxEntries):
 		entryNumber = chain.GetEntryNumber(entry);
 		localEntry = chain.LoadTree(entryNumber);
 		if (localEntry >= 0):
-			print "NAMEVAR = ", chain.NAMEVAR
-			if(entryNumber%500==0):
+			#print "NAMEVAR = ", chain.NAMEVAR
+			if(entryNumber%1000==0):
 				print 'processing entry ',entryNumber, 'of', maxEntries
 			selector.Process(localEntry)
 			passingETauIndices = []
