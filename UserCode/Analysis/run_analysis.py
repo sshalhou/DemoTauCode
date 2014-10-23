@@ -32,17 +32,37 @@ check_events = []
 chain = TChain('*/FlatTuple')
 
 listOfFiles = []
-#listOfFiles.append('./FlatTuple_eTau.root')
-#listOfFiles.append('FlatTupleHold/FlatTuple_ggHUP.root') # tau ES up
-#listOfFiles.append('FlatTupleHold/FlatTuple_ggH.root')
-listOfFiles.append('./testCombined.root')
-#listOfFiles.append('./FlatTuple_bbH90.root')
-#listOfFiles.append('./FlatTuple_bbH80.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_1_1_yol.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNA_FlatTuple/FlatTuple_2_1_ZFT.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_1_1_QUV.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_2_1_o9e.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_3_1_m5G.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_4_1_MYD.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_5_1_50n.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNB_FlatTuple/FlatTuple_6_1_LBA.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_1_1_NvJ.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_2_1_Ht3.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_3_1_HcU.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_4_1_jsl.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_5_1_Bib.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_6_1_Es4.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_7_1_KO3.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_8_1_fI6.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUNC_FlatTuple/FlatTuple_9_1_hdX.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_1_1_EdN.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_2_1_vsX.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_3_1_Ocs.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_4_1_bjt.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_5_1_Grc.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_6_1_V69.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_7_1_tVQ.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/DATA2012RUND_FlatTuple/FlatTuple_8_1_FtS.root')
+listOfFiles.append('/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_SZS_RECOVEREDDATA_ABCD_v5ntup.root')
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')
-	chain.AddFile(afile,0,'TauEsUp/FlatTuple')
-	chain.AddFile(afile,0,'TauEsDown/FlatTuple')
+	#chain.AddFile(afile,0,'TauEsUp/FlatTuple')
+	#chain.AddFile(afile,0,'TauEsDown/FlatTuple')
 
 
 
@@ -121,8 +141,8 @@ for entry in range(0,maxEntries):
 					passesCuts = False
 				if OnlyCheckEmbeddedTriggers is False and tauTriggerForETau(chain,index,UseNewTriggers) is False:
 					passesCuts = False
-				if chain.eT_passSignalGeneratorMass70to130Cut[index] is False:
-					passesCuts = False
+				#if chain.eT_passSignalGeneratorMass70to130Cut[index] is False:
+				#	passesCuts = False
 				if passesCuts is True:
 					passingETauIndices.append(index)
 
@@ -145,8 +165,8 @@ for entry in range(0,maxEntries):
 					passesCuts = False
 				if OnlyCheckEmbeddedTriggers is False and tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
 					passesCuts = False
-				if chain.muT_passSignalGeneratorMass70to130Cut[index] is False:
-					passesCuts = False
+				#if chain.muT_passSignalGeneratorMass70to130Cut[index] is False:
+				#	passesCuts = False
 				if passesCuts is True:
 					passingMuTauIndices.append(index)
 
@@ -191,8 +211,22 @@ for entry in range(0,maxEntries):
 				SAMPLE_ADD = '_ggH120_'
 				if(sampleName=='/SUSYBBHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
 					SAMPLE_ADD = '_bbH80_'
-				if(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+				elif(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
 					SAMPLE_ADD = '_bbH90_'
+				elif(sampleName=='/TauPlusX/Run2012A-22Jan2013-v1/AOD'):
+					SAMPLE_ADD ='_data_obs_'
+					finalWt = 1.0
+				elif(sampleName=='/TauPlusX/Run2012B-22Jan2013-v1/AOD'):
+					SAMPLE_ADD ='_data_obs_'
+					finalWt = 1.0
+				elif(sampleName=='/TauPlusX/Run2012C-22Jan2013-v1/AOD'):
+					SAMPLE_ADD ='_data_obs_'
+					finalWt = 1.0
+				elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
+					SAMPLE_ADD ='_data_obs_'
+					finalWt = 1.0
+
+
 #				print 'Filling'
 				thingToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+maxPairTypeAndIndex[2]
 				thingToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+'inclusive'
