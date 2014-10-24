@@ -140,9 +140,7 @@ SVFitPairFilter::~SVFitPairFilter()
 bool
 SVFitPairFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  std::size_t lastElectronIndex = min(std::size_t(maxElectrons_),electrons->size());
-  std::size_t lastMuonIndex = min(std::size_t(maxMuons_),muons->size());
-  std::size_t lastTauIndex = min(std::size_t(maxTaus_),taus->size());
+
 
 
   //////////////
@@ -162,6 +160,11 @@ SVFitPairFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
   edm::Handle< TupleTauCollection > taus;
   iEvent.getByLabel(tauSrcNominal_, taus);
+
+
+  std::size_t lastElectronIndex = min(std::size_t(maxElectrons_),electrons->size());
+  std::size_t lastMuonIndex = min(std::size_t(maxMuons_),muons->size());
+  std::size_t lastTauIndex = min(std::size_t(maxTaus_),taus->size());
 
   bool ReturnValue = 0;
 
