@@ -652,7 +652,7 @@ TupleElectronProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
     if(  !(electron->pt() > 18)           ) passFullId = 0;
     if(  !( fabs(electron->eta()) < 2.2)  ) passFullId = 0;
     if(  !(pass_fail)                     ) passFullId = 0;
-    if(  !(relativeIsolation < 999.)       ) passFullId = 0;
+    if(  !(relativeIsolation < 0.6)       ) passFullId = 0;
     if(  !(numberOfMissingInnerHits==0)   ) passFullId = 0;
     if(  !(conversionVetoPass)            ) passFullId = 0;
     if(  !( fabs(dxy) < 0.045)  ) passFullId = 0;

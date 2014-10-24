@@ -26,20 +26,21 @@ printListOfModules_ = False
 CheckMemoryUsage_ = False
 
 
+FilterEventsAtTriggerAndReco_ = True
 FilterEvents_ = True
 KeepAll_ = False
 KeepPat_ = False
 PrintProductIDs_ = False
 
 ##################
-# never filter on triggers for the
+# never filter on triggers/Reco for the
 # embedded samples
 
 if isNonTopEmbeddedSample_:
-    FilterEvents_ = False
+    FilterEventsAtTriggerAndReco_ = False
 
 if isTopEmbeddedSample_:
-    FilterEvents_ = False
+    FilterEventsAtTriggerAndReco_ = False
 
 
 
@@ -400,7 +401,9 @@ process.patConversions = cms.EDProducer("PATConversionProducer",
 from PhysicsTools.PatAlgos.selectionLayer1.tauSelector_cfi import *
 process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
             cut = cms.string("pt>17 && abs(eta)<2.4"+
-            " && ( tauID('byLooseCombinedIsolationDeltaBetaCorr3Hits') > 0.5 || tauID('byVLooseIsolationMVA3oldDMwLT') > 0.5 )"+
+            "&& (tauID('byTightIsolationMVA3oldDMwLT')>0.5"+
+            "|| tauID('byLooseIsolationMVA3oldDMwLT')>0.5 "+
+            "|| tauID('byMediumIsolationMVA3oldDMwLT')>0.5)"+
             " && ( tauID('againstElectronLoose')>0.5 || tauID('againstElectronVLooseMVA5')>0.5 )"+
             " && ( tauID('againstMuonLoose3')>0.5 || tauID('againstMuonLooseMVA')>0.5 )")
                                                 )
@@ -408,14 +411,12 @@ process.countMyPatTaus = selectedPatTaus.clone(src = 'cleanPatTaus',
 
 from PhysicsTools.PatAlgos.selectionLayer1.muonSelector_cfi import *
 process.myCleanPatMuons = selectedPatMuons.clone(src = 'cleanPatMuons',
-cut = cms.string("pt > 10"+
-                 " && abs(eta) < 2.4"
+cut = cms.string("pt > 17"+
+                 " && abs(eta) < 2.2"
                 +" && isPFMuon"
                 +" && isTrackerMuon "
                 +" && isGlobalMuon "
-                +" && (pfIsolationR04.sumChargedParticlePt +"
-                +"max(pfIsolationR04.sumNeutralHadronEt+pfIsolationR04.sumPhotonEt-0.5*pfIsolationR04.sumPUPt,0.0))/pt < 0.3"
-                )
+                            )
                                                   )
 
 #########################################################################
@@ -427,12 +428,11 @@ cut = cms.string("pt > 10"+
 
 from PhysicsTools.PatAlgos.selectionLayer1.electronSelector_cfi import *
 process.countMyPatElectrons = selectedPatElectrons.clone(src = 'cleanPatElectrons',
-      cut = cms.string("et > 20 * 0.9"+
+      cut = cms.string("et > 17"+
                        " && gsfTrack.trackerExpectedHitsInner.numberOfLostHits == 0"+
-                       " && abs(eta) < 2.1 * 1.1" +
+                       " && abs(eta) < 2.2" +
                        " && electronID('mvaNonTrigV0') >= 0.85 " +
-                       " && passConversionVeto " +
-                       " && (chargedHadronIso + max(neutralHadronIso+photonIso-0.5*puChargedHadronIso,0.0))/pt < 0.2 "
+                       " && passConversionVeto "
                       )
                                                         )
 
@@ -1261,12 +1261,31 @@ process.TupleElectronTauDownVetoes = cms.EDProducer("TupleElectronTauVetoesProdu
                 pfSrc = cms.InputTag('particleFlow')
                 )
 
+######################
+# only keep events that have a
+# candidate for which we computed
+# svFit, note the nominal tau passID
+# pt is set to (uncorrected) 17
+# which means this is valid for tau ID above 17 GeV
+# if you go lower, you need to adjust it lower to accomodade tau ES sys.
+
+process.SVFitPairPresent = cms.EDFilter("SVFitPairFilter",
+    electronSrc=cms.InputTag('TupleElectronsNominal','TupleElectronsNominal','PAT'),
+    muonSrc=cms.InputTag('TupleMuonsNominal','TupleMuonsNominal','PAT'),
+    tauSrcNominal=cms.InputTag('TupleTausNominal','TupleTausNominal','PAT'),
+    maxElectrons=cms.uint32(MAX_ELECTRONS),
+    maxMuons=cms.uint32(MAX_MUONS),
+    maxTaus=cms.uint32(MAX_TAUS),
+    filter = cms.bool(True)
+)
+
+
 
 ##################################################
 # Let it run
 ###################################################
 process.p = cms.Path(process.VertexPresent)
-if FilterEvents_:
+if FilterEventsAtTriggerAndReco_:
   process.p *= process.triggerFilter
   process.p *= process.AtLeastOneRecoMuonOrElectron
 process.p *= process.UserSpecifiedData
@@ -1522,6 +1541,12 @@ process.p *= pairWiseMvaMETsNominal
 process.p *= process.TupleElectronsNominal
 process.p *= process.TupleMuonsNominal
 process.p *= process.TupleTausNominal
+
+
+
+if FilterEvents_:
+  process.p *= process.SVFitPairPresent
+
 process.p *= process.TupleMuonTausNominal
 process.p *= process.TupleElectronTausNominal
 process.p *= process.TupleMuonTausNominalWeights
@@ -1549,6 +1574,7 @@ if runOnMC_:
   process.p *= process.TupleMuonTauUpVetoes
   process.p *= process.TupleElectronTauDownVetoes
   process.p *= process.TupleMuonTauDownVetoes
+
 
 
 if printListOfModules_:

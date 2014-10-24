@@ -640,7 +640,7 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     ///////////////////////////
 
-    if(!(CurrentTau.p4().pt()>18))
+    if(!(CurrentTau.p4().pt()>17))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;
@@ -651,9 +651,19 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       passFullId_eTau = 0;
     }
 
+    bool ANYISOL = 0;
+    if(tau->tauID("byTightIsolationMVA3oldDMwLT")>0.5) ANYISOL = 1;
+    if(tau->tauID("byLooseIsolationMVA3oldDMwLT")>0.5)  ANYISOL = 1;
+    if(tau->tauID("byMediumIsolationMVA3oldDMwLT")>0.5) ANYISOL = 1;
 
-  // note here we have omitted the requirement on the isol related disc.
-   if(!(tau->tauID("decayModeFindingOldDMs") > 0.5 && tau->tauID("byTightIsolationMVA3oldDMwLT") > -99999.9))
+    if(ANYISOL!=1)
+      {
+        passFullId_muTau = 0;
+        passFullId_eTau = 0;
+      }
+
+
+   if(!(tau->tauID("decayModeFindingOldDMs") > 0.5))
     {
       passFullId_muTau = 0;
       passFullId_eTau = 0;

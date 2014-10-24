@@ -603,7 +603,7 @@ TupleMuonProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     }
     else passFullId = 0;
-    if(!(relativeIsolation_DR4 < 999.9)) passFullId = 0;
+    if(!(relativeIsolation_DR4 < 0.6)) passFullId = 0;
 
     ///////////////////////////
 
