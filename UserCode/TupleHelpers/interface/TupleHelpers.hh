@@ -159,7 +159,7 @@ namespace TupleHelpers
 
 
 
-          std::cout<<" candidate with ID == "<<ID<<" and mother == "<<MOM<<"\n";
+          //std::cout<<" candidate with ID == "<<ID<<" and mother == "<<MOM<<"\n";
 
 
 
@@ -169,22 +169,22 @@ namespace TupleHelpers
 
     }
 
-    std::cout<<" ztt, zmm, zee "<<isDecayZtauTau<<" , "<<isDecayZmuMu<<" , "<<isDecayZeE<<"\n";
-
-    std::cout<<"  isRecoLep_matchedTo_GenTauFromZ " << isRecoLep_matchedTo_GenTauFromZ <<"\n";
-    std::cout<<"  isRecoTau_matchedTo_GenTauFromZ  " << isRecoTau_matchedTo_GenTauFromZ <<"\n";
-
-    std::cout<<"  isRecoLep_matchedTo_GenMuonFromZ " << isRecoLep_matchedTo_GenMuonFromZ <<"\n";
-    std::cout<<"  isRecoTau_matchedTo_GenMuonFromZ  " << isRecoTau_matchedTo_GenMuonFromZ <<"\n";
-
-    std::cout<<"  isRecoLep_matchedTo_GenElecFromZ " << isRecoLep_matchedTo_GenElecFromZ <<"\n";
-    std::cout<<"  isRecoTau_matchedTo_GenElecFromZ  " << isRecoTau_matchedTo_GenElecFromZ <<"\n";
-
-    std::cout<<"  isRecoLep_matchedTo_GenElecFromTau " << isRecoLep_matchedTo_GenElecFromTau <<"\n";
-    std::cout<<"  isRecoTau_matchedTo_GenElecFromTau " << isRecoTau_matchedTo_GenElecFromTau <<"\n";
-
-    std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
-    std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
+    // std::cout<<" ztt, zmm, zee "<<isDecayZtauTau<<" , "<<isDecayZmuMu<<" , "<<isDecayZeE<<"\n";
+    //
+    // std::cout<<"  isRecoLep_matchedTo_GenTauFromZ " << isRecoLep_matchedTo_GenTauFromZ <<"\n";
+    // std::cout<<"  isRecoTau_matchedTo_GenTauFromZ  " << isRecoTau_matchedTo_GenTauFromZ <<"\n";
+    //
+    // std::cout<<"  isRecoLep_matchedTo_GenMuonFromZ " << isRecoLep_matchedTo_GenMuonFromZ <<"\n";
+    // std::cout<<"  isRecoTau_matchedTo_GenMuonFromZ  " << isRecoTau_matchedTo_GenMuonFromZ <<"\n";
+    //
+    // std::cout<<"  isRecoLep_matchedTo_GenElecFromZ " << isRecoLep_matchedTo_GenElecFromZ <<"\n";
+    // std::cout<<"  isRecoTau_matchedTo_GenElecFromZ  " << isRecoTau_matchedTo_GenElecFromZ <<"\n";
+    //
+    // std::cout<<"  isRecoLep_matchedTo_GenElecFromTau " << isRecoLep_matchedTo_GenElecFromTau <<"\n";
+    // std::cout<<"  isRecoTau_matchedTo_GenElecFromTau " << isRecoTau_matchedTo_GenElecFromTau <<"\n";
+    //
+    // std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
+    // std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
 
 
 
