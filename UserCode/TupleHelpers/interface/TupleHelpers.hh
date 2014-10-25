@@ -77,7 +77,7 @@ namespace TupleHelpers
   const reco::GenParticleCollection & genparticles)
   {
 
-    for(std::size_t z = 0; mc < genparticles.size(); ++mc)
+    for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
 
       const GenParticle & Zcand = (*genParticles)[mc];
