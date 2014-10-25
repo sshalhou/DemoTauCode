@@ -96,7 +96,7 @@ namespace TupleHelpers
 
               for(std::size_t ll = 0; ll < d->numberOfDaughters(); ++ll)
                 {
-                  const reco::Candidate * dd = d->daughter(l);
+                  const reco::Candidate * dd = d->daughter(ll);
                 std::cout<<" found 2nd gen daughter index ll : "<<ll<<" with id "<<dd->pdgId()<<" and status "<<dd->status()<<"\n";
 
 
