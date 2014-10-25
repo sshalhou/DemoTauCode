@@ -74,19 +74,19 @@ namespace TupleHelpers
 
 
   void classifyDrellYanEvents(const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVector tau,
-                              bool isDecayZtauTau,
-                              bool isDecayZeE,
-                              bool isDecayZmuMu,
-                              bool isRecoLep_matchedTo_GenTauFromZ,
-                              bool isRecoTau_matchedTo_GenTauFromZ,
-                              bool isRecoLep_matchedTo_GenElecFromZ,
-                              bool isRecoTau_matchedTo_GenElecFromZ,
-                              bool isRecoLep_matchedTo_GenMuonFromZ,
-                              bool isRecoTau_matchedTo_GenMuonFromZ,
-                              bool isRecoLep_matchedTo_GenElecFromTau,
-                              bool isRecoTau_matchedTo_GenElecFromTau,
-                              bool isRecoLep_matchedTo_GenMuonFromTau,
-                              bool isRecoTau_matchedTo_GenMuonFromTau)
+                              bool & isDecayZtauTau,
+                              bool & isDecayZeE,
+                              bool & isDecayZmuMu,
+                              bool & isRecoLep_matchedTo_GenTauFromZ,
+                              bool & isRecoTau_matchedTo_GenTauFromZ,
+                              bool & isRecoLep_matchedTo_GenElecFromZ,
+                              bool & isRecoTau_matchedTo_GenElecFromZ,
+                              bool & isRecoLep_matchedTo_GenMuonFromZ,
+                              bool & isRecoTau_matchedTo_GenMuonFromZ,
+                              bool & isRecoLep_matchedTo_GenElecFromTau,
+                              bool & isRecoTau_matchedTo_GenElecFromTau,
+                              bool & isRecoLep_matchedTo_GenMuonFromTau,
+                              bool & isRecoTau_matchedTo_GenMuonFromTau)
   {
 
      isDecayZtauTau = 0;
