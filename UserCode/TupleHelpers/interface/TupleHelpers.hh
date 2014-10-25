@@ -81,6 +81,14 @@ namespace TupleHelpers
     bool isDecayZeE = 0;
     bool isDecayZmuMu = 0;
 
+    bool isRecoLep_matchedTo_GenTauFromZ = 0;
+    bool isRecoTau_matchedTo_GenTauFromZ = 0;
+
+    bool isRecoLep_matchedTo_GenElecFromTau = 0;
+    bool isRecoTau_matchedTo_GenElecFromTau = 0;
+
+    bool isRecoLep_matchedTo_GenMuonFromTau = 0;
+    bool isRecoLep_matchedTo_GenMuonFromTau = 0;
 
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
@@ -92,15 +100,42 @@ namespace TupleHelpers
 
           int ID = gen.pdgId();
           int MOM = gen.mother()->pdgId();
+          double dRlep = deltaR(lep,gen.p4());
+          double dRtau = deltaR(tau,gen.p4());
+
+          ///////////////////////////////////////////////////////
+          if( abs(ID) == 15 && MOM == 23)
+            {
+              isDecayZtauTau = 1;
+              if(dRlep < 0.3) isRecoLep_matchedTo_GenTauFromZ = 1;
+              if(dRtau < 0.3) isRecoTau_matchedTo_GenTauFromZ = 1;
+            }
+          else if( abs(ID) == 13 && MOM == 23) isDecayZmuMu = 1;
+          else if( abs(ID) == 11 && MOM == 23) isDecayZeE = 1;
+          ///////////////////////////////////////////////////////
+
+          ///////////////////////////////////////////////////////
+          if( abs(ID) == 11 && abs(MOM) == 15)
+            {
+                 if(dRlep < 0.3) isRecoLep_matchedTo_GenElecFromTau = 1;
+                 if(dRtau < 0.3) isRecoTau_matchedTo_GenElecFromTau = 1;
+
+            }
+          if( abs(ID) == 13 && abs(MOM) == 15)
+            {
+                 if(dRlep < 0.3) isRecoLep_matchedTo_GenMuonFromTau = 1;
+                 if(dRtau < 0.3) isRecoTau_matchedTo_GenMuonFromTau = 1;
+
+            }
+
+
+
+          ///////////////////////////////////////////////////////
+
+
+
 
           std::cout<<" candidate with ID == "<<ID<<" and mother == "<<MOM<<"\n";
-
-          if( abs(ID) == 15 && MOM == 23) isDecayZtauTau = 1;
-          if( abs(ID) == 13 && MOM == 23) isDecayZmuMu = 1;
-          if( abs(ID) == 11 && MOM == 23) isDecayZeE = 1;
-
-          std::cout<<" ztt, zmm, zee "<<isDecayZtauTau<<" , "<<isDecayZmuMu<<" , "<<isDecayZeE<<"\n";
-
 
 
 
@@ -109,6 +144,18 @@ namespace TupleHelpers
 
 
     }
+
+    std::cout<<" ztt, zmm, zee "<<isDecayZtauTau<<" , "<<isDecayZmuMu<<" , "<<isDecayZeE<<"\n";
+
+    std::cout<<"  isRecoLep_matchedTo_GenTauFromZ " << isRecoLep_matchedTo_GenTauFromZ <<"\n";
+    std::cout<<"  isRecoTau_matchedTo_GenTauFromZ  " << isRecoTau_matchedTo_GenTauFromZ <<"\n";
+
+    std::cout<<"  isRecoLep_matchedTo_GenElecFromTau " << isRecoLep_matchedTo_GenElecFromTau <<"\n";
+    std::cout<<"  isRecoTau_matchedTo_GenElecFromTau " << isRecoTau_matchedTo_GenElecFromTau <<"\n";
+
+    std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
+    std::cout<<"  isRecoLep_matchedTo_GenMuonFromTau " << isRecoLep_matchedTo_GenMuonFromTau <<"\n";
+
 
 
   return;
