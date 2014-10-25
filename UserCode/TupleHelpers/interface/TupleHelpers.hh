@@ -74,7 +74,7 @@ namespace TupleHelpers
 
 
   void classifyDrellYanEvents(const TupleUserSpecifiedData userData0,
-  const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVetcor tau)
+  const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVector tau)
   {
 
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
