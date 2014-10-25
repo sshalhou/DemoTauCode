@@ -82,7 +82,16 @@ namespace TupleHelpers
 
       const reco::GenParticle & Zcand = (genparticles)[mc];
 
-      if(Zcand.pdgId()==23)
+      if( abs(Zcand.pdgId())==11 || abs(Zcand.pdgId())==13 || abs(Zcand.pdgId())==15)
+        {
+
+          std::cout<<" candidate with ID == "<<Zcand.pdgId()<<" and mother == "<<Zcand.mother().pdgId()<<"\n";
+
+        }
+
+
+
+      if(Zcand.pdgId()==23 && 7==3)
         {
 
           std::cout<<" have a Z at index "<<mc<<" with n daughters == "<<Zcand.numberOfDaughters();
