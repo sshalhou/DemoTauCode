@@ -501,6 +501,11 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if ( gen.isValid() )
         {
 
+
+          TupleHelpers::classifyDrellYanEvents(userData0,*gen);
+
+
+
           //////////////////
           // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
           // cuts for embedded (non-tt) samples

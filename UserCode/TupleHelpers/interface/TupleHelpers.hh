@@ -57,6 +57,65 @@ using namespace reco::isodeposit;
 namespace TupleHelpers
 {
 
+  //////////////////////////////////////
+  // the DY background (ZTT) is filled using
+  // the embedded Z->tau tau samples
+  // however the noramization is taken from the inclusive (not njet)
+  // DY with polarization off MC sample with a gen-level genZ->tauGen tauGen
+  // and DR<0.3 between both reco candidates and the tauGens
+
+  // flags - for sample ID :
+
+  // isInclusiveDY : based on sample names, is it an n-jet sample or inclusive
+  // isPolOff :  based on sample name, is it the DY tau-polarization off sample?
+  // isZTTembedded : bases on sample names, is it the embedded Z->tau tau sample?
+
+  // flags - for reco-leg matching DR(recoX, genY) < 0.3
+
+
+  void classifyDrellYanEvents(const TupleUserSpecifiedData userData0,
+  const reco::GenParticleCollection & genparticles)
+  {
+
+    for(std::size_t z = 0; mc < genparticles.size(); ++mc)
+    {
+
+      const GenParticle & Zcand = (*genParticles)[mc];
+
+      if(Zcand.pdgId()==23)
+        {
+
+          std::cout<<" have a Z at index "<<mc<<" with n daughters == "<<Zcand.numberOfDaughters()<<;
+          std::cout<<" and status = "<<Zcand.status()<<"\n";
+
+          for(std::size_t l = 0; l < Zcand.numberOfDaughters(); ++l)
+            {
+              const reco::Candidate * d = Zcand.daughter(l);
+
+              std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d.pdgId()<<" and status "<<d.status()<<"\n";
+              
+
+
+            }
+
+
+
+
+          int nDau = p.numberOfDaughters();
+     for(size_t j = 0; j < n; ++ j) {
+       const Candidate * d = p.daughter( j );
+       int dauId = d->pdgId();
+
+
+        }
+
+    }
+
+
+  return;
+  }
+
+
 
   void setElectron_dz_dxy_NumLostHits_RelIsol(
                                 double & dz, double & dxy, int & NumLostHits,
