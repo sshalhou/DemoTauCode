@@ -180,6 +180,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( abs(genparticle.pdgId())==11) storeIt = 1;
       if( abs(genparticle.pdgId())==13) storeIt = 1;
       if( abs(genparticle.pdgId())==15) storeIt = 1;
+      if( abs(motherID)==15) storeIt = 1;
 
       if(storeIt) TupleGens->push_back(CurrentGen);
 
@@ -211,6 +212,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       if( abs(genparticle.pdgId())==11) storeIt = 1;
       if( abs(genparticle.pdgId())==13) storeIt = 1;
       if( abs(genparticle.pdgId())==15) storeIt = 1;
+      if( abs(motherID)==15) storeIt = 1;
 
       if(storeIt) TupleGens->push_back(CurrentGen);
 
