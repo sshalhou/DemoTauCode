@@ -94,6 +94,7 @@ public:
   void set_isRecoTau_matchedTo_GenElecFromTau(bool);
   void set_isRecoLep_matchedTo_GenMuonFromTau(bool);
   void set_isRecoTau_matchedTo_GenMuonFromTau(bool);
+  void set_passEmbeddedTrigger(bool);
 
   // getters
 
@@ -160,6 +161,8 @@ public:
   bool isRecoTau_matchedTo_GenElecFromTau() const;
   bool isRecoLep_matchedTo_GenMuonFromTau() const;
   bool isRecoTau_matchedTo_GenMuonFromTau() const;
+  bool passEmbeddedTrigger() const;
+
 
 private:
 
@@ -225,6 +228,7 @@ private:
   bool m_isRecoTau_matchedTo_GenElecFromTau;
   bool m_isRecoLep_matchedTo_GenMuonFromTau;
   bool m_isRecoTau_matchedTo_GenMuonFromTau;
+  bool m_passEmbeddedTrigger;
 
 };
 

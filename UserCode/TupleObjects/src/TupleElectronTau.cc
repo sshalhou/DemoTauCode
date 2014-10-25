@@ -66,9 +66,15 @@ TupleElectronTau::TupleElectronTau()
   m_isRecoTau_matchedTo_GenElecFromTau = 0;
   m_isRecoLep_matchedTo_GenMuonFromTau = 0;
   m_isRecoTau_matchedTo_GenMuonFromTau = 0;
+  m_passEmbeddedTrigger = 0;
 
 
 }
+
+void TupleElectronTau::set_passEmbeddedTrigger(bool passEmbeddedTrigger_)
+   {m_passEmbeddedTrigger  = passEmbeddedTrigger_; }
+bool TupleElectronTau::passEmbeddedTrigger() const {return m_passEmbeddedTrigger;}
+
 
 void TupleElectronTau::set_isDecayZtauTau(bool isDecayZtauTau_)
    {m_isDecayZtauTau  = isDecayZtauTau_; }

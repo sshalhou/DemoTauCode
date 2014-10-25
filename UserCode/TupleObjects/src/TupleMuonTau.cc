@@ -66,10 +66,16 @@ TupleMuonTau::TupleMuonTau()
   m_isRecoTau_matchedTo_GenElecFromTau = 0;
   m_isRecoLep_matchedTo_GenMuonFromTau = 0;
   m_isRecoTau_matchedTo_GenMuonFromTau = 0;
+  m_passEmbeddedTrigger = 0;
 
 
 
 }
+
+
+void TupleMuonTau::set_passEmbeddedTrigger(bool passEmbeddedTrigger_)
+   {m_passEmbeddedTrigger  = passEmbeddedTrigger_; }
+bool TupleMuonTau::passEmbeddedTrigger() const {return m_passEmbeddedTrigger;}
 
 
 void TupleMuonTau::set_isDecayZtauTau(bool isDecayZtauTau_)

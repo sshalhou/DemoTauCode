@@ -1105,6 +1105,48 @@ namespace TupleHelpers
 
   }
 
+  ////////////////////////
+  // for embedded samples, the normal trigger paths
+  // and matching is not done instead check the DoubleMu trigger wasAccept()
+
+  bool passEmbeddedTrigger(const TupleUserSpecifiedData userData0, const pat::TriggerPathCollection* paths)
+  {
+
+      bool triggerOK = 0;
+
+      std::vector<std::string> doubleMuPaths;
+      doubleMuPaths.clear();
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v16");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v17");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v18");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v19");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v20");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v21");
+      doubleMuPaths.push_back("HLT_Mu17_Mu8_v22");
+
+      for(size_t i = 0; i<doubleMuPaths.size(); ++i)
+      {
+        for (size_t ii = 0; ii < paths->size(); ++ii)
+        {
+
+          const pat::TriggerPath& path = paths->at(ii);
+          if(path.name().find(doubleMuPaths[i])!= std::string::npos)
+          {
+
+            if(path.wasAccept() && path.wasRun())
+            {
+              std::cout<<" path "<<doubleMuPaths[i]<<" found and wasAccept = "<<path.wasAccept();
+              std::cout<<" in form "<<path.name()<<"\n";
+              triggerOK = 1;
+            }
+          }
+        }
+      }
+
+
+    return triggerOK;
+  }
+
   ///////////////////////
   // for non-tt embedded samples, the normal trigger paths
   // and matching is not done

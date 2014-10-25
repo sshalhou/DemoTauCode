@@ -490,6 +490,14 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 
 
 
+        ////////////////////////
+        // for embedded samples, the normal trigger paths
+        // and matching is not required instead check the DoubleMu trigger wasAccept()
+
+        bool passEmbeddedTrigger = TupleHelpers::passEmbeddedTrigger(userData0, paths);
+        CurrentElectronTau.set_passEmbeddedTrigger(passEmbeddedTrigger);
+
+
 
         /////////////////
         // check triLepton Veto

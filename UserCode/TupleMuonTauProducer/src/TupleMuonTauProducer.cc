@@ -483,6 +483,13 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         CurrentMuonTau.set_PVp4(PVp4);
 
 
+        ////////////////////////
+        // for embedded samples, the normal trigger paths
+        // and matching is not required instead check the DoubleMu trigger wasAccept()
+
+        bool passEmbeddedTrigger = TupleHelpers::passEmbeddedTrigger(userData0, paths);
+        CurrentMuonTau.set_passEmbeddedTrigger(passEmbeddedTrigger);
+
 
         /////////////////
         // check triLepton Veto
