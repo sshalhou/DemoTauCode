@@ -87,7 +87,7 @@ namespace TupleHelpers
 
       const reco::GenParticle & gen = (genparticles)[mc];
 
-      if( abs(gen.pdgId())==11 || abs(gen.pdgId())==13 || abs(gen.pdgId())==15 && gen.p4().pt()>8.0)
+      if( (abs(gen.pdgId())==11 || abs(gen.pdgId())==13 || abs(gen.pdgId())==15) && gen.p4().pt()>8.0)
         {
 
           int ID = gen.pdgId();
