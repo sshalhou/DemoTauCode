@@ -29,6 +29,7 @@ public:
 
   void set_p4(LorentzVector);
   void set_pdgId(int);
+  void set_pdgIdmother(int);
   void set_status(int);
 
 
@@ -38,6 +39,7 @@ public:
 
   LorentzVector p4() const;
   int pdgId() const;
+  int pdgIdmother() const;
   int status() const;
 
 
@@ -46,6 +48,7 @@ private:
 
   LorentzVector m_p4;
   int m_pdgId;
+  int m_pdgIdmother;
   int m_status;
 
 

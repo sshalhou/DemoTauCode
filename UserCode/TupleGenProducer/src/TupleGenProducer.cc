@@ -161,12 +161,14 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
     for(size_t mc = 0; mc < gen->size(); ++ mc)
     {
-      if(mc>30) break;
+      //if(mc>30) break;
       const reco::GenParticle & genparticle = (*gen)[mc];
 
       TupleGen CurrentGen;
       CurrentGen.set_p4(genparticle.p4());
       CurrentGen.set_pdgId(genparticle.pdgId());
+      CurrentGen.set_pdgIdmother(genparticle.mother()->pdgId());
+
       CurrentGen.set_status(genparticle.status());
 
       ////////////
