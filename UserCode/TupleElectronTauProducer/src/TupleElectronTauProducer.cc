@@ -502,7 +502,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         {
 
 
-          TupleHelpers::classifyDrellYanEvents(userData0,*gen);
+          TupleHelpers::classifyDrellYanEvents(userData0,*gen,electron.p4() , tau.corrected_p4());
 
 
 

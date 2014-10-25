@@ -74,7 +74,7 @@ namespace TupleHelpers
 
 
   void classifyDrellYanEvents(const TupleUserSpecifiedData userData0,
-  const reco::GenParticleCollection & genparticles)
+  const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVetcor tau)
   {
 
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
@@ -94,7 +94,13 @@ namespace TupleHelpers
 
               std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d->pdgId()<<" and status "<<d->status()<<"\n";
 
+              for(std::size_t ll = 0; ll < d->numberOfDaughters(); ++ll)
+                {
+                  const reco::Candidate * dd = d->daughter(l);
+                std::cout<<" found 2nd gen daughter index ll : "<<ll<<" with id "<<dd->pdgId()<<" and status "<<dd->status()<<"\n";
 
+
+                }
 
             }
 
