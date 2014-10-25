@@ -214,7 +214,7 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       if(storeIt) TupleGens->push_back(CurrentGen);
 
-    
+
 
     }
   }
