@@ -93,18 +93,13 @@ namespace TupleHelpers
               const reco::Candidate * d = Zcand.daughter(l);
 
               std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d.pdgId()<<" and status "<<d.status()<<"\n";
-              
+
 
 
             }
 
 
 
-
-          int nDau = p.numberOfDaughters();
-     for(size_t j = 0; j < n; ++ j) {
-       const Candidate * d = p.daughter( j );
-       int dauId = d->pdgId();
 
 
         }
