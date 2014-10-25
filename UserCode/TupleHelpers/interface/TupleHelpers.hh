@@ -80,7 +80,7 @@ namespace TupleHelpers
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
 
-      const reco::GenParticle & Zcand = (*genParticles)[mc];
+      const reco::GenParticle & Zcand = (*genparticles)[mc];
 
       if(Zcand.pdgId()==23)
         {
