@@ -80,19 +80,19 @@ namespace TupleHelpers
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
 
-      const reco::GenParticle & Zcand = (*genparticles)[mc];
+      const reco::GenParticle & Zcand = (genparticles)[mc];
 
       if(Zcand.pdgId()==23)
         {
 
-          std::cout<<" have a Z at index "<<mc<<" with n daughters == "<<Zcand.numberOfDaughters()<<;
+          std::cout<<" have a Z at index "<<mc<<" with n daughters == "<<Zcand.numberOfDaughters();
           std::cout<<" and status = "<<Zcand.status()<<"\n";
 
           for(std::size_t l = 0; l < Zcand.numberOfDaughters(); ++l)
             {
               const reco::Candidate * d = Zcand.daughter(l);
 
-              std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d.pdgId()<<" and status "<<d.status()<<"\n";
+              std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d->pdgId()<<" and status "<<d->status()<<"\n";
 
 
 
