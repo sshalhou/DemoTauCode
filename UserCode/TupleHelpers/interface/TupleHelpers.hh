@@ -84,6 +84,12 @@ namespace TupleHelpers
     bool isRecoLep_matchedTo_GenTauFromZ = 0;
     bool isRecoTau_matchedTo_GenTauFromZ = 0;
 
+    bool isRecoLep_matchedTo_GenElecFromZ = 0;
+    bool isRecoTau_matchedTo_GenElecFromZ = 0;
+
+    bool isRecoLep_matchedTo_GenMuonFromZ = 0;
+    bool isRecoTau_matchedTo_GenMuonFromZ = 0;
+
     bool isRecoLep_matchedTo_GenElecFromTau = 0;
     bool isRecoTau_matchedTo_GenElecFromTau = 0;
 
@@ -110,8 +116,19 @@ namespace TupleHelpers
               if(dRlep < 0.3) isRecoLep_matchedTo_GenTauFromZ = 1;
               if(dRtau < 0.3) isRecoTau_matchedTo_GenTauFromZ = 1;
             }
-          else if( abs(ID) == 13 && MOM == 23) isDecayZmuMu = 1;
-          else if( abs(ID) == 11 && MOM == 23) isDecayZeE = 1;
+          else if( abs(ID) == 13 && MOM == 23)
+            {
+              isDecayZmuMu = 1;
+              if(dRlep < 0.3) isRecoLep_matchedTo_GenMuonFromZ = 1;
+              if(dRtau < 0.3) isRecoTau_matchedTo_GenMuonFromZ = 1;
+            }
+          else if( abs(ID) == 11 && MOM == 23)
+            {
+              isDecayZeE = 1;
+              if(dRlep < 0.3) isRecoLep_matchedTo_GenElecFromZ = 1;
+              if(dRtau < 0.3) isRecoTau_matchedTo_GenElecFromZ = 1;
+
+            }
           ///////////////////////////////////////////////////////
 
           ///////////////////////////////////////////////////////
@@ -149,6 +166,12 @@ namespace TupleHelpers
 
     std::cout<<"  isRecoLep_matchedTo_GenTauFromZ " << isRecoLep_matchedTo_GenTauFromZ <<"\n";
     std::cout<<"  isRecoTau_matchedTo_GenTauFromZ  " << isRecoTau_matchedTo_GenTauFromZ <<"\n";
+
+    std::cout<<"  isRecoLep_matchedTo_GenMuonFromZ " << isRecoLep_matchedTo_GenMuonFromZ <<"\n";
+    std::cout<<"  isRecoTau_matchedTo_GenMuonFromZ  " << isRecoTau_matchedTo_GenMuonFromZ <<"\n";
+
+    std::cout<<"  isRecoLep_matchedTo_GenElecFromZ " << isRecoLep_matchedTo_GenElecFromZ <<"\n";
+    std::cout<<"  isRecoTau_matchedTo_GenElecFromZ  " << isRecoTau_matchedTo_GenElecFromZ <<"\n";
 
     std::cout<<"  isRecoLep_matchedTo_GenElecFromTau " << isRecoLep_matchedTo_GenElecFromTau <<"\n";
     std::cout<<"  isRecoTau_matchedTo_GenElecFromTau " << isRecoTau_matchedTo_GenElecFromTau <<"\n";
