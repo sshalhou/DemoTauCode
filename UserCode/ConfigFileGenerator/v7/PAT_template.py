@@ -1647,14 +1647,11 @@ if KeepPat_:
   process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
 
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
+process.out.fileName = 'NTUPLE.root'
 
 ########################################################################################################
-myfilelist = cms.untracked.vstring()
-myfilelist.extend(['file:/uscms/home/shalhout/no_backup/oneThousand_selectedEventsRaw.root'])
 
 process.source = cms.Source ("PoolSource",
-                      fileNames=myfilelist,
                         dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
                         inputCommands = cms.untracked.vstring(
                         'keep *',
