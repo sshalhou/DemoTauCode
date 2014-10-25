@@ -161,7 +161,6 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
     for(size_t mc = 0; mc < gen->size(); ++ mc)
     {
-      //if(mc>30) break;
       const reco::GenParticle & genparticle = (*gen)[mc];
 
       TupleGen CurrentGen;
@@ -176,8 +175,13 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
       ////////////
       // store the CurrentGen
+      bool storeIt = 0;
+      if(mc<30) storeIt = 1;
+      if( abs(genparticle.pdgId())==11) storeIt = 1;
+      if( abs(genparticle.pdgId())==13) storeIt = 1;
+      if( abs(genparticle.pdgId())==15) storeIt = 1;
 
-      TupleGens->push_back(CurrentGen);
+      if(storeIt) TupleGens->push_back(CurrentGen);
 
     }
   }
@@ -187,18 +191,30 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   {
     for(size_t mc = 0; mc < genTTembedded->size(); ++ mc)
     {
-      if(mc>30) break;
       const reco::GenParticle & genparticle = (*genTTembedded)[mc];
 
       TupleGen CurrentGen;
       CurrentGen.set_p4(genparticle.p4());
       CurrentGen.set_pdgId(genparticle.pdgId());
+      int motherID = -999;
+      if(genparticle.mother()) motherID = genparticle.mother()->pdgId();
+
+      CurrentGen.set_pdgIdmother(motherID);
+
       CurrentGen.set_status(genparticle.status());
+
 
       ////////////
       // store the CurrentGen
+      bool storeIt = 0;
+      if(mc<30) storeIt = 1;
+      if( abs(genparticle.pdgId())==11) storeIt = 1;
+      if( abs(genparticle.pdgId())==13) storeIt = 1;
+      if( abs(genparticle.pdgId())==15) storeIt = 1;
 
-      TupleGens->push_back(CurrentGen);
+      if(storeIt) TupleGens->push_back(CurrentGen);
+
+    
 
     }
   }
