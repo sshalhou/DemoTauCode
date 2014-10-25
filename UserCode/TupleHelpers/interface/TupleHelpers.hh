@@ -85,7 +85,7 @@ namespace TupleHelpers
       if( abs(Zcand.pdgId())==11 || abs(Zcand.pdgId())==13 || abs(Zcand.pdgId())==15)
         {
 
-          std::cout<<" candidate with ID == "<<Zcand.pdgId()<<" and mother == "<<Zcand.mother().pdgId()<<"\n";
+          std::cout<<" candidate with ID == "<<Zcand.pdgId()<<" and mother == "<<Zcand.mother()->pdgId()<<"\n";
 
         }
 
