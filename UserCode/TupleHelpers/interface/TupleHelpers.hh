@@ -88,7 +88,7 @@ namespace TupleHelpers
     bool isRecoTau_matchedTo_GenElecFromTau = 0;
 
     bool isRecoLep_matchedTo_GenMuonFromTau = 0;
-    bool isRecoLep_matchedTo_GenMuonFromTau = 0;
+    bool isRecoTau_matchedTo_GenMuonFromTau = 0;
 
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
