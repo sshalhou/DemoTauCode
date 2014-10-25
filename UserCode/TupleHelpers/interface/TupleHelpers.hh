@@ -112,7 +112,8 @@ namespace TupleHelpers
         {
 
           int ID = gen.pdgId();
-          int MOM = gen.mother()->pdgId();
+          int MOM = -999;
+          if(gen.mother()) MOM = gen.mother()->pdgId();
           double dRlep = deltaR(lep,gen.p4());
           double dRtau = deltaR(tau,gen.p4());
 
