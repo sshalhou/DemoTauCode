@@ -501,8 +501,53 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         if ( gen.isValid() )
         {
 
+          //////////////////////////
+          // get info about DY decays and reco-gen matching
+          // this is needed for ZTT, ZL, and ZJ templates
 
-          TupleHelpers::classifyDrellYanEvents(userData0,*gen,electron.p4() , tau.corrected_p4());
+          bool isDecayZtauTau = 0;
+          bool isDecayZeE = 0;
+          bool isDecayZmuMu = 0;
+          bool isRecoLep_matchedTo_GenTauFromZ = 0;
+          bool isRecoTau_matchedTo_GenTauFromZ = 0;
+          bool isRecoLep_matchedTo_GenElecFromZ = 0;
+          bool isRecoTau_matchedTo_GenElecFromZ = 0;
+          bool isRecoLep_matchedTo_GenMuonFromZ = 0;
+          bool isRecoTau_matchedTo_GenMuonFromZ = 0;
+          bool isRecoLep_matchedTo_GenElecFromTau = 0;
+          bool isRecoTau_matchedTo_GenElecFromTau = 0;
+          bool isRecoLep_matchedTo_GenMuonFromTau = 0;
+          bool isRecoTau_matchedTo_GenMuonFromTau = 0;
+          TupleHelpers::classifyDrellYanEvents(*gen, electron.p4(), tau.corrected_p4(),
+                                               isDecayZtauTau,
+                                               isDecayZeE,
+                                               isDecayZmuMu,
+                                               isRecoLep_matchedTo_GenTauFromZ,
+                                               isRecoTau_matchedTo_GenTauFromZ,
+                                               isRecoLep_matchedTo_GenElecFromZ,
+                                               isRecoTau_matchedTo_GenElecFromZ,
+                                               isRecoLep_matchedTo_GenMuonFromZ,
+                                               isRecoTau_matchedTo_GenMuonFromZ,
+                                               isRecoLep_matchedTo_GenElecFromTau,
+                                               isRecoTau_matchedTo_GenElecFromTau,
+                                               isRecoLep_matchedTo_GenMuonFromTau,
+                                               isRecoTau_matchedTo_GenMuonFromTau);
+
+        CurrentElectronTau.set_isDecayZtauTau(isDecayZtauTau);
+        CurrentElectronTau.set_isDecayZeE(isDecayZeE);
+        CurrentElectronTau.set_isDecayZmuMu(isDecayZmuMu);
+        CurrentElectronTau.set_isRecoLep_matchedTo_GenTauFromZ(isRecoLep_matchedTo_GenTauFromZ);
+        CurrentElectronTau.set_isRecoTau_matchedTo_GenTauFromZ(isRecoTau_matchedTo_GenTauFromZ);
+        CurrentElectronTau.set_isRecoLep_matchedTo_GenElecFromZ(isRecoLep_matchedTo_GenElecFromZ);
+        CurrentElectronTau.set_isRecoTau_matchedTo_GenElecFromZ(isRecoTau_matchedTo_GenElecFromZ);
+        CurrentElectronTau.set_isRecoLep_matchedTo_GenMuonFromZ(isRecoLep_matchedTo_GenMuonFromZ);
+        CurrentElectronTau.set_isRecoTau_matchedTo_GenMuonFromZ(isRecoTau_matchedTo_GenMuonFromZ);
+        CurrentElectronTau.set_isRecoLep_matchedTo_GenElecFromTau(isRecoLep_matchedTo_GenElecFromTau);
+        CurrentElectronTau.set_isRecoTau_matchedTo_GenElecFromTau(isRecoTau_matchedTo_GenElecFromTau);
+        CurrentElectronTau.set_isRecoLep_matchedTo_GenMuonFromTau(isRecoLep_matchedTo_GenMuonFromTau);
+        CurrentElectronTau.set_isRecoTau_matchedTo_GenMuonFromTau(isRecoTau_matchedTo_GenMuonFromTau);
+
+
 
 
 

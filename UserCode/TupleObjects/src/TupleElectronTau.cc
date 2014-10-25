@@ -53,9 +53,87 @@ TupleElectronTau::TupleElectronTau()
   m_PVz = NAN;
   m_PVpositionRho = NAN;
   m_PVp4.SetXYZT(NAN,NAN,NAN,NAN);
+  m_isDecayZtauTau = 0;
+  m_isDecayZeE = 0;
+  m_isDecayZmuMu = 0;
+  m_isRecoLep_matchedTo_GenTauFromZ = 0;
+  m_isRecoTau_matchedTo_GenTauFromZ = 0;
+  m_isRecoLep_matchedTo_GenElecFromZ = 0;
+  m_isRecoTau_matchedTo_GenElecFromZ = 0;
+  m_isRecoLep_matchedTo_GenMuonFromZ = 0;
+  m_isRecoTau_matchedTo_GenMuonFromZ = 0;
+  m_isRecoLep_matchedTo_GenElecFromTau = 0;
+  m_isRecoTau_matchedTo_GenElecFromTau = 0;
+  m_isRecoLep_matchedTo_GenMuonFromTau = 0;
+  m_isRecoTau_matchedTo_GenMuonFromTau = 0;
 
 
 }
+
+void TupleMuonTau::set_isDecayZtauTau(bool isDecayZtauTau_)
+   {m_isDecayZtauTau  = isDecayZtauTau_; }
+bool TupleMuonTau::isDecayZtauTau() const {return m_isDecayZtauTau;}
+
+
+void TupleMuonTau::set_isDecayZeE(bool isDecayZeE_)
+   {m_isDecayZeE  = isDecayZeE_; }
+bool TupleMuonTau::isDecayZeE() const {return m_isDecayZeE;}
+
+
+void TupleMuonTau::set_isDecayZmuMu(bool isDecayZmuMu_)
+   {m_isDecayZmuMu  = isDecayZmuMu_; }
+bool TupleMuonTau::isDecayZmuMu() const {return m_isDecayZmuMu;}
+
+
+void TupleMuonTau::set_isRecoLep_matchedTo_GenTauFromZ(bool isRecoLep_matchedTo_GenTauFromZ_)
+   {m_isRecoLep_matchedTo_GenTauFromZ  = isRecoLep_matchedTo_GenTauFromZ_; }
+bool TupleMuonTau::isRecoLep_matchedTo_GenTauFromZ() const {return m_isRecoLep_matchedTo_GenTauFromZ;}
+
+
+void TupleMuonTau::set_isRecoTau_matchedTo_GenTauFromZ(bool isRecoTau_matchedTo_GenTauFromZ_)
+   {m_isRecoTau_matchedTo_GenTauFromZ  = isRecoTau_matchedTo_GenTauFromZ_; }
+bool TupleMuonTau::isRecoTau_matchedTo_GenTauFromZ() const {return m_isRecoTau_matchedTo_GenTauFromZ;}
+
+
+void TupleMuonTau::set_isRecoLep_matchedTo_GenElecFromZ(bool isRecoLep_matchedTo_GenElecFromZ_)
+   {m_isRecoLep_matchedTo_GenElecFromZ  = isRecoLep_matchedTo_GenElecFromZ_; }
+bool TupleMuonTau::isRecoLep_matchedTo_GenElecFromZ() const {return m_isRecoLep_matchedTo_GenElecFromZ;}
+
+
+void TupleMuonTau::set_isRecoTau_matchedTo_GenElecFromZ(bool isRecoTau_matchedTo_GenElecFromZ_)
+   {m_isRecoTau_matchedTo_GenElecFromZ  = isRecoTau_matchedTo_GenElecFromZ_; }
+bool TupleMuonTau::isRecoTau_matchedTo_GenElecFromZ() const {return m_isRecoTau_matchedTo_GenElecFromZ;}
+
+
+void TupleMuonTau::set_isRecoLep_matchedTo_GenMuonFromZ(bool isRecoLep_matchedTo_GenMuonFromZ_)
+   {m_isRecoLep_matchedTo_GenMuonFromZ  = isRecoLep_matchedTo_GenMuonFromZ_; }
+bool TupleMuonTau::isRecoLep_matchedTo_GenMuonFromZ() const {return m_isRecoLep_matchedTo_GenMuonFromZ;}
+
+
+void TupleMuonTau::set_isRecoTau_matchedTo_GenMuonFromZ(bool isRecoTau_matchedTo_GenMuonFromZ_)
+   {m_isRecoTau_matchedTo_GenMuonFromZ  = isRecoTau_matchedTo_GenMuonFromZ_; }
+bool TupleMuonTau::isRecoTau_matchedTo_GenMuonFromZ() const {return m_isRecoTau_matchedTo_GenMuonFromZ;}
+
+
+void TupleMuonTau::set_isRecoLep_matchedTo_GenElecFromTau(bool isRecoLep_matchedTo_GenElecFromTau_)
+   {m_isRecoLep_matchedTo_GenElecFromTau  = isRecoLep_matchedTo_GenElecFromTau_; }
+bool TupleMuonTau::isRecoLep_matchedTo_GenElecFromTau() const {return m_isRecoLep_matchedTo_GenElecFromTau;}
+
+
+void TupleMuonTau::set_isRecoTau_matchedTo_GenElecFromTau(bool isRecoTau_matchedTo_GenElecFromTau_)
+   {m_isRecoTau_matchedTo_GenElecFromTau  = isRecoTau_matchedTo_GenElecFromTau_; }
+bool TupleMuonTau::isRecoTau_matchedTo_GenElecFromTau() const {return m_isRecoTau_matchedTo_GenElecFromTau;}
+
+
+void TupleMuonTau::set_isRecoLep_matchedTo_GenMuonFromTau(bool isRecoLep_matchedTo_GenMuonFromTau_)
+   {m_isRecoLep_matchedTo_GenMuonFromTau  = isRecoLep_matchedTo_GenMuonFromTau_; }
+bool TupleMuonTau::isRecoLep_matchedTo_GenMuonFromTau() const {return m_isRecoLep_matchedTo_GenMuonFromTau;}
+
+
+void TupleMuonTau::set_isRecoTau_matchedTo_GenMuonFromTau(bool isRecoTau_matchedTo_GenMuonFromTau_)
+   {m_isRecoTau_matchedTo_GenMuonFromTau  = isRecoTau_matchedTo_GenMuonFromTau_; }
+bool TupleMuonTau::isRecoTau_matchedTo_GenMuonFromTau() const {return m_isRecoTau_matchedTo_GenMuonFromTau;}
+
 
 void TupleElectronTau::set_numberOfGoodVertices(int numberOfGoodVertices_) { m_numberOfGoodVertices  =  numberOfGoodVertices_;}
 int TupleElectronTau::numberOfGoodVertices() const { return m_numberOfGoodVertices; }

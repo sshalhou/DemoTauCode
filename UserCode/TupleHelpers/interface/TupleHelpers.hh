@@ -73,28 +73,35 @@ namespace TupleHelpers
   // flags - for reco-leg matching DR(recoX, genY) < 0.3
 
 
-  void classifyDrellYanEvents(const TupleUserSpecifiedData userData0,
-  const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVector tau)
+  void classifyDrellYanEvents(const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVector tau,
+                              bool isDecayZtauTau,
+                              bool isDecayZeE,
+                              bool isDecayZmuMu,
+                              bool isRecoLep_matchedTo_GenTauFromZ,
+                              bool isRecoTau_matchedTo_GenTauFromZ,
+                              bool isRecoLep_matchedTo_GenElecFromZ,
+                              bool isRecoTau_matchedTo_GenElecFromZ,
+                              bool isRecoLep_matchedTo_GenMuonFromZ,
+                              bool isRecoTau_matchedTo_GenMuonFromZ,
+                              bool isRecoLep_matchedTo_GenElecFromTau,
+                              bool isRecoTau_matchedTo_GenElecFromTau,
+                              bool isRecoLep_matchedTo_GenMuonFromTau,
+                              bool isRecoTau_matchedTo_GenMuonFromTau)
   {
 
-    bool isDecayZtauTau = 0;
-    bool isDecayZeE = 0;
-    bool isDecayZmuMu = 0;
-
-    bool isRecoLep_matchedTo_GenTauFromZ = 0;
-    bool isRecoTau_matchedTo_GenTauFromZ = 0;
-
-    bool isRecoLep_matchedTo_GenElecFromZ = 0;
-    bool isRecoTau_matchedTo_GenElecFromZ = 0;
-
-    bool isRecoLep_matchedTo_GenMuonFromZ = 0;
-    bool isRecoTau_matchedTo_GenMuonFromZ = 0;
-
-    bool isRecoLep_matchedTo_GenElecFromTau = 0;
-    bool isRecoTau_matchedTo_GenElecFromTau = 0;
-
-    bool isRecoLep_matchedTo_GenMuonFromTau = 0;
-    bool isRecoTau_matchedTo_GenMuonFromTau = 0;
+     isDecayZtauTau = 0;
+     isDecayZeE = 0;
+     isDecayZmuMu = 0;
+     isRecoLep_matchedTo_GenTauFromZ = 0;
+     isRecoTau_matchedTo_GenTauFromZ = 0;
+     isRecoLep_matchedTo_GenElecFromZ = 0;
+     isRecoTau_matchedTo_GenElecFromZ = 0;
+     isRecoLep_matchedTo_GenMuonFromZ = 0;
+     isRecoTau_matchedTo_GenMuonFromZ = 0;
+     isRecoLep_matchedTo_GenElecFromTau = 0;
+     isRecoTau_matchedTo_GenElecFromTau = 0;
+     isRecoLep_matchedTo_GenMuonFromTau = 0;
+     isRecoTau_matchedTo_GenMuonFromTau = 0;
 
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
@@ -116,13 +123,13 @@ namespace TupleHelpers
               if(dRlep < 0.3) isRecoLep_matchedTo_GenTauFromZ = 1;
               if(dRtau < 0.3) isRecoTau_matchedTo_GenTauFromZ = 1;
             }
-          else if( abs(ID) == 13 && MOM == 23)
+          if( abs(ID) == 13 && MOM == 23)
             {
               isDecayZmuMu = 1;
               if(dRlep < 0.3) isRecoLep_matchedTo_GenMuonFromZ = 1;
               if(dRtau < 0.3) isRecoTau_matchedTo_GenMuonFromZ = 1;
             }
-          else if( abs(ID) == 11 && MOM == 23)
+          if( abs(ID) == 11 && MOM == 23)
             {
               isDecayZeE = 1;
               if(dRlep < 0.3) isRecoLep_matchedTo_GenElecFromZ = 1;

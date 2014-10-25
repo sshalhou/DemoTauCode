@@ -81,6 +81,21 @@ public:
   void set_PVpositionRho(double);
   void set_PVp4(LorentzVector);
 
+  void set_isDecayZtauTau(bool);
+  void set_isDecayZeE(bool);
+  void set_isDecayZmuMu(bool);
+  void set_isRecoLep_matchedTo_GenTauFromZ(bool);
+  void set_isRecoTau_matchedTo_GenTauFromZ(bool);
+  void set_isRecoLep_matchedTo_GenElecFromZ(bool);
+  void set_isRecoTau_matchedTo_GenElecFromZ(bool);
+  void set_isRecoLep_matchedTo_GenMuonFromZ(bool);
+  void set_isRecoTau_matchedTo_GenMuonFromZ(bool);
+  void set_isRecoLep_matchedTo_GenElecFromTau(bool);
+  void set_isRecoTau_matchedTo_GenElecFromTau(bool);
+  void set_isRecoLep_matchedTo_GenMuonFromTau(bool);
+  void set_isRecoTau_matchedTo_GenMuonFromTau(bool);
+
+
   // getters
 
   LorentzVector p4() const;
@@ -133,6 +148,19 @@ public:
   double PVpositionRho() const;
   LorentzVector PVp4() const;
 
+  bool isDecayZtauTau() const;
+  bool isDecayZeE() const;
+  bool isDecayZmuMu() const;
+  bool isRecoLep_matchedTo_GenTauFromZ() const;
+  bool isRecoTau_matchedTo_GenTauFromZ() const;
+  bool isRecoLep_matchedTo_GenElecFromZ() const;
+  bool isRecoTau_matchedTo_GenElecFromZ() const;
+  bool isRecoLep_matchedTo_GenMuonFromZ() const;
+  bool isRecoTau_matchedTo_GenMuonFromZ() const;
+  bool isRecoLep_matchedTo_GenElecFromTau() const;
+  bool isRecoTau_matchedTo_GenElecFromTau() const;
+  bool isRecoLep_matchedTo_GenMuonFromTau() const;
+  bool isRecoTau_matchedTo_GenMuonFromTau() const;
 
 private:
 
@@ -185,6 +213,18 @@ private:
   double m_PVz;
   double m_PVpositionRho;
   LorentzVector m_PVp4;
+  bool m_isDecayZeE;
+  bool m_isDecayZmuMu;
+  bool m_isRecoLep_matchedTo_GenTauFromZ;
+  bool m_isRecoTau_matchedTo_GenTauFromZ;
+  bool m_isRecoLep_matchedTo_GenElecFromZ;
+  bool m_isRecoTau_matchedTo_GenElecFromZ;
+  bool m_isRecoLep_matchedTo_GenMuonFromZ;
+  bool m_isRecoTau_matchedTo_GenMuonFromZ;
+  bool m_isRecoLep_matchedTo_GenElecFromTau;
+  bool m_isRecoTau_matchedTo_GenElecFromTau;
+  bool m_isRecoLep_matchedTo_GenMuonFromTau;
+  bool m_isRecoTau_matchedTo_GenMuonFromTau;
 
 
 };
