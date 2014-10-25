@@ -167,7 +167,10 @@ TupleGenProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
       TupleGen CurrentGen;
       CurrentGen.set_p4(genparticle.p4());
       CurrentGen.set_pdgId(genparticle.pdgId());
-      CurrentGen.set_pdgIdmother(genparticle.mother()->pdgId());
+      int motherID = -999;
+      if(genparticle.mother()) motherID = genparticle.mother()->pdgId();
+
+      CurrentGen.set_pdgIdmother(motherID);
 
       CurrentGen.set_status(genparticle.status());
 
