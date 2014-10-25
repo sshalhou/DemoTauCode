@@ -213,6 +213,7 @@ private:
   double m_PVz;
   double m_PVpositionRho;
   LorentzVector m_PVp4;
+  bool m_isDecayZtauTau;
   bool m_isDecayZeE;
   bool m_isDecayZmuMu;
   bool m_isRecoLep_matchedTo_GenTauFromZ;
