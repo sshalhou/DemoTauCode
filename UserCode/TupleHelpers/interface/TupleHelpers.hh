@@ -92,14 +92,19 @@ namespace TupleHelpers
             {
               const reco::Candidate * d = Zcand.daughter(l);
 
-              std::cout<<" found daughter at daughter index l : "<<l<<" with id "<<d->pdgId()<<" and status "<<d->status()<<"\n";
+              std::cout<<"-> found daughter at daughter index l : "<<l<<" with id "<<d->pdgId()<<" and status "<<d->status()<<"\n";
 
               for(std::size_t ll = 0; ll < d->numberOfDaughters(); ++ll)
                 {
                   const reco::Candidate * dd = d->daughter(ll);
-                std::cout<<" found 2nd gen daughter index ll : "<<ll<<" with id "<<dd->pdgId()<<" and status "<<dd->status()<<"\n";
+                std::cout<<"--> found 2nd gen daughter index ll : "<<ll<<" with id "<<dd->pdgId()<<" and status "<<dd->status()<<"\n";
 
+                    for(std::size_t lll = 0; lll < dd->numberOfDaughters(); ++lll)
+                      {
+                        const reco::Candidate * ddd = dd->daughter(lll);
+                      std::cout<<"---> found 3rd gen daughter index lll : "<<lll<<" with id "<<ddd->pdgId()<<" and status "<<ddd->status()<<"\n";
 
+                      }
                 }
 
             }

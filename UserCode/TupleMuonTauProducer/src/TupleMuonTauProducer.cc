@@ -494,6 +494,9 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         if ( gen.isValid() )
         {
 
+          TupleHelpers::classifyDrellYanEvents(userData0,*gen,muon.p4() , tau.corrected_p4());
+
+
           //////////////////
           // check if passes NonTopEmbeddedTrigger and DiMuon Mass50
           // cuts for embedded (non-tt) samples
