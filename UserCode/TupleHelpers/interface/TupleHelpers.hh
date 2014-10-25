@@ -77,52 +77,36 @@ namespace TupleHelpers
   const reco::GenParticleCollection & genparticles, LorentzVector lep, LorentzVector tau)
   {
 
+    bool isDecayZtauTau = 0;
+    bool isDecayZeE = 0;
+    bool isDecayZmuMu = 0;
+
+
     for(std::size_t mc = 0; mc < genparticles.size(); ++mc)
     {
 
-      const reco::GenParticle & Zcand = (genparticles)[mc];
+      const reco::GenParticle & gen = (genparticles)[mc];
 
-      if( abs(Zcand.pdgId())==11 || abs(Zcand.pdgId())==13 || abs(Zcand.pdgId())==15)
+      if( abs(gen.pdgId())==11 || abs(gen.pdgId())==13 || abs(gen.pdgId())==15 && gen.p4().pt()>8.0)
         {
 
-          std::cout<<" candidate with ID == "<<Zcand.pdgId()<<" and mother == "<<Zcand.mother()->pdgId()<<"\n";
+          int ID = gen.pdgId();
+          int MOM = gen.mother()->pdgId();
 
-        }
+          std::cout<<" candidate with ID == "<<ID<<" and mother == "<<MOM<<"\n";
 
+          if( abs(ID) == 15 && MOM == 23) isDecayZtauTau = 1;
+          if( abs(ID) == 13 && MOM == 23) isDecayZmuMu = 1;
+          if( abs(ID) == 11 && MOM == 23) isDecayZeE = 1;
 
-
-      if(Zcand.pdgId()==23 && 7==3)
-        {
-
-          std::cout<<" have a Z at index "<<mc<<" with n daughters == "<<Zcand.numberOfDaughters();
-          std::cout<<" and status = "<<Zcand.status()<<"\n";
-
-          for(std::size_t l = 0; l < Zcand.numberOfDaughters(); ++l)
-            {
-              const reco::Candidate * d = Zcand.daughter(l);
-
-              std::cout<<"-> found daughter at daughter index l : "<<l<<" with id "<<d->pdgId()<<" and status "<<d->status()<<"\n";
-
-              for(std::size_t ll = 0; ll < d->numberOfDaughters(); ++ll)
-                {
-                  const reco::Candidate * dd = d->daughter(ll);
-                std::cout<<"--> found 2nd gen daughter index ll : "<<ll<<" with id "<<dd->pdgId()<<" and status "<<dd->status()<<"\n";
-
-                    for(std::size_t lll = 0; lll < dd->numberOfDaughters(); ++lll)
-                      {
-                        const reco::Candidate * ddd = dd->daughter(lll);
-                      std::cout<<"---> found 3rd gen daughter index lll : "<<lll<<" with id "<<ddd->pdgId()<<" and status "<<ddd->status()<<"\n";
-
-                      }
-                }
-
-            }
-
+          std::cout<<" ztt, zmm, zee "<<isDecayZtauTau<<" , "<<isDecayZmuMu<<" , "<<isDecayZeE<<"\n";
 
 
 
 
         }
+
+
 
     }
 
