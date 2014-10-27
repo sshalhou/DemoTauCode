@@ -3,7 +3,10 @@ import sys
 import os
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
 
-comparisonFile = TFile( "comparisonFile.root", 'RECREATE', 'test' )
+from Plotting.python.FileName import FileNamePrefix
+
+
+comparisonFile = TFile( FileNamePrefix+"comparisonFile.root", 'RECREATE', 'test' )
 
 j1Pt_eleTau = TH1F("j1Pt_eleTau","j1Pt_eleTau",25,0,500)
 njet_eleTau = TH1F("njet_eleTau","njet_eleTau",5,0,5)

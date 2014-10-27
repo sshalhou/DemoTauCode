@@ -45,9 +45,10 @@ def highPtTauSYS(chain, maxPairTypeAndIndex):
     tauPt = Tvec.Pt()
   if math.isnan(tauPt) is True:
      returnWeight = 1.0
+     return returnWeight
   else:
     returnWeight = (0.20*tauPt/1000.0)
-  print tauPt,   returnWeight
+  #print tauPt,   returnWeight
   return returnWeight
 
 
@@ -100,9 +101,21 @@ def highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex):
   returnWeight = 1.0
   i = maxPairTypeAndIndex[0]
   if maxPairTypeAndIndex[1] == 'eleTau':
-    returnWeight *= divisionHelp(chain.eT_EffDataHighPtTauTrigger[i], chain.eT_EffMcHighPtTauTrigger[i])
+    adjustedDataWt = chain.eT_EffDataHighPtTauTrigger[i]
+    # fix computation for data
+    if adjustedDataWt != 1.0:
+        adjustedDataWt = ((chain.eT_EffDataHighPtTauTrigger[i]-0.3)/0.7)
+        adjustedDataWt = (1-0.6245691177080073)+adjustedDataWt*(0.6245691177080073)
+        #print "original, new ", chain.eT_EffDataHighPtTauTrigger[i], adjustedDataWt
+    returnWeight *= divisionHelp(adjustedDataWt, chain.eT_EffMcHighPtTauTrigger[i])
   elif maxPairTypeAndIndex[1] == 'muTau':
-    returnWeight *= divisionHelp(chain.muT_EffDataHighPtTauTrigger[i], chain.muT_EffMcHighPtTauTrigger[i])
+    adjustedDataWt = chain.muT_EffDataHighPtTauTrigger[i]
+    # fix computation for data
+    if adjustedDataWt != 1.0:
+       adjustedDataWt = ((chain.muT_EffDataHighPtTauTrigger[i]-0.3)/0.7)
+       adjustedDataWt = (1-0.6245691177080073)+adjustedDataWt*(0.6245691177080073)
+       #print "original, new ", chain.muT_EffDataHighPtTauTrigger[i], adjustedDataWt
+    returnWeight *= divisionHelp(adjustedDataWt, chain.muT_EffMcHighPtTauTrigger[i])
   return returnWeight
 
 ##########################
@@ -186,7 +199,29 @@ def higgsPtReWeightNEW(chain, maxPairTypeAndIndex, UPorDOWNorNOMINAL):
   return 1.0
 
 
-
+def CrabJobEfficiency(sampleName):
+    eff = 1.0
+    if(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        eff = 0.997778
+    elif(sampleName=='/SUSYGluGluToHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        eff = 0.997774
+    elif(sampleName=='/SUSYGluGluToHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        eff = 0.997778
+    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        eff = 0.976945245
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        eff = 0.9988276671
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        eff = 0.9918651947
+    elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        eff = 0.99092
+    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        eff = 0.995919
+    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        eff = 0.9959184446
+    elif(sampleName=='/WbbJetsToLNu_Massive_TuneZ2star_8TeV-madgraph-pythia6_tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        eff = 0.9998386837
+    return eff
 
 
 def signalSUSYweight(chain, maxPairTypeAndIndex, Verbose):
@@ -199,6 +234,7 @@ def signalSUSYweight(chain, maxPairTypeAndIndex, Verbose):
   allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
   allWeights['higgsPtNEW'] = higgsPtReWeight(chain, maxPairTypeAndIndex, 'USENEW', 'NOMINAL')
   allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+  allWeights['nevents'] = 1000.0*19.7/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
   #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
   # this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
   for key, value in allWeights.iteritems():

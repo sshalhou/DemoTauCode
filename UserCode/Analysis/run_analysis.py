@@ -20,7 +20,7 @@ UseNewTriggers = False
 OnlyCheckEmbeddedTriggers = False
 
 Verbose = False
-SmallRun = False
+SmallRun = True
 
 PrintEvents = True
 check_events = []
@@ -100,7 +100,7 @@ maxEntries = chain.GetEntries()
 #chain.AddBranchToCache("*",1)
 
 if SmallRun is True:
-	maxEntries = 10000
+	maxEntries = 100
 
 for entry in range(0,maxEntries):
 		entryNumber = chain.GetEntryNumber(entry);

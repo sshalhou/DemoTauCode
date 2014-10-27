@@ -31,6 +31,51 @@ def btagAndTauPtCategory(btags, tauPt, njets):
   return returnWord
 
 
+def getSAMPLE_ADD(sampleName):
+    SAMPLE_ADD = ""
+    if(sampleName=='/SUSYBBHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH80_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH90_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-100_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH100_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-110_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH110_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-120_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH120_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-130_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH130_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-140_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH140_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-160_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH160_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-180_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH180_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH200_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH250_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH300_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH350_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH400_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH450_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH500_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH600_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH700_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH800_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH900_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_bbH1000_'
+    return SAMPLE_ADD
 
 
 def muTauClassification(chain, index):
@@ -42,3 +87,25 @@ def eTauClassification(chain, index):
   Tvec =  TLorentzVector(0,0,0,0)
   Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
   return btagAndTauPtCategory(chain.eT_nbjets[index],Tvec.Pt(),chain.eT_njets[index])
+
+
+def muTauClassificationJECDOWN(chain, index):
+  Tvec =  TLorentzVector(0,0,0,0)
+  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+  return btagAndTauPtCategory(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index])
+
+def eTauClassificationJECDOWN(chain, index):
+  Tvec =  TLorentzVector(0,0,0,0)
+  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+  return btagAndTauPtCategory(chain.eT_nbjetsDOWN[index],Tvec.Pt(),chain.eT_njetsDOWN[index])
+
+
+def muTauClassificationJECUP(chain, index):
+  Tvec =  TLorentzVector(0,0,0,0)
+  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+  return btagAndTauPtCategory(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index])
+
+def eTauClassificationJECUP(chain, index):
+  Tvec =  TLorentzVector(0,0,0,0)
+  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+  return btagAndTauPtCategory(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index])
