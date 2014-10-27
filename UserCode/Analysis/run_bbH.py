@@ -32,7 +32,7 @@ check_events = []
 chain = TChain('*/FlatTuple')
 
 listOfFiles = []
-//listOfFiles.append('./HOLDER/FlatTuple_SZS_SUSYBBHToTauTauM80_v5ntup.root')
+#listOfFiles.append('./HOLDER/FlatTuple_SZS_SUSYBBHToTauTauM80_v5ntup.root')
 
 listOfFiles.append('/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_SZS_SUSYBBHToTauTauM1000_v5ntup.root')
 listOfFiles.append('/eos/uscms/store/user/shalhout/FlatTuples/FlatTuple_SZS_SUSYBBHToTauTauM100_v5ntup.root')
