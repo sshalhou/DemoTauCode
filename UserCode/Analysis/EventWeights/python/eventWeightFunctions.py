@@ -29,7 +29,7 @@ def PUweight(chain, maxPairTypeAndIndex):
   return returnWeight
 
 ##################
-# high pt tau ID sf
+# high pt tau ID systematic
 
 def highPtTauSYS(chain, maxPairTypeAndIndex):
   returnWeight = 1.0
@@ -51,7 +51,21 @@ def highPtTauSYS(chain, maxPairTypeAndIndex):
   #print tauPt,   returnWeight
   return returnWeight
 
+##################
+# higgsPt weight systematic
+# for ggH susy samples only
 
+def higgsPtWeightSYS(chain, maxPairTypeAndIndex,):
+  i = maxPairTypeAndIndex[0]
+  if maxPairTypeAndIndex[1] == 'eleTau':
+    Tvec = TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_genP4_x[i], chain.eT_tau_genP4_y[i], chain.eT_tau_genP4_z[i],chain.eT_tau_genP4_t[i])
+    tauPt = Tvec.Pt()
+  elif maxPairTypeAndIndex[1] == 'muTau':
+    Tvec = TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_genP4_x[i], chain.muT_tau_genP4_y[i], chain.muT_tau_genP4_z[i],chain.muT_tau_genP4_t[i])
+    tauPt = Tvec.Pt()
+  return
 
 
 ##################################
@@ -224,7 +238,7 @@ def CrabJobEfficiency(sampleName):
     return eff
 
 
-def signalSUSYweight(chain, maxPairTypeAndIndex, Verbose):
+def signalSUSYweightGluGlu(chain, maxPairTypeAndIndex, Verbose):
   returnWeight = 1.0
   allWeights = {}
   allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
@@ -242,3 +256,21 @@ def signalSUSYweight(chain, maxPairTypeAndIndex, Verbose):
   if Verbose:
     print allWeights
   return returnWeight
+
+def signalSUSYweightBB(chain, maxPairTypeAndIndex, Verbose):
+   returnWeight = 1.0
+   allWeights = {}
+   allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+   allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+   allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+   allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+   allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+   allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+   allWeights['nevents'] = 1000.0*19.7/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+   #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+   # this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
+   for key, value in allWeights.iteritems():
+     returnWeight*=value
+   if Verbose:
+     print allWeights
+   return returnWeight

@@ -68,8 +68,8 @@ def fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,his
         tauEffVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+maxPairTypeAndIndex[2]
         tauEffVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUP+'inclusive'
         tauEffVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+'inclusive'
-        finalWtUp =  finalWt*(1+highPtTauWtSYS)
-        finalWtDown =  finalWt*(1-highPtTauWtSYS)
+        finalWtUp =  finalWt*(1.0+highPtTauWtSYS)
+        finalWtDown =  finalWt*(1.0-highPtTauWtSYS)
         if(finalWtDown<0):
             finalWtDown = 0.0
         #print tauEffVariantToFillUp, tauEffVariantToFillDown, tauEffVariantToFillUpinc, tauEffVariantToFillDowninc

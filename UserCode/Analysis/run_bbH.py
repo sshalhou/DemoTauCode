@@ -181,7 +181,7 @@ for entry in range(0,maxEntries):
 			if len(maxPairTypeAndIndex)	> 0:
 				eventVariables = {}
 				fillVariables(chain,eventVariables,maxPairTypeAndIndex,Verbose)
-				finalWt = signalSUSYweight(chain, maxPairTypeAndIndex, Verbose)
+				finalWt = signalSUSYweightBB(chain, maxPairTypeAndIndex, Verbose)
 				highPtTauWtSYS =  highPtTauSYS(chain, maxPairTypeAndIndex)
 				SAMPLE_ADD = getSAMPLE_ADD(sampleName)
 				assert(len(SAMPLE_ADD)>0), " Assert : unknown sample "
