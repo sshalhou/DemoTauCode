@@ -176,7 +176,20 @@ private:
   std::vector< double > eT_PVz ;
   std::vector< double > eT_PVpositionRho ;
   std::vector< double > eT_PVp4_x , eT_PVp4_y , eT_PVp4_z , eT_PVp4_t ;
-
+  std::vector< bool > eT_isDecayZtauTau ;
+  std::vector< bool > eT_isDecayZeE ;
+  std::vector< bool > eT_isDecayZmuMu ;
+  std::vector< bool > eT_isRecoLep_matchedTo_GenTauFromZ ;
+  std::vector< bool > eT_isRecoTau_matchedTo_GenTauFromZ ;
+  std::vector< bool > eT_isRecoLep_matchedTo_GenElecFromZ ;
+  std::vector< bool > eT_isRecoTau_matchedTo_GenElecFromZ ;
+  std::vector< bool > eT_isRecoLep_matchedTo_GenMuonFromZ ;
+  std::vector< bool > eT_isRecoTau_matchedTo_GenMuonFromZ ;
+  std::vector< bool > eT_isRecoLep_matchedTo_GenElecFromTau ;
+  std::vector< bool > eT_isRecoTau_matchedTo_GenElecFromTau ;
+  std::vector< bool > eT_isRecoLep_matchedTo_GenMuonFromTau ;
+  std::vector< bool > eT_isRecoTau_matchedTo_GenMuonFromTau ;
+  std::vector< bool > eT_passEmbeddedTrigger ;
 
 
 
@@ -413,6 +426,21 @@ private:
   std::vector< double > muT_PVz ;
   std::vector< double > muT_PVpositionRho ;
   std::vector< double > muT_PVp4_x , muT_PVp4_y , muT_PVp4_z , muT_PVp4_t ;
+  std::vector< bool > muT_isDecayZtauTau ;
+  std::vector< bool > muT_isDecayZeE ;
+  std::vector< bool > muT_isDecayZmuMu ;
+  std::vector< bool > muT_isRecoLep_matchedTo_GenTauFromZ ;
+  std::vector< bool > muT_isRecoTau_matchedTo_GenTauFromZ ;
+  std::vector< bool > muT_isRecoLep_matchedTo_GenElecFromZ ;
+  std::vector< bool > muT_isRecoTau_matchedTo_GenElecFromZ ;
+  std::vector< bool > muT_isRecoLep_matchedTo_GenMuonFromZ ;
+  std::vector< bool > muT_isRecoTau_matchedTo_GenMuonFromZ ;
+  std::vector< bool > muT_isRecoLep_matchedTo_GenElecFromTau ;
+  std::vector< bool > muT_isRecoTau_matchedTo_GenElecFromTau ;
+  std::vector< bool > muT_isRecoLep_matchedTo_GenMuonFromTau ;
+  std::vector< bool > muT_isRecoTau_matchedTo_GenMuonFromTau ;
+  std::vector< bool > muT_passEmbeddedTrigger ;
+
 
   ///////////
   // muon in muTau
@@ -752,6 +780,20 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_PVp4_y", &eT_PVp4_y);
   lepTauTree->Branch("eT_PVp4_z", &eT_PVp4_z);
   lepTauTree->Branch("eT_PVp4_t", &eT_PVp4_t);
+  lepTauTree->Branch("eT_isDecayZtauTau", &eT_isDecayZtauTau);
+  lepTauTree->Branch("eT_isDecayZeE", &eT_isDecayZeE);
+  lepTauTree->Branch("eT_isDecayZmuMu", &eT_isDecayZmuMu);
+  lepTauTree->Branch("eT_isRecoLep_matchedTo_GenTauFromZ", &eT_isRecoLep_matchedTo_GenTauFromZ);
+  lepTauTree->Branch("eT_isRecoTau_matchedTo_GenTauFromZ", &eT_isRecoTau_matchedTo_GenTauFromZ);
+  lepTauTree->Branch("eT_isRecoLep_matchedTo_GenElecFromZ", &eT_isRecoLep_matchedTo_GenElecFromZ);
+  lepTauTree->Branch("eT_isRecoTau_matchedTo_GenElecFromZ", &eT_isRecoTau_matchedTo_GenElecFromZ);
+  lepTauTree->Branch("eT_isRecoLep_matchedTo_GenMuonFromZ", &eT_isRecoLep_matchedTo_GenMuonFromZ);
+  lepTauTree->Branch("eT_isRecoTau_matchedTo_GenMuonFromZ", &eT_isRecoTau_matchedTo_GenMuonFromZ);
+  lepTauTree->Branch("eT_isRecoLep_matchedTo_GenElecFromTau", &eT_isRecoLep_matchedTo_GenElecFromTau);
+  lepTauTree->Branch("eT_isRecoTau_matchedTo_GenElecFromTau", &eT_isRecoTau_matchedTo_GenElecFromTau);
+  lepTauTree->Branch("eT_isRecoLep_matchedTo_GenMuonFromTau", &eT_isRecoLep_matchedTo_GenMuonFromTau);
+  lepTauTree->Branch("eT_isRecoTau_matchedTo_GenMuonFromTau", &eT_isRecoTau_matchedTo_GenMuonFromTau);
+  lepTauTree->Branch("eT_passEmbeddedTrigger", &eT_passEmbeddedTrigger);
 
   // electron in eTau
 
@@ -1036,6 +1078,21 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_PVp4_y", &muT_PVp4_y);
   lepTauTree->Branch("muT_PVp4_z", &muT_PVp4_z);
   lepTauTree->Branch("muT_PVp4_t", &muT_PVp4_t);
+  lepTauTree->Branch("muT_isDecayZtauTau", &muT_isDecayZtauTau);
+  lepTauTree->Branch("muT_isDecayZeE", &muT_isDecayZeE);
+  lepTauTree->Branch("muT_isDecayZmuMu", &muT_isDecayZmuMu);
+  lepTauTree->Branch("muT_isRecoLep_matchedTo_GenTauFromZ", &muT_isRecoLep_matchedTo_GenTauFromZ);
+  lepTauTree->Branch("muT_isRecoTau_matchedTo_GenTauFromZ", &muT_isRecoTau_matchedTo_GenTauFromZ);
+  lepTauTree->Branch("muT_isRecoLep_matchedTo_GenElecFromZ", &muT_isRecoLep_matchedTo_GenElecFromZ);
+  lepTauTree->Branch("muT_isRecoTau_matchedTo_GenElecFromZ", &muT_isRecoTau_matchedTo_GenElecFromZ);
+  lepTauTree->Branch("muT_isRecoLep_matchedTo_GenMuonFromZ", &muT_isRecoLep_matchedTo_GenMuonFromZ);
+  lepTauTree->Branch("muT_isRecoTau_matchedTo_GenMuonFromZ", &muT_isRecoTau_matchedTo_GenMuonFromZ);
+  lepTauTree->Branch("muT_isRecoLep_matchedTo_GenElecFromTau", &muT_isRecoLep_matchedTo_GenElecFromTau);
+  lepTauTree->Branch("muT_isRecoTau_matchedTo_GenElecFromTau", &muT_isRecoTau_matchedTo_GenElecFromTau);
+  lepTauTree->Branch("muT_isRecoLep_matchedTo_GenMuonFromTau", &muT_isRecoLep_matchedTo_GenMuonFromTau);
+  lepTauTree->Branch("muT_isRecoTau_matchedTo_GenMuonFromTau", &muT_isRecoTau_matchedTo_GenMuonFromTau);
+  lepTauTree->Branch("muT_passEmbeddedTrigger", &muT_passEmbeddedTrigger);
+
 
   lepTauTree->Branch("muT_muon_p4_x", &muT_muon_p4_x);
   lepTauTree->Branch("muT_muon_p4_y", &muT_muon_p4_y);
@@ -1435,6 +1492,20 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_PVp4_y.push_back(eTau.PVp4().y());
     eT_PVp4_z.push_back(eTau.PVp4().z());
     eT_PVp4_t.push_back(eTau.PVp4().t());
+    eT_isDecayZtauTau.push_back(eTau.isDecayZtauTau());
+    eT_isDecayZeE.push_back(eTau.isDecayZeE());
+    eT_isDecayZmuMu.push_back(eTau.isDecayZmuMu());
+    eT_isRecoLep_matchedTo_GenTauFromZ.push_back(eTau.isRecoLep_matchedTo_GenTauFromZ());
+    eT_isRecoTau_matchedTo_GenTauFromZ.push_back(eTau.isRecoTau_matchedTo_GenTauFromZ());
+    eT_isRecoLep_matchedTo_GenElecFromZ.push_back(eTau.isRecoLep_matchedTo_GenElecFromZ());
+    eT_isRecoTau_matchedTo_GenElecFromZ.push_back(eTau.isRecoTau_matchedTo_GenElecFromZ());
+    eT_isRecoLep_matchedTo_GenMuonFromZ.push_back(eTau.isRecoLep_matchedTo_GenMuonFromZ());
+    eT_isRecoTau_matchedTo_GenMuonFromZ.push_back(eTau.isRecoTau_matchedTo_GenMuonFromZ());
+    eT_isRecoLep_matchedTo_GenElecFromTau.push_back(eTau.isRecoLep_matchedTo_GenElecFromTau());
+    eT_isRecoTau_matchedTo_GenElecFromTau.push_back(eTau.isRecoTau_matchedTo_GenElecFromTau());
+    eT_isRecoLep_matchedTo_GenMuonFromTau.push_back(eTau.isRecoLep_matchedTo_GenMuonFromTau());
+    eT_isRecoTau_matchedTo_GenMuonFromTau.push_back(eTau.isRecoTau_matchedTo_GenMuonFromTau());
+    eT_passEmbeddedTrigger.push_back(eTau.passEmbeddedTrigger());
 
 
     eT_ele_p4_x.push_back(theElec.p4().x());
@@ -1738,6 +1809,21 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_PVp4_y.push_back(muTau.PVp4().y());
       muT_PVp4_z.push_back(muTau.PVp4().z());
       muT_PVp4_t.push_back(muTau.PVp4().t());
+      muT_isDecayZtauTau.push_back(muTau.isDecayZtauTau());
+      muT_isDecayZeE.push_back(muTau.isDecayZeE());
+      muT_isDecayZmuMu.push_back(muTau.isDecayZmuMu());
+      muT_isRecoLep_matchedTo_GenTauFromZ.push_back(muTau.isRecoLep_matchedTo_GenTauFromZ());
+      muT_isRecoTau_matchedTo_GenTauFromZ.push_back(muTau.isRecoTau_matchedTo_GenTauFromZ());
+      muT_isRecoLep_matchedTo_GenElecFromZ.push_back(muTau.isRecoLep_matchedTo_GenElecFromZ());
+      muT_isRecoTau_matchedTo_GenElecFromZ.push_back(muTau.isRecoTau_matchedTo_GenElecFromZ());
+      muT_isRecoLep_matchedTo_GenMuonFromZ.push_back(muTau.isRecoLep_matchedTo_GenMuonFromZ());
+      muT_isRecoTau_matchedTo_GenMuonFromZ.push_back(muTau.isRecoTau_matchedTo_GenMuonFromZ());
+      muT_isRecoLep_matchedTo_GenElecFromTau.push_back(muTau.isRecoLep_matchedTo_GenElecFromTau());
+      muT_isRecoTau_matchedTo_GenElecFromTau.push_back(muTau.isRecoTau_matchedTo_GenElecFromTau());
+      muT_isRecoLep_matchedTo_GenMuonFromTau.push_back(muTau.isRecoLep_matchedTo_GenMuonFromTau());
+      muT_isRecoTau_matchedTo_GenMuonFromTau.push_back(muTau.isRecoTau_matchedTo_GenMuonFromTau());
+      muT_passEmbeddedTrigger.push_back(muTau.passEmbeddedTrigger());
+
 
       muT_muon_p4_x.push_back(theMuon.p4().x());
       muT_muon_p4_y.push_back(theMuon.p4().y());
@@ -2106,6 +2192,20 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_PVp4_y.clear();
     eT_PVp4_z.clear();
     eT_PVp4_t.clear();
+    eT_isDecayZtauTau.clear();
+    eT_isDecayZeE.clear();
+    eT_isDecayZmuMu.clear();
+    eT_isRecoLep_matchedTo_GenTauFromZ.clear();
+    eT_isRecoTau_matchedTo_GenTauFromZ.clear();
+    eT_isRecoLep_matchedTo_GenElecFromZ.clear();
+    eT_isRecoTau_matchedTo_GenElecFromZ.clear();
+    eT_isRecoLep_matchedTo_GenMuonFromZ.clear();
+    eT_isRecoTau_matchedTo_GenMuonFromZ.clear();
+    eT_isRecoLep_matchedTo_GenElecFromTau.clear();
+    eT_isRecoTau_matchedTo_GenElecFromTau.clear();
+    eT_isRecoLep_matchedTo_GenMuonFromTau.clear();
+    eT_isRecoTau_matchedTo_GenMuonFromTau.clear();
+    eT_passEmbeddedTrigger.clear();
 
     eT_ele_p4_x.clear();
     eT_ele_p4_y.clear();
@@ -2386,6 +2486,20 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_PVp4_y.clear();
     muT_PVp4_z.clear();
     muT_PVp4_t.clear();
+    muT_isDecayZtauTau.clear();
+    muT_isDecayZeE.clear();
+    muT_isDecayZmuMu.clear();
+    muT_isRecoLep_matchedTo_GenTauFromZ.clear();
+    muT_isRecoTau_matchedTo_GenTauFromZ.clear();
+    muT_isRecoLep_matchedTo_GenElecFromZ.clear();
+    muT_isRecoTau_matchedTo_GenElecFromZ.clear();
+    muT_isRecoLep_matchedTo_GenMuonFromZ.clear();
+    muT_isRecoTau_matchedTo_GenMuonFromZ.clear();
+    muT_isRecoLep_matchedTo_GenElecFromTau.clear();
+    muT_isRecoTau_matchedTo_GenElecFromTau.clear();
+    muT_isRecoLep_matchedTo_GenMuonFromTau.clear();
+    muT_isRecoTau_matchedTo_GenMuonFromTau.clear();
+    muT_passEmbeddedTrigger.clear();
 
     muT_muon_p4_x.clear();
     muT_muon_p4_y.clear();
