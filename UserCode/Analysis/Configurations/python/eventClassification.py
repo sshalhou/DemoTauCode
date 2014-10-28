@@ -15,7 +15,7 @@ def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
   if btags == 0:
     returnWord = 'nobtag'
     if tauPt <= 30:
-      print tauPt
+      print tauPt, " is less than 30 "
       returnWord += '-ForgotToCorrectTauPt?'
     elif tauPt > 30 and tauPt <= 45:
       returnWord += '_low'
@@ -26,7 +26,7 @@ def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
   elif njets<2 and btagsLooseCSV>0:
     returnWord = 'btag'
     if tauPt <= 30:
-      print tauPt
+      print tauPt, " is less than 30 "
       returnWord += '-ForgotToCorrectTauPt?'
     elif tauPt > 30 and tauPt <= 45:
       returnWord += '_low'
@@ -42,7 +42,7 @@ def btagAndTauPtCategory(btags, tauPt, njets):
   if btags == 0:
     returnWord = 'nobtag'
     if tauPt <= 30:
-      print tauPt
+      print tauPt, " is less than 30 "
       returnWord += '-ForgotToCorrectTauPt?'
     elif tauPt > 30 and tauPt <= 45:
       returnWord += '_low'
@@ -53,7 +53,7 @@ def btagAndTauPtCategory(btags, tauPt, njets):
   elif njets<2:
     returnWord = 'btag'
     if tauPt <= 30:
-      print tauPt
+      print tauPt, " is less than 30 "
       returnWord += '-ForgotToCorrectTauPt?'
     elif tauPt > 30 and tauPt <= 45:
       returnWord += '_low'
@@ -158,6 +158,63 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_data_obs_'
     elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
         SAMPLE_ADD = '_data_obs_'
+
+    elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_DYJetsInclusive_'
+
+    elif(sampleName=='/DY1JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_DY1Jet_'
+
+    elif(sampleName=='/DY2JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
+        SAMPLE_ADD = '_DY2Jet_'
+
+    elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_DY3Jet_'
+
+    elif(sampleName=='/DY4JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_DY4Jet_'
+
+    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v2/AODSIM'):
+        SAMPLE_ADD = '_TTJetsFullLept_'
+
+    elif(sampleName=='/TTJets_SemiLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
+        SAMPLE_ADD = '_TTJetsSemiLept_'
+
+    elif(sampleName=='/TTJets_HadronicMGDecays_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A_ext-v1/AODSIM'):
+        SAMPLE_ADD = '_TTJetsHadronic_'
+
+    elif(sampleName=='/Tbar_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_SingleTopBar_'
+
+    elif(sampleName=='/T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_SingleTop_'
+
+    elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_ZZJetsTo4L_'
+
+    elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
+        SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
+
+    elif(sampleName=='/ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_ZZJetsTo2L2Q_'
+
+    elif(sampleName=='/WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_WWJetsTo2L2Nu_'
+
+    elif(sampleName=='/WZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_WZJetsTo2L2Q_'
+
+    elif(sampleName=='/WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_WZJetsTo3LNu_'
+
+
+    elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+        SAMPLE_ADD = '_DYTauPolOff_'
+
+
+
+
+
     return SAMPLE_ADD
 
 
@@ -207,3 +264,68 @@ def eTauClassificationJECUP(chain, index):
   Tvec =  TLorentzVector(0,0,0,0)
   Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
   return btagAndTauPtCategory(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index])
+
+
+####################
+# classiffy Z->XX decays
+# based on generator - recoTau matching
+
+def classifyZDecay(chain,maxPairTypeAndIndex):
+    classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    i=maxPairTypeAndIndex[0]
+    ########################
+    # check reco-gen matches
+    tauMatches = {}
+    tauMatches['genTau'] = False
+    tauMatches['genLep'] = False
+    tauMatches['lepFakesTau'] = False
+    if maxPairTypeAndIndex[1] == 'muTau':
+        if chain.muT_isDecayZtauTau[i] :
+            if chain.muT_isRecoTau_matchedTo_GenTauFromZ[i] : tauMatches['genTau'] = True
+            if chain.muT_isRecoTau_matchedTo_GenMuonFromTau[i] : tauMatches['genLep'] = True
+            if tauMatches['genTau'] is True and tauMatches['genLep'] is False:
+                classification = '_ZTT_'
+                print 'found a ZTT in Z->tau tau'
+            elif tauMatches['genTau'] is False and tauMatches['genLep'] is True:
+                classification = '_ZL_'
+                print 'found a ZL in Z->tau tau'
+            elif tauMatches['genTau'] is False and tauMatches['genLep'] is False:
+                classification = '_ZJ_'
+                print 'found a ZJ in Z->tau tau'
+            elif tauMatches['genTau'] is True and tauMatches['genLep'] is True:
+                classification = '_X_'
+                print 'found a X in Z->tau tau'
+        elif chain.muT_isDecayZmuMu[i] :
+            if chain.muT_isRecoTau_matchedTo_GenMuonFromZ[i]: tauMatches['lepFakesTau'] = True
+            if tauMatches['lepFakesTau'] is True:
+                classification = '_ZL_'
+                print 'found a ZL in Z->mu mu'
+            elif tauMatches['lepFakesTau'] is False:
+                classification = '_ZJ_'
+                print 'found a ZJ in Z->mu mu'
+
+    elif maxPairTypeAndIndex[1] == 'eleTau':
+        if chain.eT_isDecayZtauTau[i] :
+            if chain.eT_isRecoTau_matchedTo_GenTauFromZ[i] : tauMatches['genTau'] = True
+            if chain.eT_isRecoTau_matchedTo_GenElecFromTau[i] : tauMatches['genLep'] = True
+            if tauMatches['genTau'] is True and tauMatches['genLep'] is False:
+                classification = '_ZTT_'
+                print 'found a ZTT in Z->tau tau'
+            elif tauMatches['genTau'] is False and tauMatches['genLep'] is True:
+                classification = '_ZL_'
+                print 'found a ZL in Z->tau tau'
+            elif tauMatches['genTau'] is False and tauMatches['genLep'] is False:
+                classification = '_ZJ_'
+                print 'found a ZJ in Z->tau tau'
+            elif tauMatches['genTau'] is True and tauMatches['genLep'] is True:
+                classification = '_X_'
+                print 'found a X in Z->tau tau'
+        elif chain.eT_isDecayZeE[i] :
+            if chain.eT_isRecoTau_matchedTo_GenElecFromZ[i]: tauMatches['lepFakesTau'] = True
+            if tauMatches['lepFakesTau'] is True:
+                classification = '_ZL_'
+                print 'found a ZL in Z->e e'
+            elif tauMatches['lepFakesTau'] is False:
+                classification = '_ZJ_'
+                print 'found a ZJ in Z->e e'
+    return classification

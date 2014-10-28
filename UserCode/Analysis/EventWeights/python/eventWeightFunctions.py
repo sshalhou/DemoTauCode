@@ -44,6 +44,28 @@ def QCDShapeWeights(chain, maxPairTypeAndIndex, QCDShapeWeightsDownNominalUp_dic
         QCDShapeWeightsDownNominalUp_dict['Up'] = 1.0
     return
 
+################################
+# get the e->tau fake weight correction
+
+def getFakeZeeWeight(chain,maxPairTypeAndIndex):
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    if maxPairTypeAndIndex[1] == 'eleTau':
+      returnWeight = chain.eT_ZeeScaleFactor[i]
+    return returnWeight
+
+##############
+# stitching Z+jets weight
+
+def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
+  returnWeight = 1.0
+  i = maxPairTypeAndIndex[0]
+  if maxPairTypeAndIndex[1] == 'eleTau':
+    returnWeight = chain.eT_weightHEPNUP_DYJets[i]
+  elif maxPairTypeAndIndex[1] == 'muTau':
+    returnWeight = chain.muT_weightHEPNUP_DYJets[i]
+  return returnWeight
+
 
 ##############
 # pileUp weight
@@ -305,3 +327,61 @@ def signalSUSYweightBB(chain, maxPairTypeAndIndex, Verbose):
    if Verbose:
      print allWeights
    return returnWeight
+
+
+def getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*(3504.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
+    allWeights['TauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    # this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is hardcoded to ',  3504.0
+    return returnWeight
+
+
+def getWeightForRegularDY(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is read from tree as ',  chain.crossSection
+    return returnWeight
+
+def getWeightForVV(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is read from tree as ',  chain.crossSection
+    return returnWeight

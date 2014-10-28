@@ -151,6 +151,39 @@ def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram
 ####################################
 # treatment for tau ES variants
 # also fills nominal shapes
+# for samples that *also* use FINE BINNING
+
+def fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    SUFFIX = ''
+    SUFFIXFINE = 'fine_binning_'
+    if maxPairTypeAndIndex[1] =='eleTau' and maxPairTypeAndIndex[3]=='TauEsUp' :
+        SUFFIX = 'CMS_scale_t_etau_8TeVUp_'
+        SUFFIXFINE = 'CMS_scale_t_etau_8TeVUp_fine_binning_'
+    if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsUp' :
+        SUFFIX = 'CMS_scale_t_mutau_8TeVUp_'
+        SUFFIXFINE = 'CMS_scale_t_mutau_8TeVUp_fine_binning_'
+    if maxPairTypeAndIndex[1] =='eleTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
+        SUFFIX = 'CMS_scale_t_etau_8TeVDown_'
+        SUFFIXFINE = 'CMS_scale_t_etau_8TeVDown_fine_binning_'
+    if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
+        SUFFIX = 'CMS_scale_t_mutau_8TeVDown_'
+        SUFFIXFINE = 'CMS_scale_t_mutau_8TeVDown_fine_binning_'
+    tauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+maxPairTypeAndIndex[2]
+    FINEtauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXFINE+maxPairTypeAndIndex[2]
+    tauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+'inclusive'
+    FINEtauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXFINE+'inclusive'
+    #print tauEsVariantToFill, tauEsVariantToFillinc, FINEtauEsVariantToFill, FINEtauEsVariantToFillinc
+    histogram_dict[tauEsVariantToFillinc].Fill(Value,finalWt)
+    histogram_dict[FINEtauEsVariantToFillinc].Fill(Value,finalWt)
+    if maxPairTypeAndIndex[2] != 'Reject':
+         histogram_dict[tauEsVariantToFill].Fill(Value,finalWt)
+         histogram_dict[FINEtauEsVariantToFill].Fill(Value,finalWt)
+    return
+
+
+####################################
+# treatment for tau ES variants
+# also fills nominal shapes
 
 def fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
     SUFFIX = ''
@@ -207,6 +240,46 @@ def fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,his
 # Fill JEC histogram variants       #
 # based off of TauEsNominal tree
 # note here event only categorization changes due to migration
+# for samples that *also* need fine binned variants
+
+def fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    SUFFIXJECUP = ''
+    SUFFIXJECDOWN = ''
+    fineSUFFIXJECUP = ''
+    fineSUFFIXJECDOWN = ''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        SUFFIXJECUP = 'CMS_scale_jDown_'
+        SUFFIXJECDOWN = 'CMS_scale_jUp_'
+        fineSUFFIXJECUP = 'CMS_scale_jDown_fine_binning_'
+        fineSUFFIXJECDOWN = 'CMS_scale_jUp_fine_binning_'
+    if len(SUFFIXJECUP)>0 and len(SUFFIXJECDOWN)>0:
+        tauJECVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECUP+maxPairTypeAndIndex[5]
+        tauJECVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECDOWN+maxPairTypeAndIndex[4]
+        tauJECVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECUP+'inclusive'
+        tauJECVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECDOWN+'inclusive'
+
+        FINEtauJECVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECUP+maxPairTypeAndIndex[5]
+        FINEtauJECVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECDOWN+maxPairTypeAndIndex[4]
+        FINEtauJECVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECUP+'inclusive'
+        FINEtauJECVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECDOWN+'inclusive'
+
+        histogram_dict[FINEtauJECVariantToFillUpinc].Fill(Value,finalWt)
+        histogram_dict[FINEtauJECVariantToFillDowninc].Fill(Value,finalWt)
+        histogram_dict[tauJECVariantToFillUpinc].Fill(Value,finalWt)
+        histogram_dict[tauJECVariantToFillDowninc].Fill(Value,finalWt)
+        if maxPairTypeAndIndex[5] != 'Reject':
+            histogram_dict[tauJECVariantToFillUp].Fill(Value,finalWt)
+            histogram_dict[FINEtauJECVariantToFillUp].Fill(Value,finalWt)
+        if maxPairTypeAndIndex[4] != 'Reject':
+            histogram_dict[tauJECVariantToFillDown].Fill(Value,finalWt)
+            histogram_dict[FINEtauJECVariantToFillDown].Fill(Value,finalWt)
+    return
+
+
+#####################################
+# Fill JEC histogram variants       #
+# based off of TauEsNominal tree
+# note here event only categorization changes due to migration
 def fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
     SUFFIXJECUP = ''
     SUFFIXJECDOWN = ''
@@ -247,4 +320,14 @@ def FillObsDATA(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,Value):
 
 def FillQCDShapes(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,Value):
     fillQCDShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,Value)
+    return
+
+def Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    return
+
+def Fill_VV(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
