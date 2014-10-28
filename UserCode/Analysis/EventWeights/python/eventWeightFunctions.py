@@ -16,6 +16,35 @@ def divisionHelp(num, den):
     returnVal = 1.0
   return returnVal
 
+
+####################
+# QCD jet->tau weights
+# and systematic variations
+# down = 1.0
+# nominal = apply weight
+# up = apply weight*weight
+# xT_etaDepQCDShapeTemplateCorrection
+
+
+def QCDShapeWeights(chain, maxPairTypeAndIndex, QCDShapeWeightsDownNominalUp_dict):
+    i = maxPairTypeAndIndex[0]
+    if maxPairTypeAndIndex[1] == 'eleTau':
+        value = chain.eT_etaDepQCDShapeTemplateCorrection[i]
+        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
+        QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
+        QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
+    elif maxPairTypeAndIndex[1] == 'muTau':
+        value = chain.muT_etaDepQCDShapeTemplateCorrection[i]
+        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
+        QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
+        QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
+    else:
+        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
+        QCDShapeWeightsDownNominalUp_dict['Nominal'] = 1.0
+        QCDShapeWeightsDownNominalUp_dict['Up'] = 1.0
+    return
+
+
 ##############
 # pileUp weight
 
