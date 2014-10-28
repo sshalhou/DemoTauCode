@@ -117,7 +117,16 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_ggH900_'
     elif(sampleName=='/SUSYGluGluToHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_ggH1000_'
+    elif(sampleName=='/TauPlusX/Run2012A-22Jan2013-v1/AOD'):
+        SAMPLE_ADD = '_data_obs_'
+    elif(sampleName=='/TauPlusX/Run2012B-22Jan2013-v1/AOD'):
+        SAMPLE_ADD = '_data_obs_'
+    elif(sampleName=='/TauPlusX/Run2012C-22Jan2013-v1/AOD'):
+        SAMPLE_ADD = '_data_obs_'
+    elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
+        SAMPLE_ADD = '_data_obs_'
     return SAMPLE_ADD
+
 
 
 def muTauClassification(chain, index):

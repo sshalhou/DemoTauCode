@@ -55,3 +55,17 @@ def passesSUSYBBExtraSelectionMuTau(chain,index):
     else:
         return True
     return False
+
+def passesSUSYGluGluExtraSelectionETau(chain,index):
+    if chain.eT_passSignalGeneratorMass70to130Cut[index] is False:
+        return False
+    else:
+        return True
+    return False
+
+def passesSUSYGluGluExtraSelectionMuTau(chain,index):
+    if chain.muT_passSignalGeneratorMass70to130Cut[index] is False:
+        return False
+    else:
+        return True
+    return False

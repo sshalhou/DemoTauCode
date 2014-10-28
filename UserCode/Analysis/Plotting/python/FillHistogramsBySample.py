@@ -25,6 +25,55 @@ from array import array
 # bbH80_CMS_scale_jDown ---> JEC down
 # bbH80_CMS_scale_jUp ----> JEC UP
 
+##################
+# for ggHSusy have all the bbSUSY
+# shapes + the higgs pt reweight variants
+
+# sampleTitle.append('ggH80_CMS_htt_higgsPtReweight_8TeVDown')
+# sampleTitle.append('ggH80_CMS_htt_higgsPtReweight_8TeVUp')
+# sampleTitle.append('ggH80_CMS_htt_higgsPtReweight_scale_8TeVDown')
+# sampleTitle.append('ggH80_CMS_htt_higgsPtReweight_scale_8TeVUp')
+
+############################
+# higgs pt reweight variants
+# for ggHSusy only
+# based on TauEsNominal Only
+
+def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value):
+    SUFFIXTANBUP = ''
+    SUFFIXTANBDOWN = ''
+    SUFFIXSCALEUP = ''
+    SUFFIXSCALEDOWN = ''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        SUFFIXTANBUP = 'CMS_htt_higgsPtReweight_8TeVUp_'
+        SUFFIXTANBDOWN = 'CMS_htt_higgsPtReweight_8TeVDown_'
+        SUFFIXSCALEUP = 'CMS_htt_higgsPtReweight_scale_8TeVUp_'
+        SUFFIXSCALEDOWN = 'CMS_htt_higgsPtReweight_scale_8TeVDown_'
+    if len(SUFFIXTANBUP)>0 and len(SUFFIXTANBDOWN)>0 and len(SUFFIXSCALEUP)>0 and len(SUFFIXSCALEDOWN)>0:
+        tauTANbetaVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXTANBUP+maxPairTypeAndIndex[2]
+        tauTANbetaVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXTANBUP+'inclusive'
+
+        tauTANbetaVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXTANBDOWN+maxPairTypeAndIndex[2]
+        tauTANbetaVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXTANBDOWN+'inclusive'
+
+        tauScaleVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEUP+maxPairTypeAndIndex[2]
+        tauScaleVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEUP+'inclusive'
+
+        tauScaleVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+maxPairTypeAndIndex[2]
+        tauScaleVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+'inclusive'
+
+        histogram_dict[tauTANbetaVariantToFillUpinc].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaUp'])
+        histogram_dict[tauTANbetaVariantToFillDowninc].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaDown'])
+        histogram_dict[tauScaleVariantToFillUpinc].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleUp'])
+        histogram_dict[tauScaleVariantToFillDowninc].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleDown'])
+
+        if maxPairTypeAndIndex[2] != 'Reject':
+            histogram_dict[tauTANbetaVariantToFillUp].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaUp'])
+            histogram_dict[tauTANbetaVariantToFillDown].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaDown'])
+            histogram_dict[tauScaleVariantToFillUp].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleUp'])
+            histogram_dict[tauScaleVariantToFillDown].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleDown'])
+    return;
+
 
 ####################################
 # treatment for tau ES variants
@@ -110,4 +159,15 @@ def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_d
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
+    return
+
+def FillSUSYGluGlu(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,higgsPtWeightSYSdict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
+    fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value)
+    return
+
+def FillObsDATA(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,1.0,histogram_dict,Value)
     return

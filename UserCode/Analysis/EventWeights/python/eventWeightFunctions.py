@@ -55,16 +55,18 @@ def highPtTauSYS(chain, maxPairTypeAndIndex):
 # higgsPt weight systematic
 # for ggH susy samples only
 
-def higgsPtWeightSYS(chain, maxPairTypeAndIndex,):
+def higgsPtWeightSYS(chain, maxPairTypeAndIndex,higgsPtWeightSYSdict):
   i = maxPairTypeAndIndex[0]
   if maxPairTypeAndIndex[1] == 'eleTau':
-    Tvec = TLorentzVector(0,0,0,0)
-    Tvec.SetXYZT(chain.eT_tau_genP4_x[i], chain.eT_tau_genP4_y[i], chain.eT_tau_genP4_z[i],chain.eT_tau_genP4_t[i])
-    tauPt = Tvec.Pt()
+    higgsPtWeightSYSdict['tanBetaUp'] = chain.eT_upPOWHEGmhmod[i]
+    higgsPtWeightSYSdict['tanBetaDown'] = chain.eT_downPOWHEGmhmod[i]
+    higgsPtWeightSYSdict['scaleUp'] = chain.eT_upPOWHEGscale[i]
+    higgsPtWeightSYSdict['scaleDown'] = chain.eT_downPOWHEGscale[i]
   elif maxPairTypeAndIndex[1] == 'muTau':
-    Tvec = TLorentzVector(0,0,0,0)
-    Tvec.SetXYZT(chain.muT_tau_genP4_x[i], chain.muT_tau_genP4_y[i], chain.muT_tau_genP4_z[i],chain.muT_tau_genP4_t[i])
-    tauPt = Tvec.Pt()
+    higgsPtWeightSYSdict['tanBetaUp'] = chain.muT_upPOWHEGmhmod[i]
+    higgsPtWeightSYSdict['tanBetaDown'] = chain.muT_downPOWHEGmhmod[i]
+    higgsPtWeightSYSdict['scaleUp'] = chain.muT_upPOWHEGscale[i]
+    higgsPtWeightSYSdict['scaleDown'] = chain.muT_downPOWHEGscale[i]
   return
 
 
