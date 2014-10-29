@@ -17,6 +17,49 @@ def divisionHelp(num, den):
   return returnVal
 
 
+
+########################
+# cross-section weights for W+jets
+# need to be treated special-like because
+# we combine multiple datasets of the same process
+
+def getWPlusJetsCrossSectionWeigt(chain):
+    numEvents = 1.0
+    sampleName = chain.SampleName
+    WJetsSampleA = '/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'
+    WJetsSampleB = '/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+
+    W1JetsSampleA = '/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+    W1JetsSampleB = '/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'
+
+    W2JetsSampleA = '/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+    W2JetsSampleB = '/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'
+
+    W3JetsSampleA = '/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+    W3JetsSampleB = '/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'
+
+    W4JetsSample  = '/W4JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'
+
+
+    if sampleName==WJetsSampleA or sampleName==WJetsSampleB:
+        numEvents = (57709905)*CrabJobEfficiency(WJetsSampleA)+(18393090)*CrabJobEfficiency(WJetsSampleB)
+    elif sampleName==W1JetsSampleA or sampleName==W1JetsSampleB:
+        numEvents = (23141598)*CrabJobEfficiency(W1JetsSampleA)+(29784800)*CrabJobEfficiency(W1JetsSampleB)
+    elif sampleName==W2JetsSampleA or sampleName==W2JetsSampleB:
+        numEvents = (34044921)*CrabJobEfficiency(W2JetsSampleA)+(30693853)*CrabJobEfficiency(W2JetsSampleB)
+    elif sampleName==W3JetsSampleA or sampleName==W3JetsSampleB:
+        numEvents = (15539503)*CrabJobEfficiency(W3JetsSampleA)+(15241144)*CrabJobEfficiency(W3JetsSampleB)
+    elif sampleName==W4JetsSample:
+        numEvents = (13382803)*CrabJobEfficiency(W4JetsSample)
+
+    #print 'single sample nevents = ',  chain.numberEvents, 'combined = ',  numEvents
+    weight = 1000.0*19.7*chain.crossSection/(numEvents)
+    return weight
+
+
+
+
+
 ####################
 # QCD jet->tau weights
 # and systematic variations
@@ -52,6 +95,61 @@ def getFakeZeeWeight(chain,maxPairTypeAndIndex):
     i = maxPairTypeAndIndex[0]
     if maxPairTypeAndIndex[1] == 'eleTau':
       returnWeight = chain.eT_ZeeScaleFactor[i]
+    return returnWeight
+
+####################################
+# get nominal jet->tau fake weights
+
+def getjetTauFakeWt(chain,maxPairTypeAndIndex):
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    if maxPairTypeAndIndex[1] == 'eleTau':
+      returnWeight = chain.eT_TauFakeCorrection[i]
+    elif maxPairTypeAndIndex[1] == 'muTau':
+      returnWeight = chain.muT_TauFakeCorrection[i]
+    return returnWeight
+
+###############
+# get nominal top pt weights
+
+def getTopPtWeight(chain,maxPairTypeAndIndex):
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    if maxPairTypeAndIndex[1] == 'eleTau':
+      returnWeight = chain.eT_TTbarPtWeight[i]
+    elif maxPairTypeAndIndex[1] == 'muTau':
+      returnWeight = chain.muT_TTbarPtWeight[i]
+    return returnWeight
+
+
+##############
+# stitching W+jets weight
+
+def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    # for v19 samples access njet from samplename directly
+
+    if 'V19' not in str(chain.SampleName) :
+        #print 'NOT ', chain.SampleName
+        if maxPairTypeAndIndex[1] == 'eleTau':
+            returnWeight = chain.eT_weightHEPNUP_WJets[i]
+        elif maxPairTypeAndIndex[1] == 'muTau':
+            returnWeight = chain.muT_weightHEPNUP_WJets[i]
+    elif 'V19' in str(chain.SampleName) :
+        #print 'YES ', chain.SampleName
+        njet = 100
+        if 'W1Jets' in chain.SampleName : njet = 1
+        elif 'W2Jets' in chain.SampleName : njet = 2
+        elif 'W3Jets' in chain.SampleName : njet = 3
+        elif 'W4Jets' in chain.SampleName : njet = 4
+
+        if njet==0:      returnWeight = 0.492871535
+        elif njet==1: returnWeight =  0.100267473
+        elif njet==2: returnWeight =  0.031238278
+        elif njet==3: returnWeight =  0.019961315
+        elif njet>=4: returnWeight =  0.018980202
+
     return returnWeight
 
 ##############
@@ -385,3 +483,53 @@ def getWeightForVV(chain,maxPairTypeAndIndex,Verbose):
       print allWeights
       print 'crossSection is read from tree as ',  chain.crossSection
     return returnWeight
+
+def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if(allWeights['topPtreweight']!=0):
+        wt_dict['topPtDown'] = returnWeight/allWeights['topPtreweight']
+        wt_dict['topPtNominal'] = returnWeight
+        wt_dict['topPtUp'] = returnWeight*allWeights['topPtreweight']
+    if Verbose:
+      print allWeights
+      print 'final wts under topPt variation : ', wt_dict
+      print 'crossSection is read from tree as ',  chain.crossSection
+    return
+
+#wt_dict['jetTauFakeDown'] = 1.0
+#wt_dict['jetTauFakeNominal'] = 1.0
+#wt_dict['jetTauFakeUp'] = 1.0
+def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = getWPlusJetsCrossSectionWeigt(chain)
+    allWeights['StitchingWjets'] = getStitchingWjetsWt(chain, maxPairTypeAndIndex)
+    allWeights['jetTauFakeWt'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if(allWeights['jetTauFakeWt']!=0):
+        wt_dict['jetTauFakeDown'] = returnWeight/allWeights['jetTauFakeWt']
+        wt_dict['jetTauFakeNominal'] = returnWeight
+        wt_dict['jetTauFakeUp'] = returnWeight*allWeights['jetTauFakeWt']
+    if Verbose:
+      print allWeights
+      print 'final wts under jet->tau fake variation : ', wt_dict
+      print 'crossSection is read from tree as ',  chain.crossSection
+    return
