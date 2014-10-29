@@ -180,6 +180,12 @@ for entry in range(0,maxEntries):
 				eventVariables = {}
 				fillVariables(chain,eventVariables,maxPairTypeAndIndex,Verbose)
 				finalWt = signalSUSYweightGluGlu(chain, maxPairTypeAndIndex, Verbose)
+				###############
+				# the above weight contains nominal pt re-weigh
+				# also pass it sep. so it can be stripped off
+
+				nominalPtReweight = higgsPtReWeight(chain, maxPairTypeAndIndex, 'USENEW', 'NOMINAL')
+
 				highPtTauWtSYS =  highPtTauSYS(chain, maxPairTypeAndIndex)
 				higgsPtWeightSYSdict = {}
 				higgsPtWeightSYS(chain, maxPairTypeAndIndex,higgsPtWeightSYSdict)
@@ -191,7 +197,7 @@ for entry in range(0,maxEntries):
 					finalWt,highPtTauWtSYS,
 					histogram_dict,
 					higgsPtWeightSYSdict,
-					eventVariables['SVFitMass'])
+					eventVariables['SVFitMass'],nominalPtReweight)
 
 
 ######################

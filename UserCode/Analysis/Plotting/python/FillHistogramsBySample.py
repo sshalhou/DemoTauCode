@@ -279,13 +279,13 @@ def fillHiggsPtReweightVariantsSM125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,hist
 # for ggHSusy only
 # based on TauEsNominal Only
 
-def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value):
+def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value,nominalPtReweight):
     #################
     # the weight passed to this function
     # should already contain the nominal weight
     # so strip it off
 
-    nominal = higgsPtReWeight(chain, maxPairTypeAndIndex, 'USENEW', 'NOMINAL')
+    nominal = nominalPtReweight
     if nominal != 0:
         nonPtreweighted = finalWt/nominal
 
@@ -515,11 +515,11 @@ def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_d
     fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
     return
 
-def FillSUSYGluGlu(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,higgsPtWeightSYSdict,Value):
+def FillSUSYGluGlu(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,higgsPtWeightSYSdict,Value,nominalPtReweight):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
-    fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value)
+    fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value,nominalPtReweight)
     return
 
 def FillObsDATA(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,Value):
