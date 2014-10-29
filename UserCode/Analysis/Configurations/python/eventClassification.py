@@ -226,6 +226,12 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_W3JetsToLNu_'
     elif(sampleName=='/W4JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_W4JetsToLNu_'
+    elif(sampleName=='/VBF_HToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_qqH_SM125_'
+    elif(sampleName=='/WH_ZH_TTH_HToTauTau_M-125_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_VH_SM125_'
+    elif(sampleName=='/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+        SAMPLE_ADD = '_ggH_SM125_'
     return SAMPLE_ADD
 
 

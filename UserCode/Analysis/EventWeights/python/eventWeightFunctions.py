@@ -219,6 +219,42 @@ def higgsPtWeightSYS(chain, maxPairTypeAndIndex,higgsPtWeightSYSdict):
   return
 
 
+##############
+# higgs pt weight for SM125 GluGlu
+
+def SM125higgsPtWeightSYS(chain, maxPairTypeAndIndex,higgsPtWeightSYSdict):
+    higgsPtWeightSYSdict['Up'] = 1.0
+    higgsPtWeightSYSdict['Down'] = 1.0
+    higgsPtWeightSYSdict['Nominal'] = 1.0
+    i = maxPairTypeAndIndex[0]
+    genBosonPt = 125.0
+    Tvec = TLorentzVector(0,0,0,0)
+    if maxPairTypeAndIndex[1] == 'eleTau':
+        Tvec.SetXYZT(chain.eT_genBosonP4_x[i], chain.eT_genBosonP4_y[i], chain.eT_genBosonP4_z[i],chain.eT_genBosonP4_t[i])
+        genBosonPt = Tvec.Pt()
+
+    elif maxPairTypeAndIndex[1] == 'muTau':
+        Tvec.SetXYZT(chain.muT_genBosonP4_x[i], chain.muT_genBosonP4_y[i], chain.muT_genBosonP4_z[i],chain.muT_genBosonP4_t[i])
+        genBosonPt = Tvec.Pt()
+
+    if genBosonPt > 0.0 and math.isnan(genBosonPt) is False:
+        histFile = TFile("SMGluGluHiggsPtRewight/HRes_weight_pTH_mH125_8TeV.root","READ")
+
+        NominalHist = TH1F(histFile.Get("Nominal"))
+        TheBinNominal = NominalHist.GetXaxis().FindBin(genBosonPt)
+
+        UpHist = TH1F(histFile.Get("Up"))
+        TheBinUp = UpHist.GetXaxis().FindBin(genBosonPt)
+
+        DownHist = TH1F(histFile.Get("Down"))
+        TheBinDown = DownHist.GetXaxis().FindBin(genBosonPt)
+
+        higgsPtWeightSYSdict['Up'] = UpHist.GetBinContent(TheBinUp)
+        higgsPtWeightSYSdict['Down'] = DownHist.GetBinContent(TheBinDown)
+        higgsPtWeightSYSdict['Nominal'] = NominalHist.GetBinContent(TheBinNominal)
+    return
+
+
 ##################################
 # trigger weights for 'regular MC'
 
@@ -397,6 +433,8 @@ def signalSUSYweightGluGlu(chain, maxPairTypeAndIndex, Verbose):
   allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
   allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
   allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+  # because the next line is here, when taking higgs pt up and down need to divide by the
+  # nominal scale factor 1st
   allWeights['higgsPtNEW'] = higgsPtReWeight(chain, maxPairTypeAndIndex, 'USENEW', 'NOMINAL')
   allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
   allWeights['nevents'] = 1000.0*19.7/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
@@ -533,3 +571,22 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
       print 'final wts under jet->tau fake variation : ', wt_dict
       print 'crossSection is read from tree as ',  chain.crossSection
     return
+
+
+def getWeightFor_XSM125(chain, maxPairTypeAndIndex, Verbose, CROSSXBR):
+    # need the CROSSXBR argument because I forgot to fill these in when
+    # creating the xml file
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*CROSSXBR/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    for key, value in allWeights.iteritems():
+        returnWeight*=value
+    if Verbose:
+        print allWeights
+    return returnWeight

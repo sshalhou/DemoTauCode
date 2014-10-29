@@ -242,8 +242,36 @@ def fillTopPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_d
         if maxPairTypeAndIndex[2] != 'Reject':
             histogram_dict[VariantToFillUp].Fill(Value,wt_dict['topPtUp'])
             histogram_dict[VariantToFillDown].Fill(Value,wt_dict['topPtDown'])
-    return;
+    return
 
+
+######################
+# higgs pt weight variants
+# for ggH sm 125
+# based on TES nominal only
+# must take the non-higgs pt
+# weighted value as finalWt
+
+def fillHiggsPtReweightVariantsSM125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value):
+    SUFFIXSCALEUP = ''
+    SUFFIXSCALEDOWN = ''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        SUFFIXSCALEUP = 'CMS_htt_higgsPtReweightSM_8TeVUp_'
+        SUFFIXSCALEDOWN = 'CMS_htt_higgsPtReweightSM_8TeVDown_'
+    if len(SUFFIXSCALEUP)>0 and len(SUFFIXSCALEDOWN)>0:
+        tauScaleVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEUP+maxPairTypeAndIndex[2]
+        tauScaleVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEUP+'inclusive'
+
+        tauScaleVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+maxPairTypeAndIndex[2]
+        tauScaleVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+'inclusive'
+
+        histogram_dict[tauScaleVariantToFillUpinc].Fill(Value,finalWt*higgsPtWeightSYSdict['Up'])
+        histogram_dict[tauScaleVariantToFillDowninc].Fill(Value,finalWt*higgsPtWeightSYSdict['Down'])
+
+        if maxPairTypeAndIndex[2] != 'Reject':
+            histogram_dict[tauScaleVariantToFillUp].Fill(Value,finalWt*higgsPtWeightSYSdict['Up'])
+            histogram_dict[tauScaleVariantToFillDown].Fill(Value,finalWt*higgsPtWeightSYSdict['Down'])
+    return
 
 
 ############################
@@ -252,6 +280,15 @@ def fillTopPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_d
 # based on TauEsNominal Only
 
 def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value):
+    #################
+    # the weight passed to this function
+    # should already contain the nominal weight
+    # so strip it off
+
+    nominal = higgsPtReWeight(chain, maxPairTypeAndIndex, 'USENEW', 'NOMINAL')
+    if nominal != 0:
+        nonPtreweighted = finalWt/nominal
+
     SUFFIXTANBUP = ''
     SUFFIXTANBDOWN = ''
     SUFFIXSCALEUP = ''
@@ -274,17 +311,17 @@ def fillHiggsPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram
         tauScaleVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+maxPairTypeAndIndex[2]
         tauScaleVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXSCALEDOWN+'inclusive'
 
-        histogram_dict[tauTANbetaVariantToFillUpinc].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaUp'])
-        histogram_dict[tauTANbetaVariantToFillDowninc].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaDown'])
-        histogram_dict[tauScaleVariantToFillUpinc].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleUp'])
-        histogram_dict[tauScaleVariantToFillDowninc].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleDown'])
+        histogram_dict[tauTANbetaVariantToFillUpinc].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['tanBetaUp'])
+        histogram_dict[tauTANbetaVariantToFillDowninc].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['tanBetaDown'])
+        histogram_dict[tauScaleVariantToFillUpinc].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['scaleUp'])
+        histogram_dict[tauScaleVariantToFillDowninc].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['scaleDown'])
 
         if maxPairTypeAndIndex[2] != 'Reject':
-            histogram_dict[tauTANbetaVariantToFillUp].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaUp'])
-            histogram_dict[tauTANbetaVariantToFillDown].Fill(Value,finalWt*higgsPtWeightSYSdict['tanBetaDown'])
-            histogram_dict[tauScaleVariantToFillUp].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleUp'])
-            histogram_dict[tauScaleVariantToFillDown].Fill(Value,finalWt*higgsPtWeightSYSdict['scaleDown'])
-    return;
+            histogram_dict[tauTANbetaVariantToFillUp].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['tanBetaUp'])
+            histogram_dict[tauTANbetaVariantToFillDown].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['tanBetaDown'])
+            histogram_dict[tauScaleVariantToFillUp].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['scaleUp'])
+            histogram_dict[tauScaleVariantToFillDown].Fill(Value,nonPtreweighted*higgsPtWeightSYSdict['scaleDown'])
+    return
 
 
 ####################################
@@ -517,4 +554,25 @@ def Fill_WjetsMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
     fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
     fillJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
+    return
+
+def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
+    return
+
+def FILLsm_QQHorVH(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
+    return
+
+def FILLsm_GluGluH125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,higgsPtWeightSYSdict,histogram_dict,Value):
+    nominalPtRewighted = finalWt*higgsPtWeightSYSdict['Nominal']
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,histogram_dict,Value)
+    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,histogram_dict,Value)
+    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,highPtTauWtSYS,histogram_dict,Value)
+    # make sure we pass the non-pt reweighted value here
+    fillHiggsPtReweightVariantsSM125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value)
     return
