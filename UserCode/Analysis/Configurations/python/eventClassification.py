@@ -283,6 +283,37 @@ def eTauClassificationJECUP(chain, index):
   return btagAndTauPtCategory(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index])
 
 
+########
+# jec variants under loose b-tag
+
+def muTauClassificationJECDOWN_looseBtag(chain, index):
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory_forQCD(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index],chain.muT_nbjetsLOOSEDOWN[index])
+
+
+def eTauClassificationJECDOWN_looseBtag(chain, index):
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory_forQCD(chain.eT_nbjetsDOWN[index],Tvec.Pt(),chain.eT_njetsDOWN[index],chain.eT_nbjetsLOOSEDOWN[index])
+
+
+
+
+def muTauClassificationJECUP_looseBtag(chain, index):
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory_forQCD(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index],chain.muT_nbjetsLOOSEUP[index])
+
+
+def eTauClassificationJECUP_looseBtag(chain, index):
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory_forQCD(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index],chain.eT_nbjetsLOOSEUP[index])
+
+
+
+
 ####################
 # classiffy Z->XX decays
 # based on generator - recoTau matching
