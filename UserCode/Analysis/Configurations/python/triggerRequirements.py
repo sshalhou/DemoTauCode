@@ -20,6 +20,23 @@ def embeddedZTauTauTrigForMuTau(chain, index, Verbose):
     returnVal = True
   return returnVal
 
+def embeddedTTbarTrigForETau(chain, index, Verbose):
+  returnVal = False
+  if Verbose:
+    print 'checking passEmbeddedTrigger returns ', chain.eT_passEmbeddedTrigger[index]
+  if chain.eT_passEmbeddedTrigger[index] is True:
+    returnVal = True
+  return returnVal
+
+def embeddedTTbarTrigForMuTau(chain, index, Verbose):
+  returnVal = False
+  if Verbose:
+    print 'checking passEmbeddedTrigger returns ', chain.muT_passEmbeddedTrigger[index]
+  if chain.muT_passEmbeddedTrigger[index] is True:
+    returnVal = True
+  return returnVal
+
+
 def muonTrigger(chain, index, useNewTriggers):
   returnVal = False
   if chain.muT_muon_has_HltMatchMu17[index] is True:

@@ -269,6 +269,22 @@ def mcTriggerWeight(chain, maxPairTypeAndIndex):
     returnWeight *= divisionHelp(chain.muT_HadronicTauDataTrigEffAntiMuMed[i], chain.muT_HadronicTauMcTrigEffAntiMuMed[i])
   return returnWeight
 
+##################################
+# trigger weights for 'embedded samples'
+# just return the data weights to emulate the
+# usual triggers
+
+def embeddedTriggerEmulationWeight(chain, maxPairTypeAndIndex):
+  returnWeight = 1.0
+  i = maxPairTypeAndIndex[0]
+  if maxPairTypeAndIndex[1] == 'eleTau':
+    returnWeight *= chain.eT_EffDataELE20andELE22[i]
+    returnWeight *= chain.eT_HadronicTauDataTrigEffAntiEMed[i]
+  elif maxPairTypeAndIndex[1] == 'muTau':
+    returnWeight *= chain.muT_EffDataISOMU17andISOMU18[i]
+    returnWeight *= chain.muT_HadronicTauDataTrigEffAntiMuMed[i]
+  return returnWeight
+
 
 ################################
 # lepton ID eff weights
@@ -572,6 +588,38 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
       print 'crossSection is read from tree as ',  chain.crossSection
     return
 
+def getWeightEmbeddedZTT(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['embeddingWeight'] = 1.0 # to be added
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+        returnWeight*=value
+    if Verbose:
+        print allWeights
+    return returnWeight
+
+def getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['embeddingWeight'] = 1.0 # to be added
+    allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
+    # use the number of events of the parent MC sample
+    # use cross-section =
+    allWeights['nevents'] = 1000.0*19.7*(5.8869)/(12011428*CrabJobEfficiency(chain.SampleName))
+    allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+        returnWeight*=value
+    if Verbose:
+        print allWeights
+    return returnWeight
 
 def getWeightFor_XSM125(chain, maxPairTypeAndIndex, Verbose, CROSSXBR):
     # need the CROSSXBR argument because I forgot to fill these in when

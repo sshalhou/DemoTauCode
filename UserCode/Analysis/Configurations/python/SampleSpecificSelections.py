@@ -46,6 +46,71 @@ def passesDefaultSelectionMuTau(chain,index,UseNewTriggers,Verbose):
     return passesCutsMuTau
 
 
+###################
+# passes embedded ZTauTau selection
+
+
+def passesEmbeddedZTauTauSelectionETau(chain,index,UseNewTriggers,Verbose):
+    passesCutsETau = True
+    if electronID(chain,index,Verbose) is False:
+        passesCutsETau = False
+    if tauID_eTau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if pairCutsETau(chain, index,Verbose) is False:
+        passesCutsETau = False
+    if embeddedZTauTauTrigForETau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if chain.eT_correctedSVFitMass[index] < 50:
+        passesCutsETau = False
+    return passesCutsETau
+
+def passesEmbeddedZTauTauSelectionMuTau(chain,index,UseNewTriggers,Verbose):
+    passesCutsMuTau = True
+    if muonID(chain,index,Verbose) is False:
+        passesCutsMuTau = False
+    if tauID_muTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if pairCutsMuTau(chain, index,Verbose) is False:
+        passesCutsMuTau = False
+    if embeddedZTauTauTrigForMuTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if chain.muT_correctedSVFitMass[index] < 50:
+        passesCutsMuTau = False
+    return passesCutsMuTau
+
+###################
+# passes embedded TTbar selection
+
+
+def passesEmbeddedTTbarSelectionETau(chain,index,UseNewTriggers,Verbose):
+    passesCutsETau = True
+    if electronID(chain,index,Verbose) is False:
+        passesCutsETau = False
+    if tauID_eTau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if pairCutsETau(chain, index,Verbose) is False:
+        passesCutsETau = False
+    if embeddedTTbarTrigForETau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if chain.eT_correctedSVFitMass[index] < 50:
+        passesCutsETau = False
+    return passesCutsETau
+
+def passesEmbeddedTTbarSelectionMuTau(chain,index,UseNewTriggers,Verbose):
+    passesCutsMuTau = True
+    if muonID(chain,index,Verbose) is False:
+        passesCutsMuTau = False
+    if tauID_muTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if pairCutsMuTau(chain, index,Verbose) is False:
+        passesCutsMuTau = False
+    if embeddedTTbarTrigForMuTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if chain.muT_correctedSVFitMass[index] < 50:
+        passesCutsMuTau = False
+    return passesCutsMuTau
+
+
 #################
 # high mT (>70)  selection
 

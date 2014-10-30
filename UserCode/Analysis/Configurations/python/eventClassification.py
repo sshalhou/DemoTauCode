@@ -232,7 +232,34 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_VH_SM125_'
     elif(sampleName=='/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_ggH_SM125_'
+    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedZTT_'
+    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedTTbar_'
+    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+        SAMPLE_ADD = '_embeddedTTbar_'
     return SAMPLE_ADD
+
+
+
+
+
+
+
 
 
 
