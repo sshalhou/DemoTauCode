@@ -23,7 +23,7 @@ def divisionHelp(num, den):
 # need to be treated special-like because
 # we combine multiple datasets of the same process
 
-def getWPlusJetsCrossSectionWeigt(chain):
+def getWPlusJetsCrossSectionWeight(chain):
     numEvents = 1.0
     sampleName = chain.SampleName
     WJetsSampleA = '/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'
@@ -573,7 +573,7 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['nevents'] = getWPlusJetsCrossSectionWeigt(chain)
+    allWeights['nevents'] = getWPlusJetsCrossSectionWeight(chain)
     allWeights['StitchingWjets'] = getStitchingWjetsWt(chain, maxPairTypeAndIndex)
     allWeights['jetTauFakeWt'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
