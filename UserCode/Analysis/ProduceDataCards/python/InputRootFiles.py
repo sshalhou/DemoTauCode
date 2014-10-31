@@ -38,6 +38,16 @@ FOR_QCD_NORM = []
 FOR_ZTT_NORM = []
 
 ###############
+# for embedded ttbar subtraction
+# note these should have tt events
+# filling the _ZTT_ templates
+
+FOR_TTEMBEDDED_SUB = []
+
+
+
+
+###############
 # for Wjets normalization
 
 FOR_W_NORM = []
@@ -90,11 +100,15 @@ FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp2_davis_htt_mssm_muTau.root')
 FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp3_davis_htt_mssm_eleTau.root')
 FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp3_davis_htt_mssm_muTau.root')
 
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p1_davis_htt_mssm_eleTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p1_davis_htt_mssm_muTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p2_davis_htt_mssm_eleTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p2_davis_htt_mssm_muTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p3_davis_htt_mssm_eleTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p3_davis_htt_mssm_muTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p4_davis_htt_mssm_eleTau.root')
-FOR_ZTT_NORM.append('./1stTry/1stTry/normZTT_p4_davis_htt_mssm_muTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p1_davis_htt_mssm_eleTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p1_davis_htt_mssm_muTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p2_davis_htt_mssm_eleTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p2_davis_htt_mssm_muTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p3_davis_htt_mssm_eleTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p3_davis_htt_mssm_muTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p4_davis_htt_mssm_eleTau.root')
+FOR_ZTT_NORM.append('./1stTry/normZTT_p4_davis_htt_mssm_muTau.root')
+
+
+FOR_TTEMBEDDED_SUB.append('./1stTry/embeddedTTbar_davis_htt_mssm_eleTau.root')
+FOR_TTEMBEDDED_SUB.append('./1stTry/embeddedTTbar_davis_htt_mssm_muTau.root')
