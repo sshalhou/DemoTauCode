@@ -86,6 +86,142 @@ for chan in range(0,len(CHANNELS)):
                     #print GOTHIST.GetTitle(),GOTHIST.GetSumOfWeights()
 
 
+
+    print '***************************************************************'
+    print '*     begin W+jets normaization determination for', FILENAME
+    print '***************************************************************'
+
+    print '* 1st determine from standard MC, the probability for a W+jets event '
+    print '* to enter our sub-categories '
+
+    WPROBS = {}
+    LOW_MT_W_COUNT = 0.0
+    HIGH_MT_W_COUNT = 0.0
+
+
+    for direc in range(0,len(DIRLIST)):
+        histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+        incname = CHANNELS[chan]+"_"+"inclusive"+"/W"
+        LOW_MT_W_COUNT = HISTOGRAM_DICTIONARY[incname].GetSumOfWeights()
+        print histname
+        WPROBS[DIRLIST[direc]] = HISTOGRAM_DICTIONARY[histname].GetSumOfWeights()/HISTOGRAM_DICTIONARY[incname].GetSumOfWeights()
+
+    print WPROBS
+
+    print '* 2nd determine from standard MC, the probability for a W+jets event '
+    print '* to enter low mt or high mt selections '
+
+    for addFile in range(0,len(FOR_W_NORM)):
+        if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
+            GOTFILE = TFile(FOR_W_NORM[addFile],'READ')
+            incname = CHANNELS[chan]+"_"+"inclusive"+"/W"
+            GOTHIST = GOTFILE.Get(incname)
+            if(GOTHIST):
+                HIGH_MT_W_COUNT += GOTHIST.GetSumOfWeights()
+            else:
+                print 'WARNING FAILED TO FIND :', incname
+
+    print ' low mt total from w+jets MC = ', LOW_MT_W_COUNT
+    print ' high mt total from w+jets MC = ', HIGH_MT_W_COUNT
+    print 'scale factor from high mt to low mt = ', LOW_MT_W_COUNT/HIGH_MT_W_COUNT
+    print 'adjust WPROBS for this factor ...'
+
+    for key, value in WPROBS.iteritems():
+        print key, value, "--->", value * (LOW_MT_W_COUNT/HIGH_MT_W_COUNT)
+        WPROBS[key] = value * (LOW_MT_W_COUNT/HIGH_MT_W_COUNT)
+
+
+    print '* next derive inclusive counts from high Mt data with bkg subtraction '
+
+
+
+    WNORMSDICT = {}
+    WNORMSDICT['data_obs'] = 0.0
+    WNORMSDICT['ZTT'] = 0.0
+    WNORMSDICT['ZL'] = 0.0
+    WNORMSDICT['ZJ'] = 0.0
+    WNORMSDICT['TT'] = 0.0
+    WNORMSDICT['VV'] = 0.0
+
+    ##############################
+    # this will hold the norm
+    # derived by comparing the inclusive
+    # selections in high mt and low mt selections
+    WNORM = 0.0
+
+
+    WNORMSDICT['data_obs'] = 0.0
+    WNORMSDICT['ZTT'] = 0.0
+    WNORMSDICT['ZL'] = 0.0
+    WNORMSDICT['ZJ'] = 0.0
+    WNORMSDICT['TT'] = 0.0
+    WNORMSDICT['VV'] = 0.0
+
+    print '**************************************'
+    print '* starting W bkg sub for dir. ', CHANNELS[chan]+'_inclusive'
+    print '**************************************'
+
+    for addFile in range(0,len(FOR_W_NORM)):
+        if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
+            GOTFILE = TFile(FOR_W_NORM[addFile],'READ')
+            #print '*** summing W norm histograms from ', FOR_W_NORM[addFile]
+
+            for key, value in WNORMSDICT.iteritems():
+                LOCALNAME = CHANNELS[chan]+'_inclusive'+"/"+key
+                #print "--> ",LOCALNAME
+                GOTHIST = GOTFILE.Get(LOCALNAME)
+                if(GOTHIST):
+                    WNORMSDICT[key] = value + GOTHIST.GetSumOfWeights()
+                else:
+                    print 'WARNING FAILED TO FIND :', key
+
+
+    ################################
+    # figure out normalization SFs
+
+    WNORM =    (WNORMSDICT['data_obs']-
+                                WNORMSDICT['ZTT'] -
+                                WNORMSDICT['ZL'] -
+                                WNORMSDICT['ZJ'] -
+                                WNORMSDICT['TT'] -
+                                WNORMSDICT['VV'])
+
+    print 'after calculation from high mt data the bkg sub W totals are are : '
+    print WNORM
+
+
+    print '* now convert the probabilities into the actual normalizations :'
+    for key, value in WPROBS.iteritems():
+        print key, value, "--->", value * WNORM
+        WPROBS[key] = value * WNORM
+
+
+
+
+
+    print 'applying W normalizaton to shape templates ...'
+    for direc in range(0,len(DIRLIST)):
+        DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
+        #print 'nominal ', (DIRNAME+"/W"), HISTOGRAM_DICTIONARY[(DIRNAME+"/W")].GetSumOfWeights()
+        nominalInt = HISTOGRAM_DICTIONARY[(DIRNAME+"/W")].GetSumOfWeights()
+        for key, value in HISTOGRAM_DICTIONARY.iteritems():
+            if 'W' in str(key) and DIRNAME in str(key):
+                 #print key, 'will be scaled to ', WPROBS[DIRLIST[direc]]
+                 systematic_factor = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+                 systematic_factor = systematic_factor/nominalInt
+                 #print 'variant ', key, HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+                 #print 'allowing for SYS variation introduces extra factor of ', systematic_factor
+                 #print key, 'will be scaled to ', WPROBS[DIRLIST[direc]], 'x', systematic_factor
+                 original = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+                 HISTOGRAM_DICTIONARY[key].Scale( (WPROBS[DIRLIST[direc]]*systematic_factor)/original)
+                 #print key, 'scaled from ', original, 'to -----> ',HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+
+
+
+
+
+
+
     print '***************************************************************'
     print '*     begin QCD normaization determination for', FILENAME
     print '***************************************************************'
@@ -247,87 +383,14 @@ for chan in range(0,len(CHANNELS)):
     print 'applying scale factors to all ZTT templates ...'
     for key, value in HISTOGRAM_DICTIONARY.iteritems():
         if 'ZTT' in str(key) and str(CHANNELS[chan]) in str(key):
-            print 'apply SF to ', key
-            #HISTOGRAM_DICTIONARY[key].Scale(ZTT_EMBEDDED_SF)
+            #print 'apply SF to ', key
+            HISTOGRAM_DICTIONARY[key].Scale(ZTT_EMBEDDED_SF)
 
 
 
 
 
-                # # NORMSDICT['QCD'] = 0.0
-                # NORMSDICT['W'] = 0.0
-                # NORMSDICT['ZTT'] = 0.0
-                # NORMSDICT['ZL'] = 0.0
-                # NORMSDICT['ZJ'] = 0.0
-                # NORMSDICT['TT'] = 0.0
-                # NORMSDICT['VV'] = 0.0
-                #
-                # print 'in channel ',DIRNAME, 'bkg sub. SS QCD is ', QCDNORM[DIRNAME]
-                # print 'the raw OS estimate was ', HISTOGRAM_DICTIONARY[DIRNAME+'/QCD'].GetSumOfWeights()
-                # QCDNORM[DIRNAME] = QCDNORM[DIRNAME]/HISTOGRAM_DICTIONARY[DIRNAME+'/QCD'].GetSumOfWeights()
-                # print 'the final norm. factor to be applied to QCD templates is ', QCDNORM[DIRNAME]
-                #
-                # print 'applying QCD normalizaton ...'
-                # for key, value in HISTOGRAM_DICTIONARY.iteritems():
-                #     if 'QCD' in str(key) and DIRNAME in str(key):
-                #         print 'normalization of ', key, 'in progress ...'
-                #         HISTOGRAM_DICTIONARY[key].Scale(QCDNORM[DIRNAME])
-                #
 
-
-    #
-    # print '***************************************************************'
-    # print '*     begin W normaization determination for', FILENAME
-    # print '***************************************************************'
-    #
-    # W_NORMSDICT = {}
-    # W_NORMSDICT['data_obs'] = 0.0
-    # W_NORMSDICT['ZTT'] = 0.0
-    # W_NORMSDICT['ZL'] = 0.0
-    # W_NORMSDICT['ZJ'] = 0.0
-    # W_NORMSDICT['TT'] = 0.0
-    # W_NORMSDICT['VV'] = 0.0
-    #
-    # ##############################
-    # # this will hold the W norm
-    # # derived by comparing the inclusive
-    # # selections in default and high mT
-    # WNORM = {}
-    #
-    # for addFile in range(0,len(FOR_W_NORM)):
-    #     if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
-    #         GOTFILE = TFile(FOR_W_NORM[addFile],'READ')
-    #         print '*** summing QCD norm histograms from ', FOR_W_NORM[addFile]
-    #
-    #         DIRNAME = CHANNELS[chan]+"_inclusive"
-    #         for key, value in W_NORMSDICT.iteritems():
-    #             LOCALNAME = DIRNAME+"/"+key
-    #             print "--> ",LOCALNAME
-    #             GOTHIST = GOTFILE.Get(LOCALNAME)
-    #             if(GOTHIST):
-    #                 W_NORMSDICT[key] = value + GOTHIST.GetSumOfWeights()
-    #             else:
-    #                 print 'WARNING FAILED TO FIND :', key
-    #
-    # ################################
-    # # figure out normalization SFs
-    # WNORM[CHANNELS[chan]] =  1.0 * (W_NORMSDICT['data_obs']-
-    #                             W_NORMSDICT['ZTT'] -
-    #                             W_NORMSDICT['ZL'] -
-    #                             W_NORMSDICT['ZJ'] -
-    #                             W_NORMSDICT['TT'] -
-    #                             W_NORMSDICT['VV'])
-    #
-    # print 'in channel ',CHANNELS[chan], 'bkg sub. high mT data is ', WNORM[CHANNELS[chan]]
-    # print 'the raw low mT estimate was ', HISTOGRAM_DICTIONARY[(CHANNELS[chan]+'_inclusive/W')].GetSumOfWeights()
-    # WNORM[CHANNELS[chan]] = WNORM[CHANNELS[chan]]/HISTOGRAM_DICTIONARY[(CHANNELS[chan]+'_inclusive/W')].GetSumOfWeights()
-    # print 'the final norm. factor to be applied to all W templates is ', WNORM[CHANNELS[chan]]
-    #
-    # print 'applying W normalizaton ...'
-    # for key, value in HISTOGRAM_DICTIONARY.iteritems():
-    #     if 'W' in str(key):
-    #         HISTOGRAM_DICTIONARY[key].Scale(WNORM[CHANNELS[chan]])
-    #
     ################################
     # print event totals by sub-channel
 
@@ -390,7 +453,10 @@ for chan in range(0,len(CHANNELS)):
     print 'Z->ll ', BTAG_TOTALSDICT['ZL'] + BTAG_TOTALSDICT['ZJ']
     print 'tt + single-t ', BTAG_TOTALSDICT['TT']
     print 'diboson ', BTAG_TOTALSDICT['VV']
-
+    print 'data/MC', BTAG_TOTALSDICT['data_obs']/(BTAG_TOTALSDICT['QCD']+BTAG_TOTALSDICT['W']+
+                            BTAG_TOTALSDICT['ZTT']+BTAG_TOTALSDICT['ZL']+BTAG_TOTALSDICT['ZJ']+
+                            BTAG_TOTALSDICT['TT']+
+                            BTAG_TOTALSDICT['VV'])
 
     print '*************************************************************'
     print '*        Event Totals for NONBTAG ', CHANNELS[chan]
@@ -403,7 +469,9 @@ for chan in range(0,len(CHANNELS)):
     print 'Z->ll ', NONBTAG_TOTALSDICT['ZL'] + NONBTAG_TOTALSDICT['ZJ']
     print 'tt + single-t ', NONBTAG_TOTALSDICT['TT']
     print 'diboson ', NONBTAG_TOTALSDICT['VV']
-
+    print 'data/MC', NONBTAG_TOTALSDICT['data_obs']/(NONBTAG_TOTALSDICT['QCD']+NONBTAG_TOTALSDICT['W']+
+                            NONBTAG_TOTALSDICT['ZTT']+NONBTAG_TOTALSDICT['ZL']+NONBTAG_TOTALSDICT['ZJ']+
+                            NONBTAG_TOTALSDICT['TT']+NONBTAG_TOTALSDICT['VV'])
 
 
 
