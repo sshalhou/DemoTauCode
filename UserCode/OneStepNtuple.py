@@ -292,9 +292,6 @@ if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
         print "EMBEDDED SETTING "
         process.ak5JetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
         process.ak5JetTracksAssociatorAtVertex.jets = cms.InputTag("ak5PFJets")
-        process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
-        process.ak5PFJetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
-        process.ak5PFJetsRecoTauChargedHadrons.builders[1].srcTracks = cms.InputTag("tmfTracks")
 
 
 
@@ -364,6 +361,10 @@ switchToPFTauHPS(process)
 if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
   print "EMBEDDED SETTING "
   process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
+  process.ak5PFJetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
+  process.ak5PFJetsRecoTauChargedHadrons.builders[1].srcTracks = cms.InputTag("tmfTracks")
+
+
 
 process.cleanPatTaus.preselection = 'pt>17 & abs(eta)<2.4'\
 + '& ( tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 | tauID("byVLooseIsolationMVA3oldDMwLT") > 0.5 )'\
