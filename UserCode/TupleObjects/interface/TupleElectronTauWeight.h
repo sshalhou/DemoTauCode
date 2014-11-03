@@ -64,7 +64,7 @@ public:
   void set_hepNUP(int);
   void set_weightHEPNUP_DYJets(double);
   void set_weightHEPNUP_WJets(double);
-
+  void set_embedWeight(double);
 
   // getters
   double puWeight() const;
@@ -109,6 +109,7 @@ public:
   int    hepNUP() const;
   double weightHEPNUP_DYJets() const;
   double weightHEPNUP_WJets() const;
+  double embedWeight() const;
 
 
 private:
@@ -155,6 +156,7 @@ private:
   int    m_hepNUP;
   double m_weightHEPNUP_DYJets;
   double m_weightHEPNUP_WJets;
+  double m_embedWeight;
 
 
 

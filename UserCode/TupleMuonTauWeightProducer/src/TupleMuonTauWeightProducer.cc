@@ -94,6 +94,7 @@ private:
   edm::InputTag TauSpinnerWThminusSrc_;
   edm::InputTag TauSpinnerWThplusSrc_;
   edm::InputTag LHEEventProductSrc_;
+  edm::InputTag embedWeightSrc_;
 
 
 };
@@ -125,7 +126,9 @@ TauSpinnerWTSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTSrc")),
 TauSpinnerWTFlipSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTFlipSrc")),
 TauSpinnerWThminusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThminusSrc")),
 TauSpinnerWThplusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThplusSrc")),
-LHEEventProductSrc_(iConfig.getParameter<edm::InputTag>("LHEEventProductSrc"))
+LHEEventProductSrc_(iConfig.getParameter<edm::InputTag>("LHEEventProductSrc")),
+embedWeightSrc_(iConfig.getParameter<edm::InputTag>("embedWeightSrc"))
+
 {
 
   produces<std::vector<TupleMuonTauWeight>>(NAME_).setBranchAlias(NAME_);
@@ -190,6 +193,17 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
   const int TupleMuonTauWeightsSize = muonTaus->size();
   TupleMuonTauWeights->reserve( TupleMuonTauWeightsSize );
+
+
+  ////////////
+  // read in the embedding weight
+  // is the same for all H candidate pairs
+  // so compute here
+
+
+  edm::Handle<GenFilterInfo> embeddingWeightHandle;
+  iEvent.getByLabel(embedWeightSrc_, embeddingWeightHandle);
+  double embedWeight_ = embeddingWeightHandle.isValid() ? embeddingWeightHandle->filterEfficiency() : 1.0;
 
 
 
@@ -300,6 +314,14 @@ TupleMuonTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetup& i
 
     const TupleMuon muon = ((*muons)[muonTau.muonIndex()]);
     const TupleTau tau = ((*taus)[muonTau.tauIndex()]);
+
+
+    ///////////////////
+    // set the embedding weight
+
+    CurrentMuonTauWeight.set_embedWeight(embedWeight_);
+    cout<<" embed weight = "<<embedWeight_<<"\n";
+
 
     /////////////////
     // set the W+jets and DY+jets

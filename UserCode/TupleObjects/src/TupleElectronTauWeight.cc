@@ -45,12 +45,20 @@ TupleElectronTauWeight::TupleElectronTauWeight()
   m_hepNUP = -999;
   m_weightHEPNUP_DYJets = NAN;
   m_weightHEPNUP_WJets = NAN;
+  m_embedWeight = NAN;
 
 
 }
 
 //Setting Weights
 
+
+//////////////////
+// embedding weight
+
+
+void TupleElectronTauWeight::set_embedWeight(double embedWeight_) { m_embedWeight  =  embedWeight_;}
+double TupleElectronTauWeight::embedWeight() const { return m_embedWeight; }
 
 
 //////////////

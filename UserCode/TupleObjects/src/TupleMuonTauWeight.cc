@@ -42,11 +42,21 @@ TupleMuonTauWeight::TupleMuonTauWeight()
   m_hepNUP = -999;
   m_weightHEPNUP_DYJets = NAN;
   m_weightHEPNUP_WJets = NAN;
+  m_embedWeight = NAN;
 
 
 }
 
 //Setting Weights
+
+
+
+//////////////////
+// embedding weight
+
+
+void TupleMuonTauWeight::set_embedWeight(double embedWeight_) { m_embedWeight  =  embedWeight_;}
+double TupleMuonTauWeight::embedWeight() const { return m_embedWeight; }
 
 
 //////////////

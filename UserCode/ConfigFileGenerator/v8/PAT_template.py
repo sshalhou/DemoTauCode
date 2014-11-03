@@ -8,18 +8,16 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 1
 ########################################################################################################
 
-
-SampleName_='SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/AODSIM/PU_S10_START53_V7A-v1/AODSIM'
-PhysicsProcess_='ggA0tautau[SUSY_120_8TeV]'
-MASS_=120.0
-isNonTopEmbeddedSample_ = False
-isTopEmbeddedSample_ = False
-runOnMC_ = True # true for MC, and all topTopBar and Ztautau embedded samples
-branchingFraction_ = 999.99
-crossSection_ = 999.99
-numberEvents_ = 999
+SampleName_='DUMMY_SampleName'
+PhysicsProcess_='DUMMY_PhysicsProcess'
+MASS_= DUMMY_MASS
+isNonTopEmbeddedSample_ = DUMMY_isNonTopEmbeddedSample
+isTopEmbeddedSample_ = DUMMY_isTopEmbeddedSample
+runOnMC_ =  DUMMY_runOnMC # true for MC, and all topTopBar and Ztautau embedded samples
+crossSection_ = DUMMY_crossSection
+numberEvents_ = DUMMY_numberEvents
+branchingFraction_ = DUMMY_branchingFraction
 WillRunSVFit_ = True
-
 
 doNotRequireFullIdForLeptons_ = False # setting to true means more SVFIt calls
 printListOfModules_ = False
@@ -295,8 +293,6 @@ if isNonTopEmbeddedSample_ or isTopEmbeddedSample_:
         process.hpsPFTauPrimaryVertexProducer.TrackCollectionTag = cms.InputTag("tmfTracks")
         process.ak5PFJetTracksAssociatorAtVertex.tracks = cms.InputTag("tmfTracks")
         process.ak5PFJetsRecoTauChargedHadrons.builders[1].srcTracks = cms.InputTag("tmfTracks")
-
-
 
 
 switchJetCollection(process,cms.InputTag('ak5PFJets'),
@@ -1660,14 +1656,11 @@ if KeepPat_:
   process.out.outputCommands +=['keep *_*TriggerMatch*_*_*']
 
 ########################################################################################################
-process.out.fileName = '/uscms/home/shalhout/no_backup/JOINTpatTuple_testing.root'
+process.out.fileName = 'NTUPLE.root'
 
 ########################################################################################################
-myfilelist = cms.untracked.vstring()
-myfilelist.extend(['file:/uscms/home/shalhout/no_backup/oneThousand_selectedEventsRaw.root'])
 
 process.source = cms.Source ("PoolSource",
-                      fileNames=myfilelist,
                         dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
                         inputCommands = cms.untracked.vstring(
                         'keep *',

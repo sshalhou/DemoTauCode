@@ -94,6 +94,8 @@ private:
   edm::InputTag TauSpinnerWThminusSrc_;
   edm::InputTag TauSpinnerWThplusSrc_;
   edm::InputTag LHEEventProductSrc_;
+  edm::InputTag embedWeightSrc_;
+
 
 };
 
@@ -124,7 +126,9 @@ TauSpinnerWTSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTSrc")),
 TauSpinnerWTFlipSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWTFlipSrc")),
 TauSpinnerWThminusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThminusSrc")),
 TauSpinnerWThplusSrc_(iConfig.getParameter<edm::InputTag>("TauSpinnerWThplusSrc")),
-LHEEventProductSrc_(iConfig.getParameter<edm::InputTag>("LHEEventProductSrc"))
+LHEEventProductSrc_(iConfig.getParameter<edm::InputTag>("LHEEventProductSrc")),
+embedWeightSrc_(iConfig.getParameter<edm::InputTag>("embedWeightSrc"))
+
 {
 
 
@@ -192,12 +196,24 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
   TupleElectronTauWeights->reserve( TupleElectronTauWeightsSize );
 
 
+  ////////////
+  // read in the embedding weight
+  // is the same for all H candidate pairs
+  // so compute here
+
+
+  edm::Handle<GenFilterInfo> embeddingWeightHandle;
+  iEvent.getByLabel(embedWeightSrc_, embeddingWeightHandle);
+  double embedWeight_ = embeddingWeightHandle.isValid() ? embeddingWeightHandle->filterEfficiency() : 1.0;
+
+
 
   ////////////////
   // read in pileUpInfo
 
   edm::Handle<std::vector<PileupSummaryInfo> > PupInfo;
   iEvent.getByLabel(pileupSrc_, PupInfo);
+
 
 
   //////////////////////
@@ -300,6 +316,14 @@ TupleElectronTauWeightProducer::produce(edm::Event& iEvent, const edm::EventSetu
 
     const TupleElectron electron = ((*electrons)[electronTau.electronIndex()]);
     const TupleTau tau = ((*taus)[electronTau.tauIndex()]);
+
+    ///////////////////
+    // set the embedding weight
+
+    CurrentElectronTauWeight.set_embedWeight(embedWeight_);
+    cout<<" embed weight (etau) = "<<embedWeight_<<"\n";
+
+
 
     /////////////////
     // set the W+jets and DY+jets

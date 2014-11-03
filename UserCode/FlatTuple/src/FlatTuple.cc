@@ -374,6 +374,9 @@ private:
   std::vector< double > eT_weightHEPNUP_WJets ;
   std::vector< bool > eT_passesThirdLeptonVeto;
   std::vector< bool > eT_passesSecondLeptonVeto;
+  std::vector< double > eT_embedWeight ;
+
+
   //////////
   // for muTau object
 
@@ -615,6 +618,7 @@ private:
   std::vector< double > muT_weightHEPNUP_WJets ;
   std::vector< bool > muT_passesThirdLeptonVeto;
   std::vector< bool > muT_passesSecondLeptonVeto;
+  std::vector< double > muT_embedWeight ;
 
 };
 
@@ -997,6 +1001,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_weightHEPNUP_WJets", &eT_weightHEPNUP_WJets);
   lepTauTree->Branch("eT_passesSecondLeptonVeto", &eT_passesSecondLeptonVeto);
   lepTauTree->Branch("eT_passesThirdLeptonVeto", &eT_passesThirdLeptonVeto);
+  lepTauTree->Branch("eT_embedWeight", &eT_embedWeight);
+
 
 
   lepTauTree->Branch("muT_p4_x", &muT_p4_x);
@@ -1284,6 +1290,8 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_weightHEPNUP_WJets", &muT_weightHEPNUP_WJets);
   lepTauTree->Branch("muT_passesSecondLeptonVeto", &muT_passesSecondLeptonVeto);
   lepTauTree->Branch("muT_passesThirdLeptonVeto", &muT_passesThirdLeptonVeto);
+  lepTauTree->Branch("muT_embedWeight", &muT_embedWeight);
+
 
 }
 
@@ -1706,6 +1714,9 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_weightHEPNUP_WJets.push_back(eTauWt.weightHEPNUP_WJets());
     eT_passesSecondLeptonVeto.push_back(eVetoes.passesSecondLeptonVeto());
     eT_passesThirdLeptonVeto.push_back(eVetoes.passesThirdLeptonVeto());
+    eT_embedWeight.push_back(eTauWt.embedWeight());
+
+
 
   }
 
@@ -2016,6 +2027,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_weightHEPNUP_WJets.push_back(muTauWt.weightHEPNUP_WJets());
       muT_passesSecondLeptonVeto.push_back(muVetoes.passesSecondLeptonVeto());
       muT_passesThirdLeptonVeto.push_back(muVetoes.passesThirdLeptonVeto());
+      muT_embedWeight.push_back(muTauWt.embedWeight());
+
 
     }
 
@@ -2406,6 +2419,9 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_weightHEPNUP_WJets.clear();
     eT_passesSecondLeptonVeto.clear();
     eT_passesThirdLeptonVeto.clear();
+    eT_embedWeight.clear();
+
+
 
     muT_p4_x.clear();
     muT_p4_y.clear();
@@ -2692,6 +2708,8 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_weightHEPNUP_WJets.clear();
     muT_passesSecondLeptonVeto.clear();
     muT_passesThirdLeptonVeto.clear();
+    muT_embedWeight.clear();
+
 
     run = 0;
     luminosityBlock = 0;
