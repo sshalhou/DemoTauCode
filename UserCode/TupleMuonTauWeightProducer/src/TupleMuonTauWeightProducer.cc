@@ -55,6 +55,7 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleUserSpecifiedData.h"
 #include "TauSpinnerInterface/TauSpinnerInterface/interface/TauSpinnerCMS.h"
 #include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
+#include "SimDataFormats/GeneratorProducts/interface/GenFilterInfo.h"
 
 
 typedef math::XYZTLorentzVector LorentzVector;
