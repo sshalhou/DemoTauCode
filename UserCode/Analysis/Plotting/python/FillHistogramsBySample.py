@@ -542,12 +542,12 @@ def Fill_ZTTembedded(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value
     fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
 
-def Fill_VV(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+def Fill_VVandSingleTop(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
 
-def Fill_TTbarAndSingleTopMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
+def Fill_TTbarMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
     fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
     fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)

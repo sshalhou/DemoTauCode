@@ -384,7 +384,7 @@ for entry in range(0,maxEntries):
 					classification = '_VV_'
 					wt = 1.0
 					wt = getWeightForVV(chain,maxPairTypeAndIndex,Verbose)
-					Fill_VV(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
+					Fill_VVandSingleTop(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 				elif (SAMPLE_ADD=='_TTJetsFullLept_' or
 					  SAMPLE_ADD=='_TTJetsSemiLept_' or
 					  SAMPLE_ADD=='_TTJetsHadronic_'):
@@ -395,7 +395,7 @@ for entry in range(0,maxEntries):
 					wt_dict['topPtUp'] = 1.0
 
 					getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose)
-					Fill_TTbarAndSingleTopMC(maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
+					Fill_TTbarMC(maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
 
 				elif SAMPLE_ADD == '_qqH_SM125_':
 					wt = 1.0
