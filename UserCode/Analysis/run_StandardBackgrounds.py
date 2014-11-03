@@ -378,16 +378,16 @@ for entry in range(0,maxEntries):
 					  SAMPLE_ADD=='_ZZJetsTo2L2Q_' or
 					  SAMPLE_ADD=='_WWJetsTo2L2Nu_' or
 					  SAMPLE_ADD=='_WZJetsTo2L2Q_' or
-					  SAMPLE_ADD=='_WZJetsTo3LNu_'):
+					  SAMPLE_ADD=='_WZJetsTo3LNu_' or
+					  SAMPLE_ADD=='_SingleTopBar_' or
+					  SAMPLE_ADD=='_SingleTop_'):
 					classification = '_VV_'
 					wt = 1.0
 					wt = getWeightForVV(chain,maxPairTypeAndIndex,Verbose)
 					Fill_VV(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 				elif (SAMPLE_ADD=='_TTJetsFullLept_' or
 					  SAMPLE_ADD=='_TTJetsSemiLept_' or
-					  SAMPLE_ADD=='_TTJetsHadronic_' or
-					  SAMPLE_ADD=='_SingleTopBar_' or
-					  SAMPLE_ADD=='_SingleTop_'):
+					  SAMPLE_ADD=='_TTJetsHadronic_'):
 					classification = '_TT_'
 					wt_dict = {}
 					wt_dict['topPtDown'] = 1.0
@@ -395,12 +395,6 @@ for entry in range(0,maxEntries):
 					wt_dict['topPtUp'] = 1.0
 
 					getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose)
-
-					# pt reweight not applied to singleTop
-					# note: the down variant has no pt weight applied
-					if SAMPLE_ADD=='_SingleTopBar_' or SAMPLE_ADD=='_SingleTop_':
-						wt_dict['topPtNominal']  = wt_dict['topPtDown']
-						wt_dict['topPtUp'] = wt_dict['topPtDown']
 					Fill_TTbarAndSingleTopMC(maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
 
 				elif SAMPLE_ADD == '_qqH_SM125_':
