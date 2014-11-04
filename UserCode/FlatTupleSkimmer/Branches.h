@@ -3537,8 +3537,8 @@ void Init(TTree *tree)
    fChain->SetBranchAddress("muT_weightHEPNUP_WJets", &muT_weightHEPNUP_WJets, &b_muT_weightHEPNUP_WJets);
    fChain->SetBranchAddress("muT_passesSecondLeptonVeto", &muT_passesSecondLeptonVeto, &b_muT_passesSecondLeptonVeto);
    fChain->SetBranchAddress("muT_passesThirdLeptonVeto", &muT_passesThirdLeptonVeto, &b_muT_passesThirdLeptonVeto);
-   fChain->SetBranchAddress("eT_embedWeight", &eT_embedWeight, &eT_embedWeight);
-   fChain->SetBranchAddress("muT_embedWeight", &muT_embedWeight, &muT_embedWeight);
+   fChain->SetBranchAddress("eT_embedWeight", &eT_embedWeight, &b_eT_embedWeight);
+   fChain->SetBranchAddress("muT_embedWeight", &muT_embedWeight, &b_muT_embedWeight);
 
 
 
