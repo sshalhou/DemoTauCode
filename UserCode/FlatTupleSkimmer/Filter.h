@@ -56,6 +56,13 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
     if( !muT_passesSecondLeptonVeto_[index]           ) localPass = 0;
     if( !muT_passesThirdLeptonVeto_[index]            ) localPass = 0;
 
+    if(!isNonTopEmbeddedSample_ && !isTopEmbeddedSample)
+      {
+        if(!muT_muon_has_HltMatchMu17_[index] && !muT_muon_has_HltMatchMu18_[index]) localPass = 0;
+        if(!muT_tau_has_HltMatchMu17[index] && !muT_tau_has_HltMatchMu18[index]) localPass = 0;
+      }
+
+
 
     if(localPass){ nMuTauPass++;}
     if(nMuTauPass>0) break;
@@ -93,6 +100,12 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
       if( eT_TransverseMass_[index] > 31.00 && eT_TransverseMass_[index] < 69.00 ) localPass = 0;
       if( !eT_passesSecondLeptonVeto_[index]           ) localPass = 0;
       if( !eT_passesThirdLeptonVeto_[index]            ) localPass = 0;
+
+      if(!isNonTopEmbeddedSample_ && !isTopEmbeddedSample)
+        {
+          if(!eT_ele_has_HltMatchEle20_[index] && !eT_ele_has_HltMatchEle22_[index]) localPass = 0;
+          if(!eT_tau_has_HltMatchEle20_[index] && !eT_tau_has_HltMatchEle22_[index]) localPass = 0;
+        }
 
 
       if(localPass){ nETauPass++;}
