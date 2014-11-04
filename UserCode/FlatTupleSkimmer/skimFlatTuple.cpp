@@ -165,6 +165,11 @@ int main(int argc, char* argv[])
 					}
 
 				X.cd();
+				X.mkdir("TauEsNominal");
+				X.mkdir("TauEsUp");
+				X.mkdir("TauEsDown");
+
+
 				if(maxEntries1>0) outputTree1->Write("TauEsNominal/FlatTuple");
 				if(maxEntries2>0) outputTree2->Write("TauEsUp/FlatTuple");
 				if(maxEntries3>0) outputTree3->Write("TauEsDown/FlatTuple");
