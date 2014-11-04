@@ -105,6 +105,7 @@ int main(int argc, char* argv[])
 
 									if(entry%2500 == 0) std::cout<<"tauEsNominal "<<entry<<" of "<<maxEntries1<<" of "<<FileName<<" ";
 									if(entry%2500 == 0) std::cout<<"filled "<<nfilled<<" of "<<entry<<" \n";
+									if(entry%2500 == 0) std::cout.flush();
 
 
 									chain1->GetEntry(chain1->GetChainEntryNumber(entry));
@@ -128,6 +129,7 @@ int main(int argc, char* argv[])
 
 						if(entry%2500 == 0) std::cout<<"tauEsUp "<<entry<<" of "<<maxEntries2<<" of "<<FileName<<" ";
 						if(entry%2500 == 0) std::cout<<"filled "<<nfilled<<" of "<<entry<<" \n";
+						if(entry%2500 == 0) std::cout.flush();
 
 
 						chain2->GetEntry(chain2->GetChainEntryNumber(entry));
@@ -155,6 +157,7 @@ int main(int argc, char* argv[])
 
 							if(entry%2500 == 0) std::cout<<"tauEsDown "<<entry<<" of "<<maxEntries3<<" of "<<FileName<<" ";
 							if(entry%2500 == 0) std::cout<<"filled "<<nfilled<<" of "<<entry<<" \n";
+							if(entry%2500 == 0) std::cout.flush();
 
 
 							chain3->GetEntry(chain3->GetChainEntryNumber(entry));
