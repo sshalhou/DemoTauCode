@@ -170,9 +170,9 @@ int main(int argc, char* argv[])
 				X.mkdir("TauEsDown");
 
 
-				if(maxEntries1>0) outputTree1->Write("TauEsNominal/FlatTuple");
-				if(maxEntries2>0) outputTree2->Write("TauEsUp/FlatTuple");
-				if(maxEntries3>0) outputTree3->Write("TauEsDown/FlatTuple");
+				if(maxEntries1>0) {X.cd("TauEsNominal"); outputTree1->Write("FlatTuple");}
+				if(maxEntries2>0) {X.cd("TauEsUp"); outputTree2->Write("FlatTuple");}
+				if(maxEntries3>0) {X.cd("TauEsDown"); outputTree3->Write("FlatTuple");}
 				X.Close();
 
 				delete chain1;
