@@ -1,6 +1,6 @@
 //g++ -I `root-config --incdir` -o skimFlatTuple.o skimFlatTuple.cpp `root-config --libs`
 
-#include "Tchain.h"
+#include "TChain.h"
 #include "TTree.h"
 #include <string>
 #include <cstring>
