@@ -59,7 +59,7 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
     if(!isNonTopEmbeddedSample_ && !isTopEmbeddedSample)
       {
         if(!muT_muon_has_HltMatchMu17_[index] && !muT_muon_has_HltMatchMu18_[index]) localPass = 0;
-        if(!muT_tau_has_HltMatchMu17[index] && !muT_tau_has_HltMatchMu18[index]) localPass = 0;
+        if(!muT_tau_has_HltMatchMu17_[index] && !muT_tau_has_HltMatchMu18_[index]) localPass = 0;
       }
 
 
