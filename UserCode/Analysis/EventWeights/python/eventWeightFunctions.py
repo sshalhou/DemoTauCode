@@ -97,6 +97,19 @@ def getFakeZeeWeight(chain,maxPairTypeAndIndex):
       returnWeight = chain.eT_ZeeScaleFactor[i]
     return returnWeight
 
+
+####################################
+# get embedding weights
+
+def getEmbedWeight(chain,maxPairTypeAndIndex):
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    if maxPairTypeAndIndex[1] == 'eleTau':
+      returnWeight = chain.eT_embedWeight[i]
+    elif maxPairTypeAndIndex[1] == 'muTau':
+      returnWeight = chain.muT_embedWeight[i]
+    return returnWeight
+
 ####################################
 # get nominal jet->tau fake weights
 
@@ -128,41 +141,47 @@ def getTopPtWeight(chain,maxPairTypeAndIndex):
 def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
     returnWeight = 1.0
     i = maxPairTypeAndIndex[0]
-    # for v19 samples access njet from samplename directly
-
-    if 'V19' not in str(chain.SampleName) :
-        #print 'NOT ', chain.SampleName
-        if maxPairTypeAndIndex[1] == 'eleTau':
-            returnWeight = chain.eT_weightHEPNUP_WJets[i]
-        elif maxPairTypeAndIndex[1] == 'muTau':
-            returnWeight = chain.muT_weightHEPNUP_WJets[i]
-    elif 'V19' in str(chain.SampleName) :
-        #print 'YES ', chain.SampleName
+    # stitching weights in ntuples are slightly off
+    # derive them from the sample name instead
         njet = 100
         if 'W1Jets' in chain.SampleName : njet = 1
         elif 'W2Jets' in chain.SampleName : njet = 2
         elif 'W3Jets' in chain.SampleName : njet = 3
         elif 'W4Jets' in chain.SampleName : njet = 4
+        elif 'WJets' in chain.SampleName : njet = 0
 
-        if njet==0:      returnWeight = 0.492871535
-        elif njet==1: returnWeight =  0.100267473
-        elif njet==2: returnWeight =  0.031238278
-        elif njet==3: returnWeight =  0.019961315
-        elif njet>=4: returnWeight =  0.018980202
 
-    return returnWeight
+        if njet==0:      returnWeight = 0.476420146
+        elif njet==1: returnWeight =  0.096920679
+        elif njet==2: returnWeight =  0.030195587
+        elif njet==3: returnWeight =  0.019295033
+        elif njet>=4: returnWeight =  0.018346669
+
+    return returnWeight*19.7
 
 ##############
 # stitching Z+jets weight
 
 def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
-  returnWeight = 1.0
-  i = maxPairTypeAndIndex[0]
-  if maxPairTypeAndIndex[1] == 'eleTau':
-    returnWeight = chain.eT_weightHEPNUP_DYJets[i]
-  elif maxPairTypeAndIndex[1] == 'muTau':
-    returnWeight = chain.muT_weightHEPNUP_DYJets[i]
-  return returnWeight
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
+    # stitching weights in ntuples are slightly off
+    # derive them from the sample name instead
+        njet = 100
+        if 'DY1Jets' in chain.SampleName : njet = 1
+        elif 'DY2Jets' in chain.SampleName : njet = 2
+        elif 'DY3Jets' in chain.SampleName : njet = 3
+        elif 'DY4Jets' in chain.SampleName : njet = 4
+        elif 'DYJets' in chain.SampleName : njet = 0
+
+
+        if njet==0:      returnWeight =0.11906618
+        elif njet==1: returnWeight =0.022478688
+        elif njet==2: returnWeight =0.009092586
+        elif njet==3: returnWeight =0.005278795
+        elif njet>=4: returnWeight = 0.004118808
+
+    return returnWeight*19.7
 
 
 ##############
@@ -424,18 +443,12 @@ def CrabJobEfficiency(sampleName):
         eff = 0.997774
     elif(sampleName=='/SUSYGluGluToHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         eff = 0.997778
-    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.976945245
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.9988276671
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.9918651947
     elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         eff = 0.99092
     elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.995919
+        eff = 0.981636792844517
     elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.9959184446
+        eff = 0.995918444569172
     elif(sampleName=='/WbbJetsToLNu_Massive_TuneZ2star_8TeV-madgraph-pythia6_tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         eff = 0.9998386837
     return eff
@@ -512,7 +525,7 @@ def getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose):
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['nevents'] = 1000.0*19.7*(3504.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    #allWeights['nevents'] = 1000.0*19.7*(3504.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
     allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
     allWeights['TauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
     #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
@@ -534,7 +547,7 @@ def getWeightForRegularDY(chain,maxPairTypeAndIndex,Verbose):
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    #allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
     allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
       returnWeight*=value
@@ -568,7 +581,8 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
-    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    # LLR has this off
+    #allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
     allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
@@ -595,7 +609,7 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['nevents'] = getWPlusJetsCrossSectionWeight(chain)
+    #allWeights['nevents'] = getWPlusJetsCrossSectionWeight(chain)
     allWeights['StitchingWjets'] = getStitchingWjetsWt(chain, maxPairTypeAndIndex)
     allWeights['jetTauFakeWt'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
@@ -613,7 +627,7 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
 def getWeightEmbeddedZTT(chain,maxPairTypeAndIndex,Verbose):
     returnWeight = 1.0
     allWeights = {}
-    allWeights['embeddingWeight'] = 1.0 # to be added
+    allWeights['embeddingWeight'] = getEmbedWeight(chain,maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
@@ -631,7 +645,7 @@ def getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['embeddingWeight'] = 1.0 # to be added
+    allWeights['embeddingWeight'] = getEmbedWeight(chain,maxPairTypeAndIndex)
     allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
     # use the number of events of the parent MC sample
     # use cross-section =

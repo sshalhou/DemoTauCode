@@ -88,7 +88,9 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_bbH200_'
     elif(sampleName=='/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_bbH250_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+    #elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+    #    SAMPLE_ADD = '_bbH300_'
+    elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'):
         SAMPLE_ADD = '_bbH300_'
     elif(sampleName=='/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_bbH350_'
@@ -189,11 +191,16 @@ def getSAMPLE_ADD(sampleName):
     elif(sampleName=='/T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_SingleTop_'
 
-    elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+   elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_ZZJetsTo4L_'
+
 
     elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
         SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
+
+
+#    elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
+#        SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
 
     elif(sampleName=='/ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_ZZJetsTo2L2Q_'
