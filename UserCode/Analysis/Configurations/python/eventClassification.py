@@ -191,7 +191,7 @@ def getSAMPLE_ADD(sampleName):
     elif(sampleName=='/T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_SingleTop_'
 
-   elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+    elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_ZZJetsTo4L_'
 
 
