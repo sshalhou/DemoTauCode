@@ -143,19 +143,19 @@ def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
     i = maxPairTypeAndIndex[0]
     # stitching weights in ntuples are slightly off
     # derive them from the sample name instead
-        njet = 100
-        if 'W1Jets' in chain.SampleName : njet = 1
-        elif 'W2Jets' in chain.SampleName : njet = 2
-        elif 'W3Jets' in chain.SampleName : njet = 3
-        elif 'W4Jets' in chain.SampleName : njet = 4
-        elif 'WJets' in chain.SampleName : njet = 0
+    njet = 100
+    if 'W1Jets' in chain.SampleName : njet = 1
+    elif 'W2Jets' in chain.SampleName : njet = 2
+    elif 'W3Jets' in chain.SampleName : njet = 3
+    elif 'W4Jets' in chain.SampleName : njet = 4
+    elif 'WJets' in chain.SampleName : njet = 0
 
 
-        if njet==0:      returnWeight = 0.476420146
-        elif njet==1: returnWeight =  0.096920679
-        elif njet==2: returnWeight =  0.030195587
-        elif njet==3: returnWeight =  0.019295033
-        elif njet>=4: returnWeight =  0.018346669
+    if njet==0:      returnWeight = 0.476420146
+    elif njet==1: returnWeight =  0.096920679
+    elif njet==2: returnWeight =  0.030195587
+    elif njet==3: returnWeight =  0.019295033
+    elif njet>=4: returnWeight =  0.018346669
 
     return returnWeight*19.7
 
@@ -167,19 +167,19 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
     i = maxPairTypeAndIndex[0]
     # stitching weights in ntuples are slightly off
     # derive them from the sample name instead
-        njet = 100
-        if 'DY1Jets' in chain.SampleName : njet = 1
-        elif 'DY2Jets' in chain.SampleName : njet = 2
-        elif 'DY3Jets' in chain.SampleName : njet = 3
-        elif 'DY4Jets' in chain.SampleName : njet = 4
-        elif 'DYJets' in chain.SampleName : njet = 0
+    njet = 100
+    if 'DY1Jets' in chain.SampleName : njet = 1
+    elif 'DY2Jets' in chain.SampleName : njet = 2
+    elif 'DY3Jets' in chain.SampleName : njet = 3
+    elif 'DY4Jets' in chain.SampleName : njet = 4
+    elif 'DYJets' in chain.SampleName : njet = 0
 
 
-        if njet==0:      returnWeight =0.11906618
-        elif njet==1: returnWeight =0.022478688
-        elif njet==2: returnWeight =0.009092586
-        elif njet==3: returnWeight =0.005278795
-        elif njet>=4: returnWeight = 0.004118808
+    if njet==0:      returnWeight =0.11906618
+    elif njet==1: returnWeight =0.022478688
+    elif njet==2: returnWeight =0.009092586
+    elif njet==3: returnWeight =0.005278795
+    elif njet>=4: returnWeight = 0.004118808
 
     return returnWeight*19.7
 
