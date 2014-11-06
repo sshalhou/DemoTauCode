@@ -36,7 +36,7 @@ def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
       returnWord += '_high'
   if len(returnWord) == 0:
     returnWord = 'Reject'
-  print returnWord
+  #print returnWord
   return returnWord
 
 
