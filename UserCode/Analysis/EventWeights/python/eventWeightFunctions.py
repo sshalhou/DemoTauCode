@@ -141,17 +141,36 @@ def getTopPtWeight(chain,maxPairTypeAndIndex):
 def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
     returnWeight = 1.0
     i = maxPairTypeAndIndex[0]
-    # stitching weights in ntuples are slightly off
-    # derive them from the sample name instead
-    njet = 100
-    if 'W1Jets' in chain.SampleName : njet = 1
-    elif 'W2Jets' in chain.SampleName : njet = 2
-    elif 'W3Jets' in chain.SampleName : njet = 3
-    elif 'W4Jets' in chain.SampleName : njet = 4
-    elif 'WJets' in chain.SampleName : njet = 0
+    nup = 999
+    njet = 999
+    #########################
+    # need to take care of 2 issues :
+    # (1) v19 w+jets MC has no nup info, need to get
+    #     njets from file names
+    # (2) for all other w+jets MC the weights are slightly
+    #     wrong, and so need to replace with updated values
+    #     below
+
+    if 'V19' not in str(chain.SampleName) :
+        #print 'V19 is not in name'
+        if maxPairTypeAndIndex[1] == 'eleTau':
+            nup = chain.eT_hepNUP[i]
+        elif maxPairTypeAndIndex[1] == 'muTau':
+            nup = chain.muT_hepNUP[i]
+        if(nup==999): return 1.0
+        njet = nup - 5
+        #print 'set njet = ', njet
 
 
-    if njet==0:      returnWeight = 0.476420146
+    elif 'V19' in str(chain.SampleName) :
+        #print 'V19 is in name'
+        if   'W1Jets' in str(chain.SampleName) : njet = 1
+        elif 'W2Jets' in str(chain.SampleName) : njet = 2
+        elif 'W3Jets' in str(chain.SampleName) : njet = 3
+        elif 'W4Jets' in str(chain.SampleName) : njet = 4
+        #print 'set njet = ', njet
+
+    if   njet==0: returnWeight =  0.476420146
     elif njet==1: returnWeight =  0.096920679
     elif njet==2: returnWeight =  0.030195587
     elif njet==3: returnWeight =  0.019295033

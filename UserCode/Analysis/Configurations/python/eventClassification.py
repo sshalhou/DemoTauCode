@@ -346,19 +346,6 @@ def eTauClassificationJECUP_looseBtag(chain, index):
     return btagAndTauPtCategory_forQCD(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index],chain.eT_nbjetsLOOSEUP[index])
 
 
-# ###################
-# # w+jets shape needs loose btags and loose iso taus
-# # (except tight iso taus for inclusive)
-#
-# muTauClassification_forQCD_wjetsShape
-# muTauClassificationJECDOWN_looseBtag_wjetsShape
-# muTauClassificationJECUP_looseBtag_wjetsShape
-# eTauClassification_forQCD_wjetsShape
-# eTauClassificationJECDOWN_looseBtag_wjetsShape
-# eTauClassificationJECUP_looseBtag_wjetsShape
-#
-
-
 ####################
 # classiffy Z->XX decays
 # based on generator - recoTau matching

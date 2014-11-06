@@ -214,6 +214,110 @@ def fillJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict
 
 
 
+##############
+# version which takes a dict to
+# decide if should fill inc and/or tagged
+# currently used by W+jet shapes
+
+
+def decide_fillJetTauFakeVariants(FILL_INCorTAG,maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
+    SUFFIXUP = ''
+    SUFFIXDOWN = ''
+    SUFFIXUPsplit = ''
+    SUFFIXDOWNsplit = ''
+    fineSUFFIXUP = ''
+    fineSUFFIXDOWN = ''
+    fineSUFFIXUPsplit = ''
+    fineSUFFIXDOWNsplit = ''
+    BASE = 'CMS_htt_WShape_'
+    if maxPairTypeAndIndex[3]!='TauEsNominal':
+        return
+    elif maxPairTypeAndIndex[1] !='eleTau' and maxPairTypeAndIndex[1] !='muTau':
+        return
+    elif maxPairTypeAndIndex[1] =='eleTau':
+        SUFFIXUP += BASE+'etau_'
+        SUFFIXDOWN += BASE+'etau_'
+    elif maxPairTypeAndIndex[1] =='muTau':
+        SUFFIXUP += BASE+'mutau_'
+        SUFFIXDOWN += BASE+'mutau_'
+
+    if 'nobtag' in str(maxPairTypeAndIndex[2]):
+        SUFFIXUPsplit = SUFFIXUP
+        SUFFIXDOWNsplit = SUFFIXDOWN
+        SUFFIXUP+= 'nobtag_8TeVUp_'
+        SUFFIXDOWN+= 'nobtag_8TeVDown_'
+        SUFFIXUPsplit+=str(maxPairTypeAndIndex[2])+'_8TeVUp_'
+        SUFFIXDOWNsplit+=str(maxPairTypeAndIndex[2])+'_8TeVDown_'
+    elif 'btag' in str(maxPairTypeAndIndex[2]):
+        SUFFIXUPsplit = SUFFIXUP
+        SUFFIXDOWNsplit = SUFFIXDOWN
+        SUFFIXUP+= 'btag_8TeVUp_'
+        SUFFIXDOWN+= 'btag_8TeVDown_'
+        SUFFIXUPsplit+=str(maxPairTypeAndIndex[2])+'_8TeVUp_'
+        SUFFIXDOWNsplit+=str(maxPairTypeAndIndex[2])+'_8TeVDown_'
+    fineSUFFIXUP = SUFFIXUP+'fine_binning_'
+    fineSUFFIXDOWN = SUFFIXDOWN+'fine_binning_'
+    fineSUFFIXUPsplit = SUFFIXUPsplit+'fine_binning_'
+    fineSUFFIXDOWNsplit = SUFFIXDOWNsplit+'fine_binning_'
+
+    #print SUFFIXUP, fineSUFFIXUP, SUFFIXUPsplit, fineSUFFIXUPsplit
+    #print SUFFIXDOWN, fineSUFFIXDOWN, SUFFIXDOWNsplit, fineSUFFIXDOWNsplit
+
+    VariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUP+maxPairTypeAndIndex[2]
+    VariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUP+'inclusive'
+
+    VariantToFillUpsplit = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUPsplit+maxPairTypeAndIndex[2]
+    VariantToFillUpsplitinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUPsplit+'inclusive'
+
+    VariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+maxPairTypeAndIndex[2]
+    VariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+'inclusive'
+
+    VariantToFillDownsplit = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWNsplit+maxPairTypeAndIndex[2]
+    VariantToFillDownsplitinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWNsplit+'inclusive'
+
+    fineVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXUP+maxPairTypeAndIndex[2]
+    fineVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXUP+'inclusive'
+
+    fineVariantToFillUpsplit = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXUPsplit+maxPairTypeAndIndex[2]
+    fineVariantToFillUpsplitinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXUPsplit+'inclusive'
+
+    fineVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXDOWN+maxPairTypeAndIndex[2]
+    fineVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXDOWN+'inclusive'
+
+    fineVariantToFillDownsplit = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXDOWNsplit+maxPairTypeAndIndex[2]
+    fineVariantToFillDownsplitinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXDOWNsplit+'inclusive'
+
+    #print VariantToFillUp, VariantToFillUpinc, VariantToFillDown, VariantToFillDowninc
+
+    #######################################################
+    # inclusive versions filled but are not really inclusive since
+    # all are split into b-tag or non-btag versions
+    # fill the unsplit versions if btagged or non-btagged
+
+    if 'nobtag' in str(maxPairTypeAndIndex[2]) or 'btag' in str(maxPairTypeAndIndex[2]):
+
+        if FILL_INCorTAG['inclusive'] is True :
+            histogram_dict[VariantToFillUpinc].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[VariantToFillUpsplitinc].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[fineVariantToFillUpinc].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[fineVariantToFillUpsplitinc].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[VariantToFillDowninc].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[VariantToFillDownsplitinc].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[fineVariantToFillDowninc].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[fineVariantToFillDownsplitinc].Fill(Value,wt_dict['jetTauFakeDown'])
+
+        if FILL_INCorTAG['Btag-or-noBtag'] is True :
+            histogram_dict[VariantToFillUp].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[VariantToFillUpsplit].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[fineVariantToFillUp].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[fineVariantToFillUpsplit].Fill(Value,wt_dict['jetTauFakeUp'])
+            histogram_dict[VariantToFillDown].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[VariantToFillDownsplit].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[fineVariantToFillDown].Fill(Value,wt_dict['jetTauFakeDown'])
+            histogram_dict[fineVariantToFillDownsplit].Fill(Value,wt_dict['jetTauFakeDown'])
+
+
+    return
 
 
 
@@ -356,6 +460,40 @@ def fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_A
          histogram_dict[FINEtauEsVariantToFill].Fill(Value,finalWt)
     return
 
+##############
+# version which takes a dict to
+# decide if should fill inc and/or tagged
+# currently used by W+jet shapes
+
+def decide_fillNominalSapesAndTauEsVariants_withFineBinToo(FILL_INCorTAG,maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    SUFFIX = ''
+    SUFFIXFINE = 'fine_binning_'
+    if maxPairTypeAndIndex[1] =='eleTau' and maxPairTypeAndIndex[3]=='TauEsUp' :
+        SUFFIX = 'CMS_scale_t_etau_8TeVUp_'
+        SUFFIXFINE = 'CMS_scale_t_etau_8TeVUp_fine_binning_'
+    if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsUp' :
+        SUFFIX = 'CMS_scale_t_mutau_8TeVUp_'
+        SUFFIXFINE = 'CMS_scale_t_mutau_8TeVUp_fine_binning_'
+    if maxPairTypeAndIndex[1] =='eleTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
+        SUFFIX = 'CMS_scale_t_etau_8TeVDown_'
+        SUFFIXFINE = 'CMS_scale_t_etau_8TeVDown_fine_binning_'
+    if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
+        SUFFIX = 'CMS_scale_t_mutau_8TeVDown_'
+        SUFFIXFINE = 'CMS_scale_t_mutau_8TeVDown_fine_binning_'
+    tauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+maxPairTypeAndIndex[2]
+    FINEtauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXFINE+maxPairTypeAndIndex[2]
+    tauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+'inclusive'
+    FINEtauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXFINE+'inclusive'
+    #print tauEsVariantToFill, tauEsVariantToFillinc, FINEtauEsVariantToFill, FINEtauEsVariantToFillinc
+    if FILL_INCorTAG['inclusive'] is True:
+        histogram_dict[tauEsVariantToFillinc].Fill(Value,finalWt)
+        histogram_dict[FINEtauEsVariantToFillinc].Fill(Value,finalWt)
+    if maxPairTypeAndIndex[2] != 'Reject':
+        if FILL_INCorTAG['Btag-or-noBtag'] is True:
+            histogram_dict[tauEsVariantToFill].Fill(Value,finalWt)
+            histogram_dict[FINEtauEsVariantToFill].Fill(Value,finalWt)
+    return
+
 
 ############################
 # fill ZLScale variants
@@ -483,6 +621,48 @@ def fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histog
             histogram_dict[FINEtauJECVariantToFillDown].Fill(Value,finalWt)
     return
 
+##############
+# version which takes a dict to
+# decide if should fill inc and/or tagged
+# currently used by W+jet shapes
+
+def decide_fillJECvariants_withFineBinToo(FILL_INCorTAG,maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    SUFFIXJECUP = ''
+    SUFFIXJECDOWN = ''
+    fineSUFFIXJECUP = ''
+    fineSUFFIXJECDOWN = ''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        SUFFIXJECUP = 'CMS_scale_jDown_'
+        SUFFIXJECDOWN = 'CMS_scale_jUp_'
+        fineSUFFIXJECUP = 'CMS_scale_jDown_fine_binning_'
+        fineSUFFIXJECDOWN = 'CMS_scale_jUp_fine_binning_'
+    if len(SUFFIXJECUP)>0 and len(SUFFIXJECDOWN)>0:
+        tauJECVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECUP+maxPairTypeAndIndex[5]
+        tauJECVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECDOWN+maxPairTypeAndIndex[4]
+        tauJECVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECUP+'inclusive'
+        tauJECVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXJECDOWN+'inclusive'
+
+        FINEtauJECVariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECUP+maxPairTypeAndIndex[5]
+        FINEtauJECVariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECDOWN+maxPairTypeAndIndex[4]
+        FINEtauJECVariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECUP+'inclusive'
+        FINEtauJECVariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+fineSUFFIXJECDOWN+'inclusive'
+
+        if FILL_INCorTAG['inclusive'] is True:
+            histogram_dict[FINEtauJECVariantToFillUpinc].Fill(Value,finalWt)
+            histogram_dict[FINEtauJECVariantToFillDowninc].Fill(Value,finalWt)
+            histogram_dict[tauJECVariantToFillUpinc].Fill(Value,finalWt)
+            histogram_dict[tauJECVariantToFillDowninc].Fill(Value,finalWt)
+        if maxPairTypeAndIndex[5] != 'Reject':
+            if FILL_INCorTAG['Btag-or-noBtag'] is True:
+                histogram_dict[tauJECVariantToFillUp].Fill(Value,finalWt)
+                histogram_dict[FINEtauJECVariantToFillUp].Fill(Value,finalWt)
+        if maxPairTypeAndIndex[4] != 'Reject':
+            if FILL_INCorTAG['Btag-or-noBtag'] is True:
+                histogram_dict[tauJECVariantToFillDown].Fill(Value,finalWt)
+                histogram_dict[FINEtauJECVariantToFillDown].Fill(Value,finalWt)
+    return
+
+
 
 #####################################
 # Fill JEC histogram variants       #
@@ -560,6 +740,13 @@ def Fill_WjetsMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
     fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
     fillJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
     return
+
+def Fill_WjetsMC_forWjetsShape(tauIsoFill,maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
+    decide_fillNominalSapesAndTauEsVariants_withFineBinToo(tauIsoFill,maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
+    decide_fillJECvariants_withFineBinToo(tauIsoFill,maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
+    decide_fillJetTauFakeVariants(tauIsoFill,maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
+    return
+
 
 def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)

@@ -219,13 +219,13 @@ def passesSameSignSelectionMuTau(chain,index,UseNewTriggers,Verbose):
 
 
 #################
-# default selection with loose Tau Iso (used for btag and nonbtagged W+jets shape)
+# default selection with loose or tight Tau Iso (used for btag and nonbtagged W+jets shape)
 
-def passesDefaultSelectionWithLooseTauIsoETau(chain,index,UseNewTriggers,Verbose):
+def passesDefaultSelectionWithLooseOrTightTauIsoETau(chain,index,UseNewTriggers,Verbose):
     passesCutsETau = True
     if electronID(chain,index,Verbose) is False:
         passesCutsETau = False
-    if tauID_eTau_forQCD(chain, index, Verbose) is False:
+    if tauID_eTau_looseORtightISO(chain, index, Verbose) is False:
         passesCutsETau = False
     if pairCutsETau(chain, index,Verbose) is False:
         passesCutsETau = False
@@ -237,11 +237,11 @@ def passesDefaultSelectionWithLooseTauIsoETau(chain,index,UseNewTriggers,Verbose
         passesCutsETau = False
     return passesCutsETau
 
-def passesDefaultSelectionWithLooseTauIsoMuTau(chain,index,UseNewTriggers,Verbose):
+def passesDefaultSelectionWithLooseOrTightTauIsoMuTau(chain,index,UseNewTriggers,Verbose):
     passesCutsMuTau = True
     if muonID(chain,index,Verbose) is False:
         passesCutsMuTau = False
-    if tauID_muTau_forQCD(chain, index, Verbose) is False:
+    if tauID_muTau_looseORtightISO(chain, index, Verbose) is False:
         passesCutsMuTau = False
     if pairCutsMuTau(chain, index,Verbose) is False:
         passesCutsMuTau = False

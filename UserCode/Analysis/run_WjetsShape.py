@@ -29,6 +29,7 @@ listOfFiles = []
 
 
 #listOfFiles.append('HOLDER/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup.root')
+#listOfFiles.append('HOLDER/FlatTuple_SZS_W3jetsLNuV7Av1_v6ntup.root')
 
 
 
@@ -89,7 +90,7 @@ maxEntries = chain.GetEntries()
 print 'starting loop ...'
 
 if SmallRun is True:
-	maxEntries = 5000
+	maxEntries = 25000
 
 for entry in range(0,maxEntries):
 		entryNumber = chain.GetEntryNumber(entry);
@@ -118,7 +119,7 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.eT_correctedSVFitMass.size()):
 				passesCuts = True
-				if passesDefaultSelectionETau(chain,index,UseNewTriggers,Verbose) is False:
+				if passesDefaultSelectionWithLooseOrTightTauIsoETau(chain,index,UseNewTriggers,Verbose) is False:
 					passesCuts = False
 				if passesCuts is True:
 					passingETauIndices.append(index)
@@ -129,7 +130,7 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.muT_correctedSVFitMass.size()):
 				passesCuts = True
-				if passesDefaultSelectionMuTau(chain,index,UseNewTriggers,Verbose) is False:
+				if passesDefaultSelectionWithLooseOrTightTauIsoMuTau(chain,index,UseNewTriggers,Verbose) is False:
 					passesCuts = False
 				if passesCuts is True:
 					passingMuTauIndices.append(index)
@@ -190,7 +191,25 @@ for entry in range(0,maxEntries):
 					wt_dict['jetTauFakeNominal'] = 1.0
 					wt_dict['jetTauFakeUp'] = 1.0
 					getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose)
-					Fill_WjetsMC(maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
+
+					##################
+					# inclusive takes only tight isolated taus
+					# btagged and non-btagged takes loose isolated taus
+					i=maxPairTypeAndIndex[0]
+					tauIsoFill = {}
+					tauIsoFill['inclusive'] = False
+					tauIsoFill['Btag-or-noBtag'] = False
+					if maxPairTypeAndIndex[1] == 'muTau':
+						if(chain.muT_tau_byLooseIsolationMVA3oldDMwLT[index] > 0.5):
+							tauIsoFill['Btag-or-noBtag'] = True
+						if(chain.muT_tau_byTightIsolationMVA3oldDMwLT[index] > 0.5):
+							tauIsoFill['inclusive'] = True
+					if maxPairTypeAndIndex[1] == 'eleTau':
+						if(chain.eT_tau_byLooseIsolationMVA3oldDMwLT[index] > 0.5):
+							tauIsoFill['Btag-or-noBtag'] = True
+						if(chain.eT_tau_byTightIsolationMVA3oldDMwLT[index] > 0.5):
+							tauIsoFill['inclusive'] = True
+					Fill_WjetsMC_forWjetsShape(tauIsoFill,maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
 
 
 
