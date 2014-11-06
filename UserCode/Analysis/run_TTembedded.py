@@ -27,44 +27,56 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-#listOfFiles.append('./HOLDER/TTEmbedMuTauFlatTuple_10_1_wuj.root')
+#listOfFiles.append('./HOLDER/TTembeddedFlatTuple_12_1_cQU_skimmed.root')
 
 
-##################
-## embedded ttbar
-##################
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_10_1_u9P.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_11_1_BLX.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_12_1_ovK.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_13_1_deR.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_14_1_DUm.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_15_1_kJ0.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_16_1_OeR.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_1_1_CgF.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_2_1_W5W.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_3_1_rb1.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_4_1_DnI.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_5_1_3EL.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_6_1_pW7.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_7_1_Er7.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_8_1_Ze1.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedETau_V7FlatTupleEx/FlatTuple_9_1_Gdd.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_10_1_wuj.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_11_1_NQk.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_12_1_Gm9.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_13_1_13w.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_14_1_HUf.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_15_1_LAe.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_16_1_PHT.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_1_1_AUs.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_2_1_20w.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_3_1_UFn.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_4_1_pfR.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_5_1_yZM.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_6_1_BuK.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_7_1_XCZ.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_8_1_jv0.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/ttEMBED/TtBarEmbeddedMuTau_V7FlatTupleEx/FlatTuple_9_1_nzV.root')
+
+#################
+# embedded ttbar
+#################
+
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_10_1_GW8_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_11_1_Zmz_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_12_1_cQU_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_13_1_L2Y_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_14_1_TMn_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_15_1_R2U_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_16_1_alW_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_17_1_Uqc_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_18_1_TCD_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_19_1_rk7_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_1_1_jlf_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_20_1_A0D_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_21_1_CiT_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_2_1_paW_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_3_1_BOa_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_4_1_TiG_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_5_1_2pM_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_6_1_OJn_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_7_1_TMB_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_8_1_77R_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_9_1_cVT_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_10_1_naD_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_11_1_pCy_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_12_1_rQf_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_13_1_bQq_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_14_1_YaV_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_15_1_L3q_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_16_1_ZSz_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_17_1_I2J_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_18_1_QRm_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_19_1_5zp_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_1_1_jzd_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_20_1_Lgz_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_21_1_cOk_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_2_1_EZE_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_3_1_uVC_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_4_1_33C_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_5_1_XK1_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_6_1_cfo_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_7_1_wY3_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_8_1_94L_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/ttEMBED_skimmed/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_9_1_uPW_skimmed.root')
 
 
 for afile in listOfFiles:
@@ -200,7 +212,7 @@ for entry in range(0,maxEntries):
 				if SAMPLE_ADD == '_embeddedTTbar_':
 					# since will subtract from embedded ZTT fill the ZTT histograms :
 					classification = '_ZTT_'
-					wt = getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose)
+					wt = getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,True)
 					Fill_ZTTembedded(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 
 
