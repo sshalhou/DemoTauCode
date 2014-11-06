@@ -27,7 +27,7 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-
+#listOfFiles.append('HOLDER/crash_13000_FlatTuple_SZS_W4jetsLNuV1_v6ntup_skimmed.root')
 #listOfFiles.append('HOLDER/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup.root')
 #listOfFiles.append('HOLDER/FlatTuple_SZS_W3jetsLNuV7Av1_v6ntup.root')
 
@@ -201,14 +201,14 @@ for entry in range(0,maxEntries):
 					tauIsoFill['inclusive'] = False
 					tauIsoFill['Btag-or-noBtag'] = False
 					if maxPairTypeAndIndex[1] == 'muTau':
-						if(chain.muT_tau_byLooseIsolationMVA3oldDMwLT[index] > 0.5):
+						if(chain.muT_tau_byLooseIsolationMVA3oldDMwLT[i] > 0.5):
 							tauIsoFill['Btag-or-noBtag'] = True
-						if(chain.muT_tau_byTightIsolationMVA3oldDMwLT[index] > 0.5):
+						if(chain.muT_tau_byTightIsolationMVA3oldDMwLT[i] > 0.5):
 							tauIsoFill['inclusive'] = True
 					if maxPairTypeAndIndex[1] == 'eleTau':
-						if(chain.eT_tau_byLooseIsolationMVA3oldDMwLT[index] > 0.5):
+						if(chain.eT_tau_byLooseIsolationMVA3oldDMwLT[i] > 0.5):
 							tauIsoFill['Btag-or-noBtag'] = True
-						if(chain.eT_tau_byTightIsolationMVA3oldDMwLT[index] > 0.5):
+						if(chain.eT_tau_byTightIsolationMVA3oldDMwLT[i] > 0.5):
 							tauIsoFill['inclusive'] = True
 					Fill_WjetsMC_forWjetsShape(tauIsoFill,maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
 
