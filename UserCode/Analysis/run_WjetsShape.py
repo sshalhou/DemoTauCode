@@ -38,15 +38,16 @@ listOfFiles = []
 ###########
 # wjets
 
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W1jetsLNuV7Av1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W2jetsLNuV19v1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W2jetsLNuV7Av1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W3jetsLNuV19v1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W3jetsLNuV7Av1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_W4jetsLNuV1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_WjetsLNuV1_v6ntup.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/wjets/FlatTuple_SZS_WjetsLNuV2_v6ntup.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W1jetsLNuV7Av1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W2jetsLNuV19v1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W2jetsLNuV7Av1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W3jetsLNuV19v1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W3jetsLNuV7Av1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W4jetsLNuV1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_WjetsLNuV1_v6ntup_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_WjetsLNuV2_v6ntup_skimmed.root')
+
 
 
 for afile in listOfFiles:
