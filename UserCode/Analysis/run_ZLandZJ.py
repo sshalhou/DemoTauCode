@@ -27,6 +27,7 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
+#listOfFiles.append('./HOLDER/DYOFFnew_skimmed.root')
 #listOfFiles.append('./HOLDER/DY2JetsFlatTuple_5_1_bfs.root')
 
 
@@ -257,31 +258,31 @@ for entry in range(0,maxEntries):
 				SAMPLE_ADD = getSAMPLE_ADD(sampleName)
 				assert(len(SAMPLE_ADD)>0), " Assert : unknown sample "
 				if SAMPLE_ADD == '_DYTauPolOff_':
-					classification = classifyZDecay(chain,maxPairTypeAndIndex)
+					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
 					print classification
 					wt = 1.0
 					if classification == '_ZL_':
-						wt = getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
+						wt = getWeightForTauPolOffDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
 						# contains an internal check for e->tau
 						wt = wt * getFakeZeeWeight(chain,maxPairTypeAndIndex)
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 					elif classification == '_ZJ_':
-						wt = getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
+						wt = getWeightForTauPolOffDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 				elif (SAMPLE_ADD=='_DY1Jet_' or
 				      SAMPLE_ADD=='_DY2Jet_' or
 					  SAMPLE_ADD=='_DY3Jet_' or
 					  SAMPLE_ADD=='_DY4Jet_'):
-					classification = classifyZDecay(chain,maxPairTypeAndIndex)
+					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
 					print classification
 					wt = 1.0
 					if classification == '_ZL_':
-						wt = getWeightForRegularDY(chain,maxPairTypeAndIndex,Verbose)
+						wt = getWeightForRegularDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
 						# contains an internal check for e->tau
 						wt = wt * getFakeZeeWeight(chain,maxPairTypeAndIndex)
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 					elif classification == '_ZJ_':
-						wt = getWeightForRegularDY(chain,maxPairTypeAndIndex,Verbose)
+						wt = getWeightForRegularDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 
 

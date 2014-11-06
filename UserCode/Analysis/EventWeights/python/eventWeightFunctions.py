@@ -163,22 +163,25 @@ def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
 # stitching Z+jets weight
 
 def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
+
+    # stitching weights in FlatTuple are slightly wrong
+    # re-derive them from the FlatTuple's nup-5 instead
+
     returnWeight = 1.0
     i = maxPairTypeAndIndex[0]
-    # stitching weights in ntuples are slightly off
-    # derive them from the sample name instead
-    njet = 100
-    if 'DY1Jets' in chain.SampleName : njet = 1
-    elif 'DY2Jets' in chain.SampleName : njet = 2
-    elif 'DY3Jets' in chain.SampleName : njet = 3
-    elif 'DY4Jets' in chain.SampleName : njet = 4
-    elif 'DYJets' in chain.SampleName : njet = 0
+    nup = 999
+    if maxPairTypeAndIndex[1] == 'eleTau':
+        nup = chain.eT_hepNUP[i]
+    elif maxPairTypeAndIndex[1] == 'muTau':
+        nup = chain.muT_hepNUP[i]
+    if(nup==999): return 1.0
 
+    njet = nup-5
 
-    if njet==0:      returnWeight =0.11906618
-    elif njet==1: returnWeight =0.022478688
-    elif njet==2: returnWeight =0.009092586
-    elif njet==3: returnWeight =0.005278795
+    if   njet==0: returnWeight = 0.11906618
+    elif njet==1: returnWeight = 0.022478688
+    elif njet==2: returnWeight = 0.009092586
+    elif njet==3: returnWeight = 0.005278795
     elif njet>=4: returnWeight = 0.004118808
 
     return returnWeight*19.7
@@ -555,6 +558,50 @@ def getWeightForRegularDY(chain,maxPairTypeAndIndex,Verbose):
       print allWeights
       print 'crossSection is read from tree as ',  chain.crossSection
     return returnWeight
+
+def getWeightForRegularDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    if classification == '_ZTT_':
+        allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    #allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is read from tree as ',  chain.crossSection
+    return returnWeight
+
+
+def getWeightForTauPolOffDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    if classification == '_ZTT_':
+        allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    #allWeights['nevents'] = 1000.0*19.7*(3504.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
+    allWeights['TauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    # this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is hardcoded to ',  3504.0
+    return returnWeight
+
+
 
 def getWeightForVV(chain,maxPairTypeAndIndex,Verbose):
     returnWeight = 1.0

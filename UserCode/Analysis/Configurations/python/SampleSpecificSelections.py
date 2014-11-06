@@ -218,6 +218,41 @@ def passesSameSignSelectionMuTau(chain,index,UseNewTriggers,Verbose):
     return passesCutsMuTau
 
 
+#################
+# default selection with loose Tau Iso (used for btag and nonbtagged W+jets shape)
+
+def passesDefaultSelectionWithLooseTauIsoETau(chain,index,UseNewTriggers,Verbose):
+    passesCutsETau = True
+    if electronID(chain,index,Verbose) is False:
+        passesCutsETau = False
+    if tauID_eTau_forQCD(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if pairCutsETau(chain, index,Verbose) is False:
+        passesCutsETau = False
+    if electronTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if tauTriggerForETau(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if chain.eT_correctedSVFitMass[index] < 50:
+        passesCutsETau = False
+    return passesCutsETau
+
+def passesDefaultSelectionWithLooseTauIsoMuTau(chain,index,UseNewTriggers,Verbose):
+    passesCutsMuTau = True
+    if muonID(chain,index,Verbose) is False:
+        passesCutsMuTau = False
+    if tauID_muTau_forQCD(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if pairCutsMuTau(chain, index,Verbose) is False:
+        passesCutsMuTau = False
+    if muonTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if chain.muT_correctedSVFitMass[index] < 50:
+        passesCutsMuTau = False
+    return passesCutsMuTau
+
 def passesSUSYBBExtraSelectionETau(chain,index):
     if chain.eT_passSignalGeneratorMass70to130Cut[index] is False:
         return False

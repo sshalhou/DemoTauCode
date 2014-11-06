@@ -346,6 +346,17 @@ def eTauClassificationJECUP_looseBtag(chain, index):
     return btagAndTauPtCategory_forQCD(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index],chain.eT_nbjetsLOOSEUP[index])
 
 
+# ###################
+# # w+jets shape needs loose btags and loose iso taus
+# # (except tight iso taus for inclusive)
+#
+# muTauClassification_forQCD_wjetsShape
+# muTauClassificationJECDOWN_looseBtag_wjetsShape
+# muTauClassificationJECUP_looseBtag_wjetsShape
+# eTauClassification_forQCD_wjetsShape
+# eTauClassificationJECDOWN_looseBtag_wjetsShape
+# eTauClassificationJECUP_looseBtag_wjetsShape
+#
 
 
 ####################
@@ -415,68 +426,135 @@ def classifyZDecay(chain,maxPairTypeAndIndex):
 ####################
 # classiffy Z->XX decays
 # based on generator - recoTau matching
+# update based on email
+#TRUE PROCESS  |        MATCHING
+#              tau_h matches gen tau_h      tau_h matches gen e or mu    tau_h matches neither
+#Z->tau tau    ZTT (*)                       ZTT                          ZJ
+#Z->ll         --                            ZL                           ZJ
 
-def classifyZDecay_TestBed(chain,maxPairTypeAndIndex):
+
+def classifyZDecay_Update(chain,maxPairTypeAndIndex):
     classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     i=maxPairTypeAndIndex[0]
     ########################
     # check reco-gen matches
-    tauMatches = {}
-    tauMatches['genTau'] = False
-    tauMatches['genLep'] = False
-    tauMatches['lepFakesTau'] = False
+    genInfo = {}
+    genInfo['z->tau tau'] = False
+    genInfo['z->l l'] = False
+    genInfo['reco-genTau'] = False
+    genInfo['reco-genLep'] = False
     if maxPairTypeAndIndex[1] == 'muTau':
-            if chain.muT_isDecayZtauTau[i]: print 'Z->tt'
-            if chain.muT_isDecayZeE[i]: print 'Z->ee'
-            if chain.muT_isDecayZmuMu[i]: print 'Z->mm'
+        if chain.muT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        elif chain.muT_isDecayZeE[i] or chain.muT_isDecayZmuMu[i] :
+            genInfo['z->l l'] = True
+        if chain.muT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['reco-genTau'] = True
+        elif (chain.muT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromZ[i]   or
+            chain.muT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['reco-genLep'] = True
 
-    #
-    #     if chain.muT_isDecayZtauTau[i] :
-    #         if chain.muT_isRecoTau_matchedTo_GenTauFromZ[i] : tauMatches['genTau'] = True
-    #         if chain.muT_isRecoTau_matchedTo_GenMuonFromTau[i] : tauMatches['genLep'] = True
-    #         if tauMatches['genTau'] is True and tauMatches['genLep'] is False:
-    #             classification = '_ZTT_'
-    #             print 'found a ZTT in Z->tau tau'
-    #         elif tauMatches['genTau'] is False and tauMatches['genLep'] is True:
-    #             classification = '_ZL_'
-    #             print 'found a ZL in Z->tau tau'
-    #         elif tauMatches['genTau'] is False and tauMatches['genLep'] is False:
-    #             classification = '_ZJ_'
-    #             print 'found a ZJ in Z->tau tau'
-    #         elif tauMatches['genTau'] is True and tauMatches['genLep'] is True:
-    #             classification = '_X_'
-    #             print 'found a X in Z->tau tau'
-    #     elif chain.muT_isDecayZmuMu[i] :
-    #         if chain.muT_isRecoTau_matchedTo_GenMuonFromZ[i]: tauMatches['lepFakesTau'] = True
-    #         if tauMatches['lepFakesTau'] is True:
-    #             classification = '_ZL_'
-    #             print 'found a ZL in Z->mu mu'
-    #         elif tauMatches['lepFakesTau'] is False:
-    #             classification = '_ZJ_'
-    #             print 'found a ZJ in Z->mu mu'
-    #
-    # elif maxPairTypeAndIndex[1] == 'eleTau':
-    #     if chain.eT_isDecayZtauTau[i] :
-    #         if chain.eT_isRecoTau_matchedTo_GenTauFromZ[i] : tauMatches['genTau'] = True
-    #         if chain.eT_isRecoTau_matchedTo_GenElecFromTau[i] : tauMatches['genLep'] = True
-    #         if tauMatches['genTau'] is True and tauMatches['genLep'] is False:
-    #             classification = '_ZTT_'
-    #             print 'found a ZTT in Z->tau tau'
-    #         elif tauMatches['genTau'] is False and tauMatches['genLep'] is True:
-    #             classification = '_ZL_'
-    #             print 'found a ZL in Z->tau tau'
-    #         elif tauMatches['genTau'] is False and tauMatches['genLep'] is False:
-    #             classification = '_ZJ_'
-    #             print 'found a ZJ in Z->tau tau'
-    #         elif tauMatches['genTau'] is True and tauMatches['genLep'] is True:
-    #             classification = '_X_'
-    #             print 'found a X in Z->tau tau'
-    #     elif chain.eT_isDecayZeE[i] :
-    #         if chain.eT_isRecoTau_matchedTo_GenElecFromZ[i]: tauMatches['lepFakesTau'] = True
-    #         if tauMatches['lepFakesTau'] is True:
-    #             classification = '_ZL_'
-    #             print 'found a ZL in Z->e e'
-    #         elif tauMatches['lepFakesTau'] is False:
-    #             classification = '_ZJ_'
-    #             print 'found a ZJ in Z->e e'
+    elif maxPairTypeAndIndex[1] == 'eleTau':
+        if chain.eT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        elif chain.eT_isDecayZeE[i] or chain.eT_isDecayZmuMu[i]:
+            genInfo['z->l l'] = True
+        if chain.eT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['reco-genTau'] = True
+        elif (chain.eT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromZ[i]   or
+            chain.eT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['reco-genLep'] = True
+
+    if genInfo['z->tau tau'] :
+        if genInfo['reco-genTau'] or genInfo['reco-genLep']:
+            classification = '_ZTT_'
+            print 'found a ZTT in Z->tau tau'
+        else :
+            classification = '_ZJ_'
+            print 'found a ZJ in Z->tau tau'
+    if genInfo['z->l l'] :
+        if genInfo['reco-genLep'] :
+            classification = '_ZL_'
+            print 'found a ZL in Z->l l'
+        else :
+            classification = '_ZJ_'
+            print 'found a ZJ in Z->l l'
+
+
+    return classification
+
+########################
+# final version of this
+# with corrections based on various
+# discussions and emails
+
+
+
+
+def classifyZDecay_Final(chain,maxPairTypeAndIndex):
+    classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    i=maxPairTypeAndIndex[0]
+    ########################
+    # check reco-gen matches
+    genInfo = {}
+    genInfo['z->tau tau'] = False
+    genInfo['z->l l'] = False
+    genInfo['reco-match-genTau'] = False
+    genInfo['reco-match-genLepFromZ'] = False
+    genInfo['reco-match-genLepFromTau'] = False
+
+    if maxPairTypeAndIndex[1] == 'muTau':
+        if chain.muT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        if chain.muT_isDecayZeE[i] or chain.muT_isDecayZmuMu[i] :
+            genInfo['z->l l'] = True
+        if chain.muT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['reco-match-genTau'] = True
+        if (chain.muT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromZ[i] ):
+            genInfo['reco-match-genLepFromZ'] = True
+        if (chain.muT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['reco-match-genLepFromTau'] = True
+
+    elif maxPairTypeAndIndex[1] == 'eleTau':
+        if chain.eT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        if chain.eT_isDecayZeE[i] or chain.eT_isDecayZmuMu[i] :
+            genInfo['z->l l'] = True
+        if chain.eT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['reco-match-genTau'] = True
+        if (chain.eT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromZ[i] ):
+            genInfo['reco-match-genLepFromZ'] = True
+        if (chain.eT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['reco-match-genLepFromTau'] = True
+
+    if genInfo['z->tau tau']:
+        if genInfo['reco-match-genLepFromTau']:
+            classification = '_ZL_'
+            print 'found a ZL in Z->Tau Tau'
+        elif genInfo['reco-match-genTau']:
+            classification = '_ZTT_'
+            print 'found a ZTT in Z->Tau Tau'
+        else:
+            classification = '_ZJ_'
+            print 'found a ZJ in Z->Tau Tau'
+
+    elif genInfo['z->l l']:
+        if genInfo['reco-match-genLepFromTau']:
+            classification = '_ZL_'
+            print 'found a ZL in Z->l l'
+        elif genInfo['reco-match-genLepFromZ']:
+            classification = '_ZL_'
+            print 'found a ZL in Z->l l'
+        else:
+            classification = '_ZJ_'
+            print 'found a ZJ in Z->l l'
+
     return classification
