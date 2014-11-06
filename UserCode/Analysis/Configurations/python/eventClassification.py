@@ -11,6 +11,8 @@ from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCan
 # the tight CSV b-jet count
 
 def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
+  print 'tight btags : ', btags
+  print 'loose btags : ', btagsLooseCSV
   returnWord = ''
   if btags == 0:
     returnWord = 'nobtag'
@@ -23,7 +25,7 @@ def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
       returnWord += '_medium'
     elif tauPt > 60:
       returnWord += '_high'
-  elif njets<2 and btagsLooseCSV>0:
+  if njets<2 and btagsLooseCSV>0:
     returnWord = 'btag'
     if tauPt <= 30:
       print tauPt, " is less than 30 "
@@ -32,8 +34,9 @@ def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
       returnWord += '_low'
     elif tauPt > 45:
       returnWord += '_high'
-  else:
+  if len(returnWord) == 0:
     returnWord = 'Reject'
+  print returnWord
   return returnWord
 
 
