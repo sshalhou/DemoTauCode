@@ -11,8 +11,8 @@ from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCan
 # the tight CSV b-jet count
 
 def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
-  print 'tight btags : ', btags
-  print 'loose btags : ', btagsLooseCSV
+  #print 'tight btags : ', btags
+  #print 'loose btags : ', btagsLooseCSV
   returnWord = ''
   if btags == 0:
     returnWord = 'nobtag'
