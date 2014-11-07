@@ -186,7 +186,7 @@ for entry in range(0,maxEntries):
 				fillVariables(chain,eventVariables,maxPairTypeAndIndex,Verbose)
 				SAMPLE_ADD = getSAMPLE_ADD(sampleName)
 				assert(len(SAMPLE_ADD)>0), " Assert : unknown sample "
-			elif SAMPLE_ADD == '_DYTauPolOff_':
+			if SAMPLE_ADD == '_DYTauPolOff_':
 					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
 					print classification
 					wt = 1.0
@@ -203,7 +203,7 @@ for entry in range(0,maxEntries):
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 
 
-			
+
 
 
 ######################
