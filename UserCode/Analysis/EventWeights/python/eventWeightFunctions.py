@@ -376,6 +376,28 @@ def highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex):
     returnWeight *= divisionHelp(adjustedDataWt, chain.muT_EffMcHighPtTauTrigger[i])
   return returnWeight
 
+def highPtTauTriggerBugWeights_forEMBEDDED(chain, maxPairTypeAndIndex):
+  returnWeight = 1.0
+  i = maxPairTypeAndIndex[0]
+  if maxPairTypeAndIndex[1] == 'eleTau':
+    adjustedDataWt = chain.eT_EffDataHighPtTauTrigger[i]
+    # fix computation for data
+    if adjustedDataWt != 1.0:
+        adjustedDataWt = ((chain.eT_EffDataHighPtTauTrigger[i]-0.3)/0.7)
+        adjustedDataWt = (1-0.6245691177080073)+adjustedDataWt*(0.6245691177080073)
+        #print "original, new ", chain.eT_EffDataHighPtTauTrigger[i], adjustedDataWt
+    returnWeight *= adjustedDataWt
+  elif maxPairTypeAndIndex[1] == 'muTau':
+    adjustedDataWt = chain.muT_EffDataHighPtTauTrigger[i]
+    # fix computation for data
+    if adjustedDataWt != 1.0:
+       adjustedDataWt = ((chain.muT_EffDataHighPtTauTrigger[i]-0.3)/0.7)
+       adjustedDataWt = (1-0.6245691177080073)+adjustedDataWt*(0.6245691177080073)
+       #print "original, new ", chain.muT_EffDataHighPtTauTrigger[i], adjustedDataWt
+    returnWeight *= adjustedDataWt
+  return returnWeight
+
+
 ##########################
 # Decay Mode Correction
 # only for signal and Z->tau tau
@@ -734,6 +756,7 @@ def getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['triggerBug'] = highPtTauTriggerBugWeights_forEMBEDDED(chain, maxPairTypeAndIndex)
     allWeights['embeddingWeight'] = getEmbedWeight(chain,maxPairTypeAndIndex)
     allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
     # use the number of events of the parent MC sample
