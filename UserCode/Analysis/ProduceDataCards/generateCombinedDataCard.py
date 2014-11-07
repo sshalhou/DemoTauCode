@@ -91,26 +91,40 @@ for chan in range(0,len(CHANNELS)):
     print '*     begin W+jets normaization determination for', FILENAME
     print '***************************************************************'
 
-    print '* 1st determine from standard MC, the probability for a W+jets event '
-    print '* to enter our sub-categories '
+    print '* 1st by comparing W+jets MC in our default selection for each subcategory *'
+    print '* to W+jets MC in our high Mt control region get the CR to SR scale factor for each category *'
 
-    WPROBS = {}
-    LOW_MT_W_COUNT = 0.0
-    HIGH_MT_W_COUNT = 0.0
+    #** note requires new run of W+jets MC under our default selection **
 
+    print 'reading in W templates under default selection ..'
 
+    # create and initialize
+    SIGNAL_REGION_W_TOTALS = {}
     for direc in range(0,len(DIRLIST)):
         histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
-        incname = CHANNELS[chan]+"_"+"inclusive"+"/W"
-        LOW_MT_W_COUNT = HISTOGRAM_DICTIONARY[incname].GetSumOfWeights()
-        print histname
-        WPROBS[DIRLIST[direc]] = HISTOGRAM_DICTIONARY[histname].GetSumOfWeights()/HISTOGRAM_DICTIONARY[incname].GetSumOfWeights()
+        SIGNAL_REGION_W_TOTALS[histname] = 0.0
 
-    print WPROBS
+    for addFile in range(0,len(FOR_W_DEFAULT)):
+        if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
+            GOTFILE = TFile(FOR_W_DEFAULT[addFile],'READ')
+            print 'checking ', FOR_W_DEFAULT[addFile], 'for SR W+jets shapes'
+            for direc in range(0,len(DIRLIST)):
+                histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+                #print 'looking for ', histname
+                GOTHIST = GOTFILE.Get(histname)
+                if(GOTHIST):
+                    #print 'Found it, adding ', GOTHIST.GetSumOfWeights(), 'to total for ', histname
+                    SIGNAL_REGION_W_TOTALS[histname] = SIGNAL_REGION_W_TOTALS[histname]+GOTHIST.GetSumOfWeights()
+                else:
+                    print 'WARNING FAILED TO FIND :', incname
 
-    print '* 2nd determine from standard MC, the probability for a W+jets event '
-    print '* to enter low mt or high mt selections '
 
+    print '** signal region w+jets totals are : '
+    for key, value in SIGNAL_REGION_W_TOTALS.iteritems():
+         print key, value
+
+    # next loop through high mt files, and get total for W+jets MC in inclusive cat.
+    HIGH_MT_W_COUNT = 0.0
     for addFile in range(0,len(FOR_W_NORM)):
         if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
             GOTFILE = TFile(FOR_W_NORM[addFile],'READ')
@@ -121,35 +135,24 @@ for chan in range(0,len(CHANNELS)):
             else:
                 print 'WARNING FAILED TO FIND :', incname
 
-    print ' low mt total from w+jets MC = ', LOW_MT_W_COUNT
-    print ' high mt total from w+jets MC = ', HIGH_MT_W_COUNT
-    print 'scale factor from high mt to low mt = ', LOW_MT_W_COUNT/HIGH_MT_W_COUNT
-    print 'adjust WPROBS for this factor ...'
 
-    for key, value in WPROBS.iteritems():
-        print key, value, "--->", value * (LOW_MT_W_COUNT/HIGH_MT_W_COUNT)
-        WPROBS[key] = value * (LOW_MT_W_COUNT/HIGH_MT_W_COUNT)
+    print ' the control region W+jets MC total for the inclusive ', CHANNELS[chan], ' is ',HIGH_MT_W_COUNT
 
+    # create and fill
+    W_SCALE_FACTORS = {}
+    for direc in range(0,len(DIRLIST)):
+        histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+        W_SCALE_FACTORS[histname] = SIGNAL_REGION_W_TOTALS[histname]/HIGH_MT_W_COUNT
 
-    print '* next derive inclusive counts from high Mt data with bkg subtraction '
-
-
-
-    WNORMSDICT = {}
-    WNORMSDICT['data_obs'] = 0.0
-    WNORMSDICT['ZTT'] = 0.0
-    WNORMSDICT['ZL'] = 0.0
-    WNORMSDICT['ZJ'] = 0.0
-    WNORMSDICT['TT'] = 0.0
-    WNORMSDICT['VV'] = 0.0
+    print '** scale factors for w+jets  are : '
+    for key, value in W_SCALE_FACTORS.iteritems():
+         print key, value
 
     ##############################
-    # this will hold the norm
-    # derived by comparing the inclusive
-    # selections in high mt and low mt selections
-    WNORM = 0.0
-
-
+    # this will hold the data - mc
+    # values derived from the high mt CR
+    WNORM_INCLUSIVE_DATA_MINUS_BKG = 0.0
+    WNORMSDICT = {}
     WNORMSDICT['data_obs'] = 0.0
     WNORMSDICT['ZTT'] = 0.0
     WNORMSDICT['ZL'] = 0.0
@@ -176,25 +179,19 @@ for chan in range(0,len(CHANNELS)):
                     print 'WARNING FAILED TO FIND :', key
 
 
-    ################################
-    # figure out normalization SFs
-
-    WNORM =    (WNORMSDICT['data_obs']-
+    WNORM_INCLUSIVE_DATA_MINUS_BKG = (WNORMSDICT['data_obs']-
                                 WNORMSDICT['ZTT'] -
                                 WNORMSDICT['ZL'] -
                                 WNORMSDICT['ZJ'] -
                                 WNORMSDICT['TT'] -
                                 WNORMSDICT['VV'])
 
-    print 'after calculation from high mt data the bkg sub W totals are are : '
-    print WNORM
+    print ' the CR data - bkg derived inclusive W normalization is ', WNORM_INCLUSIVE_DATA_MINUS_BKG
 
-
-    print '* now convert the probabilities into the actual normalizations :'
-    for key, value in WPROBS.iteritems():
-        print key, value, "--->", value * WNORM
-        WPROBS[key] = value * WNORM
-
+    print '* now convert the scale factors into the actual normalizations :'
+    for key, value in W_SCALE_FACTORS.iteritems():
+        print key, value, "--->", value * WNORM_INCLUSIVE_DATA_MINUS_BKG
+        W_SCALE_FACTORS[key] = value * WNORM_INCLUSIVE_DATA_MINUS_BKG
 
 
 
@@ -206,17 +203,16 @@ for chan in range(0,len(CHANNELS)):
         nominalInt = HISTOGRAM_DICTIONARY[(DIRNAME+"/W")].GetSumOfWeights()
         for key, value in HISTOGRAM_DICTIONARY.iteritems():
             if 'W' in str(key) and DIRNAME in str(key):
-                 #print key, 'will be scaled to ', WPROBS[DIRLIST[direc]]
+                 #print key, 'will be scaled to norm for ', (DIRNAME+"/W")
+                 #print key, 'will be scaled to ', W_SCALE_FACTORS[(DIRNAME+"/W")]
                  systematic_factor = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
                  systematic_factor = systematic_factor/nominalInt
                  #print 'variant ', key, HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
                  #print 'allowing for SYS variation introduces extra factor of ', systematic_factor
-                 #print key, 'will be scaled to ', WPROBS[DIRLIST[direc]], 'x', systematic_factor
+                 #print key, 'will be scaled to ', W_SCALE_FACTORS[(DIRNAME+"/W")], 'x', systematic_factor
                  original = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-                 HISTOGRAM_DICTIONARY[key].Scale( (WPROBS[DIRLIST[direc]]*systematic_factor)/original)
+                 HISTOGRAM_DICTIONARY[key].Scale( (W_SCALE_FACTORS[(DIRNAME+"/W")]*systematic_factor)/original)
                  #print key, 'scaled from ', original, 'to -----> ',HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-
-
 
 
 

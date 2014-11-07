@@ -35,24 +35,25 @@ listOfFiles = []
 ###########
 # DY
 
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_10_1_0dZ.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_11_1_Fy8.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_12_1_Cyl.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_13_1_gHI.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_14_1_7JL.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_15_1_mSd.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_16_1_STt.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_17_1_aiY.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_18_1_nUb.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_1_1_lEU.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_2_1_nrG.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_3_1_LcN.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_4_1_LO1.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_5_1_GQM.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_6_1_wqp.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_7_1_ubt.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_8_1_awC.root')
-listOfFiles.append('/uscms_data/d3/shalhout/TEMP_FILEHOLDER/dy/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_9_1_reh.root')
+
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_10_1_0dZ_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_11_1_Fy8_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_12_1_Cyl_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_13_1_gHI_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_14_1_7JL_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_15_1_mSd_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_16_1_STt_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_17_1_aiY_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_18_1_nUb_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_1_1_lEU_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_2_1_nrG_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_3_1_LcN_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_4_1_LO1_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_5_1_GQM_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_6_1_wqp_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_7_1_ubt_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_8_1_awC_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/dy_skimmed/DYJetsToLLTauSpin_V7FlatTupleEx/FlatTuple_9_1_reh_skimmed.root')
 
 
 
@@ -185,27 +186,24 @@ for entry in range(0,maxEntries):
 				fillVariables(chain,eventVariables,maxPairTypeAndIndex,Verbose)
 				SAMPLE_ADD = getSAMPLE_ADD(sampleName)
 				assert(len(SAMPLE_ADD)>0), " Assert : unknown sample "
-				if SAMPLE_ADD == '_DYTauPolOff_':
-					classification = classifyZDecay(chain,maxPairTypeAndIndex)
+			elif SAMPLE_ADD == '_DYTauPolOff_':
+					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
 					print classification
 					wt = 1.0
 					if classification == '_ZTT_':
-						wt = getWeightForTauPolOffDY_noStitch(chain,maxPairTypeAndIndex,Verbose)
-						print 'old ', getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
-						print 'new ', wt
-						print 'new/old', wt/getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
-						print chain.numberEvents
-
+						wt = getWeightForTauPolOffDY_NOSTITCH_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
 						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
-					# elif classification == '_ZL_':
-					# 	wt = getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
-					# 	# contains an internal check for e->tau
-					# 	wt = wt * getFakeZeeWeight(chain,maxPairTypeAndIndex)
-					# 	Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
-					# elif classification == '_ZJ_':
-					# 	wt = getWeightForTauPolOffDY(chain,maxPairTypeAndIndex,Verbose)
-					# 	Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
+					elif classification == '_ZL_':
+						wt = getWeightForTauPolOffDY_NOSTITCH_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
+						# contains an internal check for e->tau
+						wt = wt * getFakeZeeWeight(chain,maxPairTypeAndIndex)
+						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
+					elif classification == '_ZJ_':
+						wt = getWeightForTauPolOffDY_NOSTITCH_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose)
+						Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
 
+
+			
 
 
 ######################

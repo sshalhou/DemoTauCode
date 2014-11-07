@@ -48,10 +48,15 @@ FOR_TTEMBEDDED_SUB = []
 
 
 ###############
-# for Wjets normalization
+# for Wjets normalization (high Mt)
 
 FOR_W_NORM = []
 
+
+###############
+# for Wjets under default selection
+
+FOR_W_DEFAULT = []
 
 ####################
 # populate the lists
@@ -71,8 +76,8 @@ FOR_UNMODIFIED_ADDITION.append('./2ndTry/ZTTembedded_skimmed_davis_htt_mssm_muTa
 FOR_UNMODIFIED_ADDITION.append('./2ndTry/standardBkg_skimmed_davis_htt_mssm_eleTau.root')
 FOR_UNMODIFIED_ADDITION.append('./2ndTry/standardBkg_skimmed_davis_htt_mssm_muTau.root')
 
-FOR_UNMODIFIED_ADDITION.append('./1stTry/qcdShapes_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./1stTry/qcdShapes_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./2ndTry/QCDshapes_skimmed_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./2ndTry/QCDshapes_skimmed_davis_htt_mssm_eleTau.root')
 
 FOR_UNMODIFIED_ADDITION.append('./2ndTry/ZLandZJ_skimmed_fixedWtAndClassP1_davis_htt_mssm_eleTau.root')
 FOR_UNMODIFIED_ADDITION.append('./2ndTry/ZLandZJ_skimmed_fixedWtAndClassP2_davis_htt_mssm_eleTau.root')
@@ -80,10 +85,19 @@ FOR_UNMODIFIED_ADDITION.append('./2ndTry/ZLandZJ_skimmed_fixedWtAndClassP1_davis
 FOR_UNMODIFIED_ADDITION.append('./2ndTry/ZLandZJ_skimmed_fixedWtAndClassP2_davis_htt_mssm_muTau.root')
 
 
-FOR_UNMODIFIED_ADDITION.append('./1stTry/shapeWJETS_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./1stTry/shapeWJETS_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./2ndTry/wjetsShape_skimmed_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./2ndTry/wjetsShape_skimmed_davis_htt_mssm_muTau.root')
 
 
+FOR_TTEMBEDDED_SUB.append('./2ndTry/ttEmbedded_skimmed_davis_htt_mssm_muTau.root')
+FOR_TTEMBEDDED_SUB.append('./2ndTry/ttEmbedded_skimmed_davis_htt_mssm_eleTau.root')
+
+FOR_W_NORM.append('./2ndTry/wJetsNORM_skimmed_davis_htt_mssm_eleTau.root')
+FOR_W_NORM.append('./2ndTry/wJetsNORM_skimmed_davis_htt_mssm_muTau.root')
+
+
+FOR_W_DEFAULT.append('./2ndTry/wJetsDEFAULT_skimmed_davis_htt_mssm_eleTau.root')
+FOR_W_DEFAULT.append('./2ndTry/wJetsDEFAULT_skimmed_davis_htt_mssm_muTau.root')
 
 
 FOR_QCD_NORM.append('./1stTry/qcdNORMpart1_davis_htt_mssm_eleTau.root')
@@ -97,18 +111,7 @@ FOR_QCD_NORM.append('./1stTry/qcdNORMpart3_davis_htt_mssm_muTau.root')
 
 
 
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp1_davis_htt_mssm_eleTau.root')
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp1_davis_htt_mssm_muTau.root')
 
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp2_davis_htt_mssm_eleTau.root')
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp2_davis_htt_mssm_muTau.root')
-
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp3_davis_htt_mssm_eleTau.root')
-FOR_W_NORM.append('./1stTry/normWJETS_tightCSVp3_davis_htt_mssm_muTau.root')
 
 FOR_ZTT_NORM.append('./1stTry/normZTT_fixed_davis_htt_mssm_muTau.root')
 FOR_ZTT_NORM.append('./1stTry/normZTT_fixed_davis_htt_mssm_eleTau.root')
-
-
-FOR_TTEMBEDDED_SUB.append('./1stTry/embeddedTTbar_davis_htt_mssm_eleTau.root')
-FOR_TTEMBEDDED_SUB.append('./1stTry/embeddedTTbar_davis_htt_mssm_muTau.root')

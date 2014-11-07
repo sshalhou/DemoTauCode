@@ -598,6 +598,29 @@ def getWeightForRegularDY_withClassificationCheck(chain,maxPairTypeAndIndex,clas
     return returnWeight
 
 
+def getWeightForTauPolOffDY_NOSTITCH_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    if classification == '_ZTT_':
+        allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['nevents'] = 1000.0*19.7*(3504.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    #allWeights['StitchingZjets'] = getStitchingZjetsWt(chain, maxPairTypeAndIndex)
+    allWeights['TauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    #allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
+    # this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value
+    if Verbose:
+      print allWeights
+      print 'crossSection is hardcoded to ',  3504.0
+    return returnWeight
+
+
 def getWeightForTauPolOffDY_withClassificationCheck(chain,maxPairTypeAndIndex,classification,Verbose):
     returnWeight = 1.0
     allWeights = {}
