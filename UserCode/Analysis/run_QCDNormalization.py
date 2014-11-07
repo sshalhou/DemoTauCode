@@ -495,12 +495,12 @@ for entry in range(0,maxEntries):
 
 			if len(maxPairTypeAndIndex)	> 0:
 				if maxPairTypeAndIndex[1] == 'muTau':
-					maxPairTypeAndIndex.append(muTauClassification_forQCD(chain, maxPairTypeAndIndex[0]))
+					maxPairTypeAndIndex.append(muTauClassification(chain, maxPairTypeAndIndex[0]))
 					maxPairTypeAndIndex.append(chain.NAMEVAR)
 					maxPairTypeAndIndex.append(muTauClassificationJECDOWN(chain, maxPairTypeAndIndex[0]))
 					maxPairTypeAndIndex.append(muTauClassificationJECUP(chain, maxPairTypeAndIndex[0]))
 				if maxPairTypeAndIndex[1] == 'eleTau':
-					maxPairTypeAndIndex.append(eTauClassification_forQCD(chain, maxPairTypeAndIndex[0]))
+					maxPairTypeAndIndex.append(eTauClassification(chain, maxPairTypeAndIndex[0]))
 					maxPairTypeAndIndex.append(chain.NAMEVAR)
 					maxPairTypeAndIndex.append(eTauClassificationJECDOWN(chain, maxPairTypeAndIndex[0]))
 					maxPairTypeAndIndex.append(eTauClassificationJECUP(chain, maxPairTypeAndIndex[0]))
@@ -584,7 +584,7 @@ for entry in range(0,maxEntries):
 					wt_dict['topPtUp'] = 1.0
 
 					getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose)
-					Fill_TTbarMC(maxPa
+					Fill_TTbarMC(maxPairTypeAndIndex,classification,wt_dict,histogram_dict,eventVariables['SVFitMass'])
 
 
 

@@ -27,7 +27,7 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-#listOfFiles.append('HOLDER/crash_13000_FlatTuple_SZS_W4jetsLNuV1_v6ntup_skimmed.root')
+listOfFiles.append('HOLDER/crash_13000_FlatTuple_SZS_W4jetsLNuV1_v6ntup_skimmed.root')
 #listOfFiles.append('HOLDER/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup.root')
 #listOfFiles.append('HOLDER/FlatTuple_SZS_W3jetsLNuV7Av1_v6ntup.root')
 
@@ -35,8 +35,8 @@ listOfFiles = []
 
 
 
-###########
-# wjets
+##########
+#wjets
 
 listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W1jetsLNuV19v1_v6ntup_skimmed.root')
 listOfFiles.append('/uscms/home/shalhout/no_backup/TEMP_FILEHOLDER/wjets_skimmed/FlatTuple_SZS_W1jetsLNuV7Av1_v6ntup_skimmed.root')
