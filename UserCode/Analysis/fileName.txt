@@ -1,1 +1,1 @@
-wJetsNORM_skimmed_
+wJetsDEFAULT_skimmed_
