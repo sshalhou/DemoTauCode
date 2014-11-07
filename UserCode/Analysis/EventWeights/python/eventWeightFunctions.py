@@ -741,6 +741,7 @@ def getWeightEmbeddedZTT(chain,maxPairTypeAndIndex,Verbose):
     allWeights['embeddingWeight'] = getEmbedWeight(chain,maxPairTypeAndIndex)
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
+    allWeights['triggerBug'] = highPtTauTriggerBugWeights_forEMBEDDED(chain, maxPairTypeAndIndex)
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
