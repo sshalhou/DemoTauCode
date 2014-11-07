@@ -147,6 +147,43 @@ def passesHighMtSelectionMuTau(chain,index,UseNewTriggers,Verbose):
     return passesCutsMuTau
 
 
+
+#################
+# high mT (>70) + Same Sign selection
+
+def passesHighMtSameSignSelectionETau(chain,index,UseNewTriggers,Verbose):
+    passesCutsETau = True
+    if electronID(chain,index,Verbose) is False:
+        passesCutsETau = False
+    if tauID_eTau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if pairCutsETau_forHighMtSameSign(chain, index,Verbose) is False:
+        passesCutsETau = False
+    if electronTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if tauTriggerForETau(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if chain.eT_correctedSVFitMass[index] < 50:
+        passesCutsETau = False
+    return passesCutsETau
+
+def passesHighMtSameSignSelectionMuTau(chain,index,UseNewTriggers,Verbose):
+    passesCutsMuTau = True
+    if muonID(chain,index,Verbose) is False:
+        passesCutsMuTau = False
+    if tauID_muTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if pairCutsMuTau_forHighMtSameSign(chain, index,Verbose) is False:
+        passesCutsMuTau = False
+    if muonTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if chain.muT_correctedSVFitMass[index] < 50:
+        passesCutsMuTau = False
+    return passesCutsMuTau
+
+
 ##################
 # QCD shape selection = anti-iso e/mu, loose iso tau, loose btag, SS
 
