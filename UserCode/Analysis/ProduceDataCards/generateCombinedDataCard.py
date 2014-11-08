@@ -105,7 +105,7 @@ for chan in range(0,len(CHANNELS)):
         SIGNAL_REGION_W_TOTALS[histname] = 0.0
 
     for addFile in range(0,len(FOR_W_DEFAULT)):
-        if str(CHANNELS[chan]) in str(FOR_W_NORM[addFile]):
+        if str(CHANNELS[chan]) in str(FOR_W_DEFAULT[addFile]):
             GOTFILE = TFile(FOR_W_DEFAULT[addFile],'READ')
             print 'checking ', FOR_W_DEFAULT[addFile], 'for SR W+jets shapes'
             for direc in range(0,len(DIRLIST)):
@@ -216,6 +216,114 @@ for chan in range(0,len(CHANNELS)):
 
 
 
+    print '***************************************************************'
+    print '*     begin W normaization determination for subtraction in QCD norm. for', FILENAME
+    print '***************************************************************'
+
+    print '* 1st by tabulating W+jets MC in our SameSign selection for each subcategory *'
+    print '* reading in W templates under SameSign selection ..'
+
+    # create and initialize
+    SAMESIGN_REGION_W_TOTALS = {}
+    for direc in range(0,len(DIRLIST)):
+        histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+        SAMESIGN_REGION_W_TOTALS[histname] = 0.0
+
+    for addFile in range(0,len(FOR_QCD_NORM)):
+        if str(CHANNELS[chan]) in str(FOR_QCD_NORM[addFile]):
+            GOTFILE = TFile(FOR_QCD_NORM[addFile],'READ')
+            print 'checking ', FOR_QCD_NORM[addFile], 'for SR W+jets shapes'
+            for direc in range(0,len(DIRLIST)):
+                histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+                #print 'looking for ', histname
+                GOTHIST = GOTFILE.Get(histname)
+                if(GOTHIST):
+                    #print 'Found it, adding ', GOTHIST.GetSumOfWeights(), 'to total for ', histname
+                    SAMESIGN_REGION_W_TOTALS[histname] = SAMESIGN_REGION_W_TOTALS[histname]+GOTHIST.GetSumOfWeights()
+                else:
+                    print 'WARNING FAILED TO FIND :', incname
+
+
+    print '** same sign region w+jets totals are : '
+    for key, value in SAMESIGN_REGION_W_TOTALS.iteritems():
+         print key, value
+
+
+    # next loop through high mt same sign files, and get total for W+jets MC in inclusive cat.
+    HIGH_MT_SS_W_COUNT = 0.0
+    for addFile in range(0,len(FOR_W_NORM_FOR_QCD)):
+        if str(CHANNELS[chan]) in str(FOR_W_NORM_FOR_QCD[addFile]):
+            GOTFILE = TFile(FOR_W_NORM_FOR_QCD[addFile],'READ')
+            incname = CHANNELS[chan]+"_"+"inclusive"+"/W"
+            GOTHIST = GOTFILE.Get(incname)
+            if(GOTHIST):
+                HIGH_MT_SS_W_COUNT += GOTHIST.GetSumOfWeights()
+            else:
+                print 'WARNING FAILED TO FIND :', incname
+
+
+    print ' the control region W+jets MC total for the inclusive ', CHANNELS[chan], ' is ',HIGH_MT_SS_W_COUNT
+
+    # create and fill
+    W_SCALE_FACTORS_FOR_QCD = {}
+    for direc in range(0,len(DIRLIST)):
+        histname = CHANNELS[chan]+"_"+DIRLIST[direc]+"/W"
+        W_SCALE_FACTORS_FOR_QCD[histname] = SAMESIGN_REGION_W_TOTALS[histname]/HIGH_MT_SS_W_COUNT
+
+    print '** scale factors for w+jets for qcd estimate are : '
+    for key, value in W_SCALE_FACTORS_FOR_QCD.iteritems():
+         print key, value
+
+    ##############################
+    # this will hold the data - mc
+    # values derived from the high mt CR
+    WNORM_INCLUSIVE_DATA_MINUS_BKG_FORQCD = 0.0
+    WNORMSDICT_FORQCD = {}
+    WNORMSDICT_FORQCD['data_obs'] = 0.0
+    WNORMSDICT_FORQCD['ZTT'] = 0.0
+    WNORMSDICT_FORQCD['ZL'] = 0.0
+    WNORMSDICT_FORQCD['ZJ'] = 0.0
+    WNORMSDICT_FORQCD['TT'] = 0.0
+    WNORMSDICT_FORQCD['VV'] = 0.0
+
+    print '**************************************'
+    print '* starting W bkg sub (for qcd norm. est) for dir. ', CHANNELS[chan]+'_inclusive'
+    print '**************************************'
+
+    for addFile in range(0,len(FOR_W_NORM_FOR_QCD)):
+        if str(CHANNELS[chan]) in str(FOR_W_NORM_FOR_QCD[addFile]):
+            GOTFILE = TFile(FOR_W_NORM_FOR_QCD[addFile],'READ')
+            #print '*** summing W norm histograms from ', FOR_W_NORM[addFile]
+
+            for key, value in WNORMSDICT_FORQCD.iteritems():
+                LOCALNAME = CHANNELS[chan]+'_inclusive'+"/"+key
+                #print "--> ",LOCALNAME
+                GOTHIST = GOTFILE.Get(LOCALNAME)
+                if(GOTHIST):
+                    WNORMSDICT_FORQCD[key] = value + GOTHIST.GetSumOfWeights()
+                else:
+                    print 'WARNING FAILED TO FIND :', key
+
+
+    WNORM_INCLUSIVE_DATA_MINUS_BKG_FORQCD = (WNORMSDICT_FORQCD['data_obs']-
+                                WNORMSDICT_FORQCD['ZTT'] -
+                                WNORMSDICT_FORQCD['ZL'] -
+                                WNORMSDICT_FORQCD['ZJ'] -
+                                WNORMSDICT_FORQCD['TT'] -
+                                WNORMSDICT_FORQCD['VV'])
+
+    print ' the CR data - bkg derived inclusive W normalization is ', WNORM_INCLUSIVE_DATA_MINUS_BKG_FORQCD
+
+    print '* now convert the scale factors into the actual normalizations :'
+    for key, value in W_SCALE_FACTORS_FOR_QCD.iteritems():
+        print key, value, "--->", value * WNORM_INCLUSIVE_DATA_MINUS_BKG_FORQCD
+        W_SCALE_FACTORS_FOR_QCD[key] = value * WNORM_INCLUSIVE_DATA_MINUS_BKG_FORQCD
+
+
+
+
+
+
 
 
     print '***************************************************************'
@@ -259,18 +367,24 @@ for chan in range(0,len(CHANNELS)):
                 #print '*** summing QCD norm histograms from ', FOR_QCD_NORM[addFile]
 
                 for key, value in NORMSDICT.iteritems():
-                    LOCALNAME = DIRNAME+"/"+key
-                    #print "--> ",LOCALNAME
-                    GOTHIST = GOTFILE.Get(LOCALNAME)
-                    if(GOTHIST):
-                        NORMSDICT[key] = value + GOTHIST.GetSumOfWeights()
-                    else:
-                        print 'WARNING FAILED TO FIND :', key
+                    if 'W' in str(key):
+                        #print 'using W from SS high Mt etsimate..',DIRNAME+"/"+key, W_SCALE_FACTORS_FOR_QCD[DIRNAME+"/"+key]
+                        # only do this once!!!! don't do +=
+                        NORMSDICT[key] = W_SCALE_FACTORS_FOR_QCD[DIRNAME+"/"+key]
+                    elif 'W' not in str(key) :
+                        LOCALNAME = DIRNAME+"/"+key
+                        #print "--> ",LOCALNAME
+                        GOTHIST = GOTFILE.Get(LOCALNAME)
+                        if(GOTHIST):
+                            NORMSDICT[key] = value + GOTHIST.GetSumOfWeights()
+                        else:
+                            print 'WARNING FAILED TO FIND :', key
 
 
-            # print 'after file ', FOR_QCD_NORM[addFile], ' in directory ', DIRNAME , 'sums are :'
-            # for key, value in NORMSDICT.iteritems():
-            #         print key,' = ',value
+        # print 'after file ', FOR_QCD_NORM[addFile], ' in directory ', DIRNAME , 'sums are :'
+        print 'data and mc from SS qcd estimate :'
+        for key, value in NORMSDICT.iteritems():
+            print key,' = ',value
 
 
 

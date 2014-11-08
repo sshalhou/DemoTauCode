@@ -52,6 +52,11 @@ FOR_TTEMBEDDED_SUB = []
 
 FOR_W_NORM = []
 
+##############
+# for Wjets norm. for QCD norm estimate
+# high Mt + SameSign
+
+FOR_W_NORM_FOR_QCD = []
 
 ###############
 # for Wjets under default selection
@@ -108,3 +113,23 @@ FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP2_davis_htt_mssm_eleTau.root')
 FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP2_davis_htt_mssm_muTau.root')
 FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP3_davis_htt_mssm_eleTau.root')
 FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP3_davis_htt_mssm_muTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP4_davis_htt_mssm_eleTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP4_davis_htt_mssm_muTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP5_davis_htt_mssm_eleTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP5_davis_htt_mssm_muTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP6_davis_htt_mssm_eleTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP6_davis_htt_mssm_muTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP7_davis_htt_mssm_eleTau.root')
+FOR_QCD_NORM.append('./2ndTry/QCDnorm_skimmedP7_davis_htt_mssm_muTau.root')
+
+
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP1_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP1_davis_htt_mssm_muTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP2_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP2_davis_htt_mssm_muTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP3_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP3_davis_htt_mssm_muTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP4_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP4_davis_htt_mssm_muTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP5_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP5_davis_htt_mssm_muTau.root')
