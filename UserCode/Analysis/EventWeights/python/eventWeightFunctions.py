@@ -56,7 +56,46 @@ def getWPlusJetsCrossSectionWeight(chain):
     weight = 1000.0*19.7*chain.crossSection/(numEvents)
     return weight
 
+###################
+# additonal W+jets shape weight
 
+def WjetsShapeAdditionalCorrection(chain, maxPairTypeAndIndex):
+    value = 0.0
+
+    # for tau_h with |eta| < 1.2
+    WWeight_mutau_central = TF1("WWeight_mutau_central","(-1.41E-03)*x+(1.06E+00)",30.,2000.)
+    # for tau_h with |eta| between 1.2 and 1.7
+    WWeight_mutau_medium =  TF1("WWeight_mutau_medium","(-6.36E-03)*x+(1.26E+00)",30.,2000.)
+    # for tau_h with |eta| > 1.7
+    WWeight_mutau_forward = TF1("WWeight_mutau_forward","(-8.61E-03)*x+(1.34E+00)",30.,2000.)
+
+    #################
+    # get tau pt and eta
+    i = maxPairTypeAndIndex[0]
+    TAUPT = 0.0
+    ABSETA = 0.0
+    if maxPairTypeAndIndex[1] == 'eleTau':
+        Tvec = TLorentzVector(0,0,0,0)
+        Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[i], chain.eT_tau_corrected_p4_y[i], chain.eT_tau_corrected_p4_z[i],chain.eT_tau_corrected_p4_t[i])
+        TAUPT = Tvec.Pt()
+        ABSETA = abs(Tvec.Eta())
+    elif maxPairTypeAndIndex[1] == 'muTau':
+        Tvec = TLorentzVector(0,0,0,0)
+        Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[i], chain.muT_tau_corrected_p4_y[i], chain.muT_tau_corrected_p4_z[i],chain.muT_tau_corrected_p4_t[i])
+        TAUPT = Tvec.Pt()
+        ABSETA = abs(Tvec.Eta())
+
+    if(ABSETA < 1.2) :
+        value = WWeight_mutau_central(TAUPT)
+    elif(ABSETA > 1.7) :
+        value = WWeight_mutau_forward(TAUPT)
+    else:
+        value = WWeight_mutau_medium(TAUPT)
+
+    if value < 0:
+        return 0.0
+    else:
+        return value;
 
 
 
@@ -69,22 +108,56 @@ def getWPlusJetsCrossSectionWeight(chain):
 # xT_etaDepQCDShapeTemplateCorrection
 
 
-def QCDShapeWeights(chain, maxPairTypeAndIndex, QCDShapeWeightsDownNominalUp_dict):
+def UpdatedQCDEtaDepWeights(chain, maxPairTypeAndIndex):
+    value = 0.0
+    ####################
+    # new functions that correctly account for loose-tight
+    # extrapolation (same function for ETau and MuTau)
+
+    # for tau_h with |eta| < 1.2
+    QCDWeight_mutau_central = TF1("QCDWeight_mutau_central","(-3.83E-03)*x+(1.15E+00)",30.,2000.)
+    # for tau_h with |eta| between 1.2 and 1.7
+    QCDWeight_mutau_medium =  TF1("QCDWeight_mutau_medium","(-6.75E-03)*x+(1.25E+00)",30.,2000.)
+    # for tau_h with |eta| > 1.7
+    QCDWeight_mutau_forward = TF1("QCDWeight_mutau_forward","(-4.12E-03)*x+(1.16E+00)",30.,2000.)
+
+    #################
+    # get tau pt and eta
     i = maxPairTypeAndIndex[0]
+    TAUPT = 0.0
+    ABSETA = 0.0
     if maxPairTypeAndIndex[1] == 'eleTau':
-        value = chain.eT_etaDepQCDShapeTemplateCorrection[i]
-        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
-        QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
-        QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
+        Tvec = TLorentzVector(0,0,0,0)
+        Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[i], chain.eT_tau_corrected_p4_y[i], chain.eT_tau_corrected_p4_z[i],chain.eT_tau_corrected_p4_t[i])
+        TAUPT = Tvec.Pt()
+        ABSETA = abs(Tvec.Eta())
     elif maxPairTypeAndIndex[1] == 'muTau':
-        value = chain.muT_etaDepQCDShapeTemplateCorrection[i]
-        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
-        QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
-        QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
+        Tvec = TLorentzVector(0,0,0,0)
+        Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[i], chain.muT_tau_corrected_p4_y[i], chain.muT_tau_corrected_p4_z[i],chain.muT_tau_corrected_p4_t[i])
+        TAUPT = Tvec.Pt()
+        ABSETA = abs(Tvec.Eta())
+    #print 'tau pt and abseta = ', TAUPT,    ABSETA
+
+    if(ABSETA < 1.2) :
+        value = QCDWeight_mutau_central(TAUPT)
+    elif(ABSETA > 1.7) :
+        value = QCDWeight_mutau_forward(TAUPT)
     else:
-        QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
-        QCDShapeWeightsDownNominalUp_dict['Nominal'] = 1.0
-        QCDShapeWeightsDownNominalUp_dict['Up'] = 1.0
+        value = QCDWeight_mutau_medium(TAUPT)
+
+    if value < 0:
+        return 0.0
+    else:
+        return value;
+
+
+
+def QCDShapeWeights(chain, maxPairTypeAndIndex, QCDShapeWeightsDownNominalUp_dict):
+    value = UpdatedQCDEtaDepWeights(chain, maxPairTypeAndIndex)
+    #print 'new QCD shape weight is :', value
+    QCDShapeWeightsDownNominalUp_dict['Down'] = 1.0
+    QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
+    QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
     return
 
 ################################
@@ -719,6 +792,8 @@ def getWeightForW(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['additionalWShape'] = WjetsShapeAdditionalCorrection(chain, maxPairTypeAndIndex)
+    #print allWeights['additionalWShape']
     allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     #allWeights['nevents'] = getWPlusJetsCrossSectionWeight(chain)
     allWeights['StitchingWjets'] = getStitchingWjetsWt(chain, maxPairTypeAndIndex)
