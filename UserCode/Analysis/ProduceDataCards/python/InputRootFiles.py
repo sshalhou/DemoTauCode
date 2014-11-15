@@ -44,7 +44,21 @@ FOR_ZTT_NORM = []
 
 FOR_TTEMBEDDED_SUB = []
 
+##########
+# for tt embedded no mt cut
 
+FOR_TTEMBEDDED_NoMtCut = []
+
+##########
+# for ztt embedded no mt cut
+
+FOR_ZTTEMBEDDED_NoMtCut = []
+
+
+##########
+# for ztt norm no mt cut
+
+FOR_ZTTNORM_NoMtCut = []
 
 
 ###############
@@ -152,3 +166,23 @@ FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP4_
 FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP4_davis_htt_mssm_muTau.root')
 FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP5_davis_htt_mssm_eleTau.root')
 FOR_W_NORM_FOR_QCD.append('./2ndTry/wjetsNormForQCDnormHighMtSameSign_skimmedP5_davis_htt_mssm_muTau.root')
+
+
+
+FOR_TTEMBEDDED_NoMtCut.append('./2ndTry/ttEmbeddedNoMtCut_skimmed_davis_htt_mssm_eleTau.root')
+FOR_TTEMBEDDED_NoMtCut.append('./2ndTry/ttEmbeddedNoMtCut_skimmed_davis_htt_mssm_muTau.root')
+
+
+FOR_ZTTNORM_NoMtCut.append('./2ndTry/ZTTNORM_NoMtCut_skimmed_davis_htt_mssm_eleTau.root')
+FOR_ZTTNORM_NoMtCut.append('./2ndTry/ZTTNORM_NoMtCut_skimmed_davis_htt_mssm_muTau.root')
+
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p1_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p1_davis_htt_mssm_muTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p2_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p2_davis_htt_mssm_muTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p3_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p3_davis_htt_mssm_muTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p4_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p4_davis_htt_mssm_muTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p5_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./2ndTry/ZTTEMBEDDED_NoMtCut_skimmed_p5_davis_htt_mssm_muTau.root')

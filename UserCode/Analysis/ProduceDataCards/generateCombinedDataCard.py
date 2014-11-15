@@ -35,6 +35,7 @@ for chan in range(0,len(CHANNELS)):
 
     NEWFILE = TFile(FILENAME,'RECREATE')
     HISTOGRAM_DICTIONARY = {}
+    TTEMBED_HISTOGRAM_DICTIONARY = {}
 
     for direc in range(0,len(DIRLIST)):
         DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
@@ -431,73 +432,171 @@ for chan in range(0,len(CHANNELS)):
     print '*     unlike other norm. this is done from inclusive category only'
     print '***************************************************************'
 
-    print '* looping over ZTT templates for embedded TT subtraction :'
+    print '* begin creation of histograms to hold TTbar embedded templates'
     for direc in range(0,len(DIRLIST)):
         DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
-        for key, value in HISTOGRAM_DICTIONARY.iteritems():
-            if 'ZTT' in str(key) and DIRNAME in str(key):
-                print 'begin tt-embedded subtraction from ', key
-                for subFile in range(0,len(FOR_TTEMBEDDED_SUB)):
-                    if str(CHANNELS[chan]) in str(FOR_TTEMBEDDED_SUB[subFile]):
-                        print 'searching for subtraction template ', key, 'in file ',FOR_TTEMBEDDED_SUB[subFile]
-                        GOTFILE = TFile(FOR_TTEMBEDDED_SUB[subFile],'READ')
+        for hist in range(0, len(HISTLIST)):
+            if RejectHistogram(DIRNAME, HISTLIST[hist]) is False:
 
-                        GOTHIST = GOTFILE.Get(key)
-                        if(GOTHIST):
-                            #print 'found ', key, 'for sub. integral = ', GOTHIST.GetSumOfWeights()
-                            #print 'subtraction starting for', key, '....'
-                            initial = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-                            print '-----> initial integral = ', initial
-                            HISTOGRAM_DICTIONARY[key].Add(GOTHIST,-1.0)
-                            final = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-                            print '-----> final integral = ', final
+                LOCAL_HIST_NAME = DIRNAME+"/"+str(HISTLIST[hist])
+                if 'ZTT' in str(LOCAL_HIST_NAME):
+                    print 'creating ', LOCAL_HIST_NAME, 'for tt embedded'
+                    if 'fine_binning' in str(HISTLIST[hist]):
+                        TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME] = TH1F(LOCAL_HIST_NAME,
+                                                                    LOCAL_HIST_NAME,
+                                                                    fine_binning[0],
+                                                                    fine_binning[1],
+                                                                    fine_binning[2])
+                        TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].Sumw2()
+                        TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].SetDirectory(0)
+                    else:
+                        if 'nobtag' in str(DIRNAME) or 'inclusive' in str(DIRNAME):
 
-                            print '****************************************'
-                            print '* begin elimination of negative content bins'
-                            print '* template integral will be held fixed at ', final
-                            print '* bin error will be kept fixed in this case'
-                            print '****************************************'
-                            newintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME] = TH1F(LOCAL_HIST_NAME,
+                                                                        LOCAL_HIST_NAME,
+                                                                        len(binning_nominal_nobtag)-1,
+                                                                        array('d',binning_nominal_nobtag))
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].Sumw2()
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].SetDirectory(0)
 
-                            for ibin in range(0, HISTOGRAM_DICTIONARY[key].GetNbinsX()+1):
-                                if(HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)<0):
-                                    #print 'bin # ', ibin, 'in ', key, 'has value ', HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)
-                                    HISTOGRAM_DICTIONARY[key].SetBinContent(ibin,0.00)
-                                    newintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-
-                            HISTOGRAM_DICTIONARY[key].Scale(final/newintegral)
-                            #print '-----> tt-subtracted integral = ', final
-                            #print '---------> integral after zero bin elimination ', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 
                         else:
-                            print 'WARNING FAILED TO FIND :', key
+
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME] = TH1F(LOCAL_HIST_NAME,
+                                                                        LOCAL_HIST_NAME,
+                                                                        len(binning_nominal_btag)-1,
+                                                                        array('d',binning_nominal_btag))
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].Sumw2()
+                            TTEMBED_HISTOGRAM_DICTIONARY[LOCAL_HIST_NAME].SetDirectory(0)
 
 
-    print '* begin extraction of ZTT normalization scale factors using only inclusive category :'
 
-    histname = CHANNELS[chan]+"_inclusive/ZTT"
-    ZTT_MC_INTEGRAL = 0.0
-    for nfile in range(0, len(FOR_ZTT_NORM)):
-        if str(CHANNELS[chan]) in str(FOR_ZTT_NORM[nfile]):
-            print 'searching for inclusive template ', histname, 'in file ',FOR_ZTT_NORM[nfile]
 
-            GOTFILE = TFile(FOR_ZTT_NORM[nfile],'READ')
-            GOTHIST = GOTFILE.Get(histname)
+
+    print 'looping over embedded tt files'
+    for subFile in range(0,len(FOR_TTEMBEDDED_SUB)):
+        if str(CHANNELS[chan]) in str(FOR_TTEMBEDDED_SUB[subFile]):
+            print FOR_TTEMBEDDED_SUB[subFile]
+            GOTFILE = TFile(FOR_TTEMBEDDED_SUB[subFile],'READ')
+            for key, value in TTEMBED_HISTOGRAM_DICTIONARY.iteritems():
+                #print key, value
+                #print TTEMBED_HISTOGRAM_DICTIONARY[key].GetEntries()
+                print 'looking for ', key
+                GOTHIST = GOTFILE.Get(key)
+                if(GOTHIST):
+                    print 'found with integral', GOTHIST.GetSumOfWeights()
+                    TTEMBED_HISTOGRAM_DICTIONARY[key].Add(GOTHIST)
+                else:
+                    print 'FAILED TO FIND FAILED TO FIND *****', key
+
+
+    for key, value in TTEMBED_HISTOGRAM_DICTIONARY.iteritems():
+        print 'after merging hists from all embedded tt files', key, TTEMBED_HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+
+
+    print '*******************************************************************'
+    print '**** step one, with no mT cut applied the inclusive ZTT embedded integrals are :'
+    print '*******************************************************************'
+    histogramToGet = str(CHANNELS[chan])+"_inclusive/ZTT"
+
+    INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut = 0.0
+
+    for xfile in range(0,len(FOR_ZTTEMBEDDED_NoMtCut)):
+        if str(CHANNELS[chan]) in str(FOR_ZTTEMBEDDED_NoMtCut[xfile]):
+            GOTFILE = TFile(FOR_ZTTEMBEDDED_NoMtCut[xfile],'READ')
+            GOTHIST = GOTFILE.Get(histogramToGet)
             if(GOTHIST):
-                ZTT_MC_INTEGRAL += GOTHIST.GetSumOfWeights()
+                print 'summing ZTT embedded inc without mt cut from file ', FOR_ZTTEMBEDDED_NoMtCut[xfile]
+                INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
+            else:
+                print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT EMBEDDED'
 
-    print 'total ZTT estimate from MC for ',  histname, ' is ',      ZTT_MC_INTEGRAL
-    print 'the raw embedded ZTT template integral is ', HISTOGRAM_DICTIONARY[histname].GetSumOfWeights()
-    ZTT_EMBEDDED_SF = ZTT_MC_INTEGRAL/HISTOGRAM_DICTIONARY[histname].GetSumOfWeights()
-    print 'giving a scaleFactor for ', CHANNELS[chan], ' of ', ZTT_EMBEDDED_SF
-    print 'applying scale factors to all ZTT templates ...'
+
+    print '*******************************************************************'
+    print '**** step 2, with no mT cut applied, the inclusive ZTT MC integrals are :'
+    print '*******************************************************************'
+
+    INCLUSIVE_ZTT_MC_INT_NoMtCut = 0.0
+
+    for xfile in range(0,len(FOR_ZTTNORM_NoMtCut)):
+        if str(CHANNELS[chan]) in str(FOR_ZTTNORM_NoMtCut[xfile]):
+            GOTFILE = TFile(FOR_ZTTNORM_NoMtCut[xfile],'READ')
+            GOTHIST = GOTFILE.Get(histogramToGet)
+            if(GOTHIST):
+                print 'summing ZTT MC inc without mt cut from file ', FOR_ZTTNORM_NoMtCut[xfile]
+                INCLUSIVE_ZTT_MC_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
+            else:
+                print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT MC'
+
+
+    print '*******************************************************************'
+    print '**** step three, with no mT cut applied the inclusive TT embedded integrals are :'
+    print '**** remember we fill ZTT templates when processing embedded TT******'
+    print '*******************************************************************'
+
+    INCLUSIVE_TT_EMBEDDED_INT_NoMtCut = 0.0
+
+    for xfile in range(0,len(FOR_TTEMBEDDED_NoMtCut)):
+        if str(CHANNELS[chan]) in str(FOR_TTEMBEDDED_NoMtCut[xfile]):
+            GOTFILE = TFile(FOR_TTEMBEDDED_NoMtCut[xfile],'READ')
+            GOTHIST = GOTFILE.Get(histogramToGet)
+            if(GOTHIST):
+                print 'summing TTbar embedded inc without mt cut from file ', FOR_TTEMBEDDED_NoMtCut[xfile]
+                INCLUSIVE_TT_EMBEDDED_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
+            else:
+                print '******* FAILED TO FIND HIST WITH NON MT CUT TT Embedded'
+
+
+    print '*******************************************************************'
+    print '**** step four, compute the weights based on steps 1-3 without mT cut'
+    print '*** only care about inclusive/ZTT here, norm changes to systematics will be set later'
+    print '*******************************************************************'
+
+    print 'weight for', str(CHANNELS[chan])+'_inclusive/ZTT', 'computed using (step2+step3)/step1'
+    print 'step 1 = ', INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    print 'step 2 = ', INCLUSIVE_ZTT_MC_INT_NoMtCut
+    print 'step 3 = ', INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
+
+    INCLUSIVE_WEIGHT_ZTT = 0.0
+    INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
+    INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
+    INCLUSIVE_WEIGHT_ZTT /= INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    print 'final weight for embedded ZTT norm = ', INCLUSIVE_WEIGHT_ZTT
+
+    print '*******************************************************************'
+    print '**************'
+    print 'Next-to-Final Step, loop through all ZTT emebedded templates, and scale by the final weights '
+    print 'and then subtract off the tt-bar embedded'
+    print '**************'
+    print '*******************************************************************'
+
     for key, value in HISTOGRAM_DICTIONARY.iteritems():
-        if 'ZTT' in str(key) and str(CHANNELS[chan]) in str(key):
-            #print 'apply SF to ', key
-            HISTOGRAM_DICTIONARY[key].Scale(ZTT_EMBEDDED_SF)
+        if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key):
+            #print key, '-----> ZTT starting weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+            HISTOGRAM_DICTIONARY[key].Scale(INCLUSIVE_WEIGHT_ZTT)
+            #print key, '-----> ZTT scaled weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+            #print key, '-----> ttBar embedded weights to be removed <--------', TTEMBED_HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+            HISTOGRAM_DICTIONARY[key].Add(TTEMBED_HISTOGRAM_DICTIONARY[key],-1.0)
+            #print key, '-----> ZTT post sub <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 
 
+    print '*******************************************************************'
+    print ' Final Step : eliminate any negative bins in the ZTT templates'
+    print ' keeping norm. fixed'
+    print '*******************************************************************'
 
+    for key, value in HISTOGRAM_DICTIONARY.iteritems():
+        finalintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+        tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+        for ibin in range(0, HISTOGRAM_DICTIONARY[key].GetNbinsX()+1):
+            if(HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)<0):
+                #print 'bin # ', ibin, 'in ', key, 'has value ', HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)
+                HISTOGRAM_DICTIONARY[key].SetBinContent(ibin,0.00)
+        tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+        if finalintegral != tempintegral and tempintegral>0.0:
+            #print 'in', key, 'negative bins eliminated, before and after integrals are ', finalintegral, tempintegral
+            HISTOGRAM_DICTIONARY[key].Scale(finalintegral/tempintegral)
+            #print 'should be same now :', HISTOGRAM_DICTIONARY[key].GetSumOfWeights(), finalintegral
 
 
 
