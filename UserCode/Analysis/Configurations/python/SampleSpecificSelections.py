@@ -144,6 +144,42 @@ def passesEmbeddedTTbarSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbose
     return passesCutsMuTau
 
 #################
+# default selection but without Mt cut
+
+def passesDefaultSelectionETau_NoMtCut(chain,index,UseNewTriggers,Verbose):
+    passesCutsETau = True
+    if electronID(chain,index,Verbose) is False:
+        passesCutsETau = False
+    if tauID_eTau(chain, index, Verbose) is False:
+        passesCutsETau = False
+    if pairCutsETau_NoMtCut(chain, index,Verbose) is False:
+        passesCutsETau = False
+    if electronTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if tauTriggerForETau(chain,index,UseNewTriggers) is False:
+        passesCutsETau = False
+    if chain.eT_correctedSVFitMass[index] < 50:
+        passesCutsETau = False
+    return passesCutsETau
+
+def passesDefaultSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbose):
+    passesCutsMuTau = True
+    if muonID(chain,index,Verbose) is False:
+        passesCutsMuTau = False
+    if tauID_muTau(chain, index, Verbose) is False:
+        passesCutsMuTau = False
+    if pairCutsMuTau_NoMtCut(chain, index,Verbose) is False:
+        passesCutsMuTau = False
+    if muonTrigger(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
+        passesCutsMuTau = False
+    if chain.muT_correctedSVFitMass[index] < 50:
+        passesCutsMuTau = False
+    return passesCutsMuTau
+
+
+#################
 # high mT (>70)  selection
 
 def passesHighMtSelectionETau(chain,index,UseNewTriggers,Verbose):
