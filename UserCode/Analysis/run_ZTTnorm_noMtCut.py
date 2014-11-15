@@ -127,7 +127,7 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.eT_correctedSVFitMass.size()):
 				passesCuts = True
-				if passesDefaultSelectionETau(chain,index,UseNewTriggers,Verbose) is False:
+				if passesDefaultSelectionETau_NoMtCut(chain,index,UseNewTriggers,Verbose) is False:
 					passesCuts = False
 				if passesCuts is True:
 					passingETauIndices.append(index)
@@ -138,7 +138,7 @@ for entry in range(0,maxEntries):
 
 			for index in range(0, chain.muT_correctedSVFitMass.size()):
 				passesCuts = True
-				if passesDefaultSelectionMuTau(chain,index,UseNewTriggers,Verbose) is False:
+				if passesDefaultSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbose) is False:
 					passesCuts = False
 				if passesCuts is True:
 					passingMuTauIndices.append(index)
