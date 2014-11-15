@@ -90,6 +90,82 @@ def pairCutsETau(chain, index, verbose):
       print "failed cuts = ",failChain
   return returnVal
 
+#############
+# no Mt Cut Applied
+
+
+def pairCutsMuTau_NoMtCut(chain, index, verbose):
+  returnVal = True
+  failChain = {}
+  passChain = {}
+  eventPar = {}
+  eventPar['sumCharge'] = chain.muT_sumCharge[index]
+  if chain.muT_sumCharge[index] != 0:
+    returnVal = False
+    failChain['sumCharge'] = False
+  else:
+    passChain['sumCharge'] = True
+  eventPar['DR'] = chain.muT_DR[index]
+  if chain.muT_DR[index] <= 0.5:
+    returnVal = False
+    failChain['DR'] = False
+  else:
+    passChain['DR'] = True
+  eventPar['passesThirdLeptonVeto'] = chain.muT_passesThirdLeptonVeto[index]
+  if chain.muT_passesThirdLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesThirdLeptonVeto'] = False
+  else:
+    passChain['passesThirdLeptonVeto'] = True
+  eventPar['passesSecondLeptonVeto'] = chain.muT_passesSecondLeptonVeto[index]
+  if chain.muT_passesSecondLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesSecondLeptonVeto'] = False
+  else:
+    passChain['passesSecondLeptonVeto'] = True
+  if verbose:
+    print 'eventCuts', eventPar
+    if len(passChain) > 0:
+      print "passed cuts = ",passChain
+    if len(failChain) > 0:
+      print "failed cuts = ",failChain
+  return returnVal
+
+def pairCutsETau_NoMtCut(chain, index, verbose):
+  returnVal = True
+  failChain = {}
+  passChain = {}
+  eventPar = {}
+  eventPar['sumCharge'] = chain.eT_sumCharge[index]
+  if chain.eT_sumCharge[index] != 0:
+    returnVal = False
+    failChain['sumCharge'] = False
+  else:
+    passChain['sumCharge'] = True
+  eventPar['DR'] = chain.eT_DR[index]
+  if chain.eT_DR[index] <= 0.5:
+    returnVal = False
+    failChain['DR'] = False
+  else:
+    passChain['DR'] = True
+  eventPar['passesThirdLeptonVeto'] = chain.eT_passesThirdLeptonVeto[index]
+  if chain.eT_passesThirdLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesThirdLeptonVeto'] = False
+  else:
+    passChain['passesThirdLeptonVeto'] = True
+  eventPar['passesSecondLeptonVeto'] = chain.eT_passesSecondLeptonVeto[index]
+  if chain.eT_passesSecondLeptonVeto[index] is not True:
+    returnVal = False
+    failChain['passesSecondLeptonVeto'] = False
+  else:
+    passChain['passesSecondLeptonVeto'] = True
+  if verbose:
+    if len(passChain) > 0:
+      print "passed cuts = ",passChain
+    if len(failChain) > 0:
+      print "failed cuts = ",failChain
+  return returnVal
 
 ###########
 # for high Mt
