@@ -127,13 +127,13 @@ for element in root.findall('Sample'):
     crabConfigName = crabJobLocation+"/crab_"+OneWordName+"_"+dateSuffix+".cfg"
     print "creating a patTupleConfigFile called = ", patTupleConfigName
 
-    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v8/PAT_template.py"
+    CatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v9/PAT_template.py"
     CatCommand += ">> "+ patTupleConfigName
     os.system(CatCommand)
 
     print "creating a crab cfg called = ", crabConfigName
 
-    crabCatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v8/crab_template.cfg"
+    crabCatCommand = "cat "+os.environ['CMSSW_BASE']+"/src/UserCode/ConfigFileGenerator/v9/crab_template.cfg"
     crabCatCommand += ">> "+ crabConfigName
     os.system(crabCatCommand)
 
@@ -172,9 +172,11 @@ for element in root.findall('Sample'):
     CRABtotal_number_of_events = "sed -i \'s/DUMMY_total_number_of_events/"+nevents+"/g\'"+" "+crabConfigName
     os.system(CRABtotal_number_of_events)
 
-    NUM_JOBS = int(float(nevents)/10000.0)
+    NUM_JOBS = int(float(nevents)/2050.0)
     if(NUM_JOBS>2500):
       NUM_JOBS = 2500
+
+
     print "will aim to generate ",str(NUM_JOBS), "crab jobs"
 
     CRABnumber_of_jobs = "sed -i \'s/DUMMY_number_of_jobs/"+str(NUM_JOBS)+"/g\'"+" "+crabConfigName
@@ -187,7 +189,7 @@ for element in root.findall('Sample'):
     CRABpset = "sed -i \'s/DUMMY_pset/"+patTupleConfigName.replace("/","\/")+"/g\'"+" "+crabConfigName
     os.system(CRABpset)
 
-    directoryName = OneWordName+"_v8ntup"
+    directoryName = OneWordName+"_v9ntup"
     pubName = "SZS_"+directoryName
 
     CRABdatasetpath = "sed -i \'s/DUMMY_datasetpath/"+str(sys.argv[1]).replace("/","\/")+"/g\'"+" "+crabConfigName
