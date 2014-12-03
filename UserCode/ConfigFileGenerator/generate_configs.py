@@ -75,8 +75,6 @@ for element in root.findall('Sample'):
     WhiteListCommand+="\" --verbose=1 | egrep \"T2|T3\" | awk \'{printf $1\" \"}\'"
     getWhiteList = os.popen(WhiteListCommand)
     whiteList = getWhiteList.read()
-    whiteList = whiteList.replace(" ","")
-    whiteList = whiteList.rstrip('\n')
     print "list = ", whiteList
 
     # get basic info
@@ -214,8 +212,12 @@ for element in root.findall('Sample'):
     for z in range(0, len(SE_WHITE_LIST)):
 	       whiteListVar += SE_WHITE_LIST[z]+','
     whiteListVar = whiteListVar[:-3]
-    whiteListVar = whiteListVar.replace(" ","")
+    whiteListVar = whiteListVar.replace(" , ",",")
+    whiteListVar = whiteListVar.rstrip(' ')
+    whiteListVar = whiteListVar.lstrip(' ')
     whiteListVar = whiteListVar.rstrip('\n')
+    whiteListVar = whiteListVar.rstrip(' ')
+
 
     CRABse_white_list = "sed -i \'s/DUMMY_se_white_list/"+whiteListVar+"/g\'"+" "+crabConfigName
     os.system(CRABse_white_list)
