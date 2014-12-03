@@ -206,6 +206,7 @@ for element in root.findall('Sample'):
     CRABpublish_data_name = "sed -i \'s/DUMMY_publish_data_name/"+pubName+"/g\'"+" "+crabConfigName
     os.system(CRABpublish_data_name)
 
+
     SE_WHITE_LIST = re.split(' ',whiteList)
     SE_WHITE_LIST.pop()
     print SE_WHITE_LIST
