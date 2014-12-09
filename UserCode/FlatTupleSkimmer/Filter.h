@@ -31,7 +31,7 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
     TLorentzVector Lvec(0,0,0,0);
     Lvec.SetXYZT(muT_muon_p4_x_[index], muT_muon_p4_y_[index], muT_muon_p4_z_[index],muT_muon_p4_t_[index]);
 
-    if(  !(Lvec.Pt()>20)                            ) localPass = 0;
+    if(  !(Lvec.Pt()>18)                            ) localPass = 0;
     if(  !(fabs(Lvec.Eta())<2.1)                    ) localPass = 0;
 
 
@@ -44,7 +44,7 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
 
     Lvec.SetXYZT(muT_tau_corrected_p4_x_[index], muT_tau_corrected_p4_y_[index], muT_tau_corrected_p4_z_[index],muT_tau_corrected_p4_t_[index]);
 
-    if(  !(Lvec.Pt()>30)                            ) localPass = 0;
+    if(  !(Lvec.Pt()>20)                            ) localPass = 0;
     if(  !(fabs(Lvec.Eta())<2.3)                    ) localPass = 0;
     if( !muT_tau_byTightIsolationMVA3oldDMwLT_[index] && !muT_tau_byLooseIsolationMVA3oldDMwLT_[index]) localPass = 0;
     if( !muT_tau_decayModeFindingOldDMs_[index]      ) localPass = 0;
@@ -89,7 +89,7 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
 
       Lvec.SetXYZT(eT_tau_corrected_p4_x_[index], eT_tau_corrected_p4_y_[index], eT_tau_corrected_p4_z_[index],eT_tau_corrected_p4_t_[index]);
 
-      if(  !(Lvec.Pt()>30)                            ) localPass = 0;
+      if(  !(Lvec.Pt()>20)                            ) localPass = 0;
       if(  !(fabs(Lvec.Eta())<2.3)                    ) localPass = 0;
       if( !eT_tau_byTightIsolationMVA3oldDMwLT_[index] && !eT_tau_byLooseIsolationMVA3oldDMwLT_[index]) localPass = 0;
       if( !eT_tau_decayModeFindingOldDMs_[index]      ) localPass = 0;
