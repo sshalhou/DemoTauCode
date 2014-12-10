@@ -776,6 +776,11 @@ def Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Va
         fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
 
+def Fill_ZTTlowMass(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+	fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+	return
+
+
 def Fill_ZTTembedded(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     #fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)

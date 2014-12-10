@@ -28,229 +28,208 @@ def btagAndTauPtCategory(btags, tauPt, njets):
 
 
 def getSAMPLE_ADD(sampleName):
-    SAMPLE_ADD = ""
-    if(sampleName=='/SUSYBBHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH80_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH90_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-100_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH100_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-110_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH110_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-120_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH120_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-130_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH130_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-140_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH140_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-160_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH160_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-180_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH180_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH200_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH250_'
-    #elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-    #    SAMPLE_ADD = '_bbH300_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'):
-        SAMPLE_ADD = '_bbH300_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH350_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH400_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH450_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH500_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH600_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH700_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH800_'
-    elif(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH900_'
-   
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m25_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba125_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m30_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba130_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m35_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba135_'    
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m40_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba140_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m45_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba145_'    	    
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m50_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba150_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m55_FilterMuOrEle15_8TeV/Summer12DR53X-PU_S10_START53_V19-v2/AODSIM'):
-    	SAMPLE_ADD = '_bba155_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m60_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba160_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m65_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba165_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m70_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba170_'
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m75_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba175_'    	
-    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m80_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-    	SAMPLE_ADD = '_bba180_'    	    	    	    	    	    		
-  
-  
-  
-    elif(sampleName=='/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_bbH1000_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH80_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH90_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-100_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH100_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-110_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH110_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH120_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-130_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH130_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-140_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH140_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-160_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH160_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-180_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH180_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH200_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH250_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH300_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH350_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH400_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH450_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH500_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH600_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH700_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH800_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH900_'
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH1000_'
-    elif(sampleName=='/TauPlusX/Run2012A-22Jan2013-v1/AOD'):
-        SAMPLE_ADD = '_data_obs_'
-    elif(sampleName=='/TauPlusX/Run2012B-22Jan2013-v1/AOD'):
-        SAMPLE_ADD = '_data_obs_'
-    elif(sampleName=='/TauPlusX/Run2012C-22Jan2013-v1/AOD'):
-        SAMPLE_ADD = '_data_obs_'
-    elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
-        SAMPLE_ADD = '_data_obs_'
-
-    elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_DYJetsInclusive_'
-
-    elif(sampleName=='/DY1JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_DY1Jet_'
-
-    elif(sampleName=='/DY2JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
-        SAMPLE_ADD = '_DY2Jet_'
-
-    elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_DY3Jet_'
-
-    elif(sampleName=='/DY4JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_DY4Jet_'
-
-    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v2/AODSIM'):
-        SAMPLE_ADD = '_TTJetsFullLept_'
-
-    elif(sampleName=='/TTJets_SemiLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
-        SAMPLE_ADD = '_TTJetsSemiLept_'
-
-    elif(sampleName=='/TTJets_HadronicMGDecays_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A_ext-v1/AODSIM'):
-        SAMPLE_ADD = '_TTJetsHadronic_'
-
-    elif(sampleName=='/Tbar_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_SingleTopBar_'
-
-    elif(sampleName=='/T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_SingleTop_'
-
-    elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ZZJetsTo4L_'
-
-
-    elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
-        SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
-
-
-#    elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
-#        SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
-
-    elif(sampleName=='/ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ZZJetsTo2L2Q_'
-
-    elif(sampleName=='/WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_WWJetsTo2L2Nu_'
-
-    elif(sampleName=='/WZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_WZJetsTo2L2Q_'
-
-    elif(sampleName=='/WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_WZJetsTo3LNu_'
-    elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-        SAMPLE_ADD = '_DYTauPolOff_'
-    elif(sampleName=='/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'):
-        SAMPLE_ADD = '_WJetsToLNu_'
-    elif(sampleName=='/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_WJetsToLNu_'
-    elif(sampleName=='/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_W1JetsToLNu_'
-    elif(sampleName=='/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-        SAMPLE_ADD = '_W1JetsToLNu_'
-    elif(sampleName=='/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_W2JetsToLNu_'
-    elif(sampleName=='/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-        SAMPLE_ADD = '_W2JetsToLNu_'
-    elif(sampleName=='/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_W3JetsToLNu_'
-    elif(sampleName=='/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
-        SAMPLE_ADD = '_W3JetsToLNu_'
-    elif(sampleName=='/W4JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_W4JetsToLNu_'
-    elif(sampleName=='/VBF_HToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_qqH_SM125_'
-    elif(sampleName=='/WH_ZH_TTH_HToTauTau_M-125_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_VH_SM125_'
-    elif(sampleName=='/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        SAMPLE_ADD = '_ggH_SM125_'
-    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedZTT_'
-    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedTTbar_'
-    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        SAMPLE_ADD = '_embeddedTTbar_'
-    return SAMPLE_ADD
+	SAMPLE_ADD = ""
+	if(sampleName=='/SUSYBBHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH80_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH90_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-100_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH100_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-110_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH110_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-120_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH120_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-130_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH130_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-140_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH140_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-160_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH160_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-180_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH180_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH200_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH250_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'):
+		SAMPLE_ADD = '_bbH300_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH350_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH400_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH450_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH500_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH600_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH700_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH800_'
+	elif(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH900_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m25_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba125_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m30_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba130_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m35_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba135_'    
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m40_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba140_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m45_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba145_'    	    
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m50_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba150_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m55_FilterMuOrEle15_8TeV/Summer12DR53X-PU_S10_START53_V19-v2/AODSIM'):
+		SAMPLE_ADD = '_bba155_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m60_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba160_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m65_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba165_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m70_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba170_'
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m75_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba175_'    	
+	elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m80_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_bba180_'    	    	    	    	    	    		
+	elif(sampleName=='/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_bbH1000_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH80_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-90_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH90_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-100_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH100_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-110_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH110_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-120_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH120_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-130_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH130_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-140_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH140_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-160_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH160_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-180_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH180_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-200_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH200_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH250_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-300_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH300_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-350_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH350_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-400_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH400_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-450_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH450_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-500_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH500_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-600_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH600_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-700_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH700_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-800_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH800_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH900_'
+	elif(sampleName=='/SUSYGluGluToHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH1000_'
+	elif(sampleName=='/TauPlusX/Run2012A-22Jan2013-v1/AOD'):
+		SAMPLE_ADD = '_data_obs_'
+	elif(sampleName=='/TauPlusX/Run2012B-22Jan2013-v1/AOD'):
+		SAMPLE_ADD = '_data_obs_'
+	elif(sampleName=='/TauPlusX/Run2012C-22Jan2013-v1/AOD'):
+		SAMPLE_ADD = '_data_obs_'
+	elif(sampleName=='/TauPlusX/Run2012D-22Jan2013-v1/AOD'):
+		SAMPLE_ADD = '_data_obs_'
+	elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DYJetsInclusive_'
+	elif(sampleName=='/DY1JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DY1Jet_'
+	elif(sampleName=='/DY2JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
+		SAMPLE_ADD = '_DY2Jet_'
+	elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DY3Jet_'
+	elif(sampleName=='/DY4JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DY4Jet_'
+	elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v2/AODSIM'):
+		SAMPLE_ADD = '_TTJetsFullLept_'
+	elif(sampleName=='/TTJets_SemiLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
+		SAMPLE_ADD = '_TTJetsSemiLept_'
+	elif(sampleName=='/TTJets_HadronicMGDecays_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A_ext-v1/AODSIM'):
+		SAMPLE_ADD = '_TTJetsHadronic_'
+	elif(sampleName=='/Tbar_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_SingleTopBar_'
+	elif(sampleName=='/T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_SingleTop_'
+	elif(sampleName=='/ZZJetsTo4L_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ZZJetsTo4L_'
+	elif(sampleName=='/ZZJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v3/AODSIM'):
+		SAMPLE_ADD = '_ZZJetsTo2L2Nu_'
+	elif(sampleName=='/ZZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ZZJetsTo2L2Q_'
+	elif(sampleName=='/WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_WWJetsTo2L2Nu_'
+	elif(sampleName=='/WZJetsTo2L2Q_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_WZJetsTo2L2Q_'
+	elif(sampleName=='/WZJetsTo3LNu_TuneZ2_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_WZJetsTo3LNu_'
+	elif(sampleName=='/DYJetsToLL_M-50_TuneZ2Star_8TeV-madgraph-tarball-tauola-tauPolarOff/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_DYTauPolOff_'
+	elif(sampleName=='/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM'):
+		SAMPLE_ADD = '_WJetsToLNu_'
+	elif(sampleName=='/WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_WJetsToLNu_'
+	elif(sampleName=='/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_W1JetsToLNu_'
+	elif(sampleName=='/W1JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_W1JetsToLNu_'
+	elif(sampleName=='/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_W2JetsToLNu_'
+	elif(sampleName=='/W2JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_W2JetsToLNu_'
+	elif(sampleName=='/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_W3JetsToLNu_'
+	elif(sampleName=='/W3JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+		SAMPLE_ADD = '_W3JetsToLNu_'
+	elif(sampleName=='/W4JetsToLNu_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_W4JetsToLNu_'
+	elif(sampleName=='/VBF_HToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_qqH_SM125_'
+	elif(sampleName=='/WH_ZH_TTH_HToTauTau_M-125_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_VH_SM125_'
+	elif(sampleName=='/GluGluToHToTauTau_M-125_8TeV-powheg-pythia6/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_ggH_SM125_'
+	elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMu/StoreResults-Run2012A_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012B_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012C_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/DoubleMuParked/StoreResults-Run2012D_22Jan2013_v1_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedZTT_'
+	elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedTTbar_'
+	elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
+		SAMPLE_ADD = '_embeddedTTbar_'
+	elif(sampleName=='/DYJetsToLL_M-10To50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DYJetLowMass_'
+	elif(sampleName=='/DY1JetsToLL_M-10To50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DY1JetLowMass_'
+	elif(sampleName=='/DY2JetsToLL_TuneZ2star_M-10To50_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		SAMPLE_ADD = '_DY2JetLowMass_'
+	return SAMPLE_ADD
 
 
 

@@ -1,1 +1,1 @@
-nMSSM_ZTTnorm_noMtCut_
+nMSSM_ZTTlowMass_

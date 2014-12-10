@@ -299,6 +299,17 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
 
     return returnWeight*19.7
 
+def getStitchingLowMassDY(chain, maxPairTypeAndIndex):
+	returnWeight = 1.0
+	sampleNameLocal =  str(chain.SampleName)
+	if(sampleNameLocal=='/DYJetsToLL_M-10To50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		returnWeight = 0.3884338094543
+	elif(sampleNameLocal=='/DY1JetsToLL_M-10To50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		returnWeight = 0.1184276438286
+	elif(sampleNameLocal=='/DY2JetsToLL_TuneZ2star_M-10To50_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
+		returnWeight = 0.0134207289253
+	return returnWeight*19.7
+
 
 ##############
 # pileUp weight
@@ -919,4 +930,21 @@ def getWeightFor_XSM125(chain, maxPairTypeAndIndex, Verbose, CROSSXBR):
         returnWeight*=value
     if Verbose:
         print allWeights
+    return returnWeight
+
+
+def getWeightForLowMassDY(chain,maxPairTypeAndIndex,Verbose):
+    returnWeight = 1.0
+    allWeights = {}
+    allWeights['PU'] = PUweight(chain, maxPairTypeAndIndex)
+    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
+    allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
+    allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
+    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
+    allWeights['StitchingLowMassDY'] = getStitchingLowMassDY(chain, maxPairTypeAndIndex)
+    for key, value in allWeights.iteritems():
+      returnWeight*=value    
+    if Verbose:
+      print allWeights
     return returnWeight
