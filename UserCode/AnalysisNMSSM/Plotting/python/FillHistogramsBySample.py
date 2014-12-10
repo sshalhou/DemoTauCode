@@ -777,8 +777,8 @@ def Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Va
     return
 
 def Fill_ZTTembedded(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
-    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
-    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    #fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
 
 def Fill_VVandSingleTop(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
