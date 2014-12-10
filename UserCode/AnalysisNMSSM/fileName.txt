@@ -1,1 +1,1 @@
-nMSSM_WjetsDefault_
+nMSSM_WjetsNormSameSignHighMt_
