@@ -64,7 +64,7 @@ def passesEmbeddedZTauTauSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     return passesCutsETau
 
-def passesEmbeddedZTauTauSelectionMuULBTau(chain,index,UseNewTriggers,Verbose):
+def passesEmbeddedZTauTauSelectionMuTau(chain,index,UseNewTriggers,Verbose):
     passesCutsMuTau = True
     if muonID(chain,index,Verbose) is False:
         passesCutsMuTau = False
