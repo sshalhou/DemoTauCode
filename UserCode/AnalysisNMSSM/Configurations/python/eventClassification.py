@@ -13,57 +13,17 @@ from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCan
 def btagAndTauPtCategory_forQCD(btags, tauPt, njets, btagsLooseCSV):
   #print 'tight btags : ', btags
   #print 'loose btags : ', btagsLooseCSV
-  returnWord = ''
-  if btags == 0:
-    returnWord = 'nobtag'
-    if tauPt <= 30:
-      print tauPt, " is less than 30 "
-      returnWord += '-ForgotToCorrectTauPt?'
-    elif tauPt > 30 and tauPt <= 45:
-      returnWord += '_low'
-    elif tauPt > 45 and tauPt <= 60:
-      returnWord += '_medium'
-    elif tauPt > 60:
-      returnWord += '_high'
-  if njets<2 and btagsLooseCSV>0:
-    returnWord = 'btag'
-    if tauPt <= 30:
-      print tauPt, " is less than 30 "
-      returnWord += '-ForgotToCorrectTauPt?'
-    elif tauPt > 30 and tauPt <= 45:
-      returnWord += '_low'
-    elif tauPt > 45:
-      returnWord += '_high'
-  if len(returnWord) == 0:
-    returnWord = 'Reject'
+  returnWord = 'Reject'
+  if btagsLooseCSV>0:
+    returnWord = 'btag'    
   #print returnWord
   return returnWord
 
 
 def btagAndTauPtCategory(btags, tauPt, njets):
-  returnWord = ''
-  if btags == 0:
-    returnWord = 'nobtag'
-    if tauPt <= 30:
-      print tauPt, " is less than 30 "
-      returnWord += '-ForgotToCorrectTauPt?'
-    elif tauPt > 30 and tauPt <= 45:
-      returnWord += '_low'
-    elif tauPt > 45 and tauPt <= 60:
-      returnWord += '_medium'
-    elif tauPt > 60:
-      returnWord += '_high'
-  elif njets<2:
+  returnWord = 'Reject'
+  if btags > 0:
     returnWord = 'btag'
-    if tauPt <= 30:
-      print tauPt, " is less than 30 "
-      returnWord += '-ForgotToCorrectTauPt?'
-    elif tauPt > 30 and tauPt <= 45:
-      returnWord += '_low'
-    elif tauPt > 45:
-      returnWord += '_high'
-  else:
-    returnWord = 'Reject'
   return returnWord
 
 
@@ -111,6 +71,34 @@ def getSAMPLE_ADD(sampleName):
         SAMPLE_ADD = '_bbH800_'
     elif(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_bbH900_'
+   
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m25_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba125_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m30_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba130_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m35_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba135_'    
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m40_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba140_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m45_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba145_'    	    
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m50_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba150_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m55_FilterMuOrEle15_8TeV/Summer12DR53X-PU_S10_START53_V19-v2/AODSIM'):
+    	SAMPLE_ADD = '_bba155_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m60_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba160_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m65_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba165_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m70_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba170_'
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m75_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba175_'    	
+    elif(sampleName=='/PYTHIA6_Tauola_nMSSM_bba1_tautau_m80_FilterMuOrEle15_8TeV/Summer12_DR53X-PU_S10_START53_V19-v1/AODSIM'):
+    	SAMPLE_ADD = '_bba180_'    	    	    	    	    	    		
+  
+  
+  
     elif(sampleName=='/SUSYBBHToTauTau_M-1000_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
         SAMPLE_ADD = '_bbH1000_'
     elif(sampleName=='/SUSYGluGluToHToTauTau_M-80_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):

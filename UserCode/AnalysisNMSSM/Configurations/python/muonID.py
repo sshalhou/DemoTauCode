@@ -14,7 +14,7 @@ def muonID(chain, index, printCutValues):
   Lvec.SetXYZT(chain.muT_muon_p4_x[index], chain.muT_muon_p4_y[index], chain.muT_muon_p4_z[index],chain.muT_muon_p4_t[index])
 
   muon['pt'] = Lvec.Pt()
-  if (Lvec.Pt()>20) is False:
+  if (Lvec.Pt()>18) is False:
     returnVal = False
     failChain['pt'] = False
   else:
@@ -90,7 +90,7 @@ def muonIDforQCD(chain, index, printCutValues):
   Lvec.SetXYZT(chain.muT_muon_p4_x[index], chain.muT_muon_p4_y[index], chain.muT_muon_p4_z[index],chain.muT_muon_p4_t[index])
 
   muon['pt'] = Lvec.Pt()
-  if (Lvec.Pt()>20) is False:
+  if (Lvec.Pt()>18) is False:
     returnVal = False
     failChain['pt'] = False
   else:

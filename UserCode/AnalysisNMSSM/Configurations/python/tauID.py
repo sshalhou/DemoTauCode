@@ -13,7 +13,7 @@ def tauID_eTau(chain, index, printCutValues):
   Lvec = TLorentzVector(0,0,0,0)
   Lvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
   tau['pt'] = Lvec.Pt()
-  if (Lvec.Pt()>30) is False:
+  if (Lvec.Pt()>20) is False:
     returnVal = False
     failChain['pt'] = False
   else:
@@ -77,7 +77,7 @@ def tauID_muTau(chain, index, printCutValues):
   Lvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
 
   tau['pt'] = Lvec.Pt()
-  if (Lvec.Pt()>30) is False:
+  if (Lvec.Pt()>20) is False:
     returnVal = False
     failChain['pt'] = False
   else:
@@ -141,7 +141,7 @@ def tauID_eTau_forQCD(chain, index, printCutValues):
     Lvec = TLorentzVector(0,0,0,0)
     Lvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
     tau['pt'] = Lvec.Pt()
-    if (Lvec.Pt()>30) is False:
+    if (Lvec.Pt()>20) is False:
         returnVal = False
         failChain['pt'] = False
     else:
@@ -205,7 +205,7 @@ def tauID_muTau_forQCD(chain, index, printCutValues):
     Lvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
 
     tau['pt'] = Lvec.Pt()
-    if (Lvec.Pt()>30) is False:
+    if (Lvec.Pt()>20) is False:
         returnVal = False
         failChain['pt'] = False
     else:
@@ -267,7 +267,7 @@ def tauID_eTau_looseORtightISO(chain, index, printCutValues):
     Lvec = TLorentzVector(0,0,0,0)
     Lvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
     tau['pt'] = Lvec.Pt()
-    if (Lvec.Pt()>30) is False:
+    if (Lvec.Pt()>20) is False:
         returnVal = False
         failChain['pt'] = False
     else:
@@ -332,7 +332,7 @@ def tauID_muTau_looseORtightISO(chain, index, printCutValues):
     Lvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
 
     tau['pt'] = Lvec.Pt()
-    if (Lvec.Pt()>30) is False:
+    if (Lvec.Pt()>20) is False:
         returnVal = False
         failChain['pt'] = False
     else:

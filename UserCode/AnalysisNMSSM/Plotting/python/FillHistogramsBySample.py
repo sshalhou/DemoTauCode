@@ -541,6 +541,12 @@ def fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,hist
         SUFFIX = 'CMS_scale_t_etau_8TeVDown_'
     if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
         SUFFIX = 'CMS_scale_t_mutau_8TeVDown_'
+    
+    print maxPairTypeAndIndex
+    print "maxPairTypeAndIndex[1]", maxPairTypeAndIndex[1]
+    print "SAMPLE_ADD", SAMPLE_ADD
+    print "SUFFIX", SUFFIX
+    print "maxPairTypeAndIndex[2]", maxPairTypeAndIndex[2]
     tauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+maxPairTypeAndIndex[2]
     tauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+'inclusive'
     #print tauEsVariantToFill, tauEsVariantToFillinc
@@ -694,6 +700,11 @@ def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_d
     fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
     return
+    
+def FillNMSSMSignals(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    return    
+    
 
 def FillSUSYGluGlu(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,higgsPtWeightSYSdict,Value,nominalPtReweight):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
