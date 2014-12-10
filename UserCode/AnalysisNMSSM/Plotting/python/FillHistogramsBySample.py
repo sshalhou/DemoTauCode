@@ -542,11 +542,11 @@ def fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,hist
     if maxPairTypeAndIndex[1] =='muTau' and maxPairTypeAndIndex[3]=='TauEsDown' :
         SUFFIX = 'CMS_scale_t_mutau_8TeVDown_'
     
-    print maxPairTypeAndIndex
-    print "maxPairTypeAndIndex[1]", maxPairTypeAndIndex[1]
-    print "SAMPLE_ADD", SAMPLE_ADD
-    print "SUFFIX", SUFFIX
-    print "maxPairTypeAndIndex[2]", maxPairTypeAndIndex[2]
+    #print maxPairTypeAndIndex
+    #print "maxPairTypeAndIndex[1]", maxPairTypeAndIndex[1]
+    #print "SAMPLE_ADD", SAMPLE_ADD
+    #print "SUFFIX", SUFFIX
+    #print "maxPairTypeAndIndex[2]", maxPairTypeAndIndex[2]
     tauEsVariantToFill = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+maxPairTypeAndIndex[2]
     tauEsVariantToFillinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIX+'inclusive'
     #print tauEsVariantToFill, tauEsVariantToFillinc

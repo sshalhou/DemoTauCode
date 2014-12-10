@@ -19,7 +19,7 @@ from ROOT import TApplication,TTreeCache
 UseNewTriggers = False
 OnlyCheckEmbeddedTriggers = False
 
-Verbose = True
+Verbose = False
 SmallRun = False
 
 PrintEvents = False
