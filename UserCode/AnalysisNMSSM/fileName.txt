@@ -1,1 +1,1 @@
-nMSSM_QCDnorm_
+nMSSM_WJETSnorm_
