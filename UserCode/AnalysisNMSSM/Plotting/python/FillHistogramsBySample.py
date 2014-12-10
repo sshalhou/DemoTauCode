@@ -205,23 +205,23 @@ def fillJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict
 
         histogram_dict[VariantToFillUpinc].Fill(Value,wt_dict['jetTauFakeUp'])
         histogram_dict[VariantToFillUpsplitinc].Fill(Value,wt_dict['jetTauFakeUp'])
-        histogram_dict[fineVariantToFillUpinc].Fill(Value,wt_dict['jetTauFakeUp'])
-        histogram_dict[fineVariantToFillUpsplitinc].Fill(Value,wt_dict['jetTauFakeUp'])
+        #histogram_dict[fineVariantToFillUpinc].Fill(Value,wt_dict['jetTauFakeUp'])
+        #histogram_dict[fineVariantToFillUpsplitinc].Fill(Value,wt_dict['jetTauFakeUp'])
 
         histogram_dict[VariantToFillDowninc].Fill(Value,wt_dict['jetTauFakeDown'])
         histogram_dict[VariantToFillDownsplitinc].Fill(Value,wt_dict['jetTauFakeDown'])
-        histogram_dict[fineVariantToFillDowninc].Fill(Value,wt_dict['jetTauFakeDown'])
-        histogram_dict[fineVariantToFillDownsplitinc].Fill(Value,wt_dict['jetTauFakeDown'])
+        #histogram_dict[fineVariantToFillDowninc].Fill(Value,wt_dict['jetTauFakeDown'])
+        #histogram_dict[fineVariantToFillDownsplitinc].Fill(Value,wt_dict['jetTauFakeDown'])
 
         histogram_dict[VariantToFillUp].Fill(Value,wt_dict['jetTauFakeUp'])
         histogram_dict[VariantToFillUpsplit].Fill(Value,wt_dict['jetTauFakeUp'])
-        histogram_dict[fineVariantToFillUp].Fill(Value,wt_dict['jetTauFakeUp'])
-        histogram_dict[fineVariantToFillUpsplit].Fill(Value,wt_dict['jetTauFakeUp'])
+        #histogram_dict[fineVariantToFillUp].Fill(Value,wt_dict['jetTauFakeUp'])
+        #histogram_dict[fineVariantToFillUpsplit].Fill(Value,wt_dict['jetTauFakeUp'])
 
         histogram_dict[VariantToFillDown].Fill(Value,wt_dict['jetTauFakeDown'])
         histogram_dict[VariantToFillDownsplit].Fill(Value,wt_dict['jetTauFakeDown'])
-        histogram_dict[fineVariantToFillDown].Fill(Value,wt_dict['jetTauFakeDown'])
-        histogram_dict[fineVariantToFillDownsplit].Fill(Value,wt_dict['jetTauFakeDown'])
+        #histogram_dict[fineVariantToFillDown].Fill(Value,wt_dict['jetTauFakeDown'])
+        #histogram_dict[fineVariantToFillDownsplit].Fill(Value,wt_dict['jetTauFakeDown'])
 
 
     return
@@ -738,8 +738,8 @@ def FillQCDShapes(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsD
     return
 
 def Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
-    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
-    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    #fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     if SAMPLE_ADD == '_ZL_':
         fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
@@ -762,8 +762,8 @@ def Fill_TTbarMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
 
 
 def Fill_WjetsMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
-    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
-    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
+    #fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['jetTauFakeNominal'],histogram_dict,Value)
     fillJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
     return
 
