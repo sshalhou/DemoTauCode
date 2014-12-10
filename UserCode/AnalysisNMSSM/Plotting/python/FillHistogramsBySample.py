@@ -734,14 +734,13 @@ def Fill_ZTTembedded(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value
     return
 
 def Fill_VVandSingleTop(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
-    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
-    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    #fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
     return
 
 def Fill_TTbarMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
-    fillNominalSapesAndTauEsVariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
-    fillJECvariants_withFineBinToo(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
-    fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)    
+    #fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
     fillTopPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
     return
 
@@ -765,17 +764,16 @@ def FillSUSYBB(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_d
     fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
     return
 
-def FILLsm_QQHorVH(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value):
+def FILLsm_QQHorVH(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
-    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
-    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
+    #fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    #fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,histogram_dict,Value)
     return
 
-def FILLsm_GluGluH125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,highPtTauWtSYS,higgsPtWeightSYSdict,histogram_dict,Value):
-    nominalPtRewighted = finalWt*higgsPtWeightSYSdict['Nominal']
-    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,histogram_dict,Value)
-    fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,histogram_dict,Value)
-    fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,highPtTauWtSYS,histogram_dict,Value)
+def FILLsm_GluGluH125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
+    fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value)
+    #fillJECvariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,histogram_dict,Value)
+    #fillTauEffVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalPtRewighted,highPtTauWtSYS,histogram_dict,Value)
     # make sure we pass the non-pt reweighted value here
-    fillHiggsPtReweightVariantsSM125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value)
+    #fillHiggsPtReweightVariantsSM125(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,higgsPtWeightSYSdict,Value)
     return

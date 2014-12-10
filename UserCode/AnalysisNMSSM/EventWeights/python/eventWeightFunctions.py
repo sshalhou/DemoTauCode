@@ -803,6 +803,8 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     # LLR has this off
     #allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+	# off for now, will add in next round
+	#allWeights['jetTauFakeRate'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
       returnWeight*=value

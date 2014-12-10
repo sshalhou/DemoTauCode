@@ -67,6 +67,13 @@ sampleType.append('VH_SM125_CMS_scale_t_etau_8TeVUp')
 sampleType.append('VH_SM125_CMS_scale_t_mutau_8TeVDown')
 sampleType.append('VH_SM125_CMS_scale_t_mutau_8TeVUp')
 
+sampleType.append('qqH_SM125')
+sampleType.append('qqH_SM125_CMS_scale_t_etau_8TeVDown')
+sampleType.append('qqH_SM125_CMS_scale_t_etau_8TeVUp')
+sampleType.append('qqH_SM125_CMS_scale_t_mutau_8TeVDown')
+sampleType.append('qqH_SM125_CMS_scale_t_mutau_8TeVUp')
+
+
 sampleType.append('VV')
 sampleType.append('VV_CMS_scale_t_etau_8TeVDown')
 sampleType.append('VV_CMS_scale_t_etau_8TeVUp')
@@ -207,6 +214,13 @@ sampleTitle.append('VH_SM125_CMS_scale_t_etau_8TeVDown')
 sampleTitle.append('VH_SM125_CMS_scale_t_etau_8TeVUp')
 sampleTitle.append('VH_SM125_CMS_scale_t_mutau_8TeVDown')
 sampleTitle.append('VH_SM125_CMS_scale_t_mutau_8TeVUp')
+
+sampleTitle.append('qqH_SM125')
+sampleTitle.append('qqH_SM125_CMS_scale_t_etau_8TeVDown')
+sampleTitle.append('qqH_SM125_CMS_scale_t_etau_8TeVUp')
+sampleTitle.append('qqH_SM125_CMS_scale_t_mutau_8TeVDown')
+sampleTitle.append('qqH_SM125_CMS_scale_t_mutau_8TeVUp')
+
 
 sampleTitle.append('VV')
 sampleTitle.append('VV_CMS_scale_t_etau_8TeVDown')
