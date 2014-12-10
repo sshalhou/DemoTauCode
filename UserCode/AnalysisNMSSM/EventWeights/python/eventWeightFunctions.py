@@ -618,7 +618,7 @@ def nMSSMweights(chain, maxPairTypeAndIndex, Verbose):
 	allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
 	allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
 	allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-	allWeights['nevents'] = 1000.0*19.7/(chain.numberEvents*CrabJobEfficiency(chain.SampleName)*genFilterEff(chain.SampleName))
+	allWeights['nevents'] = genFilterEff(chain.SampleName)*1000.0*19.7/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
 	#allWeights['tauPolarization'] = tauPolarizationWeight(chain, maxPairTypeAndIndex)
 	# this is a SYS allWeights['highPtTauEff'] = highPtTauSF(chain, maxPairTypeAndIndex)
 	for key, value in allWeights.iteritems():
