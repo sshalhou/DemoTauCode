@@ -107,6 +107,25 @@ def WjetsShapeAdditionalCorrection(chain, maxPairTypeAndIndex):
 # up = apply weight*weight
 # xT_etaDepQCDShapeTemplateCorrection
 
+def QCDoSsSWeights(chain, maxPairTypeAndIndex):
+	retVal = 1.0
+	MASS = 0
+
+	BTAGOSSS =  TF1("BTAGOSSS","1.1+1.418*exp(-0.11*x)",20.,2000.)
+	INCLUSIVEOSSS = TF1("INCLUSIVEOSSS","1.13+1.0*exp(-0.087*x)",20.,2000.)
+
+
+	i = maxPairTypeAndIndex[0]
+	if maxPairTypeAndIndex[1] == 'eleTau':
+		MASS = chain.eT_correctedSVFitMass[i]
+	elif maxPairTypeAndIndex[1] == 'muTau':
+		MASS = chain.muT_correctedSVFitMass[i]	
+
+	if 'Reject' in str(maxPairTypeAndIndex[2]):
+		retVal = INCLUSIVEOSSS(MASS)
+	elif 'btag' in str(maxPairTypeAndIndex[2]):
+		retVal = BTAGOSSS(MASS)
+	return retVal
 
 def UpdatedQCDEtaDepWeights(chain, maxPairTypeAndIndex):
     value = 0.0
@@ -115,11 +134,11 @@ def UpdatedQCDEtaDepWeights(chain, maxPairTypeAndIndex):
     # extrapolation (same function for ETau and MuTau)
 
     # for tau_h with |eta| < 1.2
-    QCDWeight_mutau_central = TF1("QCDWeight_mutau_central","(-3.83E-03)*x+(1.15E+00)",30.,2000.)
+    QCDWeight_mutau_central = TF1("QCDWeight_mutau_central","0.936+0.002487385*x",20.,2000.)
     # for tau_h with |eta| between 1.2 and 1.7
-    QCDWeight_mutau_medium =  TF1("QCDWeight_mutau_medium","(-6.75E-03)*x+(1.25E+00)",30.,2000.)
+    QCDWeight_mutau_medium =  TF1("QCDWeight_mutau_medium","1.116-0.00451078*x",20.,2000.)
     # for tau_h with |eta| > 1.7
-    QCDWeight_mutau_forward = TF1("QCDWeight_mutau_forward","(-4.12E-03)*x+(1.16E+00)",30.,2000.)
+    QCDWeight_mutau_forward = TF1("QCDWeight_mutau_forward","1.387-0.015387226*x",20.,2000.)
 
     #################
     # get tau pt and eta
@@ -159,6 +178,8 @@ def QCDShapeWeights(chain, maxPairTypeAndIndex, QCDShapeWeightsDownNominalUp_dic
     QCDShapeWeightsDownNominalUp_dict['Nominal'] = value
     QCDShapeWeightsDownNominalUp_dict['Up'] = value*value
     return
+    
+
 
 ################################
 # get the e->tau fake weight correction

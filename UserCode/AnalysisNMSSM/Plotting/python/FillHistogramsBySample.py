@@ -52,59 +52,74 @@ from array import array
 ######################
 # fill all QCD shape variants
 # only based on TauEsNominal
-def fillQCDShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,Value):
+def fillQCDShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,QCDoSsSWeightsDownNominalUp_dict,Value):
     SUFFIXNominal=''
-    SUFFIXNominalFine='fine_binning_'
     SUFFIXchannelUp=''
-    SUFFIXchannelUpFine=''
     SUFFIXchannelDown=''
-    SUFFIXchannelDownFine=''
     if maxPairTypeAndIndex[3]=='TauEsNominal':
         if maxPairTypeAndIndex[1] =='eleTau':
             SUFFIXchannelUp='CMS_htt_QCDfrShape_etau_8TeVUp_'
-            SUFFIXchannelUpFine='CMS_htt_QCDfrShape_etau_8TeVUp_fine_binning_'
             SUFFIXchannelDown='CMS_htt_QCDfrShape_etau_8TeVDown_'
-            SUFFIXchannelDownFine='CMS_htt_QCDfrShape_etau_8TeVDown_fine_binning_'
         if maxPairTypeAndIndex[1] =='muTau':
             SUFFIXchannelUp='CMS_htt_QCDfrShape_mutau_8TeVUp_'
-            SUFFIXchannelUpFine='CMS_htt_QCDfrShape_mutau_8TeVUp_fine_binning_'
             SUFFIXchannelDown='CMS_htt_QCDfrShape_mutau_8TeVDown_'
-            SUFFIXchannelDownFine='CMS_htt_QCDfrShape_mutau_8TeVDown_fine_binning_'
         variantNominal = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominal+maxPairTypeAndIndex[2]
-        variantNominalFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominalFine+maxPairTypeAndIndex[2]
         variantUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUp+maxPairTypeAndIndex[2]
-        variantUpFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUpFine+maxPairTypeAndIndex[2]
         variantDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDown+maxPairTypeAndIndex[2]
-        variantDownFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDownFine+maxPairTypeAndIndex[2]
 
         INCvariantNominal = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominal+'inclusive'
-        INCvariantNominalFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominalFine+'inclusive'
         INCvariantUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUp+'inclusive'
-        INCvariantUpFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUpFine+'inclusive'
         INCvariantDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDown+'inclusive'
-        INCvariantDownFine = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDownFine+'inclusive'
 
 
-        nominalWt = QCDShapeWeightsDownNominalUp_dict['Nominal']
-        downWt = QCDShapeWeightsDownNominalUp_dict['Down']
-        upWt = QCDShapeWeightsDownNominalUp_dict['Up']
+        nominalWt = QCDShapeWeightsDownNominalUp_dict['Nominal']*QCDoSsSWeightsDownNominalUp_dict['Nominal']
+        downWt = QCDShapeWeightsDownNominalUp_dict['Down']*QCDoSsSWeightsDownNominalUp_dict['Nominal']
+        upWt = QCDShapeWeightsDownNominalUp_dict['Up']*QCDoSsSWeightsDownNominalUp_dict['Nominal']
 
         histogram_dict[INCvariantNominal].Fill(Value,nominalWt)
-        histogram_dict[INCvariantNominalFine].Fill(Value,nominalWt)
         histogram_dict[INCvariantUp].Fill(Value,upWt)
-        histogram_dict[INCvariantUpFine].Fill(Value,upWt)
         histogram_dict[INCvariantDown].Fill(Value,downWt)
-        histogram_dict[INCvariantDownFine].Fill(Value,downWt)
         if maxPairTypeAndIndex[2] != 'Reject':
             histogram_dict[variantNominal].Fill(Value,nominalWt)
-            histogram_dict[variantNominalFine].Fill(Value,nominalWt)
             histogram_dict[variantUp].Fill(Value,upWt)
-            histogram_dict[variantUpFine].Fill(Value,upWt)
             histogram_dict[variantDown].Fill(Value,downWt)
-            histogram_dict[variantDownFine].Fill(Value,downWt)
     return
 
+######################
+# fill all QCD OS SS shape variants
+# only based on TauEsNominal
+def fillQCDOSSSShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,QCDoSsSWeightsDownNominalUp_dict,Value):
+    SUFFIXNominal=''
+    SUFFIXchannelUp=''
+    SUFFIXchannelDown=''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        if maxPairTypeAndIndex[1] =='eleTau':
+            SUFFIXchannelUp='CMS_htt_QCDShape_etau_btag_8TeVUp_'
+            SUFFIXchannelDown='CMS_htt_QCDShape_etau_btag_8TeVDown_'
+        if maxPairTypeAndIndex[1] =='muTau':
+            SUFFIXchannelUp='CMS_htt_QCDShape_mutau_btag_8TeVUp_'
+            SUFFIXchannelDown='CMS_htt_QCDShape_mutau_btag_8TeVDown_'
+        variantNominal = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominal+maxPairTypeAndIndex[2]
+        variantUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUp+maxPairTypeAndIndex[2]
+        variantDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDown+maxPairTypeAndIndex[2]
 
+        INCvariantNominal = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXNominal+'inclusive'
+        INCvariantUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelUp+'inclusive'
+        INCvariantDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXchannelDown+'inclusive'
+
+
+        nominalWt = QCDoSsSWeightsDownNominalUp_dict['Nominal']*QCDShapeWeightsDownNominalUp_dict['Nominal']
+        downWt = QCDoSsSWeightsDownNominalUp_dict['Down']*QCDShapeWeightsDownNominalUp_dict['Nominal']
+        upWt = QCDoSsSWeightsDownNominalUp_dict['Up']*QCDShapeWeightsDownNominalUp_dict['Nominal']
+
+        #histogram_dict[INCvariantNominal].Fill(Value,nominalWt)
+        histogram_dict[INCvariantUp].Fill(Value,upWt)
+        histogram_dict[INCvariantDown].Fill(Value,downWt)
+        if maxPairTypeAndIndex[2] != 'Reject':
+            #histogram_dict[variantNominal].Fill(Value,nominalWt)
+            histogram_dict[variantUp].Fill(Value,upWt)
+            histogram_dict[variantDown].Fill(Value,downWt)
+    return
 
 ##############
 # fill the jet->tau fake variants
@@ -717,8 +732,9 @@ def FillObsDATA(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,1.0,histogram_dict,Value)
     return
 
-def FillQCDShapes(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,Value):
-    fillQCDShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,Value)
+def FillQCDShapes(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,QCDoSsSWeightsDownNominalUp_dict,Value):
+    fillQCDShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,QCDoSsSWeightsDownNominalUp_dict,Value)
+    fillQCDOSSSShapeVariants(maxPairTypeAndIndex,SAMPLE_ADD,histogram_dict,QCDShapeWeightsDownNominalUp_dict,QCDoSsSWeightsDownNominalUp_dict,Value)
     return
 
 def Fill_DY_ZTTorZLorZJ(maxPairTypeAndIndex,SAMPLE_ADD,finalWt,histogram_dict,Value):
