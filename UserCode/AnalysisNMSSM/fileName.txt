@@ -1,1 +1,1 @@
-nMSSM_TTbarEmbedded_
+nMSSM_WjetsDefault_
