@@ -25,7 +25,7 @@ def passesDefaultSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -41,7 +41,7 @@ def passesDefaultSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -60,11 +60,11 @@ def passesEmbeddedZTauTauSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if embeddedZTauTauTrigForETau(chain, index, Verbose) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
-def passesEmbeddedZTauTauSelectionMuTau(chain,index,UseNewTriggers,Verbose):
+def passesEmbeddedZTauTauSelectionMuULBTau(chain,index,UseNewTriggers,Verbose):
     passesCutsMuTau = True
     if muonID(chain,index,Verbose) is False:
         passesCutsMuTau = False
@@ -74,7 +74,7 @@ def passesEmbeddedZTauTauSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if embeddedZTauTauTrigForMuTau(chain, index, Verbose) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -94,7 +94,7 @@ def passesEmbeddedZTauTauSelectionETau_NoMtCut(chain,index,UseNewTriggers,Verbos
         passesCutsETau = False
     if embeddedZTauTauTrigForETau(chain, index, Verbose) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -108,7 +108,7 @@ def passesEmbeddedZTauTauSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbo
         passesCutsMuTau = False
     if embeddedZTauTauTrigForMuTau(chain, index, Verbose) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -126,7 +126,7 @@ def passesEmbeddedTTbarSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if embeddedTTbarTrigForETau(chain, index, Verbose) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -140,7 +140,7 @@ def passesEmbeddedTTbarSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if embeddedTTbarTrigForMuTau(chain, index, Verbose) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -159,7 +159,7 @@ def passesEmbeddedTTbarSelectionETau_NoMtCut(chain,index,UseNewTriggers,Verbose)
         passesCutsETau = False
     if embeddedTTbarTrigForETau(chain, index, Verbose) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -173,7 +173,7 @@ def passesEmbeddedTTbarSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbose
         passesCutsMuTau = False
     if embeddedTTbarTrigForMuTau(chain, index, Verbose) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -192,7 +192,7 @@ def passesDefaultSelectionETau_NoMtCut(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -208,7 +208,7 @@ def passesDefaultSelectionMuTau_NoMtCut(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -228,7 +228,7 @@ def passesHighMtSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -244,7 +244,7 @@ def passesHighMtSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -265,7 +265,7 @@ def passesHighMtSameSignSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -281,7 +281,7 @@ def passesHighMtSameSignSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -301,7 +301,7 @@ def passesQCDSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -317,7 +317,7 @@ def passesQCDSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -336,7 +336,7 @@ def passesSameSignSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -352,7 +352,7 @@ def passesSameSignSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
@@ -372,7 +372,7 @@ def passesDefaultSelectionWithLooseOrTightTauIsoETau(chain,index,UseNewTriggers,
         passesCutsETau = False
     if tauTriggerForETau(chain,index,UseNewTriggers) is False:
         passesCutsETau = False
-    if chain.eT_correctedSVFitMass[index] < -50:
+    if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
     return passesCutsETau
 
@@ -388,7 +388,7 @@ def passesDefaultSelectionWithLooseOrTightTauIsoMuTau(chain,index,UseNewTriggers
         passesCutsMuTau = False
     if tauTriggerForMuTau(chain,index,UseNewTriggers) is False:
         passesCutsMuTau = False
-    if chain.muT_correctedSVFitMass[index] < -50:
+    if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False
     return passesCutsMuTau
 
