@@ -15,7 +15,7 @@ UseNewTriggers = False
 OnlyCheckEmbeddedTriggers = False
 
 Verbose = False
-SmallRun = True
+SmallRun = False
 
 PrintEvents = False
 check_events = []

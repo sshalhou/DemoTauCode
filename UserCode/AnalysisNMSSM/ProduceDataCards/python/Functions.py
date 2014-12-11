@@ -51,7 +51,7 @@ def RejectHistogram(DIRNAME, HISTNAME):
     if '_nobtag' in D and '_btag_8' in H:
               reject = True
     if 'btag' in D and 'btag_' not in D:
-        if 'low' in H: reject = True
+        if 'low' in H and 'lowMass' not in H: reject = True
         if 'medium' in H: reject = True
         if 'high' in H: reject = True
     if 'btag_' in D:
