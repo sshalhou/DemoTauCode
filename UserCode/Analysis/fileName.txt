@@ -1,1 +1,1 @@
-MSSM_QCDshapes_
+MSSM_QCDnorm_
