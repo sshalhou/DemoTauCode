@@ -268,56 +268,74 @@ def getSAMPLE_ADD(sampleName):
 
 
 
-
-
-
-
-
-
 def muTauClassification_forQCD(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory_forQCD(chain.muT_nbjets[index],Tvec.Pt(),chain.muT_njets[index],chain.muT_nbjetsLOOSE[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    localClassIf = btagAndTauPtCategory_forQCD(chain.muT_nbjets[index],Tvec.Pt(),chain.muT_njets[index],chain.muT_nbjetsLOOSE[index])
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf
+
 
 def eTauClassification_forQCD(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory_forQCD(chain.eT_nbjets[index],Tvec.Pt(),chain.eT_njets[index],chain.eT_nbjetsLOOSE[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory_forQCD(chain.eT_nbjets[index],Tvec.Pt(),chain.eT_njets[index],chain.eT_nbjetsLOOSE[index])
 
 
 
 
 def muTauClassification(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.muT_nbjets[index],Tvec.Pt(),chain.muT_njets[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    localClassIf = btagAndTauPtCategory(chain.muT_nbjets[index],Tvec.Pt(),chain.muT_njets[index])  
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf
+
+
 
 def eTauClassification(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.eT_nbjets[index],Tvec.Pt(),chain.eT_njets[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory(chain.eT_nbjets[index],Tvec.Pt(),chain.eT_njets[index])
 
 
 def muTauClassificationJECDOWN(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    localClassIf = btagAndTauPtCategory(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index])
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf
 
 def eTauClassificationJECDOWN(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.eT_nbjetsDOWN[index],Tvec.Pt(),chain.eT_njetsDOWN[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory(chain.eT_nbjetsDOWN[index],Tvec.Pt(),chain.eT_njetsDOWN[index])
 
 
 def muTauClassificationJECUP(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
+    localClassIf =  btagAndTauPtCategory(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index])
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf 
+
 
 def eTauClassificationJECUP(chain, index):
-  Tvec =  TLorentzVector(0,0,0,0)
-  Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
-  return btagAndTauPtCategory(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index])
+    Tvec =  TLorentzVector(0,0,0,0)
+    Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[index], chain.eT_tau_corrected_p4_y[index], chain.eT_tau_corrected_p4_z[index],chain.eT_tau_corrected_p4_t[index])
+    return btagAndTauPtCategory(chain.eT_nbjetsUP[index],Tvec.Pt(),chain.eT_njetsUP[index])
 
 
 ########
@@ -326,8 +344,12 @@ def eTauClassificationJECUP(chain, index):
 def muTauClassificationJECDOWN_looseBtag(chain, index):
     Tvec =  TLorentzVector(0,0,0,0)
     Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-    return btagAndTauPtCategory_forQCD(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index],chain.muT_nbjetsLOOSEDOWN[index])
-
+    localClassIf = btagAndTauPtCategory_forQCD(chain.muT_nbjetsDOWN[index],Tvec.Pt(),chain.muT_njetsDOWN[index],chain.muT_nbjetsLOOSEDOWN[index])
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf    
 
 def eTauClassificationJECDOWN_looseBtag(chain, index):
     Tvec =  TLorentzVector(0,0,0,0)
@@ -340,8 +362,12 @@ def eTauClassificationJECDOWN_looseBtag(chain, index):
 def muTauClassificationJECUP_looseBtag(chain, index):
     Tvec =  TLorentzVector(0,0,0,0)
     Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[index], chain.muT_tau_corrected_p4_y[index], chain.muT_tau_corrected_p4_z[index],chain.muT_tau_corrected_p4_t[index])
-    return btagAndTauPtCategory_forQCD(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index],chain.muT_nbjetsLOOSEUP[index])
-
+    localClassIf = btagAndTauPtCategory_forQCD(chain.muT_nbjetsUP[index],Tvec.Pt(),chain.muT_njetsUP[index],chain.muT_nbjetsLOOSEUP[index])
+    if ('btag_low' in str(localClassIf) or 'btag_high' in str(localClassIf)) and 'nobtag' not in str(localClassIf) :
+        if chain.muT_tau_againstElectronLooseMVA5[index] < 0.5:
+            print 'Reject due to new antiE mva in muTau'
+            return 'Reject'
+    return localClassIf    
 
 def eTauClassificationJECUP_looseBtag(chain, index):
     Tvec =  TLorentzVector(0,0,0,0)

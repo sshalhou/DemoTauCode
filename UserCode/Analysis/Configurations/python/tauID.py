@@ -1,7 +1,7 @@
 import time
 import sys
 import os
-from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
+from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile, TMath
 
 
 
@@ -54,6 +54,21 @@ def tauID_eTau(chain, index, printCutValues):
   else:
     passChain['againstMuonLoose3'] = True
 
+  VtxZ = chain.eT_PVz[index]
+  theta = Lvec.Theta()
+  tanTheta = TMath.tan(theta)
+  tau['ZimpactTau'] = 0.51
+  if tanTheta != 0:
+      tau['ZimpactTau'] = VtxZ + 130.0/( tanTheta )
+
+
+  if (tau['ZimpactTau'] < -1.5 or tau['ZimpactTau'] > 0.5) is False :
+    returnVal = False
+    failChain['ZimpactTau'] = False
+  else:
+    passChain['ZimpactTau'] = True
+
+  #print  tau['ZimpactTau'],  (tau['ZimpactTau'] < -1.5 or tau['ZimpactTau'] > 0.5)
 
   if printCutValues:
     print "-------------------------------------------"
@@ -182,6 +197,20 @@ def tauID_eTau_forQCD(chain, index, printCutValues):
     else:
         passChain['againstMuonLoose3'] = True
 
+    VtxZ = chain.eT_PVz[index]
+    theta = Lvec.Theta()
+    tanTheta = TMath.tan(theta)
+    tau['ZimpactTau'] = 0.51
+    if tanTheta != 0:
+        tau['ZimpactTau'] = VtxZ + 130.0/( tanTheta )
+
+
+    if (tau['ZimpactTau'] < -1.5 or tau['ZimpactTau'] > 0.5) is False :
+       returnVal = False
+       failChain['ZimpactTau'] = False
+    else:
+       passChain['ZimpactTau'] = True    
+
 
     if printCutValues:
         print "-------------------------------------------"
@@ -309,6 +338,20 @@ def tauID_eTau_looseORtightISO(chain, index, printCutValues):
     else:
         passChain['againstMuonLoose3'] = True
 
+
+    VtxZ = chain.eT_PVz[index]
+    theta = Lvec.Theta()
+    tanTheta = TMath.tan(theta)
+    tau['ZimpactTau'] = 0.51
+    if tanTheta != 0:
+        tau['ZimpactTau'] = VtxZ + 130.0/( tanTheta )
+
+
+    if (tau['ZimpactTau'] < -1.5 or tau['ZimpactTau'] > 0.5) is False :
+       returnVal = False
+       failChain['ZimpactTau'] = False
+    else:
+       passChain['ZimpactTau'] = True        
 
     if printCutValues:
         print "-------------------------------------------"
