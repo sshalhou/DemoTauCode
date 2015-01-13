@@ -73,7 +73,7 @@ Implementation:
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "PhysicsTools/PatAlgos/plugins/JetCorrFactorsProducer.h"
 #include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
-
+#include "TauAnalysis/SVfitStandalone/interface/SVfitStandaloneAlgorithm.h"
 
 typedef math::XYZTLorentzVector LorentzVector;
 typedef std::vector<edm::InputTag> vInputTag;
@@ -864,30 +864,17 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         ////////////////
 
         TMatrixD covMET(2, 2); // PFMET significance matrix
-        std::vector<NSVfitStandalone::MeasuredTauLepton> measuredTauLeptons;
+        
 
-        ///////
-        // it seems the order matters
-        // pass the higher pt lepton 1st
+        //svFitStandalone::LorentzVector leg1P4(muon.p4().px(),muon.p4().py(),muon.p4().pz(),muon.p4().energy());
+        //svFitStandalone::LorentzVector leg2P4(tau.corrected_p4().px(),tau.corrected_p4().py(),tau.corrected_p4().pz(),tau.corrected_p4().energy());
 
+        std::vector<svFitStandalone::MeasuredTauLepton> measuredTauLeptons;
+        measuredTauLeptons.clear();
 
-        //      if( muon.p4().pt() >=  tau.corrected_p4().pt()  )
-        //    {
-        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-        muon.p4()) );
-        measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        tau.corrected_p4()));
-        //  }
+        measuredTauLeptons.push_back(svFitStandalone::MeasuredTauLepton(svFitStandalone::kTauToMuDecay, muon.p4().pt(),muon.p4().eta(),muon.p4().phi(),svFitStandalone::muonMass));
+        measuredTauLeptons.push_back(svFitStandalone::MeasuredTauLepton(svFitStandalone::kTauToHadDecay,tau.corrected_p4().pt(),tau.corrected_p4().eta(),tau.corrected_p4().phi(),tau.corrected_p4().mass()));
 
-        //else
-        //{
-        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kHadDecay,
-        //tau.corrected_p4()));
-        //measuredTauLeptons.push_back(NSVfitStandalone::MeasuredTauLepton(NSVfitStandalone::kLepDecay,
-        //muon.p4()) );
-
-
-        //}
 
         // store the met
         CurrentMuonTau.set_mvaMET(correctedMET.pt());
@@ -902,23 +889,17 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
         if(doSVFit_)
         {
-          // last argument is verbosity
-          NSVfitStandaloneAlgorithm algo(measuredTauLeptons, NSVcorrectedMET, covMET, 0);
-          algo.addLogM(false);
-          //algo.integrateMarkovChain();
-          algo.integrateVEGAS();
-          CurrentMuonTau.set_correctedSVFitMass(algo.getMass());
 
+        // last argument is verbosity, set to 2 to see probs
 
-          // calculate SVFit mass without recoil met corr.
-          //NSVfitStandaloneAlgorithm algoRaw(measuredTauLeptons, NSVrawMET, covMET, 0);
-          //algoRaw.addLogM(false);
-          //          algoRaw.integrateMarkovChain();
-          //algoRaw.integrateVEGAS();
-          //CurrentMuonTau.set_rawSVFitMass(algoRaw.getMass());
+          svFitStandalone::Vector SVmeasuredMEt(correctedMET.px(), correctedMET.py(), 0.);
+          SVfitStandaloneAlgorithm svFitAlgorithm(measuredTauLeptons, correctedMET.x(),correctedMET.y(), covMET, 0);
+          svFitAlgorithm.addLogM(true, 2.);
+          svFitAlgorithm.integrateVEGAS();
+          double autoRoundedSVmass = svFitAlgorithm.getMass();
+          CurrentMuonTau.set_correctedSVFitMass(autoRoundedSVmass);
 
-
-
+          std::cout<<iEvent.id()<<" sv mass = "<<autoRoundedSVmass<<"\n";
 
 
         }
