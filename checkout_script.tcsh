@@ -13,7 +13,7 @@ ln -s ../../UserCode UserCode
 ################################################
 
 
-echo "checking out SVFit code : "
+echo "checking out SVFit code : with auto-rounding of inputs, older version also kept to minimize code changes needed"
 
 ################################################
 wget --no-check-certificate https://github.com/cms-analysis/TauAnalysis-CandidateTools/archive/TauAnalysis-CandidateTools-V00-02-03s.tar.gz .
@@ -22,6 +22,13 @@ mkdir TauAnalysis
 rm -rf TauAnalysis/CandidateTools
 mv TauAnalysis-CandidateTools-TauAnalysis-CandidateTools-V00-02-03s TauAnalysis/CandidateTools
 rm -rf TauAnalysis-CandidateTools-V00-02-03s
+
+
+cd TauAnalysis
+cp /afs/cern.ch/user/s/sshalhou/public/INSTALL_PUBLIC_FILES/TauAnalysis_SVfitStandalone_2014Dec18_myMod.tar.gz .
+tar -xzvf TauAnalysis_SVfitStandalone_2014Dec18_myMod.tar.gz
+cd -
+
 ################################################
 
 
