@@ -45,6 +45,16 @@ public:
   void set_numHadrons(int);
 
 
+  // new tau.vertex parameters
+
+  void set_vertex_x(double);
+  void set_vertex_y(double);
+  void set_vertex_z(double);
+  void set_vertex_theta(double);
+  void set_vertex_eta(double);
+  void set_vertex_phi(double);
+
+
   // Tau Discriminators
 
   void set_againstElectronDeadECAL(float);
@@ -142,6 +152,13 @@ public:
   int numStrips() const;
   int numHadrons() const;
 
+  double vertex_x() const;
+  double vertex_y() const;
+  double vertex_z() const;
+  double vertex_theta() const;
+  double vertex_eta() const;
+  double vertex_phi() const;
+
 
   float againstElectronDeadECAL() const;
   float againstElectronLoose() const;
@@ -234,6 +251,14 @@ private:
   bool m_passFullId_eTau;
   int m_numStrips;
   int m_numHadrons;
+
+  double m_vertex_x(); 
+  double m_vertex_y();
+  double m_vertex_z(); 
+  double m_vertex_theta(); 
+  double m_vertex_eta(); 
+  double m_vertex_phi(); 
+
 
   float m_againstElectronDeadECAL;
   float m_againstElectronLoose;

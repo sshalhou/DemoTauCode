@@ -353,6 +353,18 @@ TupleTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     CurrentTau.set_decayMode(tau->decayMode());
 
 
+    //////////
+    // fill the tau vertex x, y, and z
+
+    CurrentTau.set_vertex_x(tau->vertex().x());
+    CurrentTau.set_vertex_y(tau->vertex().y());
+    CurrentTau.set_vertex_z(tau->vertex().z());
+
+    CurrentTau.set_vertex_theta(tau->vertex().theta());
+    CurrentTau.set_vertex_eta(tau->vertex().eta());
+    CurrentTau.set_vertex_phi(tau->vertex().phi());
+
+
     ////////////////////////
     // fill the tau discriminators
     float disc = 0.0;

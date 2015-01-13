@@ -19,6 +19,13 @@ TupleTau::TupleTau()
   m_numStrips = -999;
   m_numHadrons = -999;
 
+  m_vertex_x = -999;
+  m_vertex_y = -999;
+  m_vertex_z = -999;
+  m_vertex_theta = -999;
+  m_vertex_eta = -999;
+  m_vertex_phi = -999;
+
   m_againstElectronDeadECAL = NAN;
   m_againstElectronLoose = NAN;
   m_againstElectronLooseMVA5 = NAN;
@@ -105,6 +112,29 @@ void TupleTau::set_numStrips(int numStrips_) { m_numStrips  =  numStrips_;}
 int TupleTau::numStrips() const { return m_numStrips; }
 
 
+/////////////////////
+// tau vertex x,y,z
+
+void TupleTau::set_vertex_x(double vertex_x_) { m_vertex_x  =  vertex_x_;}
+double TupleTau::vertex_x() const { return m_vertex_x; }
+
+void TupleTau::set_vertex_y(double vertex_y_) { m_vertex_y  =  vertex_y_;}
+double TupleTau::vertex_y() const { return m_vertex_y; }
+
+void TupleTau::set_vertex_z(double vertex_z_) { m_vertex_z  =  vertex_z_;}
+double TupleTau::vertex_z() const { return m_vertex_z; }
+
+
+void TupleTau::set_vertex_theta(double vertex_theta_) { m_vertex_theta  =  vertex_theta_;}
+double TupleTau::vertex_theta() const { return m_vertex_theta; }
+
+
+void TupleTau::set_vertex_eta(double vertex_eta_) { m_vertex_eta  =  vertex_eta_;}
+double TupleTau::vertex_eta() const { return m_vertex_eta; }
+
+
+void TupleTau::set_vertex_phi(double vertex_phi_) { m_vertex_phi  =  vertex_phi_;}
+double TupleTau::vertex_phi() const { return m_vertex_phi; }
 
 ////////////////////
 // number of hadrons
