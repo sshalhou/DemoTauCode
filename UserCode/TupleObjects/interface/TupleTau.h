@@ -252,12 +252,12 @@ private:
   int m_numStrips;
   int m_numHadrons;
 
-  double m_vertex_x(); 
-  double m_vertex_y();
-  double m_vertex_z(); 
-  double m_vertex_theta(); 
-  double m_vertex_eta(); 
-  double m_vertex_phi(); 
+  double m_vertex_x; 
+  double m_vertex_y;
+  double m_vertex_z; 
+  double m_vertex_theta; 
+  double m_vertex_eta; 
+  double m_vertex_phi; 
 
 
   float m_againstElectronDeadECAL;
