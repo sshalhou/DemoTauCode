@@ -907,7 +907,7 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
           svFitAlgorithm.addLogM(true, 2.);
           svFitAlgorithm.integrateVEGAS();
           double autoRoundedSVmass = svFitAlgorithm.getMass();
-          CurrentMuonTau.set_correctedSVFitMass(autoRoundedSVmass);
+          CurrentElectronTau.set_correctedSVFitMass(autoRoundedSVmass);
 
           //std::cout<<iEvent.id()<<" sv mass = "<<autoRoundedSVmass<<"\n";
 
