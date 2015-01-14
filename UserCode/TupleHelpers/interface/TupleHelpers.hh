@@ -446,7 +446,14 @@ namespace TupleHelpers
 
   void findPrimaryVertexAndGetInfo(
   edm::Handle<edm::View<reco::Vertex> > vertices,
-  int & numberOfGoodVertices, int & PVndof, double & PVz, double & PVpositionRho, LorentzVector & PVp4)
+  int & numberOfGoodVertices, int & PVndof, double & PVz, double & PVpositionRho, LorentzVector & PVp4,
+  double & PVpositionX,
+  double & PVpositionY,
+  double & PVpositionZ,
+  double & PVpositionTheta,
+  double & PVpositionEta,
+  double & PVpositionPhi
+  )
   {
 
     int primary_vertex_indx = -999;
@@ -480,6 +487,15 @@ namespace TupleHelpers
       PVz = primary_vertex.z();
       PVpositionRho = primary_vertex.position().Rho();
       PVp4 = primary_vertex.p4();
+      PVpositionX     = primary_vertex.position().x();
+      PVpositionY     = primary_vertex.position().y();
+      PVpositionZ     = primary_vertex.position().z();
+      PVpositionTheta = primary_vertex.position().theta();
+      PVpositionEta   = primary_vertex.position().eta();  
+      PVpositionPhi   = primary_vertex.position().phi();
+
+
+
     }
 
     return;

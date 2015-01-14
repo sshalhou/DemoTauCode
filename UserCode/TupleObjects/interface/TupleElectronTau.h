@@ -81,6 +81,15 @@ public:
   void set_PVpositionRho(double);
   void set_PVp4(LorentzVector);
 
+  void set_PVpositionX(double);
+  void set_PVpositionY(double);
+  void set_PVpositionZ(double);
+  void set_PVpositionTheta(double);
+  void set_PVpositionEta(double);
+  void set_PVpositionPhi(double);
+
+
+
   void set_isDecayZtauTau(bool);
   void set_isDecayZeE(bool);
   void set_isDecayZmuMu(bool);
@@ -147,6 +156,14 @@ public:
   double PVz() const;
   double PVpositionRho() const;
   LorentzVector PVp4() const;
+  
+  double PVpositionX() const;
+  double PVpositionY() const;
+  double PVpositionZ() const;
+  double PVpositionTheta() const;
+  double PVpositionEta() const;
+  double PVpositionPhi() const;
+
 
   bool isDecayZtauTau() const;
   bool isDecayZeE() const;
@@ -215,6 +232,14 @@ private:
   double m_PVz;
   double m_PVpositionRho;
   LorentzVector m_PVp4;
+
+  double m_PVpositionX;
+  double m_PVpositionY;
+  double m_PVpositionZ;
+  double m_PVpositionTheta;
+  double m_PVpositionEta;
+  double m_PVpositionPhi;
+
   bool m_isDecayZtauTau;
   bool m_isDecayZeE;
   bool m_isDecayZmuMu;

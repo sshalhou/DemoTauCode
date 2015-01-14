@@ -53,6 +53,14 @@ TupleMuonTau::TupleMuonTau()
   m_PVz = NAN;
   m_PVpositionRho = NAN;
   m_PVp4.SetXYZT(NAN,NAN,NAN,NAN);
+
+  m_PVpositionX = NAN;
+  m_PVpositionY = NAN;
+  m_PVpositionZ = NAN;
+  m_PVpositionTheta = NAN;
+  m_PVpositionEta = NAN;
+  m_PVpositionPhi = NAN;
+
   m_isDecayZtauTau = 0;
   m_isDecayZeE = 0;
   m_isDecayZmuMu = 0;
@@ -160,6 +168,23 @@ double TupleMuonTau::PVpositionRho() const { return m_PVpositionRho; }
 void TupleMuonTau::set_PVp4(LorentzVector PVp4_) { m_PVp4  =  PVp4_;}
 LorentzVector TupleMuonTau::PVp4() const { return m_PVp4; }
 
+void TupleMuonTau::set_PVpositionX(double PVpositionX_) { m_PVpositionX  =  PVpositionX_;}
+double TupleMuonTau::PVpositionX() const { return m_PVpositionX; }
+
+void TupleMuonTau::set_PVpositionY(double PVpositionY_) { m_PVpositionY  =  PVpositionY_;}
+double TupleMuonTau::PVpositionY() const { return m_PVpositionY; }
+
+void TupleMuonTau::set_PVpositionZ(double PVpositionZ_) { m_PVpositionZ  =  PVpositionZ_;}
+double TupleMuonTau::PVpositionZ() const { return m_PVpositionZ; }
+
+void TupleMuonTau::set_PVpositionTheta(double PVpositionTheta_) { m_PVpositionTheta  =  PVpositionTheta_;}
+double TupleMuonTau::PVpositionTheta() const { return m_PVpositionTheta; }
+
+void TupleMuonTau::set_PVpositionEta(double PVpositionEta_) { m_PVpositionEta  =  PVpositionEta_;}
+double TupleMuonTau::PVpositionEta() const { return m_PVpositionEta; }
+
+void TupleMuonTau::set_PVpositionPhi(double PVpositionPhi_) { m_PVpositionPhi  =  PVpositionPhi_;}
+double TupleMuonTau::PVpositionPhi() const { return m_PVpositionPhi; }
 
 
 void TupleMuonTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}

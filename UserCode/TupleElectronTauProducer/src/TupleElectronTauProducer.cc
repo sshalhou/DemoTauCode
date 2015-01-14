@@ -213,9 +213,17 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
   double PVz = NAN;
   double PVpositionRho = NAN;
   LorentzVector PVp4(NAN,NAN,NAN,NAN);
+  double PVpositionX     = NAN;
+  double PVpositionY     = NAN;
+  double PVpositionZ     = NAN;
+  double PVpositionTheta = NAN;
+  double PVpositionEta   = NAN;
+  double PVpositionPhi   = NAN;
+
 
   TupleHelpers::findPrimaryVertexAndGetInfo(vertices, numberOfGoodVertices,
-  PVndof, PVz, PVpositionRho, PVp4);
+  PVndof, PVz, PVpositionRho, PVp4, 
+  PVpositionX, PVpositionY, PVpositionZ, PVpositionTheta, PVpositionEta, PVpositionPhi);
 
 
 
@@ -487,6 +495,13 @@ TupleElectronTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSe
         CurrentElectronTau.set_PVz(PVz);
         CurrentElectronTau.set_PVpositionRho(PVpositionRho);
         CurrentElectronTau.set_PVp4(PVp4);
+
+        CurrentElectronTau.set_PVpositionX(PVpositionX);
+        CurrentElectronTau.set_PVpositionY(PVpositionY);
+        CurrentElectronTau.set_PVpositionZ(PVpositionZ);
+        CurrentElectronTau.set_PVpositionTheta(PVpositionTheta);
+        CurrentElectronTau.set_PVpositionEta(PVpositionEta);
+        CurrentElectronTau.set_PVpositionPhi(PVpositionPhi);
 
 
 

@@ -53,6 +53,16 @@ TupleElectronTau::TupleElectronTau()
   m_PVz = NAN;
   m_PVpositionRho = NAN;
   m_PVp4.SetXYZT(NAN,NAN,NAN,NAN);
+
+  m_PVpositionX = NAN;
+  m_PVpositionY = NAN;
+  m_PVpositionZ = NAN;
+  m_PVpositionTheta = NAN;
+  m_PVpositionEta = NAN;
+  m_PVpositionPhi = NAN;
+
+
+
   m_isDecayZtauTau = 0;
   m_isDecayZeE = 0;
   m_isDecayZmuMu = 0;
@@ -155,6 +165,26 @@ double TupleElectronTau::PVpositionRho() const { return m_PVpositionRho; }
 
 void TupleElectronTau::set_PVp4(LorentzVector PVp4_) { m_PVp4  =  PVp4_;}
 LorentzVector TupleElectronTau::PVp4() const { return m_PVp4; }
+
+
+void TupleElectronTau::set_PVpositionX(double PVpositionX_) { m_PVpositionX  =  PVpositionX_;}
+double TupleElectronTau::PVpositionX() const { return m_PVpositionX; }
+
+void TupleElectronTau::set_PVpositionY(double PVpositionY_) { m_PVpositionY  =  PVpositionY_;}
+double TupleElectronTau::PVpositionY() const { return m_PVpositionY; }
+
+void TupleElectronTau::set_PVpositionZ(double PVpositionZ_) { m_PVpositionZ  =  PVpositionZ_;}
+double TupleElectronTau::PVpositionZ() const { return m_PVpositionZ; }
+
+void TupleElectronTau::set_PVpositionTheta(double PVpositionTheta_) { m_PVpositionTheta  =  PVpositionTheta_;}
+double TupleElectronTau::PVpositionTheta() const { return m_PVpositionTheta; }
+
+void TupleElectronTau::set_PVpositionEta(double PVpositionEta_) { m_PVpositionEta  =  PVpositionEta_;}
+double TupleElectronTau::PVpositionEta() const { return m_PVpositionEta; }
+
+void TupleElectronTau::set_PVpositionPhi(double PVpositionPhi_) { m_PVpositionPhi  =  PVpositionPhi_;}
+double TupleElectronTau::PVpositionPhi() const { return m_PVpositionPhi; }
+
 
 void TupleElectronTau::set_genTOPp4(LorentzVector genTOPp4_) { m_genTOPp4  =  genTOPp4_;}
 LorentzVector TupleElectronTau::genTOPp4() const { return m_genTOPp4; }

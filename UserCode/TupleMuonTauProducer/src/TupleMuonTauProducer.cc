@@ -214,9 +214,16 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   double PVz = NAN;
   double PVpositionRho = NAN;
   LorentzVector PVp4(NAN,NAN,NAN,NAN);
+  double PVpositionX     = NAN;
+  double PVpositionY     = NAN;
+  double PVpositionZ     = NAN;
+  double PVpositionTheta = NAN;
+  double PVpositionEta   = NAN;
+  double PVpositionPhi   = NAN;
 
   TupleHelpers::findPrimaryVertexAndGetInfo(vertices, numberOfGoodVertices,
-  PVndof, PVz, PVpositionRho, PVp4);
+  PVndof, PVz, PVpositionRho, PVp4,
+  PVpositionX, PVpositionY, PVpositionZ, PVpositionTheta, PVpositionEta, PVpositionPhi);
 
 
   ////////////////
@@ -482,6 +489,12 @@ TupleMuonTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
         CurrentMuonTau.set_PVpositionRho(PVpositionRho);
         CurrentMuonTau.set_PVp4(PVp4);
 
+        CurrentMuonTau.set_PVpositionX(PVpositionX);
+        CurrentMuonTau.set_PVpositionY(PVpositionY);
+        CurrentMuonTau.set_PVpositionZ(PVpositionZ);
+        CurrentMuonTau.set_PVpositionTheta(PVpositionTheta);
+        CurrentMuonTau.set_PVpositionEta(PVpositionEta);
+        CurrentMuonTau.set_PVpositionPhi(PVpositionPhi);
 
         ////////////////////////
         // for embedded samples, the normal trigger paths
