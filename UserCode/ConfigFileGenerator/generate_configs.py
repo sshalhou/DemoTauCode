@@ -189,7 +189,7 @@ for element in root.findall('Sample'):
     CRABpset = "sed -i \'s/DUMMY_pset/"+patTupleConfigName.replace("/","\/")+"/g\'"+" "+crabConfigName
     os.system(CRABpset)
 
-    directoryName = OneWordName+"_v9ntup"
+    directoryName = OneWordName+"_v9Xntup"
     pubName = "SZS_"+directoryName
 
     CRABdatasetpath = "sed -i \'s/DUMMY_datasetpath/"+str(sys.argv[1]).replace("/","\/")+"/g\'"+" "+crabConfigName
