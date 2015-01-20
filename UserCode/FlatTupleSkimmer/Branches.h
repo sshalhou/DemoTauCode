@@ -104,6 +104,14 @@ vector<int>     *eT_numberOfGoodVertices;
 vector<int>     *eT_PVndof;
 vector<double>  *eT_PVz;
 vector<double>  *eT_PVpositionRho;
+
+vector<double>  *eT_PVpositionX;
+vector<double>  *eT_PVpositionY;
+vector<double>  *eT_PVpositionZ;
+vector<double>  *eT_PVpositionTheta;
+vector<double>  *eT_PVpositionEta;
+vector<double>  *eT_PVpositionPhi;
+
 vector<double>  *eT_PVp4_x;
 vector<double>  *eT_PVp4_y;
 vector<double>  *eT_PVp4_z;
@@ -271,6 +279,14 @@ vector<bool>    *eT_tau_has_HltMatchEle27;
 vector<bool>    *eT_tau_has_HltMatchMu17;
 vector<bool>    *eT_tau_has_HltMatchMu18;
 vector<bool>    *eT_tau_has_HltMatchMu24;
+
+vector<double>    *eT_tau_vertex_x;
+vector<double>    *eT_tau_vertex_y;
+vector<double>    *eT_tau_vertex_z;
+vector<double>    *eT_tau_vertex_theta;
+vector<double>    *eT_tau_vertex_eta;
+vector<double>    *eT_tau_vertex_phi;
+
 vector<double>  *eT_puWeight;
 vector<double>  *eT_puWeightM1;
 vector<double>  *eT_puWeightP1;
@@ -390,6 +406,16 @@ vector<int>     *muT_numberOfGoodVertices;
 vector<int>     *muT_PVndof;
 vector<double>  *muT_PVz;
 vector<double>  *muT_PVpositionRho;
+
+vector<double>  *muT_PVpositionX;
+vector<double>  *muT_PVpositionY;
+vector<double>  *muT_PVpositionZ;
+vector<double>  *muT_PVpositionTheta;
+vector<double>  *muT_PVpositionEta;
+vector<double>  *muT_PVpositionPhi;
+
+
+
 vector<double>  *muT_PVp4_x;
 vector<double>  *muT_PVp4_y;
 vector<double>  *muT_PVp4_z;
@@ -553,6 +579,16 @@ vector<bool>    *muT_tau_has_HltMatchEle27;
 vector<bool>    *muT_tau_has_HltMatchMu17;
 vector<bool>    *muT_tau_has_HltMatchMu18;
 vector<bool>    *muT_tau_has_HltMatchMu24;
+
+vector<double>    *muT_tau_vertex_x;
+vector<double>    *muT_tau_vertex_y;
+vector<double>    *muT_tau_vertex_z;
+vector<double>    *muT_tau_vertex_theta;
+vector<double>    *muT_tau_vertex_eta;
+vector<double>    *muT_tau_vertex_phi;
+
+
+
 vector<double>  *muT_puWeight;
 vector<double>  *muT_puWeightM1;
 vector<double>  *muT_puWeightP1;
@@ -689,6 +725,14 @@ vector<int>     eT_numberOfGoodVertices_;
 vector<int>     eT_PVndof_;
 vector<double>  eT_PVz_;
 vector<double>  eT_PVpositionRho_;
+
+vector<double>  eT_PVpositionX_;
+vector<double>  eT_PVpositionY_;
+vector<double>  eT_PVpositionZ_;
+vector<double>  eT_PVpositionTheta_;
+vector<double>  eT_PVpositionEta_;
+vector<double>  eT_PVpositionPhi_;
+
 vector<double>  eT_PVp4_x_;
 vector<double>  eT_PVp4_y_;
 vector<double>  eT_PVp4_z_;
@@ -856,6 +900,14 @@ vector<bool>    eT_tau_has_HltMatchEle27_;
 vector<bool>    eT_tau_has_HltMatchMu17_;
 vector<bool>    eT_tau_has_HltMatchMu18_;
 vector<bool>    eT_tau_has_HltMatchMu24_;
+
+vector<double>    eT_tau_vertex_x_;
+vector<double>    eT_tau_vertex_y_;
+vector<double>    eT_tau_vertex_z_;
+vector<double>    eT_tau_vertex_theta_;
+vector<double>    eT_tau_vertex_eta_;
+vector<double>    eT_tau_vertex_phi_;
+
 vector<double>  eT_puWeight_;
 vector<double>  eT_puWeightM1_;
 vector<double>  eT_puWeightP1_;
@@ -975,6 +1027,15 @@ vector<int>     muT_numberOfGoodVertices_;
 vector<int>     muT_PVndof_;
 vector<double>  muT_PVz_;
 vector<double>  muT_PVpositionRho_;
+
+vector<double>  muT_PVpositionX_;
+vector<double>  muT_PVpositionY_;
+vector<double>  muT_PVpositionZ_;
+vector<double>  muT_PVpositionTheta_;
+vector<double>  muT_PVpositionEta_;
+vector<double>  muT_PVpositionPhi_;
+
+
 vector<double>  muT_PVp4_x_;
 vector<double>  muT_PVp4_y_;
 vector<double>  muT_PVp4_z_;
@@ -1138,6 +1199,14 @@ vector<bool>    muT_tau_has_HltMatchEle27_;
 vector<bool>    muT_tau_has_HltMatchMu17_;
 vector<bool>    muT_tau_has_HltMatchMu18_;
 vector<bool>    muT_tau_has_HltMatchMu24_;
+
+vector<double>    muT_tau_vertex_x_;
+vector<double>    muT_tau_vertex_y_;
+vector<double>    muT_tau_vertex_z_;
+vector<double>    muT_tau_vertex_theta_;
+vector<double>    muT_tau_vertex_eta_;
+vector<double>    muT_tau_vertex_phi_;
+
 vector<double>  muT_puWeight_;
 vector<double>  muT_puWeightM1_;
 vector<double>  muT_puWeightP1_;
@@ -1273,6 +1342,14 @@ TBranch        *b_eT_numberOfGoodVertices;   //!
 TBranch        *b_eT_PVndof;   //!
 TBranch        *b_eT_PVz;   //!
 TBranch        *b_eT_PVpositionRho;   //!
+
+TBranch        *b_eT_PVpositionX;   //!
+TBranch        *b_eT_PVpositionY;   //!
+TBranch        *b_eT_PVpositionZ;   //!
+TBranch        *b_eT_PVpositionTheta;   //!
+TBranch        *b_eT_PVpositionEta;   //!
+TBranch        *b_eT_PVpositionPhi;   //!
+
 TBranch        *b_eT_PVp4_x;   //!
 TBranch        *b_eT_PVp4_y;   //!
 TBranch        *b_eT_PVp4_z;   //!
@@ -1440,6 +1517,14 @@ TBranch        *b_eT_tau_has_HltMatchEle27;   //!
 TBranch        *b_eT_tau_has_HltMatchMu17;   //!
 TBranch        *b_eT_tau_has_HltMatchMu18;   //!
 TBranch        *b_eT_tau_has_HltMatchMu24;   //!
+
+TBranch        *b_eT_tau_vertex_x;   //!
+TBranch        *b_eT_tau_vertex_y;   //!
+TBranch        *b_eT_tau_vertex_z;   //!
+TBranch        *b_eT_tau_vertex_theta;   //!
+TBranch        *b_eT_tau_vertex_eta;   //!
+TBranch        *b_eT_tau_vertex_phi;   //!
+
 TBranch        *b_eT_puWeight;   //!
 TBranch        *b_eT_puWeightM1;   //!
 TBranch        *b_eT_puWeightP1;   //!
@@ -1559,6 +1644,15 @@ TBranch        *b_muT_numberOfGoodVertices;   //!
 TBranch        *b_muT_PVndof;   //!
 TBranch        *b_muT_PVz;   //!
 TBranch        *b_muT_PVpositionRho;   //!
+
+TBranch        *b_muT_PVpositionX;   //!
+TBranch        *b_muT_PVpositionY;   //!
+TBranch        *b_muT_PVpositionZ;   //!
+TBranch        *b_muT_PVpositionTheta;   //!
+TBranch        *b_muT_PVpositionEta;   //!
+TBranch        *b_muT_PVpositionPhi;   //!
+
+
 TBranch        *b_muT_PVp4_x;   //!
 TBranch        *b_muT_PVp4_y;   //!
 TBranch        *b_muT_PVp4_z;   //!
@@ -1722,6 +1816,15 @@ TBranch        *b_muT_tau_has_HltMatchEle27;   //!
 TBranch        *b_muT_tau_has_HltMatchMu17;   //!
 TBranch        *b_muT_tau_has_HltMatchMu18;   //!
 TBranch        *b_muT_tau_has_HltMatchMu24;   //!
+
+TBranch        *b_muT_tau_vertex_x;   //!
+TBranch        *b_muT_tau_vertex_y;   //!
+TBranch        *b_muT_tau_vertex_z;   //!
+TBranch        *b_muT_tau_vertex_theta;   //!
+TBranch        *b_muT_tau_vertex_eta;   //!
+TBranch        *b_muT_tau_vertex_phi;   //!
+
+
 TBranch        *b_muT_puWeight;   //!
 TBranch        *b_muT_puWeightM1;   //!
 TBranch        *b_muT_puWeightP1;   //!
@@ -1863,6 +1966,14 @@ void deRef()
   eT_PVndof_ = *eT_PVndof;
   eT_PVz_ = *eT_PVz;
   eT_PVpositionRho_ = *eT_PVpositionRho;
+
+  eT_PVpositionX_ = *eT_PVpositionX;
+  eT_PVpositionY_ = *eT_PVpositionY;
+  eT_PVpositionZ_ = *eT_PVpositionZ;
+  eT_PVpositionTheta_ = *eT_PVpositionTheta;
+  eT_PVpositionEta_ = *eT_PVpositionEta;
+  eT_PVpositionPhi_ = *eT_PVpositionPhi;
+
   eT_PVp4_x_ = *eT_PVp4_x;
   eT_PVp4_y_ = *eT_PVp4_y;
   eT_PVp4_z_ = *eT_PVp4_z;
@@ -2036,6 +2147,15 @@ void deRef()
   eT_tau_has_HltMatchMu17_ = *eT_tau_has_HltMatchMu17;
   eT_tau_has_HltMatchMu18_ = *eT_tau_has_HltMatchMu18;
   eT_tau_has_HltMatchMu24_ = *eT_tau_has_HltMatchMu24;
+
+
+  eT_tau_vertex_x_ = *eT_tau_vertex_x;
+  eT_tau_vertex_y_ = *eT_tau_vertex_y;
+  eT_tau_vertex_z_ = *eT_tau_vertex_z;
+  eT_tau_vertex_theta_ = *eT_tau_vertex_theta;
+  eT_tau_vertex_eta_ = *eT_tau_vertex_eta;
+  eT_tau_vertex_phi_ = *eT_tau_vertex_phi;
+
   eT_puWeight_ = *eT_puWeight;
   eT_puWeightM1_ = *eT_puWeightM1;
   eT_puWeightP1_ = *eT_puWeightP1;
@@ -2155,6 +2275,16 @@ void deRef()
   muT_PVndof_ = *muT_PVndof;
   muT_PVz_ = *muT_PVz;
   muT_PVpositionRho_ = *muT_PVpositionRho;
+
+  muT_PVpositionX_ = *muT_PVpositionX;
+  muT_PVpositionY_ = *muT_PVpositionY;
+  muT_PVpositionZ_ = *muT_PVpositionZ;
+  muT_PVpositionTheta_ = *muT_PVpositionTheta;
+  muT_PVpositionEta_ = *muT_PVpositionEta;
+  muT_PVpositionPhi_ = *muT_PVpositionPhi;
+
+
+
   muT_PVp4_x_ = *muT_PVp4_x;
   muT_PVp4_y_ = *muT_PVp4_y;
   muT_PVp4_z_ = *muT_PVp4_z;
@@ -2323,6 +2453,16 @@ void deRef()
   muT_tau_has_HltMatchMu17_ = *muT_tau_has_HltMatchMu17;
   muT_tau_has_HltMatchMu18_ = *muT_tau_has_HltMatchMu18;
   muT_tau_has_HltMatchMu24_ = *muT_tau_has_HltMatchMu24;
+
+
+  muT_tau_vertex_x_ = *muT_tau_vertex_x;
+  muT_tau_vertex_y_ = *muT_tau_vertex_y;
+  muT_tau_vertex_z_ = *muT_tau_vertex_z;
+  muT_tau_vertex_theta_ = *muT_tau_vertex_theta;
+  muT_tau_vertex_eta_ = *muT_tau_vertex_eta;
+  muT_tau_vertex_phi_ = *muT_tau_vertex_phi;
+
+
   muT_puWeight_ = *muT_puWeight;
   muT_puWeightM1_ = *muT_puWeightM1;
   muT_puWeightP1_ = *muT_puWeightP1;
@@ -2457,6 +2597,14 @@ void Init(TTree *tree)
    eT_PVndof = 0;
    eT_PVz = 0;
    eT_PVpositionRho = 0;
+
+   eT_PVpositionX = 0;
+   eT_PVpositionY = 0;
+   eT_PVpositionZ = 0;
+   eT_PVpositionTheta = 0;
+   eT_PVpositionEta = 0;
+   eT_PVpositionPhi = 0;
+
    eT_PVp4_x = 0;
    eT_PVp4_y = 0;
    eT_PVp4_z = 0;
@@ -2624,6 +2772,14 @@ void Init(TTree *tree)
    eT_tau_has_HltMatchMu17 = 0;
    eT_tau_has_HltMatchMu18 = 0;
    eT_tau_has_HltMatchMu24 = 0;
+
+   eT_tau_vertex_x = 0;
+   eT_tau_vertex_y = 0;
+   eT_tau_vertex_z = 0;
+   eT_tau_vertex_theta = 0;
+   eT_tau_vertex_eta = 0;
+   eT_tau_vertex_phi = 0;
+
    eT_puWeight = 0;
    eT_puWeightM1 = 0;
    eT_puWeightP1 = 0;
@@ -2743,6 +2899,15 @@ void Init(TTree *tree)
    muT_PVndof = 0;
    muT_PVz = 0;
    muT_PVpositionRho = 0;
+
+   muT_PVpositionX = 0;
+   muT_PVpositionY = 0;
+   muT_PVpositionZ = 0;
+   muT_PVpositionTheta = 0;
+   muT_PVpositionEta = 0;
+   muT_PVpositionPhi = 0;
+
+
    muT_PVp4_x = 0;
    muT_PVp4_y = 0;
    muT_PVp4_z = 0;
@@ -2906,6 +3071,15 @@ void Init(TTree *tree)
    muT_tau_has_HltMatchMu17 = 0;
    muT_tau_has_HltMatchMu18 = 0;
    muT_tau_has_HltMatchMu24 = 0;
+
+   muT_tau_vertex_x = 0;
+   muT_tau_vertex_y = 0;
+   muT_tau_vertex_z = 0;
+   muT_tau_vertex_theta = 0;
+   muT_tau_vertex_eta = 0;
+   muT_tau_vertex_phi = 0;
+
+
    muT_puWeight = 0;
    muT_puWeightM1 = 0;
    muT_puWeightP1 = 0;
@@ -3047,6 +3221,14 @@ void Init(TTree *tree)
    fChain->SetBranchAddress("eT_PVndof", &eT_PVndof, &b_eT_PVndof);
    fChain->SetBranchAddress("eT_PVz", &eT_PVz, &b_eT_PVz);
    fChain->SetBranchAddress("eT_PVpositionRho", &eT_PVpositionRho, &b_eT_PVpositionRho);
+
+   fChain->SetBranchAddress("eT_PVpositionX", &eT_PVpositionX, &b_eT_PVpositionX);
+   fChain->SetBranchAddress("eT_PVpositionY", &eT_PVpositionY, &b_eT_PVpositionY);
+   fChain->SetBranchAddress("eT_PVpositionZ", &eT_PVpositionZ, &b_eT_PVpositionZ);
+   fChain->SetBranchAddress("eT_PVpositionTheta", &eT_PVpositionTheta, &b_eT_PVpositionTheta);
+   fChain->SetBranchAddress("eT_PVpositionEta", &eT_PVpositionEta, &b_eT_PVpositionEta);
+   fChain->SetBranchAddress("eT_PVpositionPhi", &eT_PVpositionPhi, &b_eT_PVpositionPhi);
+   
    fChain->SetBranchAddress("eT_PVp4_x", &eT_PVp4_x, &b_eT_PVp4_x);
    fChain->SetBranchAddress("eT_PVp4_y", &eT_PVp4_y, &b_eT_PVp4_y);
    fChain->SetBranchAddress("eT_PVp4_z", &eT_PVp4_z, &b_eT_PVp4_z);
@@ -3214,6 +3396,14 @@ void Init(TTree *tree)
    fChain->SetBranchAddress("eT_tau_has_HltMatchMu17", &eT_tau_has_HltMatchMu17, &b_eT_tau_has_HltMatchMu17);
    fChain->SetBranchAddress("eT_tau_has_HltMatchMu18", &eT_tau_has_HltMatchMu18, &b_eT_tau_has_HltMatchMu18);
    fChain->SetBranchAddress("eT_tau_has_HltMatchMu24", &eT_tau_has_HltMatchMu24, &b_eT_tau_has_HltMatchMu24);
+
+   fChain->SetBranchAddress("eT_tau_vertex_x", &eT_tau_vertex_x, &b_eT_tau_vertex_x);
+   fChain->SetBranchAddress("eT_tau_vertex_y", &eT_tau_vertex_y, &b_eT_tau_vertex_y);
+   fChain->SetBranchAddress("eT_tau_vertex_z", &eT_tau_vertex_z, &b_eT_tau_vertex_z);
+   fChain->SetBranchAddress("eT_tau_vertex_theta", &eT_tau_vertex_theta, &b_eT_tau_vertex_theta);
+   fChain->SetBranchAddress("eT_tau_vertex_eta", &eT_tau_vertex_eta, &b_eT_tau_vertex_eta);
+   fChain->SetBranchAddress("eT_tau_vertex_phi", &eT_tau_vertex_phi, &b_eT_tau_vertex_phi);
+
    fChain->SetBranchAddress("eT_puWeight", &eT_puWeight, &b_eT_puWeight);
    fChain->SetBranchAddress("eT_puWeightM1", &eT_puWeightM1, &b_eT_puWeightM1);
    fChain->SetBranchAddress("eT_puWeightP1", &eT_puWeightP1, &b_eT_puWeightP1);
@@ -3333,6 +3523,15 @@ void Init(TTree *tree)
    fChain->SetBranchAddress("muT_PVndof", &muT_PVndof, &b_muT_PVndof);
    fChain->SetBranchAddress("muT_PVz", &muT_PVz, &b_muT_PVz);
    fChain->SetBranchAddress("muT_PVpositionRho", &muT_PVpositionRho, &b_muT_PVpositionRho);
+
+   fChain->SetBranchAddress("muT_PVpositionX", &muT_PVpositionX, &b_muT_PVpositionX);
+   fChain->SetBranchAddress("muT_PVpositionY", &muT_PVpositionY, &b_muT_PVpositionY);
+   fChain->SetBranchAddress("muT_PVpositionZ", &muT_PVpositionZ, &b_muT_PVpositionZ);
+   fChain->SetBranchAddress("muT_PVpositionTheta", &muT_PVpositionTheta, &b_muT_PVpositionTheta);
+   fChain->SetBranchAddress("muT_PVpositionEta", &muT_PVpositionEta, &b_muT_PVpositionEta);
+   fChain->SetBranchAddress("muT_PVpositionPhi", &muT_PVpositionPhi, &b_muT_PVpositionPhi);
+
+
    fChain->SetBranchAddress("muT_PVp4_x", &muT_PVp4_x, &b_muT_PVp4_x);
    fChain->SetBranchAddress("muT_PVp4_y", &muT_PVp4_y, &b_muT_PVp4_y);
    fChain->SetBranchAddress("muT_PVp4_z", &muT_PVp4_z, &b_muT_PVp4_z);
@@ -3496,6 +3695,15 @@ void Init(TTree *tree)
    fChain->SetBranchAddress("muT_tau_has_HltMatchMu17", &muT_tau_has_HltMatchMu17, &b_muT_tau_has_HltMatchMu17);
    fChain->SetBranchAddress("muT_tau_has_HltMatchMu18", &muT_tau_has_HltMatchMu18, &b_muT_tau_has_HltMatchMu18);
    fChain->SetBranchAddress("muT_tau_has_HltMatchMu24", &muT_tau_has_HltMatchMu24, &b_muT_tau_has_HltMatchMu24);
+
+   fChain->SetBranchAddress("muT_tau_vertex_x", &muT_tau_vertex_x, &b_muT_tau_vertex_x);
+   fChain->SetBranchAddress("muT_tau_vertex_y", &muT_tau_vertex_y, &b_muT_tau_vertex_y);
+   fChain->SetBranchAddress("muT_tau_vertex_z", &muT_tau_vertex_z, &b_muT_tau_vertex_z);
+   fChain->SetBranchAddress("muT_tau_vertex_theta", &muT_tau_vertex_theta, &b_muT_tau_vertex_theta);
+   fChain->SetBranchAddress("muT_tau_vertex_eta", &muT_tau_vertex_eta, &b_muT_tau_vertex_eta);
+   fChain->SetBranchAddress("muT_tau_vertex_phi", &muT_tau_vertex_phi, &b_muT_tau_vertex_phi);
+
+
    fChain->SetBranchAddress("muT_puWeight", &muT_puWeight, &b_muT_puWeight);
    fChain->SetBranchAddress("muT_puWeightM1", &muT_puWeightM1, &b_muT_puWeightM1);
    fChain->SetBranchAddress("muT_puWeightP1", &muT_puWeightP1, &b_muT_puWeightP1);

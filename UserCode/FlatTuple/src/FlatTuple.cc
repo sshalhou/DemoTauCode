@@ -175,6 +175,16 @@ private:
   std::vector< int > eT_PVndof ;
   std::vector< double > eT_PVz ;
   std::vector< double > eT_PVpositionRho ;
+
+  std::vector< double > eT_PVpositionX ;
+  std::vector< double > eT_PVpositionY ;
+  std::vector< double > eT_PVpositionZ ;
+  std::vector< double > eT_PVpositionTheta ;
+  std::vector< double > eT_PVpositionEta ;
+  std::vector< double > eT_PVpositionPhi ;
+
+
+
   std::vector< double > eT_PVp4_x , eT_PVp4_y , eT_PVp4_z , eT_PVp4_t ;
   std::vector< bool > eT_isDecayZtauTau ;
   std::vector< bool > eT_isDecayZeE ;
@@ -326,6 +336,13 @@ private:
   std::vector< bool > eT_tau_has_HltMatchMu17 ;
   std::vector< bool > eT_tau_has_HltMatchMu18 ;
   std::vector< bool > eT_tau_has_HltMatchMu24 ;
+  std::vector< double > eT_tau_vertex_x;
+  std::vector< double > eT_tau_vertex_y;
+  std::vector< double > eT_tau_vertex_z;
+  std::vector< double > eT_tau_vertex_theta;
+  std::vector< double > eT_tau_vertex_eta;
+  std::vector< double > eT_tau_vertex_phi;
+
 
   //////////////
   // weights for eTau
@@ -428,6 +445,15 @@ private:
   std::vector< int > muT_PVndof ;
   std::vector< double > muT_PVz ;
   std::vector< double > muT_PVpositionRho ;
+
+  std::vector< double > muT_PVpositionX ;
+  std::vector< double > muT_PVpositionY ;
+  std::vector< double > muT_PVpositionZ ;
+  std::vector< double > muT_PVpositionTheta ;
+  std::vector< double > muT_PVpositionEta ;
+  std::vector< double > muT_PVpositionPhi ;
+
+
   std::vector< double > muT_PVp4_x , muT_PVp4_y , muT_PVp4_z , muT_PVp4_t ;
   std::vector< bool > muT_isDecayZtauTau ;
   std::vector< bool > muT_isDecayZeE ;
@@ -573,6 +599,12 @@ private:
   std::vector< bool > muT_tau_has_HltMatchMu17 ;
   std::vector< bool > muT_tau_has_HltMatchMu18 ;
   std::vector< bool > muT_tau_has_HltMatchMu24 ;
+  std::vector< double > muT_tau_vertex_x;
+  std::vector< double > muT_tau_vertex_y;
+  std::vector< double > muT_tau_vertex_z;
+  std::vector< double > muT_tau_vertex_theta;
+  std::vector< double > muT_tau_vertex_eta;
+  std::vector< double > muT_tau_vertex_phi;  
 
   //////
   // muon tau weight
@@ -780,6 +812,15 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_PVndof", &eT_PVndof);
   lepTauTree->Branch("eT_PVz", &eT_PVz);
   lepTauTree->Branch("eT_PVpositionRho", &eT_PVpositionRho);
+
+  lepTauTree->Branch("eT_PVpositionX", &eT_PVpositionX);
+  lepTauTree->Branch("eT_PVpositionY", &eT_PVpositionY);
+  lepTauTree->Branch("eT_PVpositionZ", &eT_PVpositionZ);
+  lepTauTree->Branch("eT_PVpositionTheta", &eT_PVpositionTheta);
+  lepTauTree->Branch("eT_PVpositionEta", &eT_PVpositionEta);
+  lepTauTree->Branch("eT_PVpositionPhi", &eT_PVpositionPhi);
+
+
   lepTauTree->Branch("eT_PVp4_x", &eT_PVp4_x);
   lepTauTree->Branch("eT_PVp4_y", &eT_PVp4_y);
   lepTauTree->Branch("eT_PVp4_z", &eT_PVp4_z);
@@ -955,6 +996,14 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("eT_tau_has_HltMatchMu17", &eT_tau_has_HltMatchMu17);
   lepTauTree->Branch("eT_tau_has_HltMatchMu18", &eT_tau_has_HltMatchMu18);
   lepTauTree->Branch("eT_tau_has_HltMatchMu24", &eT_tau_has_HltMatchMu24);
+  lepTauTree->Branch("eT_tau_vertex_x", &eT_tau_vertex_x);
+  lepTauTree->Branch("eT_tau_vertex_y", &eT_tau_vertex_y);
+  lepTauTree->Branch("eT_tau_vertex_z", &eT_tau_vertex_z);
+  lepTauTree->Branch("eT_tau_vertex_theta", &eT_tau_vertex_theta);
+  lepTauTree->Branch("eT_tau_vertex_eta", &eT_tau_vertex_eta);
+  lepTauTree->Branch("eT_tau_vertex_phi", &eT_tau_vertex_phi);
+
+
 
 
   lepTauTree->Branch("eT_puWeight", &eT_puWeight);
@@ -1080,6 +1129,15 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_PVndof", &muT_PVndof);
   lepTauTree->Branch("muT_PVz", &muT_PVz);
   lepTauTree->Branch("muT_PVpositionRho", &muT_PVpositionRho);
+
+  lepTauTree->Branch("muT_PVpositionX", &muT_PVpositionX);
+  lepTauTree->Branch("muT_PVpositionY", &muT_PVpositionY);
+  lepTauTree->Branch("muT_PVpositionZ", &muT_PVpositionZ);
+  lepTauTree->Branch("muT_PVpositionTheta", &muT_PVpositionTheta);
+  lepTauTree->Branch("muT_PVpositionEta", &muT_PVpositionEta);
+  lepTauTree->Branch("muT_PVpositionPhi", &muT_PVpositionPhi);
+
+
   lepTauTree->Branch("muT_PVp4_x", &muT_PVp4_x);
   lepTauTree->Branch("muT_PVp4_y", &muT_PVp4_y);
   lepTauTree->Branch("muT_PVp4_z", &muT_PVp4_z);
@@ -1248,6 +1306,12 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("muT_tau_has_HltMatchMu17", &muT_tau_has_HltMatchMu17);
   lepTauTree->Branch("muT_tau_has_HltMatchMu18", &muT_tau_has_HltMatchMu18);
   lepTauTree->Branch("muT_tau_has_HltMatchMu24", &muT_tau_has_HltMatchMu24);
+  lepTauTree->Branch("muT_tau_vertex_x", &muT_tau_vertex_x);
+  lepTauTree->Branch("muT_tau_vertex_y", &muT_tau_vertex_y);
+  lepTauTree->Branch("muT_tau_vertex_z", &muT_tau_vertex_z);
+  lepTauTree->Branch("muT_tau_vertex_theta", &muT_tau_vertex_theta);
+  lepTauTree->Branch("muT_tau_vertex_eta", &muT_tau_vertex_eta);
+  lepTauTree->Branch("muT_tau_vertex_phi", &muT_tau_vertex_phi);
 
   lepTauTree->Branch("muT_puWeight", &muT_puWeight);
   lepTauTree->Branch("muT_puWeightM1", &muT_puWeightM1);
@@ -1495,7 +1559,17 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_numberOfGoodVertices.push_back(eTau.numberOfGoodVertices());
     eT_PVndof.push_back(eTau.PVndof());
     eT_PVz.push_back(eTau.PVz());
-    eT_PVpositionRho.push_back(eTau.PVpositionRho());
+
+    eT_PVpositionX.push_back(eTau.PVpositionX());
+    eT_PVpositionY.push_back(eTau.PVpositionY());
+    eT_PVpositionZ.push_back(eTau.PVpositionZ());
+    eT_PVpositionTheta.push_back(eTau.PVpositionTheta());
+    eT_PVpositionEta.push_back(eTau.PVpositionEta());
+    eT_PVpositionPhi.push_back(eTau.PVpositionPhi());
+
+
+
+
     eT_PVp4_x.push_back(eTau.PVp4().x());
     eT_PVp4_y.push_back(eTau.PVp4().y());
     eT_PVp4_z.push_back(eTau.PVp4().z());
@@ -1669,6 +1743,14 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_tau_has_HltMatchMu17.push_back(theTau.has_HltMatchMu17());
     eT_tau_has_HltMatchMu18.push_back(theTau.has_HltMatchMu18());
     eT_tau_has_HltMatchMu24.push_back(theTau.has_HltMatchMu24());
+    eT_tau_vertex_x.push_back(theTau.vertex_x());
+    eT_tau_vertex_y.push_back(theTau.vertex_y());
+    eT_tau_vertex_z.push_back(theTau.vertex_z());
+    eT_tau_vertex_theta.push_back(theTau.vertex_theta());
+    eT_tau_vertex_eta.push_back(theTau.vertex_eta());
+    eT_tau_vertex_phi.push_back(theTau.vertex_phi());
+
+
 
     eT_puWeight.push_back(eTauWt.puWeight());
     eT_puWeightM1.push_back(eTauWt.puWeightM1());
@@ -1816,6 +1898,15 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_PVndof.push_back(muTau.PVndof());
       muT_PVz.push_back(muTau.PVz());
       muT_PVpositionRho.push_back(muTau.PVpositionRho());
+
+      muT_PVpositionX.push_back(muTau.PVpositionX());
+      muT_PVpositionY.push_back(muTau.PVpositionY());
+      muT_PVpositionZ.push_back(muTau.PVpositionZ());
+      muT_PVpositionTheta.push_back(muTau.PVpositionTheta());
+      muT_PVpositionEta.push_back(muTau.PVpositionEta());
+      muT_PVpositionPhi.push_back(muTau.PVpositionPhi());
+
+
       muT_PVp4_x.push_back(muTau.PVp4().x());
       muT_PVp4_y.push_back(muTau.PVp4().y());
       muT_PVp4_z.push_back(muTau.PVp4().z());
@@ -1985,6 +2076,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       muT_tau_has_HltMatchMu17.push_back(theTau.has_HltMatchMu17());
       muT_tau_has_HltMatchMu18.push_back(theTau.has_HltMatchMu18());
       muT_tau_has_HltMatchMu24.push_back(theTau.has_HltMatchMu24());
+      muT_tau_vertex_x.push_back(theTau.vertex_x());
+      muT_tau_vertex_y.push_back(theTau.vertex_y());
+      muT_tau_vertex_z.push_back(theTau.vertex_z());
+      muT_tau_vertex_theta.push_back(theTau.vertex_theta());
+      muT_tau_vertex_eta.push_back(theTau.vertex_eta());
+      muT_tau_vertex_phi.push_back(theTau.vertex_phi());
 
       muT_puWeight.push_back(muTauWt.puWeight());
       muT_puWeightM1.push_back(muTauWt.puWeightM1());
@@ -2201,6 +2298,15 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_PVndof.clear();
     eT_PVz.clear();
     eT_PVpositionRho.clear();
+
+    eT_PVpositionX.clear();
+    eT_PVpositionY.clear();
+    eT_PVpositionZ.clear();
+    eT_PVpositionTheta.clear();
+    eT_PVpositionEta.clear();
+    eT_PVpositionPhi.clear();
+
+
     eT_PVp4_x.clear();
     eT_PVp4_y.clear();
     eT_PVp4_z.clear();
@@ -2372,8 +2478,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     eT_tau_has_HltMatchMu17.clear();
     eT_tau_has_HltMatchMu18.clear();
     eT_tau_has_HltMatchMu24.clear();
-
-
+    eT_tau_vertex_x.clear();
+    eT_tau_vertex_y.clear();
+    eT_tau_vertex_z.clear();
+    eT_tau_vertex_theta.clear();
+    eT_tau_vertex_eta.clear();
+    eT_tau_vertex_phi.clear();
 
     eT_puWeight.clear();
     eT_puWeightM1.clear();
@@ -2498,6 +2608,15 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_PVndof.clear();
     muT_PVz.clear();
     muT_PVpositionRho.clear();
+
+    muT_PVpositionX.clear();
+    muT_PVpositionY.clear();
+    muT_PVpositionZ.clear();
+    muT_PVpositionTheta.clear();
+    muT_PVpositionEta.clear();
+    muT_PVpositionPhi.clear();
+
+
     muT_PVp4_x.clear();
     muT_PVp4_y.clear();
     muT_PVp4_z.clear();
@@ -2666,6 +2785,12 @@ FlatTuple::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     muT_tau_has_HltMatchMu18.clear();
     muT_tau_has_HltMatchMu24.clear();
 
+    muT_tau_vertex_x.clear();
+    muT_tau_vertex_y.clear();
+    muT_tau_vertex_z.clear();
+    muT_tau_vertex_theta.clear();
+    muT_tau_vertex_eta.clear();
+    muT_tau_vertex_phi.clear();
 
     muT_puWeight.clear();
     muT_puWeightM1.clear();
