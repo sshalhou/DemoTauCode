@@ -291,11 +291,11 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
 
     njet = nup-5
 
-    if   njet==0: returnWeight = 0.11906618
-    elif njet==1: returnWeight = 0.022478688
-    elif njet==2: returnWeight = 0.009092586
-    elif njet==3: returnWeight = 0.005278795
-    elif njet>=4: returnWeight = 0.004118808
+    if   njet==0: returnWeight = 0.115028140807156
+    elif njet==1: returnWeight = 0.0223306919016347
+    elif njet==2: returnWeight = 0.00906254091946747
+    elif njet==3: returnWeight = 0.00525780694398914
+    elif njet>=4: returnWeight = 0.00411381273009578
 
     return returnWeight*19.7
 

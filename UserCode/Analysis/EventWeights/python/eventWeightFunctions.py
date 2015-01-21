@@ -270,11 +270,11 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
 
     njet = nup-5
 
-    if   njet==0: returnWeight = 0.11906618
-    elif njet==1: returnWeight = 0.022478688
-    elif njet==2: returnWeight = 0.009092586
-    elif njet==3: returnWeight = 0.005278795
-    elif njet>=4: returnWeight = 0.004118808
+    if   njet==0: returnWeight = 0.115028140807156
+    elif njet==1: returnWeight = 0.0223306919016347
+    elif njet==2: returnWeight = 0.00906254091946747
+    elif njet==3: returnWeight = 0.00525780694398914
+    elif njet>=4: returnWeight = 0.00411381273009578
 
     return returnWeight*19.7
 
@@ -554,20 +554,6 @@ def higgsPtReWeightNEW(chain, maxPairTypeAndIndex, UPorDOWNorNOMINAL):
 
 def CrabJobEfficiency(sampleName):
     eff = 1.0
-    if(sampleName=='/SUSYBBHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        eff = 0.997778
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-250_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        eff = 0.997774
-    elif(sampleName=='/SUSYGluGluToHToTauTau_M-900_8TeV-pythia6-tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        eff = 0.997778
-    elif(sampleName=='/DY3JetsToLL_M-50_TuneZ2Star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        eff = 0.99092
-    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau115_ptelec1_20had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.981636792844517
-    elif(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/StoreResults-Summer12_TTJets_FullLeptMGDecays_DR53X_PU_S10_START53_V7C_v2_PFembedded_trans1_tau116_ptmu1_16had1_18_v1-5ef1c0fd428eb740081f19333520fdc8/USER'):
-        eff = 0.995918444569172
-    elif(sampleName=='/WbbJetsToLNu_Massive_TuneZ2star_8TeV-madgraph-pythia6_tauola/Summer12_DR53X-PU_S10_START53_V7A-v1/AODSIM'):
-        eff = 0.9998386837
     return eff
 
 
