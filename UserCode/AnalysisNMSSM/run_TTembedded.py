@@ -27,57 +27,54 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-listOfFiles.append('./HOLDER/TTembedET.root')
-listOfFiles.append('./HOLDER/TTembedMT.root')
+
 
 
 
 #################
 # embedded ttbar
 #################
-
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_8_1_77R_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_3_1_BOa_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_2_1_paW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_9_1_cVT_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_13_1_L2Y_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_5_1_2pM_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_7_1_TMB_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_14_1_TMn_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_1_1_jlf_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_4_1_TiG_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_19_1_rk7_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_18_1_TCD_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_6_1_OJn_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_17_1_Uqc_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_11_1_Zmz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_12_1_cQU_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_10_1_GW8_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_21_1_CiT_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_15_1_R2U_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_16_1_alW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedETau_v8FLATtuple/FlatTuple_20_1_A0D_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_12_1_rQf_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_7_1_wY3_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_17_1_I2J_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_10_1_naD_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_14_1_YaV_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_16_1_ZSz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_18_1_QRm_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_13_1_bQq_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_5_1_XK1_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_6_1_cfo_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_3_1_uVC_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_19_1_5zp_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_9_1_uPW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_11_1_pCy_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_15_1_L3q_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_8_1_94L_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_20_1_Lgz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_2_1_EZE_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_1_1_jzd_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_4_1_33C_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIM/TtBarEmbeddedMuTau_v8FLATtuple/FlatTuple_21_1_cOk_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_10_1_WV7_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_11_1_OBv_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_12_1_Red_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_13_1_Hka_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_14_1_sbU_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_15_1_3LV_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_16_1_g6K_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_17_1_AeZ_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_18_1_0Sy_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_19_1_RNG_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_1_1_YYr_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_20_1_Rh0_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_2_1_pYW_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_3_1_Qbf_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_4_1_nHw_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_5_1_p8d_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_6_1_amk_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_7_1_Dru_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_8_1_NEt_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedETau_FLATv9Xntup/FlatTuple_9_1_ZM1_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_10_1_1dM_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_11_1_KUW_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_12_1_poq_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_13_1_l7K_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_14_1_mlN_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_15_1_x8R_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_16_1_i9X_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_17_1_Ka0_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_18_1_hu4_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_19_1_PEl_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_1_1_0JE_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_20_1_p0c_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_21_1_lqN_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_2_1_rE1_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_3_1_iC2_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_4_1_vx0_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_5_1_fRR_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_6_1_7By_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_7_1_0y9_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_8_1_sLC_skimmed.root')
+listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/TtBarEmbeddedMuTau_FLATv9Xntup/FlatTuple_9_1_zlR_skimmed.root')
 
 
 for afile in listOfFiles:
@@ -211,10 +208,14 @@ for entry in range(0,maxEntries):
 				assert(len(SAMPLE_ADD)>0), " Assert : unknown sample "
 
 				if SAMPLE_ADD == '_embeddedTTbar_':
-					# since will subtract from embedded ZTT fill the ZTT histograms :
-					classification = '_ZTT_'
-					wt = getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose)
-					Fill_ZTTembedded(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
+					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
+					if classification == '_ZTT_':
+						print 'filling a ', classification, 'event'
+						# since will subtract from embedded ZTT fill the ZTT histograms :
+						wt = getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose)
+						Fill_ZTTembedded(maxPairTypeAndIndex,classification,wt,histogram_dict,eventVariables['SVFitMass'])
+
+
 
 
 ######################
