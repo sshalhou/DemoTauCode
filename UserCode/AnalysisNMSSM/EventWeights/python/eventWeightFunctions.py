@@ -17,6 +17,24 @@ def divisionHelp(num, den):
   return returnVal
 
 
+########################
+# return the cross section
+# for each of the 3 ttbar MC samples
+# the values stored in the trees themselves
+# are no longer correct
+
+def getTTmcCrossSection(chain):
+    XSttBar = 241.5
+    SFttBar = 1.033
+    crossReturn = 1.0
+    sampleName = chain.SampleName
+    if(sampleName=='/TTJets_FullLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v2/AODSIM'):
+        crossReturn = XSttBar * SFttBar * 0.1050 
+    elif(sampleName=='/TTJets_SemiLeptMGDecays_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM'):
+        crossReturn = XSttBar * SFttBar * 0.4380
+    elif(sampleName=='/TTJets_HadronicMGDecays_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A_ext-v1/AODSIM'):
+        crossReturn = XSttBar * SFttBar * 0.4570
+    return crossReturn     
 
 ########################
 # cross-section weights for W+jets
@@ -834,7 +852,8 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
     # LLR has this off
     #allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['nevents'] = 1000.0*19.7*(chain.crossSection)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
+    allWeights['ttXsection'] = getTTmcCrossSection(chain)
+    allWeights['nevents'] = 1000.0*19.7*(1.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
 	# off for now, will add in next round
 	#allWeights['jetTauFakeRate'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
