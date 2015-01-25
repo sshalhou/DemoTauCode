@@ -204,7 +204,7 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     // scale the 4-vector
     reco::Candidate::LorentzVector EsCorrectedP4(0.0,0.0,0.0,0.0);
 
-    std::cout<<" shifting 4-vectr by "<<v4_sf<<" and mass by "<<v4_sf_MASS<<"\n";
+    //std::cout<<" shifting 4-vectr by "<<v4_sf<<" and mass by "<<v4_sf_MASS<<"\n";
       
       double pxS = tau->px()*v4_sf;
       double pyS = tau->py()*v4_sf;

@@ -488,7 +488,7 @@ namespace TupleHelpers
       PVpositionTheta = primary_vertex.position().theta();
       PVpositionEta   = primary_vertex.position().eta();  
       PVpositionPhi   = primary_vertex.position().phi();
-      std::cout<<" primary vertex at index "<<primary_vertex_indx<<" has z = "<<PVpositionZ<<"\n";
+      //std::cout<<" primary vertex at index "<<primary_vertex_indx<<" has z = "<<PVpositionZ<<"\n";
 
 
     }
