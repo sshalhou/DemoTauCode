@@ -1,5 +1,6 @@
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleHelpers/interface/TupleHelpers.hh"
+#include "TMath.h"
 
 
 TupleTau::TupleTau()
@@ -889,25 +890,41 @@ void TupleTau::set_corrected_p4(LorentzVector v4_, size_t hadrons, size_t strips
 {
 
   double v4_sf = 1.0;
+  double v4_sf_MASS = 1.0;
+
 
   /////////////////////
   // 1% correction for improved
   // MSSM analysis if matched to generator
   // level hadronic tau decay
 
-  if((hadrons==1 && strips>0) || (hadrons==1 && strips==0) || (hadrons==3))
+  if((hadrons==1 && strips>0) || (hadrons==3))
   {
 
 
-    v4_sf *= 1.01;
+    v4_sf *= 1.01 * ESshift;
+    v4_sf_MASS *= 1.01 * ESshift;
+
 
   }
 
-  m_corrected_p4 = v4_*v4_sf*ESshift;
+  else if (hadrons==1 && strips==0) 
+  {
+
+    v4_sf = 1.01 * ESshift;
+    v4_sf_MASS = 1.0000;
+
+  }
 
 
-
-
+  LorentzVector EsCorrectedP4(0.0,0.0,0.0,0.0);
+  double pxS = v4_.px()*v4_sf;
+  double pyS = v4_.py()*v4_sf;
+  double pzS = v4_.pz()*v4_sf;
+  double massS = v4_.mass()*v4_sf_MASS;
+  double enS = TMath::Sqrt(pxS*pxS + pyS*pyS + pzS*pzS + massS*massS);
+  EsCorrectedP4.SetPxPyPzE(pxS, pyS, pzS, enS );
+  m_corrected_p4 = EsCorrectedP4;
 
 }
 
