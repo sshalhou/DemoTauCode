@@ -166,6 +166,8 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
 
 
     double v4_sf = 1.0;
+    double v4_sf_MASS = 1.0;
+
 
     /////////////////////
     // 1% correction for improved
@@ -175,19 +177,43 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
     if ( tau->genJet() && deltaR(tau->p4(), tau->genJet()->p4()) < 0.5 && tau->genJet()->pt() > 8. )
     {
 
-      if((hadrons==1 && strips>0) || (hadrons==1 && strips==0) || (hadrons==3))
+      if((hadrons==1 && strips>0) || (hadrons==3))
       {
 
 
-        v4_sf *= 1.01;
+        v4_sf = 1.01*TauESshift_;
+        v4_sf_MASS = 1.01*TauESshift_;
 
       }
+
+      else if (hadrons==1 && strips==0) 
+       {
+
+
+        v4_sf = 1.01*TauESshift_;
+        v4_sf_MASS = 1.000;
+
+       } 
+
+
+
     }
 
     //////////////
     // scale the 4-vector
-    reco::Candidate::LorentzVector EsCorrectedP4 = tau->p4();
-    EsCorrectedP4 *= v4_sf*TauESshift_;
+    reco::Candidate::LorentzVector EsCorrectedP4(0.0,0.0,0.0,0.0);
+
+    std::cout<<" shifting 4-vectr by "<<v4_sf<<" and mass by "<<v4_sf_MASS<<"\n";
+      
+      double pxS = tau->px()*v4_sf;
+      double pyS = tau->py()*v4_sf;
+      double pzS = tau->pz()*v4_sf;
+      double massS = tau->mass()*v4_sf_MASS;
+      double enS = TMath::Sqrt(pxS*pxS + pyS*pyS + pzS*pzS + massS*massS);
+      
+      EsCorrectedP4.SetPxPyPzE(pxS, pyS, pzS, enS );
+
+
 
     //////////////////
     // store the new P4

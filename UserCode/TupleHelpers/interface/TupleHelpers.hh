@@ -469,12 +469,8 @@ namespace TupleHelpers
         {
 
           numberOfGoodVertices_++;
-
-          if( vertex->p4().pt() > max_sumPt)
-          {
-            max_sumPt  =     vertex->p4().pt();
-            primary_vertex_indx =    vertex - vertices->begin();
-          }
+          primary_vertex_indx = 0;
+       
         }
       }
     }
@@ -493,7 +489,7 @@ namespace TupleHelpers
       PVpositionTheta = primary_vertex.position().theta();
       PVpositionEta   = primary_vertex.position().eta();  
       PVpositionPhi   = primary_vertex.position().phi();
-
+      std::cout<<" primary vertex at index "<<primary_vertex_indx<<" has z = "<<PVpositionZ<<"\n";
 
 
     }
