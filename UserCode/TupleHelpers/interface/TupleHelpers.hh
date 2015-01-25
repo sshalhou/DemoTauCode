@@ -457,7 +457,6 @@ namespace TupleHelpers
   {
 
     int primary_vertex_indx = -999;
-    double max_sumPt = -999.0;
     int numberOfGoodVertices_ = 0;
 
     edm::View<reco::Vertex>::const_iterator vertex;

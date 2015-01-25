@@ -209,7 +209,7 @@ EsCorrectedTauProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetu
       double pyS = tau->py()*v4_sf;
       double pzS = tau->pz()*v4_sf;
       double massS = tau->mass()*v4_sf_MASS;
-      double enS = TMath::Sqrt(pxS*pxS + pyS*pyS + pzS*pzS + massS*massS);
+      double enS = ROOT::TMath::Sqrt(pxS*pxS + pyS*pyS + pzS*pzS + massS*massS);
       
       EsCorrectedP4.SetPxPyPzE(pxS, pyS, pzS, enS );
 
