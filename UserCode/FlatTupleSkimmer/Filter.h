@@ -52,7 +52,6 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
     if( !muT_tau_againstElectronLoose_[index]        ) localPass = 0;
 
     if( (muT_DR_[index] <= 0.5)                        ) localPass = 0;
-    if( muT_TransverseMass_[index] > 31.00 && muT_TransverseMass_[index] < 69.00 ) localPass = 0;
     if( !muT_passesSecondLeptonVeto_[index]           ) localPass = 0;
     if( !muT_passesThirdLeptonVeto_[index]            ) localPass = 0;
 
@@ -97,7 +96,6 @@ for(size_t index = 0; index < muT_correctedSVFitMass_.size(); ++index)
       if( !eT_tau_againstMuonLoose3_[index]           ) localPass = 0;
 
       if( (eT_DR_[index] <= 0.5)                        ) localPass = 0;
-      if( eT_TransverseMass_[index] > 31.00 && eT_TransverseMass_[index] < 69.00 ) localPass = 0;
       if( !eT_passesSecondLeptonVeto_[index]           ) localPass = 0;
       if( !eT_passesThirdLeptonVeto_[index]            ) localPass = 0;
 
