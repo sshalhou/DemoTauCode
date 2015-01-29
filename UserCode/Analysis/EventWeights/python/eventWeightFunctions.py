@@ -261,13 +261,16 @@ def getStitchingWjetsWt(chain, maxPairTypeAndIndex):
         elif 'W4Jets' in str(chain.SampleName) : njet = 4
         #print 'set njet = ', njet
 
-    if   njet==0: returnWeight =  0.476420146
-    elif njet==1: returnWeight =  0.096920679
-    elif njet==2: returnWeight =  0.030195587
-    elif njet==3: returnWeight =  0.019295033
-    elif njet>=4: returnWeight =  0.018346669
 
-    return returnWeight*19.7
+    if   njet==0: returnWeight =  0.0004822832531
+    elif njet==1: returnWeight =  0.00009812141584
+    elif njet==2: returnWeight =  0.00003056796532
+    elif njet==3: returnWeight =  0.00001953280552
+    elif njet>=4: returnWeight =  0.00001856311314
+
+    return returnWeight*19.7*1000
+
+
 
 ##############
 # stitching Z+jets weight
@@ -288,13 +291,13 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
 
     njet = nup-5
 
-    if   njet==0: returnWeight = 0.115028140807156
-    elif njet==1: returnWeight = 0.0223306919016347
-    elif njet==2: returnWeight = 0.00906254091946747
-    elif njet==3: returnWeight = 0.00525780694398914
-    elif njet>=4: returnWeight = 0.00411381273009578
+    if   njet==0: returnWeight = 0.0001159539602
+    elif njet==1: returnWeight = 0.00002251042347
+    elif njet==2: returnWeight = 0.000009135481997
+    elif njet==3: returnWeight = 0.000005300125109
+    elif njet>=4: returnWeight = 0.000004146923304
 
-    return returnWeight*19.7
+    return returnWeight*19.7*1000.0
 
 
 ##############
