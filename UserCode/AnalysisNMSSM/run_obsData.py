@@ -28,33 +28,16 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNA_V9XFlatTuple/FlatTuple_1_1_BF5_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNA_V9XFlatTuple/FlatTuple_2_1_dLg_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_1_1_2iz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_2_1_9ar_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_3_1_jah_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_4_1_Dlv_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_5_1_wtf_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_V9XFlatTuple/FlatTuple_6_1_HoI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNB_recover_V9XFlatTuple/FlatTuple_1_1_9in_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_1_1_i89_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_2_1_mFV_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_3_1_dTp_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_4_1_JFh_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_5_1_9yI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_6_1_9tl_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_7_1_zaN_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_8_1_8YI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUNC_V9XFlatTuple/FlatTuple_9_1_lY6_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_1_1_J0n_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_2_1_F1W_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_3_1_LTO_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_4_1_tgn_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_5_1_Ax8_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_6_1_rfl_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_7_1_3Dw_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DATA2012RUND_V9XFlatTuple/FlatTuple_8_1_CHr_skimmed.root')
+##############
+# import file lists
+from InputFlatFiles.python.FlatFileLists import *
 
+###############
+listOfFiles += dataList
+
+###############
+for f in range(0,len(listOfFiles)):
+	print 'adding ', listOfFiles[f]
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')
