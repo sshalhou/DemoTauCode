@@ -920,12 +920,12 @@ def getWeightEmbeddedTTbar(chain,maxPairTypeAndIndex,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     #allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
-    allWeights['regularTrigger'] = mcTriggerWeight(chain, maxPairTypeAndIndex)
-    allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['embeddedEmulationOfTrigger'] = embeddedTriggerEmulationWeight(chain,maxPairTypeAndIndex)
+    allWeights['triggerBug'] = highPtTauTriggerBugWeights_forEMBEDDED(chain, maxPairTypeAndIndex)
     allWeights['embeddingWeight'] = getEmbedWeight(chain,maxPairTypeAndIndex)
     # use the number of events of the parent MC sample
     # use cross-section =
-    allWeights['nevents'] = 1000.0*19.7*(5.8869)/(12011428*CrabJobEfficiency(chain.SampleName))
+    allWeights['nevents'] = 1000.0*19.7*(5.8869*4.45013504560974305)/(12011428*CrabJobEfficiency(chain.SampleName))
     allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
         returnWeight*=value

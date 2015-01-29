@@ -485,6 +485,7 @@ for chan in range(0,len(CHANNELS)):
                 GOTHIST = GOTFILE.Get(key)
                 if(GOTHIST):
                     print 'found with integral', GOTHIST.GetSumOfWeights()
+                    # extra cross section 4.45013504560974305e+00 SF applied at ana level
                     TTEMBED_HISTOGRAM_DICTIONARY[key].Add(GOTHIST)
                 else:
                     print 'FAILED TO FIND FAILED TO FIND *****', key
@@ -511,6 +512,8 @@ for chan in range(0,len(CHANNELS)):
             else:
                 print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT EMBEDDED'
 
+    print "----> ", INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut            
+
 
     print '*******************************************************************'
     print '**** step 2, with no mT cut applied, the inclusive ZTT MC integrals are :'
@@ -527,6 +530,7 @@ for chan in range(0,len(CHANNELS)):
                 INCLUSIVE_ZTT_MC_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
             else:
                 print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT MC'
+    print "----> ", INCLUSIVE_ZTT_MC_INT_NoMtCut            
 
 
     print '*******************************************************************'
@@ -546,21 +550,28 @@ for chan in range(0,len(CHANNELS)):
             else:
                 print '******* FAILED TO FIND HIST WITH NON MT CUT TT Embedded'
 
-
+    print "------>", INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
+                
     print '*******************************************************************'
     print '**** step four, compute the weights based on steps 1-3 without mT cut'
     print '*** only care about inclusive/ZTT here, norm changes to systematics will be set later'
     print '*******************************************************************'
 
-    print 'weight for', str(CHANNELS[chan])+'_inclusive/ZTT', 'computed using (step2+step3)/step1'
+    #print 'weight for', str(CHANNELS[chan])+'_inclusive/ZTT', 'computed using (step2+step3)/step1'
     print 'step 1 = ', INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
     print 'step 2 = ', INCLUSIVE_ZTT_MC_INT_NoMtCut
     print 'step 3 = ', INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
 
+    #INCLUSIVE_WEIGHT_ZTT = 0.0
+    #INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
+    #INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
+    #INCLUSIVE_WEIGHT_ZTT /= INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    
     INCLUSIVE_WEIGHT_ZTT = 0.0
     INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
-    INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
-    INCLUSIVE_WEIGHT_ZTT /= INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    localDenominator = INCLUSIVE_TT_EMBEDDED_INT_NoMtCut + INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    INCLUSIVE_WEIGHT_ZTT = INCLUSIVE_WEIGHT_ZTT/localDenominator
+
     print 'final weight for embedded ZTT norm = ', INCLUSIVE_WEIGHT_ZTT
 
     print '*******************************************************************'
@@ -573,10 +584,11 @@ for chan in range(0,len(CHANNELS)):
     for key, value in HISTOGRAM_DICTIONARY.iteritems():
         if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key):
             #print key, '-----> ZTT starting weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-            HISTOGRAM_DICTIONARY[key].Scale(INCLUSIVE_WEIGHT_ZTT)
+            
             #print key, '-----> ZTT scaled weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
             #print key, '-----> ttBar embedded weights to be removed <--------', TTEMBED_HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
             HISTOGRAM_DICTIONARY[key].Add(TTEMBED_HISTOGRAM_DICTIONARY[key],-1.0)
+            HISTOGRAM_DICTIONARY[key].Scale(INCLUSIVE_WEIGHT_ZTT)
             #print key, '-----> ZTT post sub <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 
 
