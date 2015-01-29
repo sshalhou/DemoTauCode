@@ -320,15 +320,14 @@ def getStitchingZjetsWt(chain, maxPairTypeAndIndex):
 
 
 def getStitchingLowMassDY(chain, maxPairTypeAndIndex):
-	returnWeight = 1.0
-	i = maxPairTypeAndIndex[0]
+    returnWeight = 1.0
+    i = maxPairTypeAndIndex[0]
     nup = 999
     if maxPairTypeAndIndex[1] == 'eleTau':
         nup = chain.eT_hepNUP[i]
     elif maxPairTypeAndIndex[1] == 'muTau':
         nup = chain.muT_hepNUP[i]
     if(nup==999): return 1.0
-
 
     njet = nup-5
 
@@ -337,9 +336,9 @@ def getStitchingLowMassDY(chain, maxPairTypeAndIndex):
     elif njet==2: returnWeight = 0.00001205464483
     elif njet==3: returnWeight = 0.0003884338095 # no exc. samples exist
     elif njet>=4: returnWeight = 0.0003884338095 # no exc. samples exist
+    return returnWeight*19.7*1000.0
 
 
-	return returnWeight*19.7*1000.0
 
 
 ##############

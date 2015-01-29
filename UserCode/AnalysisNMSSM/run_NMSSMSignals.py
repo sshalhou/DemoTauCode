@@ -40,7 +40,9 @@ from InputFlatFiles.python.FlatFileLists import *
 ###############
 listOfFiles += nmssmSignalList
 
-
+###############
+for f in range(0,len(listOfFiles)):
+	print 'adding ', listOfFiles[f]
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')

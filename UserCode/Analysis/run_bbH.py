@@ -40,6 +40,9 @@ from InputFlatFiles.python.FlatFileLists import *
 ###############
 listOfFiles += bbHsusyList
 
+###############
+for f in range(0,len(listOfFiles)):
+	print 'adding ', listOfFiles[f]
 
 
 
