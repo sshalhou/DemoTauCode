@@ -27,39 +27,20 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
+##############
+# import file lists
+from InputFlatFiles.python.FlatFileLists import *
 
 
 ###########
-# DY
+# DY no spin
 
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_10_1_MxF_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_11_1_Qnk_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_12_1_O6A_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_13_1_QGG_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_14_1_vsN_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_15_1_tSI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_16_1_4X4_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_17_1_rkv_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_18_1_FcL_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_19_1_D8A_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_1_1_Scv_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_20_1_HSD_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_21_1_sQw_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_22_1_4Rh_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_23_1_OPz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_24_1_1GE_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_25_1_Fvy_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_26_1_DJf_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_27_1_jsE_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_28_1_0Iy_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_2_1_SjP_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_3_1_Ss8_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_4_1_TPm_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_5_1_XuT_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_6_1_DLa_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_7_1_uAN_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_8_1_ObR_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLLTauSpin_FLATv9Xntup/FlatTuple_9_1_ZZm_skimmed.root')
+listOfFiles += dyJetsTauPolOffList
+
+###############
+for f in range(0,len(listOfFiles)):
+	print 'adding ', listOfFiles[f]
+
 
 for afile in listOfFiles:
 	chain.AddFile(afile,0,'TauEsNominal/FlatTuple')

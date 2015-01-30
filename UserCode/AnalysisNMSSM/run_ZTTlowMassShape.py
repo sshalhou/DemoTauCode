@@ -27,94 +27,22 @@ chain = TChain('*/FlatTuple')
 
 listOfFiles = []
 
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_10_1_7RJ_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_11_1_Tf1_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_12_1_0hn_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_13_1_u4x_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_14_1_yP7_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_15_1_8IV_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_16_1_44N_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_17_1_Lqj_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_18_1_dBv_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_19_1_bT6_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_1_1_I3B_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_20_1_Obg_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_21_1_bVB_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_22_1_cqC_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_23_1_Qlt_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_24_1_MUo_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_25_1_DJE_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_26_1_huI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_27_1_U0g_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_28_1_viC_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_2_1_cV5_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_3_1_Qra_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_4_1_N59_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_5_1_M1n_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_6_1_AMW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_7_1_KxW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_8_1_9kw_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY1JetsToLL_M10To50_FLATv9Xntup/FlatTuple_9_1_eu1_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_10_1_sZm_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_11_1_SMW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_12_1_Zo5_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_13_1_sEB_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_14_1_oAe_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_15_1_l4U_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_16_1_MZp_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_17_1_PoY_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_18_1_YQY_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_19_1_VpI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_1_1_Maf_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_20_1_fxl_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_21_1_yXJ_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_22_1_2q4_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_23_1_O9z_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_24_1_u1K_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_25_1_Yfh_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_26_1_7YP_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_27_1_fNJ_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_28_1_e3W_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_2_1_uyq_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_3_1_7Ga_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_4_1_lky_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_5_1_Dg2_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_6_1_rvY_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_7_1_rsl_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_8_1_CqM_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DY2JetsToLL_M10To50_FLATv9Xntup/FlatTuple_9_1_5Ud_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_10_1_nBP_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_11_1_0WI_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_12_1_qJ4_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_13_1_UHY_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_14_1_JpO_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_15_1_G7r_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_16_1_taG_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_17_1_t9T_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_18_1_TVi_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_19_1_REV_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_1_1_x0R_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_20_1_AL1_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_21_1_5XC_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_22_1_NRW_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_23_1_S7A_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_24_1_nTO_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_25_1_IWD_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_26_1_cil_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_27_1_wEu_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_28_1_GsC_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_2_1_Cgb_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_3_1_9Ou_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_4_1_mQh_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_5_1_GpT_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_6_1_g4R_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_7_1_fBz_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_8_1_z3T_skimmed.root')
-listOfFiles.append('/uscms/home/shalhout/no_backup/NEWSKIMV9X/DYJetsToLL_M10To50_FLATv9Xntup/FlatTuple_9_1_NEH_skimmed.root')
+##############
+# import file lists
+from InputFlatFiles.python.FlatFileLists import *
 
 
 ###########
-# DY @ low Mass 
+# DY  low Mass 
+
+listOfFiles += dyJetsLowMassList
+
+###############
+for f in range(0,len(listOfFiles)):
+	print 'adding ', listOfFiles[f]
+
+
+
 
 
 for afile in listOfFiles:
