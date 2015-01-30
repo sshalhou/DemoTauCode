@@ -333,7 +333,7 @@ def getStitchingLowMassDY(chain, maxPairTypeAndIndex):
 
     if   njet==0: returnWeight = 0.0003884338095
     elif njet==1: returnWeight = 0.00009075714979
-    elif njet==2: returnWeight = 0.00001205464483
+    elif njet==2: returnWeight = 0.00001297251708 
     elif njet==3: returnWeight = 0.0003884338095 # no exc. samples exist
     elif njet>=4: returnWeight = 0.0003884338095 # no exc. samples exist
     return returnWeight*19.7*1000.0
