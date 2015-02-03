@@ -58,7 +58,7 @@ def passesEmbeddedZTauTauSelectionETau(chain,index,UseNewTriggers,Verbose):
         passesCutsETau = False
     if pairCutsETau(chain, index,Verbose) is False:
         passesCutsETau = False
-    if embeddedZTauTauTrigForETau(chain, index, Verbose) is False:
+    if embeddedTTbarTrigForETau(chain, index, Verbose) is False:
         passesCutsETau = False
     if chain.eT_correctedSVFitMass[index] > 200.0:
         passesCutsETau = False
@@ -72,7 +72,7 @@ def passesEmbeddedZTauTauSelectionMuTau(chain,index,UseNewTriggers,Verbose):
         passesCutsMuTau = False
     if pairCutsMuTau(chain, index,Verbose) is False:
         passesCutsMuTau = False
-    if embeddedZTauTauTrigForMuTau(chain, index, Verbose) is False:
+    if embeddedTTbarTrigForMuTau(chain, index, Verbose) is False:
         passesCutsMuTau = False
     if chain.muT_correctedSVFitMass[index] > 200.0:
         passesCutsMuTau = False

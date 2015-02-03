@@ -854,6 +854,8 @@ def getWeightForVV(chain,maxPairTypeAndIndex,Verbose):
       print 'crossSection is read from tree as ',  chain.crossSection
     return returnWeight
 
+
+
 def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     returnWeight = 1.0
     allWeights = {}
@@ -862,12 +864,11 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
     allWeights['leptonID'] = leptonIDweights(chain, maxPairTypeAndIndex)
     allWeights['leptonISOL'] = leptonISOLweights(chain, maxPairTypeAndIndex)
     allWeights['TriggerBug'] =  highPtTauTriggerBugWeights(chain, maxPairTypeAndIndex)
+    allWeights['jetTauFakeWt'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     # LLR has this off
     #allWeights['decayMode'] = decayModeCorrection(chain,maxPairTypeAndIndex)
     allWeights['ttXsection'] = getTTmcCrossSection(chain)
     allWeights['nevents'] = 1000.0*19.7*(1.0)/(chain.numberEvents*CrabJobEfficiency(chain.SampleName))
-	# off for now, will add in next round
-	#allWeights['jetTauFakeRate'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
     allWeights['topPtreweight'] = getTopPtWeight(chain,maxPairTypeAndIndex)
     for key, value in allWeights.iteritems():
       returnWeight*=value
@@ -880,6 +881,7 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
       print 'final wts under topPt variation : ', wt_dict
       print 'crossSection is read from tree as ',  chain.crossSection
     return
+
 
 #wt_dict['jetTauFakeDown'] = 1.0
 #wt_dict['jetTauFakeNominal'] = 1.0
