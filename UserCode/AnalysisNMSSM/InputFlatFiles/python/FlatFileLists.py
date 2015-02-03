@@ -19,7 +19,7 @@ def listFlatTrees(path):
 #####################
 # for local tests
 
-treeList = []
+testList = []
 for path in glob.glob('/Users/shalhout/Desktop/CMS_ANALYSIS/Git/Demo*Code/UserCode/Analysis/HOLDER'):
 	testList += listFlatTrees(path)
 
