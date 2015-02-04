@@ -1,6 +1,7 @@
 import time
 import sys
 import os
+import math
 
 from ROOT import gROOT,TChain, TLorentzVector, TSelector, TTree, TF1, TH1F, TCanvas, gStyle, TFile
 from ROOT import TApplication,TTreeCache
@@ -77,7 +78,7 @@ for chan in range(0,len(CHANNELS)):
 			GOTFILE = TFile(FOR_UNMODIFIED_ADDITION[addFile],'READ')
 			print '*** adding histograms from ', FOR_UNMODIFIED_ADDITION[addFile]
 			for key, value in HISTOGRAM_DICTIONARY.iteritems():
-				if str(CHANNELS[chan]) in key:
+				if str(CHANNELS[chan]) in key and 'QCDOSSSShape' not in key:
 					GOTHIST = GOTFILE.Get(key)
 					if(GOTHIST):
 						HISTOGRAM_DICTIONARY[key].Add(GOTHIST)
@@ -86,6 +87,121 @@ for chan in range(0,len(CHANNELS)):
 
 
 					#print GOTHIST.GetTitle(),GOTHIST.GetSumOfWeights()
+
+
+
+
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	    if str(CHANNELS[chan]) in key and ('lowMass' in key):
+	    	print 'start ', key, HISTOGRAM_DICTIONARY[key].GetEntries(), HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+
+
+	print '*******************************************************************'
+	print ' Derive ZTT low Mass normalization'
+	print ' the shape comes from loose btag, while the norm comes from standard btag'
+	print '*******************************************************************'
+	
+	#print HISTOGRAM_DICTIONARY
+	
+	LooseBtagNorm_inclusive = 0.0
+	LooseBtagNorm_btag = 0.0
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+		if 'lowMass' in str(key):
+			if 'inclusive' in str(key):
+				LooseBtagNorm_inclusive = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+			elif 'btag' in str(key):
+				LooseBtagNorm_btag = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()	
+	
+
+	print '*** now loop over FOR_ZTT_LOW_MASSNORM to extract the norm under normal btagging ***'
+	
+	RegualarBtagNorm_inclusive = 0.0
+	RegularBtagNorm_btag = 0.0
+	for xfile in range(0,len(FOR_ZTT_LOW_MASSNORM)):
+		for direc in range(0,len(DIRLIST)):
+			DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
+			if str(CHANNELS[chan]) in str(FOR_ZTT_LOW_MASSNORM[xfile]):
+				GOTFILE = TFile(FOR_ZTT_LOW_MASSNORM[xfile],'READ')
+				histogramToGet = str(DIRNAME) + "/" + 'ZTT_lowMass'
+				GOTHIST = GOTFILE.Get(histogramToGet)
+				print '********** ', histogramToGet
+				print '********** ', histogramToGet
+				print '********** ', histogramToGet
+				print '********** ', histogramToGet
+				print '********** ', histogramToGet
+				
+				if(GOTHIST):
+					if 'inclusive' in str(DIRNAME):
+						RegualarBtagNorm_inclusive += GOTHIST.GetSumOfWeights()
+					elif 'btag' in 	str(DIRNAME):
+						RegularBtagNorm_btag += GOTHIST.GetSumOfWeights()	
+				else:
+					print '******* FAILED TO FIND ', histogramToGet
+
+	print 'LooseBtagNorm_inclusive, LooseBtagNorm_btag', LooseBtagNorm_inclusive, LooseBtagNorm_btag
+	print 'RegualarBtagNorm_inclusive, RegularBtagNorm_btag', RegualarBtagNorm_inclusive, RegularBtagNorm_btag
+	SF_lowMass_inclusive = RegualarBtagNorm_inclusive/LooseBtagNorm_inclusive
+	SF_lowMass_btag = RegularBtagNorm_btag/LooseBtagNorm_btag
+	
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+		if 'lowMass' in str(key):
+			if 'inclusive' in str(key):
+				HISTOGRAM_DICTIONARY[key].Scale(SF_lowMass_inclusive)
+			elif 'btag' in str(key):
+				HISTOGRAM_DICTIONARY[key].Scale(SF_lowMass_btag)
+        
+
+
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	    if str(CHANNELS[chan]) in key and ('lowMass' in key):
+	    	print 'END ', key, HISTOGRAM_DICTIONARY[key].GetEntries(), HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+
+
+
+
+
+	print '***************************************************************'
+	print '*     begin ZL and ZJ normaization determination for', FILENAME
+	print '* shape = loose Btag, norm = medium Btag'
+	print '***************************************************************'
+
+
+	# initialize dict to hold norms for medium btag 
+	ZLandZJNorms = {}
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	    if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+	        ZLandZJNorms[key] = 0.0
+
+
+	# fill dict to hold norms for medium btag 
+
+	for addFile in range(0,len(FOR_ZLandZJ_NORM)):
+	    if str(CHANNELS[chan]) in str(FOR_ZLandZJ_NORM[addFile]):
+	        GOTFILE = TFile(FOR_ZLandZJ_NORM[addFile],'READ')
+	        print '*** getting ZL and ZJ histogram norm from ', FOR_ZLandZJ_NORM[addFile]
+	        for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	            if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+	                GOTHIST = GOTFILE.Get(key)
+	                if(GOTHIST):
+	                    ZLandZJNorms[key]+= GOTHIST.GetSumOfWeights()
+	                else:
+	                    print 'WARNING FAILED TO FIND :', key
+
+	# print dict of norms for medium btag 
+
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	    if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+	        print key, 'medium btag norm = ', ZLandZJNorms[key]                     
+
+
+	# apply norms from medium btag to loose b-tag
+
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+	    if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+	        initalNorm = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+	        if initalNorm > 0:
+	            print "scaling ", key, ' by ', ZLandZJNorms[key]/initalNorm
+	            HISTOGRAM_DICTIONARY[key].Scale(ZLandZJNorms[key]/initalNorm)                                            
 
 
 
@@ -401,9 +517,22 @@ for chan in range(0,len(CHANNELS)):
 									NORMSDICT['TT'] -
 									NORMSDICT['VV'])
 
+		print '******', DIRNAME
+		print 'NORMSDICT[QCD] = ', NORMSDICT['QCD']
+		print 'NORMSDICT[W] = ', NORMSDICT['W']
+		print 'NORMSDICT[ZTT] = ', NORMSDICT['ZTT']
+		print 'NORMSDICT[ZL] = ', NORMSDICT['ZL']
+		print 'NORMSDICT[ZJ] = ', NORMSDICT['ZJ']
+		print 'NORMSDICT[TT] = ', NORMSDICT['TT']
+		print 'NORMSDICT[VV] = ', NORMSDICT['VV']
+		print 'QCDNORM[DIRNAME] = ', QCDNORM[DIRNAME]
+
 	# print 'after calculation the bkg sub QCD totals are are : '
 	# for key, value in QCDNORM.iteritems():
 	#	 print key,' = ',value
+
+
+
 
 
 	print 'transform bkg sub QCD totals into scaleFactors : '
@@ -419,10 +548,65 @@ for chan in range(0,len(CHANNELS)):
 	for direc in range(0,len(DIRLIST)):
 		DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
 		for key, value in HISTOGRAM_DICTIONARY.iteritems():
-			if 'QCD' in str(key) and DIRNAME in str(key):
+			if 'QCD' in str(key) and DIRNAME in str(key) and 'QCDOSSSShape' not in str(key):
 				 #print 'normalization of ', key, 'in progress ...', HISTOGRAM_DICTIONARY[key].GetSumOfWeights(), ' is now '
 				 HISTOGRAM_DICTIONARY[key].Scale(QCDNORM[DIRNAME])
 				 #print '-----------> ', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+
+
+	def fitFunc_Exp3Par( binCenter,  catNAME) :
+		#print '----> ', catNAME
+		if 'Tau_inclusive' in str(catNAME):
+			par0 = 1.13
+			par1 = 1.00
+			par2 = -0.087
+		elif 'Tau_btag' in str(catNAME):
+			par0 = 1.10
+			par1 = 1.418
+			par2 = -0.11
+		else : return 1.0    
+		
+		return par0 + par1 * math.exp(par2 * binCenter)
+
+
+		
+	for key, value in HISTOGRAM_DICTIONARY.iteritems():
+		if 'QCD' in str(key) and DIRNAME in str(key) and 'QCDOSSSShape' not in str(key):
+
+			upVAR = ''
+			dnVAR = ''
+
+			if 'QCDShape' not in str(key) and 'QCDfrShape' not in str(key):
+				upVAR = key
+				dnVAR = key
+
+				if 'eleTau_btag' in str(key):
+					upVAR += '_CMS_htt_QCDOSSSShape_etau_8TeVUp'
+					dnVAR += '_CMS_htt_QCDOSSSShape_etau_8TeVDown' 
+				if 'muTau_btag' in str(key):	
+					upVAR += '_CMS_htt_QCDOSSSShape_mutau_8TeVUp' 
+					dnVAR += '_CMS_htt_QCDOSSSShape_mutau_8TeVDown' 
+
+				print upVAR
+				print dnVAR
+
+			for bin in range(0,HISTOGRAM_DICTIONARY[key].GetNbinsX()+1):	
+				error = HISTOGRAM_DICTIONARY[key].GetBinError(bin)	
+				original = HISTOGRAM_DICTIONARY[key].GetBinContent(bin)
+				binCenter = HISTOGRAM_DICTIONARY[key].GetBinCenter(bin)
+				catNAME = str(key)
+				scale = fitFunc_Exp3Par( binCenter,  catNAME)
+				HISTOGRAM_DICTIONARY[key].SetBinContent(bin,scale*original)		
+				if (upVAR and dnVAR):
+					HISTOGRAM_DICTIONARY[upVAR].SetBinContent(bin,scale*scale*original)	
+					HISTOGRAM_DICTIONARY[upVAR].SetBinError(bin,error)	
+					HISTOGRAM_DICTIONARY[dnVAR].SetBinContent(bin,original)	
+					HISTOGRAM_DICTIONARY[dnVAR].SetBinError(bin,error)	
+
+	print 'LEN1 = ', len(HISTOGRAM_DICTIONARY)
+
+	
+	
 
 
 
@@ -579,7 +763,7 @@ for chan in range(0,len(CHANNELS)):
 	print '*******************************************************************'
 
 	for key, value in HISTOGRAM_DICTIONARY.iteritems():
-		if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key):
+		if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key) and 'lowMass' not in str(key):
 			#print key, '-----> ZTT starting weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 			HISTOGRAM_DICTIONARY[key].Add(TTEMBED_HISTOGRAM_DICTIONARY[key],-1.0)
 			HISTOGRAM_DICTIONARY[key].Scale(INCLUSIVE_WEIGHT_ZTT)
@@ -594,74 +778,26 @@ for chan in range(0,len(CHANNELS)):
 	print '*******************************************************************'
 
 	for key, value in HISTOGRAM_DICTIONARY.iteritems():
-		finalintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-		tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-		for ibin in range(0, HISTOGRAM_DICTIONARY[key].GetNbinsX()+1):
-			if(HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)<0):
-				#print 'bin # ', ibin, 'in ', key, 'has value ', HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)
-				HISTOGRAM_DICTIONARY[key].SetBinContent(ibin,0.00)
-		tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-		if finalintegral != tempintegral and tempintegral>0.0:
-			#print 'in', key, 'negative bins eliminated, before and after integrals are ', finalintegral, tempintegral
-			HISTOGRAM_DICTIONARY[key].Scale(finalintegral/tempintegral)
-			#print 'should be same now :', HISTOGRAM_DICTIONARY[key].GetSumOfWeights(), finalintegral
+		# NEXT LINE IS NEW Feb 4, 2015 
+		if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key) and 'lowMass' not in str(key):
+			finalintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+			tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+			for ibin in range(0, HISTOGRAM_DICTIONARY[key].GetNbinsX()+1):
+				if(HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)<0):
+					#print 'bin # ', ibin, 'in ', key, 'has value ', HISTOGRAM_DICTIONARY[key].GetBinContent(ibin)
+					HISTOGRAM_DICTIONARY[key].SetBinContent(ibin,0.00)
+			tempintegral = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+			if finalintegral != tempintegral and tempintegral>0.0:
+				#print 'in', key, 'negative bins eliminated, before and after integrals are ', finalintegral, tempintegral
+				HISTOGRAM_DICTIONARY[key].Scale(finalintegral/tempintegral)
+				#print 'should be same now :', HISTOGRAM_DICTIONARY[key].GetSumOfWeights(), finalintegral
 
 
-	print '*******************************************************************'
-	print ' Derive ZTT low Mass normalization'
-	print ' the shape comes from loose btag, while the norm comes from standard btag'
-	print '*******************************************************************'
-	
-	#print HISTOGRAM_DICTIONARY
-	
-	LooseBtagNorm_inclusive = 0.0
-	LooseBtagNorm_btag = 0.0
-	for key, value in HISTOGRAM_DICTIONARY.iteritems():
-		if 'lowMass' in str(key):
-			if 'inclusive' in str(key):
-				LooseBtagNorm_inclusive = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-			elif 'btag' in str(key):
-				LooseBtagNorm_btag = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()	
-	
-
-	print '*** now loop over FOR_ZTT_LOW_MASSNORM to extract the norm under normal btagging ***'
-	
-	RegualarBtagNorm_inclusive = 0.0
-	RegularBtagNorm_btag = 0.0
-	for xfile in range(0,len(FOR_ZTT_LOW_MASSNORM)):
-		for direc in range(0,len(DIRLIST)):
-			DIRNAME = CHANNELS[chan]+"_"+DIRLIST[direc]
-			if str(CHANNELS[chan]) in str(FOR_ZTT_LOW_MASSNORM[xfile]):
-				GOTFILE = TFile(FOR_ZTT_LOW_MASSNORM[xfile],'READ')
-				histogramToGet = str(DIRNAME) + "/" + 'ZTT_lowMass'
-				GOTHIST = GOTFILE.Get(histogramToGet)
-				print '********** ', histogramToGet
-				print '********** ', histogramToGet
-				print '********** ', histogramToGet
-				print '********** ', histogramToGet
-				print '********** ', histogramToGet
-				
-				if(GOTHIST):
-					if 'inclusive' in str(DIRNAME):
-						RegualarBtagNorm_inclusive += GOTHIST.GetSumOfWeights()
-					elif 'btag' in 	str(DIRNAME):
-						RegularBtagNorm_btag += GOTHIST.GetSumOfWeights()	
-				else:
-					print '******* FAILED TO FIND ', histogramToGet
-
-	print 'LooseBtagNorm_inclusive, LooseBtagNorm_btag', LooseBtagNorm_inclusive, LooseBtagNorm_btag
-	print 'RegualarBtagNorm_inclusive, RegularBtagNorm_btag', RegualarBtagNorm_inclusive, RegularBtagNorm_btag
-	SF_lowMass_inclusive = RegualarBtagNorm_inclusive/LooseBtagNorm_inclusive
-	SF_lowMass_btag = RegularBtagNorm_btag/LooseBtagNorm_btag
 	
 	for key, value in HISTOGRAM_DICTIONARY.iteritems():
-		if 'lowMass' in str(key):
-			if 'inclusive' in str(key):
-				HISTOGRAM_DICTIONARY[key].Scale(SF_lowMass_inclusive)
-			elif 'btag' in str(key):
-				HISTOGRAM_DICTIONARY[key].Scale(SF_lowMass_btag)
+		if str(CHANNELS[chan]) in key and ('lowMass' in key):
+			print 'END x ', key, HISTOGRAM_DICTIONARY[key].GetEntries(), HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 
-	
 
 
 	################################
@@ -740,6 +876,10 @@ for chan in range(0,len(CHANNELS)):
 
 	##################################
 	# finally save all the histograms
+
+
+	print 'LEN3 = ', len(HISTOGRAM_DICTIONARY)
+
 
 
 	for key, value in HISTOGRAM_DICTIONARY.iteritems():

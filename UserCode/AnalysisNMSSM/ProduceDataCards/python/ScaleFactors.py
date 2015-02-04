@@ -3,4 +3,4 @@ import sys
 import os
 
 
-OStoSSfactor = 1.06
+OStoSSfactor = 1.0000

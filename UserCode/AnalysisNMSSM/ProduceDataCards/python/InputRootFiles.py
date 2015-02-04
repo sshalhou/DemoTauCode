@@ -82,72 +82,90 @@ FOR_W_DEFAULT = []
 
 FOR_ZTT_LOW_MASSNORM = []
 
+
+##############
+# for ZL and ZJ norm under meduim b-tag
+# loose b-tag version for the shapes goes
+# into FOR_UNMODIFIED_ADDITION
+
+
+FOR_ZLandZJ_NORM = []
+
 ####################
 # populate the lists
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_obsData_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_obsData_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_DATA_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_DATA_davis_htt_mssm_muTau.root')
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_Signals_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_Signals_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_nmssmSignals_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_nmssmSignals_davis_htt_mssm_muTau.root')
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZTTEMBEDDED_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZTTEMBEDDED_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_ZTTembedded_FIX_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_ZTTembedded_FIX_davis_htt_mssm_muTau.root')
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_stdBkgs_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_stdBkgs_davis_htt_mssm_muTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZTTembedded_davis_htt_mssm_eleTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZTTembedded_davis_htt_mssm_muTau.root')
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_QCDshape_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_QCDshape_davis_htt_mssm_muTau.root')
-
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZLandZJ_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZLandZJ_davis_htt_mssm_muTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_StdBkgs_davis_htt_mssm_eleTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_StdBkgs_davis_htt_mssm_muTau.root')
 
 
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_WJETSshape_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_WJETSshape_davis_htt_mssm_muTau.root')
-
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZTTlowMassShape_davis_htt_mssm_eleTau.root')
-FOR_UNMODIFIED_ADDITION.append('./NMSSM_1stTry/nMSSM_ZTTlowMassShape_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_StdBkgs_FIX_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_StdBkgs_FIX_davis_htt_mssm_muTau.root')
 
 
-FOR_TTEMBEDDED_SUB.append('./NMSSM_1stTry/nMSSM_TTbarEmbedded_davis_htt_mssm_eleTau.root')
-FOR_TTEMBEDDED_SUB.append('./NMSSM_1stTry/nMSSM_TTbarEmbedded_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_QCDshapes_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_QCDshapes_davis_htt_mssm_muTau.root')
 
-FOR_W_NORM.append('./NMSSM_1stTry/nMSSM_WJETSnorm_davis_htt_mssm_eleTau.root')
-FOR_W_NORM.append('./NMSSM_1stTry/nMSSM_WJETSnorm_davis_htt_mssm_muTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZLandZJ_davis_htt_mssm_eleTau.root')
+#FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZLandZJ_davis_htt_mssm_muTau.root')
 
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_ZLandZJSHAPE_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./Fix6/nMSSMV10_ZLandZJSHAPE_davis_htt_mssm_muTau.root')
 
-FOR_W_DEFAULT.append('./NMSSM_1stTry/nMSSM_WjetsDefault_davis_htt_mssm_eleTau.root')
-FOR_W_DEFAULT.append('./NMSSM_1stTry/nMSSM_WjetsDefault_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_WjetsShape_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_WjetsShape_davis_htt_mssm_muTau.root')
 
-
-
-FOR_QCD_NORM.append('./NMSSM_1stTry/nMSSM_QCDnorm_davis_htt_mssm_eleTau.root')
-FOR_QCD_NORM.append('./NMSSM_1stTry/nMSSM_QCDnorm_davis_htt_mssm_muTau.root')
-
-FOR_W_NORM_FOR_QCD.append('./NMSSM_1stTry/nMSSM_WjetsNormSameSignHighMt_davis_htt_mssm_eleTau.root')
-FOR_W_NORM_FOR_QCD.append('./NMSSM_1stTry/nMSSM_WjetsNormSameSignHighMt_davis_htt_mssm_muTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZTTlowMassShape_davis_htt_mssm_eleTau.root')
+FOR_UNMODIFIED_ADDITION.append('./6thTry/nMSSMV10_ZTTlowMassShape_davis_htt_mssm_muTau.root')
 
 
-FOR_TTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_TTembedded_noMtCut_davis_htt_mssm_eleTau.root')
-FOR_TTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_TTembedded_noMtCut_davis_htt_mssm_muTau.root')
+FOR_TTEMBEDDED_SUB.append('./6thTry/nMSSMV10_TTBarEmbedded_davis_htt_mssm_eleTau.root')
+FOR_TTEMBEDDED_SUB.append('./6thTry/nMSSMV10_TTBarEmbedded_davis_htt_mssm_muTau.root')
+
+FOR_W_NORM.append('./6thTry/nMSSMV10_WjetsNorm_davis_htt_mssm_eleTau.root')
+FOR_W_NORM.append('./6thTry/nMSSMV10_WjetsNorm_davis_htt_mssm_muTau.root')
 
 
-FOR_ZTTNORM_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTnorm_noMtCut_davis_htt_mssm_eleTau.root')
-FOR_ZTTNORM_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTnorm_noMtCut_davis_htt_mssm_muTau.root')
+FOR_W_DEFAULT.append('./6thTry/nMSSMV10_WjetsDefault_davis_htt_mssm_eleTau.root')
+FOR_W_DEFAULT.append('./6thTry/nMSSMV10_WjetsDefault_davis_htt_mssm_muTau.root')
 
-FOR_ZTT_LOW_MASSNORM.append('./NMSSM_1stTry/nMSSM_ZTTlowMass_davis_htt_mssm_eleTau.root')
-FOR_ZTT_LOW_MASSNORM.append('./NMSSM_1stTry/nMSSM_ZTTlowMass_davis_htt_mssm_muTau.root')
 
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch1_davis_htt_mssm_eleTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch1_davis_htt_mssm_muTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch2_davis_htt_mssm_eleTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch2_davis_htt_mssm_muTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch3_davis_htt_mssm_eleTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch3_davis_htt_mssm_muTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch4_davis_htt_mssm_eleTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch4_davis_htt_mssm_muTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch5_davis_htt_mssm_eleTau.root')
-FOR_ZTTEMBEDDED_NoMtCut.append('./NMSSM_1stTry/nMSSM_ZTTembedded_noMtCut_batch5_davis_htt_mssm_muTau.root')
+
+FOR_QCD_NORM.append('./6thTry/nMSSMV10_QCDnorm_davis_htt_mssm_eleTau.root')
+FOR_QCD_NORM.append('./6thTry/nMSSMV10_QCDnorm_davis_htt_mssm_muTau.root')
+
+FOR_W_NORM_FOR_QCD.append('./6thTry/nMSSMV10_WjetsNormSameSignHighMt_davis_htt_mssm_eleTau.root')
+FOR_W_NORM_FOR_QCD.append('./6thTry/nMSSMV10_WjetsNormSameSignHighMt_davis_htt_mssm_muTau.root')
+
+
+FOR_TTEMBEDDED_NoMtCut.append('./6thTry/nMSSMV10_TTBarEmbedded_noMtCut_davis_htt_mssm_eleTau.root')
+FOR_TTEMBEDDED_NoMtCut.append('./6thTry/nMSSMV10_TTBarEmbedded_noMtCut_davis_htt_mssm_muTau.root')
+
+
+FOR_ZTTNORM_NoMtCut.append('./6thTry/nMSSMV10_ZTTnorm_noMtCut_davis_htt_mssm_eleTau.root')
+FOR_ZTTNORM_NoMtCut.append('./6thTry/nMSSMV10_ZTTnorm_noMtCut_davis_htt_mssm_muTau.root')
+
+FOR_ZTT_LOW_MASSNORM.append('./6thTry/nMSSMV10_ZTTlowMass_davis_htt_mssm_eleTau.root')
+FOR_ZTT_LOW_MASSNORM.append('./6thTry/nMSSMV10_ZTTlowMass_davis_htt_mssm_muTau.root')
+
+#FOR_ZTTEMBEDDED_NoMtCut.append('./6thTry/nMSSMV10_ZTTEmbeddedNoMtCut_davis_htt_mssm_eleTau.root')
+#FOR_ZTTEMBEDDED_NoMtCut.append('./6thTry/nMSSMV10_ZTTEmbeddedNoMtCut_davis_htt_mssm_muTau.root')
+
+FOR_ZTTEMBEDDED_NoMtCut.append('./Fix6/nMSSMV10_ZTTEmbeddedNoMtCut_davis_htt_mssm_eleTau.root')
+FOR_ZTTEMBEDDED_NoMtCut.append('./Fix6/nMSSMV10_ZTTEmbeddedNoMtCut_davis_htt_mssm_muTau.root')
+
+
+FOR_ZLandZJ_NORM.append('./6thTry/nMSSMV10_ZLandZJ_davis_htt_mssm_eleTau.root')
+FOR_ZLandZJ_NORM.append('./6thTry/nMSSMV10_ZLandZJ_davis_htt_mssm_muTau.root')
 
