@@ -509,6 +509,7 @@ for chan in range(0,len(CHANNELS)):
 			if(GOTHIST):
 				print 'summing ZTT embedded inc without mt cut from file ', FOR_ZTTEMBEDDED_NoMtCut[xfile]
 				INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
+				print ' = ', INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
 			else:
 				print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT EMBEDDED'
 
@@ -526,6 +527,7 @@ for chan in range(0,len(CHANNELS)):
 			if(GOTHIST):
 				print 'summing ZTT MC inc without mt cut from file ', FOR_ZTTNORM_NoMtCut[xfile]
 				INCLUSIVE_ZTT_MC_INT_NoMtCut+=GOTHIST.GetSumOfWeights()
+				print ' = ', INCLUSIVE_ZTT_MC_INT_NoMtCut
 			else:
 				print '******* FAILED TO FIND HIST WITH NON MT CUT ZTT MC'
 
@@ -558,10 +560,15 @@ for chan in range(0,len(CHANNELS)):
 	print 'step 2 = ', INCLUSIVE_ZTT_MC_INT_NoMtCut
 	print 'step 3 = ', INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
 
+	#INCLUSIVE_WEIGHT_ZTT = 0.0
+	#INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
+	#INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
+	#INCLUSIVE_WEIGHT_ZTT /= INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
 	INCLUSIVE_WEIGHT_ZTT = 0.0
 	INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
-	INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_TT_EMBEDDED_INT_NoMtCut
-	INCLUSIVE_WEIGHT_ZTT /= INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+	localDenominator = -INCLUSIVE_TT_EMBEDDED_INT_NoMtCut + INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+	INCLUSIVE_WEIGHT_ZTT = INCLUSIVE_WEIGHT_ZTT/localDenominator
+
 	print 'final weight for embedded ZTT norm = ', INCLUSIVE_WEIGHT_ZTT
 
 	print '*******************************************************************'
@@ -574,10 +581,10 @@ for chan in range(0,len(CHANNELS)):
 	for key, value in HISTOGRAM_DICTIONARY.iteritems():
 		if str(CHANNELS[chan]) in str(key) and 'ZTT' in str(key):
 			#print key, '-----> ZTT starting weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+			HISTOGRAM_DICTIONARY[key].Add(TTEMBED_HISTOGRAM_DICTIONARY[key],-1.0)
 			HISTOGRAM_DICTIONARY[key].Scale(INCLUSIVE_WEIGHT_ZTT)
 			#print key, '-----> ZTT scaled weight <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 			#print key, '-----> ttBar embedded weights to be removed <--------', TTEMBED_HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
-			HISTOGRAM_DICTIONARY[key].Add(TTEMBED_HISTOGRAM_DICTIONARY[key],-1.0)
 			#print key, '-----> ZTT post sub <--------', HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
 
 

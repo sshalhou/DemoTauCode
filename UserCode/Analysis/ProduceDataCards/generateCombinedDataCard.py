@@ -569,7 +569,7 @@ for chan in range(0,len(CHANNELS)):
     
     INCLUSIVE_WEIGHT_ZTT = 0.0
     INCLUSIVE_WEIGHT_ZTT += INCLUSIVE_ZTT_MC_INT_NoMtCut
-    localDenominator = INCLUSIVE_TT_EMBEDDED_INT_NoMtCut + INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
+    localDenominator = -INCLUSIVE_TT_EMBEDDED_INT_NoMtCut + INCLUSIVE_ZTT_EMBEDDED_INT_NoMtCut
     INCLUSIVE_WEIGHT_ZTT = INCLUSIVE_WEIGHT_ZTT/localDenominator
 
     print 'final weight for embedded ZTT norm = ', INCLUSIVE_WEIGHT_ZTT
