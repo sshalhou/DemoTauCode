@@ -876,6 +876,10 @@ def getWeightForTTmc(chain,maxPairTypeAndIndex,wt_dict,Verbose):
         wt_dict['topPtDown'] = returnWeight/allWeights['topPtreweight']
         wt_dict['topPtNominal'] = returnWeight
         wt_dict['topPtUp'] = returnWeight*allWeights['topPtreweight']
+    
+    # this is already in the default, will need to divide and multiply for sys. OSSSShape
+    wt_dict['jetTauFake'] = getjetTauFakeWt(chain,maxPairTypeAndIndex)
+
     if Verbose:
       print allWeights
       print 'final wts under topPt variation : ', wt_dict

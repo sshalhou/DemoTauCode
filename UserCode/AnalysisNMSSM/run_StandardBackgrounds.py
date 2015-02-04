@@ -34,7 +34,7 @@ listOfFiles = []
 # import file lists
 from InputFlatFiles.python.FlatFileLists import *
 
-
+#listOfFiles += testList
 
 ###########
 #  SM Higgs @125

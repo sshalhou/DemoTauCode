@@ -20,7 +20,7 @@ def listFlatTrees(path):
 # for local tests
 
 testList = []
-for path in glob.glob('/Users/shalhout/Desktop/CMS_ANALYSIS/Git/Demo*Code/UserCode/Analysis/HOLDER'):
+for path in glob.glob('/Users/shalhout/Desktop/CMS_ANALYSIS/Git/Demo*Code/UserCode/AnalysisNMSSM/HOLDER'):
 	testList += listFlatTrees(path)
 
 

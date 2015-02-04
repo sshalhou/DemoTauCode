@@ -364,6 +364,38 @@ def fillTopPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_d
     return
 
 
+############################
+# top MC jet->tau fake variants
+
+def fillTopJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,nominalWt,fakeScale,histogram_dict,Value):
+    SUFFIXUP = ''
+    SUFFIXDOWN = ''
+    if maxPairTypeAndIndex[3]=='TauEsNominal':
+        SUFFIXUP = 'CMS_htt_ttbarJetFake_8TeVUp_'
+        SUFFIXDOWN = 'CMS_htt_ttbarJetFake_8TeVDown_'
+    if len(SUFFIXUP)>0 and len(SUFFIXDOWN)>0:
+        upWt = nominalWt
+        dnWt = nominalWt
+        #print 'jet->tau Fake = ',fakeScale
+        if fakeScale > 0.0:
+            dnWt = nominalWt/fakeScale
+            upWt = nominalWt*fakeScale
+
+        VariantToFillUp = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUP+maxPairTypeAndIndex[2]
+        VariantToFillUpinc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXUP+'inclusive'
+
+        VariantToFillDown = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+maxPairTypeAndIndex[2]
+        VariantToFillDowninc = maxPairTypeAndIndex[1]+SAMPLE_ADD+SUFFIXDOWN+'inclusive'
+
+        histogram_dict[VariantToFillUpinc].Fill(Value,upWt)
+        histogram_dict[VariantToFillDowninc].Fill(Value,dnWt)
+
+        if maxPairTypeAndIndex[2] != 'Reject':
+            histogram_dict[VariantToFillUp].Fill(Value,upWt)
+            histogram_dict[VariantToFillDown].Fill(Value,dnWt)
+    return
+
+
 ######################
 # higgs pt weight variants
 # for ggH sm 125
@@ -795,6 +827,7 @@ def Fill_TTbarMC(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value):
     fillNominalSapesAndTauEsVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)    
     #fillZLScaleVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],histogram_dict,Value)
     fillTopPtReweightVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict,histogram_dict,Value)
+    fillTopJetTauFakeVariants(maxPairTypeAndIndex,SAMPLE_ADD,wt_dict['topPtNominal'],wt_dict['jetTauFake'],histogram_dict,Value)
     return
 
 
