@@ -485,7 +485,7 @@ def classifyZDecay_Update(chain,maxPairTypeAndIndex):
 
 
 
-def classifyZDecay_Final(chain,maxPairTypeAndIndex):
+def classifyZDecay_FinaDONTUSEl(chain,maxPairTypeAndIndex):
     classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     i=maxPairTypeAndIndex[0]
     ########################
@@ -548,3 +548,126 @@ def classifyZDecay_Final(chain,maxPairTypeAndIndex):
             print 'found a ZJ in Z->l l'
 
     return classification
+
+
+
+def classifyZDecay_UpdateLogic3(chain,maxPairTypeAndIndex):
+    classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    i=maxPairTypeAndIndex[0]
+
+
+    genInfo = {}
+    genInfo['z->tau tau'] = False
+    genInfo['z->l l'] = False
+    genInfo['recoTau-match-genTau'] = False
+    genInfo['recoTau-match-genLepFromZ'] = False
+    genInfo['recoTau-match-genLepFromTau'] = False
+    genInfo['recoLep-match-genTau'] = False
+    genInfo['recoLep-match-genLepFromZ'] = False
+    genInfo['recoLep-match-genLepFromTau'] = False
+
+
+    if maxPairTypeAndIndex[1] == 'muTau':
+        if chain.muT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        if chain.muT_isDecayZeE[i] or chain.muT_isDecayZmuMu[i] :
+            genInfo['z->l l'] = True
+        if chain.muT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['recoTau-match-genTau'] = True
+        if (chain.muT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromZ[i] ):
+            genInfo['recoTau-match-genLepFromZ'] = True
+        if (chain.muT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.muT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['recoTau-match-genLepFromTau'] = True
+        if chain.muT_isRecoLep_matchedTo_GenTauFromZ[i]:
+            genInfo['recoLep-match-genTau'] = True
+        if (chain.muT_isRecoLep_matchedTo_GenElecFromZ[i]  or
+            chain.muT_isRecoLep_matchedTo_GenMuonFromZ[i] ):
+            genInfo['recoLep-match-genLepFromZ'] = True
+        if (chain.muT_isRecoLep_matchedTo_GenElecFromTau[i] or
+            chain.muT_isRecoLep_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['recoLep-match-genLepFromTau'] = True
+
+
+    elif maxPairTypeAndIndex[1] == 'eleTau':
+        if chain.eT_isDecayZtauTau[i] :
+            genInfo['z->tau tau'] = True
+        if chain.eT_isDecayZeE[i] or chain.eT_isDecayZmuMu[i] :
+            genInfo['z->l l'] = True
+        if chain.eT_isRecoTau_matchedTo_GenTauFromZ[i]:
+            genInfo['recoTau-match-genTau'] = True
+        if (chain.eT_isRecoTau_matchedTo_GenElecFromZ[i]  or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromZ[i] ):
+            genInfo['recoTau-match-genLepFromZ'] = True
+        if (chain.eT_isRecoTau_matchedTo_GenElecFromTau[i] or
+            chain.eT_isRecoTau_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['recoTau-match-genLepFromTau'] = True
+        if chain.eT_isRecoLep_matchedTo_GenTauFromZ[i]:
+            genInfo['recoLep-match-genTau'] = True
+        if (chain.eT_isRecoLep_matchedTo_GenElecFromZ[i]  or
+            chain.eT_isRecoLep_matchedTo_GenMuonFromZ[i] ):
+            genInfo['recoLep-match-genLepFromZ'] = True
+        if (chain.eT_isRecoLep_matchedTo_GenElecFromTau[i] or
+            chain.eT_isRecoLep_matchedTo_GenMuonFromTau[i]   ) :
+            genInfo['recoLep-match-genLepFromTau'] = True
+
+
+    ##################
+    # within 2% of LLR for 100 events  
+    # if genInfo['z->tau tau'] and genInfo['recoTau-match-genTau'] : 
+    #     if genInfo['recoTau-match-genLepFromZ'] is False :
+    #         if genInfo['recoTau-match-genLepFromTau'] is False :
+    #             if genInfo['recoLep-match-genLepFromTau'] is True :
+    #                 if genInfo['recoLep-match-genLepFromZ'] is False :
+    #                     classification = '_ZTT_'        
+    ##################
+
+    DONE = False
+
+
+    if genInfo['recoTau-match-genTau'] is False and DONE is False:
+        if genInfo['recoTau-match-genLepFromTau'] is False :
+            if genInfo['recoTau-match-genLepFromZ'] is False :
+                classification = '_ZJ_'       
+                DONE = True
+              
+
+    if genInfo['z->tau tau'] and DONE is False: 
+        if genInfo['recoTau-match-genLepFromTau'] is True :
+            if genInfo['recoLep-match-genLepFromTau'] is True :
+                classification = '_ZL_'       
+                DONE = True
+
+    if genInfo['z->l l'] and DONE is False: 
+        if genInfo['recoTau-match-genLepFromZ'] is True :
+            if genInfo['recoLep-match-genLepFromZ'] is True :
+                classification = '_ZL_'       
+                DONE = True
+
+
+    if DONE is False :
+        if genInfo['recoTau-match-genLepFromTau'] is True :
+            if genInfo['recoLep-match-genLepFromTau'] is True :
+                classification = '_ZL_'       
+                DONE = True
+        if genInfo['recoTau-match-genLepFromZ'] is True :
+            if genInfo['recoLep-match-genLepFromZ'] is True :
+                classification = '_ZL_'       
+                DONE = True
+
+        
+    if genInfo['z->tau tau'] and genInfo['recoTau-match-genTau'] and DONE is False: 
+        if genInfo['recoTau-match-genLepFromZ'] is False :
+            if genInfo['recoTau-match-genLepFromTau'] is False :
+                if genInfo['recoLep-match-genLepFromTau'] is True :
+                    if genInfo['recoLep-match-genLepFromZ'] is False :
+                        classification = '_ZTT_'       
+                        DONE = True
+
+    if DONE is False :
+        classification = '_ZJ_'                        
+
+
+    return classification
+    

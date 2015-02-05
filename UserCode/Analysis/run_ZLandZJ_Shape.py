@@ -179,7 +179,7 @@ for entry in range(0,maxEntries):
 					SAMPLE_ADD=='_DY2Jet_' or
 					SAMPLE_ADD=='_DY3Jet_' or
 					SAMPLE_ADD=='_DY4Jet_'):
-					classification = classifyZDecay_Final(chain,maxPairTypeAndIndex)
+					classification = classifyZDecay_UpdateLogic3(chain,maxPairTypeAndIndex)
 					print classification
 					wt = 1.0
 					if classification == '_ZL_':
