@@ -1406,6 +1406,14 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
   reInit();
 
+
+  ////////////////
+  // Decide to keep event or not based on SUM of these :
+  bool passes = 1;
+  int  nMuTauPass = 0;
+  int  nETauPass = 0;
+
+
   //////////////////
   // fill event level info
   // - not based on eTau or muTau pair
@@ -1533,8 +1541,12 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     const TupleTau theTau =   ((*taus)[eTau.tauIndex()]);
 
 
-  //  if(theElec.p4().pt()<24) continue;
-  //  if(eTau.passesTriLeptonVeto()!=1) continue;
+    /////////////////////
+    // apply filtering here
+
+    bool localPass = 1;
+    TLorentzVector Lvec(0,0,0,0);
+    Lvec.SetXYZT(eTau.p4().x(), eTau.p4().y(), eTau.p4().z(),eTau.p4().t());
 
 
 
@@ -2184,10 +2196,9 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     }
 
 
-    ///////////////
-    // Impose the Trilepton Veto
-    // since we have a Tau + l, if we get
-    // more than 1 muon or electron
+    ///////
+    // moved skimmer function here 
+
 
 
 
