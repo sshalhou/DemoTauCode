@@ -1,0 +1,2 @@
+/eos/uscms/store/user/shalhout/SUSYBBHToTauTau_M-300_8TeV-pythia6-tauola/SZS_SUSYBBHToTauTauM300_v5ntup
+/eos/uscms/store/user/shalhout/SUSYBBHToTauTau_M-100_8TeV-pythia6-tauola/SZS_SUSYBBHToTauTauM100_v5ntup
