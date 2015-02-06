@@ -676,6 +676,7 @@ private:
 // constructors and destructor
 //
 FlatTupleWithGenInfo::FlatTupleWithGenInfo(const edm::ParameterSet& iConfig):
+genSrc_(iConfig.getParameter<edm::InputTag>("genSrc" )),
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
 electronTauWtSrc_(iConfig.getParameter<edm::InputTag>("electronTauWtSrc" )),
 electronTauVetoSrc_(iConfig.getParameter<edm::InputTag>("electronTauVetoSrc" )),
