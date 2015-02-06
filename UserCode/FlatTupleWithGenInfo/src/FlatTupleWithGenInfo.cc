@@ -1468,7 +1468,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     gen_t.push_back(aGEN.p4().t());
     pdgId.push_back(aGEN.pdgId());
     pdgIdmother.push_back(aGEN.pdgIdmother());
-    status.push_back(aGEN.status();
+    status.push_back(aGEN.status());
 
   }
 
