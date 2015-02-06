@@ -1545,7 +1545,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     // apply filtering here
 
     bool localPass = 1;
-    TLorentzVector Lvec(0,0,0,0);
+    LorentzVector Lvec(0,0,0,0);
     Lvec.SetXYZT(eTau.p4().x(), eTau.p4().y(), eTau.p4().z(),eTau.p4().t());
 
 
