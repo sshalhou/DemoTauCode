@@ -1917,6 +1917,53 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
       const TupleTau theTau =   ((*taus)[muTau.tauIndex()]);
 
 
+      /////////////////////
+      // apply filtering here  
+
+
+      bool localPass = 1;
+
+      LorentzVector Lvec(0,0,0,0);
+      Lvec.SetXYZT(theMuon.p4().x(), theMuon.p4().y(), theMuon.p4().z(),theMuon.p4().t());
+
+      if(  !(Lvec.Pt()>18)                            ) localPass = 0;
+      if(  !(fabs(Lvec.Eta())<2.1)                    ) localPass = 0;
+
+
+      if(  !theMuon.isGlobalMuon()              ) localPass = 0;
+      if(  !theMuon.isTightMuon()               ) localPass = 0;
+      if(  !theMuon.isPFMuon()                  ) localPass = 0;
+      if(  theMuon.relativeIso_DR4() > 0.6     ) localPass = 0;
+      if(  !(fabs(theMuon.dxy())<0.045)         ) localPass = 0;
+      if(  !(fabs(theMuon.dz())<0.2)            ) localPass = 0;
+
+      Lvec.SetXYZT(theTau.corrected_p4().x(), theTau.corrected_p4().y(), theTau.corrected_p4().z(),theTau.corrected_p4().t());
+
+      if(  !(Lvec.Pt()>20)                            ) localPass = 0;
+      if(  !(fabs(Lvec.Eta())<2.3)                    ) localPass = 0;
+      if( !theTau.byTightIsolationMVA3oldDMwLT() && !theTau.byLooseIsolationMVA3oldDMwLT()) localPass = 0;
+      if( !theTau.decayModeFindingOldDMs()      ) localPass = 0;
+      if( !theTau.againstMuonMediumMVA()        ) localPass = 0;
+      if( !theTau.againstElectronLoose()        ) localPass = 0;
+
+      if( (muTau.DR() <= 0.5)                        ) localPass = 0;
+      if( !muVetoes.passesSecondLeptonVeto()           ) localPass = 0;
+      if( !muVetoes.passesThirdLeptonVeto()            ) localPass = 0;
+
+      if(!isNonTopEmbeddedSample && !isTopEmbeddedSample)
+        {
+          if(!theMuon.has_HltMatchMu17() && !theMuon.has_HltMatchMu18()) localPass = 0;
+          if(!theTau.has_HltMatchMu17() && !theTau.has_HltMatchMu18()) localPass = 0;
+        }
+
+
+
+      if(localPass){ nMuTauPass++;}
+      std::cout<<" passing muTau count "<<nMuTauPass<<"\n";
+
+
+
+
 //      if(theMuon.p4().pt()<20) continue;
 //      if(muTau.passesTriLeptonVeto()!=1) continue;
 
