@@ -1579,7 +1579,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
     if(localPass){ nETauPass++;}
-    std::cout<<" passing eTau count "<<nETauPass<<"\n";
+    //std::cout<<" passing eTau count "<<nETauPass<<"\n";
 
 
     eT_p4_x.push_back(eTau.p4().x());
@@ -1959,7 +1959,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
       if(localPass){ nMuTauPass++;}
-      std::cout<<" passing muTau count "<<nMuTauPass<<"\n";
+      //std::cout<<" passing muTau count "<<nMuTauPass<<"\n";
 
 
 
@@ -2282,8 +2282,8 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
     ///////////
     // fill the tree
-
-    if(muTaus->size()+eTaus->size() > 0) lepTauTree->Fill();
+    if(nMuTauPass==0 && nETauPass==0) passes = 0;
+    if(muTaus->size()+eTaus->size() > 0 && passes) lepTauTree->Fill();
 
 
 
