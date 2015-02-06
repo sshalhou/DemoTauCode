@@ -1546,7 +1546,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
     bool localPass = 1;
     LorentzVector Lvec(0,0,0,0);
-    Lvec.SetXYZT(eTau.p4().x(), eTau.p4().y(), eTau.p4().z(),eTau.p4().t());
+    Lvec.SetXYZT(theElec.p4().x(), theElec.p4().y(), theElec.p4().z(),theElec.p4().t());
 
     if(  !(Lvec.Pt()>24)                            ) localPass = 0;
     if(  !(fabs(Lvec.Eta())<2.1)                    ) localPass = 0;
