@@ -1568,12 +1568,12 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     if( !theTau.againstMuonLoose3()           ) localPass = 0;
 
     if( (eTau.DR() <= 0.5)                        ) localPass = 0;
-    if( !eTau.passesSecondLeptonVeto()           ) localPass = 0;
-    if( !eTau.passesThirdLeptonVeto()            ) localPass = 0;
+    if( !eVetoes.passesSecondLeptonVeto()           ) localPass = 0;
+    if( !eVetoes.passesThirdLeptonVeto()            ) localPass = 0;
 
     if(!isNonTopEmbeddedSample && !isTopEmbeddedSample)
       {
-        if(!eTau.ele_has_HltMatchEle20() && !eTau.ele_has_HltMatchEle22()) localPass = 0;
+        if(!theElec.has_HltMatchEle20() && !theElec.has_HltMatchEle22()) localPass = 0;
         if(!theTau.has_HltMatchEle20() && !theTau.has_HltMatchEle22()) localPass = 0;
       }
 
