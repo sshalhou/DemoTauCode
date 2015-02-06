@@ -1548,7 +1548,38 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     LorentzVector Lvec(0,0,0,0);
     Lvec.SetXYZT(eTau.p4().x(), eTau.p4().y(), eTau.p4().z(),eTau.p4().t());
 
+    if(  !(Lvec.Pt()>24.0)                            ) localPass = 0;
+    if(  !(fabs(Lvec.Eta())<2.1)                    ) localPass = 0;
+    if(  theElec.numberOfMissingInnerHits()!=0 ) localPass = 0;
+    if(  !theElec.passConversionVeto()         ) localPass = 0;
+    if(  !theElec.pass_tight_mvaNonTrigV0()    ) localPass = 0;
+    if(  theElec.relativeIso() > 0.6           ) localPass = 0;
+    if(  !(fabs(theElec.dxy())<0.045)          ) localPass = 0;
+    if(  !(fabs(theElec.dz())<0.2)             ) localPass = 0;
 
+
+    Lvec.SetXYZT(theTau.corrected_p4_x(), theTau.corrected_p4_y(), theTau.corrected_p4_z(),theTau.corrected_p4_t());
+
+    if(  !(Lvec.Pt()>20)                            ) localPass = 0;
+    if(  !(fabs(Lvec.Eta())<2.3)                    ) localPass = 0;
+    if( !theTau.byTightIsolationMVA3oldDMwLT() && !theTau.byLooseIsolationMVA3oldDMwLT()) localPass = 0;
+    if( !theTau.decayModeFindingOldDMs()      ) localPass = 0;
+    if( !theTau.againstElectronMediumMVA5()   ) localPass = 0;
+    if( !theTau.againstMuonLoose3()           ) localPass = 0;
+
+    if( (eTau.DR() <= 0.5)                        ) localPass = 0;
+    if( !eTau.passesSecondLeptonVeto()           ) localPass = 0;
+    if( !eTau.passesThirdLeptonVeto()            ) localPass = 0;
+
+    if(!isNonTopEmbeddedSample && !isTopEmbeddedSample)
+      {
+        if(!eTau.ele_has_HltMatchEle20() && !eTau.ele_has_HltMatchEle22()) localPass = 0;
+        if(!theTau.has_HltMatchEle20() && !theTau.has_HltMatchEle22()) localPass = 0;
+      }
+
+
+    if(localPass){ nETauPass++;}
+    std::cout<<" passing eTau count "<<nETauPass<"\n";
 
 
     eT_p4_x.push_back(eTau.p4().x());
