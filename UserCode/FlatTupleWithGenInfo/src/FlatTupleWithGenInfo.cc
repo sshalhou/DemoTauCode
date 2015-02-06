@@ -1558,7 +1558,7 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     if(  !(fabs(theElec.dz())<0.2)             ) localPass = 0;
 
 
-    Lvec.SetXYZT(theTau.corrected_p4_x(), theTau.corrected_p4_y(), theTau.corrected_p4_z(),theTau.corrected_p4_t());
+    Lvec.SetXYZT(theTau.corrected_p4().x(), theTau.corrected_p4().y(), theTau.corrected_p4().z(),theTau.corrected_p4().t());
 
     if(  !(Lvec.Pt()>20)                            ) localPass = 0;
     if(  !(fabs(Lvec.Eta())<2.3)                    ) localPass = 0;
