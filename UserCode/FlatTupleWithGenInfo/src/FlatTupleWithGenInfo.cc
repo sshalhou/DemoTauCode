@@ -1462,25 +1462,26 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
   // fill generator info
 
 
-
-  for (std::size_t i = 0; i < GENs->size(); ++i)
+  if(GENs.isValid())
   {
+    for (std::size_t i = 0; i < GENs->size(); ++i)
+    {
 
 
 
-    const TupleGen aGEN =   ((*GENs)[i]);
+      const TupleGen aGEN =   ((*GENs)[i]);
 
 
-    gen_x.push_back(aGEN.p4().x());
-    gen_y.push_back(aGEN.p4().y());
-    gen_z.push_back(aGEN.p4().z());
-    gen_t.push_back(aGEN.p4().t());
-    pdgId.push_back(aGEN.pdgId());
-    pdgIdmother.push_back(aGEN.pdgIdmother());
-    status.push_back(aGEN.status());
+      gen_x.push_back(aGEN.p4().x());
+      gen_y.push_back(aGEN.p4().y());
+      gen_z.push_back(aGEN.p4().z());
+      gen_t.push_back(aGEN.p4().t());
+      pdgId.push_back(aGEN.pdgId());
+      pdgIdmother.push_back(aGEN.pdgIdmother());
+      status.push_back(aGEN.status());
 
+    }
   }
-
 
 
 
