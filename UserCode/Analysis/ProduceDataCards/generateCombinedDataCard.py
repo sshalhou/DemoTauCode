@@ -87,6 +87,53 @@ for chan in range(0,len(CHANNELS)):
                     #print GOTHIST.GetTitle(),GOTHIST.GetSumOfWeights()
 
 
+    print '***************************************************************'
+    print '*     begin ZL and ZJ normaization determination for', FILENAME
+    print '* shape = loose Btag, norm = medium Btag'
+    print '***************************************************************'
+
+
+    # initialize dict to hold norms for medium btag 
+    ZLandZJNorms = {}
+    for key, value in HISTOGRAM_DICTIONARY.iteritems():
+        if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+            ZLandZJNorms[key] = 0.0
+
+
+    # fill dict to hold norms for medium btag 
+
+    for addFile in range(0,len(FOR_ZLandZJ_NORM)):
+        if str(CHANNELS[chan]) in str(FOR_ZLandZJ_NORM[addFile]):
+            GOTFILE = TFile(FOR_ZLandZJ_NORM[addFile],'READ')
+            print '*** getting ZL and ZJ histogram norm from ', FOR_ZLandZJ_NORM[addFile]
+            for key, value in HISTOGRAM_DICTIONARY.iteritems():
+                if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+                    GOTHIST = GOTFILE.Get(key)
+                    if(GOTHIST):
+                        ZLandZJNorms[key]+= GOTHIST.GetSumOfWeights()
+                    else:
+                        print 'WARNING FAILED TO FIND :', key
+
+    # print dict of norms for medium btag 
+
+    for key, value in HISTOGRAM_DICTIONARY.iteritems():
+        if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+            print key, 'medium btag norm = ', ZLandZJNorms[key]                     
+
+
+    # apply norms from medium btag to loose b-tag
+
+    for key, value in HISTOGRAM_DICTIONARY.iteritems():
+        if str(CHANNELS[chan]) in key and ('/ZL' in key or '/ZJ' in key):
+            initalNorm = HISTOGRAM_DICTIONARY[key].GetSumOfWeights()
+            if initalNorm > 0:
+                print "scaling ", key, ' by ', ZLandZJNorms[key]/initalNorm
+                HISTOGRAM_DICTIONARY[key].Scale(ZLandZJNorms[key]/initalNorm)                                            
+
+
+
+
+
 
     print '***************************************************************'
     print '*     begin W+jets normaization determination for', FILENAME
