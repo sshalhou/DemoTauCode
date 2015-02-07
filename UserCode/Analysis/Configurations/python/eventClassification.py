@@ -699,5 +699,106 @@ def classifyZDecay_UpdateLogic3(chain,maxPairTypeAndIndex):
 
     return classification
 
+def classifyZDecay_GENBASED(chain,maxPairTypeAndIndex):
+    classification = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    i=maxPairTypeAndIndex[0]
+
+
+    Tvec =  TLorentzVector(0,0,0,0)
+    Lvec =  TLorentzVector(0,0,0,0)
+    Gvec1 =  TLorentzVector(0,0,0,0)
+    Gvec2 =  TLorentzVector(0,0,0,0)
+    Gvec3 =  TLorentzVector(0,0,0,0)
+
+    # first get the reco Tau_h and Lepton
+    RecoLepFlavor = 0
+    
+    if maxPairTypeAndIndex[1] == 'muTau':
+        Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[i], chain.muT_tau_corrected_p4_y[i], chain.muT_tau_corrected_p4_z[i],chain.muT_tau_corrected_p4_t[i])
+        Lvec.SetXYZT(chain.muT_muon_p4_x[i], chain.muT_muon_p4_y[i], chain.muT_muon_p4_z[i],chain.muT_muon_p4_t[i])
+        RecoLepFlavor = -13 * chain.muT_muon_charge[i]
+
+    elif maxPairTypeAndIndex[1] == 'eleTau':
+        Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[i], chain.eT_tau_corrected_p4_y[i], chain.eT_tau_corrected_p4_z[i],chain.eT_tau_corrected_p4_t[i])
+        Lvec.SetXYZT(chain.eT_ele_p4_x[i], chain.eT_ele_p4_y[i], chain.eT_ele_p4_z[i],chain.eT_ele_p4_t[i])
+        RecoLepFlavor = -11 * chain.eT_ele_charge[i]
+
+    # gen-particle index lists
+    TausFromZ = []
+    EorMuFromZ = []
+    EorMuFromTau = []
+
+
+    for x in range(0, chain.pdgId.size()):
+        #print x, chain.pdgId[x], chain.pdgIdmother[x]
+        if (chain.pdgIdmother[x]==23 or chain.pdgIdmother[x]==22):
+            if abs(chain.pdgId[x]) == 15:
+                TausFromZ.append(x)
+            elif abs(chain.pdgId[x]) == 11 or abs(chain.pdgId[x]) == 13:    
+                EorMuFromZ.append(x) 
+        elif abs(chain.pdgIdmother[x])==15:
+            if abs(chain.pdgId[x]) == 11 or abs(chain.pdgId[x]) == 13:    
+                EorMuFromTau.append(x)
+
+
+    #print 'TausFromZ', TausFromZ
+    #print 'EorMuFromZ', EorMuFromZ
+    #print 'EorMuFromTau', EorMuFromTau
+
+    # _ZTT_
+    # check for true Z -> (tau -> tau_h)  (tau -> lep) 
+
+    if len(TausFromZ) == 2 and len(EorMuFromTau)==1 and len(EorMuFromZ)==0:
+        for l1 in range(0, len(TausFromZ)):
+            l11 = TausFromZ[l1]
+            Gvec1.SetXYZT(chain.gen_x[l11],chain.gen_y[l11],chain.gen_z[l11],chain.gen_t[l11])
+#            print 'Gvec1', chain.gen_x[l11],chain.gen_y[l11],chain.gen_z[l11],chain.gen_t[l11]
+
+            if Tvec.DeltaR(Gvec1) < 0.5 :
+                for l2 in range(0, len(EorMuFromTau)):
+                    l22 = EorMuFromTau[l2]
+                    Gvec2.SetXYZT(chain.gen_x[l22],chain.gen_y[l22],chain.gen_z[l22],chain.gen_t[l22])    
+                    #print 'Gvec2', chain.gen_x[l22],chain.gen_y[l22],chain.gen_z[l22],chain.gen_t[l22]
+                    #print 'RecoLepFlavor vs pdgID ', RecoLepFlavor, chain.pdgId[l22]
+                    if Lvec.DeltaR(Gvec2) < 0.5 and RecoLepFlavor == chain.pdgId[l22]:
+                        return '_ZTT_'
+
+    # _ZL_ case one :  Z -> (tau -> lep)  (tau -> lep)                         
+
+    elif len(TausFromZ) == 2 and len(EorMuFromTau)==2 and len(EorMuFromZ)==0:
+            l0 = EorMuFromTau[0]
+            l1 = EorMuFromTau[1]
+            Gvec1.SetXYZT(chain.gen_x[l0],chain.gen_y[l0],chain.gen_z[l0],chain.gen_t[l0])
+            Gvec2.SetXYZT(chain.gen_x[l1],chain.gen_y[l1],chain.gen_z[l1],chain.gen_t[l1])
+            if RecoLepFlavor == chain.pdgId[l0]:
+                if Lvec.DeltaR(Gvec1) < 0.5 :
+                    if Tvec.DeltaR(Gvec2) < 0.5 :
+                        return '_ZL_'
+            elif RecoLepFlavor == chain.pdgId[l1]:
+                if Lvec.DeltaR(Gvec2) < 0.5 :
+                    if Tvec.DeltaR(Gvec1) < 0.5 :
+                        return '_ZL_'
+
+    # _ZL_ case two :  Z -> (lep)  (lep)                         
+
+    elif len(TausFromZ) == 0 and len(EorMuFromTau)==0 and len(EorMuFromZ)==2:
+            l0 = EorMuFromZ[0]
+            l1 = EorMuFromZ[1]
+            Gvec1.SetXYZT(chain.gen_x[l0],chain.gen_y[l0],chain.gen_z[l0],chain.gen_t[l0])
+            Gvec2.SetXYZT(chain.gen_x[l1],chain.gen_y[l1],chain.gen_z[l1],chain.gen_t[l1])
+            if RecoLepFlavor == chain.pdgId[l0]:
+                if Lvec.DeltaR(Gvec1) < 0.5 :
+                    if Tvec.DeltaR(Gvec2) < 0.5 :
+                        return '_ZL_'
+            elif RecoLepFlavor == chain.pdgId[l1]:
+                if Lvec.DeltaR(Gvec2) < 0.5 :
+                    if Tvec.DeltaR(Gvec1) < 0.5 :
+                        return '_ZL_'
+
+
+    return '_ZJ_'
+
+
+
 
 

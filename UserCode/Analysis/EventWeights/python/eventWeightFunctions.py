@@ -871,3 +871,54 @@ def getWeightFor_XSM125(chain, maxPairTypeAndIndex, Verbose, CROSSXBR):
     if Verbose:
         print allWeights
     return returnWeight
+
+
+
+
+def decayModeCorrectionMCandTTembedded(chain, maxPairTypeAndIndex):
+    decayModeSF = 1.0
+    i = maxPairTypeAndIndex[0]
+    Tvec = TLorentzVector(0,0,0,0)
+    Gvec = TLorentzVector(0,0,0,0)
+    genJetVec = TLorentzVector(0,0,0,0)  
+    pdgId = -1
+    isMatch  = False
+
+
+    if maxPairTypeAndIndex[1] == 'eleTau': 
+        decayModeSF = chain.eT_DecayModeCorrectionFactor[i]
+        Tvec.SetXYZT(chain.eT_tau_corrected_p4_x[i], chain.eT_tau_corrected_p4_y[i],
+                chain.eT_tau_corrected_p4_z[i],chain.eT_tau_corrected_p4_t[i])
+    
+        if math.isnan(chain.eT_tau_genJet_x[i]) : return 1.0
+        else :
+                genJetVec.SetXYZT(chain.eT_tau_genJet_x[i],chain.eT_tau_genJet_y[i],
+                     chain.eT_tau_genJet_z[i],chain.eT_tau_genJet_t[i])                
+               
+
+    elif maxPairTypeAndIndex[1] == 'muTau': 
+        decayModeSF = chain.muT_DecayModeCorrectionFactor[i]
+        Tvec.SetXYZT(chain.muT_tau_corrected_p4_x[i], chain.muT_tau_corrected_p4_y[i],
+                chain.muT_tau_corrected_p4_z[i],chain.muT_tau_corrected_p4_t[i])
+    
+        if math.isnan(chain.muT_tau_genJet_x[i]) : return 1.0
+        else :
+                genJetVec.SetXYZT(chain.muT_tau_genJet_x[i],chain.muT_tau_genJet_y[i],
+                     chain.muT_tau_genJet_z[i],chain.muT_tau_genJet_t[i])
+               
+    if genJetVec.Pt() < 8.0 : return 1.0
+    if Tvec.DeltaR(genJetVec) > 0.5 : return 1.0               
+
+    ########################
+    # check for gen-Tau match  
+
+
+    for x in range(0, chain.pdgId.size()):
+        if abs(chain.pdgIdmother[x])==15:
+            Gvec.SetXYZT(chain.gen_x[x],chain.gen_y[x],chain.gen_z[x],chain.gen_t[x])
+            if Tvec.DeltaR(Gvec) < 0.5 :
+                return decayModeSF
+
+    return 1.0
+
+
