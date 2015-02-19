@@ -31,6 +31,7 @@ Implementation:
 #include "UserCode/TupleObjects/interface/TupleMuon.h"
 #include "UserCode/TupleObjects/interface/TupleTau.h"
 #include "UserCode/TupleObjects/interface/TupleGen.h"
+#include "UserCode/TupleObjects/interface/TupleJet.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTau.h"
 #include "UserCode/TupleObjects/interface/TupleMuonTau.h"
 #include "UserCode/TupleObjects/interface/TupleElectronTauWeight.h"
