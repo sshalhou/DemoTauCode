@@ -93,6 +93,7 @@ private:
   edm::InputTag muonTauVetoSrc_;
   std::string NAME_;  // use TauESNom, TauESUp, TauESDown
   edm::InputTag userDataSrc_;
+  edm::InputTag jetSrc_;
 
 
   TTree *lepTauTree;
@@ -132,6 +133,22 @@ private:
   std::vector< int > pdgId;
   std::vector< int > pdgIdmother;
   std::vector< int > status;
+
+  /////////////////
+  // corresponding to TupleJet objects
+
+
+  std::vector< double > jet_x , jet_y , jet_z , jet_t ;
+  std::vector< double > JecShift;
+  std::vector< bool > passesPUjetIDLoose;
+  std::vector< bool > passesPUjetIDMedium;
+  std::vector< bool > passesPUjetIDTight;
+  std::vector< double > PUjetIDScore;
+  std::vector< int > PUjetIDFlag;
+  std::vector< bool > passesPFjetIDLoose;
+  std::vector< double > combinedSecondaryVertexBJetTags;
+  std::vector< int > partonFlavour;
+  std::vector< bool > isBtagged;
 
 
   ///////
@@ -677,6 +694,7 @@ private:
 //
 FlatTupleWithGenInfo::FlatTupleWithGenInfo(const edm::ParameterSet& iConfig):
 genSrc_(iConfig.getParameter<edm::InputTag>("genSrc" )),
+jetSrc_(iConfig.getParameter<edm::InputTag>("jetSrc" )),
 electronTauSrc_(iConfig.getParameter<edm::InputTag>("electronTauSrc" )),
 electronTauWtSrc_(iConfig.getParameter<edm::InputTag>("electronTauWtSrc" )),
 electronTauVetoSrc_(iConfig.getParameter<edm::InputTag>("electronTauVetoSrc" )),
@@ -755,6 +773,25 @@ lepTauTree = fs->make<TTree>("FlatTuple", "FlatTuple");
   lepTauTree->Branch("pdgId", &pdgId);
   lepTauTree->Branch("pdgIdmother", &pdgIdmother);
   lepTauTree->Branch("status", &status);
+
+
+  // jet
+
+
+  lepTauTree->Branch("jet_x",&jet_x);
+  lepTauTree->Branch("jet_y",&jet_y);
+  lepTauTree->Branch("jet_z",&jet_z);
+  lepTauTree->Branch("jet_t",&jet_t);
+  lepTauTree->Branch("JecShift",&JecShift);
+  lepTauTree->Branch("passesPUjetIDLoose",&passesPUjetIDLoose);
+  lepTauTree->Branch("passesPUjetIDMedium",&passesPUjetIDMedium);
+  lepTauTree->Branch("passesPUjetIDTight",&passesPUjetIDTight);
+  lepTauTree->Branch("PUjetIDScore",&PUjetIDScore);
+  lepTauTree->Branch("PUjetIDFlag",&PUjetIDFlag);
+  lepTauTree->Branch("passesPFjetIDLoose",&passesPFjetIDLoose);
+  lepTauTree->Branch("combinedSecondaryVertexBJetTags",&combinedSecondaryVertexBJetTags);
+  lepTauTree->Branch("partonFlavour",&partonFlavour);
+  lepTauTree->Branch("isBtagged",&isBtagged);
 
 
   // eTau
@@ -1458,6 +1495,14 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
   iEvent.getByLabel(genSrc_, GENs);
 
 
+  /////////////
+  // get jet collection
+
+  edm::Handle< TupleJetCollection > JETs;
+  iEvent.getByLabel(jetSrc_, JETs);
+
+
+
   /////////////////////////
   // fill generator info
 
@@ -1479,6 +1524,41 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
       pdgId.push_back(aGEN.pdgId());
       pdgIdmother.push_back(aGEN.pdgIdmother());
       status.push_back(aGEN.status());
+
+    }
+  }
+
+
+
+  //////////////
+  // fill jet variables
+
+
+  if(JETs.isValid())
+  {
+    for (std::size_t i = 0; i < JETs->size(); ++i)
+    {
+
+
+
+      const TupleJet aJET =   ((*JETs)[i]);
+
+
+      jet_x.push_back(aJET.p4().x());
+      jet_y.push_back(aJET.p4().y());
+      jet_z.push_back(aJET.p4().z());
+      jet_t.push_back(aJET.p4().t());
+      JecShift.push_back(aJET.JecShift());
+      passesPUjetIDLoose.push_back(aJET.passesPUjetIDLoose());
+      passesPUjetIDMedium.push_back(aJET.passesPUjetIDMedium());
+      passesPUjetIDTight.push_back(aJET.passesPUjetIDTight());
+      PUjetIDScore.push_back(aJET.PUjetIDScore());
+      PUjetIDFlag.push_back(aJET.PUjetIDFlag());
+      passesPFjetIDLoose.push_back(aJET.passesPFjetIDLoose());
+      combinedSecondaryVertexBJetTags.push_back(aJET.combinedSecondaryVertexBJetTags());
+      partonFlavour.push_back(aJET.partonFlavour());
+      isBtagged.push_back(aJET.isBtagged());
+
 
     }
   }
@@ -2376,6 +2456,25 @@ FlatTupleWithGenInfo::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     pdgId.clear();
     pdgIdmother.clear();
     status.clear();
+
+
+
+    jet_x.clear();
+    jet_y.clear();
+    jet_z.clear();
+    jet_t.clear();
+    JecShift.clear();
+    passesPUjetIDLoose.clear();
+    passesPUjetIDMedium.clear();
+    passesPUjetIDTight.clear();
+    PUjetIDScore.clear();
+    PUjetIDFlag.clear();
+    passesPFjetIDLoose.clear();
+    combinedSecondaryVertexBJetTags.clear();
+    partonFlavour.clear();
+    isBtagged.clear();
+
+
 
     eT_p4_x.clear();
     eT_p4_y.clear();
