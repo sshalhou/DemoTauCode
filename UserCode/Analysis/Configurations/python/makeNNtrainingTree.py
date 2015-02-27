@@ -170,7 +170,10 @@ VAR_NAMES.append('GENlepM')
 VAR_NAMES.append('GENdiTauMass')
 VAR_NAMES.append('SVMass')
 
-
+VAR_NAMES.append('cov00')
+VAR_NAMES.append('cov01')
+VAR_NAMES.append('cov10')
+VAR_NAMES.append('cov11')
 
 #  SVmass,
 # type, decayMode, gTvec.Pt(), gTvec.Eta(), gTvec.Phi(), gLvec.Pt(), 
@@ -649,6 +652,11 @@ def writeLepTauParameters(nnVARS_DICT,chain, maxPairTypeAndIndex):
 		nnVARS_DICT['muon_normalizedChi2'] = chain.muT_muon_normalizedChi2[i]
 		nnVARS_DICT['isLEPmuon'] = 1
 		nnVARS_DICT['isLEPelectron'] = 0
+		nnVARS_DICT['cov00'] = chain.muT_cov00[i]
+		nnVARS_DICT['cov01'] = chain.muT_cov01[i]
+		nnVARS_DICT['cov10'] = chain.muT_cov10[i]
+		nnVARS_DICT['cov11'] = chain.muT_cov11[i]
+
 
 	elif maxPairTypeAndIndex[1] == 'eleTau':
 
@@ -684,6 +692,10 @@ def writeLepTauParameters(nnVARS_DICT,chain, maxPairTypeAndIndex):
 		nnVARS_DICT['ele_hadronicOverEm'] = chain.eT_ele_hadronicOverEm[i]
 		nnVARS_DICT['isLEPmuon'] = 0
 		nnVARS_DICT['isLEPelectron'] = 1
+		nnVARS_DICT['cov00'] = chain.eT_cov00[i]
+		nnVARS_DICT['cov01'] = chain.eT_cov01[i]
+		nnVARS_DICT['cov10'] = chain.eT_cov10[i]
+		nnVARS_DICT['cov11'] = chain.eT_cov11[i]
 
 	return
 
