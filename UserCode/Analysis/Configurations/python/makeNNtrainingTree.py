@@ -175,6 +175,9 @@ VAR_NAMES.append('cov01')
 VAR_NAMES.append('cov10')
 VAR_NAMES.append('cov11')
 
+VAR_NAMES.append('DRlepGEN')
+VAR_NAMES.append('DRtauGEN')
+
 #  SVmass,
 # type, decayMode, gTvec.Pt(), gTvec.Eta(), gTvec.Phi(), gLvec.Pt(), 
 # gLvec.Eta(), gLvec.Phi(), (gLvec+gTvec).M(), bVec.M(), genVEC.Pt()/Tvec.Pt()
@@ -224,7 +227,7 @@ def WriteTree(nnTree):
 ##############################
 def SetVariableValues(nnVARS_DICT,chain, maxPairTypeAndIndex):
 	i = maxPairTypeAndIndex[0]
-	DRCUT = 0.05
+	DRCUT = 10000.0
 	# reset to zero
 	for key, value in nnVARS_DICT.iteritems():
 		nnVARS_DICT[key] = 0.0
@@ -263,6 +266,10 @@ def SetVariableValues(nnVARS_DICT,chain, maxPairTypeAndIndex):
 	if genVecs['genLepTau'].DeltaR(recoVecs['recoLepTau']) >= DRCUT or genVecs['genHadTau'].DeltaR(recoVecs['recoHadTau'])>= DRCUT:
 		print 'BAD DR'
 		return False
+
+
+	nnVARS_DICT['DRlepGEN'] = genVecs['genLepTau'].DeltaR(recoVecs['recoLepTau'])
+	nnVARS_DICT['DRtauGEN'] = genVecs['genHadTau'].DeltaR(recoVecs['recoHadTau'])
 
 	#print genVecs['genLepTau'].Pt()/recoVecs['recoLepTau'].Pt(),
 	#print genVecs['genHadTau'].Pt()/recoVecs['recoHadTau'].Pt()
