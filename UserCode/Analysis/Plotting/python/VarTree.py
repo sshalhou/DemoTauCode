@@ -21,6 +21,8 @@ VARIABLE_NAMES.append('decay_mode_2')
 VARIABLE_NAMES.append('tau_numStrips')
 VARIABLE_NAMES.append('tau_numHadrons')
 VARIABLE_NAMES.append('fill_weight')
+VARIABLE_NAMES.append('isMuonTau')
+
 
 # string variables 
 VARIABLE_NAMES.append('channel'); channel_String = TString("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
@@ -90,7 +92,7 @@ def fill_varTree(chain,varTree,sampleClassification, maxPairTypeAndIndex, VARS_D
 		VARS_DICT['tau_numStrips'] = chain.muT_tau_numStrips[index]
 		VARS_DICT['tau_numHadrons'] = chain.muT_tau_numHadrons[index]
 		VARS_DICT['decay_mode_1']	= chain.muT_tau_decayModeFindingOldDMs[index]
-
+		VARS_DICT['isMuonTau'] = 1.0
 
 	if maxPairTypeAndIndex[1] == 'eleTau':
 
@@ -105,6 +107,7 @@ def fill_varTree(chain,varTree,sampleClassification, maxPairTypeAndIndex, VARS_D
 		VARS_DICT['tau_numStrips'] = chain.eT_tau_numStrips[index]
 		VARS_DICT['tau_numHadrons'] = chain.eT_tau_numHadrons[index]
 		VARS_DICT['decay_mode_1']	= chain.eT_tau_decayModeFindingOldDMs[index]
+		VARS_DICT['isMuonTau'] = 0.0
 
 
 
